@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - z_components (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - z_components (from `.symlinks/plugins/z_components/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  z_components:
+    :path: ".symlinks/plugins/z_components/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  z_components: bfff8afe5dbb327151ca9f47210e4acf9861e026
+
+PODFILE CHECKSUM: ebd43b443038e611b86ede96e613bd6033c49497
+
+COCOAPODS: 1.5.3
