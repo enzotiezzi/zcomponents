@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
+import 'package:z_components/z_text_field.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,7 +37,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body:
-      new ListView(children: <Widget>[
+      new ListView(
+
+          children: <Widget>[
+        ZTextField(),
         ZSwitch(
             value: value,
             onChanged: (b) {
