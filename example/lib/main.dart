@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool value = false;
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -24,26 +25,22 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: new ListView(children: <Widget>[
+    return MaterialApp(theme: ThemeData(), home: Home());
+  }
+}
 
-            ZSwitch(
-                value: value,
-                activeColor: Colors.teal,
-                onChanged: (b) {
-                  setState(() {
-                    value = b;
-                  });
-                }),
-
-            ZPicker(
-              context: context,
-            ),
-        ]),
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: RaisedButton(
+            child: Text('Show dialog!'),
+            onPressed: () {
+              new ZPicker(
+                context: context,
+              );
+            }),
       ),
     );
   }
