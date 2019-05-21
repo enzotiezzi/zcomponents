@@ -228,7 +228,7 @@ class ZTextField extends StatelessWidget {
         textInputAction: this.textInputAction,
       );
     } else {
-      CupertinoTextField(
+      zTextField = CupertinoTextField(
         onChanged: this.onChanged,
         style: this.style,
         enabled: this.enabled,
