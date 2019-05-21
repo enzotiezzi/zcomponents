@@ -31,12 +31,14 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatelessWidget{
   bool value = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: new ZNavigationBar(
+      ),
       body: new ListView(
           children: <Widget>[
         ZSwitch(value: value, onChanged: (b) {}),
@@ -50,10 +52,6 @@ class Home extends StatelessWidget {
                 },
               );
             }),
-        new Container(
-          color: Colors.red,
-        width: 50,
-        height: 50,)
       ]),
     );
   }
