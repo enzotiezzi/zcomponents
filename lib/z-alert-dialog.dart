@@ -139,11 +139,6 @@ class ZAlertDialog extends StatelessWidget {
         child: dialogChild,
       );
 
-    return Dialog(
-      backgroundColor: backgroundColor,
-      elevation: elevation,
-      shape: shape,
-      child: dialogChild,
-    );
+    return zAlertDialog;
   }
 }
