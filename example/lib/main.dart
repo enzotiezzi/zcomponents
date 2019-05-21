@@ -35,7 +35,8 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: new ListView(children: <Widget>[
+      body: new ListView(
+          children: <Widget>[
         ZSwitch(value: value, onChanged: (b) {}),
         RaisedButton(
             child: Text('Show dialog!'),
@@ -47,6 +48,10 @@ class Home extends StatelessWidget {
                 },
               );
             }),
+        new Container(
+          color: Colors.red,
+        width: 50,
+        height: 50,)
       ]),
     );
   }
