@@ -43,7 +43,8 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate, // if it's a RTL language
         ],
       supportedLocales: [
-        const Locale('pt', 'BR'), // include country code too
+        const Locale('en', 'US'),
+        const Locale('ru', 'RU'),
       ],
     );
   }

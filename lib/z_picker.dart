@@ -22,7 +22,7 @@ class ZPicker {
                 height: 200.0,
                 child: CupertinoDatePicker(
                   onDateTimeChanged: (date) => this.onTimerDurationChanged(date),
-                  initialDateTime: DateTime.now(),
+                  initialDateTime: DateTime.now(),use24hFormat: true,
                 ));
           });
     }

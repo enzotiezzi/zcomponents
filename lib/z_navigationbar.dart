@@ -2,12 +2,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class _DefaultHeroTag {
-  const _DefaultHeroTag();
-  @override
-  String toString() => '<default FloatingActionButton tag>';
-}
-
 class ZNavigationBar extends StatelessWidget with PreferredSizeWidget{
  
   Widget zNavigationBar;
@@ -61,7 +55,6 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget{
     this.padding,
     this.actionsForegroundColor,
     this.transitionBetweenRoutes = true,
-    this.heroTag = const _DefaultHeroTag(),
     this.title,
     this.shape,
     this.bottomOpacity = 1.0,
@@ -98,7 +91,6 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget{
         automaticallyImplyLeading: this.automaticallyImplyLeading,
         actionsForegroundColor: this.actionsForegroundColor,
         automaticallyImplyMiddle: this.automaticallyImplyMiddle,
-        heroTag: this.heroTag,
         previousPageTitle: this.previousPageTitle,
         transitionBetweenRoutes: this.transitionBetweenRoutes,
         key: key,
