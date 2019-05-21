@@ -31,26 +31,23 @@ class _MyAppState extends State<MyApp> {
 
 class Home extends StatelessWidget {
   bool value = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-      new ListView(children: <Widget>[
-        ZSwitch(
-            value: value,
-            onChanged: (b) {
-            }),
+      body: new ListView(children: <Widget>[
+        ZSwitch(value: value, onChanged: (b) {}),
         RaisedButton(
             child: Text('Show dialog!'),
             onPressed: () {
               new ZPicker(
                 context: context,
+                onTimerDurationChanged: (date) {
+                  date;
+                },
               );
             }),
       ]),
-
     );
   }
-
 }
