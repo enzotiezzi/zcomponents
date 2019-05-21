@@ -12,6 +12,7 @@ import 'package:z_components/z_button.dart';
 import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
 void main() => runApp(MyApp());
 
@@ -36,10 +37,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(),
       home: Home(),
-      localizationsDelegates: [
+        localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate, // if it's a RTL language
-      ],
+        ],
       supportedLocales: [
         const Locale('pt', 'BR'), // include country code too
       ],
