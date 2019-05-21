@@ -7,28 +7,17 @@ import 'package:flutter/cupertino.dart';
 class ZAlertDialog extends StatelessWidget {
   Widget zAlertDialog;
   final Widget title;
-
   final EdgeInsetsGeometry titlePadding;
-
   final TextStyle titleTextStyle;
-
   final Widget content;
-
   final EdgeInsetsGeometry contentPadding;
-
   final TextStyle contentTextStyle;
-
   final List<Widget> actions;
-
   final Color backgroundColor;
-
   final double elevation;
-
   final String semanticLabel;
-
   final ShapeBorder shape;
   final List<Widget> actionsCupertino;
-
   final ScrollController scrollController;
   final ScrollController actionScrollController;
 
