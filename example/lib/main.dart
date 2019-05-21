@@ -48,10 +48,6 @@ class Home extends StatelessWidget {
                 },
               );
             }),
-        new Container(
-          color: Colors.red,
-        width: 50,
-        height: 50,)
       ]),
     );
   }
