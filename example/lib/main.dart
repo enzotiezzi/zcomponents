@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
+import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
 
 void main() => runApp(MyApp());
@@ -30,12 +31,14 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatelessWidget{
   bool value = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: new ZNavigationBar(
+      ),
       body: new ListView(
           children: <Widget>[
 
