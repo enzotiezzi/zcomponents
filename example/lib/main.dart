@@ -41,6 +41,7 @@ class Home extends StatelessWidget{
       ),
       body: new ListView(
           children: <Widget>[
+            ZTextField(),
 
         ZSwitch(value: value, onChanged: (b) {}),
         RaisedButton(
