@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ZButton extends StatelessWidget {
+ 
   Key key;
   Widget zButton;
   double minSize;
