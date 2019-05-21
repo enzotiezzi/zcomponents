@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_navigationbar.dart';
-
+import 'package:z_components/z_text_field.dart';
 
 void main() => runApp(MyApp());
 
