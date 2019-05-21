@@ -66,7 +66,7 @@ class ZAlertDialog extends StatelessWidget {
         titleTextStyle: this.titleTextStyle,
       );
     } else {
-      CupertinoAlertDialog(
+      zAlertDialog = CupertinoAlertDialog(
         actions: <Widget>[],
         title: this.title,
         content: this.content,
