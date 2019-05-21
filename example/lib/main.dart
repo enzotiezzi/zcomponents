@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
+import 'package:z_components/z_button.dart';
+
 
 import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
@@ -43,22 +45,26 @@ class Home extends StatelessWidget{
       appBar: new ZNavigationBar(
       ),
       body: new ListView(
-          children: <Widget>[
-            ZTextField(),
+        children: <Widget>[
+          new Column(
+              children: <Widget>[
+                ZTextField(),
 
-        ZSwitch(value: value, onChanged: (b) {}),
-        RaisedButton(
-            child: Text('Show dialog!'),
-            onPressed: () {
-              new ZPicker(
-                context: context,
-                onTimerDurationChanged: (date) {
-                  date;
-                },
-              );
-            }),
+                ZSwitch(value: value, onChanged: (b) {}),
+                ZButton(
+                    child: Text('Show dialog!',style: new TextStyle(color: Colors.white),),
+                    onPressed: () {
+                      new ZPicker(
+                        context: context,
+                        onTimerDurationChanged: (date) {
+                          date;
+                        },
+                      );
+                    }),
 
-      ]),
+              ]),
+        ],
+      ),
       bottomNavigationBar: ZtabBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
