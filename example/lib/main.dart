@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter/services.dart';
+import 'package:z_components/z-float-button.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
+import 'package:z_components/z_button.dart';
 
 import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
@@ -52,24 +54,34 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: ZFloatButton(
+        onPressed: () {},
+      ),
       appBar: new ZNavigationBar(
         title: new Text("teste"),
         centerTitle: true,
       ),
-      body: new ListView(children: <Widget>[
-        ZTextField(),
-        ZSwitch(value: value, onChanged: (b) {}),
-        RaisedButton(
-            child: Text('Show dialog!'),
-            onPressed: () {
-              new ZPicker(
-                context: context,
-                onTimerDurationChanged: (date) {
-                  date;
-                },
-              );
-            }),
-      ]),
+      body: new ListView(
+        children: <Widget>[
+          new Column(children: <Widget>[
+            ZTextField(),
+            ZSwitch(value: value, onChanged: (b) {}),
+            ZButton(
+                child: Text(
+                  'Show dialog!',
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  new ZPicker(
+                    context: context,
+                    onTimerDurationChanged: (date) {
+                      date;
+                    },
+                  );
+                }),
+          ]),
+        ],
+      ),
       bottomNavigationBar: ZtabBar(
         backgroundColor: Colors.teal,
         items: <BottomNavigationBarItem>[
