@@ -87,9 +87,6 @@ class Home extends StatelessWidget {
                  showDialog(  context: context,
                      builder: (BuildContext context) => ZAlertDialog(title: Text("teste"),actions: <Widget>[FlatButton(child: new Icon(Icons.add),)],));
                 },)
-
-
-
               ]),
         ],
       ),
