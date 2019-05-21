@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
+
 class _DefaultHeroTag {
   const _DefaultHeroTag();
   @override
   String toString() => '<default FloatingActionButton tag>';
 }
+
 class _ChildOverflowBox extends SingleChildRenderObjectWidget {
   const _ChildOverflowBox({
     Key key,
@@ -52,42 +54,23 @@ class _RenderChildOverflowBox extends RenderAligningShiftedBox {
   }
 }
 class ZFloatButton extends StatelessWidget {
+  
   Widget zFloatButton;
-
- Widget child;
-
- String tooltip;
-
- Color foregroundColor;
-
- Color backgroundColor;
-
-
- Object heroTag;
-
- VoidCallback onPressed;
-
- double elevation;
-
-
- double highlightElevation;
-
-
- double disabledElevation;
-
- bool mini;
-
- ShapeBorder shape;
-
-
- Clip clipBehavior;
-
- bool isExtended;
-
-
- MaterialTapTargetSize materialTapTargetSize;
-
- BoxConstraints _sizeConstraints;
+  Widget child;
+  String tooltip;
+  Color foregroundColor;
+  Color backgroundColor;
+  Object heroTag;
+  VoidCallback onPressed;
+  double elevation;
+  double highlightElevation;
+  double disabledElevation;
+  bool mini;
+  ShapeBorder shape;
+  Clip clipBehavior;
+  bool isExtended;
+  MaterialTapTargetSize materialTapTargetSize;
+  BoxConstraints _sizeConstraints;
 
   static const double _defaultElevation = 6;
   static const double _defaultHighlightElevation = 12;
@@ -176,7 +159,8 @@ class ZFloatButton extends StatelessWidget {
           ),
         ),
         super(key: key) {
-          zFloatButton = FloatingActionButton(onPressed: this.onPressed,
+          zFloatButton = FloatingActionButton(
+            onPressed: this.onPressed,
             key: this.key,
             child: this.child,
             elevation: this.elevation,
@@ -267,6 +251,5 @@ class ZFloatButton extends StatelessWidget {
     }
 
     return result;
-
   }
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter/services.dart';
+import 'package:z_components/z-alert-dialog.dart';
 import 'package:z_components/z-float-button.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
@@ -63,24 +64,32 @@ class Home extends StatelessWidget {
         centerTitle: true,
       ),
       body: new ListView(
+
         children: <Widget>[
-          new Column(children: <Widget>[
-            ZTextField(),
-            ZSwitch(value: value, onChanged: (b) {}),
-            ZButton(
-                child: Text(
-                  'Show dialog!',
-                  style: new TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  new ZPicker(
-                    context: context,
-                    onTimerDurationChanged: (date) {
-                      date;
-                    },
-                  );
-                }),
-          ]),
+
+          new Column(
+              children: <Widget>[
+                ZTextField(),
+
+                ZSwitch(value: value, onChanged: (b) {}),
+                ZButton(
+                    child: Text('Show dialog!',style: new TextStyle(color: Colors.white),),
+                    onPressed: () {
+                      new ZPicker(
+                        context: context,
+                        onTimerDurationChanged: (date) {
+                          date;
+                        },
+                      );
+                    }),
+                ZButton(child: Text("dialog"),onPressed: (){
+                 showDialog(  context: context,
+                     builder: (BuildContext context) => ZAlertDialog(title: Text("teste"),actions: <Widget>[FlatButton(child: new Icon(Icons.add),)],));
+                },)
+
+
+
+              ]),
         ],
       ),
       bottomNavigationBar: ZtabBar(
