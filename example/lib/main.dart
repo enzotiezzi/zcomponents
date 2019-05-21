@@ -73,7 +73,7 @@ class Home extends StatelessWidget {
             ZSwitch(value: value, onChanged: (b) {}),
             ZButton(
                 child: Text(
-                  'Show dialog!',
+                  'Show Date Picker!',
                   style: new TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
@@ -85,15 +85,22 @@ class Home extends StatelessWidget {
                   );
                 }),
             ZButton(
-              child: Text("dialog"),
+              child: Text("Dialog",style: new TextStyle(color: Colors.white),),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => ZAlertDialog(
-                          title: Text("teste"),
+                      actionsCupertino: <Widget>[
+                      new ZButton(onPressed: (){})
+                    ],
+                          title: Text("Dialog Teste:"),
                           actions: <Widget>[
-                            FlatButton(
-                              child: new Icon(Icons.add),
+                            ZButton(
+                              color: const Color(0xffF7F7F7),
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                              child: new Text("OK",style: new TextStyle(color: Colors.teal),),
                             )
                           ],
                         ));
