@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:z_components/z-alert-dialog.dart';
 import 'package:z_components/z-float-button.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
+import 'package:z_components/z_button.dart';
+
 
 import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
@@ -45,21 +48,33 @@ class Home extends StatelessWidget{
       appBar: new ZNavigationBar(
       ),
       body: new ListView(
-          children: <Widget>[
-            ZTextField(),
-        ZSwitch(value: value, onChanged: (b) {}),
-        RaisedButton(
-            child: Text('Show dialog!'),
-            onPressed: () {
-              new ZPicker(
-                context: context,
-                onTimerDurationChanged: (date) {
-                  date;
-                },
-              );
-            }),
 
-      ]),
+        children: <Widget>[
+          new Column(
+              children: <Widget>[
+                ZTextField(),
+
+                ZSwitch(value: value, onChanged: (b) {}),
+                ZButton(
+                    child: Text('Show dialog!',style: new TextStyle(color: Colors.white),),
+                    onPressed: () {
+                      new ZPicker(
+                        context: context,
+                        onTimerDurationChanged: (date) {
+                          date;
+                        },
+                      );
+                    }),
+                ZButton(child: Text("dialog"),onPressed: (){
+                 showDialog(  context: context,
+                     builder: (BuildContext context) => ZAlertDialog(title: Text("teste"),actions: <Widget>[FlatButton(child: new Icon(Icons.add),)],));
+                },)
+
+
+
+              ]),
+        ],
+      ),
       bottomNavigationBar: ZtabBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

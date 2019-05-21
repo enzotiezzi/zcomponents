@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -48,27 +49,101 @@ class ZAlertDialog extends StatelessWidget {
     this.scrollController,
     this.actionScrollController,
   })  : assert(contentPadding != null),
-        assert(actions != null),
-        super(key: key){
-          if(Platform.isAndroid){
-            zAlertDialog = AlertDialog(backgroundColor: this.backgroundColor,
-            shape: this.shape,
-            elevation: this.elevation,
-             key: this.key,
-            title: this.title,
-            actions: <Widget>[],
-            titlePadding: this.titlePadding,
-              contentPadding: this.contentPadding,
-              content: this.content,
-              contentTextStyle: this.contentTextStyle,
-              semanticLabel: this.semanticLabel,
-              titleTextStyle: this.titleTextStyle,
-            );
-          }
-}
+        super(key: key) {
+    if (Platform.isAndroid) {
+      zAlertDialog = AlertDialog(
+        backgroundColor: this.backgroundColor,
+        shape: this.shape,
+        elevation: this.elevation,
+        key: this.key,
+        title: this.title,
+        actions: <Widget>[],
+        titlePadding: this.titlePadding,
+        contentPadding: this.contentPadding,
+        content: this.content,
+        contentTextStyle: this.contentTextStyle,
+        semanticLabel: this.semanticLabel,
+        titleTextStyle: this.titleTextStyle,
+      );
+    } else {
+      CupertinoAlertDialog(
+        actions: <Widget>[],
+        title: this.title,
+        content: this.content,
+        key: this.key,
+        actionScrollController: this.actionScrollController,
+        scrollController: this.scrollController,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoAlertDialog();
+    assert(debugCheckHasMaterialLocalizations(context));
+    final ThemeData theme = Theme.of(context);
+    final DialogTheme dialogTheme = DialogTheme.of(context);
+    final List<Widget> children = <Widget>[];
+    String label = semanticLabel;
+
+    if (title != null) {
+      children.add(Padding(
+        padding: titlePadding ??
+            EdgeInsets.fromLTRB(24.0, 24.0, 24.0, content == null ? 20.0 : 0.0),
+        child: DefaultTextStyle(
+          style: titleTextStyle ??
+              dialogTheme.titleTextStyle ??
+              theme.textTheme.title,
+          child: Semantics(
+            child: title,
+            namesRoute: true,
+            container: true,
+          ),
+        ),
+      ));
+    }
+
+    if (content != null) {
+      children.add(Flexible(
+        child: Padding(
+          padding: contentPadding,
+          child: DefaultTextStyle(
+            style: contentTextStyle ??
+                dialogTheme.contentTextStyle ??
+                theme.textTheme.subhead,
+            child: content,
+          ),
+        ),
+      ));
+    }
+
+    if (actions != null) {
+      children.add(ButtonTheme.bar(
+        child: ButtonBar(
+          children: actions,
+        ),
+      ));
+    }
+
+    Widget dialogChild = IntrinsicWidth(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: children,
+      ),
+    );
+
+    if (label != null)
+      dialogChild = Semantics(
+        namesRoute: true,
+        label: label,
+        child: dialogChild,
+      );
+
+    return Dialog(
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      shape: shape,
+      child: dialogChild,
+    );
   }
 }
