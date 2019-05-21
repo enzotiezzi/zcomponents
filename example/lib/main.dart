@@ -38,6 +38,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: new ListView(
           children: <Widget>[
+
         ZSwitch(value: value, onChanged: (b) {}),
         RaisedButton(
             child: Text('Show dialog!'),
