@@ -2,8 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ZPicker extends StatelessWidget {
-  Widget zPicker = new Container();
+class ZPicker {
   BuildContext context;
   ValueChanged<DateTime> onTimerDurationChanged;
 
@@ -28,19 +27,12 @@ class ZPicker extends StatelessWidget {
     }
   }
 
-  Future<DateTime> _showDatePicker(
-      ValueChanged<DateTime> onTimerDurationChanged) async {
+  Future<DateTime> _showDatePicker(ValueChanged<DateTime> onTimerDurationChanged) async {
     onTimerDurationChanged(await showDatePicker(
       context: this.context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2018),
-      lastDate: DateTime(2030),
+      firstDate: DateTime(1965),
+      lastDate: DateTime(2022)
     ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return zPicker;
   }
 }

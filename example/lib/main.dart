@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter/services.dart';
 import 'package:z_components/z-alert-dialog.dart';
@@ -8,7 +9,6 @@ import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
 import 'package:z_components/z_button.dart';
-
 
 import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
@@ -34,22 +34,38 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData(), home: Home());
+    return MaterialApp(
+      theme: ThemeData(),
+      home: Home(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate, // if it's a RTL language
+      ],
+      supportedLocales: [
+        const Locale('pt', 'BR'), // include country code too
+      ],
+    );
   }
 }
 
-class Home extends StatelessWidget{
+class Home extends StatelessWidget {
   bool value = false;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: ZFloatButton(onPressed: (){},),
+      floatingActionButton: ZFloatButton(
+        onPressed: () {},
+      ),
       appBar: new ZNavigationBar(
+        title: new Text("teste"),
+        centerTitle: true,
       ),
       body: new ListView(
 
         children: <Widget>[
+
           new Column(
               children: <Widget>[
                 ZTextField(),
@@ -76,7 +92,8 @@ class Home extends StatelessWidget{
         ],
       ),
       bottomNavigationBar: ZtabBar(
-        items: const <BottomNavigationBarItem>[
+        backgroundColor: Colors.teal,
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             title: Text('Home'),
@@ -90,14 +107,15 @@ class Home extends StatelessWidget{
             title: Text('School'),
           ),
         ],
+        onTap: (index) => this.index = index,
         currentIndex: 0,
-       iconSize: 15,
-       elevation: 0.0,
-       inactiveColor: Colors.red,
-       activeColor: Colors.black,
-       // currentIndex: _selectedIndex,
+        iconSize: 16,
+        inactiveColor: Colors.red,
+        activeColor: Colors.black,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.black45,
+        // currentIndex: _selectedIndex,
       ),
     );
   }
-
 }
