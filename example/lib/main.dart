@@ -4,6 +4,10 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
+import 'package:z_components/z_tabbar.dart';
+
+import 'package:z_components/z_navigationbar.dart';
+import 'package:z_components/z_text_field.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,19 +33,53 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatelessWidget{
+  bool value = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: RaisedButton(
+      appBar: new ZNavigationBar(
+      ),
+      body: new ListView(
+          children: <Widget>[
+            ZTextField(),
+
+        ZSwitch(value: value, onChanged: (b) {}),
             child: Text('Show dialog!'),
             onPressed: () {
               new ZPicker(
                 context: context,
+                onTimerDurationChanged: (date) {
+                  date;
+                },
               );
             }),
+
+      ]),
+      bottomNavigationBar: ZtabBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('Business'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            title: Text('School'),
+          ),
+        ],
+        currentIndex: 0,
+       iconSize: 15,
+       elevation: 0.0,
+       inactiveColor: Colors.red,
+       activeColor: Colors.black,
+       // currentIndex: _selectedIndex,
       ),
     );
   }
+
 }
