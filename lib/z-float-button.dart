@@ -1,8 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
+class _DefaultHeroTag {
+  const _DefaultHeroTag();
+  @override
+  String toString() => '<default FloatingActionButton tag>';
+}
+class _ChildOverflowBox extends SingleChildRenderObjectWidget {
+  const _ChildOverflowBox({
+    Key key,
+    Widget child,
+  }) : super(key: key, child: child);
+
+  @override
+  _RenderChildOverflowBox createRenderObject(BuildContext context) {
+    return _RenderChildOverflowBox(
+      textDirection: Directionality.of(context),
+    );
+  }
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderChildOverflowBox renderObject) {
+    renderObject
+      ..textDirection = Directionality.of(context);
+  }
+}
+class _RenderChildOverflowBox extends RenderAligningShiftedBox {
+  _RenderChildOverflowBox({
+    RenderBox child,
+    TextDirection textDirection,
+  }) : super(child: child, alignment: Alignment.center, textDirection: textDirection);
+
+  @override
+  double computeMinIntrinsicWidth(double height) => 0.0;
+
+  @override
+  double computeMinIntrinsicHeight(double width) => 0.0;
+
+  @override
+  void performLayout() {
+    if (child != null) {
+      child.layout(const BoxConstraints(), parentUsesSize: true);
+      size = Size(
+        math.max(constraints.minWidth, math.min(constraints.maxWidth, child.size.width)),
+        math.max(constraints.minHeight, math.min(constraints.maxHeight, child.size.height)),
+      );
+      alignChild();
+    } else {
+      size = constraints.biggest;
+    }
+  }
+}
 class ZFloatButton extends StatelessWidget {
   Widget zFloatButton;
+
  Widget child;
 
  String tooltip;
@@ -49,7 +100,7 @@ class ZFloatButton extends StatelessWidget {
     this.child,
     this.tooltip,
     this.foregroundColor,
-    this.backgroundColor,
+    this.backgroundColor: const Color(0xff2BB9B4),
     this.heroTag = const _DefaultHeroTag(),
     this.elevation,
     this.highlightElevation,
@@ -126,61 +177,96 @@ class ZFloatButton extends StatelessWidget {
         ),
         super(key: key) {
           zFloatButton = FloatingActionButton(onPressed: this.onPressed,
+            key: this.key,
+            child: this.child,
+            elevation: this.elevation,
+            shape: this.shape,
+            backgroundColor: this.backgroundColor,
+            clipBehavior: this.clipBehavior,
+            disabledElevation: this.disabledElevation,
+            foregroundColor: this.foregroundColor,
+            heroTag: this.heroTag,
+            highlightElevation: this.highlightElevation,
+            isExtended: this.isExtended,
+            materialTapTargetSize: this.materialTapTargetSize,
+            mini: this.mini,
+            tooltip: this.tooltip,
           );
 }
 
   @override
   Widget build(BuildContext context) {
-    return zFloatButton;
-  }
-}
-class _DefaultHeroTag {
-  const _DefaultHeroTag();
-  @override
-  String toString() => '<default FloatingActionButton tag>';
-}
-class _ChildOverflowBox extends SingleChildRenderObjectWidget {
-  const _ChildOverflowBox({
-    Key key,
-    Widget child,
-  }) : super(key: key, child: child);
+    final ThemeData theme = Theme.of(context);
+    final FloatingActionButtonThemeData floatingActionButtonTheme = theme.floatingActionButtonTheme;
 
-  @override
-  _RenderChildOverflowBox createRenderObject(BuildContext context) {
-    return _RenderChildOverflowBox(
-      textDirection: Directionality.of(context),
+    final Color backgroundColor = this.backgroundColor
+        ?? floatingActionButtonTheme.backgroundColor
+        ?? theme.colorScheme.secondary;
+    final Color foregroundColor = this.foregroundColor
+        ?? floatingActionButtonTheme.foregroundColor
+        ?? theme.accentIconTheme.color
+        ?? theme.colorScheme.onSecondary;
+    final double elevation = this.elevation
+        ?? floatingActionButtonTheme.elevation
+        ?? _defaultElevation;
+    final double disabledElevation = this.disabledElevation
+        ?? floatingActionButtonTheme.disabledElevation
+        ?? elevation;
+    final double highlightElevation = this.highlightElevation
+        ?? floatingActionButtonTheme.highlightElevation
+        ?? _defaultHighlightElevation;
+    final MaterialTapTargetSize materialTapTargetSize = this.materialTapTargetSize
+        ?? theme.materialTapTargetSize;
+    final TextStyle textStyle = theme.accentTextTheme.button.copyWith(
+      color: foregroundColor,
+      letterSpacing: 1.2,
     );
-  }
+    final ShapeBorder shape = this.shape
+        ?? floatingActionButtonTheme.shape
+        ?? (isExtended ? _defaultExtendedShape : _defaultShape);
 
-  @override
-  void updateRenderObject(BuildContext context, _RenderChildOverflowBox renderObject) {
-    renderObject
-      ..textDirection = Directionality.of(context);
-  }
-}
-class _RenderChildOverflowBox extends RenderAligningShiftedBox {
-  _RenderChildOverflowBox({
-    RenderBox child,
-    TextDirection textDirection,
-  }) : super(child: child, alignment: Alignment.center, textDirection: textDirection);
+    Widget result;
 
-  @override
-  double computeMinIntrinsicWidth(double height) => 0.0;
-
-  @override
-  double computeMinIntrinsicHeight(double width) => 0.0;
-
-  @override
-  void performLayout() {
     if (child != null) {
-      child.layout(const BoxConstraints(), parentUsesSize: true);
-      size = Size(
-        math.max(constraints.minWidth, math.min(constraints.maxWidth, child.size.width)),
-        math.max(constraints.minHeight, math.min(constraints.maxHeight, child.size.height)),
+      result = IconTheme.merge(
+        data: IconThemeData(
+          color: foregroundColor,
+        ),
+        child: child,
       );
-      alignChild();
-    } else {
-      size = constraints.biggest;
     }
+
+    result = RawMaterialButton(
+      onPressed: onPressed,
+      elevation: elevation,
+      highlightElevation: highlightElevation,
+      disabledElevation: disabledElevation,
+      constraints: _sizeConstraints,
+      materialTapTargetSize: materialTapTargetSize,
+      fillColor: backgroundColor,
+      textStyle: textStyle,
+      shape: shape,
+      clipBehavior: clipBehavior,
+      child: result,
+    );
+
+    if (tooltip != null) {
+      result = MergeSemantics(
+        child: Tooltip(
+          message: tooltip,
+          child: result,
+        ),
+      );
+    }
+
+    if (heroTag != null) {
+      result = Hero(
+        tag: heroTag,
+        child: result,
+      );
+    }
+
+    return result;
+
   }
 }
