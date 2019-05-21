@@ -9,6 +9,8 @@ import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
 import 'package:z_components/z_button.dart';
+import 'package:z_components/z_loading.dart';
+
 
 import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
@@ -38,10 +40,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(),
       home: Home(),
-        localizationsDelegates: [
+      localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate, // if it's a RTL language
-        ],
+      ],
       supportedLocales: [
         const Locale('en', 'US'),
         const Locale('ru', 'RU'),
@@ -65,29 +67,40 @@ class Home extends StatelessWidget {
         centerTitle: true,
       ),
       body: new ListView(
-
         children: <Widget>[
-
-          new Column(
-              children: <Widget>[
-                ZTextField(),
-
-                ZSwitch(value: value, onChanged: (b) {}),
-                ZButton(
-                    child: Text('Show dialog!',style: new TextStyle(color: Colors.white),),
-                    onPressed: () {
-                      new ZPicker(
-                        context: context,
-                        onTimerDurationChanged: (date) {
-                          date;
-                        },
-                      );
-                    }),
-                ZButton(child: Text("dialog"),onPressed: (){
-                 showDialog(  context: context,
-                     builder: (BuildContext context) => ZAlertDialog(title: Text("teste"),actions: <Widget>[FlatButton(child: new Icon(Icons.add),)],));
-                },)
-              ]),
+          new Column(children: <Widget>[
+            ZTextField(),
+            ZSwitch(value: value, onChanged: (b) {}),
+            ZButton(
+                child: Text(
+                  'Show dialog!',
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  new ZPicker(
+                    context: context,
+                    onTimerDurationChanged: (date) {
+                      date;
+                    },
+                  );
+                }),
+            ZButton(
+              child: Text("dialog"),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => ZAlertDialog(
+                          title: Text("teste"),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: new Icon(Icons.add),
+                            )
+                          ],
+                        ));
+              },
+            ),
+            ZLoading(),
+          ]),
         ],
       ),
       bottomNavigationBar: ZtabBar(
