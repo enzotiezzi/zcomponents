@@ -63,7 +63,8 @@ class Home extends StatelessWidget {
         onPressed: () {},
       ),
       appBar: new ZNavigationBar(
-        title: new Text("teste"),
+        middle: new Text("ZComponets",style: new TextStyle(color: Colors.white),),
+        title: new Text("ZComponets",style: new TextStyle(color: Colors.white),),
         centerTitle: true,
       ),
       body: new ListView(
