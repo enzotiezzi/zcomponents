@@ -57,7 +57,7 @@ class ZAlertDialog extends StatelessWidget {
         elevation: this.elevation,
         key: this.key,
         title: this.title,
-        actions: <Widget>[],
+        actions: this.actions,
         titlePadding: this.titlePadding,
         contentPadding: this.contentPadding,
         content: this.content,
@@ -67,7 +67,7 @@ class ZAlertDialog extends StatelessWidget {
       );
     } else {
       zAlertDialog = CupertinoAlertDialog(
-        actions: <Widget>[],
+        actions: this.actions,
         title: this.title,
         content: this.content,
         key: this.key,
