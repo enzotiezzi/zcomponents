@@ -41,7 +41,7 @@ class ZPicker {
       this.use24hFormat = true,
       this.minuteInterval = 1,
       this.initialDateTime}) {
-    if (Platform.isIOS) {
+    if (Platform.isAndroid) {
       _showDatePicker();
     } else {
       showModalBottomSheet(
