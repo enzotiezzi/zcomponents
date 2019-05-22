@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/z-platform.dart';
 
 class ZtabBar extends StatelessWidget {
-  
   Widget _zTabBar;
-  
+
   final List<BottomNavigationBarItem> items;
   final ValueChanged<int> onTap;
   final int currentIndex;
@@ -23,6 +23,7 @@ class ZtabBar extends StatelessWidget {
   final double unselectedFontSize;
   final bool showUnselectedLabels;
   final bool showSelectedLabels;
+  final ZPlatform zPlatform;
 
   ZtabBar(
       {Key key,
@@ -42,38 +43,75 @@ class ZtabBar extends StatelessWidget {
       this.unselectedFontSize = 12.0,
       this.showSelectedLabels = true,
       this.showUnselectedLabels,
-      this.fixedColor})
+      this.fixedColor,
+      this.zPlatform = ZPlatform.notPlatform})
       : super(key: key) {
-    if (Platform.isAndroid) {
-      _zTabBar = new BottomNavigationBar(
-        currentIndex: this.currentIndex,
-        iconSize: this.iconSize,
-        items: this.items,
-        backgroundColor: this.backgroundColor,
-        selectedItemColor: this.selectedItemColor,
-        onTap: this.onTap,
-        elevation: this.elevation,
-        type: this.type,
-        fixedColor: this.fixedColor,
-        selectedFontSize: this.selectedFontSize,
-        showSelectedLabels: this.showSelectedLabels,
-        showUnselectedLabels: this.showUnselectedLabels,
-        unselectedItemColor: unselectedItemColor,
-        key: this.key,
-        unselectedFontSize: this.unselectedFontSize,
-      );
-    } else {
-      _zTabBar = new CupertinoTabBar(
-        key: this.key,
-        border: this.border,
-        iconSize: this.iconSize,
-        currentIndex: currentIndex,
-        items: this.items,
-        backgroundColor: this.backgroundColor,
-        activeColor: this.selectedItemColor,
-        onTap: this.onTap,
-        inactiveColor: this.inactiveColor,
-      );
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zTabBar = new BottomNavigationBar(
+            currentIndex: this.currentIndex,
+            iconSize: this.iconSize,
+            items: this.items,
+            backgroundColor: this.backgroundColor,
+            selectedItemColor: this.selectedItemColor,
+            onTap: this.onTap,
+            elevation: this.elevation,
+            type: this.type,
+            fixedColor: this.fixedColor,
+            selectedFontSize: this.selectedFontSize,
+            showSelectedLabels: this.showSelectedLabels,
+            showUnselectedLabels: this.showUnselectedLabels,
+            unselectedItemColor: unselectedItemColor,
+            key: this.key,
+            unselectedFontSize: this.unselectedFontSize,
+          );
+        } else {
+          _zTabBar = new CupertinoTabBar(
+            key: this.key,
+            border: this.border,
+            iconSize: this.iconSize,
+            currentIndex: currentIndex,
+            items: this.items,
+            backgroundColor: this.backgroundColor,
+            activeColor: this.selectedItemColor,
+            onTap: this.onTap,
+            inactiveColor: this.inactiveColor,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zTabBar = new BottomNavigationBar(
+          currentIndex: this.currentIndex,
+          iconSize: this.iconSize,
+          items: this.items,
+          backgroundColor: this.backgroundColor,
+          selectedItemColor: this.selectedItemColor,
+          onTap: this.onTap,
+          elevation: this.elevation,
+          type: this.type,
+          fixedColor: this.fixedColor,
+          selectedFontSize: this.selectedFontSize,
+          showSelectedLabels: this.showSelectedLabels,
+          showUnselectedLabels: this.showUnselectedLabels,
+          unselectedItemColor: unselectedItemColor,
+          key: this.key,
+          unselectedFontSize: this.unselectedFontSize,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zTabBar = new CupertinoTabBar(
+          key: this.key,
+          border: this.border,
+          iconSize: this.iconSize,
+          currentIndex: currentIndex,
+          items: this.items,
+          backgroundColor: this.backgroundColor,
+          activeColor: this.selectedItemColor,
+          onTap: this.onTap,
+          inactiveColor: this.inactiveColor,
+        );
+        break;
     }
   }
 

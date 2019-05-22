@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/z-platform.dart';
 
 class ZLoading extends StatelessWidget {
   Widget _zLoading;
@@ -15,6 +16,7 @@ class ZLoading extends StatelessWidget {
   final String semanticsValue;
   final bool animating;
   final double radius;
+  final ZPlatform zPlatform;
 
   ZLoading({
     this.context,
@@ -27,23 +29,46 @@ class ZLoading extends StatelessWidget {
     this.semanticsValue,
     this.animating = true,
     this.radius = 15.0,
+    this.zPlatform = ZPlatform.notPlatform,
   }) : super(key: key) {
-    if (Platform.isAndroid) {
-      _zLoading = CircularProgressIndicator(
-        key: this.key,
-        value: this.value,
-        backgroundColor: this.backgroundColor,
-        valueColor: this.valueColor,
-        strokeWidth: this.strokeWidth,
-        semanticsLabel: this.semanticsLabel,
-        semanticsValue: this.semanticsValue,
-      );
-    } else {
-      _zLoading = CupertinoActivityIndicator(
-        key: this.key,
-        animating: this.animating,
-        radius: this.radius,
-      );
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zLoading = CircularProgressIndicator(
+            key: this.key,
+            value: this.value,
+            backgroundColor: this.backgroundColor,
+            valueColor: this.valueColor,
+            strokeWidth: this.strokeWidth,
+            semanticsLabel: this.semanticsLabel,
+            semanticsValue: this.semanticsValue,
+          );
+        } else {
+          _zLoading = CupertinoActivityIndicator(
+            key: this.key,
+            animating: this.animating,
+            radius: this.radius,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zLoading = CircularProgressIndicator(
+          key: this.key,
+          value: this.value,
+          backgroundColor: this.backgroundColor,
+          valueColor: this.valueColor,
+          strokeWidth: this.strokeWidth,
+          semanticsLabel: this.semanticsLabel,
+          semanticsValue: this.semanticsValue,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zLoading = CupertinoActivityIndicator(
+          key: this.key,
+          animating: this.animating,
+          radius: this.radius,
+        );
+        break;
     }
   }
 

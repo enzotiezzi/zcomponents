@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:z_components/z-platform.dart';
 
 class ZAlertDialog extends StatelessWidget {
-  
   Widget _zAlertDialog;
-  
+
   final Key key;
   final Widget title;
   final EdgeInsetsGeometry titlePadding;
@@ -23,6 +23,7 @@ class ZAlertDialog extends StatelessWidget {
   final List<Widget> actionsCupertino;
   final ScrollController scrollController;
   final ScrollController actionScrollController;
+  final ZPlatform zPlatform;
 
   ZAlertDialog({
     this.key,
@@ -40,32 +41,63 @@ class ZAlertDialog extends StatelessWidget {
     this.actionsCupertino = const <Widget>[],
     this.scrollController,
     this.actionScrollController,
+    this.zPlatform = ZPlatform.notPlatform,
   })  : assert(contentPadding != null),
         super(key: key) {
-    if (Platform.isAndroid) {
-      _zAlertDialog = AlertDialog(
-        backgroundColor: this.backgroundColor,
-        shape: this.shape,
-        elevation: this.elevation,
-        key: this.key,
-        title: this.title,
-        actions: this.actions,
-        titlePadding: this.titlePadding,
-        contentPadding: this.contentPadding,
-        content: this.content,
-        contentTextStyle: this.contentTextStyle,
-        semanticLabel: this.semanticLabel,
-        titleTextStyle: this.titleTextStyle,
-      );
-    } else {
-      _zAlertDialog = CupertinoAlertDialog(
-        actions: this.actions,
-        title: this.title,
-        content: this.content,
-        key: this.key,
-        actionScrollController: this.actionScrollController,
-        scrollController: this.scrollController,
-      );
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zAlertDialog = AlertDialog(
+            backgroundColor: this.backgroundColor,
+            shape: this.shape,
+            elevation: this.elevation,
+            key: this.key,
+            title: this.title,
+            actions: this.actions,
+            titlePadding: this.titlePadding,
+            contentPadding: this.contentPadding,
+            content: this.content,
+            contentTextStyle: this.contentTextStyle,
+            semanticLabel: this.semanticLabel,
+            titleTextStyle: this.titleTextStyle,
+          );
+        } else {
+          _zAlertDialog = CupertinoAlertDialog(
+            actions: this.actions,
+            title: this.title,
+            content: this.content,
+            key: this.key,
+            actionScrollController: this.actionScrollController,
+            scrollController: this.scrollController,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zAlertDialog = AlertDialog(
+          backgroundColor: this.backgroundColor,
+          shape: this.shape,
+          elevation: this.elevation,
+          key: this.key,
+          title: this.title,
+          actions: this.actions,
+          titlePadding: this.titlePadding,
+          contentPadding: this.contentPadding,
+          content: this.content,
+          contentTextStyle: this.contentTextStyle,
+          semanticLabel: this.semanticLabel,
+          titleTextStyle: this.titleTextStyle,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zAlertDialog = CupertinoAlertDialog(
+          actions: this.actions,
+          title: this.title,
+          content: this.content,
+          key: this.key,
+          actionScrollController: this.actionScrollController,
+          scrollController: this.scrollController,
+        );
+        break;
     }
   }
 
