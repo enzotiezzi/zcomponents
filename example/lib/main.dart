@@ -83,7 +83,7 @@ class Home extends StatelessWidget {
                     }),
                 ZButton(child: Text("dialog"),onPressed: (){
                  showDialog(  context: context,
-                     builder: (BuildContext context) => ZAlertDialog(title: Text("teste"),actions: <Widget>[FlatButton(child: new Icon(Icons.add),)],));
+                     builder: (BuildContext context) => ZAlertDialog(title: Text("teste"),actions: <Widget>[FlatButton(onPressed: (){},child: new Icon(Icons.add),)],));
                 },)
 
 

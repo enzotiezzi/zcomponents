@@ -125,12 +125,6 @@ class ZFloatButton extends StatelessWidget {
         ),
         super(key: key);
 
-  /// Creates a wider [StadiumBorder]-shaped floating action button with
-  /// an optional [icon] and a [label].
-  ///
-  /// The [label] and [clipBehavior] arguments must non-null. Additionally,
-  /// [elevation], [highlightElevation], and [disabledElevation] (if specified)
-  /// must be non-negative.
   ZFloatButton.extended({
     Key key,
     this.tooltip,
