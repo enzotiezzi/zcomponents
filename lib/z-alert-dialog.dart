@@ -57,7 +57,7 @@ class ZAlertDialog extends StatelessWidget {
         elevation: this.elevation,
         key: this.key,
         title: this.title,
-        actions: <Widget>[],
+        actions: this.actions,
         titlePadding: this.titlePadding,
         contentPadding: this.contentPadding,
         content: this.content,
@@ -66,8 +66,8 @@ class ZAlertDialog extends StatelessWidget {
         titleTextStyle: this.titleTextStyle,
       );
     } else {
-      CupertinoAlertDialog(
-        actions: <Widget>[],
+      zAlertDialog = CupertinoAlertDialog(
+        actions: this.actions,
         title: this.title,
         content: this.content,
         key: this.key,
@@ -139,11 +139,6 @@ class ZAlertDialog extends StatelessWidget {
         child: dialogChild,
       );
 
-    return Dialog(
-      backgroundColor: backgroundColor,
-      elevation: elevation,
-      shape: shape,
-      child: dialogChild,
-    );
+    return zAlertDialog;
   }
 }
