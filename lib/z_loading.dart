@@ -3,21 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZLoading extends StatelessWidget {
-  Widget zLoading;
-  BuildContext context;
-  Key key;
-  double value;
-  Color backgroundColor;
-  Animation<Color> valueColor;
-  double strokeWidth;
-  String semanticsLabel;
-  String semanticsValue;
-  bool animating;
-  double radius;
+  Widget _zLoading;
+
+  final BuildContext context;
+  final Key key;
+  final double value;
+  final Color backgroundColor;
+  final Animation<Color> valueColor;
+  final double strokeWidth;
+  final String semanticsLabel;
+  final String semanticsValue;
+  final bool animating;
+  final double radius;
 
   ZLoading({
     this.context,
-    Key key,
+    this.key,
     this.value,
     this.backgroundColor,
     this.valueColor,
@@ -26,20 +27,20 @@ class ZLoading extends StatelessWidget {
     this.semanticsValue,
     this.animating = true,
     this.radius = 15.0,
-  }) {
+  }) : super(key: key) {
     if (Platform.isAndroid) {
-     zLoading = CircularProgressIndicator(
-        key: key,
-        value: value,
-        backgroundColor: backgroundColor,
-        valueColor: valueColor,
-        strokeWidth: strokeWidth,
-        semanticsLabel: semanticsLabel,
-        semanticsValue: semanticsValue,
+      _zLoading = CircularProgressIndicator(
+        key: this.key,
+        value: this.value,
+        backgroundColor: this.backgroundColor,
+        valueColor: this.valueColor,
+        strokeWidth: this.strokeWidth,
+        semanticsLabel: this.semanticsLabel,
+        semanticsValue: this.semanticsValue,
       );
     } else {
-     zLoading = CupertinoActivityIndicator(
-        key: key,
+      _zLoading = CupertinoActivityIndicator(
+        key: this.key,
         animating: this.animating,
         radius: this.radius,
       );
@@ -48,7 +49,6 @@ class ZLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return zLoading;
+    return _zLoading;
   }
 }

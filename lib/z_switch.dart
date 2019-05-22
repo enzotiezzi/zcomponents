@@ -4,18 +4,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ZSwitch extends StatelessWidget {
-  Widget zSwitch;
+ 
+  Widget _zSwitch;
 
-  bool value;
-  ValueChanged<bool> onChanged;
-  Color activeColor;
-  DragStartBehavior dragStartBehavior;
-  Color activeTrackColor;
-  Color inactiveThumbColor;
-  Color inactiveTrackColor;
-  ImageProvider activeThumbImage;
-  ImageProvider inactiveThumbImage;
-  MaterialTapTargetSize materialTapTargetSize;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+  final Color activeColor;
+  final DragStartBehavior dragStartBehavior;
+  final Color activeTrackColor;
+  final Color inactiveThumbColor;
+  final Color inactiveTrackColor;
+  final ImageProvider activeThumbImage;
+  final ImageProvider inactiveThumbImage;
+  final MaterialTapTargetSize materialTapTargetSize;
 
   ZSwitch({
     Key key,
@@ -32,7 +33,7 @@ class ZSwitch extends StatelessWidget {
   })  : assert(value != null),
         assert(dragStartBehavior != null) {
     if (Platform.isAndroid) {
-      zSwitch = new Switch(
+      _zSwitch = new Switch(
         onChanged: this.onChanged,
         value: this.value,
         activeColor: this.activeColor,
@@ -46,7 +47,7 @@ class ZSwitch extends StatelessWidget {
         materialTapTargetSize: this.materialTapTargetSize,
       );
     } else {
-      zSwitch = new CupertinoSwitch(
+      _zSwitch = new CupertinoSwitch(
         onChanged: this.onChanged,
         value: this.value,
         activeColor: this.activeColor,
@@ -58,7 +59,6 @@ class ZSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return zSwitch;
+    return _zSwitch;
   }
 }

@@ -6,99 +6,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ZTextField extends StatelessWidget {
-  Widget zTextField;
+  
+  Widget _zTextField;
 
-  TextStyle placeholderStyle;
-
-  TextEditingController controller;
-
-  FocusNode focusNode;
-
-  InputDecoration decoration;
-
-  TextInputType keyboardType;
-
-  TextInputAction textInputAction;
-
-  TextCapitalization textCapitalization;
-
-  TextStyle style;
-
-  StrutStyle strutStyle;
-
-  TextAlign textAlign;
-
-  TextDirection textDirection;
-
-  bool autofocus;
-
-  bool obscureText;
-
-  bool autocorrect;
-
-  int maxLines;
-
-  int minLines;
-
-  bool expands;
-
+  final TextStyle placeholderStyle;
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  final InputDecoration decoration;
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  final TextCapitalization textCapitalization;
+  final TextStyle style;
+  final StrutStyle strutStyle;
+  final TextAlign textAlign;
+  final TextDirection textDirection;
+  final bool autofocus;
+  final bool obscureText;
+  final bool autocorrect;
+  final int maxLines;
+  final int minLines;
+  final bool expands;
   static const int noMaxLength = -1;
-
-  int maxLength;
-
-  bool maxLengthEnforced;
-
-  ValueChanged<String> onChanged;
-
-  VoidCallback onEditingComplete;
-
-  ValueChanged<String> onSubmitted;
-
-  List<TextInputFormatter> inputFormatters;
-
-  bool enabled;
-
-  double cursorWidth;
-
-  Radius cursorRadius;
-
-  Color cursorColor;
-
-  Brightness keyboardAppearance;
-
-  EdgeInsets scrollPadding;
-
-  bool enableInteractiveSelection;
-
-  DragStartBehavior dragStartBehavior;
-
-  bool get selectionEnabled {
-    return enableInteractiveSelection ?? !obscureText;
-  }
-
-  GestureTapCallback onTap;
-
-  InputCounterWidgetBuilder buildCounter;
-
-  ScrollPhysics scrollPhysics;
-
-  EdgeInsetsGeometry padding;
-
-  String placeholder;
-
-  Widget prefix;
-
-  OverlayVisibilityMode prefixMode;
-
-  Widget suffix;
-
-  OverlayVisibilityMode suffixMode;
-
-  OverlayVisibilityMode clearButtonMode;
-
+  final int maxLength;
+  final bool maxLengthEnforced;
+  final ValueChanged<String> onChanged;
+  final VoidCallback onEditingComplete;
+  final ValueChanged<String> onSubmitted;
+  final List<TextInputFormatter> inputFormatters;
+  final bool enabled;
+  final double cursorWidth;
+  final Radius cursorRadius;
+  final Color cursorColor;
+  final Brightness keyboardAppearance;
+  final EdgeInsets scrollPadding;
+  final bool enableInteractiveSelection;
+  final DragStartBehavior dragStartBehavior;
+  final GestureTapCallback onTap;
+  final InputCounterWidgetBuilder buildCounter;
+  final ScrollPhysics scrollPhysics;
+  final EdgeInsetsGeometry padding;
+  final String placeholder;
+  final Widget prefix;
+  final OverlayVisibilityMode prefixMode;
+  final Widget suffix;
+  final OverlayVisibilityMode suffixMode;
+  final OverlayVisibilityMode clearButtonMode;
   final BoxDecoration decorationCupertino;
 
   ZTextField({
+    this.keyboardType,
     this.decorationCupertino = const BoxDecoration(
       border: Border(
           top: BorderSide(
@@ -129,14 +85,12 @@ class ZTextField extends StatelessWidget {
     this.decoration,
     this.padding = const EdgeInsets.all(6.0),
     this.placeholder,
-    this.placeholderStyle = const TextStyle(
-        fontWeight: FontWeight.w300, color: const Color(0xFFC2C2C2)),
+    this.placeholderStyle = const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xFFC2C2C2)),
     this.prefix,
     this.prefixMode = OverlayVisibilityMode.always,
     this.suffix,
     this.suffixMode = OverlayVisibilityMode.always,
     this.clearButtonMode = OverlayVisibilityMode.never,
-    TextInputType keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
     this.style,
@@ -166,32 +120,9 @@ class ZTextField extends StatelessWidget {
     this.enableInteractiveSelection,
     this.onTap,
     this.buildCounter,
-  })  : assert(textAlign != null),
-        assert(autofocus != null),
-        assert(obscureText != null),
-        assert(autocorrect != null),
-        assert(maxLengthEnforced != null),
-        assert(scrollPadding != null),
-        assert(dragStartBehavior != null),
-        assert(maxLines == null || maxLines > 0),
-        assert(minLines == null || minLines > 0),
-        assert(
-          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
-          'minLines can\'t be greater than maxLines',
-        ),
-        assert(expands != null),
-        assert(
-          !expands || (maxLines == null && minLines == null),
-          'minLines and maxLines must be null when expands is true.',
-        ),
-        assert(maxLength == null ||
-            maxLength == TextField.noMaxLength ||
-            maxLength > 0),
-        keyboardType = keyboardType ??
-            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        super(key: key) {
+  }) : super(key: key) {
     if (Platform.isAndroid) {
-      zTextField = new TextField(
+      _zTextField = new TextField(
         onChanged: this.onChanged,
         style: this.style,
         decoration: this.decoration,
@@ -228,7 +159,7 @@ class ZTextField extends StatelessWidget {
         textInputAction: this.textInputAction,
       );
     } else {
-      zTextField = CupertinoTextField(
+      _zTextField = CupertinoTextField(
         onChanged: this.onChanged,
         style: this.style,
         enabled: this.enabled,
@@ -259,7 +190,7 @@ class ZTextField extends StatelessWidget {
         textCapitalization: TextCapitalization.none,
         textInputAction: this.textInputAction,
         decoration: this.decorationCupertino,
-        padding:  const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.all(6.0),
         clearButtonMode: OverlayVisibilityMode.never,
         placeholder: this.placeholder,
         placeholderStyle: this.placeholderStyle,
@@ -273,6 +204,6 @@ class ZTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return zTextField;
+    return _zTextField;
   }
 }
