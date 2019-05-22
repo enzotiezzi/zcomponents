@@ -5,12 +5,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:z_components/z-alert-dialog.dart';
 import 'package:z_components/z-float-button.dart';
+import 'package:z_components/z-platform.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
 import 'package:z_components/z_button.dart';
 import 'package:z_components/z_loading.dart';
-
 
 import 'package:z_components/z_navigationbar.dart';
 import 'package:z_components/z_text_field.dart';
@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(),
       home: Home(),
       localizationsDelegates: [
@@ -45,8 +46,13 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate, // if it's a RTL language
       ],
       supportedLocales: [
+        
+        if(Platform.isIOS)
         const Locale('en', 'US'),
-        const Locale('ru', 'RU'),
+        
+        if(Platform.isAndroid)
+        const Locale('pt', 'BR'),
+    
       ],
     );
   }
@@ -63,8 +69,14 @@ class Home extends StatelessWidget {
         onPressed: () {},
       ),
       appBar: new ZNavigationBar(
-        middle: new Text("ZComponets",style: new TextStyle(color: Colors.white),),
-        title: new Text("ZComponets",style: new TextStyle(color: Colors.white),),
+        middle: new Text(
+          "ZComponets",
+          style: new TextStyle(color: Colors.white),
+        ),
+        title: new Text(
+          "ZComponets",
+          style: new TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: new ListView(
@@ -80,34 +92,46 @@ class Home extends StatelessWidget {
                 onPressed: () {
                   new ZPicker(
                     context: context,
+                    initialDate: DateTime.now(),
+                    lastDate: DateTime(2090),
+                    firstDate: DateTime(1090),
                     onTimerDurationChanged: (date) {
                       date;
                     },
                   );
                 }),
             ZButton(
-              child: Text("Dialog",style: new TextStyle(color: Colors.white),),
+              child: Text(
+                "Dialog",
+                style: new TextStyle(color: Colors.white),
+              ),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => ZAlertDialog(
-                      actionsCupertino: <Widget>[
-                      new ZButton(onPressed: (){})
-                    ],
+                          actionsCupertino: <Widget>[new ZButton(onPressed: () {})],
                           title: Text("Dialog Teste:"),
                           actions: <Widget>[
                             ZButton(
                               color: const Color(0xffF7F7F7),
-                              onPressed: (){
+                              onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: new Text("OK",style: new TextStyle(color: Colors.teal),),
+                              child: new Text(
+                                "OK",
+                                style: new TextStyle(color: Colors.teal),
+                              ),
                             )
                           ],
                         ));
               },
             ),
             ZLoading(),
+            ZTextField(
+              style: TextStyle(fontSize: 20),
+              controller: TextEditingController(text: "teste"),
+              zPlatform: ZPlatform.isAndroid,
+            ),
           ]),
         ],
       ),
