@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZPicker {
- 
   final BuildContext context;
   final ValueChanged<DateTime> onTimerDurationChanged;
   final DateTime initialDate;
@@ -23,26 +22,25 @@ class ZPicker {
   final bool use24hFormat;
   final int minuteInterval;
 
-  ZPicker({
-    this.context,
-    this.initialDate,
-    this.firstDate,
-    this.lastDate,
-    this.selectableDayPredicate,
-    this.initialDatePickerMode = DatePickerMode.day,
-    this.locale,
-    this.textDirection,
-    this.builder,
-    this.onTimerDurationChanged,
-    this.mode,
-    this.minimumDate,
-    this.maximumDate,
-    this.minimumYear,
-    this.maximumYear,
-    this.use24hFormat,
-    this.minuteInterval,
-    this.initialDateTime
-  }) {
+  ZPicker(
+      {this.context,
+      this.initialDate,
+      this.firstDate,
+      this.lastDate,
+      this.selectableDayPredicate,
+      this.initialDatePickerMode = DatePickerMode.day,
+      this.locale,
+      this.textDirection,
+      this.builder,
+      this.onTimerDurationChanged,
+      this.mode = CupertinoDatePickerMode.dateAndTime,
+      this.minimumDate,
+      this.maximumDate,
+      this.minimumYear = 1,
+      this.maximumYear,
+      this.use24hFormat = true,
+      this.minuteInterval = 1,
+      this.initialDateTime}) {
     if (Platform.isAndroid) {
       _showDatePicker();
     } else {
@@ -59,8 +57,8 @@ class ZPicker {
                   maximumDate: this.maximumDate,
                   maximumYear: this.maximumYear,
                   minimumDate: this.minimumDate,
-                  minimumYear: this.maximumYear,
-                  use24hFormat: true,
+                  minimumYear: this.minimumYear,
+                  use24hFormat: this.use24hFormat,
                 ));
           });
     }
