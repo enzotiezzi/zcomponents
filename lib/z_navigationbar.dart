@@ -97,7 +97,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget{
         backgroundColor: this.backgroundColor,
         leading: this.leading,
         middle: this.middle,
-        trailing: (this.trailing != null) ? this.trailing : this.title,
+        trailing: this.trailing,
         border: this.border,
         padding: this.padding,
       );
