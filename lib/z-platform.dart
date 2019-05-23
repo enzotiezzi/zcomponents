@@ -1,1 +1,1 @@
-enum ZPlatform { isIOS, isAndroid, notPlatform }
+enum ZPlatform { isIOS, isAndroid, isPlatform }

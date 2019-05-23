@@ -17,7 +17,7 @@ class ZLoading extends StatelessWidget {
   final bool animating;
   final double radius;
   final ZPlatform zPlatform;
-
+  
   ZLoading({
     this.context,
     this.key,
@@ -29,10 +29,10 @@ class ZLoading extends StatelessWidget {
     this.semanticsValue,
     this.animating = true,
     this.radius = 15.0,
-    this.zPlatform = ZPlatform.notPlatform,
+    this.zPlatform = ZPlatform.isPlatform,
   }) : super(key: key) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zLoading = CircularProgressIndicator(
             key: this.key,

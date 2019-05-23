@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:z_components/z-alert-dialog.dart';
 import 'package:z_components/z-float-button.dart';
 import 'package:z_components/z-platform.dart';
+import 'package:z_components/z-size.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
@@ -111,7 +112,7 @@ class Home extends StatelessWidget {
                     },
                   );
                 }),
-            ZButton(
+    new ZSize(context: context,child: ZButton(
               child: Text(
                 "Dialog",
                 style: new TextStyle(color: Colors.white),
@@ -120,8 +121,9 @@ class Home extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) =>
-                        ZAlertDialog(
-                          actionsCupertino: <Widget>[new ZButton(onPressed: () {})],
+                ZAlertDialog(
+                          actionsCupertino: <Widget>[
+                            new ZButton(onPressed: () {})],
                           title: Text("Dialog Teste:"),
                           actions: <Widget>[
                             ZButton(
@@ -137,8 +139,8 @@ class Home extends StatelessWidget {
                           ],
                         ));
               },
-            ),
-            ZLoading(),
+            ),quadrado: true,),
+            new ZSize(context: context,child: ZLoading(zPlatform: ZPlatform.isAndroid,),width: 10),
             Text(appSwitch.text),
           ]),
         ],

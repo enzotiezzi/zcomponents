@@ -57,10 +57,10 @@ class ZButton extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.colorBrightness,
     this.animationDuration,
-    this.zPlatform = ZPlatform.notPlatform,
+    this.zPlatform = ZPlatform.isPlatform,
   }) : super(key: key) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zButton = new RaisedButton(
             onPressed: this.onPressed,

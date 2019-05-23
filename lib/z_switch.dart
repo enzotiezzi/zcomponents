@@ -31,11 +31,11 @@ class ZSwitch extends StatelessWidget {
       this.inactiveThumbImage,
       this.inactiveTrackColor,
       this.materialTapTargetSize,
-      this.zPlatform = ZPlatform.notPlatform})
+      this.zPlatform = ZPlatform.isPlatform})
       : assert(value != null),
         assert(dragStartBehavior != null) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zSwitch = new Switch(
             onChanged: this.onChanged,

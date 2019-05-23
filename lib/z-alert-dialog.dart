@@ -41,11 +41,11 @@ class ZAlertDialog extends StatelessWidget {
     this.actionsCupertino = const <Widget>[],
     this.scrollController,
     this.actionScrollController,
-    this.zPlatform = ZPlatform.notPlatform,
+    this.zPlatform = ZPlatform.isPlatform,
   })  : assert(contentPadding != null),
         super(key: key) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zAlertDialog = AlertDialog(
             backgroundColor: this.backgroundColor,

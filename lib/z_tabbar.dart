@@ -44,10 +44,10 @@ class ZtabBar extends StatelessWidget {
       this.showSelectedLabels = true,
       this.showUnselectedLabels,
       this.fixedColor,
-      this.zPlatform = ZPlatform.notPlatform})
+      this.zPlatform = ZPlatform.isPlatform})
       : super(key: key) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zTabBar = new BottomNavigationBar(
             currentIndex: this.currentIndex,

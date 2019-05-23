@@ -121,10 +121,10 @@ class ZTextField extends StatelessWidget {
       this.enableInteractiveSelection,
       this.onTap,
       this.buildCounter,
-      this.zPlatform = ZPlatform.notPlatform})
+      this.zPlatform = ZPlatform.isPlatform})
       : super(key: key) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zTextField = new TextField(
             onChanged: this.onChanged,
