@@ -139,8 +139,8 @@ class Home extends StatelessWidget {
                           ],
                         ));
               },
-            ),quadrado: true,),
-            new ZSize(context: context,child: ZLoading(zPlatform: ZPlatform.isAndroid,),width: 10),
+            ),quadrado: false,percentWidth: 40,percentHeight: 10,maxHeight: 30,),
+            new ZLoading(zPlatform: ZPlatform.isAndroid,),
             Text(appSwitch.text),
           ]),
         ],
