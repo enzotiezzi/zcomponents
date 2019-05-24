@@ -139,9 +139,105 @@ class Home extends StatelessWidget {
                           ],
                         ));
               },
-            ),quadrado: false,percentWidth: 40,percentHeight: 10,maxHeight: 30,),
+            ),quadrado: false,percentWidth: 90,percentHeight: 10,maxHeight: 30,),
             new ZLoading(zPlatform: ZPlatform.isAndroid,),
             Text(appSwitch.text),
+            
+            new Row(children: <Widget>[
+              
+              new ZSize(
+                context: context,
+                child: ZButton(
+                child: Text(
+                  "Dialog",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          ZAlertDialog(
+                            actionsCupertino: <Widget>[
+                              new ZButton(onPressed: () {})],
+                            title: Text("Dialog Teste:"),
+                            actions: <Widget>[
+                              ZButton(
+                                color: const Color(0xffF7F7F7),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  "OK",
+                                  style: new TextStyle(color: Colors.teal),
+                                ),
+                              )
+                            ],
+                          ));
+                },
+              ),percentHeight: 10,
+              maxHeight: 50,
+              maxWidth: 500,
+              padding: EdgeInsets.all(5.0),
+              percentWidth: 30.0),
+              
+              new ZSize(context: context,
+                child: ZButton(
+                child: Text(
+                  "Dialog",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          ZAlertDialog(
+                            actionsCupertino: <Widget>[
+                              new ZButton(onPressed: () {})],
+                            title: Text("Dialog Teste:"),
+                            actions: <Widget>[
+                              ZButton(
+                                color: const Color(0xffF7F7F7),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  "OK",
+                                  style: new TextStyle(color: Colors.teal),
+                                ),
+                              )
+                            ],
+                          ));
+                },
+              ),quadrado: false,percentWidth: 33.33,percentHeight: 10,maxHeight: 30,),
+              new ZSize(context: context,child: ZButton(
+                child: Text(
+                  "Dialog",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          ZAlertDialog(
+                            actionsCupertino: <Widget>[
+                              new ZButton(onPressed: () {})],
+                            title: Text("Dialog Teste:"),
+                            actions: <Widget>[
+                              ZButton(
+                                color: const Color(0xffF7F7F7),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  "OK",
+                                  style: new TextStyle(color: Colors.teal),
+                                ),
+                              )
+                            ],
+                          ));
+                },
+              ),quadrado: false,percentWidth: 33.33,percentHeight: 10,maxHeight: 30,),
+            ],)
           ]),
         ],
       ),
