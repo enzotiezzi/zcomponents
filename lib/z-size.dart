@@ -27,8 +27,8 @@ class ZSize extends StatelessWidget {
     this.quadrado = false,
     this.maxHeight = 450,
     this.maxWidth = 450,
-    this.percentHeight = 5,
-    this.percentWidth = 5,
+    this.percentHeight = 20,
+    this.percentWidth = 50,
   }) : super(key: key) {
     initSize();
   }
