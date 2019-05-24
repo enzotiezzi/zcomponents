@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZAlertDialog extends StatelessWidget {
   Widget _zAlertDialog;

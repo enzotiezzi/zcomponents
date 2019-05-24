@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZSwitch extends StatelessWidget {
   Widget _zSwitch;

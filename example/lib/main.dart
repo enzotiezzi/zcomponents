@@ -3,18 +3,18 @@ import 'dart:async';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter/services.dart';
-import 'package:z_components/z-alert-dialog.dart';
-import 'package:z_components/z-float-button.dart';
-import 'package:z_components/z-platform.dart';
-import 'package:z_components/z-size.dart';
-import 'package:z_components/z_switch.dart';
-import 'package:z_components/z_picker.dart';
-import 'package:z_components/z_tabbar.dart';
-import 'package:z_components/z_button.dart';
-import 'package:z_components/z_loading.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/components/z-float-button.dart';
+import 'package:z_components/config/z-platform.dart';
+import 'package:z_components/components/z-size.dart';
+import 'package:z_components/components/z_switch.dart';
+import 'package:z_components/components/z_picker.dart';
+import 'package:z_components/components/z_tabbar.dart';
+import 'package:z_components/components/z_button.dart';
+import 'package:z_components/components/z_loading.dart';
 
-import 'package:z_components/z_navigationbar.dart';
-import 'package:z_components/z_text_field.dart';
+import 'package:z_components/components/z_navigationbar.dart';
+import 'package:z_components/components/z_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 
@@ -144,10 +144,9 @@ class Home extends StatelessWidget {
             Text(appSwitch.text),
             
             new Row(children: <Widget>[
-              
               new ZSize(
                 context: context,
-                child: ZButton(
+                child: new ZButton(
                 child: Text(
                   "Dialog",
                   style: new TextStyle(color: Colors.white),
@@ -174,14 +173,15 @@ class Home extends StatelessWidget {
                             ],
                           ));
                 },
-              ),percentHeight: 10,
-              maxHeight: 50,
-              maxWidth: 500,
-              padding: EdgeInsets.all(5.0),
-              percentWidth: 30.0),
-              
+              ),
+                  percentHeight: 10,
+                  maxHeight: 50,
+                  maxWidth: 500,
+                  padding: EdgeInsets.all(5),
+                  percentWidth: 30,
+              ),
               new ZSize(context: context,
-                child: ZButton(
+                child: new ZButton(
                 child: Text(
                   "Dialog",
                   style: new TextStyle(color: Colors.white),
@@ -208,8 +208,14 @@ class Home extends StatelessWidget {
                             ],
                           ));
                 },
-              ),quadrado: false,percentWidth: 33.33,percentHeight: 10,maxHeight: 30,),
-              new ZSize(context: context,child: ZButton(
+              ),
+                  percentWidth: 33.33,
+                  percentHeight: 10,
+                  maxHeight: 30,
+              ),
+              new ZSize(
+                context: context,
+                child: new ZButton(
                 child: Text(
                   "Dialog",
                   style: new TextStyle(color: Colors.white),
@@ -236,7 +242,12 @@ class Home extends StatelessWidget {
                             ],
                           ));
                 },
-              ),quadrado: false,percentWidth: 33.33,percentHeight: 10,maxHeight: 30,),
+              ),
+                  percentWidth: 33.33,
+                  percentHeight: 100,
+                  maxHeight: 50,
+                  padding: EdgeInsets.all(5),
+                ),
             ],)
           ]),
         ],
