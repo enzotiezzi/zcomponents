@@ -1,42 +1,44 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/z-platform.dart';
 
-class ZNavigationBar extends StatelessWidget with PreferredSizeWidget{
- 
-  Widget zNavigationBar;
-  BuildContext context;
-  Widget leading;
-  bool automaticallyImplyLeading;
-  bool automaticallyImplyMiddle;
-  String previousPageTitle;
-  Widget middle;
-  Widget trailing;
-  Color backgroundColor;
-  EdgeInsetsDirectional padding;
-  Border border;
-  Color actionsForegroundColor;
-  bool transitionBetweenRoutes;
-  Object heroTag;
-  Widget title;
-  ShapeBorder shape;
-  List<Widget> actions;
-  Widget flexibleSpace;
-  PreferredSizeWidget bottom;
-  double elevation;
-  Brightness brightness;
-  IconThemeData iconTheme;
-  IconThemeData actionsIconTheme;
-  TextTheme textTheme;
-  bool primary;
-  bool centerTitle;
-  double titleSpacing;
-  double toolbarOpacity;
-  double bottomOpacity;
-  
+class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
+  Widget _zNavigationBar;
+
+  final Key key;
+  final BuildContext context;
+  final Widget leading;
+  final bool automaticallyImplyLeading;
+  final bool automaticallyImplyMiddle;
+  final String previousPageTitle;
+  final Widget middle;
+  final Widget trailing;
+  final Color backgroundColor;
+  final EdgeInsetsDirectional padding;
+  final Border border;
+  final Color actionsForegroundColor;
+  final bool transitionBetweenRoutes;
+  final Widget title;
+  final ShapeBorder shape;
+  final List<Widget> actions;
+  final Widget flexibleSpace;
+  final PreferredSizeWidget bottom;
+  final double elevation;
+  final Brightness brightness;
+  final IconThemeData iconTheme;
+  final IconThemeData actionsIconTheme;
+  final TextTheme textTheme;
+  final bool primary;
+  final bool centerTitle;
+  final double titleSpacing;
+  final double toolbarOpacity;
+  final double bottomOpacity;
+  final ZPlatform zPlatform;
+
   ZNavigationBar({
     this.context,
-    Key key,
+    this.key,
     this.leading,
     this.bottom,
     this.flexibleSpace,
@@ -62,52 +64,95 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget{
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.centerTitle,
     this.primary = true,
-    this.textTheme
+    this.textTheme,
+    this.zPlatform = ZPlatform.notPlatform,
   }) {
-    if (Platform.isAndroid) {
-      zNavigationBar = new AppBar(
-        elevation: this.elevation,
-        primary: this.primary,
-        centerTitle: this.centerTitle,
-        actions: this.actions,
-        actionsIconTheme: this.actionsIconTheme,
-        automaticallyImplyLeading: this.automaticallyImplyLeading,
-        bottom: this.bottom,
-        bottomOpacity: this.bottomOpacity,
-        brightness: this.brightness,
-        flexibleSpace: this.flexibleSpace,
-        iconTheme: this.iconTheme,
-        textTheme: this.textTheme,
-        titleSpacing: this.titleSpacing,
-        toolbarOpacity: this.toolbarOpacity,
-        key: key,
-        backgroundColor: this.backgroundColor,
-        leading: this.leading,
-        title: this.title,
-        shape: this.shape,
-      );
-    } else {
-      zNavigationBar = new CupertinoNavigationBar(
-        automaticallyImplyLeading: this.automaticallyImplyLeading,
-        actionsForegroundColor: this.actionsForegroundColor,
-        automaticallyImplyMiddle: this.automaticallyImplyMiddle,
-        previousPageTitle: this.previousPageTitle,
-        transitionBetweenRoutes: this.transitionBetweenRoutes,
-        key: key,
-        backgroundColor: this.backgroundColor,
-        leading: this.leading,
-        middle: this.middle,
-        trailing: this.trailing,
-        border: this.border,
-        padding: this.padding,
-      );
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zNavigationBar = new AppBar(
+            elevation: this.elevation,
+            primary: this.primary,
+            centerTitle: this.centerTitle,
+            actions: this.actions,
+            actionsIconTheme: this.actionsIconTheme,
+            automaticallyImplyLeading: this.automaticallyImplyLeading,
+            bottom: this.bottom,
+            bottomOpacity: this.bottomOpacity,
+            brightness: this.brightness,
+            flexibleSpace: this.flexibleSpace,
+            iconTheme: this.iconTheme,
+            textTheme: this.textTheme,
+            titleSpacing: this.titleSpacing,
+            toolbarOpacity: this.toolbarOpacity,
+            key: this.key,
+            backgroundColor: this.backgroundColor,
+            leading: this.leading,
+            title: this.title,
+            shape: this.shape,
+          );
+        } else {
+          _zNavigationBar = new CupertinoNavigationBar(
+            automaticallyImplyLeading: this.automaticallyImplyLeading,
+            actionsForegroundColor: this.actionsForegroundColor,
+            automaticallyImplyMiddle: this.automaticallyImplyMiddle,
+            previousPageTitle: this.previousPageTitle,
+            transitionBetweenRoutes: this.transitionBetweenRoutes,
+            key: this.key,
+            backgroundColor: this.backgroundColor,
+            leading: this.leading,
+            middle: this.middle,
+            trailing: this.trailing,
+            border: this.border,
+            padding: this.padding,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zNavigationBar = new AppBar(
+          elevation: this.elevation,
+          primary: this.primary,
+          centerTitle: this.centerTitle,
+          actions: this.actions,
+          actionsIconTheme: this.actionsIconTheme,
+          automaticallyImplyLeading: this.automaticallyImplyLeading,
+          bottom: this.bottom,
+          bottomOpacity: this.bottomOpacity,
+          brightness: this.brightness,
+          flexibleSpace: this.flexibleSpace,
+          iconTheme: this.iconTheme,
+          textTheme: this.textTheme,
+          titleSpacing: this.titleSpacing,
+          toolbarOpacity: this.toolbarOpacity,
+          key: this.key,
+          backgroundColor: this.backgroundColor,
+          leading: this.leading,
+          title: this.title,
+          shape: this.shape,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zNavigationBar = new CupertinoNavigationBar(
+          automaticallyImplyLeading: this.automaticallyImplyLeading,
+          actionsForegroundColor: this.actionsForegroundColor,
+          automaticallyImplyMiddle: this.automaticallyImplyMiddle,
+          previousPageTitle: this.previousPageTitle,
+          transitionBetweenRoutes: this.transitionBetweenRoutes,
+          key: this.key,
+          backgroundColor: this.backgroundColor,
+          leading: this.leading,
+          middle: this.middle,
+          trailing: this.trailing,
+          border: this.border,
+          padding: this.padding,
+        );
+        break;
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return zNavigationBar;
+    return _zNavigationBar;
   }
 
   @override

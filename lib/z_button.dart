@@ -1,35 +1,40 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:z_components/z-platform.dart';
 
 class ZButton extends StatelessWidget {
- 
-  Key key;
-  Widget zButton;
-  double minSize;
-  VoidCallback onPressed;
-  ValueChanged<bool> onHighlightChanged;
-  ButtonTextTheme textTheme;
-  Color textColor;
-  Color disabledTextColor;
-  Color color;
-  Color disabledColor;
-  EdgeInsetsGeometry padding;
-  Color highlightColor;
-  Color splashColor;
-  double elevation;
-  double highlightElevation;
-  double disabledElevation;
-  Widget child;
-  ShapeBorder shape;
-  BorderRadius borderRadius;
-  double pressedOpacity;
+  Widget _zButton;
+
+  final Key key;
+  final double minSize;
+  final VoidCallback onPressed;
+  final ValueChanged<bool> onHighlightChanged;
+  final ButtonTextTheme textTheme;
+  final Color textColor;
+  final Color disabledTextColor;
+  final Color color;
+  final Color disabledColor;
+  final EdgeInsetsGeometry padding;
+  final Color highlightColor;
+  final Color splashColor;
+  final double elevation;
+  final double highlightElevation;
+  final double disabledElevation;
+  final Widget child;
+  final ShapeBorder shape;
+  final BorderRadius borderRadius;
+  final double pressedOpacity;
+  final Brightness colorBrightness;
+  final Clip clipBehavior;
+  final MaterialTapTargetSize materialTapTargetSize;
+  final Duration animationDuration;
+  final ZPlatform zPlatform;
 
   ZButton({
-    Key key,
+    this.key,
     @required this.onPressed,
     this.onHighlightChanged,
     this.textTheme,
@@ -48,40 +53,93 @@ class ZButton extends StatelessWidget {
     this.child,
     this.shape,
     this.borderRadius,
-  })  : assert(elevation == null || elevation >= 0.0),
-        assert(highlightElevation == null || highlightElevation >= 0.0),
-        assert(disabledElevation == null || disabledElevation >= 0.0) {
-    if (Platform.isAndroid) {
-      zButton = new RaisedButton(
-        onPressed: this.onPressed,
-        child: this.child,
-        color: this.color,
-        shape: this.shape,
-        elevation: this.elevation,
-        padding: this.padding,
-        disabledElevation: this.disabledElevation,
-        highlightElevation: this.highlightElevation,
-        splashColor: this.splashColor,
-        disabledColor: this.disabledColor,
-        key: key,
-      );
-    } else {
-      zButton = new CupertinoButton(
-        onPressed: this.onPressed,
-        child: this.child,
-        color: this.color,
-        padding: this.padding,
-        borderRadius: this.borderRadius,
-        disabledColor: this.disabledColor,
-        key: key,
-        minSize: this.minSize,
-        pressedOpacity: this.pressedOpacity,
-      );
+    this.materialTapTargetSize,
+    this.clipBehavior = Clip.none,
+    this.colorBrightness,
+    this.animationDuration,
+    this.zPlatform = ZPlatform.notPlatform,
+  }) : super(key: key) {
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zButton = new RaisedButton(
+            onPressed: this.onPressed,
+            child: this.child,
+            color: this.color,
+            shape: this.shape,
+            elevation: this.elevation,
+            padding: this.padding,
+            disabledElevation: this.disabledElevation,
+            highlightElevation: this.highlightElevation,
+            splashColor: this.splashColor,
+            disabledColor: this.disabledColor,
+            key: this.key,
+            materialTapTargetSize: this.materialTapTargetSize,
+            clipBehavior: this.clipBehavior,
+            textTheme: this.textTheme,
+            animationDuration: this.animationDuration,
+            colorBrightness: this.colorBrightness,
+            disabledTextColor: this.disabledTextColor,
+            highlightColor: this.highlightColor,
+            onHighlightChanged: this.onHighlightChanged,
+            textColor: this.textColor,
+          );
+        } else {
+          _zButton = new CupertinoButton(
+            onPressed: this.onPressed,
+            child: this.child,
+            color: this.color,
+            padding: this.padding,
+            borderRadius: this.borderRadius,
+            disabledColor: this.disabledColor,
+            key: key,
+            minSize: this.minSize,
+            pressedOpacity: this.pressedOpacity,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zButton = new RaisedButton(
+          onPressed: this.onPressed,
+          child: this.child,
+          color: this.color,
+          shape: this.shape,
+          elevation: this.elevation,
+          padding: this.padding,
+          disabledElevation: this.disabledElevation,
+          highlightElevation: this.highlightElevation,
+          splashColor: this.splashColor,
+          disabledColor: this.disabledColor,
+          key: this.key,
+          materialTapTargetSize: this.materialTapTargetSize,
+          clipBehavior: this.clipBehavior,
+          textTheme: this.textTheme,
+          animationDuration: this.animationDuration,
+          colorBrightness: this.colorBrightness,
+          disabledTextColor: this.disabledTextColor,
+          highlightColor: this.highlightColor,
+          onHighlightChanged: this.onHighlightChanged,
+          textColor: this.textColor,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zButton = new CupertinoButton(
+          onPressed: this.onPressed,
+          child: this.child,
+          color: this.color,
+          padding: this.padding,
+          borderRadius: this.borderRadius,
+          disabledColor: this.disabledColor,
+          key: key,
+          minSize: this.minSize,
+          pressedOpacity: this.pressedOpacity,
+        );
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return zButton;
+    return _zButton;
   }
 }

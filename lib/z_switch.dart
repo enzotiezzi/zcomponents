@@ -2,63 +2,93 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/z-platform.dart';
 
 class ZSwitch extends StatelessWidget {
-  Widget zSwitch;
+  Widget _zSwitch;
 
-  bool value;
-  ValueChanged<bool> onChanged;
-  Color activeColor;
-  DragStartBehavior dragStartBehavior;
-  Color activeTrackColor;
-  Color inactiveThumbColor;
-  Color inactiveTrackColor;
-  ImageProvider activeThumbImage;
-  ImageProvider inactiveThumbImage;
-  MaterialTapTargetSize materialTapTargetSize;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+  final Color activeColor;
+  final DragStartBehavior dragStartBehavior;
+  final Color activeTrackColor;
+  final Color inactiveThumbColor;
+  final Color inactiveTrackColor;
+  final ImageProvider activeThumbImage;
+  final ImageProvider inactiveThumbImage;
+  final MaterialTapTargetSize materialTapTargetSize;
+  final ZPlatform zPlatform;
 
-  ZSwitch({
-    Key key,
-    @required this.value,
-    @required this.onChanged,
-    this.activeColor,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.activeThumbImage,
-    this.activeTrackColor,
-    this.inactiveThumbColor,
-    this.inactiveThumbImage,
-    this.inactiveTrackColor,
-    this.materialTapTargetSize,
-  })  : assert(value != null),
+  ZSwitch(
+      {Key key,
+      @required this.value,
+      @required this.onChanged,
+      this.activeColor,
+      this.dragStartBehavior = DragStartBehavior.start,
+      this.activeThumbImage,
+      this.activeTrackColor,
+      this.inactiveThumbColor,
+      this.inactiveThumbImage,
+      this.inactiveTrackColor,
+      this.materialTapTargetSize,
+      this.zPlatform = ZPlatform.notPlatform})
+      : assert(value != null),
         assert(dragStartBehavior != null) {
-    if (Platform.isAndroid) {
-      zSwitch = new Switch(
-        onChanged: this.onChanged,
-        value: this.value,
-        activeColor: this.activeColor,
-        dragStartBehavior: this.dragStartBehavior,
-        key: key,
-        activeThumbImage: this.activeThumbImage,
-        activeTrackColor: this.activeTrackColor,
-        inactiveThumbColor: this.inactiveThumbColor,
-        inactiveThumbImage: this.inactiveThumbImage,
-        inactiveTrackColor: this.inactiveTrackColor,
-        materialTapTargetSize: this.materialTapTargetSize,
-      );
-    } else {
-      zSwitch = new CupertinoSwitch(
-        onChanged: this.onChanged,
-        value: this.value,
-        activeColor: this.activeColor,
-        dragStartBehavior: this.dragStartBehavior,
-        key: key,
-      );
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zSwitch = new Switch(
+            onChanged: this.onChanged,
+            value: this.value,
+            activeColor: this.activeColor,
+            dragStartBehavior: this.dragStartBehavior,
+            key: key,
+            activeThumbImage: this.activeThumbImage,
+            activeTrackColor: this.activeTrackColor,
+            inactiveThumbColor: this.inactiveThumbColor,
+            inactiveThumbImage: this.inactiveThumbImage,
+            inactiveTrackColor: this.inactiveTrackColor,
+            materialTapTargetSize: this.materialTapTargetSize,
+          );
+        } else {
+          _zSwitch = new CupertinoSwitch(
+            onChanged: this.onChanged,
+            value: this.value,
+            activeColor: this.activeColor,
+            dragStartBehavior: this.dragStartBehavior,
+            key: key,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zSwitch = new Switch(
+          onChanged: this.onChanged,
+          value: this.value,
+          activeColor: this.activeColor,
+          dragStartBehavior: this.dragStartBehavior,
+          key: key,
+          activeThumbImage: this.activeThumbImage,
+          activeTrackColor: this.activeTrackColor,
+          inactiveThumbColor: this.inactiveThumbColor,
+          inactiveThumbImage: this.inactiveThumbImage,
+          inactiveTrackColor: this.inactiveTrackColor,
+          materialTapTargetSize: this.materialTapTargetSize,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zSwitch = new CupertinoSwitch(
+          onChanged: this.onChanged,
+          value: this.value,
+          activeColor: this.activeColor,
+          dragStartBehavior: this.dragStartBehavior,
+          key: key,
+        );
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return zSwitch;
+    return _zSwitch;
   }
 }

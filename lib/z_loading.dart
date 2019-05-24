@@ -1,23 +1,26 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/z-platform.dart';
 
 class ZLoading extends StatelessWidget {
-  Widget zLoading;
-  BuildContext context;
-  Key key;
-  double value;
-  Color backgroundColor;
-  Animation<Color> valueColor;
-  double strokeWidth;
-  String semanticsLabel;
-  String semanticsValue;
-  bool animating;
-  double radius;
+  Widget _zLoading;
+
+  final BuildContext context;
+  final Key key;
+  final double value;
+  final Color backgroundColor;
+  final Animation<Color> valueColor;
+  final double strokeWidth;
+  final String semanticsLabel;
+  final String semanticsValue;
+  final bool animating;
+  final double radius;
+  final ZPlatform zPlatform;
 
   ZLoading({
     this.context,
-    Key key,
+    this.key,
     this.value,
     this.backgroundColor,
     this.valueColor,
@@ -26,29 +29,51 @@ class ZLoading extends StatelessWidget {
     this.semanticsValue,
     this.animating = true,
     this.radius = 15.0,
-  }) {
-    if (Platform.isAndroid) {
-     zLoading = CircularProgressIndicator(
-        key: key,
-        value: value,
-        backgroundColor: backgroundColor,
-        valueColor: valueColor,
-        strokeWidth: strokeWidth,
-        semanticsLabel: semanticsLabel,
-        semanticsValue: semanticsValue,
-      );
-    } else {
-     zLoading = CupertinoActivityIndicator(
-        key: key,
-        animating: this.animating,
-        radius: this.radius,
-      );
+    this.zPlatform = ZPlatform.notPlatform,
+  }) : super(key: key) {
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zLoading = CircularProgressIndicator(
+            key: this.key,
+            value: this.value,
+            backgroundColor: this.backgroundColor,
+            valueColor: this.valueColor,
+            strokeWidth: this.strokeWidth,
+            semanticsLabel: this.semanticsLabel,
+            semanticsValue: this.semanticsValue,
+          );
+        } else {
+          _zLoading = CupertinoActivityIndicator(
+            key: this.key,
+            animating: this.animating,
+            radius: this.radius,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zLoading = CircularProgressIndicator(
+          key: this.key,
+          value: this.value,
+          backgroundColor: this.backgroundColor,
+          valueColor: this.valueColor,
+          strokeWidth: this.strokeWidth,
+          semanticsLabel: this.semanticsLabel,
+          semanticsValue: this.semanticsValue,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zLoading = CupertinoActivityIndicator(
+          key: this.key,
+          animating: this.animating,
+          radius: this.radius,
+        );
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return zLoading;
+    return _zLoading;
   }
 }
