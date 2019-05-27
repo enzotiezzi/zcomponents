@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:z_components/z-alert-dialog.dart';
 import 'package:z_components/z-float-button.dart';
+import 'package:z_components/z-platform.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
@@ -129,6 +130,7 @@ class Home extends StatelessWidget {
             ZTextField(
               style: TextStyle(fontSize: 20),
               controller: TextEditingController(text: "teste"),
+              zPlatform: ZPlatform.isAndroid,
             ),
           ]),
         ],

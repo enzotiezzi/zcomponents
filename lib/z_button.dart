@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:z_components/z-platform.dart';
 
 class ZButton extends StatelessWidget {
   Widget _zButton;
@@ -30,6 +31,7 @@ class ZButton extends StatelessWidget {
   final Clip clipBehavior;
   final MaterialTapTargetSize materialTapTargetSize;
   final Duration animationDuration;
+  final ZPlatform zPlatform;
 
   ZButton({
     this.key,
@@ -55,42 +57,84 @@ class ZButton extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.colorBrightness,
     this.animationDuration,
+    this.zPlatform = ZPlatform.notPlatform,
   }) : super(key: key) {
-    if (Platform.isAndroid) {
-      _zButton = new RaisedButton(
-        onPressed: this.onPressed,
-        child: this.child,
-        color: this.color,
-        shape: this.shape,
-        elevation: this.elevation,
-        padding: this.padding,
-        disabledElevation: this.disabledElevation,
-        highlightElevation: this.highlightElevation,
-        splashColor: this.splashColor,
-        disabledColor: this.disabledColor,
-        key: this.key,
-        materialTapTargetSize: this.materialTapTargetSize,
-        clipBehavior: this.clipBehavior,
-        textTheme: this.textTheme,
-        animationDuration: this.animationDuration,
-        colorBrightness: this.colorBrightness,
-        disabledTextColor: this.disabledTextColor,
-        highlightColor: this.highlightColor,
-        onHighlightChanged: this.onHighlightChanged,
-        textColor: this.textColor,
-      );
-    } else {
-      _zButton = new CupertinoButton(
-        onPressed: this.onPressed,
-        child: this.child,
-        color: this.color,
-        padding: this.padding,
-        borderRadius: this.borderRadius,
-        disabledColor: this.disabledColor,
-        key: key,
-        minSize: this.minSize,
-        pressedOpacity: this.pressedOpacity,
-      );
+    switch (zPlatform) {
+      case ZPlatform.notPlatform:
+        if (Platform.isAndroid) {
+          _zButton = new RaisedButton(
+            onPressed: this.onPressed,
+            child: this.child,
+            color: this.color,
+            shape: this.shape,
+            elevation: this.elevation,
+            padding: this.padding,
+            disabledElevation: this.disabledElevation,
+            highlightElevation: this.highlightElevation,
+            splashColor: this.splashColor,
+            disabledColor: this.disabledColor,
+            key: this.key,
+            materialTapTargetSize: this.materialTapTargetSize,
+            clipBehavior: this.clipBehavior,
+            textTheme: this.textTheme,
+            animationDuration: this.animationDuration,
+            colorBrightness: this.colorBrightness,
+            disabledTextColor: this.disabledTextColor,
+            highlightColor: this.highlightColor,
+            onHighlightChanged: this.onHighlightChanged,
+            textColor: this.textColor,
+          );
+        } else {
+          _zButton = new CupertinoButton(
+            onPressed: this.onPressed,
+            child: this.child,
+            color: this.color,
+            padding: this.padding,
+            borderRadius: this.borderRadius,
+            disabledColor: this.disabledColor,
+            key: key,
+            minSize: this.minSize,
+            pressedOpacity: this.pressedOpacity,
+          );
+        }
+        break;
+      case ZPlatform.isAndroid:
+        _zButton = new RaisedButton(
+          onPressed: this.onPressed,
+          child: this.child,
+          color: this.color,
+          shape: this.shape,
+          elevation: this.elevation,
+          padding: this.padding,
+          disabledElevation: this.disabledElevation,
+          highlightElevation: this.highlightElevation,
+          splashColor: this.splashColor,
+          disabledColor: this.disabledColor,
+          key: this.key,
+          materialTapTargetSize: this.materialTapTargetSize,
+          clipBehavior: this.clipBehavior,
+          textTheme: this.textTheme,
+          animationDuration: this.animationDuration,
+          colorBrightness: this.colorBrightness,
+          disabledTextColor: this.disabledTextColor,
+          highlightColor: this.highlightColor,
+          onHighlightChanged: this.onHighlightChanged,
+          textColor: this.textColor,
+        );
+        break;
+      case ZPlatform.isIOS:
+        _zButton = new CupertinoButton(
+          onPressed: this.onPressed,
+          child: this.child,
+          color: this.color,
+          padding: this.padding,
+          borderRadius: this.borderRadius,
+          disabledColor: this.disabledColor,
+          key: key,
+          minSize: this.minSize,
+          pressedOpacity: this.pressedOpacity,
+        );
+        break;
     }
   }
 
