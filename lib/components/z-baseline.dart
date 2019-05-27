@@ -23,13 +23,14 @@ class ZBaseLine extends StatelessWidget {
               new Expanded(
                   flex: 3,
                   child: new Container(
-                      padding: const EdgeInsets.only(top: 10.0,bottom: 10.0,left: 10.0),
+                      padding: const EdgeInsets.only(top: 12.0,bottom: 12.0,left: 16.0),
                       child: new Text(title,
                         style: new TextStyle(color: Color(0xffA0A0A0)),),
                   )),
               new Expanded(
                   flex: 7,
                   child: new Container(
+                    margin: const EdgeInsets.only(right: 16.0),
                     child: ztextField,
                   ))
             ],

@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/config/z-platform.dart';
+import 'package:z_components/config/z-mask.dart';
+
 import 'package:z_components/components/z-size.dart';
 import 'package:z_components/components/z_switch.dart';
 import 'package:z_components/components/z_picker.dart';
@@ -101,6 +103,15 @@ class Home extends StatelessWidget {
             new ZBaseLine(
               title: "Sobrenome:",
               ztextField: new ZTextField(
+                //onChanged: (text) => appSwitch.text = text,
+              ),
+            ),
+            new ZBaseLine(
+              title: "CPF:",
+              ztextField: new ZTextField(
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.end,
+                zMask: ZMask.isCPF,
                 //onChanged: (text) => appSwitch.text = text,
               ),
             ),

@@ -34,7 +34,7 @@ class ZTextField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final VoidCallback onEditingComplete;
   final ValueChanged<String> onSubmitted;
-  final List<TextInputFormatter> inputFormatters;
+  var inputFormatters = List<TextInputFormatter>();
   final bool enabled;
   final double cursorWidth;
   final Radius cursorRadius;
@@ -111,7 +111,6 @@ class ZTextField extends StatelessWidget {
       this.onChanged,
       this.onEditingComplete,
       this.onSubmitted,
-      this.inputFormatters,
       this.enabled,
       this.cursorWidth = 2.0,
       this.cursorRadius = const Radius.circular(2.0),
