@@ -147,6 +147,10 @@ class ZTextField extends StatelessWidget {
         inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XX.XXX.XXX/XXXX-XX", maskTWO: "XX.XXX.XXX/XXXX-XX"));
         inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
         break;
+      case ZMask.isCEP:
+        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"));
+        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        break;
     }
 
     switch (zPlatform) {
