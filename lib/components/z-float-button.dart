@@ -22,7 +22,7 @@ class ZFloatButton extends StatelessWidget {
   ZFloatButton({
     this.key,
     @required this.onPressed,
-    this.child,
+    this.child: const Icon(Icons.add),
     this.tooltip,
     this.foregroundColor,
     this.backgroundColor: const Color(0xff2BB9B4),
