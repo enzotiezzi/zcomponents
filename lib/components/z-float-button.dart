@@ -22,7 +22,7 @@ class ZFloatButton extends StatelessWidget {
   ZFloatButton({
     this.key,
     @required this.onPressed,
-    this.child,
+    this.child: const Icon(Icons.add),
     this.tooltip,
     this.foregroundColor,
     this.backgroundColor: const Color(0xff2BB9B4),
@@ -34,6 +34,7 @@ class ZFloatButton extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.materialTapTargetSize,
     this.isExtended = false,
+
   }) : super(key: key) {
     _zFloatButton = new FloatingActionButton(
         onPressed: this.onPressed,
@@ -51,6 +52,7 @@ class ZFloatButton extends StatelessWidget {
         tooltip: this.tooltip,
         key: this.key);
   }
+
 
   @override
   Widget build(BuildContext context) {

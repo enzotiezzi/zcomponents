@@ -89,6 +89,7 @@ class Home extends StatelessWidget {
       ),
       body: new ListView(
         children: <Widget>[
+
           new Column(children: <Widget>[
 
             new ZBaseLine(
