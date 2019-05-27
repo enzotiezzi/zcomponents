@@ -21,7 +21,7 @@ class ZSize extends StatelessWidget {
     this.key,
     @required this.context,
     @required this.child,
-    this.padding = const EdgeInsets.all(2.0),
+    this.padding = const EdgeInsets.all(0.0),
     this.height = 0,
     this.width = 0,
     this.quadrado = false,

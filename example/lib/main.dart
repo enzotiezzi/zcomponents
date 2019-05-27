@@ -95,18 +95,21 @@ class Home extends StatelessWidget {
           new Column(children: <Widget>[
 
             new ZBaseLine(
+              context: context,
               title: "Nome:",
               ztextField: new ZTextField(
                 //onChanged: (text) => appSwitch.text = text,
               ),
             ),
             new ZBaseLine(
+              context: context,
               title: "Sobrenome:",
               ztextField: new ZTextField(
                 //onChanged: (text) => appSwitch.text = text,
               ),
             ),
             new ZBaseLine(
+              context: context,
               title: "CPF:",
               ztextField: new ZTextField(
                 keyboardType: TextInputType.number,
