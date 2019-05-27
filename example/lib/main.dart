@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:z_components/z-alert-dialog.dart';
 import 'package:z_components/z-float-button.dart';
 import 'package:z_components/z-platform.dart';
+import 'package:z_components/z-size.dart';
 import 'package:z_components/z_switch.dart';
 import 'package:z_components/z_picker.dart';
 import 'package:z_components/z_tabbar.dart';
@@ -17,6 +18,8 @@ import 'package:z_components/z_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 
+import 'package:provider/provider.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -27,33 +30,34 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool value = false;
   DateTime selectedDate = DateTime.now();
-
+  
   @override
   void initState() {
     super.initState();
   }
-
+  
   // Platform messages are asynchronous, so we initialize in an async method.
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      home: Home(),
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate, // if it's a RTL language
-      ],
-      supportedLocales: [
-        
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(),
+        home: ChangeNotifierProvider<AppSwitch>(
+            builder: (_) => AppSwitch(),
+            child: Home()),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate, // if it's a RTL language
+        ],
+        supportedLocales: [
         if(Platform.isIOS)
-        const Locale('en', 'US'),
-        
+          const Locale('en', 'US')
+        ,
         if(Platform.isAndroid)
-        const Locale('pt', 'BR'),
-    
-      ],
+          const Locale('pt','BR'),
+        ]
+      ,
     );
   }
 }
@@ -61,9 +65,11 @@ class _MyAppState extends State<MyApp> {
 class Home extends StatelessWidget {
   bool value = false;
   int index = 0;
-
+  
   @override
   Widget build(BuildContext context) {
+    final appSwitch = Provider.of<AppSwitch>(context);
+    
     return Scaffold(
       floatingActionButton: ZFloatButton(
         onPressed: () {},
@@ -83,8 +89,14 @@ class Home extends StatelessWidget {
         children: <Widget>[
 
           new Column(children: <Widget>[
-            ZTextField(),
-            ZSwitch(value: value, onChanged: (b) {}),
+            
+            new Container(
+              child: ZTextField(
+              onChanged: (text) => appSwitch.text = text,
+            ),padding: EdgeInsets.all(8),),
+            ZSwitch(value: appSwitch.value, onChanged: (b) {
+              appSwitch.value = b;
+            }),
             ZButton(
                 child: Text(
                   'Show Date Picker!',
@@ -101,7 +113,7 @@ class Home extends StatelessWidget {
                     },
                   );
                 }),
-            ZButton(
+    new ZSize(context: context,child: ZButton(
               child: Text(
                 "Dialog",
                 style: new TextStyle(color: Colors.white),
@@ -109,8 +121,10 @@ class Home extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context) => ZAlertDialog(
-                          actionsCupertino: <Widget>[new ZButton(onPressed: () {})],
+                    builder: (BuildContext context) =>
+                ZAlertDialog(
+                          actionsCupertino: <Widget>[
+                            new ZButton(onPressed: () {})],
                           title: Text("Dialog Teste:"),
                           actions: <Widget>[
                             ZButton(
@@ -126,13 +140,9 @@ class Home extends StatelessWidget {
                           ],
                         ));
               },
-            ),
-            ZLoading(),
-            ZTextField(
-              style: TextStyle(fontSize: 20),
-              controller: TextEditingController(text: "teste"),
-              zPlatform: ZPlatform.isAndroid,
-            ),
+            ),quadrado: false,percentWidth: 40,percentHeight: 10,maxHeight: 30,),
+            new ZLoading(zPlatform: ZPlatform.isAndroid,),
+            Text(appSwitch.text),
           ]),
         ],
       ),
@@ -163,4 +173,27 @@ class Home extends StatelessWidget {
       ),
     );
   }
+}
+
+class AppSwitch with ChangeNotifier {
+
+AppSwitch();
+
+bool _value = false;
+String _text = "";
+
+set value(bool text) {
+  _value = text;
+  notifyListeners();
+}
+
+bool get value => _value;
+
+set text(String text) {
+  _text = text;
+  notifyListeners();
+}
+
+String get text => _text;
+
 }

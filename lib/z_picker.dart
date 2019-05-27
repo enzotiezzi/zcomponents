@@ -43,10 +43,10 @@ class ZPicker {
     this.use24hFormat = true,
     this.minuteInterval = 1,
     this.initialDateTime,
-    this.zPlatform = ZPlatform.notPlatform,
+    this.zPlatform = ZPlatform.isPlatform,
   }) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _showDatePicker();
         } else {
