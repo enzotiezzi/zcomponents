@@ -13,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   provider: ^2.0.1
+  mask_shifter: ^0.1.0
 
 dev_dependencies:
   flutter_test:

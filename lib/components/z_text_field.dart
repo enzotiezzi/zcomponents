@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:z_components/config/z-mask.dart';
 import 'package:z_components/config/z-platform.dart';
+import 'package:mask_shifter/mask_shifter.dart';
 
 class ZTextField extends StatelessWidget {
   Widget _zTextField;
@@ -53,6 +55,7 @@ class ZTextField extends StatelessWidget {
   final OverlayVisibilityMode clearButtonMode;
   final BoxDecoration decorationCupertino;
   final ZPlatform zPlatform;
+  final ZMask zMask;
 
   ZTextField(
       {this.keyboardType,
@@ -121,9 +124,35 @@ class ZTextField extends StatelessWidget {
       this.enableInteractiveSelection,
       this.onTap,
       this.buildCounter,
-      this.zPlatform = ZPlatform.isPlatform})
+      this.zPlatform = ZPlatform.isPlatform,
+      this.zMask = ZMask.isPadrao,
+      })
       : super(key: key) {
-    
+    switch(zMask){
+      case ZMask.isPadrao:
+    break;
+      case ZMask.isTelefone:
+        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "(XX) XXXXX-XXXX", maskTWO: "(XX) XXXXX-XXXX"));
+        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[,]:")));
+        break;
+      case ZMask.isCPF:
+        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XXX.XXX.XXX-XX", maskTWO: "XXX.XXX.XXX-XX"));
+        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        break;
+      case ZMask.isData:
+        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"));
+        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        break;
+      case ZMask.isCNPJ:
+        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XX.XXX.XXX/XXXX-XX", maskTWO: "XX.XXX.XXX/XXXX-XX"));
+        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        break;
+      case ZMask.isCEP:
+        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"));
+        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        break;
+    }
+
     switch (zPlatform) {
       case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
