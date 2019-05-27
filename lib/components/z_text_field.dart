@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZTextField extends StatelessWidget {
   Widget _zTextField;
@@ -123,6 +123,7 @@ class ZTextField extends StatelessWidget {
       this.buildCounter,
       this.zPlatform = ZPlatform.isPlatform})
       : super(key: key) {
+    
     switch (zPlatform) {
       case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
