@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZPicker {
   final BuildContext context;
@@ -43,10 +43,10 @@ class ZPicker {
     this.use24hFormat = true,
     this.minuteInterval = 1,
     this.initialDateTime,
-    this.zPlatform = ZPlatform.notPlatform,
+    this.zPlatform = ZPlatform.isPlatform,
   }) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _showDatePicker();
         } else {

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
   Widget _zNavigationBar;
@@ -65,10 +65,10 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
     this.centerTitle,
     this.primary = true,
     this.textTheme,
-    this.zPlatform = ZPlatform.notPlatform,
+    this.zPlatform = ZPlatform.isPlatform,
   }) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zNavigationBar = new AppBar(
             elevation: this.elevation,

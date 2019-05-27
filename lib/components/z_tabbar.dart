@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZtabBar extends StatelessWidget {
   Widget _zTabBar;
@@ -44,10 +44,10 @@ class ZtabBar extends StatelessWidget {
       this.showSelectedLabels = true,
       this.showUnselectedLabels,
       this.fixedColor,
-      this.zPlatform = ZPlatform.notPlatform})
+      this.zPlatform = ZPlatform.isPlatform})
       : super(key: key) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zTabBar = new BottomNavigationBar(
             currentIndex: this.currentIndex,

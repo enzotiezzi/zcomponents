@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZSwitch extends StatelessWidget {
   Widget _zSwitch;
@@ -31,11 +31,11 @@ class ZSwitch extends StatelessWidget {
       this.inactiveThumbImage,
       this.inactiveTrackColor,
       this.materialTapTargetSize,
-      this.zPlatform = ZPlatform.notPlatform})
+      this.zPlatform = ZPlatform.isPlatform})
       : assert(value != null),
         assert(dragStartBehavior != null) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zSwitch = new Switch(
             onChanged: this.onChanged,

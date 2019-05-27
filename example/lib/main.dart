@@ -3,19 +3,24 @@ import 'dart:async';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter/services.dart';
-import 'package:z_components/z-alert-dialog.dart';
-import 'package:z_components/z-float-button.dart';
-import 'package:z_components/z-platform.dart';
-import 'package:z_components/z_switch.dart';
-import 'package:z_components/z_picker.dart';
-import 'package:z_components/z_tabbar.dart';
-import 'package:z_components/z_button.dart';
-import 'package:z_components/z_loading.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/components/z-float-button.dart';
+import 'package:z_components/config/z-platform.dart';
+import 'package:z_components/components/z-size.dart';
+import 'package:z_components/components/z_switch.dart';
+import 'package:z_components/components/z_picker.dart';
+import 'package:z_components/components/z_tabbar.dart';
+import 'package:z_components/components/z_button.dart';
+import 'package:z_components/components/z_loading.dart';
+import 'package:z_components/components/z-baseline.dart';
 
-import 'package:z_components/z_navigationbar.dart';
-import 'package:z_components/z_text_field.dart';
+
+import 'package:z_components/components/z_navigationbar.dart';
+import 'package:z_components/components/z_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
+
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,33 +32,34 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool value = false;
   DateTime selectedDate = DateTime.now();
-
+  
   @override
   void initState() {
     super.initState();
   }
-
+  
   // Platform messages are asynchronous, so we initialize in an async method.
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      home: Home(),
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate, // if it's a RTL language
-      ],
-      supportedLocales: [
-        
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(),
+        home: ChangeNotifierProvider<AppSwitch>(
+            builder: (_) => AppSwitch(),
+            child: Home()),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate, // if it's a RTL language
+        ],
+        supportedLocales: [
         if(Platform.isIOS)
-        const Locale('en', 'US'),
-        
+          const Locale('en', 'US')
+        ,
         if(Platform.isAndroid)
-        const Locale('pt', 'BR'),
-    
-      ],
+          const Locale('pt','BR'),
+        ]
+      ,
     );
   }
 }
@@ -61,9 +67,11 @@ class _MyAppState extends State<MyApp> {
 class Home extends StatelessWidget {
   bool value = false;
   int index = 0;
-
+  
   @override
   Widget build(BuildContext context) {
+    final appSwitch = Provider.of<AppSwitch>(context);
+    
     return Scaffold(
       floatingActionButton: ZFloatButton(
         onPressed: () {},
@@ -82,8 +90,27 @@ class Home extends StatelessWidget {
       body: new ListView(
         children: <Widget>[
           new Column(children: <Widget>[
-            ZTextField(),
-            ZSwitch(value: value, onChanged: (b) {}),
+
+            new ZBaseLine(
+              title: "Nome:",
+              ztextField: new ZTextField(
+                //onChanged: (text) => appSwitch.text = text,
+              ),
+            ),
+            new ZBaseLine(
+              title: "Sobrenome:",
+              ztextField: new ZTextField(
+                //onChanged: (text) => appSwitch.text = text,
+              ),
+            ),
+            
+            new Container(
+              child: ZTextField(
+              onChanged: (text) => appSwitch.text = text,
+            ),padding: EdgeInsets.all(8),),
+            ZSwitch(value: appSwitch.value, onChanged: (b) {
+              appSwitch.value = b;
+            }),
             ZButton(
                 child: Text(
                   'Show Date Picker!',
@@ -100,7 +127,7 @@ class Home extends StatelessWidget {
                     },
                   );
                 }),
-            ZButton(
+    new ZSize(context: context,child: ZButton(
               child: Text(
                 "Dialog",
                 style: new TextStyle(color: Colors.white),
@@ -108,8 +135,10 @@ class Home extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context) => ZAlertDialog(
-                          actionsCupertino: <Widget>[new ZButton(onPressed: () {})],
+                    builder: (BuildContext context) =>
+                ZAlertDialog(
+                          actionsCupertino: <Widget>[
+                            new ZButton(onPressed: () {})],
                           title: Text("Dialog Teste:"),
                           actions: <Widget>[
                             ZButton(
@@ -125,13 +154,116 @@ class Home extends StatelessWidget {
                           ],
                         ));
               },
-            ),
-            ZLoading(),
-            ZTextField(
-              style: TextStyle(fontSize: 20),
-              controller: TextEditingController(text: "teste"),
-              zPlatform: ZPlatform.isAndroid,
-            ),
+            ),quadrado: false,percentWidth: 90,percentHeight: 10,maxHeight: 30,),
+            new ZLoading(zPlatform: ZPlatform.isAndroid,),
+            Text(appSwitch.text),
+            
+            new Row(children: <Widget>[
+              new ZSize(
+                context: context,
+                child: new ZButton(
+                child: Text(
+                  "Dialog",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          ZAlertDialog(
+                            actionsCupertino: <Widget>[
+                              new ZButton(onPressed: () {})],
+                            title: Text("Dialog Teste:"),
+                            actions: <Widget>[
+                              ZButton(
+                                color: const Color(0xffF7F7F7),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  "OK",
+                                  style: new TextStyle(color: Colors.teal),
+                                ),
+                              )
+                            ],
+                          ));
+                },
+              ),
+                  percentHeight: 10,
+                  maxHeight: 50,
+                  maxWidth: 500,
+                  padding: EdgeInsets.all(5),
+                  percentWidth: 30,
+              ),
+              new ZSize(context: context,
+                child: new ZButton(
+                child: Text(
+                  "Dialog",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          ZAlertDialog(
+                            actionsCupertino: <Widget>[
+                              new ZButton(onPressed: () {})],
+                            title: Text("Dialog Teste:"),
+                            actions: <Widget>[
+                              ZButton(
+                                color: const Color(0xffF7F7F7),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  "OK",
+                                  style: new TextStyle(color: Colors.teal),
+                                ),
+                              )
+                            ],
+                          ));
+                },
+              ),
+                  percentWidth: 33.33,
+                  percentHeight: 10,
+                  maxHeight: 30,
+              ),
+              new ZSize(
+                context: context,
+                child: new ZButton(
+                child: Text(
+                  "Dialog",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          ZAlertDialog(
+                            actionsCupertino: <Widget>[
+                              new ZButton(onPressed: () {})],
+                            title: Text("Dialog Teste:"),
+                            actions: <Widget>[
+                              ZButton(
+                                color: const Color(0xffF7F7F7),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  "OK",
+                                  style: new TextStyle(color: Colors.teal),
+                                ),
+                              )
+                            ],
+                          ));
+                },
+              ),
+                  percentWidth: 33.33,
+                  percentHeight: 100,
+                  maxHeight: 50,
+                  padding: EdgeInsets.all(5),
+                ),
+            ],)
           ]),
         ],
       ),
@@ -162,4 +294,27 @@ class Home extends StatelessWidget {
       ),
     );
   }
+}
+
+class AppSwitch with ChangeNotifier {
+
+AppSwitch();
+
+bool _value = false;
+String _text = "";
+
+set value(bool text) {
+  _value = text;
+  notifyListeners();
+}
+
+bool get value => _value;
+
+set text(String text) {
+  _text = text;
+  notifyListeners();
+}
+
+String get text => _text;
+
 }

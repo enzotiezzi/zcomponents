@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/z-platform.dart';
+import 'package:z_components/config/z-platform.dart';
 
 class ZAlertDialog extends StatelessWidget {
   Widget _zAlertDialog;
@@ -41,11 +41,11 @@ class ZAlertDialog extends StatelessWidget {
     this.actionsCupertino = const <Widget>[],
     this.scrollController,
     this.actionScrollController,
-    this.zPlatform = ZPlatform.notPlatform,
+    this.zPlatform = ZPlatform.isPlatform,
   })  : assert(contentPadding != null),
         super(key: key) {
     switch (zPlatform) {
-      case ZPlatform.notPlatform:
+      case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
           _zAlertDialog = AlertDialog(
             backgroundColor: this.backgroundColor,
