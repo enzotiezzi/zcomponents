@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'dart:async';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -15,7 +16,6 @@ import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z-baseline.dart';
-
 
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
@@ -34,34 +34,34 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool value = false;
   DateTime selectedDate = DateTime.now();
-  
+
   @override
   void initState() {
     super.initState();
   }
-  
+
   // Platform messages are asynchronous, so we initialize in an async method.
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(),
-        home: ChangeNotifierProvider<AppSwitch>(
-            builder: (_) => AppSwitch(),
-            child: Home()),
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate, // if it's a RTL language
-        ],
-        supportedLocales: [
-        if(Platform.isIOS)
-          const Locale('en', 'US')
-        ,
-        if(Platform.isAndroid)
-          const Locale('pt','BR'),
-        ]
-      ,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primaryColor: const Color(0xff2BBAB4),
+          accentColor: const Color(0xff2BBAB4),
+          splashColor: const Color(0xff2BBAB4),
+
+       ),
+      home: ChangeNotifierProvider<AppSwitch>(
+          builder: (_) => AppSwitch(), child: Home()),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate, // if it's a RTL language
+      ],
+      supportedLocales: [
+        if (Platform.isIOS) const Locale('en', 'US'),
+        if (Platform.isAndroid) const Locale('pt', 'BR'),
+      ],
     );
   }
 }
@@ -69,11 +69,11 @@ class _MyAppState extends State<MyApp> {
 class Home extends StatelessWidget {
   bool value = false;
   int index = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     final appSwitch = Provider.of<AppSwitch>(context);
-    
+
     return Scaffold(
       floatingActionButton: ZFloatButton(
         onPressed: () {},
@@ -91,22 +91,20 @@ class Home extends StatelessWidget {
       ),
       body: new ListView(
         children: <Widget>[
-
           new Column(children: <Widget>[
-
             new ZBaseLine(
               context: context,
               title: "Nome:",
               ztextField: new ZTextField(
-                //onChanged: (text) => appSwitch.text = text,
-              ),
+                  //onChanged: (text) => appSwitch.text = text,
+                  ),
             ),
             new ZBaseLine(
               context: context,
               title: "Sobrenome:",
               ztextField: new ZTextField(
-                //onChanged: (text) => appSwitch.text = text,
-              ),
+                  //onChanged: (text) => appSwitch.text = text,
+                  ),
             ),
             new ZBaseLine(
               context: context,
@@ -118,14 +116,17 @@ class Home extends StatelessWidget {
                 //onChanged: (text) => appSwitch.text = text,
               ),
             ),
-            
             new Container(
               child: ZTextField(
-              onChanged: (text) => appSwitch.text = text,
-            ),padding: EdgeInsets.all(8),),
-            ZSwitch(value: appSwitch.value, onChanged: (b) {
-              appSwitch.value = b;
-            }),
+                onChanged: (text) => appSwitch.text = text,
+              ),
+              padding: EdgeInsets.all(8),
+            ),
+            ZSwitch(
+                value: appSwitch.value,
+                onChanged: (b) {
+                  appSwitch.value = b;
+                }),
             ZButton(
                 child: Text(
                   'Show Date Picker!',
@@ -142,41 +143,9 @@ class Home extends StatelessWidget {
                     },
                   );
                 }),
-    new ZSize(context: context,child: ZButton(
-              child: Text(
-                "Dialog",
-                style: new TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                ZAlertDialog(
-                          actionsCupertino: <Widget>[
-                            new ZButton(onPressed: () {})],
-                          title: Text("Dialog Teste:"),
-                          actions: <Widget>[
-                            ZButton(
-                              color: const Color(0xffF7F7F7),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: new Text(
-                                "OK",
-                                style: new TextStyle(color: Colors.teal),
-                              ),
-                            )
-                          ],
-                        ));
-              },
-            ),quadrado: false,percentWidth: 90,percentHeight: 10,maxHeight: 30,),
-            new ZLoading(zPlatform: ZPlatform.isAndroid,),
-            Text(appSwitch.text),
-            
-            new Row(children: <Widget>[
-              new ZSize(
-                context: context,
-                child: new ZButton(
+            new ZSize(
+              context: context,
+              child: ZButton(
                 child: Text(
                   "Dialog",
                   style: new TextStyle(color: Colors.white),
@@ -184,10 +153,10 @@ class Home extends StatelessWidget {
                 onPressed: () {
                   showDialog(
                       context: context,
-                      builder: (BuildContext context) =>
-                          ZAlertDialog(
+                      builder: (BuildContext context) => ZAlertDialog(
                             actionsCupertino: <Widget>[
-                              new ZButton(onPressed: () {})],
+                              new ZButton(onPressed: () {})
+                            ],
                             title: Text("Dialog Teste:"),
                             actions: <Widget>[
                               ZButton(
@@ -204,81 +173,124 @@ class Home extends StatelessWidget {
                           ));
                 },
               ),
+              quadrado: false,
+              percentWidth: 90,
+              percentHeight: 10,
+              maxHeight: 30,
+            ),
+            new ZLoading(
+              zPlatform: ZPlatform.isAndroid,
+            ),
+            Text(appSwitch.text),
+            new Row(
+              children: <Widget>[
+                new ZSize(
+                  context: context,
+                  child: new ZButton(
+                    child: Text(
+                      "Dialog",
+                      style: new TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => ZAlertDialog(
+                                actionsCupertino: <Widget>[
+                                  new ZButton(onPressed: () {})
+                                ],
+                                title: Text("Dialog Teste:"),
+                                actions: <Widget>[
+                                  ZButton(
+                                    color: const Color(0xffF7F7F7),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: new Text(
+                                      "OK",
+                                      style: new TextStyle(color: Colors.teal),
+                                    ),
+                                  )
+                                ],
+                              ));
+                    },
+                  ),
                   percentHeight: 10,
                   maxHeight: 50,
                   maxWidth: 500,
                   padding: EdgeInsets.all(5),
                   percentWidth: 30,
-              ),
-              new ZSize(context: context,
-                child: new ZButton(
-                child: Text(
-                  "Dialog",
-                  style: new TextStyle(color: Colors.white),
                 ),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          ZAlertDialog(
-                            actionsCupertino: <Widget>[
-                              new ZButton(onPressed: () {})],
-                            title: Text("Dialog Teste:"),
-                            actions: <Widget>[
-                              ZButton(
-                                color: const Color(0xffF7F7F7),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: new Text(
-                                  "OK",
-                                  style: new TextStyle(color: Colors.teal),
-                                ),
-                              )
-                            ],
-                          ));
-                },
-              ),
+                new ZSize(
+                  context: context,
+                  child: new ZButton(
+                    child: Text(
+                      "Dialog",
+                      style: new TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => ZAlertDialog(
+                                actionsCupertino: <Widget>[
+                                  new ZButton(onPressed: () {})
+                                ],
+                                title: Text("Dialog Teste:"),
+                                actions: <Widget>[
+                                  ZButton(
+                                    color: const Color(0xffF7F7F7),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: new Text(
+                                      "OK",
+                                      style: new TextStyle(color: Colors.teal),
+                                    ),
+                                  )
+                                ],
+                              ));
+                    },
+                  ),
                   percentWidth: 33.33,
                   percentHeight: 10,
                   maxHeight: 30,
-              ),
-              new ZSize(
-                context: context,
-                child: new ZButton(
-                child: Text(
-                  "Dialog",
-                  style: new TextStyle(color: Colors.white),
                 ),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          ZAlertDialog(
-                            actionsCupertino: <Widget>[
-                              new ZButton(onPressed: () {})],
-                            title: Text("Dialog Teste:"),
-                            actions: <Widget>[
-                              ZButton(
-                                color: const Color(0xffF7F7F7),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: new Text(
-                                  "OK",
-                                  style: new TextStyle(color: Colors.teal),
-                                ),
-                              )
-                            ],
-                          ));
-                },
-              ),
+                new ZSize(
+                  context: context,
+                  child: new ZButton(
+                    child: Text(
+                      "Dialog",
+                      style: new TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => ZAlertDialog(
+                                actionsCupertino: <Widget>[
+                                  new ZButton(onPressed: () {})
+                                ],
+                                title: Text("Dialog Teste:"),
+                                actions: <Widget>[
+                                  ZButton(
+                                    color: const Color(0xffF7F7F7),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: new Text(
+                                      "OK",
+                                      style: new TextStyle(color: Colors.teal),
+                                    ),
+                                  )
+                                ],
+                              ));
+                    },
+                  ),
                   percentWidth: 33.33,
                   percentHeight: 100,
                   maxHeight: 50,
                   padding: EdgeInsets.all(5),
                 ),
-            ],)
+              ],
+            )
           ]),
         ],
       ),
@@ -312,24 +324,22 @@ class Home extends StatelessWidget {
 }
 
 class AppSwitch with ChangeNotifier {
+  AppSwitch();
 
-AppSwitch();
+  bool _value = false;
+  String _text = "";
 
-bool _value = false;
-String _text = "";
+  set value(bool text) {
+    _value = text;
+    notifyListeners();
+  }
 
-set value(bool text) {
-  _value = text;
-  notifyListeners();
-}
+  bool get value => _value;
 
-bool get value => _value;
+  set text(String text) {
+    _text = text;
+    notifyListeners();
+  }
 
-set text(String text) {
-  _text = text;
-  notifyListeners();
-}
-
-String get text => _text;
-
+  String get text => _text;
 }
