@@ -190,7 +190,7 @@ class ZAlertDialog extends StatelessWidget {
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new Icon(Icons.warning,color: Color(0xff1AC15D),)
+                    new Icon(Icons.check_circle,color: Color(0xff1AC15D),)
                   ],
                 ),
                 new Row(
