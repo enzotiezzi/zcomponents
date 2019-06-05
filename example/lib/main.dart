@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-float-button.dart';
+import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
 import 'package:z_components/config/z-mask.dart';
 
@@ -127,9 +128,9 @@ class Home extends StatelessWidget {
                 onChanged: (b) {
                   appSwitch.value = b;
                 }),
-            ZButton(
+            ZButton(zButtonType: ZButtonType.isContained,
                 child: Text(
-                  'Show Date Picker!',
+                  'Contained',
                   style: new TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
@@ -143,6 +144,9 @@ class Home extends StatelessWidget {
                     },
                   );
                 }),
+      ZButton(zButtonType: ZButtonType.isOutlined,
+      onPressed: (){},
+      child: new Text("Outlined"),),
             new ZSize(
               context: context,
               child: ZButton(

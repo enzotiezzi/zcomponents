@@ -1,0 +1,1 @@
+enum ZButtonType {isContained , isOutlined}
