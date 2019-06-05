@@ -9,6 +9,8 @@ import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
 import 'package:z_components/config/z-mask.dart';
+import 'package:z_components/config/z-dialog.dart';
+
 
 import 'package:z_components/components/z-size.dart';
 import 'package:z_components/components/z_switch.dart';
@@ -17,6 +19,7 @@ import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z-baseline.dart';
+import 'package:z_components/components/z-alert-custom.dart';
 
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
@@ -129,10 +132,8 @@ class Home extends StatelessWidget {
                   appSwitch.value = b;
                 }),
             ZButton(zButtonType: ZButtonType.isContained,
-                child: Text(
+                text:
                   'Contained',
-                  style: new TextStyle(color: Colors.white),
-                ),
                 onPressed: () {
                   new ZPicker(
                     context: context,
@@ -144,157 +145,39 @@ class Home extends StatelessWidget {
                     },
                   );
                 }),
+
       ZButton(zButtonType: ZButtonType.isOutlined,
-      onPressed: (){},
-      child: new Text("Outlined"),),
-            new ZSize(
+          onPressed: () {
+            new ZPicker(
               context: context,
-              child: ZButton(
-                child: Text(
-                  "Dialog",
-                  style: new TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => ZAlertDialog(
-                            actionsCupertino: <Widget>[
-                              new ZButton(onPressed: () {})
-                            ],
-                            title: Text("Dialog Teste:"),
-                            actions: <Widget>[
-                              ZButton(
-                                color: const Color(0xffF7F7F7),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: new Text(
-                                  "OK",
-                                  style: new TextStyle(color: Colors.teal),
-                                ),
-                              )
-                            ],
-                          ));
-                },
-              ),
-              quadrado: false,
-              percentWidth: 90,
-              percentHeight: 10,
-              maxHeight: 30,
-            ),
-            new ZLoading(
-              zPlatform: ZPlatform.isAndroid,
-            ),
+              initialDate: DateTime.now(),
+              lastDate: DateTime(2090),
+              firstDate: DateTime(1090),
+              onTimerDurationChanged: (date) {
+                date;
+              },
+            );
+          },
+      text: "Outlined"),
+
+    new ZSize(context: context,child: ZButton(
+             text:
+                "Dialog",
+
+
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                ZAlertDialog(
+                  zDialog: ZDialog.erro,
+                          titulo: "Teste",
+                          height: 90,
+                        ));
+              },
+            ),quadrado: false,percentWidth: 90,percentHeight: 10,maxHeight: 30,),
+            new ZLoading(zPlatform: ZPlatform.isAndroid,),
             Text(appSwitch.text),
-            new Row(
-              children: <Widget>[
-                new ZSize(
-                  context: context,
-                  child: new ZButton(
-                    child: Text(
-                      "Dialog",
-                      style: new TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => ZAlertDialog(
-                                actionsCupertino: <Widget>[
-                                  new ZButton(onPressed: () {})
-                                ],
-                                title: Text("Dialog Teste:"),
-                                actions: <Widget>[
-                                  ZButton(
-                                    color: const Color(0xffF7F7F7),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: new Text(
-                                      "OK",
-                                      style: new TextStyle(color: Colors.teal),
-                                    ),
-                                  )
-                                ],
-                              ));
-                    },
-                  ),
-                  percentHeight: 10,
-                  maxHeight: 50,
-                  maxWidth: 500,
-                  padding: EdgeInsets.all(5),
-                  percentWidth: 30,
-                ),
-                new ZSize(
-                  context: context,
-                  child: new ZButton(
-                    child: Text(
-                      "Dialog",
-                      style: new TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => ZAlertDialog(
-                                actionsCupertino: <Widget>[
-                                  new ZButton(onPressed: () {})
-                                ],
-                                title: Text("Dialog Teste:"),
-                                actions: <Widget>[
-                                  ZButton(
-                                    color: const Color(0xffF7F7F7),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: new Text(
-                                      "OK",
-                                      style: new TextStyle(color: Colors.teal),
-                                    ),
-                                  )
-                                ],
-                              ));
-                    },
-                  ),
-                  percentWidth: 33.33,
-                  percentHeight: 10,
-                  maxHeight: 30,
-                ),
-                new ZSize(
-                  context: context,
-                  child: new ZButton(
-                    child: Text(
-                      "Dialog",
-                      style: new TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => ZAlertDialog(
-                                actionsCupertino: <Widget>[
-                                  new ZButton(onPressed: () {})
-                                ],
-                                title: Text("Dialog Teste:"),
-                                actions: <Widget>[
-                                  ZButton(
-                                    color: const Color(0xffF7F7F7),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: new Text(
-                                      "OK",
-                                      style: new TextStyle(color: Colors.teal),
-                                    ),
-                                  )
-                                ],
-                              ));
-                    },
-                  ),
-                  percentWidth: 33.33,
-                  percentHeight: 100,
-                  maxHeight: 50,
-                  padding: EdgeInsets.all(5),
-                ),
-              ],
-            )
           ]),
         ],
       ),

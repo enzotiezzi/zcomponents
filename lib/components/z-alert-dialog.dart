@@ -4,99 +4,216 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-platform.dart';
+import 'package:z_components/config/z-dialog.dart';
 
 class ZAlertDialog extends StatelessWidget {
   Widget _zAlertDialog;
 
   final Key key;
-  final Widget title;
-  final EdgeInsetsGeometry titlePadding;
-  final TextStyle titleTextStyle;
-  final Widget content;
   final EdgeInsetsGeometry contentPadding;
-  final TextStyle contentTextStyle;
-  final List<Widget> actions;
-  final Color backgroundColor;
-  final double elevation;
-  final String semanticLabel;
-  final ShapeBorder shape;
-  final List<Widget> actionsCupertino;
-  final ScrollController scrollController;
-  final ScrollController actionScrollController;
-  final ZPlatform zPlatform;
+  final ZDialog zDialog;
+  final double height;
+  final String titulo;
+  final Widget corpo;
 
   ZAlertDialog({
+    this.corpo,
+    this.titulo = "",
+    this.height,
     this.key,
-    this.title,
-    this.titlePadding,
-    this.titleTextStyle,
-    this.content,
     this.contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
-    this.contentTextStyle,
-    this.actions,
-    this.backgroundColor,
-    this.elevation,
-    this.semanticLabel,
-    this.shape,
-    this.actionsCupertino = const <Widget>[],
-    this.scrollController,
-    this.actionScrollController,
-    this.zPlatform = ZPlatform.isPlatform,
+    this.zDialog = ZDialog.zDialog,
   })  : assert(contentPadding != null),
         super(key: key) {
-    switch (zPlatform) {
-      case ZPlatform.isPlatform:
-        if (Platform.isAndroid) {
-          _zAlertDialog = AlertDialog(
-            backgroundColor: this.backgroundColor,
-            shape: this.shape,
-            elevation: this.elevation,
-            key: this.key,
-            title: this.title,
-            actions: this.actions,
-            titlePadding: this.titlePadding,
-            contentPadding: this.contentPadding,
-            content: this.content,
-            contentTextStyle: this.contentTextStyle,
-            semanticLabel: this.semanticLabel,
-            titleTextStyle: this.titleTextStyle,
-          );
-        } else {
-          _zAlertDialog = CupertinoAlertDialog(
-            actions: this.actions,
-            title: this.title,
-            content: this.content,
-            key: this.key,
-            actionScrollController: this.actionScrollController,
-            scrollController: this.scrollController,
-          );
-        }
-        break;
-      case ZPlatform.isAndroid:
+    switch (zDialog) {
+      case ZDialog.normal:
         _zAlertDialog = AlertDialog(
-          backgroundColor: this.backgroundColor,
-          shape: this.shape,
-          elevation: this.elevation,
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 0,
           key: this.key,
-          title: this.title,
-          actions: this.actions,
-          titlePadding: this.titlePadding,
+          title: new Container(
+            width: double.infinity,
+            height: 5,
+            decoration: new BoxDecoration(
+                color: Color(0xffC7C7CC),
+                borderRadius: new BorderRadius.only(
+                    topLeft:  const  Radius.circular(5.0),
+                    topRight: const  Radius.circular(5.0))
+            ),
+          ),
+          titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
-          content: this.content,
-          contentTextStyle: this.contentTextStyle,
-          semanticLabel: this.semanticLabel,
-          titleTextStyle: this.titleTextStyle,
+          content:new Container(
+            height: height,
+            child:
+            new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(top: 20),
+                        child:  new Text(titulo,textAlign: TextAlign.center
+                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
+                    ),
+                  ],
+                ),
+                (corpo == null)?
+                    new Container():
+                    corpo
+              ],
+            ),
+          ),
         );
         break;
-      case ZPlatform.isIOS:
-        _zAlertDialog = CupertinoAlertDialog(
-          actions: this.actions,
-          title: this.title,
-          content: this.content,
+      case ZDialog.alert:
+        _zAlertDialog = AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 0,
           key: this.key,
-          actionScrollController: this.actionScrollController,
-          scrollController: this.scrollController,
+          title: new Container(
+            width: double.infinity,
+            height: 5,
+            decoration: new BoxDecoration(
+                color: const Color(0xffFFB520),
+                borderRadius: new BorderRadius.only(
+                    topLeft:  const  Radius.circular(5.0),
+                    topRight: const  Radius.circular(5.0))
+            ),
+          ),
+          titlePadding: EdgeInsets.all(0.0),
+          contentPadding: this.contentPadding,
+          content:new Container(
+            height: height,
+            child:
+            new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Icon(Icons.warning,color: Color(0xffFFB520),)
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(top: 20),
+                        child:  new Text(titulo,textAlign: TextAlign.center
+                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
+                    ),
+                  ],
+                ),
+                (corpo == null)?
+                new Container():
+                corpo
+              ],
+            ),
+          ),
         );
+        break;
+      case ZDialog.erro:
+        _zAlertDialog = AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 0,
+          key: this.key,
+          title: new Container(
+            width: double.infinity,
+            height: 5,
+            decoration: new BoxDecoration(
+                color: const Color(0xffE53629),
+                borderRadius: new BorderRadius.only(
+                    topLeft:  const  Radius.circular(5.0),
+                    topRight: const  Radius.circular(5.0))
+            ),
+          ),
+          titlePadding: EdgeInsets.all(0.0),
+          contentPadding: this.contentPadding,
+          content:new Container(
+            height: height,
+            child:
+            new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Icon(Icons.error,color: Color(0xffE53629),)
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(top: 20),
+                        child:  new Text(titulo,textAlign: TextAlign.center
+                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
+                    ),
+                  ],
+                ),
+                (corpo == null)?
+                new Container():
+                corpo
+              ],
+            ),
+          ),
+        );
+        break;
+      case ZDialog.sucess:
+        _zAlertDialog = AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 0,
+          key: this.key,
+          title: new Container(
+            width: double.infinity,
+            height: 5,
+            decoration: new BoxDecoration(
+                color: const Color(0xff1AC15D),
+                borderRadius: new BorderRadius.only(
+                    topLeft:  const  Radius.circular(5.0),
+                    topRight: const  Radius.circular(5.0))
+            ),
+          ),
+          titlePadding: EdgeInsets.all(0.0),
+          contentPadding: this.contentPadding,
+          content:new Container(
+            height: height,
+            child:
+            new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Icon(Icons.check_circle,color: Color(0xff1AC15D),)
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(top: 20),
+                        child:  new Text(titulo,textAlign: TextAlign.center
+                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
+                    ),
+                  ],
+                ),
+                (corpo == null)?
+                new Container():
+                corpo
+              ],
+            ),
+          ),
+        );
+        break;
+      case ZDialog.zDialog:
+        // TODO: Handle this case.
         break;
     }
   }
