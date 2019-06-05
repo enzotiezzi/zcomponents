@@ -7,6 +7,8 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/config/z-platform.dart';
 import 'package:z_components/config/z-mask.dart';
+import 'package:z_components/config/z-dialog.dart';
+
 
 import 'package:z_components/components/z-size.dart';
 import 'package:z_components/components/z_switch.dart';
@@ -15,6 +17,7 @@ import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z-baseline.dart';
+import 'package:z_components/components/z-alert-custom.dart';
 
 
 import 'package:z_components/components/z_navigationbar.dart';
@@ -152,21 +155,9 @@ class Home extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) =>
                 ZAlertDialog(
-                          actionsCupertino: <Widget>[
-                            new ZButton(onPressed: () {})],
-                          title: Text("Dialog Teste:"),
-                          actions: <Widget>[
-                            ZButton(
-                              color: const Color(0xffF7F7F7),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: new Text(
-                                "OK",
-                                style: new TextStyle(color: Colors.teal),
-                              ),
-                            )
-                          ],
+                  zDialog: ZDialog.erro,
+                          titulo: "Teste",
+                          height: 90,
                         ));
               },
             ),quadrado: false,percentWidth: 90,percentHeight: 10,maxHeight: 30,),
@@ -185,22 +176,9 @@ class Home extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) =>
-                          ZAlertDialog(
-                            actionsCupertino: <Widget>[
-                              new ZButton(onPressed: () {})],
-                            title: Text("Dialog Teste:"),
-                            actions: <Widget>[
-                              ZButton(
-                                color: const Color(0xffF7F7F7),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: new Text(
-                                  "OK",
-                                  style: new TextStyle(color: Colors.teal),
-                                ),
-                              )
-                            ],
+                          ZAlertDialogCustom(
+                            title: new Text("TESTE"),
+
                           ));
                 },
               ),
@@ -220,22 +198,8 @@ class Home extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) =>
-                          ZAlertDialog(
-                            actionsCupertino: <Widget>[
-                              new ZButton(onPressed: () {})],
-                            title: Text("Dialog Teste:"),
-                            actions: <Widget>[
-                              ZButton(
-                                color: const Color(0xffF7F7F7),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: new Text(
-                                  "OK",
-                                  style: new TextStyle(color: Colors.teal),
-                                ),
-                              )
-                            ],
+                          ZAlertDialogCustom(
+                            title: new Text("TESTE"),
                           ));
                 },
               ),
@@ -254,22 +218,8 @@ class Home extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) =>
-                          ZAlertDialog(
-                            actionsCupertino: <Widget>[
-                              new ZButton(onPressed: () {})],
-                            title: Text("Dialog Teste:"),
-                            actions: <Widget>[
-                              ZButton(
-                                color: const Color(0xffF7F7F7),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: new Text(
-                                  "OK",
-                                  style: new TextStyle(color: Colors.teal),
-                                ),
-                              )
-                            ],
+                          ZAlertDialogCustom(
+                            title: new Text("TESTE"),
                           ));
                 },
               ),
