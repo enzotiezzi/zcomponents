@@ -170,9 +170,19 @@ class Home extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) =>
                 ZAlertDialog(
-                  zDialog: ZDialog.erro,
-                          titulo: "Teste",
+                  zDialog: ZDialog.sucess,
                           height: 90,
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(top: 20),
+                          child:  new Text("TESTE",textAlign: TextAlign.center
+                            ,style: new TextStyle(fontWeight: FontWeight.bold,),)
+                      ),
+                    ],
+                  ),
                         ));
               },
             ),quadrado: false,percentWidth: 90,percentHeight: 10,maxHeight: 30,),
