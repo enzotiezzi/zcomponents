@@ -156,7 +156,7 @@ class Home extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) =>
                 ZAlertDialog(
-                  zDialog: ZDialog.erro,
+                  zDialog: ZDialog.sucess,
                           titulo: "Teste",
                           height: 90,
                         ));
