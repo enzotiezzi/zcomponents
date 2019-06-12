@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
 
 class ZButton extends StatelessWidget {
@@ -11,6 +12,7 @@ class ZButton extends StatelessWidget {
   final Key key;
   final double minSize;
   final VoidCallback onPressed;
+  final String text;
   final ValueChanged<bool> onHighlightChanged;
   final ButtonTextTheme textTheme;
   final Color textColor;
@@ -23,7 +25,6 @@ class ZButton extends StatelessWidget {
   final double elevation;
   final double highlightElevation;
   final double disabledElevation;
-  final Widget child;
   final ShapeBorder shape;
   final BorderRadius borderRadius;
   final double pressedOpacity;
@@ -31,11 +32,12 @@ class ZButton extends StatelessWidget {
   final Clip clipBehavior;
   final MaterialTapTargetSize materialTapTargetSize;
   final Duration animationDuration;
-  final ZPlatform zPlatform;
+  final ZButtonType zButtonType;
 
   ZButton({
     this.key,
     @required this.onPressed,
+    this.text,
     this.onHighlightChanged,
     this.textTheme,
     this.textColor,
@@ -50,23 +52,22 @@ class ZButton extends StatelessWidget {
     this.disabledElevation,
     this.minSize = 44.0,
     this.pressedOpacity = 0.1,
-    this.child,
     this.shape,
     this.borderRadius,
     this.materialTapTargetSize,
     this.clipBehavior = Clip.none,
     this.colorBrightness,
     this.animationDuration,
-    this.zPlatform = ZPlatform.isPlatform,
+    this.zButtonType = ZButtonType.isContained,
+
   }) : super(key: key) {
-    switch (zPlatform) {
-      case ZPlatform.isPlatform:
-        if (Platform.isAndroid) {
+    switch (zButtonType) {
+      case ZButtonType.isContained:
           _zButton = new RaisedButton(
             onPressed: this.onPressed,
-            child: this.child,
-            color: this.color,
-            shape: this.shape,
+            child: new Text(this.text, style: TextStyle(color: Colors.white),),
+            color: const Color(0xff2BBAB4),
+            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             elevation: this.elevation,
             padding: this.padding,
             disabledElevation: this.disabledElevation,
@@ -84,31 +85,23 @@ class ZButton extends StatelessWidget {
             onHighlightChanged: this.onHighlightChanged,
             textColor: this.textColor,
           );
-        } else {
-          _zButton = new CupertinoButton(
-            onPressed: this.onPressed,
-            child: this.child,
-            color: this.color,
-            padding: this.padding,
-            borderRadius: this.borderRadius,
-            disabledColor: this.disabledColor,
-            key: key,
-            minSize: this.minSize,
-            pressedOpacity: this.pressedOpacity,
-          );
-        }
+
         break;
-      case ZPlatform.isAndroid:
+      case ZButtonType.isOutlined:
         _zButton = new RaisedButton(
           onPressed: this.onPressed,
-          child: this.child,
-          color: this.color,
-          shape: this.shape,
-          elevation: this.elevation,
+          child: new Container(
+            padding: EdgeInsets.fromLTRB(20.0, 7.0, 20.0, 7.0),
+            child: new Text(this.text,style: TextStyle( color: const Color(0xff2BBAB4), ),),decoration: BoxDecoration(
+              borderRadius: new BorderRadius.circular(30.0),
+              border: Border.all(   color: const Color(0xff2BBAB4),)),),
+          color:Colors.transparent,
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          elevation: 0,
           padding: this.padding,
           disabledElevation: this.disabledElevation,
-          highlightElevation: this.highlightElevation,
-          splashColor: this.splashColor,
+          highlightElevation: 0,
+          splashColor: Colors.transparent,
           disabledColor: this.disabledColor,
           key: this.key,
           materialTapTargetSize: this.materialTapTargetSize,
@@ -117,24 +110,12 @@ class ZButton extends StatelessWidget {
           animationDuration: this.animationDuration,
           colorBrightness: this.colorBrightness,
           disabledTextColor: this.disabledTextColor,
-          highlightColor: this.highlightColor,
+          highlightColor: Colors.transparent,
           onHighlightChanged: this.onHighlightChanged,
           textColor: this.textColor,
         );
         break;
-      case ZPlatform.isIOS:
-        _zButton = new CupertinoButton(
-          onPressed: this.onPressed,
-          child: this.child,
-          color: this.color,
-          padding: this.padding,
-          borderRadius: this.borderRadius,
-          disabledColor: this.disabledColor,
-          key: key,
-          minSize: this.minSize,
-          pressedOpacity: this.pressedOpacity,
-        );
-        break;
+
     }
   }
 

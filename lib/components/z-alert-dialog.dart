@@ -13,12 +13,10 @@ class ZAlertDialog extends StatelessWidget {
   final EdgeInsetsGeometry contentPadding;
   final ZDialog zDialog;
   final double height;
-  final String titulo;
-  final Widget corpo;
+  final Widget child;
 
   ZAlertDialog({
-    this.corpo,
-    this.titulo = "",
+    this.child,
     this.height,
     this.key,
     this.contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
@@ -49,20 +47,9 @@ class ZAlertDialog extends StatelessWidget {
             child:
             new Column(
               children: <Widget>[
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 20),
-                        child:  new Text(titulo,textAlign: TextAlign.center
-                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
-                    ),
-                  ],
-                ),
-                (corpo == null)?
+                (child == null)?
                     new Container():
-                    corpo
+                child
               ],
             ),
           ),
@@ -97,20 +84,9 @@ class ZAlertDialog extends StatelessWidget {
                     new Icon(Icons.warning,color: Color(0xffFFB520),)
                   ],
                 ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 20),
-                        child:  new Text(titulo,textAlign: TextAlign.center
-                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
-                    ),
-                  ],
-                ),
-                (corpo == null)?
+                (child == null)?
                 new Container():
-                corpo
+                child
               ],
             ),
           ),
@@ -145,20 +121,9 @@ class ZAlertDialog extends StatelessWidget {
                     new Icon(Icons.error,color: Color(0xffE53629),)
                   ],
                 ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 20),
-                        child:  new Text(titulo,textAlign: TextAlign.center
-                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
-                    ),
-                  ],
-                ),
-                (corpo == null)?
+                (child == null)?
                 new Container():
-                corpo
+                child
               ],
             ),
           ),
@@ -193,20 +158,9 @@ class ZAlertDialog extends StatelessWidget {
                     new Icon(Icons.check_circle,color: Color(0xff1AC15D),)
                   ],
                 ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 20),
-                        child:  new Text(titulo,textAlign: TextAlign.center
-                          ,style: new TextStyle(fontWeight: FontWeight.bold,),)
-                    ),
-                  ],
-                ),
-                (corpo == null)?
+                (child == null)?
                 new Container():
-                corpo
+                child
               ],
             ),
           ),

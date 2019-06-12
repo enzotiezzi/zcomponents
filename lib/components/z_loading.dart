@@ -31,45 +31,53 @@ class ZLoading extends StatelessWidget {
     this.radius = 15.0,
     this.zPlatform = ZPlatform.isPlatform,
   }) : super(key: key) {
-    switch (zPlatform) {
-      case ZPlatform.isPlatform:
-        if (Platform.isAndroid) {
-          _zLoading = CircularProgressIndicator(
-            key: this.key,
-            value: this.value,
-            backgroundColor: this.backgroundColor,
-            valueColor: this.valueColor,
-            strokeWidth: this.strokeWidth,
-            semanticsLabel: this.semanticsLabel,
-            semanticsValue: this.semanticsValue,
-          );
-        } else {
-          _zLoading = CupertinoActivityIndicator(
-            key: this.key,
-            animating: this.animating,
-            radius: this.radius,
-          );
-        }
-        break;
-      case ZPlatform.isAndroid:
-        _zLoading = CircularProgressIndicator(
-          key: this.key,
-          value: this.value,
-          backgroundColor: this.backgroundColor,
-          valueColor: this.valueColor,
-          strokeWidth: this.strokeWidth,
-          semanticsLabel: this.semanticsLabel,
-          semanticsValue: this.semanticsValue,
-        );
-        break;
-      case ZPlatform.isIOS:
-        _zLoading = CupertinoActivityIndicator(
-          key: this.key,
-          animating: this.animating,
-          radius: this.radius,
-        );
-        break;
-    }
+    _zLoading = new Container(
+      width: 60,
+      height: 60,
+      child: new Card(
+          elevation: 6,
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          color: const Color(0xff2BB9B4),
+          child:
+          new Stack(
+            children: <Widget>[
+              new Container(
+                padding: EdgeInsets.all(5.0),
+                decoration: new BoxDecoration(
+                  borderRadius: new BorderRadius.circular(25.0),
+                ),
+                child: new Material(
+                  color: const Color(0xff2BB9B4),
+                  borderRadius: new BorderRadius.circular(25.0),
+                  child: new SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(
+                      key: this.key,
+                      value: this.value,
+                      backgroundColor: this.backgroundColor,
+                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                      strokeWidth: this.strokeWidth,
+                      semanticsLabel: this.semanticsLabel,
+                      semanticsValue: this.semanticsValue,
+                    ),
+                  )
+                ),
+              ),
+              new Container(
+                child: new Center(
+                  child: new Container(
+                    height: 19,
+                    width:19 ,
+                    child: Image(image: AssetImage('assets/z.png'),fit: BoxFit.scaleDown,),
+                  ),
+                ),
+              )
+
+            ],
+          )
+      ),
+    );
   }
 
   @override
