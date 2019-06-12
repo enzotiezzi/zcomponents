@@ -1,8 +1,8 @@
 name: z_components
 description: Flutter components
 version: 0.0.1
-author:
-homepage:
+author: Zellar <zellarrh1@gmail.com>
+homepage: https://github.com/victortmarques/zcomponents
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
