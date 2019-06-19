@@ -11,7 +11,6 @@ import 'package:z_components/config/z-platform.dart';
 import 'package:z_components/config/z-mask.dart';
 import 'package:z_components/config/z-dialog.dart';
 
-
 import 'package:z_components/components/z-size.dart';
 import 'package:z_components/components/z_switch.dart';
 import 'package:z_components/components/z_picker.dart';
@@ -51,11 +50,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: const Color(0xff2BBAB4),
-          accentColor: const Color(0xff2BBAB4),
-          splashColor: const Color(0xff2BBAB4),
-
-       ),
+        primaryColor: const Color(0xff2BBAB4),
+        accentColor: const Color(0xff2BBAB4),
+        splashColor: const Color(0xff2BBAB4),
+      ),
       home: ChangeNotifierProvider<AppSwitch>(
           builder: (_) => AppSwitch(), child: Home()),
       localizationsDelegates: [
@@ -131,9 +129,9 @@ class Home extends StatelessWidget {
                 onChanged: (b) {
                   appSwitch.value = b;
                 }),
-            ZButton(zButtonType: ZButtonType.isContained,
-                text:
-                  'Contained',
+            ZButton(
+                zButtonType: ZButtonType.isContained,
+                text: 'Contained',
                 onPressed: () {
                   new ZPicker(
                     context: context,
@@ -145,48 +143,56 @@ class Home extends StatelessWidget {
                     },
                   );
                 }),
-
-      ZButton(zButtonType: ZButtonType.isOutlined,
-          onPressed: () {
-            new ZPicker(
-              context: context,
-              initialDate: DateTime.now(),
-              lastDate: DateTime(2090),
-              firstDate: DateTime(1090),
-              onTimerDurationChanged: (date) {
-                date;
-              },
-            );
-          },
-      text: "Outlined"),
-
-    new ZSize(context: context,child: ZButton(
-             text:
-                "Dialog",
-
-
-              onPressed: () {
-                showDialog(
+            ZButton(
+                zButtonType: ZButtonType.isOutlined,
+                onPressed: () {
+                  new ZPicker(
                     context: context,
-                    builder: (BuildContext context) =>
-                ZAlertDialog(
-                  zDialog: ZDialog.sucess,
-                          height: 90,
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(top: 20),
-                          child:  new Text("TESTE",textAlign: TextAlign.center
-                            ,style: new TextStyle(fontWeight: FontWeight.bold,),)
-                      ),
-                    ],
-                  ),
-                        ));
-              },
-            ),quadrado: false,percentWidth: 90,percentHeight: 10,maxHeight: 30,),
-            new ZLoading(zPlatform: ZPlatform.isAndroid,),
+                    initialDate: DateTime.now(),
+                    lastDate: DateTime(2090),
+                    firstDate: DateTime(1090),
+                    onTimerDurationChanged: (date) {
+                      date;
+                    },
+                  );
+                },
+                text: "Outlined"),
+            new ZSize(
+              context: context,
+              child: ZButton(
+                text: "Dialog",
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => ZAlertDialog(
+                            zDialog: ZDialog.sucess,
+                            height: 90,
+                            child: new Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                new Container(
+                                    alignment: Alignment.center,
+                                    margin: EdgeInsets.only(top: 20),
+                                    child: new Text(
+                                      "TESTE",
+                                      textAlign: TextAlign.center,
+                                      style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ));
+                },
+              ),
+              quadrado: false,
+              percentWidth: 90,
+              percentHeight: 10,
+              maxHeight: 30,
+            ),
+            new ZLoading(
+              zPlatform: ZPlatform.isAndroid,
+            ),
             Text(appSwitch.text),
           ]),
         ],
