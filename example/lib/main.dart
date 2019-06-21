@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'dart:async';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
 import 'package:z_components/config/z-mask.dart';
 import 'package:z_components/config/z-dialog.dart';
-
 import 'package:z_components/components/z-size.dart';
 import 'package:z_components/components/z_switch.dart';
 import 'package:z_components/components/z_picker.dart';
@@ -18,14 +16,10 @@ import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z-baseline.dart';
-import 'package:z_components/components/z-alert-custom.dart';
-
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
-
-import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -81,10 +75,12 @@ class Home extends StatelessWidget {
         onPressed: () {},
       ),
       appBar: new ZNavigationBar(
+        //middle: IOS
         middle: new Text(
           "ZComponets",
           style: new TextStyle(color: Colors.white),
         ),
+        //title: ANDROID
         title: new Text(
           "ZComponets",
           style: new TextStyle(color: Colors.white),
@@ -174,15 +170,20 @@ class Home extends StatelessWidget {
                                   new Container(
                                     margin: const EdgeInsets.only(top: 12,bottom: 12),
                                     alignment: Alignment.center,
-                                  //  width: MediaQuery.of(context).size.width * 0.7,
+                                      width: MediaQuery.of(context).size.width * 0.7,
                                     child:
                                     new Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
-                                        new Text("Empresa criada com sucesso!",style: new TextStyle(fontWeight: FontWeight.bold),),
+                                        new Text("Uma empresa já possui seu cadastro",style: new TextStyle(fontWeight: FontWeight.bold,),textAlign: TextAlign.center,),
                                         new Container(
                                           margin: EdgeInsets.only(top: 6),
-                                          child:new Text("Por favor adicione um colaborador.",style: new TextStyle(color: Color(0xfff707070),fontWeight: FontWeight.normal,fontSize: 13),),
+                                          child:new Text("Deseja se vincular à empresa abaixo?",style: new TextStyle(color: Color(0xfff707070),fontWeight: FontWeight.normal,fontSize: 13),),
+
+                                        ),
+                                        new Container(
+                                          margin: EdgeInsets.only(top: 6),
+                                          child:new Text("",style: new TextStyle(color: Color(0xfff707070),fontWeight: FontWeight.normal,fontSize: 13),),
 
                                         )
                                       ],
@@ -212,7 +213,7 @@ class Home extends StatelessWidget {
                                             elevation: 0.0,
                                             color: Colors.white,
                                             child: new Text(
-                                              "MAIS TARDE",
+                                              "NÃO VINCULAR",
                                               style: new TextStyle(
                                                   color: Color(0xff707070),
                                                   fontWeight: FontWeight.normal),
@@ -233,7 +234,7 @@ class Home extends StatelessWidget {
                                             elevation: 0.0,
                                             color: Colors.white,
                                             child: new Text(
-                                              "ADICIONAR",
+                                              "VINCULAR",
                                               style: new TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),

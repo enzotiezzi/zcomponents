@@ -1,15 +1,26 @@
-# z_components
+# Z_Components
 
-Flutter components
+Z_Components is a package that contains a set of standardized components to facilitate,
+optimize, and accelerate the development of Zellar company's Android / IOS applications.
 
-## Getting Started
+## A small example of how to use:
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+```dart
+import 'package:z_components/components/z_button.dart';
+import 'package:z_components/components/z_picker.dart';
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-flutter packages pub publish
+          new ZButton(
+                zButtonType: ZButtonType.isOutlined,
+                onPressed: () {
+                  new ZPicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    lastDate: DateTime(2090),
+                    firstDate: DateTime(1090),
+                    onTimerDurationChanged: (date) {
+                      date;
+                    },
+                  );
+                },
+                text: "Outlined"),
+```
