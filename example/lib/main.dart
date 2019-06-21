@@ -165,24 +165,91 @@ class Home extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) => ZAlertDialog(
-                            zDialog: ZDialog.sucess,
-                            height: 90,
-                            child: new Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Container(
+                          zDialog: ZDialog.alert,
+                          child: new Column(
+                            children: <Widget>[
+                              new Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Container(
+                                    margin: const EdgeInsets.only(top: 12,bottom: 12),
                                     alignment: Alignment.center,
-                                    margin: EdgeInsets.only(top: 20),
-                                    child: new Text(
-                                      "TESTE",
-                                      textAlign: TextAlign.center,
-                                      style: new TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ));
+                                  //  width: MediaQuery.of(context).size.width * 0.7,
+                                    child:
+                                    new Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        new Text("Empresa criada com sucesso!",style: new TextStyle(fontWeight: FontWeight.bold),),
+                                        new Container(
+                                          margin: EdgeInsets.only(top: 6),
+                                          child:new Text("Por favor adicione um colaborador.",style: new TextStyle(color: Color(0xfff707070),fontWeight: FontWeight.normal,fontSize: 13),),
+
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              new Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Container(
+                                    height: 1,
+                                    width: 280,
+                                    color: Color(0xffe0e0e0),
+                                  )
+                                ],
+                              ),
+                              new Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  new Container(
+                                      alignment: Alignment.center,
+                                      margin: EdgeInsets.only(top: 0),
+                                      child: new ButtonTheme(
+                                        minWidth: 100,
+                                        child: new RaisedButton(
+                                            elevation: 0.0,
+                                            color: Colors.white,
+                                            child: new Text(
+                                              "MAIS TARDE",
+                                              style: new TextStyle(
+                                                  color: Color(0xff707070),
+                                                  fontWeight: FontWeight.normal),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            shape: new RoundedRectangleBorder(
+                                                borderRadius:
+                                                new BorderRadius.circular(30.0))),
+                                      )),
+                                  new Container(
+                                      alignment: Alignment.center,
+                                      margin: EdgeInsets.only(top: 0),
+                                      child: new ButtonTheme(
+                                        minWidth: 100,
+                                        child: new RaisedButton(
+                                            elevation: 0.0,
+                                            color: Colors.white,
+                                            child: new Text(
+                                              "ADICIONAR",
+                                              style: new TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            shape: new RoundedRectangleBorder(
+                                                borderRadius:
+                                                new BorderRadius.circular(30.0))),
+                                      )),
+                                ],
+                              ),
+                            ],
+                          )
+                      ));
                 },
               ),
               quadrado: false,

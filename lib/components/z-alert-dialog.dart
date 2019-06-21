@@ -12,14 +12,12 @@ class ZAlertDialog extends StatelessWidget {
   final Key key;
   final EdgeInsetsGeometry contentPadding;
   final ZDialog zDialog;
-  final double height;
   final Widget child;
 
   ZAlertDialog({
     this.child,
-    this.height,
     this.key,
-    this.contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
+    this.contentPadding = const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
     this.zDialog = ZDialog.zDialog,
   })  : assert(contentPadding != null),
         super(key: key) {
@@ -42,17 +40,15 @@ class ZAlertDialog extends StatelessWidget {
           ),
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
-          content:new Container(
-            height: height,
-            child:
+          content:
             new Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 (child == null)?
                     new Container():
                 child
               ],
             ),
-          ),
         );
         break;
       case ZDialog.alert:
@@ -74,9 +70,10 @@ class ZAlertDialog extends StatelessWidget {
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
           content:new Container(
-            height: height,
+            margin: const EdgeInsets.only(top: 12),
             child:
             new Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -111,9 +108,10 @@ class ZAlertDialog extends StatelessWidget {
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
           content:new Container(
-            height: height,
+            margin: const EdgeInsets.only(top: 12),
             child:
             new Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -148,9 +146,9 @@ class ZAlertDialog extends StatelessWidget {
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
           content:new Container(
-            height: height,
-            child:
-            new Column(
+            margin: const EdgeInsets.only(top: 12),
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
