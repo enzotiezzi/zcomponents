@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
@@ -18,6 +19,7 @@ import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
+import 'package:z_components/components/z-collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 
@@ -90,178 +92,17 @@ class Home extends StatelessWidget {
       body: new ListView(
         children: <Widget>[
           new Column(children: <Widget>[
-            new ZBaseLine(
-              context: context,
-              title: "Nome:",
-              ztextField: new ZTextField(
-                  //onChanged: (text) => appSwitch.text = text,
-                  ),
+            new ZCollection(
+              titulo: "Estados",
+              lista: ["Azerbaifodase", "Ibirapufodase"]
+                  .map(
+                      (x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
+                  .toList(),
+              onChange: (item) {
+                if(item != null)
+                  print(item.valor);
+              },
             ),
-            new ZBaseLine(
-              context: context,
-              title: "Sobrenome:",
-              ztextField: new ZTextField(
-                  //onChanged: (text) => appSwitch.text = text,
-                  ),
-            ),
-            new ZBaseLine(
-              context: context,
-              title: "CPF:",
-              ztextField: new ZTextField(
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.end,
-                zMask: ZMask.isCPF,
-                //onChanged: (text) => appSwitch.text = text,
-              ),
-            ),
-            new Container(
-              child: ZTextField(
-                onChanged: (text) => appSwitch.text = text,
-              ),
-              padding: EdgeInsets.all(8),
-            ),
-            ZSwitch(
-                value: appSwitch.value,
-                onChanged: (b) {
-                  appSwitch.value = b;
-                }),
-            ZButton(
-                zButtonType: ZButtonType.isContained,
-                text: 'Contained',
-                onPressed: () {
-                  new ZPicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    lastDate: DateTime(2090),
-                    firstDate: DateTime(1090),
-                    onTimerDurationChanged: (date) {
-                      date;
-                    },
-                  );
-                }),
-            ZButton(
-                zButtonType: ZButtonType.isOutlined,
-                onPressed: () {
-                  new ZPicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    lastDate: DateTime(2090),
-                    firstDate: DateTime(1090),
-                    onTimerDurationChanged: (date) {
-                      date;
-                    },
-                  );
-                },
-                text: "Outlined"),
-            new ZSize(
-              context: context,
-              child: ZButton(
-                text: "Dialog",
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => ZAlertDialog(
-                          zDialog: ZDialog.alert,
-                          child: new Column(
-                            children: <Widget>[
-                              new Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Container(
-                                    margin: const EdgeInsets.only(top: 12,bottom: 12),
-                                    alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width * 0.7,
-                                    child:
-                                    new Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        new Text("Uma empresa já possui seu cadastro",style: new TextStyle(fontWeight: FontWeight.bold,),textAlign: TextAlign.center,),
-                                        new Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child:new Text("Deseja se vincular à empresa abaixo?",style: new TextStyle(color: Color(0xfff707070),fontWeight: FontWeight.normal,fontSize: 13),),
-
-                                        ),
-                                        new Container(
-                                          margin: EdgeInsets.only(top: 6),
-                                          child:new Text("",style: new TextStyle(color: Color(0xfff707070),fontWeight: FontWeight.normal,fontSize: 13),),
-
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              new Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Container(
-                                    height: 1,
-                                    width: 280,
-                                    color: Color(0xffe0e0e0),
-                                  )
-                                ],
-                              ),
-                              new Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  new Container(
-                                      alignment: Alignment.center,
-                                      margin: EdgeInsets.only(top: 0),
-                                      child: new ButtonTheme(
-                                        minWidth: 100,
-                                        child: new RaisedButton(
-                                            elevation: 0.0,
-                                            color: Colors.white,
-                                            child: new Text(
-                                              "NÃO VINCULAR",
-                                              style: new TextStyle(
-                                                  color: Color(0xff707070),
-                                                  fontWeight: FontWeight.normal),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            shape: new RoundedRectangleBorder(
-                                                borderRadius:
-                                                new BorderRadius.circular(30.0))),
-                                      )),
-                                  new Container(
-                                      alignment: Alignment.center,
-                                      margin: EdgeInsets.only(top: 0),
-                                      child: new ButtonTheme(
-                                        minWidth: 100,
-                                        child: new RaisedButton(
-                                            elevation: 0.0,
-                                            color: Colors.white,
-                                            child: new Text(
-                                              "VINCULAR",
-                                              style: new TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            shape: new RoundedRectangleBorder(
-                                                borderRadius:
-                                                new BorderRadius.circular(30.0))),
-                                      )),
-                                ],
-                              ),
-                            ],
-                          )
-                      ));
-                },
-              ),
-              quadrado: false,
-              percentWidth: 90,
-              percentHeight: 10,
-              maxHeight: 30,
-            ),
-            new ZLoading(
-              zPlatform: ZPlatform.isAndroid,
-            ),
-            Text(appSwitch.text),
           ]),
         ],
       ),
