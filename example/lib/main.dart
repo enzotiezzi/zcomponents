@@ -102,8 +102,8 @@ class Home extends StatelessWidget {
                       (x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
                   .toList(),
               onChange: (item) {
-                if(item != null)
-                  print(item.valor);
+                if(_key.currentState.itemSelecionado != null)
+                  print(_key.currentState.itemSelecionado.valor);
               },
             ),
           ]),
@@ -135,6 +135,7 @@ class Home extends StatelessWidget {
         // currentIndex: _selectedIndex,
       ),
     );
+
   }
 }
 
