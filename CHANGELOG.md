@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Improvement ZCollection
+
 ## 0.0.7
 
 * Implementation of new component(Z-Collection)!
