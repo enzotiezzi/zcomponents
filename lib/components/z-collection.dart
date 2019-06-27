@@ -60,7 +60,7 @@ class _ZCollectioState extends State<ZCollection> {
           ],
         ),
       ),
-      onTap: _irParaSelecaoDeItem,
+      onTap: _irParaSelecaoDeItemHorizontal,
     );
   }
 
@@ -71,7 +71,43 @@ class _ZCollectioState extends State<ZCollection> {
             builder: (BuildContext context) => ZCollectionList(
                   lista: widget.lista,
                   titulo: widget.titulo,
-                )));
+                )
+        )
+    );
+    if(widget.onChange != null)
+      widget.onChange(_itemSelecionado);
+
+    setState(() {});
+  }
+  void _irParaSelecaoDeItemHorizontal() async {
+    _itemSelecionado = await Navigator.push<ZCollectionItem>(
+        context,
+        new PageRouteBuilder(
+          pageBuilder: (BuildContext context, Animation animation,
+              Animation secondaryAnimation) {
+            return ZCollectionList(
+              lista: widget.lista,
+              titulo: widget.titulo,
+            );
+          },
+          transitionsBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation, Widget child) {
+            return SlideTransition(
+              position: new Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: new SlideTransition(
+                position: new Tween<Offset>(
+                  begin: Offset.zero,
+                  end: const Offset(1.0, 0.0),
+                ).animate(secondaryAnimation),
+                child: child,
+              ),
+            );
+          },
+        )
+    );
     if(widget.onChange != null)
       widget.onChange(_itemSelecionado);
 
