@@ -8,14 +8,17 @@ class ZCollection extends StatefulWidget {
   final List<ZCollectionItem> lista;
   final ValueChanged<ZCollectionItem> onChange;
 
-  ZCollection({this.titulo: "Z Collection", this.lista, this.onChange});
+  ZCollection({Key key, this.titulo: "Z Collection", this.lista, this.onChange})
+      : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ZCollectioState();
+  State<StatefulWidget> createState() => ZCollectioState();
 }
 
-class _ZCollectioState extends State<ZCollection> {
+class ZCollectioState extends State<ZCollection> {
   ZCollectionItem _itemSelecionado;
+
+  ZCollectionItem get itemSelecionado => _itemSelecionado;
 
   @override
   void initState() {
@@ -72,8 +75,7 @@ class _ZCollectioState extends State<ZCollection> {
                   lista: widget.lista,
                   titulo: widget.titulo,
                 )));
-    if(widget.onChange != null)
-      widget.onChange(_itemSelecionado);
+    if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
     setState(() {});
   }

@@ -68,6 +68,8 @@ class Home extends StatelessWidget {
   bool value = false;
   int index = 0;
 
+  var _key = new GlobalKey<ZCollectioState>();
+
   @override
   Widget build(BuildContext context) {
     final appSwitch = Provider.of<AppSwitch>(context);
@@ -93,6 +95,7 @@ class Home extends StatelessWidget {
         children: <Widget>[
           new Column(children: <Widget>[
             new ZCollection(
+              key: _key,
               titulo: "Estados",
               lista: ["Azerbaifodase", "Ibirapufodase"]
                   .map(
