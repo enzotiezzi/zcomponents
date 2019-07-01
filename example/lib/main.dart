@@ -96,9 +96,8 @@ class Home extends StatelessWidget {
           new Column(children: <Widget>[
             new ZCollection(
               key: _key,
-              titulo: "Estados",
-              lista: ["Azerbaifodase", "Ibirapufodase"]
-                  .map(
+              titulo: "Cargos",
+              lista: ["Vigilante Condutor de Animais", "Analista de Departamento Pessoal", "Assistente de Tecnico de Seguranca do Trabalho", "Coordenador de Seguranca do Trabalho", "Encarregado de Manutencao de Areas Verdes","Assistente de TI","Auxiliar Mecanico de Refrigeracao", "Coordenador de Departamento Pessoal","Coordenador de Relacionamento com Cliente", "Diretor de Desenvolvimento de Negocios", "Gerente de Desemvolvimento de Ngocios", "Gerente de Relacionamnto com Cliente", "Lider de Monitoramento de Sistmemas Eletronicos", "Meio Oficial de Manutencao Eletrica", "Secretaria - Analista", "Secretaria de Analista"].map(
                       (x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
                   .toList(),
               onChange: (item) {
