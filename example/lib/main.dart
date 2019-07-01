@@ -21,6 +21,7 @@ import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:z_components/config/z-tipos-baseline.dart';
 import 'dart:io';
 
 void main() => runApp(MyApp());
@@ -104,6 +105,27 @@ class Home extends StatelessWidget {
                 if(_key.currentState.itemSelecionado != null)
                   print(_key.currentState.itemSelecionado.valor);
               },
+            ),
+
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.isNomeCompleto,
+              context: context,
+            ),
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.isCPF,
+              context: context,
+            ),
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.isCelular,
+              context: context,
+            ),
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.isEmail,
+              context: context,
+            ),
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.isDataNascimento,
+              context: context,
             ),
           ]),
         ],

@@ -1,0 +1,1 @@
+enum ZTipoBaseline {isNomeCompleto , isCPF, isCelular, isEmail, isDataNascimento}
