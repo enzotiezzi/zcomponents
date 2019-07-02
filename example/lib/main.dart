@@ -4,8 +4,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/components/z-cadastro-usuario.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
+import 'package:z_components/components/z-item-tile.dart';
+import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
 import 'package:z_components/config/z-mask.dart';
@@ -21,6 +24,7 @@ import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'dart:io';
 
@@ -70,12 +74,14 @@ class Home extends StatelessWidget {
   int index = 0;
 
   var _key = new GlobalKey<ZCollectioState>();
+  var _key2 = new GlobalKey<ZCollectioState>();
 
   @override
   Widget build(BuildContext context) {
     final appSwitch = Provider.of<AppSwitch>(context);
 
-    return Scaffold(
+    return
+     Scaffold(
       floatingActionButton: ZFloatButton(
         onPressed: () {},
       ),
@@ -127,6 +133,13 @@ class Home extends StatelessWidget {
               zTipos: ZTipoBaseline.isDataNascimento,
               context: context,
             ),
+            new ZPinSenha(context: context,numeroQuadrados: 4,zTipos: ZTipoSenha.isSenha,),
+            new ZPinSenha(context: context,numeroQuadrados: 4,zTipos: ZTipoSenha.isRepetirSenha,)
+            ,new ZItemTile(textoTitulo: "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",textoDois: "Sede - Fernando ltda.",textoTres: "Sede - Fernando ltda.",
+            textoQuatro: "5x2",textoCinco: "(seg-sex)",textoSeis: "08:00-17:48",textoSete: "1:00",textoCodigo: "012345",status: true,
+            ),
+           // new ZItemTile(),
+            new Container(height: 80.0,)
           ]),
         ],
       ),
