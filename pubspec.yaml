@@ -16,6 +16,8 @@ dependencies:
   mask_shifter: ^0.1.0
   pin_code_text_field: ^1.3.6
   cpf_cnpj_validator: ^1.0.5
+  email_validator: '^1.0.0'
+
 
 dev_dependencies:
   flutter_test:
