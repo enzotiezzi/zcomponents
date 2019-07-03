@@ -381,14 +381,14 @@ class _HoraState extends State<Hora> {
       _horarioTrabalhado = 24 - _intHoraEntrada;
       _horarioTrabalhado = _horarioTrabalhado + _intHoraSaida;
       print(_horarioTrabalhado);
-      if (_intHoraIntervalo > _horarioTrabalhado) {
+      if (_intHoraIntervalo >= _horarioTrabalhado) {
         showAlertDialogNew("Erro de Jornada!",
             "O intervalo não pode ser maior que a jornada trabalhada.");
       }
     } else {
       _horarioTrabalhado = _intHoraSaida - _intHoraEntrada;
       print(_horarioTrabalhado);
-      if (_intHoraIntervalo > _horarioTrabalhado) {
+      if (_intHoraIntervalo >= _horarioTrabalhado) {
         showAlertDialogNew("Erro de Jornada!",
             "O intervalo não pode ser maior que a jornada trabalhada.");
       }
