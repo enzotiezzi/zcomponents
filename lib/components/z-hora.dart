@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-size.dart';
@@ -93,6 +94,8 @@ class ZHora extends StatelessWidget {
                                         inputFormatters: [
                                           MaskedTextInputFormatterShifter(
                                               maskONE: "XX:XX", maskTWO: "XX:XX"),
+                                          BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                                         ],
                                         focusNode: _focusEntrada,
                                         keyboardType: TextInputType.number,
@@ -142,6 +145,8 @@ class ZHora extends StatelessWidget {
                                         inputFormatters: [
                                           MaskedTextInputFormatterShifter(
                                               maskONE: "XX:XX", maskTWO: "XX:XX"),
+                                          BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                                         ],
                                         focusNode: _focusSaida,
                                         keyboardType: TextInputType.number,
@@ -192,6 +197,8 @@ class ZHora extends StatelessWidget {
                                         inputFormatters: [
                                           MaskedTextInputFormatterShifter(
                                               maskONE: "XX:XX", maskTWO: "XX:XX"),
+                                          BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                                         ],
                                         keyboardType: TextInputType.number,
                                        // controller: _binding.controllerIntervalo,
@@ -268,6 +275,8 @@ class ZHora extends StatelessWidget {
                     inputFormatters: [
                       MaskedTextInputFormatterShifter(
                           maskONE: "XX:XX", maskTWO: "XX:XX"),
+                      BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                     ],
                     //focusNode: _horaInicioFocus,
                     keyboardType: TextInputType.number,

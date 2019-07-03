@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-size.dart';
@@ -216,7 +217,8 @@ class ZBaseLine extends StatelessWidget {
                             ),
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
-                                  maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX")
+                                  maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"),
+                              BlacklistingTextInputFormatter(RegExp("[\\\\,.-]")),
                             ],
                             onChanged: (text) {
                               bool bisexto;
