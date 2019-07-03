@@ -156,7 +156,6 @@ class Home extends StatelessWidget {
               zTipos: ZTipoBaseline.isDataNascimento,
               context: context,
             ),
-<<<<<<< HEAD
             new ZHora(
               zHora: ZHorario.isPadrao,
               context: context,
@@ -165,8 +164,9 @@ class Home extends StatelessWidget {
             new ZHora(
               zHora: ZHorario.isNormal,
               context: context,
+    ),
 
-=======
+
             new ZPinSenha(
               context: context,
               numeroQuadrados: 4,
@@ -226,7 +226,6 @@ class Home extends StatelessWidget {
             Container(height: 30.0,),
             new Container(
               height: 80.0,
->>>>>>> 7c9dc85cdfa810d008cad9135f844433e2999bba
             )
           ]),
         ],
