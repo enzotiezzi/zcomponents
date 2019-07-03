@@ -7,6 +7,8 @@ import 'package:z_components/components/z-size.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:cpf_cnpj_validator/cpf_validator.dart';
+
 
 class ZBaseLine extends StatelessWidget {
   Widget _zBaseLine;
@@ -15,11 +17,16 @@ class ZBaseLine extends StatelessWidget {
   final BuildContext context;
   final ZTipoBaseline zTipos;
   FocusNode emailFocus;
+  FocusNode cpfFocus;
   String email;
+  String CPF;
+  var controllerEmail = new TextEditingController();
+
 
   ZBaseLine(
       {this.key,  @required this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
       : super(key: key) {
+    init();
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
         _zBaseLine = new Container(
@@ -80,6 +87,11 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            onChanged: (text){
+                              CPF = text;
+                            },
+                            focusNode: cpfFocus,
+                            keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
@@ -164,6 +176,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            controller: controllerEmail,
                             focusNode: emailFocus,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
@@ -175,9 +188,6 @@ class ZBaseLine extends StatelessWidget {
                             ),
                             onChanged: (text){
                               email = text;
-                            },
-                            onEditingComplete: (){
-                              _validarEmail();
                             },
                           ),
                         ))
@@ -369,8 +379,67 @@ class ZBaseLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return _zBaseLine;
   }
+  void init(){
+    emailFocus = FocusNode();
+    cpfFocus = FocusNode();
+    emailFocus.addListener((){
+      if (!emailFocus.hasFocus) {
+        _validarEmail();
+      }
+      if (!cpfFocus.hasFocus) {
+        _validarEmail();
+      }
+    });
+  }
 
-
+  void _validarCPF(){
+    if (!CPFValidator.isValid(CPF)){
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>  ZAlertDialog(
+            zDialog: ZDialog.erro,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      margin: const EdgeInsets.all(8),
+                      child: new Text("CPF Inválido!",style: new TextStyle(fontWeight: FontWeight.bold),),
+                    )
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      margin: const EdgeInsets.only(left: 16, right: 16,bottom: 16),
+                      child: new Text("Por Favor insira um CPF válido.",textAlign: TextAlign.center,),
+                    )
+                  ],
+                ),
+                new Divider(
+                  color: const Color(0xffdbdbdb),
+                ),
+                new Container(
+                  child:  new InkWell(borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+                    splashColor: const Color(0xffe6e6e6),
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: new Container(
+                      padding: const EdgeInsets.all(12),
+                      child: new Text("ENTENDI",style: new TextStyle(fontWeight: FontWeight.bold),),
+                    ),
+                  ),
+                  margin: const EdgeInsets.only(bottom: 8),
+                )
+              ],
+            ),
+          ));
+    }
+  }
 
   void _validarEmail(){
     if (!EmailValidator.validate(
