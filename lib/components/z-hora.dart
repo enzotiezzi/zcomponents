@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-size.dart';
@@ -93,6 +94,8 @@ class ZHora extends StatelessWidget {
                                         inputFormatters: [
                                           MaskedTextInputFormatterShifter(
                                               maskONE: "XX:XX", maskTWO: "XX:XX"),
+                                          BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                                         ],
                                         focusNode: _focusEntrada,
                                         keyboardType: TextInputType.number,
@@ -142,6 +145,8 @@ class ZHora extends StatelessWidget {
                                         inputFormatters: [
                                           MaskedTextInputFormatterShifter(
                                               maskONE: "XX:XX", maskTWO: "XX:XX"),
+                                          BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                                         ],
                                         focusNode: _focusSaida,
                                         keyboardType: TextInputType.number,
@@ -192,6 +197,8 @@ class ZHora extends StatelessWidget {
                                         inputFormatters: [
                                           MaskedTextInputFormatterShifter(
                                               maskONE: "XX:XX", maskTWO: "XX:XX"),
+                                          BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                                         ],
                                         keyboardType: TextInputType.number,
                                        // controller: _binding.controllerIntervalo,
@@ -204,7 +211,6 @@ class ZHora extends StatelessWidget {
 
                                           if(text.length == 5)
                                           {
-                                            horarioTrabalhado();
                                             if(_intHoraIntervalo > 23 && _intMinutoIntervalo > 59)
                                             {
                                               showAlertDialogNew("Horario Inválido!", "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
@@ -218,6 +224,7 @@ class ZHora extends StatelessWidget {
                                               showAlertDialogNew("Minuto Inválido!", "Por favor insira um valor de minuto entre 00 e 59.");
                                             }
                                             else{
+                                              horarioTrabalhado();
                                               FocusScope.of(context).requestFocus(new FocusNode());
                                             }
                                           }
@@ -268,6 +275,8 @@ class ZHora extends StatelessWidget {
                     inputFormatters: [
                       MaskedTextInputFormatterShifter(
                           maskONE: "XX:XX", maskTWO: "XX:XX"),
+                      BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+
                     ],
                     //focusNode: _horaInicioFocus,
                     keyboardType: TextInputType.number,
