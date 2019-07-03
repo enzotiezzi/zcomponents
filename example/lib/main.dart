@@ -11,6 +11,8 @@ import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
+import 'package:z_components/config/z-horario-tye.dart';
+
 import 'package:z_components/config/z-mask.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-size.dart';
@@ -23,6 +25,8 @@ import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
 import 'package:z_components/components/z-collection.dart';
+import 'package:z_components/components/z-hora.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
@@ -142,6 +146,16 @@ class Home extends StatelessWidget {
               zTipos: ZTipoBaseline.isDataNascimento,
               context: context,
             ),
+            new ZHora(
+              zHora: ZHorario.isPadrao,
+              context: context,
+
+            ),
+            new ZHora(
+              zHora: ZHorario.isNormal,
+              context: context,
+    ),
+
 
             new ZPinSenha(
               context: context,

@@ -17,7 +17,7 @@ class ZBaseLine extends StatelessWidget {
   String email;
 
   ZBaseLine(
-      {this.key, this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
+      {this.key,  @required this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
       : super(key: key) {
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
@@ -207,6 +207,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
@@ -219,6 +220,93 @@ class ZBaseLine extends StatelessWidget {
                               MaskedTextInputFormatterShifter(
                                   maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX")
                             ],
+                            onChanged: (text) {
+                              bool bisexto;
+
+
+                              var dias = text.substring(0, 2);
+                              int intDias = int.parse(dias);
+
+                              var mes = text.substring(3, 5);
+                              int intMes = int.parse(mes);
+
+                              var ano = text.substring(6, 10);
+                              int intAno = int.parse(ano);
+
+                              if ( ( intAno % 4 == 0 && intAno % 100 != 0 ) || intAno % 400 == 0 ){
+                                bisexto = true;
+                              }
+                              else{
+                                bisexto = false;
+                              }
+
+                              print(dias);
+                              print(mes);
+                              print(ano);
+
+                              if(text.length == 10)
+                                {
+                                  if(intMes < 13 && intDias < 32 && intAno < 2004)
+                                  {
+                                    if(intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12)
+                                    {
+                                      if(intDias > 31)
+                                      {
+                                        showAlertDialogNew("Dia Inválido!","Insira um valor de dia entre 01 e 31.");
+                                      }
+                                    }
+                                    else if( intMes == 04 || intMes == 06 || intMes == 09 || intMes == 11)
+                                    {
+                                      if(intDias > 30)
+                                      {
+                                        showAlertDialogNew("Dia Inválido!","Insira um valor de dia entre 01 e 31.");
+                                      }
+                                    }
+                                    else{
+                                      if(bisexto == true)
+                                        {
+                                          if(intDias > 29)
+                                          {
+                                            showAlertDialogNew("Dia Inválido!","Insira um valor de dia entre 01 e 28.");
+                                          }
+                                        }
+                                        else{
+                                        if(intDias > 28)
+                                        {
+                                          showAlertDialogNew("Dia Inválido!","Insira um valor de dia entre 01 e 28.");
+                                        }
+                                      }
+                                    }
+                                  }
+                                  else if(intMes > 13 && intDias < 32 && intAno < 2004)
+                                    {
+                                      showAlertDialogNew("Mês Inválido!","Insira um valor de mês entre 01 e 12");
+                                    }
+                                  else if(intMes < 13 && intDias > 32 && intAno < 2004)
+                                  {
+                                    showAlertDialogNew("Dia Inválido!","Insira um valor de dia entre 01 e 31");
+                                  }
+                                  else if(intMes < 13 && intDias < 32 && intAno > 2004)
+                                  {
+                                    showAlertDialogNew("Ano Inválido!","Insira um valor de ano abaixo de 2004");
+                                  }
+                                  else if(intMes > 13 && intDias < 32 && intAno > 2004)
+                                  {
+                                    showAlertDialogNew("Mês e Ano Inválido!","Insira um valor de mes entre 01 e 12 e um ano abaixo de 2004");
+                                  }
+                                  else if(intMes > 13 && intDias > 32 && intAno < 2004)
+                                  {
+                                    showAlertDialogNew("Mês e Dia Inválido!","Insira um valor de mes entre 01 e 12 e dia entre 01 e 31");
+                                  }
+                                  else if(intMes < 13 && intDias > 32 && intAno > 2004)
+                                  {
+                                    showAlertDialogNew("Dia e Ano Inválido!","Insira um valor de dia entre 01 e 31 e um ano abaixo de 2004");
+                                  }
+                                  else{
+                                    showAlertDialogNew("Data Inválida!","Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004 ");
+                                  }
+                                }
+                            },
                           ),
                         ))
                   ],
@@ -227,6 +315,52 @@ class ZBaseLine extends StatelessWidget {
             ));
         break;
     }
+  }
+  void showAlertDialogNew(String title, String message) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) =>  ZAlertDialog(
+          zDialog: ZDialog.erro,
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    margin: const EdgeInsets.all(8),
+                    child: new Text(title,style: new TextStyle(fontWeight: FontWeight.bold),),
+                  )
+                ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    margin: const EdgeInsets.only(left: 16, right: 16,bottom: 16),
+                    child: new Text(message,textAlign: TextAlign.center,),
+                  )
+                ],
+              ),
+              new Divider(
+                color: const Color(0xffdbdbdb),
+              ),
+             new Container(
+               child:  new InkWell(borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+                 splashColor: const Color(0xffe6e6e6),
+                 onTap: (){
+                   Navigator.pop(context);
+                 },
+                 child: new Container(
+                   padding: const EdgeInsets.all(12),
+                   child: new Text("ENTENDI",style: new TextStyle(fontWeight: FontWeight.bold),),
+                 ),
+               ),
+               margin: const EdgeInsets.only(bottom: 8),
+             )
+            ],
+          ),
+        ));
   }
 
   @override
