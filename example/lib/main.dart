@@ -133,6 +133,13 @@ class Home extends StatelessWidget {
               zTipos: ZTipoBaseline.isDataNascimento,
               context: context,
             ),
+            new ZButton(
+              zButtonType: ZButtonType.isLogin,
+              onPressed: (){
+                print('teste');
+              },
+            ),
+
             new ZPinSenha(context: context,numeroQuadrados: 4,zTipos: ZTipoSenha.isSenha,),
             new ZPinSenha(context: context,numeroQuadrados: 4,zTipos: ZTipoSenha.isRepetirSenha,)
             ,new ZItemTile(textoTitulo: "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",textoDois: "Sede - Fernando ltda.",textoTres: "Sede - Fernando ltda.",
@@ -140,7 +147,9 @@ class Home extends StatelessWidget {
             ),
            // new ZItemTile(),
             new Container(height: 80.0,)
+
           ]),
+
         ],
       ),
       bottomNavigationBar: ZtabBar(
