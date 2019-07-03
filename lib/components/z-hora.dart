@@ -14,6 +14,7 @@ class ZHora extends StatelessWidget {
   final Key key;
   final BuildContext context;
   final ZHorario zHora;
+  bool dMaisUm = false;
 
   FocusNode _focusEntrada;
   FocusNode _focusSaida;
@@ -21,13 +22,13 @@ class ZHora extends StatelessWidget {
 
   String _horaEntrada;
   String _minutoEntrada;
-  int _intHoraEntrada;
+  int _intHoraEntrada = 0;
   int _intMinutoEntrada;
 
 
   String _horaSaida;
   String _minutoSaida;
-  int _intHoraSaida;
+  int _intHoraSaida = 0;
   int _intMinutoSaida;
 
 
@@ -139,46 +140,69 @@ class ZHora extends StatelessWidget {
                                     borderRadius: new BorderRadius.all(
                                         const Radius.circular(5.0)),
                                   ),
-                                  child: new Container(
-                                      margin: EdgeInsets.only(left: 30.0),
-                                      child: new TextField(
-                                        inputFormatters: [
-                                          MaskedTextInputFormatterShifter(
-                                              maskONE: "XX:XX", maskTWO: "XX:XX"),
-                                          BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+                                  child: new Stack(
+                                    children: <Widget>[
+                                      new Container(
+                                          margin: EdgeInsets.only(left: 30.0),
+                                          child: new TextField(
+                                            inputFormatters: [
+                                              MaskedTextInputFormatterShifter(
+                                                  maskONE: "XX:XX", maskTWO: "XX:XX"),
+                                              BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
 
+                                            ],
+                                            focusNode: _focusSaida,
+                                            keyboardType: TextInputType.number,
+                                            //controller: _binding.controllerFim,
+                                            decoration: InputDecoration.collapsed(hintText: ""),
+                                            onChanged: (text) {
+                                              _horaSaida = text.substring(0, 2);
+                                              _minutoSaida = text.substring(3, 5);
+                                              _intHoraSaida = int.parse(_horaSaida);
+                                              _intMinutoSaida = int.parse(_minutoSaida);
+                                              if(text.length == 5)
+                                              {
+                                                if(_intHoraSaida > 23 && _intMinutoSaida > 59)
+                                                {
+                                                  showAlertDialogNew("Horario Inválido!", "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+                                                }
+                                                else if(_intHoraSaida > 23 && _intMinutoSaida < 59)
+                                                {
+                                                  showAlertDialogNew("Hora Inválida!", "Por favor insira um valor de hora entre 00 e 23.");
+                                                }
+                                                else if(_intHoraSaida < 23 && _intMinutoSaida > 59)
+                                                {
+                                                  showAlertDialogNew("Minuto Inválido!", "Por favor insira um valor de minuto entre 00 e 59.");
+                                                }
+                                                else {
+                                                  _fieldFocusChange(context, _focusSaida, _focusIntervalo);
+                                                }
+                                              }
+
+
+                                            },
+                                          )),
+                                      (dMaisUm == true)?
+                                      new Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: <Widget>[
+                                          new Container(
+                                            margin: const EdgeInsets.only(right: 2),
+                                            decoration: new BoxDecoration(
+                                                color: Colors.teal,
+                                                borderRadius: new BorderRadius.all(const Radius.circular(5.0))),
+                                            width: 28,
+                                            height: 20,
+                                            child: new Center(
+                                              child: new Text("d+1",style: new TextStyle(color: Colors.white,fontSize: 10),),
+                                            ),
+                                          )
                                         ],
-                                        focusNode: _focusSaida,
-                                        keyboardType: TextInputType.number,
-                                        //controller: _binding.controllerFim,
-                                        decoration: InputDecoration.collapsed(hintText: ""),
-                                        onChanged: (text) {
-                                          _horaSaida = text.substring(0, 2);
-                                          _minutoSaida = text.substring(3, 5);
-                                          _intHoraSaida = int.parse(_horaSaida);
-                                          _intMinutoSaida = int.parse(_minutoSaida);
-                                          if(text.length == 5)
-                                          {
-                                            if(_intHoraSaida > 23 && _intMinutoSaida > 59)
-                                            {
-                                              showAlertDialogNew("Horario Inválido!", "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
-                                            }
-                                            else if(_intHoraSaida > 23 && _intMinutoSaida < 59)
-                                            {
-                                              showAlertDialogNew("Hora Inválida!", "Por favor insira um valor de hora entre 00 e 23.");
-                                            }
-                                            else if(_intHoraSaida < 23 && _intMinutoSaida > 59)
-                                            {
-                                              showAlertDialogNew("Minuto Inválido!", "Por favor insira um valor de minuto entre 00 e 59.");
-                                            }
-                                            else {
-                                              _fieldFocusChange(context, _focusSaida, _focusIntervalo);
-                                            }
-                                          }
+                                      ):new Container()
 
 
-                                        },
-                                      )),
+                                    ],
+                                  )
                                 ),
                               ),
                               new Expanded(
@@ -387,6 +411,16 @@ class ZHora extends StatelessWidget {
     _focusEntrada = FocusNode();
     _focusSaida = FocusNode();
     _focusIntervalo = FocusNode();
+    _focusSaida.addListener((){
+      if(_intHoraEntrada > _intHoraSaida)
+        {
+
+          dMaisUm = true;
+        }
+        else{
+        dMaisUm = false;
+      }
+    });
 
   }
   _fieldFocusChange(
