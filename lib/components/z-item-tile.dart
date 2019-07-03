@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ZItemTile extends StatefulWidget {
+  String isExpand;
   String textoTitulo;
   String textoDois;
   String textoTres;
@@ -24,7 +25,9 @@ class ZItemTile extends StatefulWidget {
       this.funcao,
       this.textoCodigo: "",
       this.status: false,
-      this.image});
+      this.image,
+      this.isExpand:""
+      });
 
   @override
   _ZItemTileState createState() => _ZItemTileState();
@@ -75,8 +78,10 @@ class _ZItemTileState extends State<ZItemTile> {
                     new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        new Container(
-                          width: 183.0,
+                    (widget.isExpand == "isExpand") ? new Container(
+                          width:
+                          (MediaQuery.of(context).size.width /
+                              2.1),
                           margin:
                               EdgeInsets.only(left: 8.0, bottom: 4.0, top: 8.0),
                           child: new Text(
@@ -86,7 +91,20 @@ class _ZItemTileState extends State<ZItemTile> {
                                 color: Color(0xFF000000),
                                 fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,
                           ),
-                        ),
+                        ):new Container(
+                      width:
+                      (MediaQuery.of(context).size.width /
+                          1.7),
+                      margin:
+                      EdgeInsets.only(left: 8.0, bottom: 4.0, top: 8.0),
+                      child: new Text(
+                        widget.textoTitulo,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            color: Color(0xFF000000),
+                            fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                         new Container(
                           margin:
                               EdgeInsets.only(left: 8.0, bottom: 4.0, top: 8.0, right: 8.0),
