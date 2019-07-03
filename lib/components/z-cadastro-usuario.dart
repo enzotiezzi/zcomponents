@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-pin-senha.dart';
+import 'package:z_components/components/z_button.dart';
+import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 
@@ -154,25 +156,8 @@ icon:  new Icon(
       new Container(
         alignment: Alignment.center,
         margin: EdgeInsets.only(bottom: 20.0,top: 40),
-        child: RaisedButton(
-          elevation: (_termos == true)?3:0,
-          padding: EdgeInsets.only(
-              left: 60.0, right: 60.0, top: 15.0, bottom: 15.0),
-          onPressed: (_termos == true)
-              ? () {
-
-          }
-              : () {},
-          color: (_termos == true)
-              ? const Color(0xff2BB9B4)
-              : const Color(0xffDBDBDB),
-          child: new Text(
-            "CADASTRAR USUÁRIO",
-            style: TextStyle(color: Colors.white, fontSize: 18.0),
-          ),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(25.0))),
-        ),
+        child: ZButton(zButtonType: ZButtonType.isCadastro,
+        text: "CADASTRAR USUÁRIO",)
       ),
     ],);
   }
@@ -193,4 +178,6 @@ icon:  new Icon(
           )),
     );
   }
+
+
 }
