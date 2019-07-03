@@ -1,0 +1,1 @@
+enum ZTipoSenha {isSenha , isRepetirSenha}
