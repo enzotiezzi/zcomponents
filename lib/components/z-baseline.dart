@@ -260,7 +260,11 @@ class ZBaseLine extends StatelessWidget {
                                 {
                                   if(intMes < 13 && intDias < 32 && intAno < 2004)
                                   {
-                                    if(intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12)
+                                    if(intDias == 00 || intMes == 00 || intAno == 00)
+                                    {
+                                      showAlertDialogNew("Data Inválida!","Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00");
+                                    }
+                                    else if(intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12)
                                     {
                                       if(intDias > 31)
                                       {
@@ -340,7 +344,7 @@ class ZBaseLine extends StatelessWidget {
                 children: <Widget>[
                   new Container(
                     margin: const EdgeInsets.all(8),
-                    child: new Text(title,style: new TextStyle(fontWeight: FontWeight.bold),),
+                    child: new Text(title,style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   )
                 ],
               ),
@@ -350,7 +354,8 @@ class ZBaseLine extends StatelessWidget {
                   new Container(
                     width: MediaQuery.of(context).size.width * 0.6,
                     margin: const EdgeInsets.only(left: 16, right: 16,bottom: 16),
-                    child: new Text(message,textAlign: TextAlign.center,),
+                    child: new Text(message,textAlign: TextAlign.center,style: new TextStyle(
+                    color:const  Color(0xff707070),fontSize: 13),),
                   )
                 ],
               ),
