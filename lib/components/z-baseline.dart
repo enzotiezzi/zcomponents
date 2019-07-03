@@ -15,11 +15,15 @@ class ZBaseLine extends StatelessWidget {
   final BuildContext context;
   final ZTipoBaseline zTipos;
   FocusNode emailFocus;
+  FocusNode cpfFocus;
   String email;
+  var controllerEmail = new TextEditingController();
+
 
   ZBaseLine(
       {this.key,  @required this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
       : super(key: key) {
+    init();
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
         _zBaseLine = new Container(
@@ -80,6 +84,8 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            focusNode: cpfFocus,
+                            keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
@@ -164,6 +170,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            controller: controllerEmail,
                             focusNode: emailFocus,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
@@ -175,9 +182,6 @@ class ZBaseLine extends StatelessWidget {
                             ),
                             onChanged: (text){
                               email = text;
-                            },
-                            onEditingComplete: (){
-                              _validarEmail();
                             },
                           ),
                         ))
@@ -369,7 +373,18 @@ class ZBaseLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return _zBaseLine;
   }
-
+  void init(){
+    emailFocus = FocusNode();
+    cpfFocus = FocusNode();
+    emailFocus.addListener((){
+      if (!emailFocus.hasFocus) {
+        _validarEmail();
+      }
+      if (!cpfFocus.hasFocus) {
+        _validarEmail();
+      }
+    });
+  }
 
 
   void _validarEmail(){
