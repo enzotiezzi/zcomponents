@@ -59,7 +59,7 @@ class ZExpendableItemTile extends StatefulWidget {
 class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return new Container(margin: EdgeInsets.only(left: 5.0, right: 5.0),
       decoration: BoxDecoration(       color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(7.0)),),
       child: ConfigurableExpansionTile(
@@ -69,6 +69,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
         ),),
         header: new Expanded(
           child: new ZItemTile(
+            isExpand: "isExpand",
             funcao: widget.funcao,
             image: widget.image,
             status: widget.status,

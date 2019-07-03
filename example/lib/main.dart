@@ -93,6 +93,7 @@ class Home extends StatelessWidget {
       ),
       appBar: ZNavigationBar(
         leading: new Icon(Icons.print),
+        trailing: new Icon(Icons.airline_seat_legroom_normal),
       ),
       body: new ListView(
         children: <Widget>[

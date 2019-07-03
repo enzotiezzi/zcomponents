@@ -65,26 +65,19 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
     this.primary = true,
     this.textTheme,
   }) : super(key: key) {
-    _zNavigationBar = new AppBar(
-      elevation: this.elevation,
-      primary: this.primary,
-      centerTitle: this.centerTitle,
-      actions: this.actions,
-      actionsIconTheme: this.actionsIconTheme,
+    _zNavigationBar = new CupertinoNavigationBar(
       automaticallyImplyLeading: this.automaticallyImplyLeading,
-      bottom: this.bottom,
-      bottomOpacity: this.bottomOpacity,
-      brightness: this.brightness,
-      flexibleSpace: this.flexibleSpace,
-      iconTheme: this.iconTheme,
-      textTheme: this.textTheme,
-      titleSpacing: this.titleSpacing,
-      toolbarOpacity: this.toolbarOpacity,
+      actionsForegroundColor: this.actionsForegroundColor,
+      automaticallyImplyMiddle: this.automaticallyImplyMiddle,
+      previousPageTitle: this.previousPageTitle,
+      transitionBetweenRoutes: this.transitionBetweenRoutes,
       key: this.key,
       backgroundColor: this.backgroundColor,
-      leading: new Container(child: leading,padding: EdgeInsets.only(left: 16.0),),
-      title: this.title,
-      shape: this.shape,
+      leading: new Container(child: leading,padding: EdgeInsets.only(left: 16.0)),
+      middle: this.middle,
+      trailing: new Container(child: trailing,padding: EdgeInsets.only(right: 16.0)),
+      border: this.border,
+      padding: this.padding ,
     );
   }
 
