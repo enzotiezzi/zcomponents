@@ -26,6 +26,8 @@ import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/components/z-hora.dart';
+import 'package:z_components/components/z-header.dart';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
@@ -98,6 +100,9 @@ class Home extends StatelessWidget {
       body: new ListView(
         children: <Widget>[
           new Column(children: <Widget>[
+            new ZHeader(
+              titulo: "TESTE",
+            ),
             new ZCollection(
               key: _key,
               titulo: "Cargos",
