@@ -138,7 +138,8 @@ class ZButton extends StatelessWidget {
         break;
 
       case ZButtonType.isCadastro:
-        _zButton = new RaisedButton(
+        _zButton =
+        new RaisedButton(
           onPressed: this.onPressed,
           child: new Text(this.text, style: TextStyle(color: Colors.white),),
           color: const Color(0xff2BBAB4),
