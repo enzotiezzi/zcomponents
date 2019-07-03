@@ -4,10 +4,10 @@ import 'package:mask_shifter/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 
-class Hora extends StatefulWidget {
+class ZHora extends StatefulWidget {
   _HoraState state;
 
-  Hora({Key key}) : super(key: key);
+  ZHora({Key key}) : super(key: key);
 
   @override
   _HoraState createState() {
@@ -17,7 +17,7 @@ class Hora extends StatefulWidget {
   }
 }
 
-class _HoraState extends State<Hora> {
+class _HoraState extends State<ZHora> {
   bool dMaisUm = false;
 
   bool _visibles = false;

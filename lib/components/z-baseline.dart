@@ -27,6 +27,7 @@ class ZBaseLine extends StatelessWidget {
       {this.key,  @required this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
       : super(key: key) {
     init();
+    initCpf();
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
         _zBaseLine = new Container(
@@ -134,6 +135,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
@@ -145,7 +147,8 @@ class ZBaseLine extends StatelessWidget {
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
                                   maskONE: "(XX)XXXXX-XXXX",
-                                  maskTWO: "(XX)XXXXX-XXXX")
+                                  maskTWO: "(XX)XXXXX-XXXX"),
+                              BlacklistingTextInputFormatter(RegExp("[\\\\,.]")),
                             ],
                           ),
                         ))
@@ -386,10 +389,17 @@ class ZBaseLine extends StatelessWidget {
   }
   void init(){
     emailFocus = FocusNode();
-    cpfFocus = FocusNode();
     emailFocus.addListener((){
       if (!emailFocus.hasFocus) {
         _validarEmail();
+      }
+    });
+  }
+  void initCpf(){
+    cpfFocus = FocusNode();
+    cpfFocus.addListener((){
+      if (!cpfFocus.hasFocus) {
+        _validarCPF();
       }
     });
   }
