@@ -211,7 +211,6 @@ class ZHora extends StatelessWidget {
 
                                           if(text.length == 5)
                                           {
-                                            horarioTrabalhado();
                                             if(_intHoraIntervalo > 23 && _intMinutoIntervalo > 59)
                                             {
                                               showAlertDialogNew("Horario Inválido!", "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
@@ -225,6 +224,7 @@ class ZHora extends StatelessWidget {
                                               showAlertDialogNew("Minuto Inválido!", "Por favor insira um valor de minuto entre 00 e 59.");
                                             }
                                             else{
+                                              horarioTrabalhado();
                                               FocusScope.of(context).requestFocus(new FocusNode());
                                             }
                                           }
