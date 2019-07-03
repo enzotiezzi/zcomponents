@@ -25,9 +25,9 @@ import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z_text_field.dart';
 import 'package:z_components/components/z-collection.dart';
-import 'package:z_components/components/z-hora.dart';
 import 'package:z_components/components/z-header.dart';
-
+import 'package:z_components/components/z-hora-padrao.dart';
+import 'package:z_components/components/z-hora-um-campo.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
@@ -89,7 +89,7 @@ class Home extends StatelessWidget {
 
     return Scaffold(
 
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.grey,
       floatingActionButton: ZFloatButton(
         onPressed: () {},
       ),
@@ -152,17 +152,10 @@ class Home extends StatelessWidget {
               zTipos: ZTipoBaseline.isDataNascimento,
               context: context,
             ),
-            new ZHora(
-              zHora: ZHorario.isPadrao,
-              context: context,
-
+            new ZHora(),
+            new ZHoraUmCampo(
+              titulo: "Horinha",
             ),
-            new ZHora(
-              zHora: ZHorario.isNormal,
-              context: context,
-    ),
-
-
             new ZPinSenha(
               context: context,
               numeroQuadrados: 4,

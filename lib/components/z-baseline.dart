@@ -27,6 +27,7 @@ class ZBaseLine extends StatelessWidget {
       {this.key,  @required this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
       : super(key: key) {
     init();
+    initCpf();
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
         _zBaseLine = new Container(
@@ -134,6 +135,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
@@ -145,7 +147,8 @@ class ZBaseLine extends StatelessWidget {
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
                                   maskONE: "(XX)XXXXX-XXXX",
-                                  maskTWO: "(XX)XXXXX-XXXX")
+                                  maskTWO: "(XX)XXXXX-XXXX"),
+                              BlacklistingTextInputFormatter(RegExp("[\\\\,.]")),
                             ],
                           ),
                         ))
@@ -260,7 +263,11 @@ class ZBaseLine extends StatelessWidget {
                                 {
                                   if(intMes < 13 && intDias < 32 && intAno < 2004)
                                   {
-                                    if(intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12)
+                                    if(intDias == 00 || intMes == 00 || intAno == 00)
+                                    {
+                                      showAlertDialogNew("Data Inválida!","Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00");
+                                    }
+                                    else if(intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12)
                                     {
                                       if(intDias > 31)
                                       {
@@ -340,7 +347,7 @@ class ZBaseLine extends StatelessWidget {
                 children: <Widget>[
                   new Container(
                     margin: const EdgeInsets.all(8),
-                    child: new Text(title,style: new TextStyle(fontWeight: FontWeight.bold),),
+                    child: new Text(title,style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   )
                 ],
               ),
@@ -350,7 +357,8 @@ class ZBaseLine extends StatelessWidget {
                   new Container(
                     width: MediaQuery.of(context).size.width * 0.6,
                     margin: const EdgeInsets.only(left: 16, right: 16,bottom: 16),
-                    child: new Text(message,textAlign: TextAlign.center,),
+                    child: new Text(message,textAlign: TextAlign.center,style: new TextStyle(
+                    color:const  Color(0xff707070),fontSize: 13),),
                   )
                 ],
               ),
@@ -381,13 +389,17 @@ class ZBaseLine extends StatelessWidget {
   }
   void init(){
     emailFocus = FocusNode();
-    cpfFocus = FocusNode();
     emailFocus.addListener((){
       if (!emailFocus.hasFocus) {
         _validarEmail();
       }
+    });
+  }
+  void initCpf(){
+    cpfFocus = FocusNode();
+    cpfFocus.addListener((){
       if (!cpfFocus.hasFocus) {
-        _validarEmail();
+        _validarCPF();
       }
     });
   }
