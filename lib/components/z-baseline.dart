@@ -18,8 +18,11 @@ class ZBaseLine extends StatelessWidget {
   final ZTipoBaseline zTipos;
   FocusNode emailFocus;
   FocusNode cpfFocus;
+  FocusNode celularFocus;
+
   String email;
   String CPF;
+  String celular;
   var controllerEmail = new TextEditingController();
 
 
@@ -28,6 +31,7 @@ class ZBaseLine extends StatelessWidget {
       : super(key: key) {
     init();
     initCpf();
+    initCelular();
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
         _zBaseLine = new Container(
@@ -135,6 +139,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            focusNode: celularFocus,
                             keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
@@ -150,6 +155,9 @@ class ZBaseLine extends StatelessWidget {
                                   maskTWO: "(XX)XXXXX-XXXX"),
                               BlacklistingTextInputFormatter(RegExp("[\\\\,.]")),
                             ],
+                            onChanged: (text){
+                             celular = text;
+                            },
                           ),
                         ))
                   ],
@@ -403,6 +411,14 @@ class ZBaseLine extends StatelessWidget {
       }
     });
   }
+  void initCelular(){
+    celularFocus = FocusNode();
+    celularFocus.addListener((){
+      if (!celularFocus.hasFocus) {
+        _validarCelular();
+      }
+    });
+  }
 
   void _validarCPF(){
     if (!CPFValidator.isValid(CPF)){
@@ -450,6 +466,55 @@ class ZBaseLine extends StatelessWidget {
               ],
             ),
           ));
+    }
+  }
+  void _validarCelular(){
+    if (celular.length <14){
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>  ZAlertDialog(
+            zDialog: ZDialog.erro,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      margin: const EdgeInsets.all(8),
+                      child: new Text("Celular Inválido!",style: new TextStyle(fontWeight: FontWeight.bold),),
+                    )
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      margin: const EdgeInsets.only(left: 16, right: 16,bottom: 16),
+                      child: new Text("Por Favor, Complete de digitar o seu celular.",textAlign: TextAlign.center,),
+                    )
+                  ],
+                ),
+                new Divider(
+                  color: const Color(0xffdbdbdb),
+                ),
+                new Container(
+                  child:  new InkWell(borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+                    splashColor: const Color(0xffe6e6e6),
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: new Container(
+                      padding: const EdgeInsets.all(12),
+                      child: new Text("ENTENDI",style: new TextStyle(fontWeight: FontWeight.bold),),
+                    ),
+                  ),
+                  margin: const EdgeInsets.only(bottom: 8),
+                )
+              ],
+            ),
+          ));
+
     }
   }
 
