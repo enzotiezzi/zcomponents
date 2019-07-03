@@ -386,9 +386,6 @@ class ZBaseLine extends StatelessWidget {
       if (!emailFocus.hasFocus) {
         _validarEmail();
       }
-      if (!cpfFocus.hasFocus) {
-        _validarEmail();
-      }
     });
   }
 
