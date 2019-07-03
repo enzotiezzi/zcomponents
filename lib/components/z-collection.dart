@@ -49,7 +49,7 @@ class ZCollectioState extends State<ZCollection> {
               title: new Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  (itemSelecionado.valor == null)? new Text(
+                  (_itemSelecionado?.valor == null)? new Text(
                     "Selecione",
                     style: new TextStyle(color: Colors.grey,),
                   ): new Text(

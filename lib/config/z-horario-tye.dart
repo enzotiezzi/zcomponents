@@ -1,0 +1,1 @@
+enum ZHorario {isNormal, isPadrao }
