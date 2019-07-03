@@ -116,6 +116,52 @@ class ZButton extends StatelessWidget {
         );
         break;
 
+
+      case ZButtonType.isLogin:
+        _zButton = new RaisedButton(
+          padding: EdgeInsets.only(
+              left: 130.0,
+              right: 130.0,
+              top: 10.0,
+              bottom: 10.0),
+          onPressed: this.onPressed,
+          color: const Color(0xff2BB9B4),
+          child: new Text(
+            "LOGIN",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20.0),
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius:
+              BorderRadius.all(Radius.circular(25.0))),
+        );
+        break;
+
+      case ZButtonType.isCadastro:
+        _zButton =
+        new RaisedButton(
+          onPressed: this.onPressed,
+          child: new Text(this.text, style: TextStyle(color: Colors.white),),
+          color: const Color(0xff2BBAB4),
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          elevation: this.elevation,
+          padding: this.padding,
+          disabledElevation: this.disabledElevation,
+          highlightElevation: this.highlightElevation,
+          splashColor: this.splashColor,
+          disabledColor: this.disabledColor,
+          key: this.key,
+          materialTapTargetSize: this.materialTapTargetSize,
+          clipBehavior: this.clipBehavior,
+          textTheme: this.textTheme,
+          animationDuration: this.animationDuration,
+          colorBrightness: this.colorBrightness,
+          disabledTextColor: this.disabledTextColor,
+          highlightColor: this.highlightColor,
+          onHighlightChanged: this.onHighlightChanged,
+          textColor: this.textColor,
+        );
+        break;
     }
   }
 

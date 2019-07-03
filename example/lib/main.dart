@@ -91,18 +91,8 @@ class Home extends StatelessWidget {
       floatingActionButton: ZFloatButton(
         onPressed: () {},
       ),
-      appBar: new ZNavigationBar(
-        //middle: IOS
-        middle: new Text(
-          "ZComponets",
-          style: new TextStyle(color: Colors.white),
-        ),
-        //title: ANDROID
-        title: new Text(
-          "ZComponets",
-          style: new TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
+      appBar: ZNavigationBar(
+        leading: new Icon(Icons.print),
       ),
       body: new ListView(
         children: <Widget>[
@@ -228,6 +218,7 @@ class Home extends StatelessWidget {
               height: 80.0,
             )
           ]),
+
         ],
       ),
       bottomNavigationBar: ZtabBar(

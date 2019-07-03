@@ -34,7 +34,6 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
   final double titleSpacing;
   final double toolbarOpacity;
   final double bottomOpacity;
-  final ZPlatform zPlatform;
 
   ZNavigationBar({
     this.context,
@@ -65,89 +64,28 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
     this.centerTitle,
     this.primary = true,
     this.textTheme,
-    this.zPlatform = ZPlatform.isPlatform,
-  }) {
-    switch (zPlatform) {
-      case ZPlatform.isPlatform:
-        if (Platform.isAndroid) {
-          _zNavigationBar = new AppBar(
-            elevation: this.elevation,
-            primary: this.primary,
-            centerTitle: this.centerTitle,
-            actions: this.actions,
-            actionsIconTheme: this.actionsIconTheme,
-            automaticallyImplyLeading: this.automaticallyImplyLeading,
-            bottom: this.bottom,
-            bottomOpacity: this.bottomOpacity,
-            brightness: this.brightness,
-            flexibleSpace: this.flexibleSpace,
-            iconTheme: this.iconTheme,
-            textTheme: this.textTheme,
-            titleSpacing: this.titleSpacing,
-            toolbarOpacity: this.toolbarOpacity,
-            key: this.key,
-            backgroundColor: this.backgroundColor,
-            leading: this.leading,
-            title: this.title,
-            shape: this.shape,
-          );
-        } else {
-          _zNavigationBar = new CupertinoNavigationBar(
-            automaticallyImplyLeading: this.automaticallyImplyLeading,
-            actionsForegroundColor: this.actionsForegroundColor,
-            automaticallyImplyMiddle: this.automaticallyImplyMiddle,
-            previousPageTitle: this.previousPageTitle,
-            transitionBetweenRoutes: this.transitionBetweenRoutes,
-            key: this.key,
-            backgroundColor: this.backgroundColor,
-            leading: this.leading,
-            middle: this.middle,
-            trailing: this.trailing,
-            border: this.border,
-            padding: this.padding,
-          );
-        }
-        break;
-      case ZPlatform.isAndroid:
-        _zNavigationBar = new AppBar(
-          elevation: this.elevation,
-          primary: this.primary,
-          centerTitle: this.centerTitle,
-          actions: this.actions,
-          actionsIconTheme: this.actionsIconTheme,
-          automaticallyImplyLeading: this.automaticallyImplyLeading,
-          bottom: this.bottom,
-          bottomOpacity: this.bottomOpacity,
-          brightness: this.brightness,
-          flexibleSpace: this.flexibleSpace,
-          iconTheme: this.iconTheme,
-          textTheme: this.textTheme,
-          titleSpacing: this.titleSpacing,
-          toolbarOpacity: this.toolbarOpacity,
-          key: this.key,
-          backgroundColor: this.backgroundColor,
-          leading: this.leading,
-          title: this.title,
-          shape: this.shape,
-        );
-        break;
-      case ZPlatform.isIOS:
-        _zNavigationBar = new CupertinoNavigationBar(
-          automaticallyImplyLeading: this.automaticallyImplyLeading,
-          actionsForegroundColor: this.actionsForegroundColor,
-          automaticallyImplyMiddle: this.automaticallyImplyMiddle,
-          previousPageTitle: this.previousPageTitle,
-          transitionBetweenRoutes: this.transitionBetweenRoutes,
-          key: this.key,
-          backgroundColor: this.backgroundColor,
-          leading: this.leading,
-          middle: this.middle,
-          trailing: this.trailing,
-          border: this.border,
-          padding: this.padding,
-        );
-        break;
-    }
+  }) : super(key: key) {
+    _zNavigationBar = new AppBar(
+      elevation: this.elevation,
+      primary: this.primary,
+      centerTitle: this.centerTitle,
+      actions: this.actions,
+      actionsIconTheme: this.actionsIconTheme,
+      automaticallyImplyLeading: this.automaticallyImplyLeading,
+      bottom: this.bottom,
+      bottomOpacity: this.bottomOpacity,
+      brightness: this.brightness,
+      flexibleSpace: this.flexibleSpace,
+      iconTheme: this.iconTheme,
+      textTheme: this.textTheme,
+      titleSpacing: this.titleSpacing,
+      toolbarOpacity: this.toolbarOpacity,
+      key: this.key,
+      backgroundColor: this.backgroundColor,
+      leading: new Container(child: leading,padding: EdgeInsets.only(left: 16.0),),
+      title: this.title,
+      shape: this.shape,
+    );
   }
 
   @override

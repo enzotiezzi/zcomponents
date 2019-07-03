@@ -14,6 +14,7 @@ class ZBaseLine extends StatelessWidget {
   final Key key;
   final BuildContext context;
   final ZTipoBaseline zTipos;
+  FocusNode emailFocus;
   String email;
 
   ZBaseLine(
@@ -163,6 +164,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            focusNode: emailFocus,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
@@ -367,6 +369,8 @@ class ZBaseLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return _zBaseLine;
   }
+
+
 
   void _validarEmail(){
     if (!EmailValidator.validate(
