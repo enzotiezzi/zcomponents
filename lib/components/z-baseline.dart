@@ -23,11 +23,12 @@ class ZBaseLine extends StatelessWidget {
   String email;
   String CPF;
   String celular;
+  String value;
   var controllerEmail = new TextEditingController();
 
 
   ZBaseLine(
-      {this.key,  @required this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
+      {this.value,this.key,  @required this.context, this.zTipos = ZTipoBaseline.isNomeCompleto})
       : super(key: key) {
     init();
     initCpf();
@@ -55,6 +56,9 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            onChanged: (text){
+                              value = text;
+                            },
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
@@ -94,6 +98,7 @@ class ZBaseLine extends StatelessWidget {
                           child: new TextField(
                             onChanged: (text){
                               CPF = text;
+                              value= text;
                             },
                             focusNode: cpfFocus,
                             keyboardType: TextInputType.number,
@@ -157,6 +162,7 @@ class ZBaseLine extends StatelessWidget {
                             ],
                             onChanged: (text){
                              celular = text;
+                             value = text;
                             },
                           ),
                         ))
@@ -199,6 +205,7 @@ class ZBaseLine extends StatelessWidget {
                             ),
                             onChanged: (text){
                               email = text;
+                              value = text;
                             },
                           ),
                         ))
@@ -333,6 +340,7 @@ class ZBaseLine extends StatelessWidget {
                                     showAlertDialogNew("Data Inválida!","Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004 ");
                                   }
                                 }
+                              value = text;
                             },
                           ),
                         ))

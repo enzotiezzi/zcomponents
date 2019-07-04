@@ -141,14 +141,18 @@ class ZButton extends StatelessWidget {
         _zButton =
         new RaisedButton(
           onPressed: this.onPressed,
-          child: new Text(this.text, style: TextStyle(color: Colors.white),),
-          color: const Color(0xff2BBAB4),
+          child: new Container(
+            padding: EdgeInsets.fromLTRB(20.0, 7.0, 20.0, 7.0),
+            child: new Text(this.text,style: TextStyle( color: const Color(0xff2BBAB4), ),),decoration: BoxDecoration(
+              borderRadius: new BorderRadius.circular(30.0),
+              border: Border.all(   color: const Color(0xff2BBAB4),)),),
+          color:Colors.transparent,
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-          elevation: this.elevation,
+          elevation: 0,
           padding: this.padding,
           disabledElevation: this.disabledElevation,
-          highlightElevation: this.highlightElevation,
-          splashColor: this.splashColor,
+          highlightElevation: 0,
+          splashColor: Colors.transparent,
           disabledColor: this.disabledColor,
           key: this.key,
           materialTapTargetSize: this.materialTapTargetSize,
@@ -157,7 +161,7 @@ class ZButton extends StatelessWidget {
           animationDuration: this.animationDuration,
           colorBrightness: this.colorBrightness,
           disabledTextColor: this.disabledTextColor,
-          highlightColor: this.highlightColor,
+          highlightColor: Colors.transparent,
           onHighlightChanged: this.onHighlightChanged,
           textColor: this.textColor,
         );

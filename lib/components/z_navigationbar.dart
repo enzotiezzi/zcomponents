@@ -73,7 +73,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
       transitionBetweenRoutes: this.transitionBetweenRoutes,
       key: this.key,
       backgroundColor: this.backgroundColor,
-      leading: new Container(child: leading,padding: EdgeInsets.only(left: 16.0)),
+      leading: new Container(child: leading,padding: EdgeInsets.only(left: 8.0)),
       middle: this.middle,
       trailing: new Container(child: trailing,padding: EdgeInsets.only(right: 16.0)),
       border: this.border,
