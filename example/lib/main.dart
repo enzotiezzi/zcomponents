@@ -1,107 +1,146 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/components/z-cadastro-usuario.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-pin-senha.dart';
-import 'package:z_components/config/z-button-type.dart';
-import 'package:z_components/config/z-platform.dart';
-import 'package:z_components/config/z-horario-tye.dart';
-
-import 'package:z_components/config/z-mask.dart';
-import 'package:z_components/config/z-dialog.dart';
-import 'package:z_components/components/z-size.dart';
-import 'package:z_components/components/z_switch.dart';
-import 'package:z_components/components/z_picker.dart';
+import 'package:z_components/components/z-check-cpf.dart';
 import 'package:z_components/components/z_tabbar.dart';
-import 'package:z_components/components/z_button.dart';
-import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
-import 'package:z_components/components/z_text_field.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/components/z-header.dart';
+import 'package:z_components/components/z-header-expansion.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
+import 'package:z_components/components/zp-grafico.dart';
+import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-hora-um-campo.dart';
-
+import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
-import 'dart:io';
 import 'package:z_components/components/z-expendable-item-tile.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool value = false;
-  DateTime selectedDate = DateTime.now();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
+class MyApp extends StatelessWidget {
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xff2BBAB4),
-        accentColor: const Color(0xff2BBAB4),
-        splashColor: const Color(0xff2BBAB4),
+      home: Scaffold(
+        body: Center(
+            child: ComponentExemploClasse()
+        ),
+        bottomNavigationBar: ZtabBar(
+          backgroundColor: Colors.teal,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              title: Text('Business'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              title: Text('School'),
+            ),
+          ],
+          onTap: (index) => this.index = index,
+          currentIndex: 0,
+          iconSize: 16,
+          inactiveColor: Colors.red,
+          activeColor: Colors.black,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.black45,
+          // currentIndex: _selectedIndex,
+        ),
       ),
-      home: ChangeNotifierProvider<AppSwitch>(
-          builder: (_) => AppSwitch(), child: Home()),
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate, // if it's a RTL language
-      ],
-      supportedLocales: [
-        if (Platform.isIOS) const Locale('en', 'US'),
-        if (Platform.isAndroid) const Locale('pt', 'BR'),
-      ],
     );
   }
 }
+class ComponentExemploClasse extends StatefulWidget {
 
-class Home extends StatelessWidget {
+  @override
+  _ComponentExemploClasseState createState() => _ComponentExemploClasseState();
+}
+class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
+
   bool value = false;
-  int index = 0;
 
   var _key = new GlobalKey<ZCollectioState>();
   var _key2 = new GlobalKey<ZCollectioState>();
 
+  Key _expansions;
+  Key _expansionTile;
+  bool _collapsed = true;
+  String _value = "open";
+  String _value2 = "close";
+
+  @override
+  void initState() {
+    super.initState();
+    _expansionTile = PageStorageKey<String>(_value);
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    final appSwitch = Provider.of<AppSwitch>(context);
-
     return Scaffold(
-
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       floatingActionButton: ZFloatButton(
         onPressed: () {},
       ),
       appBar: ZNavigationBar(
         leading: new Icon(Icons.print),
-        trailing: new Icon(Icons.airline_seat_legroom_normal),
+        trailing: new GestureDetector(
+          onTap: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => new InformacaoBatida(
+                bottomChild:  new Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(bottom: 5),
+                    child:  new ButtonTheme(
+                      minWidth: 145,
+                      child: new RaisedButton(
+                          color: Color(0xff2bbab4),
+                          child: new Text("ENTENDI",style: new TextStyle(color: Colors.white,fontWeight: FontWeight.w600),),
+                          onPressed: ()
+                          {
+                            Navigator.pop(context);
+                          },
+                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
+                      ),
+                    )
+                ),
+              )),
+            );
+          },
+          child: new Container(
+            child: new Icon(
+              Icons.info,
+              color: Colors.white,
+              size: 19.0,
+            ),
+          ),
+        ),
       ),
       body: new ListView(
         children: <Widget>[
           new Column(children: <Widget>[
             new ZHeader(
               titulo: "TESTE",
+            ),
+            new ZHeaderExpansion(
+              titulo: "Teste Expanded",
+              value: _value,
+              key: _expansionTile,
+              collapsed: _collapsed,
             ),
             new ZCollection(
               key: _key,
@@ -130,6 +169,9 @@ class Home extends StatelessWidget {
               onChange: (item) {
                 if (_key.currentState.itemSelecionado != null)
                   print(_key.currentState.itemSelecionado.valor);
+                else{
+                  print("Nenhum item");
+                }
               },
             ),
             new ZBaseLine(
@@ -152,6 +194,40 @@ class Home extends StatelessWidget {
               zTipos: ZTipoBaseline.isDataNascimento,
               context: context,
             ),
+            new Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child:  new ZExpansion(
+                childTitle: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Container(
+                      padding: const EdgeInsets.all(10),
+                      child: new Text("Titulo"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            new ZPGrafico(
+              key: _expansionTile,
+              tituloCenterCircle: "ESCOLA",
+              titulo: "Ponto Hoje",
+              tituloItem1: "Sapatos",
+              tituloItem2: "Escovas",
+              tituloItem3: "Disco Vinil",
+              valueItem1: 10.0,
+              valueItem2: 30.0,
+              valueItem3: 10.0,
+              onTapItem1: (){
+                print("Tap Item 1");
+              },
+              onTapItem2: (){
+                print("Tap Item 2");
+              },
+              onTapItem3: (){
+                print("Tap Item 3");
+              },
+            ),
             new ZHora(),
             new ZHoraUmCampo(
               titulo: "Horinha",
@@ -166,9 +242,10 @@ class Home extends StatelessWidget {
               numeroQuadrados: 4,
               zTipos: ZTipoSenha.isRepetirSenha,
             ),
+            new ZCheckCPF(),
             new ZItemTile(
               textoTitulo:
-                  "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
+              "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
               textoDois: "Sede - Fernando ltda.",
               textoTres: "Sede - Fernando ltda.",
               textoQuatro: "5x2",
@@ -220,35 +297,9 @@ class Home extends StatelessWidget {
 
         ],
       ),
-      bottomNavigationBar: ZtabBar(
-        backgroundColor: Colors.teal,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
-          ),
-        ],
-        onTap: (index) => this.index = index,
-        currentIndex: 0,
-        iconSize: 16,
-        inactiveColor: Colors.red,
-        activeColor: Colors.black,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black45,
-        // currentIndex: _selectedIndex,
-      ),
     );
   }
 }
-
 class AppSwitch with ChangeNotifier {
   AppSwitch();
 
