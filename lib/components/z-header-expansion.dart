@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class ZHeaderExpansion extends StatefulWidget {
   _ZHeaderExpansionState state;
-  Key key;
   String titulo;
   bool collapsed;
-  String value;
+  GestureTapCallback onTap;
+
 
   ZHeaderExpansion({Key key,
-    this.value,
     this.titulo = "",
     this.collapsed,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,6 @@ class _ZHeaderExpansionState extends State<ZHeaderExpansion> with TickerProvider
   @override
   void initState() {
     super.initState();
-    widget.key = PageStorageKey<String>(widget.value);
   }
 
   void dismiss() {
@@ -58,17 +57,7 @@ class _ZHeaderExpansionState extends State<ZHeaderExpansion> with TickerProvider
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               GestureDetector(
-                onTap: (){
-                  setState(() {
-                    widget.collapsed = ! widget.collapsed;
-                    if(widget.value == "open"){
-                      widget.value = "close";
-                    }else{
-                      widget.value = "open";
-                    }
-                    widget.key = PageStorageKey<String>(widget.value);
-                  });
-                },
+                onTap: widget.onTap,
                 child: new Container(padding: EdgeInsets.only(left: 7.0, right: 7.0),
                   color: Colors.transparent,
                   child:(widget.collapsed == true)? new Column(

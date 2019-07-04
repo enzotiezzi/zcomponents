@@ -18,6 +18,19 @@ class ZBaseLine extends StatelessWidget {
   FocusNode emailFocus;
   FocusNode cpfFocus;
   FocusNode celularFocus;
+  FocusNode mesFocus;
+
+  String dia;
+  String ano;
+  String mes;
+
+  int intDias;
+  int intMes;
+  int intAno;
+
+  String total;
+
+  bool bisexto;
 
   String email;
   String CPF;
@@ -39,6 +52,7 @@ class ZBaseLine extends StatelessWidget {
     init();
     initCpf();
     initCelular();
+    initMes();
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
         _zBaseLine = new Container(
@@ -240,6 +254,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            focusNode: mesFocus,
                             controller: controllerData,
                             keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
@@ -257,104 +272,8 @@ class ZBaseLine extends StatelessWidget {
                                   RegExp("[\\\\,.-]")),
                             ],
                             onChanged: (text) {
-                              bool bisexto;
-
-                              var dias = text.substring(0, 2);
-                              int intDias = int.parse(dias);
-
-                              var mes = text.substring(3, 5);
-                              int intMes = int.parse(mes);
-
-                              var ano = text.substring(6, 10);
-                              int intAno = int.parse(ano);
-
-                              if ((intAno % 4 == 0 && intAno % 100 != 0) ||
-                                  intAno % 400 == 0) {
-                                bisexto = true;
-                              } else {
-                                bisexto = false;
-                              }
-
-                              print(dias);
-                              print(mes);
-                              print(ano);
-
-                              if (text.length == 10) {
-                                if (intMes < 13 &&
-                                    intDias < 32 &&
-                                    intAno < 2004) {
-                                  if (intDias == 00 ||
-                                      intMes == 00 ||
-                                      intAno == 00) {
-                                    showAlertDialogNew("Data Inválida!",
-                                        "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00");
-                                  } else if (intMes == 01 ||
-                                      intMes == 03 ||
-                                      intMes == 05 ||
-                                      intMes == 07 ||
-                                      intMes == 08 ||
-                                      intMes == 10 ||
-                                      intMes == 12) {
-                                    if (intDias > 31) {
-                                      showAlertDialogNew("Dia Inválido!",
-                                          "Insira um valor de dia entre 01 e 31.");
-                                    }
-                                  } else if (intMes == 04 ||
-                                      intMes == 06 ||
-                                      intMes == 09 ||
-                                      intMes == 11) {
-                                    if (intDias > 30) {
-                                      showAlertDialogNew("Dia Inválido!",
-                                          "Insira um valor de dia entre 01 e 31.");
-                                    }
-                                  } else {
-                                    if (bisexto == true) {
-                                      if (intDias > 29) {
-                                        showAlertDialogNew("Dia Inválido!",
-                                            "Insira um valor de dia entre 01 e 28.");
-                                      }
-                                    } else {
-                                      if (intDias > 28) {
-                                        showAlertDialogNew("Dia Inválido!",
-                                            "Insira um valor de dia entre 01 e 28.");
-                                      }
-                                    }
-                                  }
-                                } else if (intMes > 13 &&
-                                    intDias < 32 &&
-                                    intAno < 2004) {
-                                  showAlertDialogNew("Mês Inválido!",
-                                      "Insira um valor de mês entre 01 e 12");
-                                } else if (intMes < 13 &&
-                                    intDias > 32 &&
-                                    intAno < 2004) {
-                                  showAlertDialogNew("Dia Inválido!",
-                                      "Insira um valor de dia entre 01 e 31");
-                                } else if (intMes < 13 &&
-                                    intDias < 32 &&
-                                    intAno > 2004) {
-                                  showAlertDialogNew("Ano Inválido!",
-                                      "Insira um valor de ano abaixo de 2004");
-                                } else if (intMes > 13 &&
-                                    intDias < 32 &&
-                                    intAno > 2004) {
-                                  showAlertDialogNew("Mês e Ano Inválido!",
-                                      "Insira um valor de mes entre 01 e 12 e um ano abaixo de 2004");
-                                } else if (intMes > 13 &&
-                                    intDias > 32 &&
-                                    intAno < 2004) {
-                                  showAlertDialogNew("Mês e Dia Inválido!",
-                                      "Insira um valor de mes entre 01 e 12 e dia entre 01 e 31");
-                                } else if (intMes < 13 &&
-                                    intDias > 32 &&
-                                    intAno > 2004) {
-                                  showAlertDialogNew("Dia e Ano Inválido!",
-                                      "Insira um valor de dia entre 01 e 31 e um ano abaixo de 2004");
-                                } else {
-                                  showAlertDialogNew("Data Inválida!",
-                                      "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004 ");
-                                }
-                              }
+                              total = text;
+                              validaMes();
                             },
                           ),
                         ))
@@ -458,6 +377,108 @@ class ZBaseLine extends StatelessWidget {
         _validarCelular();
       }
     });
+  }
+  void initMes() {
+    mesFocus = FocusNode();
+    mesFocus.addListener(() {
+      if (!mesFocus.hasFocus) {
+        mesHasFocus();
+      }
+    });
+  }
+  void validaMes(){
+
+
+    dia = total.substring(0, 2);
+    intDias = int.parse(dia);
+
+    mes = total.substring(3, 5);
+    intMes = int.parse(mes);
+
+    ano = total.substring(6, 10);
+    intAno = int.parse(ano);
+
+    if ((intAno % 4 == 0 && intAno % 100 != 0) ||
+        intAno % 400 == 0) {
+      bisexto = true;
+    } else {
+      bisexto = false;
+    }
+
+    print(dia);
+    print(mes);
+    print(ano);
+
+    if (total.length == 10) {
+      if (intMes < 13 && intDias < 32 && intAno < 2004) {
+        if (intDias == 00 || intMes == 00 || intAno == 00) {
+          showAlertDialogNew("Data Inválida!",
+              "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
+        } else if (intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12) {
+          if (intDias > 31) {
+            showAlertDialogNew("Dia Inválido!",
+                "Insira um valor de dia entre 01 e 31.");
+          }
+        } else if (intMes == 04 || intMes == 06 || intMes == 09 || intMes == 11) {
+          if (intDias > 30) {
+            showAlertDialogNew("Dia Inválido!",
+                "Insira um valor de dia entre 01 e 31.");
+          }
+        } else {
+          if (bisexto == true) {
+            if (intDias > 29) {
+              showAlertDialogNew("Dia Inválido!",
+                  "Insira um valor de dia entre 01 e 28.");
+            }
+          } else {
+            if (intDias > 28) {
+              showAlertDialogNew("Dia Inválido!",
+                  "Insira um valor de dia entre 01 e 28.");
+            }
+          }
+        }
+      } else if (intMes > 12 &&
+          intDias < 32 &&
+          intAno < 2004) {
+        showAlertDialogNew("Mês Inválido!",
+            "Insira um valor de mês entre 01 e 12.");
+      } else if (intMes < 13 &&
+          intDias > 32 &&
+          intAno < 2004) {
+        showAlertDialogNew("Dia Inválido!",
+            "Insira um valor de dia entre 01 e 31.");
+      } else if (intMes < 13 &&
+          intDias < 32 &&
+          intAno > 2004) {
+        showAlertDialogNew("Ano Inválido!",
+            "Insira um valor de ano abaixo de 2004.");
+      } else if (intMes > 12 &&
+          intDias < 32 &&
+          intAno > 2004) {
+        showAlertDialogNew("Mês e Ano Inválido!",
+            "Insira um valor de mes entre 01 e 12 e um ano abaixo de 2004.");
+      } else if (intMes > 12 &&
+          intDias > 32 &&
+          intAno < 2004) {
+        showAlertDialogNew("Mês e Dia Inválido!",
+            "Insira um valor de mes entre 01 e 12 e dia entre 01 e 31.");
+      } else if (intMes < 13 &&
+          intDias > 32 &&
+          intAno > 2004) {
+        showAlertDialogNew("Dia e Ano Inválido!",
+            "Insira um valor de dia entre 01 e 31 e um ano abaixo de 2004.");
+      } else {
+        showAlertDialogNew("Data Inválida!",
+            "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004.");
+      }
+    }
+  }
+  void mesHasFocus(){
+    if(total.length < 10)
+      {
+        showAlertDialogNew("Data Inválida!",
+            "Por Favor, termine de digitar sua data.");
+      }
   }
 
   void _validarCPF() {

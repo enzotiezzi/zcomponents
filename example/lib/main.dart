@@ -127,7 +127,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             child: new Container(
               child: new Icon(
                 Icons.info,
-                color: Colors.white,
+                color: Colors.blue,
                 size: 19.0,
               ),
 
@@ -142,9 +142,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
               new ZHeaderExpansion(
                 titulo: "Teste Expanded",
-                value: _value,
-                key: _expansionTile,
                 collapsed: _collapsed,
+                onTap: (){
+                  print("TabTeste");
+                },
               ),
               new ZCollection(
                 key: _key,
