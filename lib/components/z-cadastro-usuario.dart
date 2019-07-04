@@ -7,13 +7,12 @@ import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/config/z-button-type.dart';
-import 'package:z_components/config/z-cadastro-teste.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 
 class ZCadastroUsuario extends StatefulWidget {
   Widget zTelaCadastro;
-  ZCadastroTeste ZCadastro = new ZCadastroTeste();
+
   final Key key;
   final BuildContext context;
   var controllerEmail = new TextEditingController();
@@ -71,27 +70,22 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           ),
         ),
         new ZBaseLine(controllerNome: widget.controllerNome,
-          value: widget.ZCadastro.nome,
           zTipos: ZTipoBaseline.isNomeCompleto,
           context: context,
         ),
         new ZBaseLine(controllerCPF: widget.controllerCPF,
-          value: widget.ZCadastro.cpf,
           zTipos: ZTipoBaseline.isCPF,
           context: context,
         ),
         new ZBaseLine(controllerCelular: widget.controllerCelular,
-          value: widget.ZCadastro.celular,
           zTipos: ZTipoBaseline.isCelular,
           context: context,
         ),
         new ZBaseLine(controllerEmail: widget.controllerEmail,
-          value: widget.ZCadastro.email,
           zTipos: ZTipoBaseline.isEmail,
           context: context,
         ),
         new ZBaseLine(controllerData: widget.controllerData,
-          value: widget.ZCadastro.dataNascimento,
           zTipos: ZTipoBaseline.isDataNascimento,
           context: context,
         ),
@@ -106,13 +100,11 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           ),
         ),
         new ZPinSenha(
-          change: widget.ZCadastro.senha,
           context: context,
           numeroQuadrados: 4,
           zTipos: ZTipoSenha.isSenha,
         ),
         new ZPinSenha(
-          change: widget.ZCadastro.repetirSenha,
           context: context,
           numeroQuadrados: 4,
           zTipos: ZTipoSenha.isRepetirSenha,

@@ -9,6 +9,7 @@ import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-pin-senha.dart';
+import 'package:z_components/components/z-text.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-platform.dart';
 import 'package:z_components/config/z-horario-tye.dart';
@@ -30,6 +31,7 @@ import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/z-hora-um-campo.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'dart:io';
@@ -87,12 +89,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final appSwitch = Provider.of<AppSwitch>(context);
 
-
     return
-   // ZCadastroUsuario();
-     Scaffold(
-
-
+        // ZCadastroUsuario();
+        Scaffold(
       backgroundColor: Colors.grey,
       floatingActionButton: ZFloatButton(
         onPressed: () {},
@@ -105,7 +104,25 @@ class Home extends StatelessWidget {
         children: <Widget>[
           new Column(children: <Widget>[
             new ZHeader(
+              zTipos: ZTipoHeader.isExpansion,
               titulo: "TESTE",
+              children: <Widget>[
+                new Container(margin: EdgeInsets.all(12.0),
+                  child: new ZItemTile(
+                    textoTitulo:
+                        "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
+                    textoDois: "Sede - Fernando ltda.",
+                    textoTres: "Sede - Fernando ltda.",
+                    textoQuatro: "5x2",
+                    textoCinco: "(seg-sex)",
+                    textoSeis: "08:00-17:48",
+                    textoSete: "1:00",
+                    textoCodigo: "012345",
+                    status: true,
+                    funcao: () {},
+                  ),
+                )
+              ],
             ),
             new ZCollection(
               key: _key,
