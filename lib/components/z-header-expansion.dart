@@ -66,11 +66,7 @@ class _ZHeaderExpansionState extends State<ZHeaderExpansion> with TickerProvider
                     }else{
                       widget.value = "open";
                     }
-                    setState(() {
-
-                      widget.key = PageStorageKey<String>(widget.value);
-
-                    });
+                    widget.key = PageStorageKey<String>(widget.value);
                   });
                 },
                 child: new Container(padding: EdgeInsets.only(left: 7.0, right: 7.0),
