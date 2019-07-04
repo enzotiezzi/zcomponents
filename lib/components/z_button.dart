@@ -59,32 +59,35 @@ class ZButton extends StatelessWidget {
     this.colorBrightness,
     this.animationDuration,
     this.zButtonType = ZButtonType.isContained,
-
   }) : super(key: key) {
     switch (zButtonType) {
       case ZButtonType.isContained:
-          _zButton = new RaisedButton(
-            onPressed: this.onPressed,
-            child: new Text(this.text, style: TextStyle(color: Colors.white),),
-            color: const Color(0xff2BBAB4),
-            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-            elevation: this.elevation,
-            padding: this.padding,
-            disabledElevation: this.disabledElevation,
-            highlightElevation: this.highlightElevation,
-            splashColor: this.splashColor,
-            disabledColor: this.disabledColor,
-            key: this.key,
-            materialTapTargetSize: this.materialTapTargetSize,
-            clipBehavior: this.clipBehavior,
-            textTheme: this.textTheme,
-            animationDuration: this.animationDuration,
-            colorBrightness: this.colorBrightness,
-            disabledTextColor: this.disabledTextColor,
-            highlightColor: this.highlightColor,
-            onHighlightChanged: this.onHighlightChanged,
-            textColor: this.textColor,
-          );
+        _zButton = new RaisedButton(
+          onPressed: this.onPressed,
+          child: new Text(
+            this.text,
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          ),
+          color: const Color(0xff2BBAB4),
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0)),
+          elevation: this.elevation,
+          padding: this.padding,
+          disabledElevation: this.disabledElevation,
+          highlightElevation: this.highlightElevation,
+          splashColor: this.splashColor,
+          disabledColor: this.disabledColor,
+          key: this.key,
+          materialTapTargetSize: this.materialTapTargetSize,
+          clipBehavior: this.clipBehavior,
+          textTheme: this.textTheme,
+          animationDuration: this.animationDuration,
+          colorBrightness: this.colorBrightness,
+          disabledTextColor: this.disabledTextColor,
+          highlightColor: this.highlightColor,
+          onHighlightChanged: this.onHighlightChanged,
+          textColor: this.textColor,
+        );
 
         break;
       case ZButtonType.isOutlined:
@@ -92,11 +95,21 @@ class ZButton extends StatelessWidget {
           onPressed: this.onPressed,
           child: new Container(
             padding: EdgeInsets.fromLTRB(20.0, 7.0, 20.0, 7.0),
-            child: new Text(this.text,style: TextStyle( color: const Color(0xff2BBAB4), ),),decoration: BoxDecoration(
-              borderRadius: new BorderRadius.circular(30.0),
-              border: Border.all(   color: const Color(0xff2BBAB4),)),),
-          color:Colors.transparent,
-          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+            child: new Text(
+              this.text,
+              style: TextStyle(
+                color: const Color(0xff2BBAB4),
+              ),
+            ),
+            decoration: BoxDecoration(
+                borderRadius: new BorderRadius.circular(30.0),
+                border: Border.all(
+                  color: const Color(0xff2BBAB4),
+                )),
+          ),
+          color: Colors.transparent,
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0)),
           elevation: 0,
           padding: this.padding,
           disabledElevation: this.disabledElevation,
@@ -116,39 +129,38 @@ class ZButton extends StatelessWidget {
         );
         break;
 
-
       case ZButtonType.isLogin:
         _zButton = new RaisedButton(
           padding: EdgeInsets.only(
-              left: 130.0,
-              right: 130.0,
-              top: 10.0,
-              bottom: 10.0),
+              left: 130.0, right: 130.0, top: 10.0, bottom: 10.0),
           onPressed: this.onPressed,
           color: const Color(0xff2BB9B4),
           child: new Text(
             "LOGIN",
-            style: TextStyle(
-                color: Colors.white, fontSize: 20.0),
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
           shape: RoundedRectangleBorder(
-              borderRadius:
-              BorderRadius.all(Radius.circular(25.0))),
+              borderRadius: BorderRadius.all(Radius.circular(25.0))),
         );
         break;
 
       case ZButtonType.isCadastro:
-        _zButton =
-        new RaisedButton(
+        _zButton = new RaisedButton(
           onPressed: this.onPressed,
-          child: new Text(this.text, style: TextStyle(color: Colors.white),),
-          color: const Color(0xff2BBAB4),
+
+          child: new Container(
+            padding: EdgeInsets.fromLTRB(20.0, 7.0, 20.0, 7.0),
+            child: new Text(this.text,style: TextStyle( color: const Color(0xff2BBAB4), ),),decoration: BoxDecoration(
+              borderRadius: new BorderRadius.circular(30.0),
+              border: Border.all(   color: const Color(0xff2BBAB4),)),),
+          color:Colors.transparent,
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-          elevation: this.elevation,
+          elevation: 0,
+
           padding: this.padding,
           disabledElevation: this.disabledElevation,
-          highlightElevation: this.highlightElevation,
-          splashColor: this.splashColor,
+          highlightElevation: 0,
+          splashColor: Colors.transparent,
           disabledColor: this.disabledColor,
           key: this.key,
           materialTapTargetSize: this.materialTapTargetSize,
@@ -157,7 +169,7 @@ class ZButton extends StatelessWidget {
           animationDuration: this.animationDuration,
           colorBrightness: this.colorBrightness,
           disabledTextColor: this.disabledTextColor,
-          highlightColor: this.highlightColor,
+          highlightColor: Colors.transparent,
           onHighlightChanged: this.onHighlightChanged,
           textColor: this.textColor,
         );

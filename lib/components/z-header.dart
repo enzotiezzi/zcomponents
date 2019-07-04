@@ -17,7 +17,6 @@ class ZHeader extends StatelessWidget {
   final BorderRadiusGeometry borderRadius;
   final String titulo;
 
-
   ZHeader({
     this.key,
     this.type = MaterialType.canvas,
@@ -32,13 +31,13 @@ class ZHeader extends StatelessWidget {
     this.animationDuration = kThemeChangeDuration,
     this.child,
     this.titulo,
-  }) : super(key: key){
+  }) : super(key: key) {
     _zHeader = new Material(
       child: Container(
         decoration: BoxDecoration(
             color: const Color(0xFFF7F7F7),
-            border:
-            Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.7)))),
+            border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.7)))),
         alignment: Alignment.center,
         padding: const EdgeInsets.only(left: 16.0, bottom: 8.0, top: 8.0),
         child: new Text(titulo,
@@ -51,12 +50,8 @@ class ZHeader extends StatelessWidget {
     );
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return _zHeader;
   }
-
 }
