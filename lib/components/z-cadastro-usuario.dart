@@ -16,10 +16,15 @@ class ZCadastroUsuario extends StatefulWidget {
   ZCadastroTeste ZCadastro = new ZCadastroTeste();
   final Key key;
   final BuildContext context;
-
-  ZCadastroUsuario({
+  var controllerEmail = new TextEditingController();
+  var controllerNome = new TextEditingController();
+  var controllerCPF = new TextEditingController();
+  var controllerCelular = new TextEditingController();
+  var onPressed;
+  var controllerData = new TextEditingController();  ZCadastroUsuario({
     this.key,
     this.context,
+    this.onPressed
   });
 
   @override
@@ -28,6 +33,7 @@ class ZCadastroUsuario extends StatefulWidget {
 
 class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     with TickerProviderStateMixin {
+
   bool _termos = false;
 
   @override
@@ -35,10 +41,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
         appBar: ZNavigationBar(
-          backgroundColor: const Color(0xffF7F7F7),
-          leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
-            print("aaaa");
-          },)
+
         ),
         body: _body());
   }
@@ -67,27 +70,27 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
           ),
         ),
-        new ZBaseLine(
+        new ZBaseLine(controllerNome: widget.controllerNome,
           value: widget.ZCadastro.nome,
           zTipos: ZTipoBaseline.isNomeCompleto,
           context: context,
         ),
-        new ZBaseLine(
+        new ZBaseLine(controllerCPF: widget.controllerCPF,
           value: widget.ZCadastro.cpf,
           zTipos: ZTipoBaseline.isCPF,
           context: context,
         ),
-        new ZBaseLine(
+        new ZBaseLine(controllerCelular: widget.controllerCelular,
           value: widget.ZCadastro.celular,
           zTipos: ZTipoBaseline.isCelular,
           context: context,
         ),
-        new ZBaseLine(
+        new ZBaseLine(controllerEmail: widget.controllerEmail,
           value: widget.ZCadastro.email,
           zTipos: ZTipoBaseline.isEmail,
           context: context,
         ),
-        new ZBaseLine(
+        new ZBaseLine(controllerData: widget.controllerData,
           value: widget.ZCadastro.dataNascimento,
           zTipos: ZTipoBaseline.isDataNascimento,
           context: context,
@@ -172,24 +175,10 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
         new Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
-            child: ZButton(
-              zButtonType:  ZButtonType.isOutlined,
+            child: ZButton(padding: EdgeInsets.only(top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
+              zButtonType:  ZButtonType.isContained,
               text: "CADASTRAR USUÁRIO",
-              onPressed: () {
-                if (widget.ZCadastro.validate(
-                        widget.ZCadastro.nome,
-                        widget.ZCadastro.cpf,
-                        widget.ZCadastro.celular,
-                        widget.ZCadastro.email,
-                        widget.ZCadastro.dataNascimento,
-                        widget.ZCadastro.senha,
-                        widget.ZCadastro.repetirSenha) ==
-                    true) {
-                  print("Sucesso");
-                } else {
-                  print("Erro ao criar");
-                }
-              },
+              onPressed: widget.onPressed,
             )),
       ],
     );

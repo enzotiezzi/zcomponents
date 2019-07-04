@@ -66,7 +66,7 @@ class ZButton extends StatelessWidget {
           onPressed: this.onPressed,
           child: new Text(
             this.text,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
           color: const Color(0xff2BBAB4),
           shape: new RoundedRectangleBorder(

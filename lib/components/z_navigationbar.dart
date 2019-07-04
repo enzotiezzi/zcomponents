@@ -5,7 +5,7 @@ import 'package:z_components/config/z-platform.dart';
 
 class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
   Widget _zNavigationBar;
-
+  final bool voltar;
   final Key key;
   final BuildContext context;
   final Widget leading;
@@ -36,6 +36,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
   final double bottomOpacity;
 
   ZNavigationBar({
+    this.voltar: true,
     this.context,
     this.key,
     this.leading,
@@ -52,7 +53,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
     this.middle,
     this.trailing,
     this.border,
-    this.backgroundColor = Colors.teal,
+    this.backgroundColor,
     this.padding,
     this.actionsForegroundColor,
     this.transitionBetweenRoutes = true,
@@ -73,11 +74,25 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
       transitionBetweenRoutes: this.transitionBetweenRoutes,
       key: this.key,
       backgroundColor: this.backgroundColor,
-      leading: new Container(child: leading,padding: EdgeInsets.only(left: 8.0)),
+      leading: (voltar == true)
+          ? new Container(
+              child: IconButton(
+                  padding: EdgeInsets.only(
+                      left: 0.0, right: 16.0, bottom: 8.0, top: 8.0),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: const Color(0xff1F8782),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+            )
+          : this.leading,
       middle: this.middle,
-      trailing: new Container(child: trailing,padding: EdgeInsets.only(right: 16.0)),
+      trailing:
+          new Container(child: trailing, padding: EdgeInsets.only(right: 16.0)),
       border: this.border,
-      padding: this.padding ,
+      padding: this.padding,
     );
   }
 
