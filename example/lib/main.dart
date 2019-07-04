@@ -207,7 +207,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       new Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.only(left: 10,right: 10),
                         child: new Text("Titulo"),
                       ),
                     ],
