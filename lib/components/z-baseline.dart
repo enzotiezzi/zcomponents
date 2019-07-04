@@ -410,7 +410,7 @@ class ZBaseLine extends StatelessWidget {
     print(ano);
 
     if (total.length == 10) {
-      if (intMes < 13 && intDias < 32 && intAno < 2004) {
+      if (intMes < 13 && intDias < 32 && intAno < 2004 && intAno > 1901) {
         if (intDias == 00 || intMes == 00 || intAno == 00) {
           showAlertDialogNew("Data Inválida!",
               "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
@@ -451,25 +451,30 @@ class ZBaseLine extends StatelessWidget {
           intDias < 32 &&
           intAno > 2004) {
         showAlertDialogNew("Ano Inválido!",
-            "Insira um valor de ano abaixo de 2004.");
-      } else if (intMes > 12 &&
+            "Insira um valor de ano entre 1901 e 2004.");
+      }
+      else if(intAno < 1901){
+        showAlertDialogNew("Ano Inválido!",
+            "Insira um valor de ano entre 1901 e 2004.");
+      }
+      else if (intMes > 12 &&
           intDias < 32 &&
           intAno > 2004) {
         showAlertDialogNew("Mês e Ano Inválido!",
-            "Insira um valor de mes entre 01 e 12 e um ano abaixo de 2004.");
+            "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
       } else if (intMes > 12 &&
           intDias > 32 &&
           intAno < 2004) {
         showAlertDialogNew("Mês e Dia Inválido!",
-            "Insira um valor de mes entre 01 e 12 e dia entre 01 e 31.");
+            "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
       } else if (intMes < 13 &&
           intDias > 32 &&
           intAno > 2004) {
         showAlertDialogNew("Dia e Ano Inválido!",
-            "Insira um valor de dia entre 01 e 31 e um ano abaixo de 2004.");
+            "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
       } else {
         showAlertDialogNew("Data Inválida!",
-            "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004.");
+            "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
       }
     }
   }
