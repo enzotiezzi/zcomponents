@@ -87,10 +87,14 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final appSwitch = Provider.of<AppSwitch>(context);
 
+<<<<<<< HEAD
     return
    // ZCadastroUsuario();
      Scaffold(
 
+=======
+    return Scaffold(
+>>>>>>> f2d5e1e4e18ea2d60aa8536aad25e73780003065
       backgroundColor: Colors.grey,
       floatingActionButton: ZFloatButton(
         onPressed: () {},
@@ -179,16 +183,18 @@ class Home extends StatelessWidget {
               textoSete: "1:00",
               textoCodigo: "012345",
               status: true,
-              funcao: () {
-
-              },
+              funcao: () {},
             ),
-            Container(height: 30.0,),
+            Container(
+              height: 30.0,
+            ),
             new ZItemTile(),
-            Container(height: 30.0,),
+            Container(
+              height: 30.0,
+            ),
             new ZExpendableItemTile(
               textoTitulo:
-              "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
+                  "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
               textoDois: "Sede - Fernando ltda.",
               textoTres: "Sede - Fernando ltda.",
               textoQuatro: "5x2",
@@ -198,28 +204,28 @@ class Home extends StatelessWidget {
               textoCodigo: "012345",
               status: true,
               funcao: () {},
-              iconeUm: new Icon(Icons.phone,
-                  color: const Color(0xff2BB9B4)),
+              iconeUm: new Icon(Icons.phone, color: const Color(0xff2BB9B4)),
               textoIconeUm: "(11)99867-9893",
-              iconeDois: new Icon(Icons.map,
-                  color: const Color(0xff2BB9B4)),
+              iconeDois: new Icon(Icons.map, color: const Color(0xff2BB9B4)),
               textoIconeDois: "Casa - trabalho",
-              iconeTres:  new Icon(Icons.description,
-                  color: const Color(0xff2BB9B4)),
+              iconeTres:
+                  new Icon(Icons.description, color: const Color(0xff2BB9B4)),
               textoIconeTres: "Espelho de Ponto",
-              iconeQuatro: new Icon(Icons.warning,
-                  color: const Color(0xff2BB9B4)),
+              iconeQuatro:
+                  new Icon(Icons.warning, color: const Color(0xff2BB9B4)),
               textoIconeQuatro: "Ocorrencia",
-
             ),
-            Container(height: 30.0,),
+            Container(
+              height: 30.0,
+            ),
             ZExpendableItemTile(),
-            Container(height: 30.0,),
+            Container(
+              height: 30.0,
+            ),
             new Container(
               height: 80.0,
             )
           ]),
-
         ],
       ),
       bottomNavigationBar: ZtabBar(
