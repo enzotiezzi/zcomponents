@@ -147,7 +147,7 @@ class ZButton extends StatelessWidget {
       case ZButtonType.isCadastro:
         _zButton = new RaisedButton(
           onPressed: this.onPressed,
-<<<<<<< HEAD
+
           child: new Container(
             padding: EdgeInsets.fromLTRB(20.0, 7.0, 20.0, 7.0),
             child: new Text(this.text,style: TextStyle( color: const Color(0xff2BBAB4), ),),decoration: BoxDecoration(
@@ -156,16 +156,7 @@ class ZButton extends StatelessWidget {
           color:Colors.transparent,
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
           elevation: 0,
-=======
-          child: new Text(
-            this.text,
-            style: TextStyle(color: Colors.white),
-          ),
-          color: const Color(0xff2BBAB4),
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0)),
-          elevation: this.elevation,
->>>>>>> f2d5e1e4e18ea2d60aa8536aad25e73780003065
+
           padding: this.padding,
           disabledElevation: this.disabledElevation,
           highlightElevation: 0,

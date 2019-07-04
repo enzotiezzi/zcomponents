@@ -87,14 +87,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final appSwitch = Provider.of<AppSwitch>(context);
 
-<<<<<<< HEAD
+
     return
    // ZCadastroUsuario();
      Scaffold(
 
-=======
-    return Scaffold(
->>>>>>> f2d5e1e4e18ea2d60aa8536aad25e73780003065
+
       backgroundColor: Colors.grey,
       floatingActionButton: ZFloatButton(
         onPressed: () {},
