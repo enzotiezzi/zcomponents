@@ -89,8 +89,8 @@ class Home extends StatelessWidget {
 
 
     return
-    ZCadastroUsuario();
-    /* Scaffold(
+   // ZCadastroUsuario();
+     Scaffold(
 
 
       backgroundColor: Colors.grey,
@@ -251,7 +251,7 @@ class Home extends StatelessWidget {
         unselectedItemColor: Colors.black45,
         // currentIndex: _selectedIndex,
       ),
-    );*/
+    );
   }
 }
 
