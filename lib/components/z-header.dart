@@ -1,4 +1,6 @@
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/config/z-tipo-header.dart';
 
 class ZHeader extends StatelessWidget {
   Widget _zHeader;
@@ -16,6 +18,8 @@ class ZHeader extends StatelessWidget {
   final Duration animationDuration;
   final BorderRadiusGeometry borderRadius;
   final String titulo;
+  final ZTipoHeader zTipos;
+  final List<Widget> children;
 
   ZHeader({
     this.key,
@@ -31,7 +35,11 @@ class ZHeader extends StatelessWidget {
     this.animationDuration = kThemeChangeDuration,
     this.child,
     this.titulo,
+    this.zTipos =ZTipoHeader.isPadrao,
+  this.children = const <Widget>[],
   }) : super(key: key) {
+    switch(zTipos) {
+      case ZTipoHeader.isPadrao:
     _zHeader = new Material(
       child: Container(
         decoration: BoxDecoration(
@@ -48,6 +56,38 @@ class ZHeader extends StatelessWidget {
             )),
       ),
     );
+    break;
+      case ZTipoHeader.isExpansion:
+        _zHeader = new Material(
+          elevation: 4.0,
+          color: const Color(0xFFF7F7F7),
+          child: new ConfigurableExpansionTile(
+            initiallyExpanded: true,
+            bottomBorderOn: true,
+            animatedWidgetFollowingHeader: new Icon(Icons.arrow_drop_down),
+            header: new Expanded(
+              child: new Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    alignment: Alignment.center,
+                    padding:
+                    const EdgeInsets.only(left: 16.0, bottom: 10.0, top: 10.0),
+                    child: new Text(titulo,
+                        style: new TextStyle(
+                            fontSize: 20.0,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)),
+                  ),
+                ],
+              ),
+            ),
+           children: children,
+          ),
+        );
+  }
   }
 
   @override

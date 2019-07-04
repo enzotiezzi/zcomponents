@@ -94,7 +94,7 @@ class _ZItemTileState extends State<ZItemTile> {
                         ):new Container(
                       width:
                       (MediaQuery.of(context).size.width /
-                          1.9),
+                          2.0),
                       margin:
                       EdgeInsets.only(left: 8.0, bottom: 4.0, top: 8.0),
                       child: new Text(
