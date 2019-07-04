@@ -209,7 +209,7 @@ class ZBaseLine extends StatelessWidget {
                                   color: Color(0xFF000000).withOpacity(0.3)),
                             ),
                             onChanged: (text) {
-                              email = text;
+                              email = text.trim();
                             },
                           ),
                         ))
