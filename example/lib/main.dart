@@ -35,9 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center(
-            child: ComponentExemploClasse()
-        ),
+        body: Center(child: ComponentExemploClasse()),
         bottomNavigationBar: ZtabBar(
           backgroundColor: Colors.teal,
           items: <BottomNavigationBarItem>[
@@ -67,13 +65,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-class ComponentExemploClasse extends StatefulWidget {
 
+class ComponentExemploClasse extends StatefulWidget {
   @override
   _ComponentExemploClasseState createState() => _ComponentExemploClasseState();
 }
-class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
+class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   bool value = false;
 
   ZBaseLine valideNome;
@@ -90,8 +88,28 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   bool _collapsed = true;
   String _value = "open";
   String _value2 = "close";
-  List<String> titulos = ["Lista de Documentos", "Espelho de Ponto", "Gestão de Ponto", "Atestados"];
-  List<IconData> icones = [Icons.assignment, Icons.list, Icons.add_to_home_screen, Icons.attach_file];
+  List<String> titulos = [
+    "Lista de Documentos",
+    "Espelho de Ponto",
+    "Gestão de Ponto",
+    "Atestados",
+    "Histórico Alocações",
+    "Histórico Status",
+    "Histórico FériasHistórico Férias",
+    "Histórico Afastamento",
+    "Dependentes"
+  ];
+  List<IconData> icones = [
+    Icons.assignment,
+    Icons.list,
+    Icons.add_to_home_screen,
+    Icons.attach_file,
+    Icons.fastfood,
+    Icons.add_circle_outline,
+    Icons.backup,
+    Icons.voice_chat,
+    Icons.view_stream
+  ];
 
   @override
   void initState() {
@@ -99,242 +117,242 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     _expansionTile = PageStorageKey<String>(_value);
   }
 
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        backgroundColor: const Color(0xffEFEFF4),
-        floatingActionButton: ZFloatButton(
-          onPressed: () {},
-        ),
-        appBar: ZNavigationBar(
-          leading: new Icon(Icons.print),
-          trailing: new GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>
-                new InformacaoBatida(
-                  bottomChild: new Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(bottom: 5),
-                      child: new ButtonTheme(
-                        minWidth: 145,
-                        child: new RaisedButton(
-                            color: Color(0xff2bbab4),
-                            child: new Text("ENTENDI", style: new TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(30.0))
-                        ),
-                      )
-                  ),
-                )),
-              );
-            },
-            child: new Container(
-              child: new Icon(
-                Icons.info,
-                color: Colors.blue,
-                size: 19.0,
-              ),
-
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xffEFEFF4),
+      floatingActionButton: ZFloatButton(
+        onPressed: () {},
+      ),
+      appBar: ZNavigationBar(
+        leading: new Icon(Icons.print),
+        trailing: new GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => new InformacaoBatida(
+                        bottomChild: new Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(bottom: 5),
+                            child: new ButtonTheme(
+                              minWidth: 145,
+                              child: new RaisedButton(
+                                  color: Color(0xff2bbab4),
+                                  child: new Text(
+                                    "ENTENDI",
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  shape: new RoundedRectangleBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(30.0))),
+                            )),
+                      )),
+            );
+          },
+          child: new Container(
+            child: new Icon(
+              Icons.info,
+              color: Colors.blue,
+              size: 19.0,
             ),
           ),
         ),
-        body: new ListView(
-          children: <Widget>[
-            new Column(children: <Widget>[
-              new ZHeader(zTipos: ZTipoHeader.isExpansion,
-
-                titulo: "TESTE",
-              ),
-              new ZHeaderExpansion(
-                titulo: "Teste Expanded",
-                collapsed: _collapsed,
-                onTap: (){
-                  print("TabTeste");
-                },
-              ),
-              new ZCollection(
-                key: _key,
-                titulo: "Cargos",
-                lista: [
-                  "Vigilante Condutor de Animais",
-                  "Analista de Departamento Pessoal",
-                  "Assistente de Tecnico de Seguranca do Trabalho",
-                  "Coordenador de Seguranca do Trabalho",
-                  "Encarregado de Manutencao de Areas Verdes",
-                  "Assistente de TI",
-                  "Auxiliar Mecanico de Refrigeracao",
-                  "Coordenador de Departamento Pessoal",
-                  "Coordenador de Relacionamento com Cliente",
-                  "Diretor de Desenvolvimento de Negocios",
-                  "Gerente de Desemvolvimento de Ngocios",
-                  "Gerente de Relacionamnto com Cliente",
-                  "Lider de Monitoramento de Sistmemas Eletronicos",
-                  "Meio Oficial de Manutencao Eletrica",
-                  "Secretaria - Analista",
-                  "Secretaria de Analista"
-                ]
-                    .map(
-                        (x) =>
-                    new ZCollectionItem(chave: x, titulo: x, valor: x))
-                    .toList(),
-                onChange: (item) {
-                  if (_key.currentState.itemSelecionado != null)
-                    print(_key.currentState.itemSelecionado.valor);
-                  else {
-                    print("Nenhum item");
-                  }
-                },
-              ),
-              valideNome = new ZBaseLine(
-                zTipos: ZTipoBaseline.isNomeCompleto,
-                context: context,
-              ),
-              valideCPF = new ZBaseLine(
-                zTipos: ZTipoBaseline.isCPF,
-                context: context,
-              ),
-              valideCelular = new ZBaseLine(
-                zTipos: ZTipoBaseline.isCelular,
-                context: context,
-              ),
-              valideEmail = new ZBaseLine(
-                zTipos: ZTipoBaseline.isEmail,
-                context: context,
-              ),
-              valideData = new ZBaseLine(
-                zTipos: ZTipoBaseline.isDataNascimento,
-                context: context,
-              ),
-              new Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: new ZExpansion(
-                  childTitle: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Container(
-                        padding: const EdgeInsets.only(left: 10,right: 10),
-                        child: new Text("Titulo"),
-                      ),
-                    ],
-                  ),
+      ),
+      body: new ListView(
+        children: <Widget>[
+          new Column(children: <Widget>[
+            new ZHeader(
+              zTipos: ZTipoHeader.isExpansion,
+              titulo: "TESTE",
+            ),
+            new ZHeaderExpansion(
+              titulo: "Teste Expanded",
+              collapsed: _collapsed,
+              onTap: () {
+                print("TabTeste");
+              },
+            ),
+            new ZCollection(
+              key: _key,
+              titulo: "Cargos",
+              lista: [
+                "Vigilante Condutor de Animais",
+                "Analista de Departamento Pessoal",
+                "Assistente de Tecnico de Seguranca do Trabalho",
+                "Coordenador de Seguranca do Trabalho",
+                "Encarregado de Manutencao de Areas Verdes",
+                "Assistente de TI",
+                "Auxiliar Mecanico de Refrigeracao",
+                "Coordenador de Departamento Pessoal",
+                "Coordenador de Relacionamento com Cliente",
+                "Diretor de Desenvolvimento de Negocios",
+                "Gerente de Desemvolvimento de Ngocios",
+                "Gerente de Relacionamnto com Cliente",
+                "Lider de Monitoramento de Sistmemas Eletronicos",
+                "Meio Oficial de Manutencao Eletrica",
+                "Secretaria - Analista",
+                "Secretaria de Analista"
+              ]
+                  .map(
+                      (x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
+                  .toList(),
+              onChange: (item) {
+                if (_key.currentState.itemSelecionado != null)
+                  print(_key.currentState.itemSelecionado.valor);
+                else {
+                  print("Nenhum item");
+                }
+              },
+            ),
+            valideNome = new ZBaseLine(
+              zTipos: ZTipoBaseline.isNomeCompleto,
+              context: context,
+            ),
+            valideCPF = new ZBaseLine(
+              zTipos: ZTipoBaseline.isCPF,
+              context: context,
+            ),
+            valideCelular = new ZBaseLine(
+              zTipos: ZTipoBaseline.isCelular,
+              context: context,
+            ),
+            valideEmail = new ZBaseLine(
+              zTipos: ZTipoBaseline.isEmail,
+              context: context,
+            ),
+            valideData = new ZBaseLine(
+              zTipos: ZTipoBaseline.isDataNascimento,
+              context: context,
+            ),
+            new Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: new ZExpansion(
+                childTitle: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Container(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: new Text("Titulo"),
+                    ),
+                  ],
                 ),
               ),
-              new ZPGrafico(
-                key: _expansionTile,
-                tituloCenterCircle: "ESCOLA",
-                titulo: "Ponto Hoje",
-                tituloItem1: "Sapatos",
-                tituloItem2: "Escovas",
-                tituloItem3: "Disco Vinil",
-                valueItem1: 10.0,
-                valueItem2: 30.0,
-                valueItem3: 10.0,
-                onTapItem1: () {
-                  print("Tap Item 1");
-                },
-                onTapItem2: () {
-                  print("Tap Item 2");
-                },
-                onTapItem3: () {
-                  print("Tap Item 3");
-                },
-              ),
-              new ZHora(),
-              new ZHoraUmCampo(
-                titulo: "Horinha",
-              ),
-              new ZPinSenha(
-                context: context,
-                numeroQuadrados: 4,
-                zTipos: ZTipoSenha.isSenha,
-              ),
-              new ZPinSenha(
-                context: context,
-                numeroQuadrados: 4,
-                zTipos: ZTipoSenha.isRepetirSenha,
-              ),
-              new ZCheckCPF(),
-              new ZItemTile(
-                textoTitulo:
-                "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
-                textoDois: "Sede - Fernando ltda.",
-                textoTres: "Sede - Fernando ltda.",
-                textoQuatro: "5x2",
-                textoCinco: "(seg-sex)",
-                textoSeis: "08:00-17:48",
-                textoSete: "1:00",
-                textoCodigo: "012345",
-                status: true,
-                funcao: () {},
-              ),
-              Container(
-                height: 30.0,
-              ),
-              new ZItemTile(),
-              Container(
-                height: 30.0,
-              ),
-              new ZExpendableItemTile(
-                textoTitulo:
-                "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
-                textoDois: "Sede - Fernando ltda.",
-                textoTres: "Sede - Fernando ltda.",
-                textoQuatro: "5x2",
-                textoCinco: "(seg-sex)",
-                textoSeis: "08:00-17:48",
-                textoSete: "1:00",
-                textoCodigo: "012345",
-                status: true,
-                funcao: () {},
-                iconeUm: new Icon(Icons.phone, color: const Color(0xff2BB9B4)),
-                textoIconeUm: "(11)99867-9893",
-                iconeDois: new Icon(Icons.map, color: const Color(0xff2BB9B4)),
-                textoIconeDois: "Casa - trabalho",
-                iconeTres:
-                new Icon(Icons.description, color: const Color(0xff2BB9B4)),
-                textoIconeTres: "Espelho de Ponto",
-                iconeQuatro:
-                new Icon(Icons.warning, color: const Color(0xff2BB9B4)),
-                textoIconeQuatro: "Ocorrencia",
-              ),
-              Container(
-                height: 30.0,
-              ),
-              ZExpendableItemTile(),
-              Container(
-                height: 30.0,
-              ),
-             new Container(height: 250.0,child:  ZPerfilItem(listaIcones: icones,listaTextos: titulos,count: 4,),),
-              new Container(
+            ),
+            new ZPGrafico(
+              key: _expansionTile,
+              tituloCenterCircle: "ESCOLA",
+              titulo: "Ponto Hoje",
+              tituloItem1: "Sapatos",
+              tituloItem2: "Escovas",
+              tituloItem3: "Disco Vinil",
+              valueItem1: 10.0,
+              valueItem2: 30.0,
+              valueItem3: 10.0,
+              onTapItem1: () {
+                print("Tap Item 1");
+              },
+              onTapItem2: () {
+                print("Tap Item 2");
+              },
+              onTapItem3: () {
+                print("Tap Item 3");
+              },
+            ),
+            new ZHora(),
+            new ZHoraUmCampo(
+              titulo: "Horinha",
+            ),
+            new ZPinSenha(
+              context: context,
+              numeroQuadrados: 4,
+              zTipos: ZTipoSenha.isSenha,
+            ),
+            new ZPinSenha(
+              context: context,
+              numeroQuadrados: 4,
+              zTipos: ZTipoSenha.isRepetirSenha,
+            ),
+            new ZCheckCPF(),
+            new ZItemTile(
+              textoTitulo:
+                  "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
+              textoDois: "Sede - Fernando ltda.",
+              textoTres: "Sede - Fernando ltda.",
+              textoQuatro: "5x2",
+              textoCinco: "(seg-sex)",
+              textoSeis: "08:00-17:48",
+              textoSete: "1:00",
+              textoCodigo: "012345",
+              status: true,
+              funcao: () {},
+            ),
+            Container(
+              height: 30.0,
+            ),
+            new ZItemTile(),
+            Container(
+              height: 30.0,
+            ),
+            new ZExpendableItemTile(
+              textoTitulo:
+                  "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
+              textoDois: "Sede - Fernando ltda.",
+              textoTres: "Sede - Fernando ltda.",
+              textoQuatro: "5x2",
+              textoCinco: "(seg-sex)",
+              textoSeis: "08:00-17:48",
+              textoSete: "1:00",
+              textoCodigo: "012345",
+              status: true,
+              funcao: () {},
+              iconeUm: new Icon(Icons.phone, color: const Color(0xff2BB9B4)),
+              textoIconeUm: "(11)99867-9893",
+              iconeDois: new Icon(Icons.map, color: const Color(0xff2BB9B4)),
+              textoIconeDois: "Casa - trabalho",
+              iconeTres:
+                  new Icon(Icons.description, color: const Color(0xff2BB9B4)),
+              textoIconeTres: "Espelho de Ponto",
+              iconeQuatro:
+                  new Icon(Icons.warning, color: const Color(0xff2BB9B4)),
+              textoIconeQuatro: "Ocorrencia",
+            ),
+            Container(
+              height: 30.0,
+            ),
+            ZExpendableItemTile(),
+            Container(
+              height: 30.0,
+            ),
 
-                height: 80.0,
-              ),
-              new RaisedButton(
+            new Container(
+              height: 80.0,
+            ),
+            new RaisedButton(
                 color: Colors.blue,
-                  child: new Text("teste aprovacao",style: new TextStyle(color: Colors.white),),
-                  onPressed: (){
-                if(valideNome.valideNome == true)
-                  {
+                child: new Text(
+                  "teste aprovacao",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  if (valideNome.valideNome == true) {
                     print("apto");
-                  }
-                  else{
+                  } else {
                     print("naoApto");
-                }
-              })
-
-            ]),
-          ],
-        ),
-      );
-    }
+                  }
+                })
+          ]),
+        ],
+      ),
+    );
+  }
 }
+
 class AppSwitch with ChangeNotifier {
   AppSwitch();
 
