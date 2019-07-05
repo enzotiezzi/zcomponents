@@ -4,6 +4,7 @@ import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-check-cpf.dart';
+import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
@@ -81,6 +82,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   bool _collapsed = true;
   String _value = "open";
   String _value2 = "close";
+  List<String> titulos = ["Lista de Documentos", "Espelho de Ponto", "Gestão de Ponto", "Atestados"];
+  List<IconData> icones = [Icons.assignment, Icons.list, Icons.add_to_home_screen, Icons.attach_file];
 
   @override
   void initState() {
@@ -91,7 +94,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     @override
     Widget build(BuildContext context) {
       return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xffEFEFF4),
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
@@ -137,7 +140,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         body: new ListView(
           children: <Widget>[
             new Column(children: <Widget>[
-              new ZHeader(
+              new ZHeader(zTipos: ZTipoHeader.isExpansion,
+
                 titulo: "TESTE",
               ),
               new ZHeaderExpansion(
@@ -299,8 +303,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               Container(
                 height: 30.0,
               ),
+             new Container(height: 250.0,child:  ZPerfilItem(listaIcones: icones,listaTextos: titulos,count: 4,),),
               new Container(
-                height: 80.0,
+                height: 120.0,
               )
             ]),
           ],
