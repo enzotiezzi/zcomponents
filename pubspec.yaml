@@ -19,6 +19,7 @@ dependencies:
   flutter_circular_chart: ^0.1.0
   email_validator: '^1.0.0'
   configurable_expansion_tile: ^1.0.0
+  http: ^0.12.0+1
   flare_flutter: ^1.5.1
 
 

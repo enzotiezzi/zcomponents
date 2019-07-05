@@ -12,10 +12,10 @@ class ZCollection extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZCollectioState();
+  State<StatefulWidget> createState() => ZCollectionState();
 }
 
-class ZCollectioState extends State<ZCollection> {
+class ZCollectionState extends State<ZCollection> {
   ZCollectionItem _itemSelecionado;
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;

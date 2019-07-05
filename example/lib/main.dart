@@ -80,9 +80,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
 
-  var _key = new GlobalKey<ZCollectioState>();
-  var _key2 = new GlobalKey<ZCollectioState>();
-
   Key _expansions;
   Key _expansionTile;
   bool _collapsed = true;
@@ -163,87 +160,60 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ),
         ),
+
       ),
-      body: new ListView(
-        children: <Widget>[
-          new Column(children: <Widget>[
-            new ZHeader(
-              zTipos: ZTipoHeader.isExpansion,
-              titulo: "TESTE",
-            ),
-            new ZHeaderExpansion(
-              titulo: "Teste Expanded",
-              collapsed: _collapsed,
-              onTap: () {
-                print("TabTeste");
-              },
-            ),
-            new ZCollection(
-              key: _key,
-              titulo: "Cargos",
-              lista: [
-                "Vigilante Condutor de Animais",
-                "Analista de Departamento Pessoal",
-                "Assistente de Tecnico de Seguranca do Trabalho",
-                "Coordenador de Seguranca do Trabalho",
-                "Encarregado de Manutencao de Areas Verdes",
-                "Assistente de TI",
-                "Auxiliar Mecanico de Refrigeracao",
-                "Coordenador de Departamento Pessoal",
-                "Coordenador de Relacionamento com Cliente",
-                "Diretor de Desenvolvimento de Negocios",
-                "Gerente de Desemvolvimento de Ngocios",
-                "Gerente de Relacionamnto com Cliente",
-                "Lider de Monitoramento de Sistmemas Eletronicos",
-                "Meio Oficial de Manutencao Eletrica",
-                "Secretaria - Analista",
-                "Secretaria de Analista"
-              ]
-                  .map(
-                      (x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
-                  .toList(),
-              onChange: (item) {
-                if (_key.currentState.itemSelecionado != null)
-                  print(_key.currentState.itemSelecionado.valor);
-                else {
-                  print("Nenhum item");
-                }
-              },
-            ),
-            valideNome = new ZBaseLine(
-              zTipos: ZTipoBaseline.isNomeCompleto,
-              context: context,
-            ),
-            valideCPF = new ZBaseLine(
-              zTipos: ZTipoBaseline.isCPF,
-              context: context,
-            ),
-            valideCelular = new ZBaseLine(
-              zTipos: ZTipoBaseline.isCelular,
-              context: context,
-            ),
-            valideEmail = new ZBaseLine(
-              zTipos: ZTipoBaseline.isEmail,
-              context: context,
-            ),
-            valideData = new ZBaseLine(
-              zTipos: ZTipoBaseline.isDataNascimento,
-              context: context,
-            ),
-            new Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: new ZExpansion(
-                childTitle: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Container(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: new Text("Titulo"),
-                    ),
-                  ],
+
+
+        body: new ListView(
+          children: <Widget>[
+            new Column(children: <Widget>[
+              new ZHeader(zTipos: ZTipoHeader.isExpansion,
+
+                titulo: "TESTE",
+              ),
+              new ZHeaderExpansion(
+                titulo: "Teste Expanded",
+                collapsed: _collapsed,
+                onTap: (){
+                  print("TabTeste");
+                },
+              ),
+
+              valideNome = new ZBaseLine(
+                zTipos: ZTipoBaseline.isNomeCompleto,
+                context: context,
+              ),
+              valideCPF = new ZBaseLine(
+                zTipos: ZTipoBaseline.isCPF,
+                context: context,
+              ),
+              valideCelular = new ZBaseLine(
+                zTipos: ZTipoBaseline.isCelular,
+                context: context,
+              ),
+              valideEmail = new ZBaseLine(
+                zTipos: ZTipoBaseline.isEmail,
+                context: context,
+              ),
+              valideData = new ZBaseLine(
+                zTipos: ZTipoBaseline.isDataNascimento,
+                context: context,
+              ),
+              new Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: new ZExpansion(
+                  childTitle: new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.only(left: 10,right: 10),
+                        child: new Text("Titulo"),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+
             new ZPGrafico(
               key: _expansionTile,
               tituloCenterCircle: "ESCOLA",
@@ -347,10 +317,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   }
                 })
           ]),
-        ],
-      ),
-    );
-  }
+
+
+   ] ));
+    }
 }
 
 class AppSwitch with ChangeNotifier {
