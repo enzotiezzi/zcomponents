@@ -70,11 +70,17 @@ class ComponentExemploClasse extends StatefulWidget {
   _ComponentExemploClasseState createState() => _ComponentExemploClasseState();
 }
 class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
+
   bool value = false;
+
+  ZBaseLine valideNome;
+  ZBaseLine valideCPF;
+  ZBaseLine valideMESS;
+  ZBaseLine valideEmail;
+  ZBaseLine valideCelular;
 
   var _key = new GlobalKey<ZCollectioState>();
   var _key2 = new GlobalKey<ZCollectioState>();
-
 
   Key _expansions;
   Key _expansionTile;
@@ -180,23 +186,23 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   }
                 },
               ),
-              new ZBaseLine(
+              valideNome = new ZBaseLine(
                 zTipos: ZTipoBaseline.isNomeCompleto,
                 context: context,
               ),
-              new ZBaseLine(
+              valideCPF = new ZBaseLine(
                 zTipos: ZTipoBaseline.isCPF,
                 context: context,
               ),
-              new ZBaseLine(
+              valideCelular = new ZBaseLine(
                 zTipos: ZTipoBaseline.isCelular,
                 context: context,
               ),
-              new ZBaseLine(
+              valideEmail = new ZBaseLine(
                 zTipos: ZTipoBaseline.isEmail,
                 context: context,
               ),
-              new ZBaseLine(
+              valideMESS = new ZBaseLine(
                 zTipos: ZTipoBaseline.isDataNascimento,
                 context: context,
               ),
@@ -301,7 +307,19 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
               new Container(
                 height: 80.0,
-              )
+              ),
+              new RaisedButton(
+                color: Colors.blue,
+                  child: new Text("teste aprovacao",style: new TextStyle(color: Colors.white),),
+                  onPressed: (){
+                if(valideNome.valideNome == true)
+                  {
+                    print("apto");
+                  }
+                  else{
+                    print("naoApto");
+                }
+              })
             ]),
           ],
         ),
