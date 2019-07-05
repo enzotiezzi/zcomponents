@@ -16,6 +16,8 @@ import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/zp-grafico.dart';
 import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-hora-um-campo.dart';
+import 'package:z_components/components/z-perfil.dart';
+
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipo-header.dart';

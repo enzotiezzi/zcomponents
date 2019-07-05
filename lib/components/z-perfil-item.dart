@@ -16,6 +16,7 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
   @override
   Widget build(BuildContext context) {
     return new GridView.builder(
+      shrinkWrap: true,
         itemCount: widget.count,
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 10.0, mainAxisSpacing: 10.0, crossAxisCount: 3),

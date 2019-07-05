@@ -38,10 +38,10 @@ class _ZPerfilState extends State<ZPerfil> {
   }
 
   Widget _buildBody() {
-    return new ListView(
+    return new Column(
       children: <Widget>[
-        new Container(height: 250.0,
-          child: ZPerfilItem(count: 4,listaTextos: titulos,listaIcones: icones,),
+        new Container(
+          child: ZPerfilItem(count:4,listaTextos: titulos,listaIcones: icones,),
         ),
         ZText(),
         ZText()
