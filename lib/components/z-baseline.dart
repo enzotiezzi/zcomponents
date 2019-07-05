@@ -10,11 +10,22 @@ import 'package:email_validator/email_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class ZBaseLine extends StatelessWidget {
+
+  bool valideMes;
+  bool valideCPF;
+  bool valideEmail;
+  bool valideCelular;
+  bool valideNome;
+
   Widget _zBaseLine;
 
   final Key key;
   final BuildContext context;
   final ZTipoBaseline zTipos;
+
+
+
+  FocusNode nomeFocus;
   FocusNode emailFocus;
   FocusNode cpfFocus;
   FocusNode celularFocus;
@@ -23,6 +34,7 @@ class ZBaseLine extends StatelessWidget {
   String dia;
   String ano;
   String mes;
+  String nome;
 
   int intDias;
   int intMes;
@@ -45,11 +57,12 @@ class ZBaseLine extends StatelessWidget {
   ZBaseLine(
       {this.value,
       this.key,
-      @required this.context,
+        this.context,
       this.zTipos = ZTipoBaseline.isNomeCompleto,
       this.controllerEmail, this.controllerData,this.controllerCelular,this.controllerCPF,this.controllerNome})
       : super(key: key) {
     init();
+    initNome();
     initCpf();
     initCelular();
     initMes();
@@ -76,6 +89,8 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            textCapitalization: TextCapitalization.words,
+                            focusNode: nomeFocus,
                             controller: controllerNome,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
@@ -85,6 +100,9 @@ class ZBaseLine extends StatelessWidget {
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
                             ),
+                            onChanged: (text){
+                              nome = text;
+                            },
                           ),
                         ))
                   ],
@@ -285,71 +303,17 @@ class ZBaseLine extends StatelessWidget {
     }
   }
 
-  void showAlertDialogNew(String title, String message) async {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => ZAlertDialog(
-              zDialog: ZDialog.erro,
-              child: new Column(
-                children: <Widget>[
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        margin: const EdgeInsets.all(8),
-                        child: new Text(
-                          title,
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                      )
-                    ],
-                  ),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        margin: const EdgeInsets.only(
-                            left: 16, right: 16, bottom: 16),
-                        child: new Text(
-                          message,
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                              color: const Color(0xff707070), fontSize: 13),
-                        ),
-                      )
-                    ],
-                  ),
-                  new Divider(
-                    color: const Color(0xffdbdbdb),
-                  ),
-                  new Container(
-                    child: new InkWell(
-                      borderRadius:
-                          new BorderRadius.all(const Radius.circular(20.0)),
-                      splashColor: const Color(0xffe6e6e6),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: new Container(
-                        padding: const EdgeInsets.all(12),
-                        child: new Text(
-                          "ENTENDI",
-                          style: new TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    margin: const EdgeInsets.only(bottom: 8),
-                  )
-                ],
-              ),
-            ));
-  }
-
   @override
   Widget build(BuildContext context) {
     return _zBaseLine;
+  }
+  void initNome() {
+    nomeFocus = FocusNode();
+    nomeFocus.addListener(() {
+      if (!nomeFocus.hasFocus) {
+        _valideNome();
+      }
+    });
   }
 
   void init() {
@@ -412,260 +376,194 @@ class ZBaseLine extends StatelessWidget {
     if (total.length == 10) {
       if (intMes < 13 && intDias < 32 && intAno < 2004 && intAno > 1901) {
         if (intDias == 00 || intMes == 00 || intAno == 00) {
-          showAlertDialogNew("Data Inválida!",
-              "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
+          showAlertDialogNew("Data Inválida!", "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
+
         } else if (intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12) {
           if (intDias > 31) {
-            showAlertDialogNew("Dia Inválido!",
-                "Insira um valor de dia entre 01 e 31.");
+            showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+          }
+          else {
+            valideMes = true;
           }
         } else if (intMes == 04 || intMes == 06 || intMes == 09 || intMes == 11) {
           if (intDias > 30) {
-            showAlertDialogNew("Dia Inválido!",
-                "Insira um valor de dia entre 01 e 31.");
+            showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+          }
+          else {
+            valideMes = true;
           }
         } else {
           if (bisexto == true) {
             if (intDias > 29) {
-              showAlertDialogNew("Dia Inválido!",
-                  "Insira um valor de dia entre 01 e 28.");
+              showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+            }
+            else {
+              valideMes = true;
             }
           } else {
             if (intDias > 28) {
-              showAlertDialogNew("Dia Inválido!",
-                  "Insira um valor de dia entre 01 e 28.");
+              showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+            }
+            else {
+              valideMes = true;
             }
           }
         }
-      } else if (intMes > 12 &&
-          intDias < 32 &&
-          intAno < 2004) {
-        showAlertDialogNew("Mês Inválido!",
-            "Insira um valor de mês entre 01 e 12.");
-      } else if (intMes < 13 &&
-          intDias > 32 &&
-          intAno < 2004) {
-        showAlertDialogNew("Dia Inválido!",
-            "Insira um valor de dia entre 01 e 31.");
-      } else if (intMes < 13 &&
-          intDias < 32 &&
-          intAno > 2004) {
-        showAlertDialogNew("Ano Inválido!",
-            "Insira um valor de ano entre 1901 e 2004.");
+      } else if (intMes > 12 && intDias < 32 && intAno < 2004) {
+
+        showAlertDialogNew("Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
+      } else if (intMes < 13 && intDias > 32 && intAno < 2004) {
+
+        showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+
+      } else if (intMes < 13 && intDias < 32 && intAno > 2004) {
+
+        showAlertDialogNew("Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
       }
       else if(intAno < 1901){
-        showAlertDialogNew("Ano Inválido!",
-            "Insira um valor de ano entre 1901 e 2004.");
+        showAlertDialogNew("Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
       }
-      else if (intMes > 12 &&
-          intDias < 32 &&
-          intAno > 2004) {
-        showAlertDialogNew("Mês e Ano Inválido!",
-            "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
-      } else if (intMes > 12 &&
-          intDias > 32 &&
-          intAno < 2004) {
-        showAlertDialogNew("Mês e Dia Inválido!",
-            "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
-      } else if (intMes < 13 &&
-          intDias > 32 &&
-          intAno > 2004) {
-        showAlertDialogNew("Dia e Ano Inválido!",
-            "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
+      else if (intMes > 12 && intDias < 32 && intAno > 2004) {
+        showAlertDialogNew("Mês e Ano Inválido!", "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
+
+      } else if (intMes > 12 && intDias > 32 && intAno < 2004) {
+
+        showAlertDialogNew("Mês e Dia Inválido!", "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
+
+      } else if (intMes < 13 && intDias > 32 && intAno > 2004) {
+
+        showAlertDialogNew("Dia e Ano Inválido!", "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
       } else {
-        showAlertDialogNew("Data Inválida!",
-            "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
+
+        showAlertDialogNew("Data Inválida!", "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
       }
     }
   }
   void mesHasFocus(){
-    if(total.length < 10)
+    if(total == null)
       {
-        showAlertDialogNew("Data Inválida!",
-            "Por Favor, termine de digitar sua data.");
+        showAlertDialogNew("Data Inválida!", "Por Favor, digite sua data de nascimento.");
       }
+      else if (total.length < 10)
+        {
+          showAlertDialogNew("Data Inválida!", "Por Favor, termine de digitar sua data de nascimento");
+
+        }
   }
 
+  void _valideNome(){
+    if(nome == null)
+      {
+        valideNome = false;
+        showAlertDialogNew( "Nome Inválido!", "Por Favor insira o nome completo.");
+      }
+      else if (nome.split(' ').length <2 ){
+      valideNome = false;
+      showAlertDialogNew( "Nome Inválido!", "Por Favor insira o nome completo.");
+    }
+    else{
+      valideNome = true;
+    }
+
+  }
   void _validarCPF() {
     if (!CPFValidator.isValid(CPF)) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => ZAlertDialog(
-                zDialog: ZDialog.erro,
-                child: new Column(
-                  children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                          margin: const EdgeInsets.all(8),
-                          child: new Text(
-                            "CPF Inválido!",
-                            style: new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          margin: const EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16),
-                          child: new Text(
-                            "Por Favor insira um CPF válido.",
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    ),
-                    new Divider(
-                      color: const Color(0xffdbdbdb),
-                    ),
-                    new Container(
-                      child: new InkWell(
-                        borderRadius:
-                            new BorderRadius.all(const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "ENTENDI",
-                            style: new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      margin: const EdgeInsets.only(bottom: 8),
-                    )
-                  ],
-                ),
-              ));
+      valideCPF = false;
+      showAlertDialogNew("CPF Inválido!","Por Favor insira um CPF válido.");
+    }
+    else{
+      valideCPF = true;
     }
   }
 
   void _validarCelular() {
-    if (celular.length < 14) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => ZAlertDialog(
-                zDialog: ZDialog.erro,
-                child: new Column(
-                  children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                          margin: const EdgeInsets.all(8),
-                          child: new Text(
-                            "Celular Inválido!",
-                            style: new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          margin: const EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16),
-                          child: new Text(
-                            "Por Favor, Complete de digitar o seu celular.",
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    ),
-                    new Divider(
-                      color: const Color(0xffdbdbdb),
-                    ),
-                    new Container(
-                      child: new InkWell(
-                        borderRadius:
-                            new BorderRadius.all(const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "ENTENDI",
-                            style: new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      margin: const EdgeInsets.only(bottom: 8),
-                    )
-                  ],
-                ),
-              ));
+    if (celular == null)
+      {
+        valideCelular = false;
+        showAlertDialogNew("Celular Inválido!", "Por Favor, digitar o seu celular.");
+      }
+    else if (celular.length < 14 ){
+      valideCelular = false;
+      showAlertDialogNew("Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
+    }
+    else{
+      valideCelular = true;
     }
   }
-
   void _validarEmail() {
-    if (!EmailValidator.validate(email)) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => ZAlertDialog(
-                zDialog: ZDialog.erro,
-                child: new Column(
-                  children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                          margin: const EdgeInsets.all(8),
-                          child: new Text(
-                            "E-mail Inválido!",
-                            style: new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          margin: const EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16),
-                          child: new Text(
-                            "Por Favor insira um E-mail válido.",
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    ),
-                    new Divider(
-                      color: const Color(0xffdbdbdb),
-                    ),
-                    new Container(
-                      child: new InkWell(
-                        borderRadius:
-                            new BorderRadius.all(const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "ENTENDI",
-                            style: new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      margin: const EdgeInsets.only(bottom: 8),
-                    )
-                  ],
-                ),
-              ));
+    if(email == null)
+      {
+        valideEmail = false;
+        showAlertDialogNew("E-mail Inválido!","Por Favor insira um E-mail.");
+      }
+    else if (!EmailValidator.validate(email)) {
+      valideEmail = false;
+      showAlertDialogNew("E-mail Inválido!","Por Favor insira um E-mail válido.");
     }
+    else{
+      valideEmail = true;
+    }
+
+  }
+  void showAlertDialogNew(String title, String message) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ZAlertDialog(
+          zDialog: ZDialog.erro,
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    margin: const EdgeInsets.all(8),
+                    child: new Text(
+                      title,
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    margin: const EdgeInsets.only(
+                        left: 16, right: 16, bottom: 16),
+                    child: new Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(
+                          color: const Color(0xff707070), fontSize: 13),
+                    ),
+                  )
+                ],
+              ),
+              new Divider(
+                color: const Color(0xffdbdbdb),
+              ),
+              new Container(
+                child: new InkWell(
+                  borderRadius:
+                  new BorderRadius.all(const Radius.circular(20.0)),
+                  splashColor: const Color(0xffe6e6e6),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Container(
+                    padding: const EdgeInsets.all(12),
+                    child: new Text(
+                      "ENTENDI",
+                      style: new TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                margin: const EdgeInsets.only(bottom: 8),
+              )
+            ],
+          ),
+        ));
   }
 }
