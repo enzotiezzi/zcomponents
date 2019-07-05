@@ -75,7 +75,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   ZBaseLine valideNome;
   ZBaseLine valideCPF;
-  ZBaseLine valideMESS;
+  ZBaseLine valideData;
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
 
@@ -202,7 +202,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 zTipos: ZTipoBaseline.isEmail,
                 context: context,
               ),
-              valideMESS = new ZBaseLine(
+              valideData = new ZBaseLine(
                 zTipos: ZTipoBaseline.isDataNascimento,
                 context: context,
               ),

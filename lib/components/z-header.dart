@@ -34,7 +34,7 @@ class ZHeader extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.animationDuration = kThemeChangeDuration,
     this.child,
-    this.titulo,
+    this.titulo = "",
     this.zTipos =ZTipoHeader.isPadrao,
   this.children = const <Widget>[],
   }) : super(key: key) {

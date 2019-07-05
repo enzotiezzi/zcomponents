@@ -89,6 +89,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            textCapitalization: TextCapitalization.words,
                             focusNode: nomeFocus,
                             controller: controllerNome,
                             cursorColor: Color(0xFF2BBAB4),
