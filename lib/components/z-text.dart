@@ -4,7 +4,7 @@ class ZText extends StatefulWidget {
   String text;
   String tituloText;
 
-  ZText({this.text, this.tituloText});
+  ZText({this.text: "", this.tituloText: ""});
 
   @override
   _ZTextState createState() => _ZTextState();

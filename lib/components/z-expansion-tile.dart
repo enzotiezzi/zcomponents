@@ -48,8 +48,6 @@ class _ZExpansionState extends State<ZExpansion> with TickerProviderStateMixin{
             //key: _expansions,
             //initiallyExpanded: _collapsed,
             onExpansionChanged: (bool) {
-              setState(() {
-              });
             },
             animatedWidgetFollowingHeader:
             new Icon(Icons.keyboard_arrow_down),

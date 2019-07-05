@@ -4,6 +4,7 @@ import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-check-cpf.dart';
+import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
@@ -15,6 +16,8 @@ import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/zp-grafico.dart';
 import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-hora-um-campo.dart';
+import 'package:z_components/components/z-perfil.dart';
+
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipo-header.dart';
@@ -70,15 +73,22 @@ class ComponentExemploClasse extends StatefulWidget {
   _ComponentExemploClasseState createState() => _ComponentExemploClasseState();
 }
 class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
+
   bool value = false;
 
-
+  ZBaseLine valideNome;
+  ZBaseLine valideCPF;
+  ZBaseLine valideData;
+  ZBaseLine valideEmail;
+  ZBaseLine valideCelular;
 
   Key _expansions;
   Key _expansionTile;
   bool _collapsed = true;
   String _value = "open";
   String _value2 = "close";
+  List<String> titulos = ["Lista de Documentos", "Espelho de Ponto", "Gestão de Ponto", "Atestados"];
+  List<IconData> icones = [Icons.assignment, Icons.list, Icons.add_to_home_screen, Icons.attach_file];
 
   @override
   void initState() {
@@ -89,7 +99,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     @override
     Widget build(BuildContext context) {
       return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xffEFEFF4),
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
@@ -135,7 +145,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         body: new ListView(
           children: <Widget>[
             new Column(children: <Widget>[
-              new ZHeader(
+              new ZHeader(zTipos: ZTipoHeader.isExpansion,
+
                 titulo: "TESTE",
               ),
               new ZHeaderExpansion(
@@ -145,23 +156,24 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   print("TabTeste");
                 },
               ),
-              new ZBaseLine(
+
+              valideNome = new ZBaseLine(
                 zTipos: ZTipoBaseline.isNomeCompleto,
                 context: context,
               ),
-              new ZBaseLine(
+              valideCPF = new ZBaseLine(
                 zTipos: ZTipoBaseline.isCPF,
                 context: context,
               ),
-              new ZBaseLine(
+              valideCelular = new ZBaseLine(
                 zTipos: ZTipoBaseline.isCelular,
                 context: context,
               ),
-              new ZBaseLine(
+              valideEmail = new ZBaseLine(
                 zTipos: ZTipoBaseline.isEmail,
                 context: context,
               ),
-              new ZBaseLine(
+              valideData = new ZBaseLine(
                 zTipos: ZTipoBaseline.isDataNascimento,
                 context: context,
               ),
@@ -264,9 +276,24 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               Container(
                 height: 30.0,
               ),
+             new Container(height: 250.0,child:  ZPerfilItem(listaIcones: icones,listaTextos: titulos,count: 4,),),
               new Container(
+
                 height: 80.0,
-              )
+              ),
+              new RaisedButton(
+                color: Colors.blue,
+                  child: new Text("teste aprovacao",style: new TextStyle(color: Colors.white),),
+                  onPressed: (){
+                if(valideNome.valideNome == true)
+                  {
+                    print("apto");
+                  }
+                  else{
+                    print("naoApto");
+                }
+              })
+
             ]),
           ],
         ),
