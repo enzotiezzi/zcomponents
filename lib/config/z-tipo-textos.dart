@@ -1,0 +1,1 @@
+enum ZTipoTextos {isTitulo , isPadrao}
