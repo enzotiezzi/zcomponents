@@ -12,16 +12,12 @@ class InformacaoBatida extends StatefulWidget {
 
 class _InformacaoBatidaState extends State<InformacaoBatida> {
   bool _visible2 = true;
-
-  bool _buttonEntendi = false;
-
   @override
   void initState() {
 
     Future.delayed(const Duration(milliseconds: 9250), () {
       setState(() {
         _visible2 = false;
-        _buttonEntendi = true;
       });
     });
     super.initState();
@@ -47,7 +43,7 @@ class _InformacaoBatidaState extends State<InformacaoBatida> {
           new FlareActor(
               "assets/anim.flr",
               alignment:Alignment.center,
-              fit:BoxFit.cover,
+              fit:BoxFit.scaleDown,
               animation:"condicoes_batida"),
           new Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -66,27 +62,6 @@ class _InformacaoBatidaState extends State<InformacaoBatida> {
           )
         ],
       ),
-    );
-  }
-  Widget olas(){
-    return new Container(
-        alignment: Alignment.center,
-        margin: EdgeInsets.only(bottom: 5),
-        child:  new ButtonTheme(
-          minWidth: 145,
-          child: new RaisedButton(
-              color: Color(0xff2bbab4),
-              child: new Text("ENTENDI",style: new TextStyle(color: Colors.white,fontWeight: FontWeight.w600),),
-              onPressed: ()
-              {
-                if(_buttonEntendi == true)
-                {
-                  Navigator.pop(context);
-                }
-              },
-              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
-          ),
-        )
     );
   }
   @override
