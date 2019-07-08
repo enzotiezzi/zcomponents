@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
 class InformacaoBatida extends StatefulWidget {
-  Widget bottomChild;
+ final Widget bottomChild;
   InformacaoBatida({Key key,
     this.bottomChild,
   }) : super(key: key);
