@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZText extends StatefulWidget {
   String text;
   String tituloText;
+  ZTipoTextos ZTipos;
 
-  ZText({this.text: "", this.tituloText: ""});
+  ZText({this.text: "", this.tituloText: "", this.ZTipos});
 
   @override
   _ZTextState createState() => _ZTextState();
@@ -13,7 +15,7 @@ class ZText extends StatefulWidget {
 class _ZTextState extends State<ZText> {
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return (widget.ZTipos ==ZTipoTextos.isPadrao)?new Container(
         color: Colors.white,
         child: new Column(
           children: <Widget>[
@@ -44,6 +46,13 @@ class _ZTextState extends State<ZText> {
               ],
             ),
           ],
-        ));
+        )):    new Container(
+      padding: EdgeInsets.only(left: 15.0, bottom: 8.0, top: 16.0),
+      alignment: Alignment.centerLeft,
+      child: new Text(
+        widget.tituloText,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+      ),
+    );
   }
 }

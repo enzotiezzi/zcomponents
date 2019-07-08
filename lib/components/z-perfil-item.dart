@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZPerfilItem extends StatefulWidget {
-  int count;
+  int numeroQuadrados;
   List<String> listaTextos;
   List<IconData> listaIcones;
 
-  ZPerfilItem({this.count = 0, this.listaIcones, this.listaTextos});
+  ZPerfilItem({this.numeroQuadrados = 0, this.listaIcones, this.listaTextos});
 
   @override
   _ZPerfilItemState createState() => _ZPerfilItemState();
@@ -16,8 +16,9 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
   @override
   Widget build(BuildContext context) {
     return new GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-        itemCount: widget.count,
+        itemCount: widget.numeroQuadrados,
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 10.0, mainAxisSpacing: 10.0, crossAxisCount: 3),
         itemBuilder: (context, index) {
@@ -40,7 +41,10 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                   ),
                   new Container(
                     margin: EdgeInsets.only(left: 5.0, right: 5.0),
-                    child: new Text(
+                    child: (widget.listaTextos[index] != null)?new Text(
+                      widget.listaTextos[index],
+                      style: TextStyle(color: const Color(0xff999999)),
+                    ): new Text(
                       widget.listaTextos[index],
                       style: TextStyle(color: const Color(0xff999999)),
                     ),
