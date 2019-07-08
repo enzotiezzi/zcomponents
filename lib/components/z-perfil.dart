@@ -110,16 +110,16 @@ class _ZPerfilState extends State<ZPerfil> {
           ),
         ),
         ZText(
-          ZTipos: ZTipoTextos.isTitulo,
+          zTipos: ZTipoTextos.isTitulo,
           tituloText: "CONTATO",
         ),
         ZText(
           tituloText: "Telefone",
-          ZTipos: ZTipoTextos.isPadrao,
+          zTipos: ZTipoTextos.isPadrao,
           text: widget.textoContato,
         ),
         ZText(
-          ZTipos: ZTipoTextos.isTitulo,
+          zTipos: ZTipoTextos.isTitulo,
           tituloText: "LOCALIZAÇÃO",
         ),
         new Container(
@@ -127,7 +127,7 @@ class _ZPerfilState extends State<ZPerfil> {
           child: ZText(
             tituloText: "Endereço",
             text: widget.textoLocalizacao,
-            ZTipos: ZTipoTextos.isPadrao,
+            zTipos: ZTipoTextos.isPadrao,
           ),
         )
       ],
