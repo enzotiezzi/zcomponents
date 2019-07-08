@@ -70,7 +70,7 @@ class ZCollectionState extends State<ZCollection> {
     );
   }
 
-  void _irParaSelecaoDeItem() async {
+ /* void _irParaSelecaoDeItem() async {
     _itemSelecionado = await Navigator.push<ZCollectionItem>(
         context,
         new MaterialPageRoute(
@@ -82,7 +82,7 @@ class ZCollectionState extends State<ZCollection> {
     if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
     setState(() {});
-  }
+  }*/
 
   void _irParaSelecaoDeItemHorizontal() async {
     _itemSelecionado = await Navigator.push<ZCollectionItem>(

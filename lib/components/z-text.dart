@@ -4,9 +4,9 @@ import 'package:z_components/config/z-tipo-textos.dart';
 class ZText extends StatefulWidget {
   String text;
   String tituloText;
-  ZTipoTextos ZTipos;
+  ZTipoTextos zTipos;
 
-  ZText({this.text: "", this.tituloText: "", this.ZTipos});
+  ZText({this.text: "", this.tituloText: "", this.zTipos});
 
   @override
   _ZTextState createState() => _ZTextState();
@@ -15,7 +15,7 @@ class ZText extends StatefulWidget {
 class _ZTextState extends State<ZText> {
   @override
   Widget build(BuildContext context) {
-    return (widget.ZTipos ==ZTipoTextos.isPadrao)?new Container(
+    return (widget.zTipos ==ZTipoTextos.isPadrao)?new Container(
         color: Colors.white,
         child: new Column(
           children: <Widget>[

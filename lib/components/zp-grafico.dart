@@ -1,10 +1,6 @@
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:mask_shifter/mask_shifter.dart';
-import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/config/z-dialog.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 class ZPGrafico extends StatefulWidget {
