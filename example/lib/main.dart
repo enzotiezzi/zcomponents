@@ -5,21 +5,18 @@ import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-check-cpf.dart';
-import 'package:z_components/components/z-perfil-item.dart';
+import 'package:z_components/components/z-perfil.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
-import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-header-expansion.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/zp-grafico.dart';
 import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-hora-um-campo.dart';
-import 'package:z_components/components/z-perfil.dart';
-
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-button-type.dart';
@@ -31,7 +28,6 @@ import 'package:z_components/components/z-expendable-item-tile.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +51,7 @@ class MyApp extends StatelessWidget {
               title: Text('School'),
             ),
           ],
-          onTap: (index) => this.index = index,
+          onTap: (index) => index = index,
           currentIndex: 0,
           iconSize: 16,
           inactiveColor: Colors.red,
@@ -88,11 +84,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
 
-  Key _expansions;
   Key _expansionTile;
   bool _collapsed = true;
   String _value = "open";
-  String _value2 = "close";
+
   List<String> titulos = [
     "Lista de Documentos",
     "Espelho de Ponto",
@@ -324,7 +319,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ZCadastroUsuario(
+                      builder: (context) => ZCadastroUsuario(tituloAppBar: new Text("CADASTRO USUARIO"),
                             onTapVoltar: () {
                               Navigator.of(context).pop();
                             },
@@ -350,7 +345,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ZPerfil(
+                      builder: (context) => ZPerfil(tituloAppBar: new Text("PERFIL DO COLABORADOR"),
                             onTapVoltar: () {
                               Navigator.of(context).pop();
                             },
@@ -363,12 +358,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                                 "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
                             tituloHeader: "Giuliano Ortiz",
                             textoTituloInfo: "Giuliano Ortiz",
-                            textoDoisInfo: "Sede - Xolis ltda.",
-                            textoTresInfo: "Garoto de TI",
-                            textoQuatroInfo: "5x2(seg-sex)",
-                            textoCincoInfo: "09:00",
-                            textoSeisInfo: "15:30",
-                            textoSeteInfo: "1:00",
+                            textoLocalInfo: "Sede - Xolis ltda.",
+                            textoCargoInfo: "Garoto de TI",
+                            textoEscalaInfo: "5x2(seg-sex)",
+                            textoHoraEntradaInfo: "09:00",
+                            textoHoraSaidaInfo: "15:30",
+                            textoHoraIntervaloInfo: "1:00",
                             textoCodigoInfo: "012345",
                           )),
                 );

@@ -8,13 +8,14 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZPerfil extends StatefulWidget {
+  Widget tituloAppBar;
   String textoTituloInfo;
-  String textoDoisInfo;
-  String textoTresInfo;
-  String textoQuatroInfo;
-  String textoCincoInfo;
-  String textoSeisInfo;
-  String textoSeteInfo;
+  String textoLocalInfo;
+  String textoCargoInfo;
+  String textoEscalaInfo;
+  String textoHoraEntradaInfo;
+  String textoHoraSaidaInfo;
+  String textoHoraIntervaloInfo;
   String textoCodigoInfo;
   String tituloHeader;
   String textoContato;
@@ -27,6 +28,7 @@ class ZPerfil extends StatefulWidget {
   var onTapVoltar;
 
   ZPerfil({
+    this.tituloAppBar,
     this.onTapVoltar,
     this.textoLocalizacao,
     this.listaIcones,
@@ -34,15 +36,15 @@ class ZPerfil extends StatefulWidget {
     this.numeroQuadrados,
     this.image,
     this.statusInfo,
-    this.textoCincoInfo,
+    this.textoHoraEntradaInfo,
     this.textoCodigoInfo,
     this.textoContato,
-    this.textoDoisInfo,
-    this.textoQuatroInfo,
-    this.textoSeisInfo,
-    this.textoSeteInfo,
+    this.textoLocalInfo,
+    this.textoEscalaInfo,
+    this.textoHoraSaidaInfo,
+    this.textoHoraIntervaloInfo,
     this.textoTituloInfo,
-    this.textoTresInfo,
+    this.textoCargoInfo,
     this.tituloHeader});
 
   @override
@@ -53,7 +55,7 @@ class _ZPerfilState extends State<ZPerfil> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: ZNavigationBar(
+      appBar: ZNavigationBar(middle: widget.tituloAppBar,
         voltar: true,
         onTap: widget.onTapVoltar,
       ),
@@ -73,12 +75,12 @@ class _ZPerfilState extends State<ZPerfil> {
                 image: widget.image,
                 status: widget.statusInfo,
                 textoCodigo: widget.textoCodigoInfo,
-                textoSete: widget.textoSeteInfo,
-                textoSeis: widget.textoSeisInfo,
-                textoCinco: widget.textoCincoInfo,
-                textoQuatro: widget.textoQuatroInfo,
-                textoTres: widget.textoTresInfo,
-                textoDois: widget.textoDoisInfo,
+                textoSete: widget.textoHoraIntervaloInfo,
+                textoSeis: widget.textoHoraSaidaInfo,
+                textoCinco: widget.textoHoraEntradaInfo,
+                textoQuatro: widget.textoEscalaInfo,
+                textoTres: widget.textoCargoInfo,
+                textoDois: widget.textoLocalInfo,
                 textoTitulo: widget.textoTituloInfo,
               ),
             )

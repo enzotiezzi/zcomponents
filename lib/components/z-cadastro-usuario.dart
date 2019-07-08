@@ -12,6 +12,7 @@ import 'package:z_components/config/z-tipos-baseline.dart';
 
 class ZCadastroUsuario extends StatefulWidget {
   Widget zTelaCadastro;
+  Widget tituloAppBar;
 
   final Key key;
   final BuildContext context;
@@ -24,6 +25,7 @@ class ZCadastroUsuario extends StatefulWidget {
   var onTapVoltar;
 
   ZCadastroUsuario({
+    this.tituloAppBar,
     this.onTapVoltar,
     this.key,
     this.context,
@@ -47,7 +49,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   Widget build(BuildContext context) {
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
-        appBar: ZNavigationBar(voltar: true,onTap: widget.onTapVoltar ,),
+        appBar: ZNavigationBar(voltar: true,onTap: widget.onTapVoltar ,middle: widget.tituloAppBar,),
         body: _body());
   }
 
