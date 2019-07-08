@@ -3,7 +3,6 @@ import 'package:flutter/painting.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-check-cpf.dart';
-import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
@@ -79,7 +78,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   bool _collapsed = true;
   String _value = "open";
 
-  String _value2 = "close";
   List<String> titulos = [
     "Lista de Documentos",
     "Espelho de Ponto",
