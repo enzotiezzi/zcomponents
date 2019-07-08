@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/components/z-size.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:email_validator/email_validator.dart';
@@ -45,7 +44,7 @@ class ZBaseLine extends StatelessWidget {
   bool bisexto;
 
   String email;
-  String CPF;
+  String cPF;
   String celular;
   String value;
   var controllerEmail = new TextEditingController();
@@ -134,7 +133,7 @@ class ZBaseLine extends StatelessWidget {
                           child: new TextField(
                             controller: controllerCPF,
                             onChanged: (text) {
-                              CPF = text;
+                              cPF = text;
                             },
                             focusNode: cpfFocus,
                             keyboardType: TextInputType.number,
@@ -467,7 +466,7 @@ class ZBaseLine extends StatelessWidget {
 
   }
   void _validarCPF() {
-    if (!CPFValidator.isValid(CPF)) {
+    if (!CPFValidator.isValid(cPF)) {
       valideCPF = false;
       showAlertDialogNew("CPF Inválido!","Por Favor insira um CPF válido.");
     }

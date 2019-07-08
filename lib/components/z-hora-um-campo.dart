@@ -24,11 +24,9 @@ class ZHoraUmCampo extends StatefulWidget {
 class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
   bool dMaisUm = false;
 
-  bool _visibles = false;
+  //bool _visibles = false;
 
   FocusNode _focusEntrada;
-  FocusNode _focusSaida;
-  FocusNode _focusIntervalo;
 
   String _horaEntrada;
   String _minutoEntrada;
@@ -41,11 +39,6 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
   void initState() {
     super.initState();
     _focusEntrada = FocusNode();
-    _focusSaida = FocusNode();
-    _focusIntervalo = FocusNode();
-    _focusSaida.addListener(() {
-
-    });
   }
 
   void dismiss() {
@@ -81,7 +74,7 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
               child: new TextField(textAlign: TextAlign.center,
                 onSubmitted: (term) {
                   _fieldFocusChange(
-                      context, _focusEntrada, _focusSaida);
+                      context, _focusEntrada, _focusEntrada);
                 },
                 inputFormatters: [
                   MaskedTextInputFormatterShifter(
@@ -114,7 +107,7 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
                           "Por favor insira um valor de minuto entre 00 e 59.");
                     } else {
                       _fieldFocusChange(
-                          context, _focusEntrada, _focusSaida);
+                          context, _focusEntrada, _focusEntrada);
                     }
                   }
                 },

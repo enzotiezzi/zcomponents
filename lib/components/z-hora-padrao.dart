@@ -40,7 +40,7 @@ class _HoraState extends State<ZHora> {
   String _minutoIntervalo;
   int _intHoraIntervalo;
   int _intMinutoIntervalo;
-  bool _visible = true;
+  //bool _visible = true;
 
   @override
   void initState() {
@@ -61,17 +61,17 @@ class _HoraState extends State<ZHora> {
     });
   }
 
-  void dismiss() {
+ /* void dismiss() {
     setState(() {
       this._visible = false;
     });
   }
-
-  void show() {
+*/
+/*  void show() {
     setState(() {
       this._visible = true;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
