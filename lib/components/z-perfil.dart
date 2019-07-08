@@ -24,21 +24,38 @@ class ZPerfil extends StatefulWidget {
   List<IconData> listaIcones;
   bool statusInfo;
   var image;
+  var onTapVoltar;
 
-
-
+  ZPerfil({
+    this.onTapVoltar,
+    this.textoLocalizacao,
+    this.listaIcones,
+    this.listaTextos,
+    this.numeroQuadrados,
+    this.image,
+    this.statusInfo,
+    this.textoCincoInfo,
+    this.textoCodigoInfo,
+    this.textoContato,
+    this.textoDoisInfo,
+    this.textoQuatroInfo,
+    this.textoSeisInfo,
+    this.textoSeteInfo,
+    this.textoTituloInfo,
+    this.textoTresInfo,
+    this.tituloHeader});
 
   @override
   _ZPerfilState createState() => _ZPerfilState();
 }
 
 class _ZPerfilState extends State<ZPerfil> {
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: ZNavigationBar(
         voltar: true,
+        onTap: widget.onTapVoltar,
       ),
       body: _body(),
     );
@@ -47,7 +64,8 @@ class _ZPerfilState extends State<ZPerfil> {
   Widget _body() {
     return new Column(
       children: <Widget>[
-        ZHeader(titulo: widget.tituloHeader,
+        ZHeader(
+          titulo: widget.tituloHeader,
           children: <Widget>[
             new Container(
               margin: EdgeInsets.all(10.0),
@@ -78,8 +96,11 @@ class _ZPerfilState extends State<ZPerfil> {
     return new ListView(
       children: <Widget>[
         new Container(
-          margin:
-              EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0,),
+          margin: EdgeInsets.only(
+            top: 20.0,
+            left: 10.0,
+            right: 10.0,
+          ),
           child: ZPerfilItem(
             numeroQuadrados: widget.numeroQuadrados,
             listaTextos: widget.listaTextos,
@@ -90,18 +111,19 @@ class _ZPerfilState extends State<ZPerfil> {
           ZTipos: ZTipoTextos.isTitulo,
           tituloText: "CONTATO",
         ),
-        ZText(tituloText: "Telefone",
+        ZText(
+          tituloText: "Telefone",
           ZTipos: ZTipoTextos.isPadrao,
           text: widget.textoContato,
         ),
         ZText(
           ZTipos: ZTipoTextos.isTitulo,
           tituloText: "LOCALIZAÇÃO",
-
         ),
         new Container(
           margin: EdgeInsets.only(bottom: 20.0),
-          child: ZText(tituloText: "Endereço",
+          child: ZText(
+            tituloText: "Endereço",
             text: widget.textoLocalizacao,
             ZTipos: ZTipoTextos.isPadrao,
           ),

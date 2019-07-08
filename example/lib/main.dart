@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:z_components/components/z-cadastro-usuario.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-check-cpf.dart';
 import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/components/z-pin-senha.dart';
+import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
@@ -20,6 +22,7 @@ import 'package:z_components/components/z-perfil.dart';
 
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
@@ -72,6 +75,11 @@ class ComponentExemploClasse extends StatefulWidget {
 }
 
 class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
+  var controllerEmail = new TextEditingController();
+  var controllerNome = new TextEditingController();
+  var controllerCPF = new TextEditingController();
+  var controllerCelular = new TextEditingController();
+  var controllerData = new TextEditingController();
   bool value = false;
 
   ZBaseLine valideNome;
@@ -117,103 +125,97 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffEFEFF4),
-      floatingActionButton: ZFloatButton(
-        onPressed: () {},
-      ),
-      appBar: ZNavigationBar(
-        leading: new Icon(Icons.print),
-        trailing: new GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => new InformacaoBatida(
-                        bottomChild: new Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(bottom: 5),
-                            child: new ButtonTheme(
-                              minWidth: 145,
-                              child: new RaisedButton(
-                                  color: Color(0xff2bbab4),
-                                  child: new Text(
-                                    "ENTENDI",
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  shape: new RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(30.0))),
-                            )),
-                      )),
-            );
-          },
-          child: new Container(
-            child: new Icon(
-              Icons.info,
-              color: Colors.blue,
-              size: 19.0,
+        backgroundColor: const Color(0xffEFEFF4),
+        floatingActionButton: ZFloatButton(
+          onPressed: () {},
+        ),
+        appBar: ZNavigationBar(
+          leading: new Icon(Icons.print),
+          trailing: new GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => new InformacaoBatida(
+                          bottomChild: new Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(bottom: 5),
+                              child: new ButtonTheme(
+                                minWidth: 145,
+                                child: new RaisedButton(
+                                    color: Color(0xff2bbab4),
+                                    child: new Text(
+                                      "ENTENDI",
+                                      style: new TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0))),
+                              )),
+                        )),
+              );
+            },
+            child: new Container(
+              child: new Icon(
+                Icons.info,
+                color: Colors.blue,
+                size: 19.0,
+              ),
             ),
           ),
         ),
-
-      ),
-
-
-        body: new ListView(
-          children: <Widget>[
-            new Column(children: <Widget>[
-              new ZHeader(zTipos: ZTipoHeader.isExpansion,
-
-                titulo: "TESTE",
-              ),
-              new ZHeaderExpansion(
-                titulo: "Teste Expanded",
-                collapsed: _collapsed,
-                onTap: (){
-                  print("TabTeste");
-                },
-              ),
-
-              valideNome = new ZBaseLine(
-                zTipos: ZTipoBaseline.isNomeCompleto,
-                context: context,
-              ),
-              valideCPF = new ZBaseLine(
-                zTipos: ZTipoBaseline.isCPF,
-                context: context,
-              ),
-              valideCelular = new ZBaseLine(
-                zTipos: ZTipoBaseline.isCelular,
-                context: context,
-              ),
-              valideEmail = new ZBaseLine(
-                zTipos: ZTipoBaseline.isEmail,
-                context: context,
-              ),
-              valideData = new ZBaseLine(
-                zTipos: ZTipoBaseline.isDataNascimento,
-                context: context,
-              ),
-              new Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: new ZExpansion(
-                  childTitle: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Container(
-                        padding: const EdgeInsets.only(left: 10,right: 10),
-                        child: new Text("Titulo"),
-                      ),
-                    ],
-                  ),
+        body: new ListView(children: <Widget>[
+          new Column(children: <Widget>[
+            new ZHeader(
+              zTipos: ZTipoHeader.isExpansion,
+              titulo: "TESTE",
+            ),
+            new ZHeaderExpansion(
+              titulo: "Teste Expanded",
+              collapsed: _collapsed,
+              onTap: () {
+                print("TabTeste");
+              },
+            ),
+            valideNome = new ZBaseLine(
+              zTipos: ZTipoBaseline.isNomeCompleto,
+              context: context,
+            ),
+            valideCPF = new ZBaseLine(
+              zTipos: ZTipoBaseline.isCPF,
+              context: context,
+            ),
+            valideCelular = new ZBaseLine(
+              zTipos: ZTipoBaseline.isCelular,
+              context: context,
+            ),
+            valideEmail = new ZBaseLine(
+              zTipos: ZTipoBaseline.isEmail,
+              context: context,
+            ),
+            valideData = new ZBaseLine(
+              zTipos: ZTipoBaseline.isDataNascimento,
+              context: context,
+            ),
+            new Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: new ZExpansion(
+                childTitle: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Container(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: new Text("Titulo"),
+                    ),
+                  ],
                 ),
               ),
-
+            ),
             new ZPGrafico(
               key: _expansionTile,
               tituloCenterCircle: "ESCOLA",
@@ -299,7 +301,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             Container(
               height: 30.0,
             ),
-
             new Container(
               height: 80.0,
             ),
@@ -315,12 +316,67 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   } else {
                     print("naoApto");
                   }
-                })
+                }),
+            new ZButton(
+              zButtonType: ZButtonType.isContained,
+              text: "CADASTRO USUARIO",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ZCadastroUsuario(
+                            onTapVoltar: () {
+                              Navigator.of(context).pop();
+                            },
+                            controllerData: controllerData,
+                            controllerCelular: controllerCelular,
+                            controllerCPF: controllerCPF,
+                            controllerNome: controllerNome,
+                            controllerEmail: controllerEmail,
+                            onPressed: () {
+                              print(controllerNome.text);
+                              print(controllerCPF.text);
+                              print(controllerCelular.text);
+                              print(controllerData.text);
+                              print(controllerEmail.text);
+                            },
+                          )),
+                );
+              },
+            ),
+            ZButton(
+              text: "PERFIL",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ZPerfil(
+                            onTapVoltar: () {
+                              Navigator.of(context).pop();
+                            },
+                            listaIcones: icones,
+                            listaTextos: titulos,
+                            numeroQuadrados: titulos.length,
+                            statusInfo: true,
+                            textoContato: "(11)9 98679893",
+                            textoLocalizacao:
+                                "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
+                            tituloHeader: "Giuliano Ortiz",
+                            textoTituloInfo: "Giuliano Ortiz",
+                            textoDoisInfo: "Sede - Xolis ltda.",
+                            textoTresInfo: "Garoto de TI",
+                            textoQuatroInfo: "5x2(seg-sex)",
+                            textoCincoInfo: "09:00",
+                            textoSeisInfo: "15:30",
+                            textoSeteInfo: "1:00",
+                            textoCodigoInfo: "012345",
+                          )),
+                );
+              },
+            ),
           ]),
-
-
-   ] ));
-    }
+        ]));
+  }
 }
 
 class AppSwitch with ChangeNotifier {

@@ -20,10 +20,19 @@ class ZCadastroUsuario extends StatefulWidget {
   var controllerCPF = new TextEditingController();
   var controllerCelular = new TextEditingController();
   var onPressed;
-  var controllerData = new TextEditingController();  ZCadastroUsuario({
+  var controllerData = new TextEditingController();
+  var onTapVoltar;
+
+  ZCadastroUsuario({
+    this.onTapVoltar,
     this.key,
     this.context,
-    this.onPressed
+    this.onPressed,
+    this.controllerData,
+    this.controllerCelular,
+    this.controllerCPF,
+    this.controllerNome,
+    this.controllerEmail,
   });
 
   @override
@@ -32,16 +41,13 @@ class ZCadastroUsuario extends StatefulWidget {
 
 class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     with TickerProviderStateMixin {
-
   bool _termos = false;
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
-        appBar: ZNavigationBar(
-
-        ),
+        appBar: ZNavigationBar(voltar: true,onTap: widget.onTapVoltar ,),
         body: _body());
   }
 
@@ -69,23 +75,28 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
           ),
         ),
-        new ZBaseLine(controllerNome: widget.controllerNome,
+        new ZBaseLine(
+          controllerNome: widget.controllerNome,
           zTipos: ZTipoBaseline.isNomeCompleto,
           context: context,
         ),
-        new ZBaseLine(controllerCPF: widget.controllerCPF,
+        new ZBaseLine(
+          controllerCPF: widget.controllerCPF,
           zTipos: ZTipoBaseline.isCPF,
           context: context,
         ),
-        new ZBaseLine(controllerCelular: widget.controllerCelular,
+        new ZBaseLine(
+          controllerCelular: widget.controllerCelular,
           zTipos: ZTipoBaseline.isCelular,
           context: context,
         ),
-        new ZBaseLine(controllerEmail: widget.controllerEmail,
+        new ZBaseLine(
+          controllerEmail: widget.controllerEmail,
           zTipos: ZTipoBaseline.isEmail,
           context: context,
         ),
-        new ZBaseLine(controllerData: widget.controllerData,
+        new ZBaseLine(
+          controllerData: widget.controllerData,
           zTipos: ZTipoBaseline.isDataNascimento,
           context: context,
         ),
@@ -167,8 +178,10 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
         new Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
-            child: ZButton(padding: EdgeInsets.only(top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
-              zButtonType:  ZButtonType.isContained,
+            child: ZButton(
+              padding: EdgeInsets.only(
+                  top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
+              zButtonType: ZButtonType.isContained,
               text: "CADASTRAR USUÁRIO",
               onPressed: widget.onPressed,
             )),

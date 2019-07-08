@@ -34,8 +34,10 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
   final double titleSpacing;
   final double toolbarOpacity;
   final double bottomOpacity;
+  var onTap;
 
   ZNavigationBar({
+    this.onTap,
     this.voltar: true,
     this.context,
     this.key,
@@ -62,7 +64,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
     this.bottomOpacity = 1.0,
     this.toolbarOpacity = 1.0,
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
-    this.centerTitle,
+    this.centerTitle: true,
     this.primary = true,
     this.textTheme,
   }) : super(key: key) {
@@ -76,7 +78,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: this.backgroundColor,
       leading: (voltar == true)
           ? new GestureDetector(
-        onTap: () => Navigator.of(context).pop(),
+        onTap: this.onTap,
         child: new Container(
           padding: EdgeInsets.only(right: 20.0),
           color: Colors.transparent,
