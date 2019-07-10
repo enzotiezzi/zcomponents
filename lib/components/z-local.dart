@@ -23,7 +23,7 @@ class ZLocalState extends State<ZLocal> {
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
-  var _keyLocal = new GlobalKey<ZCollectionState>();
+  var key = new GlobalKey<ZCollectionState>();
 
   IZLocalService _service;
 
@@ -39,7 +39,7 @@ class ZLocalState extends State<ZLocal> {
   @override
   Widget build(BuildContext context) {
     return new ZCollection(
-      key: _keyLocal,
+      key: key,
       titulo: "Locais",
       lista: _centroCustos
           .map((x) => new ZCollectionItem(

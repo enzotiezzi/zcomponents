@@ -22,7 +22,7 @@ class ZEscalaState extends State<ZEscala> {
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
-  var _keyEscala = new GlobalKey<ZCollectionState>();
+  var key = new GlobalKey<ZCollectionState>();
 
   IZEscalaService _service;
 
@@ -38,7 +38,7 @@ class ZEscalaState extends State<ZEscala> {
   @override
   Widget build(BuildContext context) {
     return new ZCollection(
-      key: _keyEscala,
+      key: key,
       titulo: "Escalas",
       lista: _escalas
           .map((x) => new ZCollectionItem(
