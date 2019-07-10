@@ -8,7 +8,7 @@ import 'dart:convert';
 
 
 class ZLocalService extends Service implements IZLocalService {
-  String _URL = "${ApiSettings.ENDPOINT}/zponto";
+  String _uRL = "${ApiSettings.ENDPOINT}/zponto";
 
   final String token;
   final String idEmpresa;
@@ -20,7 +20,7 @@ class ZLocalService extends Service implements IZLocalService {
   Future<List<CentroCustoViewModel>> listarCentrosCusto() async {
     try {
 
-      var url = "$_URL/buscar-centros-custo-empresa/$idEmpresa";
+      var url = "$_uRL/buscar-centros-custo-empresa/$idEmpresa";
 
       var response = await http.get(url, headers: await headers);
 

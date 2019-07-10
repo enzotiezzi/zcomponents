@@ -13,7 +13,7 @@ abstract class Service{
 
   init() async {
     headers[HttpHeaders.contentTypeHeader] = "application/json";
-    headers[HttpHeaders.authorizationHeader] = "Bearer ${token}";
+    headers[HttpHeaders.authorizationHeader] = "Bearer $token";
   }
 
 }

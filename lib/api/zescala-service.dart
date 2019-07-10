@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:z_components/view-model/EscalaViewModel.dart';
 
 class ZEscalaService extends Service implements IZEscalaService {
-  String _URL = "${ApiSettings.ENDPOINT}/zponto";
+  String _uRL = "${ApiSettings.ENDPOINT}/zponto";
 
   final String token;
 
@@ -15,7 +15,7 @@ class ZEscalaService extends Service implements IZEscalaService {
   @override
   Future<List<EscalaViewModel>> listarEscalas() async {
     try {
-      var url = "$_URL/listar-escalas";
+      var url = "$_uRL/listar-escalas";
 
       var response = await http.get(url, headers: await headers);
 
