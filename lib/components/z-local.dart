@@ -8,8 +8,11 @@ import 'package:z_components/view-model/centrocusto-viewmodel.dart';
 class ZLocal extends StatefulWidget {
   final String token;
   final String idEmpresa;
+  Key key;
 
-  ZLocal({this.token, this.idEmpresa}) : super();
+
+  ZLocal({  Key key
+  ,this.token, this.idEmpresa}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZLocalState();

@@ -7,8 +7,9 @@ import 'package:z_components/api/zcargo-service.dart';
 
 class ZCargo extends StatefulWidget {
   final String token;
+  Key key;
 
-  ZCargo({this.token}) : super();
+  ZCargo({Key key, this.token}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZCargoState();

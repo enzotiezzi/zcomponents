@@ -16,8 +16,6 @@ class ZCargoService extends Service implements IZCargoService {
   @override
   Future<List<CargoViewModel>> listarCargos() async {
     try {
-      headers[HttpHeaders.authorizationHeader] =
-      "Bearer $token";
 
       var url = "$_URL/listar-cargos";
 

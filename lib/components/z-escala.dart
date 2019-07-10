@@ -7,8 +7,11 @@ import 'package:z_components/view-model/EscalaViewModel.dart';
 
 class ZEscala extends StatefulWidget {
   final String token;
+  Key key;
 
-  ZEscala({this.token}) : super();
+
+  ZEscala({  Key key
+    ,this.token}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZEscalaState();
