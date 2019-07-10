@@ -28,7 +28,6 @@ import 'package:z_components/components/z-expendable-item-tile.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
           onTap: (index) => index = index,
           currentIndex: 0,
           iconSize: 16,
-          inactiveColor: Colors.red,
+          inactiveColor: Colors.black,
           activeColor: Colors.black,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.black45,
@@ -123,7 +122,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffEFEFF4),
+        backgroundColor: const Color(0xff000000),
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
@@ -322,7 +321,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ZCadastroUsuario(tituloAppBar: new Text("CADASTRO USUARIO"),
+                      builder: (context) => ZCadastroUsuario(
+                            tituloAppBar: new Text("CADASTRO USUARIO"),
                             onTapVoltar: () {
                               Navigator.of(context).pop();
                             },
@@ -348,13 +348,14 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 );
               },
             ),
-            ZButton(
+            new ZButton(
               text: "PERFIL",
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ZPerfil(tituloAppBar: new Text("PERFIL DO COLABORADOR"),
+                      builder: (context) => ZPerfil(
+                            tituloAppBar: new Text("PERFIL DO COLABORADOR"),
                             onTapVoltar: () {
                               Navigator.of(context).pop();
                             },
@@ -377,6 +378,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           )),
                 );
               },
+            ),
+            new ZButton(
+              zButtonType: ZButtonType.isCadastro,
+              onPressed: (){},
             ),
           ]),
         ]));

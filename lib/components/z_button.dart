@@ -146,10 +146,10 @@ class ZButton extends StatelessWidget {
           onPressed: this.onPressed,
 
           child: new Container(
-            padding: EdgeInsets.fromLTRB(20.0, 7.0, 20.0, 7.0),
-            child: new Text(this.text,style: TextStyle( color: const Color(0xff2BBAB4), ),),decoration: BoxDecoration(
+            padding: EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 4.0),
+            child: new Text("CADASTRO",style: TextStyle( color: const Color(0xFFFFFFFF),fontSize: 20.0,  ),),decoration: BoxDecoration(
               borderRadius: new BorderRadius.circular(30.0),
-              border: Border.all(   color: const Color(0xff2BBAB4),)),),
+              border: Border.all(   color: const Color(0xFFFFFFFF),)),),
           color:Colors.transparent,
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
           elevation: 0,
