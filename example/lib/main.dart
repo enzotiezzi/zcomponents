@@ -128,6 +128,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         appBar: ZNavigationBar(
           leading: new Icon(Icons.print),
+          middle: new Container(child: new Text('teste'),),
           trailing: new GestureDetector(
             onTap: () {
               Navigator.push(

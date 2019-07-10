@@ -73,7 +73,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
       previousPageTitle: this.previousPageTitle,
       transitionBetweenRoutes: this.transitionBetweenRoutes,
       key: this.key,
-      backgroundColor: this.backgroundColor,
+      backgroundColor: new Color(0xFFF7F7F7),
       leading: (voltar == true)
           ? new GestureDetector(
         onTap: this.onTap,
@@ -89,7 +89,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
       )
 
           : this.leading,
-      middle: this.middle,
+      middle: new Container(child: this.middle,),
       trailing:
           new Container(child: trailing, padding: EdgeInsets.only(right: 16.0)),
       border: this.border,
