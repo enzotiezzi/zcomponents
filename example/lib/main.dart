@@ -171,7 +171,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   print("TabTeste");
                 },
               ),
-
               valideNome = new ZBaseLine(
                 zTipos: ZTipoBaseline.isNomeCompleto,
                 context: context,
@@ -206,7 +205,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   ),
                 ),
               ),
-
             new ZPGrafico(
               key: _expansionTile,
               tituloCenterCircle: "ESCOLA",
@@ -308,7 +306,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   } else {
                     print("naoApto");
                   }
-                })
+                }),
           ]),
 
 
