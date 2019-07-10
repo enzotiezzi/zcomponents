@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Correction!
+
 ## 0.1.1
 
 *  created new component!
