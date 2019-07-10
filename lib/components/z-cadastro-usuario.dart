@@ -21,9 +21,14 @@ class ZCadastroUsuario extends StatefulWidget {
   var controllerCelular = new TextEditingController();
   var onPressed;
   var controllerData = new TextEditingController();
+  var controllerSenha = new TextEditingController();
+  var controllerRepetirSenha = new TextEditingController();
+
   var onTapVoltar;
 
   ZCadastroUsuario({
+    this.controllerRepetirSenha,
+    this.controllerSenha,
     this.tituloAppBar,
     this.onTapVoltar,
     this.key,
@@ -42,13 +47,23 @@ class ZCadastroUsuario extends StatefulWidget {
 
 class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     with TickerProviderStateMixin {
+  ZBaseLine valideNome;
+  ZBaseLine valideCPF;
+  ZBaseLine valideData;
+  ZBaseLine valideEmail;
+  ZBaseLine valideCelular;
+  String teste;
   bool _termos = false;
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
-        appBar: ZNavigationBar(voltar: true,onTap: widget.onTapVoltar ,middle: widget.tituloAppBar,),
+        appBar: ZNavigationBar(
+          voltar: true,
+          onTap: widget.onTapVoltar,
+          middle: widget.tituloAppBar,
+        ),
         body: _body());
   }
 
@@ -76,30 +91,30 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
           ),
         ),
-        new ZBaseLine(
+       valideNome= new ZBaseLine(
           controllerNome: widget.controllerNome,
           zTipos: ZTipoBaseline.isNomeCompleto,
-          context: context,
+          context: widget.context,
         ),
-        new ZBaseLine(
+       valideCPF= new ZBaseLine(
           controllerCPF: widget.controllerCPF,
           zTipos: ZTipoBaseline.isCPF,
-          context: context,
+          context: widget.context,
         ),
-        new ZBaseLine(
+     valideCelular=   new ZBaseLine(
           controllerCelular: widget.controllerCelular,
           zTipos: ZTipoBaseline.isCelular,
-          context: context,
+          context: widget.context,
         ),
-        new ZBaseLine(
+       valideEmail= new ZBaseLine(
           controllerEmail: widget.controllerEmail,
           zTipos: ZTipoBaseline.isEmail,
-          context: context,
+          context: widget.context,
         ),
-        new ZBaseLine(
+      valideData=  new ZBaseLine(
           controllerData: widget.controllerData,
           zTipos: ZTipoBaseline.isDataNascimento,
-          context: context,
+          context: widget.context,
         ),
         new Container(
           decoration: BoxDecoration(
@@ -112,11 +127,17 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           ),
         ),
         new ZPinSenha(
+          onChange: (text) {
+            widget.controllerSenha.text = text;
+          },
           context: context,
           numeroQuadrados: 4,
           zTipos: ZTipoSenha.isSenha,
         ),
         new ZPinSenha(
+          onChange: (text) {
+            widget.controllerRepetirSenha.text = text;
+          },
           context: context,
           numeroQuadrados: 4,
           zTipos: ZTipoSenha.isRepetirSenha,

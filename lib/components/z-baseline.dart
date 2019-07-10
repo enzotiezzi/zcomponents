@@ -9,7 +9,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class ZBaseLine extends StatelessWidget {
-
   bool valideMes;
   bool valideCPF;
   bool valideEmail;
@@ -21,8 +20,6 @@ class ZBaseLine extends StatelessWidget {
   final Key key;
   final BuildContext context;
   final ZTipoBaseline zTipos;
-
-
 
   FocusNode nomeFocus;
   FocusNode emailFocus;
@@ -55,16 +52,21 @@ class ZBaseLine extends StatelessWidget {
 
   ZBaseLine(
       {this.value,
-      this.key,
+        this.key,
         this.context,
-      this.zTipos = ZTipoBaseline.isNomeCompleto,
-      this.controllerEmail, this.controllerData,this.controllerCelular,this.controllerCPF,this.controllerNome})
+        this.zTipos = ZTipoBaseline.isNomeCompleto,
+        this.controllerEmail,
+        this.controllerData,
+        this.controllerCelular,
+        this.controllerCPF,
+        this.controllerNome})
       : super(key: key) {
     init();
     initNome();
     initCpf();
     initCelular();
     initMes();
+
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
         _zBaseLine = new Container(
@@ -99,7 +101,8 @@ class ZBaseLine extends StatelessWidget {
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
                             ),
-                            onChanged: (text){
+
+                            onChanged: (text) {
                               nome = text;
                             },
                           ),
@@ -140,7 +143,7 @@ class ZBaseLine extends StatelessWidget {
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
-                              hintText: "*** . *** . *** - **",
+                              hintText: "* . * . * - **",
                               hintStyle: new TextStyle(
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
@@ -185,7 +188,7 @@ class ZBaseLine extends StatelessWidget {
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
-                              hintText: "( ** ) 9 **** - ****",
+                              hintText: "( * ) 9 ** - ***",
                               hintStyle: new TextStyle(
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
@@ -306,6 +309,7 @@ class ZBaseLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return _zBaseLine;
   }
+
   void initNome() {
     nomeFocus = FocusNode();
     nomeFocus.addListener(() {
@@ -341,6 +345,7 @@ class ZBaseLine extends StatelessWidget {
       }
     });
   }
+
   void initMes() {
     mesFocus = FocusNode();
     mesFocus.addListener(() {
@@ -349,20 +354,18 @@ class ZBaseLine extends StatelessWidget {
       }
     });
   }
-  void validaMes(){
 
-
-    dia = total.substring(0, 2);
+  void validaMes() {
+    dia = controllerData.text.substring(0, 2);
     intDias = int.parse(dia);
 
-    mes = total.substring(3, 5);
+    mes = controllerData.text.substring(3, 5);
     intMes = int.parse(mes);
 
-    ano = total.substring(6, 10);
+    ano = controllerData.text.substring(6, 10);
     intAno = int.parse(ano);
 
-    if ((intAno % 4 == 0 && intAno % 100 != 0) ||
-        intAno % 400 == 0) {
+    if ((intAno % 4 == 0 && intAno % 100 != 0) || intAno % 400 == 0) {
       bisexto = true;
     } else {
       bisexto = false;
@@ -372,138 +375,137 @@ class ZBaseLine extends StatelessWidget {
     print(mes);
     print(ano);
 
-    if (total.length == 10) {
+    if (controllerData.text.length == 10) {
       if (intMes < 13 && intDias < 32 && intAno < 2004 && intAno > 1901) {
         if (intDias == 00 || intMes == 00 || intAno == 00) {
-          showAlertDialogNew("Data Inválida!", "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
-
-        } else if (intMes == 01 || intMes == 03 || intMes == 05 || intMes == 07 || intMes == 08 || intMes == 10 || intMes == 12) {
+          showAlertDialogNew("Data Inválida!",
+              "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
+        } else if (intMes == 01 ||
+            intMes == 03 ||
+            intMes == 05 ||
+            intMes == 07 ||
+            intMes == 08 ||
+            intMes == 10 ||
+            intMes == 12) {
           if (intDias > 31) {
-            showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-          }
-          else {
+            showAlertDialogNew(
+                "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+          } else {
             valideMes = true;
           }
-        } else if (intMes == 04 || intMes == 06 || intMes == 09 || intMes == 11) {
+        } else if (intMes == 04 ||
+            intMes == 06 ||
+            intMes == 09 ||
+            intMes == 11) {
           if (intDias > 30) {
-            showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-          }
-          else {
+            showAlertDialogNew(
+                "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+          } else {
             valideMes = true;
           }
         } else {
           if (bisexto == true) {
             if (intDias > 29) {
-              showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
-            }
-            else {
+              showAlertDialogNew(
+                  "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+            } else {
               valideMes = true;
             }
           } else {
             if (intDias > 28) {
-              showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
-            }
-            else {
+              showAlertDialogNew(
+                  "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+            } else {
               valideMes = true;
             }
           }
         }
       } else if (intMes > 12 && intDias < 32 && intAno < 2004) {
-
-        showAlertDialogNew("Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
+        showAlertDialogNew(
+            "Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
       } else if (intMes < 13 && intDias > 32 && intAno < 2004) {
-
-        showAlertDialogNew("Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-
+        showAlertDialogNew(
+            "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
       } else if (intMes < 13 && intDias < 32 && intAno > 2004) {
-
-        showAlertDialogNew("Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
-      }
-      else if(intAno < 1901){
-        showAlertDialogNew("Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
-      }
-      else if (intMes > 12 && intDias < 32 && intAno > 2004) {
-        showAlertDialogNew("Mês e Ano Inválido!", "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
-
+        showAlertDialogNew(
+            "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
+      } else if (intAno < 1901) {
+        showAlertDialogNew(
+            "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
+      } else if (intMes > 12 && intDias < 32 && intAno > 2004) {
+        showAlertDialogNew("Mês e Ano Inválido!",
+            "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
       } else if (intMes > 12 && intDias > 32 && intAno < 2004) {
-
-        showAlertDialogNew("Mês e Dia Inválido!", "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
-
+        showAlertDialogNew("Mês e Dia Inválido!",
+            "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
       } else if (intMes < 13 && intDias > 32 && intAno > 2004) {
-
-        showAlertDialogNew("Dia e Ano Inválido!", "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
+        showAlertDialogNew("Dia e Ano Inválido!",
+            "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
       } else {
-
-        showAlertDialogNew("Data Inválida!", "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
+        showAlertDialogNew("Data Inválida!",
+            "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
       }
     }
   }
-  void mesHasFocus(){
-    if(total == null)
-      {
-        showAlertDialogNew("Data Inválida!", "Por Favor, digite sua data de nascimento.");
-      }
-      else if (total.length < 10)
-        {
-          showAlertDialogNew("Data Inválida!", "Por Favor, termine de digitar sua data de nascimento");
 
-        }
+  void mesHasFocus() {
+    if (controllerData.text == null) {
+      showAlertDialogNew(
+          "Data Inválida!", "Por Favor, digite sua data de nascimento.");
+    } else if (controllerData.text.length < 10) {
+      showAlertDialogNew("Data Inválida!",
+          "Por Favor, termine de digitar sua data de nascimento");
+    }
   }
 
-  void _valideNome(){
-    if(nome == null)
-      {
-        valideNome = false;
-        showAlertDialogNew( "Nome Inválido!", "Por Favor insira o nome completo.");
-      }
-      else if (nome.split(' ').length <2 ){
+  void _valideNome() {
+    if (controllerNome.text == null) {
       valideNome = false;
-      showAlertDialogNew( "Nome Inválido!", "Por Favor insira o nome completo.");
-    }
-    else{
+      showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
+    } else if (controllerNome.text.split(' ').length < 2) {
+      valideNome = false;
+      showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
+    } else {
       valideNome = true;
     }
-
   }
+
   void _validarCPF() {
-    if (!CPFValidator.isValid(cPF)) {
+    if (!CPFValidator.isValid(controllerCPF.text)) {
       valideCPF = false;
-      showAlertDialogNew("CPF Inválido!","Por Favor insira um CPF válido.");
-    }
-    else{
+      showAlertDialogNew("CPF Inválido!", "Por Favor insira um CPF válido.");
+    } else {
       valideCPF = true;
     }
   }
 
   void _validarCelular() {
-    if (celular == null)
-      {
-        valideCelular = false;
-        showAlertDialogNew("Celular Inválido!", "Por Favor, digitar o seu celular.");
-      }
-    else if (celular.length < 14 ){
+    if (controllerCelular.text == null) {
       valideCelular = false;
-      showAlertDialogNew("Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
-    }
-    else{
+      showAlertDialogNew(
+          "Celular Inválido!", "Por Favor, digitar o seu celular.");
+    } else if (controllerCelular.text.length < 14) {
+      valideCelular = false;
+      showAlertDialogNew(
+          "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
+    } else {
       valideCelular = true;
     }
   }
+
   void _validarEmail() {
-    if(email == null)
-      {
-        valideEmail = false;
-        showAlertDialogNew("E-mail Inválido!","Por Favor insira um E-mail.");
-      }
-    else if (!EmailValidator.validate(email)) {
+    if (controllerEmail.text == null) {
       valideEmail = false;
-      showAlertDialogNew("E-mail Inválido!","Por Favor insira um E-mail válido.");
-    }
-    else{
+      showAlertDialogNew("E-mail Inválido!", "Por Favor insira um E-mail.");
+    } else if (!EmailValidator.validate(controllerEmail.text)) {
+      valideEmail = false;
+      showAlertDialogNew(
+          "E-mail Inválido!", "Por Favor insira um E-mail válido.");
+    } else {
       valideEmail = true;
     }
-
   }
+
   void showAlertDialogNew(String title, String message) async {
     showDialog(
         context: context,
@@ -565,4 +567,5 @@ class ZBaseLine extends StatelessWidget {
           ),
         ));
   }
+
 }
