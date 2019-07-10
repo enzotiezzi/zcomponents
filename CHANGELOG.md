@@ -1,3 +1,7 @@
+## 0.1.1
+
+*  created new component!
+
 ## 0.1.0
 
 *  created new components!

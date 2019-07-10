@@ -8,14 +8,14 @@ class ZPinSenha extends StatelessWidget {
   final Key key;
   final BuildContext context;
   final ZTipoSenha zTipos;
-  String change;
+  final Function(String) onChange;
   int numeroQuadrados;
 
   ZPinSenha(
       {this.key,
       this.context,
       this.zTipos = ZTipoSenha.isSenha,
-      this.change,
+      this.onChange,
       this.numeroQuadrados})
       : super(key: key) {
     switch (zTipos) {
@@ -55,9 +55,7 @@ class ZPinSenha extends StatelessWidget {
                               Duration(milliseconds: 150),
                           pinTextStyle: new TextStyle(fontSize: 22),
                           hideCharacter: true,
-                          onTextChanged: (text) {
-                            change = text;
-                          }))),
+                          onTextChanged: onChange))),
             ],
           ),
         );
@@ -97,9 +95,7 @@ class ZPinSenha extends StatelessWidget {
                               Duration(milliseconds: 150),
                           pinTextStyle: new TextStyle(fontSize: 22),
                           hideCharacter: true,
-                          onTextChanged: (text) {
-                            change = text;
-                          }))),
+                          onTextChanged: onChange))),
             ],
           ),
         );

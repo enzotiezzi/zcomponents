@@ -70,7 +70,7 @@ class _ZPerfilState extends State<ZPerfil> {
           titulo: widget.tituloHeader,
           children: <Widget>[
             new Container(
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.only(right: 10.0, left: 10.0),
               child: ZItemTile(
                 image: widget.image,
                 status: widget.statusInfo,

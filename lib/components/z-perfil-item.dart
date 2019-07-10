@@ -18,43 +18,89 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
     return new GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-        itemCount: widget.numeroQuadrados,
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisSpacing: 10.0, mainAxisSpacing: 10.0, crossAxisCount: 3),
-        itemBuilder: (context, index) {
-          return new Material(
-            borderRadius: BorderRadius.all(Radius.circular(7.0)),
-            color: Colors.white,
-            elevation: 2.0,
-            child: new Container(
-              child: new Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  new Container(
-                    margin: EdgeInsets.only(bottom: 10.0, top: 18.0, left: 2.0),
-                    child: new Icon(
-                      widget.listaIcones[index],
-                      color: const Color(0xff2BBAB4),
+      itemCount: widget.numeroQuadrados,
+      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 10.0, mainAxisSpacing: 10.0, crossAxisCount: 3),
+      itemBuilder: (context, index) {
+        return (index == widget.numeroQuadrados - 1 ||
+                index == widget.numeroQuadrados - 2 ||
+                index == widget.numeroQuadrados - 3)
+            ? new Container(
+                margin: EdgeInsets.only(bottom: 2.0),
+                child: new Material(
+                  borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  color: Colors.white,
+                  elevation: 2.0,
+                  child: new Container(
+                    child: new Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        new Container(
+                          margin: EdgeInsets.only(
+                              bottom: 10.0, top: 18.0, left: 2.0),
+                          child: new Icon(
+                            widget.listaIcones[index],
+                            color: const Color(0xff2BBAB4),
+                          ),
+                        ),
+                        new Container(
+                          margin: EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: (widget.listaTextos[index] != null)
+                              ? new Text(
+                                  widget.listaTextos[index],
+                                  style:
+                                      TextStyle(color: const Color(0xff999999)),
+                                )
+                              : new Text(
+                                  widget.listaTextos[index],
+                                  style:
+                                      TextStyle(color: const Color(0xff999999)),
+                                ),
+                        )
+                      ],
                     ),
                   ),
-                  new Container(
-                    margin: EdgeInsets.only(left: 5.0, right: 5.0),
-                    child: (widget.listaTextos[index] != null)?new Text(
-                      widget.listaTextos[index],
-                      style: TextStyle(color: const Color(0xff999999)),
-                    ): new Text(
-                      widget.listaTextos[index],
-                      style: TextStyle(color: const Color(0xff999999)),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-      )
-    ;
+                ),
+              )
+            : new Material(
+                borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                color: Colors.white,
+                elevation: 2.0,
+                child: new Container(
+                  child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      new Container(
+                        margin:
+                            EdgeInsets.only(bottom: 10.0, top: 18.0, left: 2.0),
+                        child: new Icon(
+                          widget.listaIcones[index],
+                          color: const Color(0xff2BBAB4),
+                        ),
+                      ),
+                      new Container(
+                        margin: EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: (widget.listaTextos[index] != null)
+                            ? new Text(
+                                widget.listaTextos[index],
+                                style:
+                                    TextStyle(color: const Color(0xff999999)),
+                              )
+                            : new Text(
+                                widget.listaTextos[index],
+                                style:
+                                    TextStyle(color: const Color(0xff999999)),
+                              ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+      },
+    );
   }
 }

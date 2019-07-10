@@ -75,6 +75,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var controllerCPF = new TextEditingController();
   var controllerCelular = new TextEditingController();
   var controllerData = new TextEditingController();
+  var controllerSenha = new TextEditingController();
+  var controllerRepetirSenha = new TextEditingController();
+
   bool value = false;
 
   ZBaseLine valideNome;
@@ -328,12 +331,18 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                             controllerCPF: controllerCPF,
                             controllerNome: controllerNome,
                             controllerEmail: controllerEmail,
+                        controllerSenha: controllerSenha,
+                        controllerRepetirSenha: controllerRepetirSenha,
+                        context: context,
                             onPressed: () {
                               print(controllerNome.text);
                               print(controllerCPF.text);
                               print(controllerCelular.text);
                               print(controllerData.text);
                               print(controllerEmail.text);
+                              print(controllerSenha.text);
+                              print(controllerRepetirSenha.text);
+
                             },
                           )),
                 );
