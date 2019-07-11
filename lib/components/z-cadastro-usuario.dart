@@ -13,7 +13,12 @@ class ZCadastroUsuario extends StatefulWidget {
   Widget zTelaCadastro;
   Widget tituloAppBar;
 
-  final Key key;
+  Key key = GlobalKey(debugLabel: 'a');
+  Key key2 = GlobalKey(debugLabel: 'b');
+  Key key3 = GlobalKey(debugLabel: 'c');
+  Key key4 = GlobalKey(debugLabel: 'd');
+  Key key5 = GlobalKey(debugLabel: 'e');
+
   final BuildContext context;
   var controllerEmail = new TextEditingController();
   var controllerNome = new TextEditingController();
@@ -91,27 +96,32 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
           ),
         ),
-       valideNome= new ZBaseLine(
+        valideNome = new ZBaseLine(
+          key: widget.key,
           controllerNome: widget.controllerNome,
           zTipos: ZTipoBaseline.isNomeCompleto,
           context: widget.context,
         ),
-       valideCPF= new ZBaseLine(
+        valideCPF = new ZBaseLine(
+          key: widget.key2,
           controllerCPF: widget.controllerCPF,
           zTipos: ZTipoBaseline.isCPF,
           context: widget.context,
         ),
-     valideCelular=   new ZBaseLine(
+        valideCelular = new ZBaseLine(
+          key: widget.key3,
           controllerCelular: widget.controllerCelular,
           zTipos: ZTipoBaseline.isCelular,
           context: widget.context,
         ),
-       valideEmail= new ZBaseLine(
+        valideEmail = new ZBaseLine(
+          key: widget.key4,
           controllerEmail: widget.controllerEmail,
           zTipos: ZTipoBaseline.isEmail,
           context: widget.context,
         ),
-      valideData=  new ZBaseLine(
+        valideData = new ZBaseLine(
+          key: widget.key5,
           controllerData: widget.controllerData,
           zTipos: ZTipoBaseline.isDataNascimento,
           context: widget.context,

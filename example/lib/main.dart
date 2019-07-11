@@ -354,7 +354,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ZPerfil(tituloAppBar: new Text("PERFIL DO COLABORADOR"),
+                      builder: (context) => ZPerfil(
                             onTapVoltar: () {
                               Navigator.of(context).pop();
                             },
