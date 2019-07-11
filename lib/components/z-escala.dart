@@ -7,11 +7,10 @@ import 'package:z_components/view-model/EscalaViewModel.dart';
 
 class ZEscala extends StatefulWidget {
   final String token;
+  String selecionado;
   Key key;
 
-
-  ZEscala({  Key key
-    ,this.token}) : super(key: key);
+  ZEscala({Key key, this.token}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZEscalaState();
@@ -21,8 +20,6 @@ class ZEscalaState extends State<ZEscala> {
   ZCollectionItem _itemSelecionado;
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
-
-  var key = new GlobalKey<ZCollectionState>();
 
   IZEscalaService _service;
 
@@ -38,15 +35,21 @@ class ZEscalaState extends State<ZEscala> {
   @override
   Widget build(BuildContext context) {
     return new ZCollection(
-      key: key,
+      key: widget.key,
       titulo: "Escalas",
       lista: _escalas
           .map((x) => new ZCollectionItem(
-          chave: x.idEscala, titulo: x.nome, valor: x.nome))
+              chave: x.idEscala, titulo: x.nome, valor: x.nome))
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
-      },
+        if (item == null) {
+          widget.selecionado = widget.selecionado;
+        }
+        else {
+          widget.selecionado = item.chave;
+        }
+      }
     );
   }
 
