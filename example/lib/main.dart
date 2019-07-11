@@ -24,6 +24,11 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/components/z-expendable-item-tile.dart';
+import 'package:z_components/components/z-cargo.dart';
+import 'package:z_components/components/z-escala.dart';
+import 'package:z_components/components/z-local.dart';
+
+
 
 void main() => runApp(MyApp());
 
@@ -86,8 +91,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
 
-  Key _expansionTile;
-  bool _collapsed = true;
+
   String _value = "open";
 
   List<String> titulos = [
@@ -113,10 +117,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     Icons.view_stream
   ];
 
+  var _key = new GlobalKey<ZCargoState>();
+  var _keyEscala = new GlobalKey<ZEscalaState>();
+  var _keyLocal = new GlobalKey<ZEscalaState>();
+
   @override
   void initState() {
     super.initState();
-    _expansionTile = PageStorageKey<String>(_value);
   }
 
   @override
@@ -128,7 +135,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         appBar: ZNavigationBar(
           leading: new Icon(Icons.print),
-          middle: new Container(child: new Text('teste'),),
+          middle: new Container(
+            child: new Text('teste'),
+          ),
           trailing: new GestureDetector(
             onTap: () {
               Navigator.push(
@@ -168,223 +177,25 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
           ),
         ),
         body: new ListView(children: <Widget>[
-          new Column(children: <Widget>[
-            new ZHeader(
-              zTipos: ZTipoHeader.isExpansion,
-              titulo: "TESTE",
-            ),
-            new ZHeaderExpansion(
-              titulo: "Teste Expanded",
-              collapsed: _collapsed,
-              onTap: () {
-                print("TabTeste");
-              },
-            ),
-            valideNome = new ZBaseLine(
-              zTipos: ZTipoBaseline.isNomeCompleto,
-              context: context,
-            ),
-            valideCPF = new ZBaseLine(
-              zTipos: ZTipoBaseline.isCPF,
-              context: context,
-            ),
-            valideCelular = new ZBaseLine(
-              zTipos: ZTipoBaseline.isCelular,
-              context: context,
-            ),
-            valideEmail = new ZBaseLine(
-              zTipos: ZTipoBaseline.isEmail,
-              context: context,
-            ),
-            valideData = new ZBaseLine(
-              zTipos: ZTipoBaseline.isDataNascimento,
-              context: context,
-            ),
-            new Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: new ZExpansion(
-                childTitle: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Container(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: new Text("Titulo"),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            new ZPGrafico(
-              key: _expansionTile,
-              tituloCenterCircle: "ESCOLA",
-              titulo: "Ponto Hoje",
-              tituloItem1: "Sapatos",
-              tituloItem2: "Escovas",
-              tituloItem3: "Disco Vinil",
-              valueItem1: 10.0,
-              valueItem2: 30.0,
-              valueItem3: 10.0,
-              onTapItem1: () {
-                print("Tap Item 1");
-              },
-              onTapItem2: () {
-                print("Tap Item 2");
-              },
-              onTapItem3: () {
-                print("Tap Item 3");
-              },
-            ),
-            new ZHora(),
-            new ZHoraUmCampo(
-              titulo: "Horinha",
-            ),
-            new ZPinSenha(
-              context: context,
-              numeroQuadrados: 4,
-              zTipos: ZTipoSenha.isSenha,
-            ),
-            new ZPinSenha(
-              context: context,
-              numeroQuadrados: 4,
-              zTipos: ZTipoSenha.isRepetirSenha,
-            ),
-            new ZCheckCPF(),
-            new ZItemTile(
-              textoTitulo:
-                  "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
-              textoDois: "Sede - Fernando ltda.",
-              textoTres: "Sede - Fernando ltda.",
-              textoQuatro: "5x2",
-              textoCinco: "(seg-sex)",
-              textoSeis: "08:00-17:48",
-              textoSete: "1:00",
-              textoCodigo: "012345",
-              status: true,
-              funcao: () {},
-            ),
-            Container(
-              height: 30.0,
-            ),
-            new ZItemTile(),
-            Container(
-              height: 30.0,
-            ),
-            new ZExpendableItemTile(
-              textoTitulo:
-                  "Bento Raimundo da Mata ag rg G wrgWRAER HGAER H tshssth ",
-              textoDois: "Sede - Fernando ltda.",
-              textoTres: "Sede - Fernando ltda.",
-              textoQuatro: "5x2",
-              textoCinco: "(seg-sex)",
-              textoSeis: "08:00-17:48",
-              textoSete: "1:00",
-              textoCodigo: "012345",
-              status: true,
-              funcao: () {},
-              iconeUm: new Icon(Icons.phone, color: const Color(0xff2BB9B4)),
-              textoIconeUm: "(11)99867-9893",
-              iconeDois: new Icon(Icons.map, color: const Color(0xff2BB9B4)),
-              textoIconeDois: "Casa - trabalho",
-              iconeTres:
-                  new Icon(Icons.description, color: const Color(0xff2BB9B4)),
-              textoIconeTres: "Espelho de Ponto",
-              iconeQuatro:
-                  new Icon(Icons.warning, color: const Color(0xff2BB9B4)),
-              textoIconeQuatro: "Ocorrencia",
-            ),
-            Container(
-              height: 30.0,
-            ),
-            ZExpendableItemTile(),
-            Container(
-              height: 30.0,
-            ),
-            new Container(
-              height: 80.0,
-            ),
-            new RaisedButton(
-                color: Colors.blue,
-                child: new Text(
-                  "teste aprovacao",
-                  style: new TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  if (valideNome.valideNome == true) {
-                    print("apto");
-                  } else {
-                    print("naoApto");
-                  }
-                }),
-            new ZButton(
-              zButtonType: ZButtonType.isContained,
-              text: "CADASTRO USUARIO",
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ZCadastroUsuario(
-                            tituloAppBar: new Text("CADASTRO USUARIO"),
-                            onTapVoltar: () {
-                              Navigator.of(context).pop();
-                            },
-                            controllerData: controllerData,
-                            controllerCelular: controllerCelular,
-                            controllerCPF: controllerCPF,
-                            controllerNome: controllerNome,
-                            controllerEmail: controllerEmail,
-                        controllerSenha: controllerSenha,
-                        controllerRepetirSenha: controllerRepetirSenha,
-                        context: context,
-                            onPressed: () {
-                              print(controllerNome.text);
-                              print(controllerCPF.text);
-                              print(controllerCelular.text);
-                              print(controllerData.text);
-                              print(controllerEmail.text);
-                              print(controllerSenha.text);
-                              print(controllerRepetirSenha.text);
+          new ZCargo(
+            onChange: (item){
+              print("${item.titulo}");
+            },
+            key: _key,
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",),
+          new ZEscala(
+            onChange: (item){
+              print("${item.titulo}");
+            },
+            key: _keyEscala,
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",)
+ /*         new ZLocal(
+            onChange: (item){
+              print("${item.titulo}");
+            },
+            key: _keyEscala,
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",),*/
 
-                            },
-                          )),
-                );
-              },
-            ),
-            new ZButton(
-              text: "PERFIL",
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ZPerfil(
-                            tituloAppBar: new Text("PERFIL DO COLABORADOR"),
-                            onTapVoltar: () {
-                              Navigator.of(context).pop();
-                            },
-                            listaIcones: icones,
-                            listaTextos: titulos,
-                            numeroQuadrados: titulos.length,
-                            statusInfo: true,
-                            textoContato: "(11)9 98679893",
-                            textoLocalizacao:
-                                "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
-                            tituloHeader: "Giuliano Ortiz",
-                            textoTituloInfo: "Giuliano Ortiz",
-                            textoLocalInfo: "Sede - Xolis ltda.",
-                            textoCargoInfo: "Garoto de TI",
-                            textoEscalaInfo: "5x2(seg-sex)",
-                            textoHoraEntradaInfo: "09:00",
-                            textoHoraSaidaInfo: "15:30",
-                            textoHoraIntervaloInfo: "1:00",
-                            textoCodigoInfo: "012345",
-                          )),
-                );
-              },
-            ),
-            new ZButton(
-              zButtonType: ZButtonType.isCadastro,
-              onPressed: (){},
-            ),
-          ]),
         ]));
   }
 }
