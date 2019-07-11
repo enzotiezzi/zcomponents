@@ -10,7 +10,7 @@ class ZEscala extends StatefulWidget {
   String selecionado;
   Key key;
 
-  ZEscala({Key key, this.token}) : super(key: key);
+  ZEscala({Key key, this.token,this.selecionado}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZEscalaState();

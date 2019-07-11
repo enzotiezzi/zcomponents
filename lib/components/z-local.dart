@@ -11,7 +11,7 @@ class ZLocal extends StatefulWidget {
   String selecionado;
   Key key;
 
-  ZLocal({Key key, this.token, this.idEmpresa}) : super(key: key);
+  ZLocal({Key key, this.token, this.idEmpresa,this.selecionado}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZLocalState();

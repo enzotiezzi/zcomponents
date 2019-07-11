@@ -10,7 +10,7 @@ class ZCargo extends StatefulWidget {
   String selecionado;
   Key key;
 
-  ZCargo({Key key, this.token}) : super(key: key);
+  ZCargo({Key key, this.token,this.selecionado}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZCargoState();
