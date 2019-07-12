@@ -197,6 +197,39 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             key: _keyEscala,
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",),*/
 
+, new ZButton(
+            text: "CADASTRO USUARIO",
+            onPressed: (){
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>   new ZCadastroUsuario(
+                context: context,
+                controllerNome: controllerNome,
+                controllerCPF: controllerCPF,
+                controllerEmail: controllerEmail,
+                controllerCelular: controllerCelular,
+                controllerData: controllerData,
+                controllerSenha: controllerSenha,
+                controllerRepetirSenha: controllerRepetirSenha,
+                onPressed: (){
+                  print(controllerNome.text);
+                  print(controllerCPF.text);
+                  print(controllerEmail.text);
+                  print(controllerCelular.text);
+                  print(controllerData.text);
+                  print(controllerSenha.text);
+                  print(controllerRepetirSenha.text);
+
+
+
+                },
+              )),
+            );
+
+
+          },)
+
         ]));
   }
 }

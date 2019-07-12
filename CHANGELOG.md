@@ -1,3 +1,11 @@
+## 0.1.8
+
+* Correction ZEscala and update ZHORA!
+
+## 0.1.7
+
+* Correction ZCARGO, ZESCALA, ZLOCAL!
+
 ## 0.1.6
 
 * Correction ZCARGO, ZESCALA, ZLOCAL!

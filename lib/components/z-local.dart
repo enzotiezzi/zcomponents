@@ -11,7 +11,11 @@ class ZLocal extends StatefulWidget {
   final String idEmpresa;
   final Key key;
 
-  ZLocal({this.key,@required this.token, @required this.idEmpresa,this.onChange});
+  ZLocal(
+      {this.key,
+      @required this.token,
+      @required this.idEmpresa,
+      this.onChange});
 
   @override
   State<StatefulWidget> createState() => ZLocalState();
@@ -21,9 +25,7 @@ class ZLocalState extends State<ZLocal> {
   ZCollectionItem _itemSelecionado;
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
-
   IZLocalService _service;
-
   var _centroCustos = new List<CentroCustoViewModel>();
 
   @override
@@ -43,14 +45,13 @@ class ZLocalState extends State<ZLocal> {
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
-        if(widget.onChange != null) widget.onChange(item);
+        if (widget.onChange != null) widget.onChange(item);
       },
     );
   }
 
   void _listarLocais() async {
     var centroCustos = await _service.listarCentrosCusto();
-
     if (centroCustos != null) {
       setState(() {
         _centroCustos = centroCustos;
