@@ -1,3 +1,19 @@
+## 0.1.4
+
+* Correction ZCARGO!
+
+## 0.1.3
+
+* Correction ZCARGO!
+
+## 0.1.2
+
+* Correction!
+
+## 0.1.1
+
+*  created new component!
+
 ## 0.1.0
 
 *  created new components!

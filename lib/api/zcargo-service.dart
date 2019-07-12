@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:z_components/api/service.dart';
 import 'package:z_components/interface/i-zcargo-service.dart';
 import 'package:z_components/settings/api-settings.dart';
@@ -6,7 +7,7 @@ import 'package:z_components/view-model/cargo-viewmodel.dart';
 import 'package:http/http.dart' as http;
 
 class ZCargoService extends Service implements IZCargoService {
-  String _uRL = "${ApiSettings.ENDPOINT}/zponto";
+  String _URL = "${ApiSettings.ENDPOINT}/zponto";
 
   final String token;
 
@@ -15,7 +16,8 @@ class ZCargoService extends Service implements IZCargoService {
   @override
   Future<List<CargoViewModel>> listarCargos() async {
     try {
-      var url = "$_uRL/listar-cargos";
+
+      var url = "$_URL/listar-cargos";
 
       var response = await http.get(url, headers: headers);
 
