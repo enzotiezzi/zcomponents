@@ -7,12 +7,11 @@ import 'package:z_components/view-model/centrocusto-viewmodel.dart';
 
 class ZLocal extends StatefulWidget {
   final String token;
+  final ValueChanged<ZCollectionItem> onChange;
   final String idEmpresa;
-  Key key;
+  final Key key;
 
-
-  ZLocal({  Key key
-  ,this.token, this.idEmpresa}) : super(key: key);
+  ZLocal({this.key,@required this.token, @required this.idEmpresa,this.onChange});
 
   @override
   State<StatefulWidget> createState() => ZLocalState();
@@ -22,8 +21,6 @@ class ZLocalState extends State<ZLocal> {
   ZCollectionItem _itemSelecionado;
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
-
-  var key = new GlobalKey<ZCollectionState>();
 
   IZLocalService _service;
 
@@ -39,14 +36,14 @@ class ZLocalState extends State<ZLocal> {
   @override
   Widget build(BuildContext context) {
     return new ZCollection(
-      key: key,
       titulo: "Locais",
       lista: _centroCustos
           .map((x) => new ZCollectionItem(
-          chave: x.idCentroCusto, titulo: x.nome, valor: x.nome))
+              chave: x.idCentroCusto, titulo: x.nome, valor: x.nome))
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
+        if(widget.onChange != null) widget.onChange(item);
       },
     );
   }

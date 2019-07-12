@@ -7,9 +7,10 @@ import 'package:z_components/api/zcargo-service.dart';
 
 class ZCargo extends StatefulWidget {
   final String token;
-  Key key;
+  final Key key;
+  final ValueChanged<ZCollectionItem> onChange;
 
-  ZCargo({Key key, this.token}) : super(key: key);
+  ZCargo({this.key, @required this.token , this.onChange});
 
   @override
   State<StatefulWidget> createState() => ZCargoState();
@@ -19,8 +20,6 @@ class ZCargoState extends State<ZCargo> {
   ZCollectionItem _itemSelecionado;
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
-
-  var key = new GlobalKey<ZCollectionState>();
 
   IZCargoService _service;
 
@@ -36,7 +35,6 @@ class ZCargoState extends State<ZCargo> {
   @override
   Widget build(BuildContext context) {
     return new ZCollection(
-      key: key,
       titulo: "Cargos",
       lista: _cargos
           .map((x) => new ZCollectionItem(
@@ -44,6 +42,7 @@ class ZCargoState extends State<ZCargo> {
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
+        if(widget.onChange != null) widget.onChange(item);
       },
     );
   }

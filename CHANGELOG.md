@@ -1,6 +1,14 @@
+## 0.1.6
+
+* Correction ZCARGO, ZESCALA, ZLOCAL!
+
+## 0.1.5
+
+* Correction ZCARGO, ZESCALA, ZLOCAL!
+
 ## 0.1.4
 
-* Correction ZCARGO!
+* Correction ZCARGO, ZESCALA, ZLOCAL!
 
 ## 0.1.3
 
