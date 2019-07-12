@@ -5,22 +5,24 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 
 class ZHora extends StatefulWidget {
-  _HoraState state;
+  final TextEditingController controllerHoraEntrada;
+  final TextEditingController controllerHoraSaida;
+  final TextEditingController controllerIntervalo;
 
-  ZHora({Key key}) : super(key: key);
+  ZHora({Key key,this.controllerHoraEntrada,this.controllerHoraSaida,this.controllerIntervalo}) : super(key: key);
 
   @override
-  _HoraState createState() {
-    state = new _HoraState();
-
-    return state;
+  State<StatefulWidget> createState() => _HoraState();
   }
-}
 
 class _HoraState extends State<ZHora> {
   bool dMaisUm = false;
 
   bool _visibles = false;
+
+  bool okEntrada;
+  bool okSaida;
+  bool okIntervalo;
 
   FocusNode _focusEntrada;
   FocusNode _focusSaida;
@@ -30,11 +32,19 @@ class _HoraState extends State<ZHora> {
   String _minutoEntrada;
   int _intHoraEntrada = 0;
   int _intMinutoEntrada;
+  
+  String horarioInteiroEntrada;
+  String horarioInteiroSaida;
+  String horarioInteiroIntervalo;
 
   String _horaSaida;
   String _minutoSaida;
-  int _intHoraSaida;
+  int _intHoraSaida = 0;
   int _intMinutoSaida;
+
+  Color ColorHoraEntrada = Colors.white;
+  Color ColorHoraSaida = Colors.white;
+  Color ColorIntervalo = Colors.white;
 
   String _horaIntervalo;
   String _minutoIntervalo;
@@ -48,8 +58,39 @@ class _HoraState extends State<ZHora> {
     _focusEntrada = FocusNode();
     _focusSaida = FocusNode();
     _focusIntervalo = FocusNode();
+    _focusEntrada.addListener(() {
+      if (!_focusEntrada.hasFocus && horarioInteiroEntrada.length < 5) {
+        showAlertDialogNew("Campo Incompleto!","Por Favor, termine de digitar o horário de entrada.");
+        _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+      }
+    });
     _focusSaida.addListener(() {
-      if (_intHoraEntrada > _intHoraSaida) {
+
+      if (!_focusSaida.hasFocus && horarioInteiroSaida.length < 5) {
+        showAlertDialogNew("Campo Incompleto!","Por Favor, termine de digitar o horário de saída.");
+        _fieldFocusChange(context, _focusSaida, _focusSaida);
+      }
+  /*    else if(horarioInteiroEntrada == null)
+        {
+          showAlertDialogNewAlert("OPS!","Por Favor, digite primeiro o horario de entrada.");
+          _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+
+        }*/
+    });
+    _focusIntervalo.addListener(() {
+      if (!_focusIntervalo.hasFocus && horarioInteiroIntervalo.length < 5) {
+        showAlertDialogNew("Campo Incompleto!","Por Favor, termine de digitar o horário de intervalo.");
+        _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
+      }
+    /*  else if(horarioInteiroEntrada == null || horarioInteiroSaida == null)
+      {
+        showAlertDialogNewAlert("OPS!","Por Favor, digite primeiro o horario de entrada.");
+        _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+
+      }*/
+    });
+    _focusSaida.addListener(() {
+      if (_intHoraEntrada > _intHoraSaida && _intHoraSaida != 0) {
         setState(() {
           _visibles = true;
         });
@@ -112,6 +153,7 @@ class _HoraState extends State<ZHora> {
                           margin: EdgeInsets.only(left: 10),
                           padding: EdgeInsets.only(top: 5, bottom: 5),
                           decoration: new BoxDecoration(
+                            border: new Border.all(color: ColorHoraEntrada ,width: 2),
                             color: Colors.white,
                             borderRadius: new BorderRadius.all(
                                 const Radius.circular(5.0)),
@@ -119,15 +161,15 @@ class _HoraState extends State<ZHora> {
                           child: new Container(
                               margin: EdgeInsets.only(left: 30.0),
                               child: new TextField(
+                                controller: widget.controllerHoraEntrada,
                                 onSubmitted: (term) {
                                   _fieldFocusChange(
-                                      context, _focusEntrada, _focusSaida);
+                                      context, _focusEntrada, _focusEntrada);
                                 },
                                 inputFormatters: [
                                   MaskedTextInputFormatterShifter(
                                       maskONE: "XX:XX", maskTWO: "XX:XX"),
-                                  BlacklistingTextInputFormatter(
-                                      RegExp("[/\\\\,.-]")),
+                                  BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
                                 ],
                                 focusNode: _focusEntrada,
                                 keyboardType: TextInputType.number,
@@ -135,6 +177,7 @@ class _HoraState extends State<ZHora> {
                                 decoration:
                                     InputDecoration.collapsed(hintText: ""),
                                 onChanged: (text) {
+                                  horarioInteiroEntrada = text;
                                   _horaEntrada = text.substring(0, 2);
                                   _minutoEntrada = text.substring(3, 5);
                                   _intHoraEntrada = int.parse(_horaEntrada);
@@ -142,19 +185,38 @@ class _HoraState extends State<ZHora> {
                                   if (text.length == 5) {
                                     if (_intHoraEntrada > 23 &&
                                         _intMinutoEntrada > 59) {
-                                      showAlertDialogNew("Horario Inválido!",
-                                          "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+                                      showAlertDialogNew("Horario Inválido!", "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+                                      _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+                                      okEntrada = false;
+                                      setState(() {
+                                        ColorHoraEntrada = const Color(0xffE53629);
+                                      });
+
                                     } else if (_intHoraEntrada > 23 &&
                                         _intMinutoEntrada < 59) {
-                                      showAlertDialogNew("Hora Inválida!",
-                                          "Por favor insira um valor de hora entre 00 e 23.");
+                                      showAlertDialogNew("Hora Inválida!", "Por favor insira um valor de hora entre 00 e 23.");
+                                      _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+                                      okEntrada = false;
+                                      setState(() {
+                                        ColorHoraEntrada = const Color(0xffE53629);
+                                      });
+
                                     } else if (_intHoraEntrada < 24 &&
                                         _intMinutoEntrada > 59) {
-                                      showAlertDialogNew("Minuto Inválido!",
-                                          "Por favor insira um valor de minuto entre 00 e 59.");
+                                      showAlertDialogNew("Minuto Inválido!", "Por favor insira um valor de minuto entre 00 e 59.");
+                                      _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+                                      okEntrada = false;
+                                      setState(() {
+                                        ColorHoraEntrada = const Color(0xffE53629);
+                                      });
+
                                     } else {
                                       _fieldFocusChange(
                                           context, _focusEntrada, _focusSaida);
+                                      okEntrada = true;
+                                      setState(() {
+                                        ColorHoraEntrada = const Color(0xff1AC15D);
+                                      });
                                     }
                                   }
                                 },
@@ -166,6 +228,7 @@ class _HoraState extends State<ZHora> {
                             margin: EdgeInsets.only(right: 10, left: 10),
                             padding: EdgeInsets.only(top: 5, bottom: 5),
                             decoration: new BoxDecoration(
+                              border: new Border.all(color: ColorHoraSaida ,width: 2),
                               color: Colors.white,
                               borderRadius: new BorderRadius.all(
                                   const Radius.circular(5.0)),
@@ -173,8 +236,14 @@ class _HoraState extends State<ZHora> {
                             child: new Stack(
                               children: <Widget>[
                                 new Container(
-                                    margin: EdgeInsets.only(left: 30.0),
+                                  margin: _visibles ? const EdgeInsets.only(right: 10): const EdgeInsets.only(right: 0),
                                     child: new TextField(
+                                      onSubmitted: (term) {
+                                        _fieldFocusChange(
+                                            context, _focusSaida, _focusSaida);
+                                      },
+                                      textAlign: TextAlign.center,
+                                      controller: widget.controllerHoraSaida,
                                       inputFormatters: [
                                         MaskedTextInputFormatterShifter(
                                             maskONE: "XX:XX", maskTWO: "XX:XX"),
@@ -187,29 +256,54 @@ class _HoraState extends State<ZHora> {
                                       decoration: InputDecoration.collapsed(
                                           hintText: ""),
                                       onChanged: (text) {
+                                        horarioInteiroSaida = text;
                                         _horaSaida = text.substring(0, 2);
                                         _minutoSaida = text.substring(3, 5);
                                         _intHoraSaida = int.parse(_horaSaida);
-                                        _intMinutoSaida =
-                                            int.parse(_minutoSaida);
+                                        _intMinutoSaida = int.parse(_minutoSaida);
+                                        
                                         if (text.length == 5) {
                                           if (_intHoraSaida > 23 &&
                                               _intMinutoSaida > 59) {
                                             showAlertDialogNew(
                                                 "Horario Inválido!",
                                                 "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+                                            _fieldFocusChange(context, _focusSaida, _focusSaida);
+                                            okSaida = false;
+                                            setState(() {
+                                              ColorHoraSaida = const Color(0xffE53629);
+                                            });
                                           } else if (_intHoraSaida > 23 &&
                                               _intMinutoSaida < 59) {
                                             showAlertDialogNew("Hora Inválida!",
                                                 "Por favor insira um valor de hora entre 00 e 23.");
+                                            _fieldFocusChange(context, _focusSaida, _focusSaida);
+                                            okSaida = false;
+
+                                            setState(() {
+                                              ColorHoraSaida = const Color(0xffE53629);
+                                            });
+
                                           } else if (_intHoraSaida < 23 &&
                                               _intMinutoSaida > 59) {
                                             showAlertDialogNew(
                                                 "Minuto Inválido!",
                                                 "Por favor insira um valor de minuto entre 00 e 59.");
+                                            _fieldFocusChange(context, _focusSaida, _focusSaida);
+                                            okSaida = false;
+
+                                            setState(() {
+                                              ColorHoraSaida = const Color(0xffE53629);
+                                            });
+
                                           } else {
                                             _fieldFocusChange(context,
                                                 _focusSaida, _focusIntervalo);
+                                            okSaida = true;
+
+                                            setState(() {
+                                              ColorHoraSaida = const Color(0xff1AC15D);
+                                            });
                                           }
                                         }
                                       },
@@ -254,6 +348,7 @@ class _HoraState extends State<ZHora> {
                           margin: EdgeInsets.only(right: 10),
                           padding: EdgeInsets.only(top: 5, bottom: 5),
                           decoration: new BoxDecoration(
+                            border: new Border.all(color: ColorIntervalo ,width: 2),
                             color: Colors.white,
                             borderRadius: new BorderRadius.all(
                                 const Radius.circular(5.0)),
@@ -261,6 +356,11 @@ class _HoraState extends State<ZHora> {
                           child: new Container(
                               margin: EdgeInsets.only(left: 30.0),
                               child: new TextField(
+                                onSubmitted: (term) {
+                                  _fieldFocusChange(
+                                      context, _focusIntervalo, _focusIntervalo);
+                                },
+                                controller: widget.controllerIntervalo,
                                 focusNode: _focusIntervalo,
                                 inputFormatters: [
                                   MaskedTextInputFormatterShifter(
@@ -273,6 +373,7 @@ class _HoraState extends State<ZHora> {
                                 decoration:
                                     InputDecoration.collapsed(hintText: ""),
                                 onChanged: (text) {
+                                  horarioInteiroIntervalo = text;
                                   _horaIntervalo = text.substring(0, 2);
                                   _minutoIntervalo = text.substring(3, 5);
                                   _intHoraIntervalo = int.parse(_horaIntervalo);
@@ -284,18 +385,33 @@ class _HoraState extends State<ZHora> {
                                         _intMinutoIntervalo > 59) {
                                       showAlertDialogNew("Horario Inválido!",
                                           "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+                                      _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
+                                      okIntervalo = false;
+                                      setState(() {
+                                        ColorIntervalo = const Color(0xffE53629);
+                                      });
                                     } else if (_intHoraIntervalo > 23 &&
                                         _intMinutoIntervalo < 59) {
                                       showAlertDialogNew("Hora Inválida!",
                                           "Por favor insira um valor de hora entre 00 e 23.");
+                                      _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
+                                      okIntervalo = false;
+
+                                      setState(() {
+                                        ColorIntervalo = const Color(0xffE53629);
+                                      });
                                     } else if (_intHoraIntervalo < 23 &&
                                         _intMinutoIntervalo > 59) {
                                       showAlertDialogNew("Minuto Inválido!",
                                           "Por favor insira um valor de minuto entre 00 e 59.");
+                                      _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
+                                      okIntervalo = false;
+
+                                      setState(() {
+                                        ColorIntervalo = const Color(0xffE53629);
+                                      });
                                     } else {
                                       horarioTrabalhado();
-                                      FocusScope.of(context)
-                                          .requestFocus(new FocusNode());
                                     }
                                   }
                                 },
@@ -312,12 +428,73 @@ class _HoraState extends State<ZHora> {
       ],
     );
   }
-
   void showAlertDialogNew(String title, String message) async {
     showDialog(
         context: context,
         builder: (BuildContext context) => ZAlertDialog(
-              zDialog: ZDialog.erro,
+          zDialog: ZDialog.erro,
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    margin: const EdgeInsets.all(8),
+                    child: new Text(
+                      title,
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    margin: const EdgeInsets.only(
+                        left: 16, right: 16, bottom: 16),
+                    child: new Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(
+                          color: const Color(0xff707070), fontSize: 13),
+                    ),
+                  )
+                ],
+              ),
+              new Divider(
+                color: const Color(0xffdbdbdb),
+              ),
+              new Container(
+                child: new InkWell(
+                  borderRadius:
+                  new BorderRadius.all(const Radius.circular(20.0)),
+                  splashColor: const Color(0xffe6e6e6),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Container(
+                    padding: const EdgeInsets.all(12),
+                    child: new Text(
+                      "ENTENDI",
+                      style: new TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                margin: const EdgeInsets.only(bottom: 8),
+              )
+            ],
+          ),
+        ));
+  }
+
+  void showAlertDialogNewAlert(String title, String message) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ZAlertDialog(
+              zDialog: ZDialog.alert,
               child: new Column(
                 children: <Widget>[
                   new Row(
@@ -384,6 +561,22 @@ class _HoraState extends State<ZHora> {
       if (_intHoraIntervalo >= _horarioTrabalhado) {
         showAlertDialogNew("Erro de Jornada!",
             "O intervalo não pode ser maior que a jornada trabalhada.");
+        okIntervalo = false;
+
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+        _fieldFocusChange(context,
+            _focusIntervalo, _focusIntervalo);
+      }
+      else{
+        FocusScope.of(context)
+            .requestFocus(new FocusNode());
+        okIntervalo = true;
+
+        setState(() {
+          ColorIntervalo = const Color(0xff1AC15D);
+        });
       }
     } else {
       _horarioTrabalhado = _intHoraSaida - _intHoraEntrada;
@@ -391,6 +584,22 @@ class _HoraState extends State<ZHora> {
       if (_intHoraIntervalo >= _horarioTrabalhado) {
         showAlertDialogNew("Erro de Jornada!",
             "O intervalo não pode ser maior que a jornada trabalhada.");
+        okIntervalo = false;
+
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+        _fieldFocusChange(context,
+            _focusIntervalo, _focusIntervalo);
+      }
+      else{
+        FocusScope.of(context)
+            .requestFocus(new FocusNode());
+        okIntervalo = true;
+
+        setState(() {
+          ColorIntervalo = const Color(0xff1AC15D);
+        });
       }
     }
   }
