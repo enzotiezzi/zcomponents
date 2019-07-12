@@ -1,11 +1,17 @@
+import 'package:cpf_cnpj_validator/cpf_validator.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mask_shifter/mask_shifter.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/config/z-button-type.dart';
+import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 
@@ -13,7 +19,12 @@ class ZCadastroUsuario extends StatefulWidget {
   Widget zTelaCadastro;
   Widget tituloAppBar;
 
-  final Key key;
+  Key key = GlobalKey(debugLabel: 'a');
+  Key key2 = GlobalKey(debugLabel: 'b');
+  Key key3 = GlobalKey(debugLabel: 'c');
+  Key key4 = GlobalKey(debugLabel: 'd');
+  Key key5 = GlobalKey(debugLabel: 'e');
+
   final BuildContext context;
   var controllerEmail = new TextEditingController();
   var controllerNome = new TextEditingController();
@@ -47,13 +58,42 @@ class ZCadastroUsuario extends StatefulWidget {
 
 class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     with TickerProviderStateMixin {
-  ZBaseLine valideNome;
-  ZBaseLine valideCPF;
-  ZBaseLine valideData;
-  ZBaseLine valideEmail;
-  ZBaseLine valideCelular;
+  int countNome = 1;
+  int countCPF = 1;
+  int countCelular = 1;
+  int countEmail = 1;
+  int countData = 1;
+  bool valideMes;
+  bool valideCPF;
+  bool valideEmail;
+  bool valideCelular;
+  bool valideNome;
+  FocusNode nomeFocus;
+  FocusNode emailFocus;
+  FocusNode cpfFocus;
+  FocusNode celularFocus;
+  FocusNode mesFocus;
+  bool bisexto;
+  int intDias;
+  int intMes;
+  int intAno;
+
+  String dia;
+  String ano;
+  String mes;
+
   String teste;
   bool _termos = false;
+
+  @override
+  void initState() {
+    init();
+    initMes();
+    initCelular();
+    initCpf();
+    initNome();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,31 +131,259 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
           ),
         ),
-       valideNome= new ZBaseLine(
-          controllerNome: widget.controllerNome,
-          zTipos: ZTipoBaseline.isNomeCompleto,
-          context: widget.context,
-        ),
-       valideCPF= new ZBaseLine(
-          controllerCPF: widget.controllerCPF,
-          zTipos: ZTipoBaseline.isCPF,
-          context: widget.context,
-        ),
-     valideCelular=   new ZBaseLine(
-          controllerCelular: widget.controllerCelular,
-          zTipos: ZTipoBaseline.isCelular,
-          context: widget.context,
-        ),
-       valideEmail= new ZBaseLine(
-          controllerEmail: widget.controllerEmail,
-          zTipos: ZTipoBaseline.isEmail,
-          context: widget.context,
-        ),
-      valideData=  new ZBaseLine(
-          controllerData: widget.controllerData,
-          zTipos: ZTipoBaseline.isDataNascimento,
-          context: widget.context,
-        ),
+        new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            "Nome Completo",
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (term) {
+                              _fieldFocusChange(context, nomeFocus, cpfFocus);
+                            },
+                            onChanged: (text){
+                              countNome = 0;
+                            },
+                            textCapitalization: TextCapitalization.words,
+                            focusNode: nomeFocus,
+                            controller: widget.controllerNome,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: "Nome Completo",
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            )),
+        new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            "CPF",
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (term) {
+                              _fieldFocusChange(
+                                  context, cpfFocus, celularFocus);
+                            },
+                            onChanged: (text) {
+                              countCPF = 0;
+                              if (text.length == 14) {
+                                _fieldFocusChange(
+                                    context, cpfFocus, celularFocus);
+                              }
+                            },
+                            controller: widget.controllerCPF,
+                            focusNode: cpfFocus,
+                            keyboardType: TextInputType.number,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: "* . * . * - **",
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                            inputFormatters: [
+                              MaskedTextInputFormatterShifter(
+                                  maskONE: "XXX.XXX.XXX-XX",
+                                  maskTWO: "XXX.XXX.XXX-XX")
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            )),
+        new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            "Celular",
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (term) {
+                              _fieldFocusChange(
+                                  context, celularFocus, emailFocus);
+                            },
+                            onChanged: (text) {
+                              countCelular = 0;
+                              if (text.length == 14) {
+                                _fieldFocusChange(
+                                    context, celularFocus, emailFocus);
+                              }
+                            },
+                            controller: widget.controllerCelular,
+                            focusNode: celularFocus,
+                            keyboardType: TextInputType.number,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: "( * ) 9 ** - ***",
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                            inputFormatters: [
+                              MaskedTextInputFormatterShifter(
+                                  maskONE: "(XX)XXXXX-XXXX",
+                                  maskTWO: "(XX)XXXXX-XXXX"),
+                              BlacklistingTextInputFormatter(
+                                  RegExp("[\\\\,.]")),
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            )),
+        new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            "E-mail",
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (term) {
+                              _fieldFocusChange(context, emailFocus, mesFocus);
+                            },
+                            onChanged: (text){
+                              countEmail = 0;
+                            },
+                            controller: widget.controllerEmail,
+                            focusNode: emailFocus,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: "email@email.com.br",
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            )),
+        new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            "Data Nascimento",
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (term) {
+                              mesFocus.unfocus();
+                            },
+                            onChanged: (text) {
+                              countData = 0;
+                              validaMes();
+                              if (text.length == 10) {
+                                mesFocus.unfocus();
+
+                              }
+                            },
+                            focusNode: mesFocus,
+                            controller: widget.controllerData,
+                            keyboardType: TextInputType.number,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: "dd / mm / aaaa",
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                            inputFormatters: [
+                              MaskedTextInputFormatterShifter(
+                                  maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"),
+                              BlacklistingTextInputFormatter(
+                                  RegExp("[\\\\,.-]")),
+                            ],
+
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            )),
         new Container(
           decoration: BoxDecoration(
               border: Border(top: BorderSide(color: Colors.grey))),
@@ -215,5 +483,265 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     return new ZHeader(
       titulo: "CADASTRO DE USUÁRIO",
     );
+  }
+
+  void validaMes() {
+    dia = widget.controllerData.text.substring(0, 2);
+    intDias = int.parse(dia);
+
+    mes = widget.controllerData.text.substring(3, 5);
+    intMes = int.parse(mes);
+
+    ano = widget.controllerData.text.substring(6, 10);
+    intAno = int.parse(ano);
+
+    if ((intAno % 4 == 0 && intAno % 100 != 0) || intAno % 400 == 0) {
+      bisexto = true;
+    } else {
+      bisexto = false;
+    }
+
+    if (widget.controllerData.text.length == 10) {
+      if (intMes < 13 && intDias < 32 && intAno < 2004 && intAno > 1901) {
+        if (intDias == 00 || intMes == 00 || intAno == 00) {
+          showAlertDialogNew("Data Inválida!",
+              "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
+        } else if (intMes == 01 ||
+            intMes == 03 ||
+            intMes == 05 ||
+            intMes == 07 ||
+            intMes == 08 ||
+            intMes == 10 ||
+            intMes == 12) {
+          if (intDias > 31) {
+            showAlertDialogNew(
+                "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+          } else {
+            valideMes = true;
+          }
+        } else if (intMes == 04 ||
+            intMes == 06 ||
+            intMes == 09 ||
+            intMes == 11) {
+          if (intDias > 30) {
+            showAlertDialogNew(
+                "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+          } else {
+            valideMes = true;
+          }
+        } else {
+          if (bisexto == true) {
+            if (intDias > 29) {
+              showAlertDialogNew(
+                  "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+            } else {
+              valideMes = true;
+            }
+          } else {
+            if (intDias > 28) {
+              showAlertDialogNew(
+                  "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+            } else {
+              valideMes = true;
+            }
+          }
+        }
+      } else if (intMes > 12 && intDias < 32 && intAno < 2004) {
+        showAlertDialogNew(
+            "Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
+      } else if (intMes < 13 && intDias > 32 && intAno < 2004) {
+        showAlertDialogNew(
+            "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+      } else if (intMes < 13 && intDias < 32 && intAno > 2004) {
+        showAlertDialogNew(
+            "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
+      } else if (intAno < 1901) {
+        showAlertDialogNew(
+            "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
+      } else if (intMes > 12 && intDias < 32 && intAno > 2004) {
+        showAlertDialogNew("Mês e Ano Inválido!",
+            "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
+      } else if (intMes > 12 && intDias > 32 && intAno < 2004) {
+        showAlertDialogNew("Mês e Dia Inválido!",
+            "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
+      } else if (intMes < 13 && intDias > 32 && intAno > 2004) {
+        showAlertDialogNew("Dia e Ano Inválido!",
+            "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
+      } else {
+        showAlertDialogNew("Data Inválida!",
+            "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
+      }
+    }
+  }
+
+  void showAlertDialogNew(String title, String message) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ZAlertDialog(
+              zDialog: ZDialog.erro,
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        margin: const EdgeInsets.all(8),
+                        child: new Text(
+                          title,
+                          style: new TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        margin: const EdgeInsets.only(
+                            left: 16, right: 16, bottom: 16),
+                        child: new Text(
+                          message,
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                              color: const Color(0xff707070), fontSize: 13),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  void initNome() {
+    nomeFocus = FocusNode();
+    nomeFocus.addListener(() {
+      if (!nomeFocus.hasFocus&& countNome==0) {
+        _valideNome();
+      }
+    });
+  }
+
+  void init() {
+    emailFocus = FocusNode();
+    emailFocus.addListener(() {
+      if (!emailFocus.hasFocus && countEmail == 0) {
+        _validarEmail();
+      }
+    });
+  }
+
+  void initCpf() {
+    cpfFocus = FocusNode();
+    cpfFocus.addListener(() {
+      if (!cpfFocus.hasFocus&& countCPF == 0) {
+        _validarCPF();
+      }
+    });
+  }
+
+  void initCelular() {
+    celularFocus = FocusNode();
+    celularFocus.addListener(() {
+      if (!celularFocus.hasFocus&& countCelular==0) {
+        _validarCelular();
+      }
+    });
+  }
+
+  void initMes() {
+    mesFocus = FocusNode();
+    mesFocus.addListener(() {
+      if (!mesFocus.hasFocus && countData == 0) {
+        mesHasFocus();
+      }
+    });
+  }
+
+  void mesHasFocus() {
+    if (widget.controllerData.text == null) {
+      showAlertDialogNew(
+          "Data Inválida!", "Por Favor, digite sua data de nascimento.");
+    } else if (widget.controllerData.text.length < 10) {
+      showAlertDialogNew("Data Inválida!",
+          "Por Favor, termine de digitar sua data de nascimento");
+    }
+  }
+
+  void _valideNome() {
+    if (widget.controllerNome.text == null) {
+      valideNome = false;
+      showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
+    } else if (widget.controllerNome.text.split(' ').length < 2) {
+      valideNome = false;
+      showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
+    } else {
+      valideNome = true;
+    }
+  }
+
+  void _validarCPF() {
+    if (!CPFValidator.isValid(widget.controllerCPF.text)) {
+      valideCPF = false;
+      showAlertDialogNew("CPF Inválido!", "Por Favor insira um CPF válido.");
+    } else {
+      valideCPF = true;
+    }
+  }
+
+  void _validarCelular() {
+    if (widget.controllerCelular.text == null) {
+      valideCelular = false;
+      showAlertDialogNew(
+          "Celular Inválido!", "Por Favor, digitar o seu celular.");
+    } else if (widget.controllerCelular.text.length < 14) {
+      valideCelular = false;
+      showAlertDialogNew(
+          "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
+    } else {
+      valideCelular = true;
+    }
+  }
+
+  void _validarEmail() {
+    if (widget.controllerEmail.text == null) {
+      valideEmail = false;
+      showAlertDialogNew("E-mail Inválido!", "Por Favor insira um E-mail.");
+    } else if (!EmailValidator.validate(widget.controllerEmail.text)) {
+      valideEmail = false;
+      showAlertDialogNew(
+          "E-mail Inválido!", "Por Favor insira um E-mail válido.");
+    } else {
+      valideEmail = true;
+    }
+  }
+
+  _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
   }
 }

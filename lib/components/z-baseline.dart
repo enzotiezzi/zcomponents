@@ -52,20 +52,30 @@ class ZBaseLine extends StatelessWidget {
 
   ZBaseLine(
       {this.value,
-        this.key,
-        this.context,
-        this.zTipos = ZTipoBaseline.isNomeCompleto,
-        this.controllerEmail,
-        this.controllerData,
-        this.controllerCelular,
-        this.controllerCPF,
-        this.controllerNome})
+      this.key,
+      this.context,
+      this.zTipos = ZTipoBaseline.isNomeCompleto,
+      this.controllerEmail,
+      this.controllerData,
+      this.controllerCelular,
+      this.controllerCPF,
+      this.controllerNome})
       : super(key: key) {
-    init();
-    initNome();
-    initCpf();
-    initCelular();
-    initMes();
+    if (zTipos == ZTipoBaseline.isEmail) {
+      init();
+    }
+    if (zTipos == ZTipoBaseline.isNomeCompleto) {
+      initNome();
+    }
+    if (zTipos == ZTipoBaseline.isCPF) {
+      initCpf();
+    }
+    if (zTipos == ZTipoBaseline.isCelular) {
+      initCelular();
+    }
+    if (zTipos == ZTipoBaseline.isDataNascimento) {
+      initMes();
+    }
 
     switch (zTipos) {
       case ZTipoBaseline.isNomeCompleto:
@@ -101,7 +111,6 @@ class ZBaseLine extends StatelessWidget {
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
                             ),
-
                             onChanged: (text) {
                               nome = text;
                             },
@@ -510,62 +519,61 @@ class ZBaseLine extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) => ZAlertDialog(
-          zDialog: ZDialog.erro,
-          child: new Column(
-            children: <Widget>[
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              zDialog: ZDialog.erro,
+              child: new Column(
                 children: <Widget>[
-                  new Container(
-                    margin: const EdgeInsets.all(8),
-                    child: new Text(
-                      title,
-                      style: new TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                  )
-                ],
-              ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    margin: const EdgeInsets.only(
-                        left: 16, right: 16, bottom: 16),
-                    child: new Text(
-                      message,
-                      textAlign: TextAlign.center,
-                      style: new TextStyle(
-                          color: const Color(0xff707070), fontSize: 13),
-                    ),
-                  )
-                ],
-              ),
-              new Divider(
-                color: const Color(0xffdbdbdb),
-              ),
-              new Container(
-                child: new InkWell(
-                  borderRadius:
-                  new BorderRadius.all(const Radius.circular(20.0)),
-                  splashColor: const Color(0xffe6e6e6),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Container(
-                    padding: const EdgeInsets.all(12),
-                    child: new Text(
-                      "ENTENDI",
-                      style: new TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        margin: const EdgeInsets.all(8),
+                        child: new Text(
+                          title,
+                          style: new TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                margin: const EdgeInsets.only(bottom: 8),
-              )
-            ],
-          ),
-        ));
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        margin: const EdgeInsets.only(
+                            left: 16, right: 16, bottom: 16),
+                        child: new Text(
+                          message,
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                              color: const Color(0xff707070), fontSize: 13),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
   }
-
 }

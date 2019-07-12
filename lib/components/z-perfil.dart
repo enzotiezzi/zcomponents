@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-item-tile.dart';
@@ -27,25 +28,25 @@ class ZPerfil extends StatefulWidget {
   var image;
   var onTapVoltar;
 
-  ZPerfil({
-    this.tituloAppBar,
-    this.onTapVoltar,
-    this.textoLocalizacao,
-    this.listaIcones,
-    this.listaTextos,
-    this.numeroQuadrados,
-    this.image,
-    this.statusInfo,
-    this.textoHoraEntradaInfo,
-    this.textoCodigoInfo,
-    this.textoContato,
-    this.textoLocalInfo,
-    this.textoEscalaInfo,
-    this.textoHoraSaidaInfo,
-    this.textoHoraIntervaloInfo,
-    this.textoTituloInfo,
-    this.textoCargoInfo,
-    this.tituloHeader});
+  ZPerfil(
+      {this.tituloAppBar,
+      this.onTapVoltar,
+      this.textoLocalizacao,
+      this.listaIcones,
+      this.listaTextos,
+      this.numeroQuadrados,
+      this.image,
+      this.statusInfo,
+      this.textoHoraEntradaInfo,
+      this.textoCodigoInfo,
+      this.textoContato,
+      this.textoLocalInfo,
+      this.textoEscalaInfo,
+      this.textoHoraSaidaInfo,
+      this.textoHoraIntervaloInfo,
+      this.textoTituloInfo,
+      this.textoCargoInfo,
+      this.tituloHeader});
 
   @override
   _ZPerfilState createState() => _ZPerfilState();
@@ -55,9 +56,20 @@ class _ZPerfilState extends State<ZPerfil> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: ZNavigationBar(middle: widget.tituloAppBar,
-        voltar: true,
-        onTap: widget.onTapVoltar,
+      appBar: CupertinoNavigationBar(
+        middle: new Container(child: new Text("PERFIL DO COLABORADOR", style: TextStyle(color: Colors.black),),),
+     leading: new GestureDetector(
+       onTap: widget.onTapVoltar,
+       child: new Container(
+         padding: EdgeInsets.only(right: 20.0),
+         color: Colors.transparent,
+         child: new Icon(
+           Icons.arrow_back_ios,
+           size: 20.0,
+           color: const Color(0xff2BB9B4),
+         ),
+       ),
+     ),
       ),
       body: _body(),
     );
