@@ -512,7 +512,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
                     zButtonType: ZButtonType.isContained,
                     text: "CADASTRAR USUÁRIO",
-              
+
                   )
                 : ZButton(
                     padding: EdgeInsets.only(
@@ -776,7 +776,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     if (widget.controllerEmail.text == null) {
       valideEmail = false;
       showAlertDialogNew("E-mail Inválido!", "Por Favor insira um E-mail.");
-    } else if (!EmailValidator.validate(widget.controllerEmail.text)) {
+    } else if (!EmailValidator.validate(widget.controllerEmail.text.trim())) {
       valideEmail = false;
       showAlertDialogNew(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");
