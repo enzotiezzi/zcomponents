@@ -1,34 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:z_components/components/z-cadastro-usuario.dart';
-import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-float-button.dart';
-import 'package:z_components/components/z-item-tile.dart';
-import 'package:z_components/components/z-check-cpf.dart';
-import 'package:z_components/components/z-perfil.dart';
-import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
-import 'package:z_components/components/z-header.dart';
-import 'package:z_components/components/z-header-expansion.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
-import 'package:z_components/components/zp-grafico.dart';
-import 'package:z_components/components/z-expansion-tile.dart';
-import 'package:z_components/components/z-hora-um-campo.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/config/z-button-type.dart';
-import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/config/z-tipo-senha.dart';
-import 'package:z_components/config/z-tipos-baseline.dart';
-import 'package:z_components/components/z-expendable-item-tile.dart';
 import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
-import 'package:z_components/components/z-local.dart';
-
-
 
 void main() => runApp(MyApp());
 
@@ -129,7 +111,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff000000),
+        backgroundColor: Colors.grey.withOpacity(0.5),
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
@@ -188,7 +170,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               print("${item.titulo}");
             },
             key: _keyEscala,
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",)
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",),
+          new ZHora()
  /*         new ZLocal(
             onChange: (item){
               print("${item.titulo}");

@@ -39,7 +39,7 @@ class ZEscalaState extends State<ZEscala> {
       titulo: "Escalas",
       lista: _escalas
           .map((x) => new ZCollectionItem(
-              chave: x.idEscala, titulo: x.nome, valor: x.nome))
+              chave: x.idEscala, titulo: x.nome, valor: x.escala))
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
