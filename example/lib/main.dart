@@ -11,6 +11,7 @@ import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
+import 'package:z_components/components/z-perfil.dart';
 
 void main() => runApp(MyApp());
 
