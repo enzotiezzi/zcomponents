@@ -39,14 +39,14 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                       children: <Widget>[
                         new Container(
                           margin: EdgeInsets.only(
-                              bottom: 10.0, top: 18.0, left: 2.0),
+                              bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
                           child: new Icon(
                             widget.listaIcones[index],
                             color: const Color(0xff2BBAB4),
                           ),
                         ),
                         new Container(
-                          margin: EdgeInsets.only(left: 5.0, right: 5.0),
+                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
                           child: (widget.listaTextos[index] != null)
                               ? new Text(
                                   widget.listaTextos[index],
@@ -75,15 +75,15 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       new Container(
-                        margin:
-                            EdgeInsets.only(bottom: 10.0, top: 18.0, left: 2.0),
+                        margin: EdgeInsets.only(
+                            bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
                         child: new Icon(
                           widget.listaIcones[index],
                           color: const Color(0xff2BBAB4),
                         ),
                       ),
                       new Container(
-                        margin: EdgeInsets.only(left: 5.0, right: 5.0),
+                        margin: EdgeInsets.only(left: 10.0, right: 10.0),
                         child: (widget.listaTextos[index] != null)
                             ? new Text(
                                 widget.listaTextos[index],

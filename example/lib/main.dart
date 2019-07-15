@@ -203,6 +203,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) =>   new ZCadastroUsuario(
+                onTapVoltar: (){Navigator.of(context).pop();},
                 context: context,
                 controllerNome: controllerNome,
                 controllerCPF: controllerCPF,
@@ -227,7 +228,37 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             );
 
 
-          },)
+          },),
+          new ZButton(
+            text: "PERFIL",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ZPerfil(
+                      onTapVoltar:() =>
+                        Navigator.of(context).pop()
+                      ,
+                      listaIcones: icones,
+                      listaTextos: titulos,
+                      numeroQuadrados: titulos.length,
+                      statusInfo: true,
+                      textoContato: "(11)9 98679893",
+                      textoLocalizacao:
+                      "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
+                      tituloHeader: "Giuliano Ortiz",
+                      textoTituloInfo: "Giuliano Ortiz",
+                      textoLocalInfo: "Sede - Xolis ltda.",
+                      textoCargoInfo: "Garoto de TI",
+                      textoEscalaInfo: "5x2(seg-sex)",
+                      textoHoraEntradaInfo: "09:00",
+                      textoHoraSaidaInfo: "15:30",
+                      textoHoraIntervaloInfo: "1:00",
+                      textoCodigoInfo: "012345",
+                    )),
+              );
+            },
+          ),
 
         ]));
   }

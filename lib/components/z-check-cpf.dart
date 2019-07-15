@@ -37,7 +37,11 @@ class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin{
       child: new GestureDetector(
         onTap: () {
           setState(() {
+            if(!_temcpf){
+              showAlertDialogNew("Atenção!", "Não é possivel se cadastrar sem CPF");
+            }
             _temcpf = !_temcpf;
+
           });
         },
         child: new Row(
@@ -100,7 +104,7 @@ class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin{
     showDialog(
         context: context,
         builder: (BuildContext context) => ZAlertDialog(
-          zDialog: ZDialog.erro,
+          zDialog: ZDialog.alert,
           child: new Column(
             children: <Widget>[
               new Row(

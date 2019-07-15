@@ -5,25 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/components/z-baseline.dart';
+import 'package:z_components/components/z-check-cpf.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/components/z_button.dart';
-import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
-import 'package:z_components/config/z-tipos-baseline.dart';
 
 class ZCadastroUsuario extends StatefulWidget {
   Widget zTelaCadastro;
   Widget tituloAppBar;
 
-  Key key = GlobalKey(debugLabel: 'a');
-  Key key2 = GlobalKey(debugLabel: 'b');
-  Key key3 = GlobalKey(debugLabel: 'c');
-  Key key4 = GlobalKey(debugLabel: 'd');
-  Key key5 = GlobalKey(debugLabel: 'e');
+  Key key;
 
   final BuildContext context;
   var controllerEmail = new TextEditingController();
@@ -99,10 +93,20 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   Widget build(BuildContext context) {
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
-        appBar: ZNavigationBar(
-          voltar: true,
-          onTap: widget.onTapVoltar,
+        appBar: CupertinoNavigationBar(
           middle: widget.tituloAppBar,
+          leading: new GestureDetector(
+            onTap: widget.onTapVoltar,
+            child: new Container(
+              padding: EdgeInsets.only(right: 20.0),
+              color: Colors.transparent,
+              child: new Icon(
+                Icons.arrow_back_ios,
+                size: 20.0,
+                color: const Color(0xff2BB9B4),
+              ),
+            ),
+          ),
         ),
         body: _body());
   }
@@ -132,261 +136,294 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           ),
         ),
         new Container(
-            color: Colors.white,
-            child: new Column(
-              children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        flex: 3,
-                        child: new Container(
-                          padding: const EdgeInsets.only(
-                              top: 12.0, bottom: 12.0, left: 16.0),
-                          child: new Text(
-                            "Nome Completo",
-                            style: new TextStyle(color: Color(0xFF999999)),
-                          ),
-                        )),
-                    new Expanded(
-                        flex: 7,
-                        child: new Container(
-                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
-                          child: new TextField(
-                            onSubmitted: (term) {
-                              _fieldFocusChange(context, nomeFocus, cpfFocus);
-                            },
-                            onChanged: (text){
-                              countNome = 0;
-                            },
-                            textCapitalization: TextCapitalization.words,
-                            focusNode: nomeFocus,
-                            controller: widget.controllerNome,
-                            cursorColor: Color(0xFF2BBAB4),
-                            style: new TextStyle(color: Color(0xFF000000)),
-                            decoration: InputDecoration(
-                              hintText: "Nome Completo",
-                              hintStyle: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Color(0xFF000000).withOpacity(0.3)),
-                            ),
-                          ),
-                        ))
-                  ],
-                ),
-              ],
-            )),
-        new Container(
-            color: Colors.white,
-            child: new Column(
-              children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        flex: 3,
-                        child: new Container(
-                          padding: const EdgeInsets.only(
-                              top: 12.0, bottom: 12.0, left: 16.0),
-                          child: new Text(
-                            "CPF",
-                            style: new TextStyle(color: Color(0xFF999999)),
-                          ),
-                        )),
-                    new Expanded(
-                        flex: 7,
-                        child: new Container(
-                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
-                          child: new TextField(
-                            onSubmitted: (term) {
-                              _fieldFocusChange(
-                                  context, cpfFocus, celularFocus);
-                            },
-                            onChanged: (text) {
-                              countCPF = 0;
-                              if (text.length == 14) {
-                                _fieldFocusChange(
-                                    context, cpfFocus, celularFocus);
-                              }
-                            },
-                            controller: widget.controllerCPF,
-                            focusNode: cpfFocus,
-                            keyboardType: TextInputType.number,
-                            cursorColor: Color(0xFF2BBAB4),
-                            style: new TextStyle(color: Color(0xFF000000)),
-                            decoration: InputDecoration(
-                              hintText: "* . * . * - **",
-                              hintStyle: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Color(0xFF000000).withOpacity(0.3)),
-                            ),
-                            inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: "XXX.XXX.XXX-XX",
-                                  maskTWO: "XXX.XXX.XXX-XX")
-                            ],
-                          ),
-                        ))
-                  ],
-                ),
-              ],
-            )),
-        new Container(
-            color: Colors.white,
-            child: new Column(
-              children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        flex: 3,
-                        child: new Container(
-                          padding: const EdgeInsets.only(
-                              top: 12.0, bottom: 12.0, left: 16.0),
-                          child: new Text(
-                            "Celular",
-                            style: new TextStyle(color: Color(0xFF999999)),
-                          ),
-                        )),
-                    new Expanded(
-                        flex: 7,
-                        child: new Container(
-                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
-                          child: new TextField(
-                            onSubmitted: (term) {
-                              _fieldFocusChange(
-                                  context, celularFocus, emailFocus);
-                            },
-                            onChanged: (text) {
-                              countCelular = 0;
-                              if (text.length == 14) {
-                                _fieldFocusChange(
-                                    context, celularFocus, emailFocus);
-                              }
-                            },
-                            controller: widget.controllerCelular,
-                            focusNode: celularFocus,
-                            keyboardType: TextInputType.number,
-                            cursorColor: Color(0xFF2BBAB4),
-                            style: new TextStyle(color: Color(0xFF000000)),
-                            decoration: InputDecoration(
-                              hintText: "( * ) 9 ** - ***",
-                              hintStyle: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Color(0xFF000000).withOpacity(0.3)),
-                            ),
-                            inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: "(XX)XXXXX-XXXX",
-                                  maskTWO: "(XX)XXXXX-XXXX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[\\\\,.]")),
-                            ],
-                          ),
-                        ))
-                  ],
-                ),
-              ],
-            )),
-        new Container(
-            color: Colors.white,
-            child: new Column(
-              children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        flex: 3,
-                        child: new Container(
-                          padding: const EdgeInsets.only(
-                              top: 12.0, bottom: 12.0, left: 16.0),
-                          child: new Text(
-                            "E-mail",
-                            style: new TextStyle(color: Color(0xFF999999)),
-                          ),
-                        )),
-                    new Expanded(
-                        flex: 7,
-                        child: new Container(
-                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
-                          child: new TextField(
-                            onSubmitted: (term) {
-                              _fieldFocusChange(context, emailFocus, mesFocus);
-                            },
-                            onChanged: (text){
-                              countEmail = 0;
-                            },
-                            controller: widget.controllerEmail,
-                            focusNode: emailFocus,
-                            cursorColor: Color(0xFF2BBAB4),
-                            style: new TextStyle(color: Color(0xFF000000)),
-                            decoration: InputDecoration(
-                              hintText: "email@email.com.br",
-                              hintStyle: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Color(0xFF000000).withOpacity(0.3)),
-                            ),
-                          ),
-                        ))
-                  ],
-                ),
-              ],
-            )),
-        new Container(
-            color: Colors.white,
-            child: new Column(
-              children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        flex: 3,
-                        child: new Container(
-                          padding: const EdgeInsets.only(
-                              top: 12.0, bottom: 12.0, left: 16.0),
-                          child: new Text(
-                            "Data Nascimento",
-                            style: new TextStyle(color: Color(0xFF999999)),
-                          ),
-                        )),
-                    new Expanded(
-                        flex: 7,
-                        child: new Container(
-                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
-                          child: new TextField(
-                            onSubmitted: (term) {
-                              mesFocus.unfocus();
-                            },
-                            onChanged: (text) {
-                              countData = 0;
-                              validaMes();
-                              if (text.length == 10) {
-                                mesFocus.unfocus();
-
-                              }
-                            },
-                            focusNode: mesFocus,
-                            controller: widget.controllerData,
-                            keyboardType: TextInputType.number,
-                            cursorColor: Color(0xFF2BBAB4),
-                            style: new TextStyle(color: Color(0xFF000000)),
-                            decoration: InputDecoration(
-                              hintText: "dd / mm / aaaa",
-                              hintStyle: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Color(0xFF000000).withOpacity(0.3)),
-                            ),
-                            inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[\\\\,.-]")),
-                            ],
-
-                          ),
-                        ))
-                  ],
-                ),
-              ],
-            )),
-        new Container(
           decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: Colors.grey))),
+              border: Border(bottom: BorderSide(color: Colors.grey))),
+          child: new Column(
+            children: <Widget>[
+              new Container(
+                  color: Colors.white,
+                  child: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Expanded(
+                              flex: 3,
+                              child: new Container(
+                                padding: const EdgeInsets.only(
+                                    top: 12.0, bottom: 12.0, left: 16.0),
+                                child: new Text(
+                                  "Nome Completo",
+                                  style:
+                                      new TextStyle(color: Color(0xFF999999)),
+                                ),
+                              )),
+                          new Expanded(
+                              flex: 7,
+                              child: new Container(
+                                margin: const EdgeInsets.only(
+                                    left: 8.0, right: 16.0),
+                                child: new TextField(
+                                  onSubmitted: (term) {
+                                    _fieldFocusChange(
+                                        context, nomeFocus, cpfFocus);
+                                  },
+                                  onChanged: (text) {
+                                    countNome = 0;
+                                  },
+                                  textCapitalization: TextCapitalization.words,
+                                  focusNode: nomeFocus,
+                                  controller: widget.controllerNome,
+                                  cursorColor: Color(0xFF2BBAB4),
+                                  style:
+                                      new TextStyle(color: Color(0xFF000000)),
+                                  decoration: InputDecoration(
+                                    hintText: "Nome Completo",
+                                    hintStyle: new TextStyle(
+                                        fontSize: 14.0,
+                                        color:
+                                            Color(0xFF000000).withOpacity(0.3)),
+                                  ),
+                                ),
+                              ))
+                        ],
+                      ),
+                    ],
+                  )),
+              new Container(
+                  color: Colors.white,
+                  child: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Expanded(
+                              flex: 3,
+                              child: new Container(
+                                padding: const EdgeInsets.only(
+                                    top: 12.0, bottom: 12.0, left: 16.0),
+                                child: new Text(
+                                  "CPF",
+                                  style:
+                                      new TextStyle(color: Color(0xFF999999)),
+                                ),
+                              )),
+                          new Expanded(
+                              flex: 7,
+                              child: new Container(
+                                margin: const EdgeInsets.only(
+                                    left: 8.0, right: 16.0),
+                                child: new TextField(
+                                  onSubmitted: (term) {
+                                    _fieldFocusChange(
+                                        context, cpfFocus, celularFocus);
+                                  },
+                                  onChanged: (text) {
+                                    countCPF = 0;
+                                    if (text.length == 14) {
+                                      _fieldFocusChange(
+                                          context, cpfFocus, celularFocus);
+                                    }
+                                  },
+                                  controller: widget.controllerCPF,
+                                  focusNode: cpfFocus,
+                                  keyboardType: TextInputType.number,
+                                  cursorColor: Color(0xFF2BBAB4),
+                                  style:
+                                      new TextStyle(color: Color(0xFF000000)),
+                                  decoration: InputDecoration(
+                                    isDense: false,
+                                    hintText: "*** . *** . *** - **",
+                                    hintStyle: new TextStyle(
+                                        fontSize: 14.0,
+                                        color:
+                                            Color(0xFF000000).withOpacity(0.3)),
+                                  ),
+                                  inputFormatters: [
+                                    MaskedTextInputFormatterShifter(
+                                        maskONE: "XXX.XXX.XXX-XX",
+                                        maskTWO: "XXX.XXX.XXX-XX")
+                                  ],
+                                ),
+                              ))
+                        ],
+                      ),
+                    ],
+                  )),
+              new Container(
+                  color: Colors.white,
+                  child: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Expanded(
+                              flex: 3,
+                              child: new Container(
+                                padding: const EdgeInsets.only(
+                                    top: 12.0, bottom: 12.0, left: 16.0),
+                                child: new Text(
+                                  "Celular",
+                                  style:
+                                      new TextStyle(color: Color(0xFF999999)),
+                                ),
+                              )),
+                          new Expanded(
+                              flex: 7,
+                              child: new Container(
+                                margin: const EdgeInsets.only(
+                                    left: 8.0, right: 16.0),
+                                child: new TextField(
+                                  onSubmitted: (term) {
+                                    _fieldFocusChange(
+                                        context, celularFocus, emailFocus);
+                                  },
+                                  onChanged: (text) {
+                                    countCelular = 0;
+                                    if (text.length == 14) {
+                                      _fieldFocusChange(
+                                          context, celularFocus, emailFocus);
+                                    }
+                                  },
+                                  controller: widget.controllerCelular,
+                                  focusNode: celularFocus,
+                                  keyboardType: TextInputType.number,
+                                  cursorColor: Color(0xFF2BBAB4),
+                                  style:
+                                      new TextStyle(color: Color(0xFF000000)),
+                                  decoration: InputDecoration(
+                                    hintText: "( ** ) 9 **** - ****",
+                                    hintStyle: new TextStyle(
+                                        fontSize: 14.0,
+                                        color:
+                                            Color(0xFF000000).withOpacity(0.3)),
+                                  ),
+                                  inputFormatters: [
+                                    MaskedTextInputFormatterShifter(
+                                        maskONE: "(XX)XXXXX-XXXX",
+                                        maskTWO: "(XX)XXXXX-XXXX"),
+                                    BlacklistingTextInputFormatter(
+                                        RegExp("[\\\\,.]")),
+                                  ],
+                                ),
+                              ))
+                        ],
+                      ),
+                    ],
+                  )),
+              new Container(
+                  color: Colors.white,
+                  child: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Expanded(
+                              flex: 3,
+                              child: new Container(
+                                padding: const EdgeInsets.only(
+                                    top: 12.0, bottom: 12.0, left: 16.0),
+                                child: new Text(
+                                  "E-mail",
+                                  style:
+                                      new TextStyle(color: Color(0xFF999999)),
+                                ),
+                              )),
+                          new Expanded(
+                              flex: 7,
+                              child: new Container(
+                                margin: const EdgeInsets.only(
+                                    left: 8.0, right: 16.0),
+                                child: new TextField(
+                                  onSubmitted: (term) {
+                                    _fieldFocusChange(
+                                        context, emailFocus, mesFocus);
+                                  },
+                                  onChanged: (text) {
+                                    countEmail = 0;
+                                  },
+                                  controller: widget.controllerEmail,
+                                  focusNode: emailFocus,
+                                  cursorColor: Color(0xFF2BBAB4),
+                                  style:
+                                      new TextStyle(color: Color(0xFF000000)),
+                                  decoration: InputDecoration(
+                                    hintText: "email@email.com.br",
+                                    hintStyle: new TextStyle(
+                                        fontSize: 14.0,
+                                        color:
+                                            Color(0xFF000000).withOpacity(0.3)),
+                                  ),
+                                ),
+                              ))
+                        ],
+                      ),
+                    ],
+                  )),
+              new Container(
+                  color: Colors.white,
+                  child: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Expanded(
+                              flex: 3,
+                              child: new Container(
+                                padding: const EdgeInsets.only(
+                                    top: 12.0, bottom: 12.0, left: 16.0),
+                                child: new Text(
+                                  "Data Nascimento",
+                                  style:
+                                      new TextStyle(color: Color(0xFF999999)),
+                                ),
+                              )),
+                          new Expanded(
+                              flex: 7,
+                              child: new Container(
+                                margin: const EdgeInsets.only(
+                                    left: 8.0, right: 16.0),
+                                child: new TextField(
+                                  onSubmitted: (term) {
+                                    mesFocus.unfocus();
+                                  },
+                                  onChanged: (text) {
+                                    countData = 0;
+                                    validaMes();
+                                    if (text.length == 10) {
+                                      mesFocus.unfocus();
+                                    }
+                                  },
+                                  focusNode: mesFocus,
+                                  controller: widget.controllerData,
+                                  keyboardType: TextInputType.number,
+                                  cursorColor: Color(0xFF2BBAB4),
+                                  style:
+                                      new TextStyle(color: Color(0xFF000000)),
+                                  decoration: InputDecoration(
+                                    hintText: "dd / mm / aaaa",
+                                    hintStyle: new TextStyle(
+                                        fontSize: 14.0,
+                                        color:
+                                            Color(0xFF000000).withOpacity(0.3)),
+                                  ),
+                                  inputFormatters: [
+                                    MaskedTextInputFormatterShifter(
+                                        maskONE: "XX/XX/XXXX",
+                                        maskTWO: "XX/XX/XXXX"),
+                                    BlacklistingTextInputFormatter(
+                                        RegExp("[\\\\,.-]")),
+                                  ],
+                                ),
+                              ))
+                        ],
+                      ),
+                    ],
+                  )),
+            ],
+          ),
+        ),
+        new Container(
+          margin: EdgeInsets.only(top: 5.0),
+          alignment: Alignment.centerRight,
+          child: new ZCheckCPF(),
+        ),
+        new Container(
           padding: EdgeInsets.only(left: 15.0, bottom: 15.0, top: 8),
           alignment: Alignment.centerLeft,
           child: new Text(
@@ -468,13 +505,22 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
         new Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
-            child: ZButton(
-              padding: EdgeInsets.only(
-                  top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
-              zButtonType: ZButtonType.isContained,
-              text: "CADASTRAR USUÁRIO",
-              onPressed: widget.onPressed,
-            )),
+            child: (_termos == false)
+                ? ZButton(
+                    color: Colors.grey,
+                    padding: EdgeInsets.only(
+                        top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
+                    zButtonType: ZButtonType.isContained,
+                    text: "CADASTRAR USUÁRIO",
+              
+                  )
+                : ZButton(
+                    padding: EdgeInsets.only(
+                        top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
+                    zButtonType: ZButtonType.isContained,
+                    text: "CADASTRAR USUÁRIO",
+                    onPressed: widget.onPressed,
+                  )),
       ],
     );
   }
@@ -639,7 +685,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   void initNome() {
     nomeFocus = FocusNode();
     nomeFocus.addListener(() {
-      if (!nomeFocus.hasFocus&& countNome==0) {
+      if (!nomeFocus.hasFocus && countNome == 0) {
         _valideNome();
       }
     });
@@ -657,7 +703,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   void initCpf() {
     cpfFocus = FocusNode();
     cpfFocus.addListener(() {
-      if (!cpfFocus.hasFocus&& countCPF == 0) {
+      if (!cpfFocus.hasFocus && countCPF == 0) {
         _validarCPF();
       }
     });
@@ -666,7 +712,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   void initCelular() {
     celularFocus = FocusNode();
     celularFocus.addListener(() {
-      if (!celularFocus.hasFocus&& countCelular==0) {
+      if (!celularFocus.hasFocus && countCelular == 0) {
         _validarCelular();
       }
     });
