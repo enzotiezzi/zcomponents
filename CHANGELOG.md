@@ -1,3 +1,7 @@
+## 0.1.9
+
+* Correction Zcadastro, ZPerfil and ZCollection!
+
 ## 0.1.8
 
 * Correction ZEscala and update ZHORA!
