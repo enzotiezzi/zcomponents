@@ -99,6 +99,18 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     Icons.voice_chat,
     Icons.view_stream
   ];
+  List <dynamic> listaOnTap = [
+    (){print("1");},
+        (){print("2");},
+        (){print("3");},
+        (){print("4");},
+        (){print("5");},
+        (){print("6");},
+        (){print("7");},
+        (){print("8");},
+        (){print("9");},
+
+  ];
 
   var _key = new GlobalKey<ZCargoState>();
   var _keyEscala = new GlobalKey<ZEscalaState>();
@@ -233,7 +245,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                               Navigator.of(context).pop()
                           ,
                           listaIcones: icones,
-                          listaTextos: titulos,
+                          listaTextos: titulos,listaOnTap: listaOnTap,
                           numeroQuadrados: titulos.length,
                           statusInfo: true,
                           textoContato: "(11)9 98679893",
