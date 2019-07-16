@@ -9,8 +9,10 @@ class ZCargo extends StatefulWidget {
   final String token;
   final Key key;
   final ValueChanged<ZCollectionItem> onChange;
+  final String valorPadrao;
 
-  ZCargo({this.key, @required this.token , this.onChange});
+
+  ZCargo({this.key, @required this.token, this.onChange, this.valorPadrao});
 
   @override
   State<StatefulWidget> createState() => ZCargoState();
@@ -22,6 +24,8 @@ class ZCargoState extends State<ZCargo> {
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
   IZCargoService _service;
+
+  var _keyZCollection = new GlobalKey<ZCollectionState>();
 
   var _cargos = new List<CargoViewModel>();
 
@@ -42,18 +46,24 @@ class ZCargoState extends State<ZCargo> {
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
-        if(widget.onChange != null) widget.onChange(item);
+        if (widget.onChange != null) widget.onChange(item);
       },
+      valorPadrao: widget.valorPadrao,
+      key: _keyZCollection,
     );
   }
 
   void _listarCargos() async {
     var cargos = await _service.listarCargos();
 
-    if (cargos != null) {
+    if (cargos != null && cargos.length > 0) {
       setState(() {
         _cargos = cargos;
       });
+      _keyZCollection.currentState.buscarValorPadrao(_cargos
+          .map((x) => new ZCollectionItem(
+          chave: x.idCargo, titulo: x.nome, valor: x.nome))
+          .toList());
     }
   }
 }

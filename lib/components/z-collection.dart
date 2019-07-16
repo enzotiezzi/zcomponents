@@ -7,8 +7,14 @@ class ZCollection extends StatefulWidget {
   final String titulo;
   final List<ZCollectionItem> lista;
   final ValueChanged<ZCollectionItem> onChange;
+  final String valorPadrao;
 
-  ZCollection({Key key, this.titulo: "Z Collection", this.lista, this.onChange})
+  ZCollection(
+      {Key key,
+      this.titulo: "Z Collection",
+      this.lista,
+      this.onChange,
+      this.valorPadrao})
       : super(key: key);
 
   @override
@@ -22,8 +28,8 @@ class ZCollectionState extends State<ZCollection> {
 
   @override
   void initState() {
-    _itemSelecionado = new ZCollectionItem();
     super.initState();
+    _itemSelecionado = new ZCollectionItem();
   }
 
   @override
@@ -49,13 +55,19 @@ class ZCollectionState extends State<ZCollection> {
               title: new Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  (_itemSelecionado?.valor == null)? new Text(
-                    "Selecione",
-                    style: new TextStyle(color: Colors.grey,),
-                  ): new Text(
-                    "${_itemSelecionado?.valor ?? ""}",
-                    style: new TextStyle(color: Colors.grey,),
-                  )
+                  (_itemSelecionado?.valor == null)
+                      ? new Text(
+                          "Selecione",
+                          style: new TextStyle(
+                            color: Colors.grey,
+                          ),
+                        )
+                      : new Text(
+                          "${_itemSelecionado?.valor ?? ""}",
+                          style: new TextStyle(
+                            color: Colors.grey,
+                          ),
+                        )
                 ],
               ),
               trailing: new Icon(
@@ -70,19 +82,23 @@ class ZCollectionState extends State<ZCollection> {
     );
   }
 
- /* void _irParaSelecaoDeItem() async {
-    _itemSelecionado = await Navigator.push<ZCollectionItem>(
-        context,
-        new MaterialPageRoute(
-            builder: (BuildContext context) => ZCollectionList(
-                  lista: widget.lista,
-                  titulo: widget.titulo,
-                )));
+  void buscarValorPadrao( List<ZCollectionItem> lista) {
 
-    if (widget.onChange != null) widget.onChange(_itemSelecionado);
+    if (lista != null && lista.length > 0) {
+      if (widget.valorPadrao != null) {
+        var vP = lista
+            .where((lista) => lista.chave == widget.valorPadrao)
+            .first;
+        if (vP != null) {
+          setState(() {
+            _itemSelecionado = vP;
+          });
+        }
+      }
+    }
 
-    setState(() {});
-  }*/
+  }
+
 
   void _irParaSelecaoDeItemHorizontal() async {
     _itemSelecionado = await Navigator.push<ZCollectionItem>(

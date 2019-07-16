@@ -11,6 +11,7 @@ import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
+import 'package:z_components/components/z-local.dart';
 
 void main() => runApp(MyApp());
 
@@ -73,7 +74,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
 
-
   String _value = "open";
 
   List<String> titulos = [
@@ -101,7 +101,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   var _key = new GlobalKey<ZCargoState>();
   var _keyEscala = new GlobalKey<ZEscalaState>();
-  var _keyLocal = new GlobalKey<ZEscalaState>();
+  var _keyLocal = new GlobalKey<ZLocalState>();
 
   @override
   void initState() {
@@ -160,58 +160,62 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(children: <Widget>[
           new ZCargo(
-            onChange: (item){
+            onChange: (item) {
               print("${item.titulo}");
             },
             key: _key,
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",),
+            token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            valorPadrao: '758ad32f-c564-4c0a-8f24-3de9d7acf554',
+          ),
           new ZEscala(
-            onChange: (item){
+            onChange: (item) {
               print("${item.titulo}");
             },
             key: _keyEscala,
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",),
-          new ZHora()
- /*         new ZLocal(
-            onChange: (item){
+            token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            valorPadrao: '9398cc94-f64f-4cb8-a391-5525201d7713',
+          ),
+          new ZHora(),
+          new ZLocal(
+            onChange: (item) {
               print("${item.titulo}");
             },
-            key: _keyEscala,
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",),*/
-
-, new ZButton(
+            key: _keyLocal,
+            token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            idEmpresa: "638ee1f4-649e-415f-9e60-a2b504972379",
+            valorPadrao: "e9bebc02-f63c-4c56-9f7d-711d7d0191c2",
+          ),
+          new ZButton(
             text: "CADASTRO USUARIO",
-            onPressed: (){
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>   new ZCadastroUsuario(
-                context: context,
-                controllerNome: controllerNome,
-                controllerCPF: controllerCPF,
-                controllerEmail: controllerEmail,
-                controllerCelular: controllerCelular,
-                controllerData: controllerData,
-                controllerSenha: controllerSenha,
-                controllerRepetirSenha: controllerRepetirSenha,
-                onPressed: (){
-                  print(controllerNome.text);
-                  print(controllerCPF.text);
-                  print(controllerEmail.text);
-                  print(controllerCelular.text);
-                  print(controllerData.text);
-                  print(controllerSenha.text);
-                  print(controllerRepetirSenha.text);
-
-
-
-                },
-              )),
-            );
-
-
-          },)
-
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => new ZCadastroUsuario(
+                          context: context,
+                          controllerNome: controllerNome,
+                          controllerCPF: controllerCPF,
+                          controllerEmail: controllerEmail,
+                          controllerCelular: controllerCelular,
+                          controllerData: controllerData,
+                          controllerSenha: controllerSenha,
+                          controllerRepetirSenha: controllerRepetirSenha,
+                          onPressed: () {
+                            print(controllerNome.text);
+                            print(controllerCPF.text);
+                            print(controllerEmail.text);
+                            print(controllerCelular.text);
+                            print(controllerData.text);
+                            print(controllerSenha.text);
+                            print(controllerRepetirSenha.text);
+                          },
+                        )),
+              );
+            },
+          )
         ]));
   }
 }
