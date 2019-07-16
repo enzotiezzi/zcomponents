@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-local.dart';
+import 'package:z_components/components/z-perfil.dart';
 
 void main() => runApp(MyApp());
 
@@ -125,28 +126,29 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => new InformacaoBatida(
-                          bottomChild: new Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.only(bottom: 5),
-                              child: new ButtonTheme(
-                                minWidth: 145,
-                                child: new RaisedButton(
-                                    color: Color(0xff2bbab4),
-                                    child: new Text(
-                                      "ENTENDI",
-                                      style: new TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0))),
-                              )),
-                        )),
+                    builder: (context) =>
+                    new InformacaoBatida(
+                      bottomChild: new Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(bottom: 5),
+                          child: new ButtonTheme(
+                            minWidth: 145,
+                            child: new RaisedButton(
+                                color: Color(0xff2bbab4),
+                                child: new Text(
+                                  "ENTENDI",
+                                  style: new TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                    new BorderRadius.circular(30.0))),
+                          )),
+                    )),
               );
             },
             child: new Container(
@@ -165,7 +167,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _key,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
             valorPadrao: '758ad32f-c564-4c0a-8f24-3de9d7acf554',
           ),
           new ZEscala(
@@ -174,7 +176,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyEscala,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
             valorPadrao: '9398cc94-f64f-4cb8-a391-5525201d7713',
           ),
           new ZHora(),
@@ -184,38 +186,73 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyLocal,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
             idEmpresa: "638ee1f4-649e-415f-9e60-a2b504972379",
             valorPadrao: "e9bebc02-f63c-4c56-9f7d-711d7d0191c2",
           ),
           new ZButton(
             text: "CADASTRO USUARIO",
+
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>
+                new ZCadastroUsuario(
+                  onTapVoltar: () {
+                    Navigator.of(context).pop();
+                  },
+                  context: context,
+                  controllerNome: controllerNome,
+                  controllerCPF: controllerCPF,
+                  controllerEmail: controllerEmail,
+                  controllerCelular: controllerCelular,
+                  controllerData: controllerData,
+                  controllerSenha: controllerSenha,
+                  controllerRepetirSenha: controllerRepetirSenha,
+                  onPressed: () {
+                    print(controllerNome.text);
+                    print(controllerCPF.text);
+                    print(controllerEmail.text);
+                    print(controllerCelular.text);
+                    print(controllerData.text);
+                    print(controllerSenha.text);
+                    print(controllerRepetirSenha.text);
+                  },
+                )),
+              );
+            },),
+          new ZButton(
+            text: "PERFIL",
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => new ZCadastroUsuario(
-                          context: context,
-                          controllerNome: controllerNome,
-                          controllerCPF: controllerCPF,
-                          controllerEmail: controllerEmail,
-                          controllerCelular: controllerCelular,
-                          controllerData: controllerData,
-                          controllerSenha: controllerSenha,
-                          controllerRepetirSenha: controllerRepetirSenha,
-                          onPressed: () {
-                            print(controllerNome.text);
-                            print(controllerCPF.text);
-                            print(controllerEmail.text);
-                            print(controllerCelular.text);
-                            print(controllerData.text);
-                            print(controllerSenha.text);
-                            print(controllerRepetirSenha.text);
-                          },
+                    builder: (context) =>
+                        ZPerfil(
+                          onTapVoltar: () =>
+                              Navigator.of(context).pop()
+                          ,
+                          listaIcones: icones,
+                          listaTextos: titulos,
+                          numeroQuadrados: titulos.length,
+                          statusInfo: true,
+                          textoContato: "(11)9 98679893",
+                          textoLocalizacao:
+                          "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
+                          tituloHeader: "Giuliano Ortiz",
+                          textoTituloInfo: "Giuliano Ortiz",
+                          textoLocalInfo: "Sede - Xolis ltda.",
+                          textoCargoInfo: "Garoto de TI",
+                          textoEscalaInfo: "5x2(seg-sex)",
+                          textoHoraEntradaInfo: "09:00",
+                          textoHoraSaidaInfo: "15:30",
+                          textoHoraIntervaloInfo: "1:00",
+                          textoCodigoInfo: "012345",
                         )),
               );
             },
-          )
+          ),
+
         ]));
   }
 }

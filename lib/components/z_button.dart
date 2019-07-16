@@ -40,7 +40,7 @@ class ZButton extends StatelessWidget {
     this.textColor,
     this.padding,
     this.disabledTextColor,
-    this.color = Colors.teal,
+    this.color = const Color(0xff2BBAB4),
     this.disabledColor,
     this.highlightColor,
     this.splashColor,
@@ -65,7 +65,7 @@ class ZButton extends StatelessWidget {
             this.text,
             style: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
-          color: const Color(0xff2BBAB4),
+          color: color,
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0)),
           elevation: this.elevation,
@@ -101,7 +101,7 @@ class ZButton extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: new BorderRadius.circular(30.0),
                 border: Border.all(
-                  color: const Color(0xff2BBAB4),
+                  color: color
                 )),
           ),
           color: Colors.transparent,

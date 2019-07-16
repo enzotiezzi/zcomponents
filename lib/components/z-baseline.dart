@@ -365,13 +365,13 @@ class ZBaseLine extends StatelessWidget {
   }
 
   void validaMes() {
-    dia = controllerData.text.substring(0, 2);
+    dia = total.substring(0, 2);
     intDias = int.parse(dia);
 
-    mes = controllerData.text.substring(3, 5);
+    mes = total.substring(3, 5);
     intMes = int.parse(mes);
 
-    ano = controllerData.text.substring(6, 10);
+    ano = total.substring(6, 10);
     intAno = int.parse(ano);
 
     if ((intAno % 4 == 0 && intAno % 100 != 0) || intAno % 400 == 0) {
@@ -384,7 +384,7 @@ class ZBaseLine extends StatelessWidget {
     print(mes);
     print(ano);
 
-    if (controllerData.text.length == 10) {
+    if (total.length == 10) {
       if (intMes < 13 && intDias < 32 && intAno < 2004 && intAno > 1901) {
         if (intDias == 00 || intMes == 00 || intAno == 00) {
           showAlertDialogNew("Data Inválida!",
@@ -458,20 +458,20 @@ class ZBaseLine extends StatelessWidget {
   }
 
   void mesHasFocus() {
-    if (controllerData.text == null) {
+    if (total == null) {
       showAlertDialogNew(
           "Data Inválida!", "Por Favor, digite sua data de nascimento.");
-    } else if (controllerData.text.length < 10) {
+    } else if (total.length < 10) {
       showAlertDialogNew("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
     }
   }
 
   void _valideNome() {
-    if (controllerNome.text == null) {
+    if (nome == null) {
       valideNome = false;
       showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
-    } else if (controllerNome.text.split(' ').length < 2) {
+    } else if (nome.split(' ').length < 2) {
       valideNome = false;
       showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
     } else {
@@ -480,7 +480,7 @@ class ZBaseLine extends StatelessWidget {
   }
 
   void _validarCPF() {
-    if (!CPFValidator.isValid(controllerCPF.text)) {
+    if (!CPFValidator.isValid(cPF)) {
       valideCPF = false;
       showAlertDialogNew("CPF Inválido!", "Por Favor insira um CPF válido.");
     } else {
@@ -489,11 +489,11 @@ class ZBaseLine extends StatelessWidget {
   }
 
   void _validarCelular() {
-    if (controllerCelular.text == null) {
+    if (celular == null) {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, digitar o seu celular.");
-    } else if (controllerCelular.text.length < 14) {
+    } else if (celular.length < 14) {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
@@ -503,10 +503,10 @@ class ZBaseLine extends StatelessWidget {
   }
 
   void _validarEmail() {
-    if (controllerEmail.text == null) {
+    if (email == null) {
       valideEmail = false;
       showAlertDialogNew("E-mail Inválido!", "Por Favor insira um E-mail.");
-    } else if (!EmailValidator.validate(controllerEmail.text)) {
+    } else if (!EmailValidator.validate(email)) {
       valideEmail = false;
       showAlertDialogNew(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");

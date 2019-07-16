@@ -32,7 +32,7 @@ class ZPinSenha extends StatelessWidget {
                 width: 100,
                 child: new Text(
                   "Senha",
-                  style: TextStyle(fontSize: 15.0),
+                  style: new TextStyle(color: Color(0xFF999999)),
                 ),
               ),
               new Expanded(
@@ -72,9 +72,8 @@ class ZPinSenha extends StatelessWidget {
               new Container(
                 width: 100,
                 child: new Text(
-                  "Repetir Senha",
-                  style: TextStyle(fontSize: 15.0),
-                ),
+                  "Repetir \nSenha",
+                  style: new TextStyle(color: Color(0xFF999999)),                ),
               ),
               new Expanded(
                   child: new Container(

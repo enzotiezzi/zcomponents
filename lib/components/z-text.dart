@@ -34,7 +34,7 @@ class _ZTextState extends State<ZText> {
                 new Expanded(
                     flex: 7,
                     child: new Container(
-                      margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                      margin: const EdgeInsets.only(left: 8.0, right: 16.0, top: 12.0, bottom: 12.0),
                       child: new Container(
                         child: new Text(
                           widget.text,
@@ -51,7 +51,7 @@ class _ZTextState extends State<ZText> {
       alignment: Alignment.centerLeft,
       child: new Text(
         widget.tituloText,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
