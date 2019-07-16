@@ -55,6 +55,13 @@ class _HoraState extends State<ZHora> {
   @override
   void initState() {
     super.initState();
+    if(widget.controllerHoraEntrada.text != "" && widget.controllerIntervalo.text != "" && widget.controllerHoraSaida.text != ""){
+      ajustarHorarioInicioPadrao(widget.controllerHoraEntrada.text);
+      ajustarHoraFimPadrao(widget.controllerHoraSaida.text);
+      ajustarHoraIntervaloPadrao(widget.controllerIntervalo.text);
+      ajustarDmaisUm();
+    }
+
     _focusEntrada = FocusNode();
     _focusSaida = FocusNode();
     _focusIntervalo = FocusNode();
@@ -177,48 +184,8 @@ class _HoraState extends State<ZHora> {
                                 decoration:
                                     InputDecoration.collapsed(hintText: ""),
                                 onChanged: (text) {
-                                  horarioInteiroEntrada = text;
-                                  _horaEntrada = text.substring(0, 2);
-                                  _minutoEntrada = text.substring(3, 5);
-                                  _intHoraEntrada = int.parse(_horaEntrada);
-                                  _intMinutoEntrada = int.parse(_minutoEntrada);
-                                  if (text.length == 5) {
-                                    if (_intHoraEntrada > 23 &&
-                                        _intMinutoEntrada > 59) {
-                                      showAlertDialogNew("Horario Inválido!", "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
-                                      _fieldFocusChange(context, _focusEntrada, _focusEntrada);
-                                      okEntrada = false;
-                                      setState(() {
-                                        ColorHoraEntrada = const Color(0xffE53629);
-                                      });
-
-                                    } else if (_intHoraEntrada > 23 &&
-                                        _intMinutoEntrada < 59) {
-                                      showAlertDialogNew("Hora Inválida!", "Por favor insira um valor de hora entre 00 e 23.");
-                                      _fieldFocusChange(context, _focusEntrada, _focusEntrada);
-                                      okEntrada = false;
-                                      setState(() {
-                                        ColorHoraEntrada = const Color(0xffE53629);
-                                      });
-
-                                    } else if (_intHoraEntrada < 24 &&
-                                        _intMinutoEntrada > 59) {
-                                      showAlertDialogNew("Minuto Inválido!", "Por favor insira um valor de minuto entre 00 e 59.");
-                                      _fieldFocusChange(context, _focusEntrada, _focusEntrada);
-                                      okEntrada = false;
-                                      setState(() {
-                                        ColorHoraEntrada = const Color(0xffE53629);
-                                      });
-
-                                    } else {
-                                      _fieldFocusChange(
-                                          context, _focusEntrada, _focusSaida);
-                                      okEntrada = true;
-                                      setState(() {
-                                        ColorHoraEntrada = const Color(0xff1AC15D);
-                                      });
-                                    }
-                                  }
+                                  text = widget.controllerHoraEntrada.text;
+                                  ajustarHorarioInicio(text);
                                 },
                               )),
                         ),
@@ -256,56 +223,8 @@ class _HoraState extends State<ZHora> {
                                       decoration: InputDecoration.collapsed(
                                           hintText: ""),
                                       onChanged: (text) {
-                                        horarioInteiroSaida = text;
-                                        _horaSaida = text.substring(0, 2);
-                                        _minutoSaida = text.substring(3, 5);
-                                        _intHoraSaida = int.parse(_horaSaida);
-                                        _intMinutoSaida = int.parse(_minutoSaida);
-                                        
-                                        if (text.length == 5) {
-                                          if (_intHoraSaida > 23 &&
-                                              _intMinutoSaida > 59) {
-                                            showAlertDialogNew(
-                                                "Horario Inválido!",
-                                                "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
-                                            _fieldFocusChange(context, _focusSaida, _focusSaida);
-                                            okSaida = false;
-                                            setState(() {
-                                              ColorHoraSaida = const Color(0xffE53629);
-                                            });
-                                          } else if (_intHoraSaida > 23 &&
-                                              _intMinutoSaida < 59) {
-                                            showAlertDialogNew("Hora Inválida!",
-                                                "Por favor insira um valor de hora entre 00 e 23.");
-                                            _fieldFocusChange(context, _focusSaida, _focusSaida);
-                                            okSaida = false;
-
-                                            setState(() {
-                                              ColorHoraSaida = const Color(0xffE53629);
-                                            });
-
-                                          } else if (_intHoraSaida < 23 &&
-                                              _intMinutoSaida > 59) {
-                                            showAlertDialogNew(
-                                                "Minuto Inválido!",
-                                                "Por favor insira um valor de minuto entre 00 e 59.");
-                                            _fieldFocusChange(context, _focusSaida, _focusSaida);
-                                            okSaida = false;
-
-                                            setState(() {
-                                              ColorHoraSaida = const Color(0xffE53629);
-                                            });
-
-                                          } else {
-                                            _fieldFocusChange(context,
-                                                _focusSaida, _focusIntervalo);
-                                            okSaida = true;
-
-                                            setState(() {
-                                              ColorHoraSaida = const Color(0xff1AC15D);
-                                            });
-                                          }
-                                        }
+                                        text = widget.controllerHoraSaida.text;
+                                       ajustarHoraFim(text);
                                       },
                                     )),
                                 new Row(
@@ -373,47 +292,8 @@ class _HoraState extends State<ZHora> {
                                 decoration:
                                     InputDecoration.collapsed(hintText: ""),
                                 onChanged: (text) {
-                                  horarioInteiroIntervalo = text;
-                                  _horaIntervalo = text.substring(0, 2);
-                                  _minutoIntervalo = text.substring(3, 5);
-                                  _intHoraIntervalo = int.parse(_horaIntervalo);
-                                  _intMinutoIntervalo =
-                                      int.parse(_minutoIntervalo);
-
-                                  if (text.length == 5) {
-                                    if (_intHoraIntervalo > 23 &&
-                                        _intMinutoIntervalo > 59) {
-                                      showAlertDialogNew("Horario Inválido!",
-                                          "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
-                                      _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
-                                      okIntervalo = false;
-                                      setState(() {
-                                        ColorIntervalo = const Color(0xffE53629);
-                                      });
-                                    } else if (_intHoraIntervalo > 23 &&
-                                        _intMinutoIntervalo < 59) {
-                                      showAlertDialogNew("Hora Inválida!",
-                                          "Por favor insira um valor de hora entre 00 e 23.");
-                                      _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
-                                      okIntervalo = false;
-
-                                      setState(() {
-                                        ColorIntervalo = const Color(0xffE53629);
-                                      });
-                                    } else if (_intHoraIntervalo < 23 &&
-                                        _intMinutoIntervalo > 59) {
-                                      showAlertDialogNew("Minuto Inválido!",
-                                          "Por favor insira um valor de minuto entre 00 e 59.");
-                                      _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
-                                      okIntervalo = false;
-
-                                      setState(() {
-                                        ColorIntervalo = const Color(0xffE53629);
-                                      });
-                                    } else {
-                                      horarioTrabalhado();
-                                    }
-                                  }
+                                  text = widget.controllerIntervalo.text;
+                                  ajustarHoraIntervalo(text);
                                 },
                               )),
                         ),
@@ -427,6 +307,256 @@ class _HoraState extends State<ZHora> {
         ),
       ],
     );
+  }
+  void ajustarHorarioInicio(String text)
+  {
+    horarioInteiroEntrada = text;
+    _horaEntrada = text.substring(0, 2);
+    _minutoEntrada = text.substring(3, 5);
+    _intHoraEntrada = int.parse(_horaEntrada);
+    _intMinutoEntrada = int.parse(_minutoEntrada);
+    if (text.length == 5) {
+      if (_intHoraEntrada > 23 &&
+          _intMinutoEntrada > 59) {
+        showAlertDialogNew("Horario Inválido!", "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+        _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+        okEntrada = false;
+        setState(() {
+          ColorHoraEntrada = const Color(0xffE53629);
+        });
+
+      } else if (_intHoraEntrada > 23 &&
+          _intMinutoEntrada < 59) {
+        showAlertDialogNew("Hora Inválida!", "Por favor insira um valor de hora entre 00 e 23.");
+        _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+        okEntrada = false;
+        setState(() {
+          ColorHoraEntrada = const Color(0xffE53629);
+        });
+
+      } else if (_intHoraEntrada < 24 &&
+          _intMinutoEntrada > 59) {
+        showAlertDialogNew("Minuto Inválido!", "Por favor insira um valor de minuto entre 00 e 59.");
+        _fieldFocusChange(context, _focusEntrada, _focusEntrada);
+        okEntrada = false;
+        setState(() {
+          ColorHoraEntrada = const Color(0xffE53629);
+        });
+
+      } else {
+        _fieldFocusChange(
+            context, _focusEntrada, _focusSaida);
+        okEntrada = true;
+        setState(() {
+          ColorHoraEntrada = const Color(0xff1AC15D);
+        });
+      }
+    }
+  }
+  void ajustarHorarioInicioPadrao(String text)
+  {
+
+    horarioInteiroEntrada = text;
+    _horaEntrada = text.substring(0, 2);
+    _minutoEntrada = text.substring(3, 5);
+    _intHoraEntrada = int.parse(_horaEntrada);
+    _intMinutoEntrada = int.parse(_minutoEntrada);
+    if (text.length == 5) {
+      if (_intHoraEntrada > 23 &&
+          _intMinutoEntrada > 59) {
+        okEntrada = false;
+        setState(() {
+          ColorHoraEntrada = const Color(0xffE53629);
+        });
+
+      } else if (_intHoraEntrada > 23 &&
+          _intMinutoEntrada < 59) {
+        okEntrada = false;
+        setState(() {
+          ColorHoraEntrada = const Color(0xffE53629);
+        });
+
+      } else if (_intHoraEntrada < 24 &&
+          _intMinutoEntrada > 59) {
+        okEntrada = false;
+        setState(() {
+          ColorHoraEntrada = const Color(0xffE53629);
+        });
+
+      } else {
+        okEntrada = true;
+        setState(() {
+          ColorHoraEntrada = const Color(0xff1AC15D);
+        });
+      }
+    }
+  }
+  void ajustarHoraFim(String text){
+    horarioInteiroSaida = text;
+    _horaSaida = text.substring(0, 2);
+    _minutoSaida = text.substring(3, 5);
+    _intHoraSaida = int.parse(_horaSaida);
+    _intMinutoSaida = int.parse(_minutoSaida);
+
+    if (text.length == 5) {
+      if (_intHoraSaida > 23 &&
+          _intMinutoSaida > 59) {
+        showAlertDialogNew(
+            "Horario Inválido!",
+            "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+        _fieldFocusChange(context, _focusSaida, _focusSaida);
+        okSaida = false;
+        setState(() {
+          ColorHoraSaida = const Color(0xffE53629);
+        });
+      } else if (_intHoraSaida > 23 &&
+          _intMinutoSaida < 59) {
+        showAlertDialogNew("Hora Inválida!",
+            "Por favor insira um valor de hora entre 00 e 23.");
+        _fieldFocusChange(context, _focusSaida, _focusSaida);
+        okSaida = false;
+
+        setState(() {
+          ColorHoraSaida = const Color(0xffE53629);
+        });
+
+      } else if (_intHoraSaida < 23 &&
+          _intMinutoSaida > 59) {
+        showAlertDialogNew(
+            "Minuto Inválido!",
+            "Por favor insira um valor de minuto entre 00 e 59.");
+        _fieldFocusChange(context, _focusSaida, _focusSaida);
+        okSaida = false;
+
+        setState(() {
+          ColorHoraSaida = const Color(0xffE53629);
+        });
+
+      } else {
+        _fieldFocusChange(context,
+            _focusSaida, _focusIntervalo);
+        okSaida = true;
+
+        setState(() {
+          ColorHoraSaida = const Color(0xff1AC15D);
+        });
+      }
+    }
+  }
+  void ajustarHoraFimPadrao(String text){
+    horarioInteiroSaida = text;
+    _horaSaida = text.substring(0, 2);
+    _minutoSaida = text.substring(3, 5);
+    _intHoraSaida = int.parse(_horaSaida);
+    _intMinutoSaida = int.parse(_minutoSaida);
+
+    if (text.length == 5) {
+      if (_intHoraSaida > 23 &&
+          _intMinutoSaida > 59) {
+        okSaida = false;
+        setState(() {
+          ColorHoraSaida = const Color(0xffE53629);
+        });
+      } else if (_intHoraSaida > 23 &&
+          _intMinutoSaida < 59) {
+        okSaida = false;
+
+        setState(() {
+          ColorHoraSaida = const Color(0xffE53629);
+        });
+
+      } else if (_intHoraSaida < 23 &&
+          _intMinutoSaida > 59) {
+        okSaida = false;
+
+        setState(() {
+          ColorHoraSaida = const Color(0xffE53629);
+        });
+
+      } else {
+        okSaida = true;
+        setState(() {
+          ColorHoraSaida = const Color(0xff1AC15D);
+        });
+      }
+    }
+  }
+  void ajustarHoraIntervalo(String text){
+    horarioInteiroIntervalo = text;
+    _horaIntervalo = text.substring(0, 2);
+    _minutoIntervalo = text.substring(3, 5);
+    _intHoraIntervalo = int.parse(_horaIntervalo);
+    _intMinutoIntervalo =
+        int.parse(_minutoIntervalo);
+
+    if (text.length == 5) {
+      if (_intHoraIntervalo > 23 &&
+          _intMinutoIntervalo > 59) {
+        showAlertDialogNew("Horario Inválido!",
+            "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
+        _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
+        okIntervalo = false;
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+      } else if (_intHoraIntervalo > 23 &&
+          _intMinutoIntervalo < 59) {
+        showAlertDialogNew("Hora Inválida!",
+            "Por favor insira um valor de hora entre 00 e 23.");
+        _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
+        okIntervalo = false;
+
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+      } else if (_intHoraIntervalo < 23 &&
+          _intMinutoIntervalo > 59) {
+        showAlertDialogNew("Minuto Inválido!",
+            "Por favor insira um valor de minuto entre 00 e 59.");
+        _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
+        okIntervalo = false;
+
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+      } else {
+        horarioTrabalhado();
+      }
+    }
+  }
+  void ajustarHoraIntervaloPadrao(String text){
+    horarioInteiroIntervalo = text;
+    _horaIntervalo = text.substring(0, 2);
+    _minutoIntervalo = text.substring(3, 5);
+    _intHoraIntervalo = int.parse(_horaIntervalo);
+    _intMinutoIntervalo =
+        int.parse(_minutoIntervalo);
+
+    if (text.length == 5) {
+      if (_intHoraIntervalo > 23 &&
+          _intMinutoIntervalo > 59) {
+        okIntervalo = false;
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+      } else if (_intHoraIntervalo > 23 &&
+          _intMinutoIntervalo < 59) {
+        okIntervalo = false;
+
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+      } else if (_intHoraIntervalo < 23 &&
+          _intMinutoIntervalo > 59) {
+        okIntervalo = false;
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+      } else {
+        horarioTrabalhadoPadrao();
+      }
+    }
+
   }
   void showAlertDialogNew(String title, String message) async {
     showDialog(
@@ -601,6 +731,54 @@ class _HoraState extends State<ZHora> {
           ColorIntervalo = const Color(0xff1AC15D);
         });
       }
+    }
+  }
+  void horarioTrabalhadoPadrao() {
+    var _horarioTrabalhado;
+    if (_intHoraEntrada > _intHoraSaida) {
+      _horarioTrabalhado = 24 - _intHoraEntrada;
+      _horarioTrabalhado = _horarioTrabalhado + _intHoraSaida;
+      print(_horarioTrabalhado);
+      if (_intHoraIntervalo >= _horarioTrabalhado) {
+        okIntervalo = false;
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+        _fieldFocusChange(context,
+            _focusIntervalo, _focusIntervalo);
+      }
+      else{
+        okIntervalo = true;
+        setState(() {
+          ColorIntervalo = const Color(0xff1AC15D);
+        });
+      }
+    } else {
+      _horarioTrabalhado = _intHoraSaida - _intHoraEntrada;
+      print(_horarioTrabalhado);
+      if (_intHoraIntervalo >= _horarioTrabalhado) {
+        okIntervalo = false;
+        setState(() {
+          ColorIntervalo = const Color(0xffE53629);
+        });
+      }
+      else{
+        okIntervalo = true;
+        setState(() {
+          ColorIntervalo = const Color(0xff1AC15D);
+        });
+      }
+    }
+  }
+  void ajustarDmaisUm(){
+    if (_intHoraEntrada > _intHoraSaida && _intHoraSaida != 0) {
+      setState(() {
+        _visibles = true;
+      });
+    } else {
+      setState(() {
+        _visibles = false;
+      });
     }
   }
 

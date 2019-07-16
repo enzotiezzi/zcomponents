@@ -68,7 +68,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var controllerRepetirSenha = new TextEditingController();
 
   bool value = false;
-
+  var _controllerFim = new TextEditingController();
+  var _controllerIntervalo = new TextEditingController();
+  var _controllerHorarioInicio = new TextEditingController();
   ZBaseLine valideNome;
   ZBaseLine valideCPF;
   ZBaseLine valideData;
@@ -106,6 +108,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   @override
   void initState() {
+    _controllerHorarioInicio.text = "08:00";
+    _controllerIntervalo.text = "02:00";
+    _controllerFim.text = "07:00";
+
     super.initState();
   }
 
@@ -179,7 +185,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
             valorPadrao: '9398cc94-f64f-4cb8-a391-5525201d7713',
           ),
-          new ZHora(),
+          new ZHora(
+            controllerIntervalo: _controllerIntervalo,
+            controllerHoraSaida: _controllerFim,
+            controllerHoraEntrada: _controllerHorarioInicio,
+          ),
           new ZLocal(
             onChange: (item) {
               print("${item.titulo}");
