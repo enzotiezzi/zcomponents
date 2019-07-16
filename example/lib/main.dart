@@ -111,7 +111,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     _controllerHorarioInicio.text = "08:00";
     _controllerIntervalo.text = "02:00";
     _controllerFim.text = "07:00";
-
     super.initState();
   }
 
