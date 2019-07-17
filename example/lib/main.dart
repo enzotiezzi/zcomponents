@@ -122,16 +122,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   @override
   void initState() {
-    _controllerHorarioInicio.text = "08:00";
-    _controllerIntervalo.text = "02:00";
-    _controllerFim.text = "07:00";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.withOpacity(0.5),
+        backgroundColor: Colors.white,
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
