@@ -358,6 +358,7 @@ class _HoraState extends State<ZHora> {
         okEntrada = true;
         setState(() {
           ColorHoraEntrada = Colors.grey;
+          horarioTrabalhado();
         });
       }
     }
@@ -448,6 +449,7 @@ class _HoraState extends State<ZHora> {
 
         setState(() {
           ColorHoraSaida = Colors.grey;
+          horarioTrabalhado();
         });
       }
     }
