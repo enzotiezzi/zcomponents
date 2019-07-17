@@ -3,7 +3,7 @@ import 'package:z_components/interface/i-zescala-service.dart';
 import 'package:z_components/settings/api-settings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:z_components/view-model/EscalaViewModel.dart';
+import 'package:z_components/view-model/escala-viewmodel.dart';
 
 class ZEscalaService extends Service implements IZEscalaService {
   String _uRL = "${ApiSettings.ENDPOINT}/zponto";

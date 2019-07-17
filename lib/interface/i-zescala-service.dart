@@ -1,4 +1,4 @@
-import 'package:z_components/view-model/EscalaViewModel.dart';
+import 'package:z_components/view-model/escala-viewmodel.dart';
 
 abstract class IZEscalaService{
 
