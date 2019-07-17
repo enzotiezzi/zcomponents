@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Correction ZHORA and new Component(ZEmpresa)!
+
 ## 0.2.0
 
 * Correction ZHORA!

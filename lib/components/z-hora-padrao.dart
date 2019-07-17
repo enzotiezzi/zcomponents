@@ -166,8 +166,8 @@ class _HoraState extends State<ZHora> {
                                 const Radius.circular(5.0)),
                           ),
                           child: new Container(
-                              margin: EdgeInsets.only(left: 30.0),
                               child: new TextField(
+                                textAlign: TextAlign.center,
                                 controller: widget.controllerHoraEntrada,
                                 onSubmitted: (term) {
                                   _fieldFocusChange(
@@ -177,6 +177,7 @@ class _HoraState extends State<ZHora> {
                                   MaskedTextInputFormatterShifter(
                                       maskONE: "XX:XX", maskTWO: "XX:XX"),
                                   BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+                                  BlacklistingTextInputFormatter(RegExp(" ")),
                                 ],
                                 focusNode: _focusEntrada,
                                 keyboardType: TextInputType.number,
@@ -214,8 +215,8 @@ class _HoraState extends State<ZHora> {
                                       inputFormatters: [
                                         MaskedTextInputFormatterShifter(
                                             maskONE: "XX:XX", maskTWO: "XX:XX"),
-                                        BlacklistingTextInputFormatter(
-                                            RegExp("[/\\\\,.-]")),
+                                        BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+                                        BlacklistingTextInputFormatter(RegExp(" ")),
                                       ],
                                       focusNode: _focusSaida,
                                       keyboardType: TextInputType.number,
@@ -273,8 +274,9 @@ class _HoraState extends State<ZHora> {
                                 const Radius.circular(5.0)),
                           ),
                           child: new Container(
-                              margin: EdgeInsets.only(left: 30.0),
+                             // margin: EdgeInsets.only(left: 30.0),
                               child: new TextField(
+                                textAlign: TextAlign.center,
                                 onSubmitted: (term) {
                                   _fieldFocusChange(
                                       context, _focusIntervalo, _focusIntervalo);
@@ -284,8 +286,8 @@ class _HoraState extends State<ZHora> {
                                 inputFormatters: [
                                   MaskedTextInputFormatterShifter(
                                       maskONE: "XX:XX", maskTWO: "XX:XX"),
-                                  BlacklistingTextInputFormatter(
-                                      RegExp("[/\\\\,.-]")),
+                                  BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+                                  BlacklistingTextInputFormatter(RegExp(" ")),
                                 ],
                                 keyboardType: TextInputType.number,
                                 // controller: _binding.controllerIntervalo,
