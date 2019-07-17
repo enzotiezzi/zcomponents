@@ -10,6 +10,7 @@ import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/components/z-cargo.dart';
+import 'package:z_components/components/z-empresa.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-local.dart';
 import 'package:z_components/components/z-perfil.dart';
@@ -101,10 +102,23 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     Icons.voice_chat,
     Icons.view_stream
   ];
+  List <dynamic> listaOnTap = [
+    (){print("1");},
+        (){print("2");},
+        (){print("3");},
+        (){print("4");},
+        (){print("5");},
+        (){print("6");},
+        (){print("7");},
+        (){print("8");},
+        (){print("9");},
+
+  ];
 
   var _key = new GlobalKey<ZCargoState>();
   var _keyEscala = new GlobalKey<ZEscalaState>();
   var _keyLocal = new GlobalKey<ZLocalState>();
+  var _keyEmpresa = new GlobalKey<ZEmpresaState>();
 
   @override
   void initState() {
@@ -166,6 +180,16 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
           ),
         ),
         body: new ListView(children: <Widget>[
+          new ZEmpresa(
+            onChange: (item) {
+              print("${item.titulo}");
+            },
+            key: _keyEmpresa,
+            token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            idUser: "6fab6b97-9227-4e29-935a-39f3f7a8ca5f" ,
+            valorPadrao: "49e30e86-7864-4594-818d-3cc572189dcb" ,
+          ),
           new ZCargo(
             onChange: (item) {
               print("${item.titulo}");
@@ -242,7 +266,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                               Navigator.of(context).pop()
                           ,
                           listaIcones: icones,
-                          listaTextos: titulos,
+                          listaTextos: titulos,listaOnTap: listaOnTap,
                           numeroQuadrados: titulos.length,
                           statusInfo: true,
                           textoContato: "(11)9 98679893",
