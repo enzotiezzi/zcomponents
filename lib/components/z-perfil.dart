@@ -24,6 +24,7 @@ class ZPerfil extends StatefulWidget {
   int numeroQuadrados;
   List<String> listaTextos;
   List<IconData> listaIcones;
+  List<dynamic> listaOnTap;
   bool statusInfo;
   var image;
   var onTapVoltar;
@@ -46,6 +47,7 @@ class ZPerfil extends StatefulWidget {
       this.textoHoraIntervaloInfo,
       this.textoTituloInfo,
       this.textoCargoInfo,
+        this.listaOnTap,
       this.tituloHeader});
 
   @override
@@ -119,6 +121,7 @@ class _ZPerfilState extends State<ZPerfil> {
             numeroQuadrados: widget.numeroQuadrados,
             listaTextos: widget.listaTextos,
             listaIcones: widget.listaIcones,
+            listaOnTap: widget.listaOnTap,
           ),
         ),
         ZText(

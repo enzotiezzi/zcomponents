@@ -5,8 +5,9 @@ class ZPerfilItem extends StatefulWidget {
   int numeroQuadrados;
   List<String> listaTextos;
   List<IconData> listaIcones;
+  List<dynamic> listaOnTap;
 
-  ZPerfilItem({this.numeroQuadrados = 0, this.listaIcones, this.listaTextos});
+  ZPerfilItem({this.numeroQuadrados = 0, this.listaIcones, this.listaTextos, this.listaOnTap});
 
   @override
   _ZPerfilItemState createState() => _ZPerfilItemState();
@@ -25,81 +26,85 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
         return (index == widget.numeroQuadrados - 1 ||
                 index == widget.numeroQuadrados - 2 ||
                 index == widget.numeroQuadrados - 3)
-            ? new Container(
-                margin: EdgeInsets.only(bottom: 2.0),
-                child: new Material(
-                  borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                  color: Colors.white,
-                  elevation: 2.0,
-                  child: new Container(
-                    child: new Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        new Container(
-                          margin: EdgeInsets.only(
-                              bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
-                          child: new Icon(
-                            widget.listaIcones[index],
-                            color: const Color(0xff2BBAB4),
-                          ),
-                        ),
-                        new Container(
-                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                          child: (widget.listaTextos[index] != null)
-                              ? new Text(
-                                  widget.listaTextos[index],
-                                  style:
-                                      TextStyle(color: const Color(0xff999999)),
-                                )
-                              : new Text(
-                                  widget.listaTextos[index],
-                                  style:
-                                      TextStyle(color: const Color(0xff999999)),
-                                ),
-                        )
-                      ],
+            ? new GestureDetector(
+          onTap: widget.listaOnTap[index],
+          child: new Container(
+          margin: EdgeInsets.only(bottom: 2.0),
+          child: new Material(
+            borderRadius: BorderRadius.all(Radius.circular(7.0)),
+            color: Colors.white,
+            elevation: 2.0,
+            child: new Container(
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  new Container(
+                    margin: EdgeInsets.only(
+                        bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
+                    child: new Icon(
+                      widget.listaIcones[index],
+                      color: const Color(0xff2BBAB4),
                     ),
                   ),
-                ),
-              )
-            : new Material(
-                borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                color: Colors.white,
-                elevation: 2.0,
-                child: new Container(
-                  child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      new Container(
-                        margin: EdgeInsets.only(
-                            bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
-                        child: new Icon(
-                          widget.listaIcones[index],
-                          color: const Color(0xff2BBAB4),
-                        ),
-                      ),
-                      new Container(
-                        margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: (widget.listaTextos[index] != null)
-                            ? new Text(
-                                widget.listaTextos[index],
-                                style:
-                                    TextStyle(color: const Color(0xff999999)),
-                              )
-                            : new Text(
-                                widget.listaTextos[index],
-                                style:
-                                    TextStyle(color: const Color(0xff999999)),
-                              ),
-                      )
-                    ],
+                  new Container(
+                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: (widget.listaTextos[index] != null)
+                        ? new Text(
+                      widget.listaTextos[index],
+                      style:
+                      TextStyle(color: const Color(0xff999999)),
+                    )
+                        : new Text(
+                      widget.listaTextos[index],
+                      style:
+                      TextStyle(color: const Color(0xff999999)),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),)
+            : new GestureDetector(
+          onTap: widget.listaOnTap[index],
+          child: new Material(
+          borderRadius: BorderRadius.all(Radius.circular(7.0)),
+          color: Colors.white,
+          elevation: 2.0,
+          child: new Container(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new Container(
+                  margin: EdgeInsets.only(
+                      bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
+                  child: new Icon(
+                    widget.listaIcones[index],
+                    color: const Color(0xff2BBAB4),
                   ),
                 ),
-              );
+                new Container(
+                  margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: (widget.listaTextos[index] != null)
+                      ? new Text(
+                    widget.listaTextos[index],
+                    style:
+                    TextStyle(color: const Color(0xff999999)),
+                  )
+                      : new Text(
+                    widget.listaTextos[index],
+                    style:
+                    TextStyle(color: const Color(0xff999999)),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),);
       },
     );
   }
