@@ -359,6 +359,7 @@ class _HoraState extends State<ZHora> {
         setState(() {
           ColorHoraEntrada = Colors.grey;
           horarioTrabalhado();
+          ajustarDmaisUm();
         });
       }
     }
