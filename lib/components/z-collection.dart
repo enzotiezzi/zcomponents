@@ -28,8 +28,10 @@ class ZCollectionState extends State<ZCollection> {
 
   @override
   void initState() {
-    super.initState();
+    buscarValorPadrao(widget.lista);
     _itemSelecionado = new ZCollectionItem();
+
+    super.initState();
   }
 
   @override
