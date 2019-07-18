@@ -20,9 +20,9 @@ class _HoraState extends State<ZHora> {
 
   bool _visibles = false;
 
-  bool okEntrada;
-  bool okSaida;
-  bool okIntervalo;
+  bool okEntrada = true;
+  bool okSaida = true;
+  bool okIntervalo = true;
 
   FocusNode _focusEntrada;
   FocusNode _focusSaida;
@@ -42,9 +42,9 @@ class _HoraState extends State<ZHora> {
   int _intHoraSaida = 0;
   int _intMinutoSaida;
 
-  Color ColorHoraEntrada = Colors.white;
-  Color ColorHoraSaida = Colors.white;
-  Color ColorIntervalo = Colors.white;
+  Color ColorHoraEntrada = Colors.grey;
+  Color ColorHoraSaida = Colors.grey;
+  Color ColorIntervalo = Colors.grey;
 
   String _horaIntervalo;
   String _minutoIntervalo;
@@ -129,17 +129,24 @@ class _HoraState extends State<ZHora> {
         new Container(
           margin: EdgeInsets.only(top: 30),
           child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              new Container(
-                margin: EdgeInsets.only(left: 18),
-                child: new Text("Hora Entrada:"),
-              ),
-              new Text("Hora Saída:"),
-              new Container(
-                margin: EdgeInsets.only(right: 18),
+             new Expanded(
+               child:  new Container(
+                 alignment: Alignment.center,
+               child: new Text("Hora Entrada:"),
+             ),),
+             new Expanded(
+               child: new Container(
+                 alignment: Alignment.center,
+               child:
+               new Text("Hora Saída:"),
+             ),),
+            new Expanded(
+              child:   new Container(
+                alignment: Alignment.center,
                 child: new Text("Hora Intervalo:"),
-              ),
+            ),)
             ],
           ),
         ),
@@ -160,7 +167,7 @@ class _HoraState extends State<ZHora> {
                           margin: EdgeInsets.only(left: 10),
                           padding: EdgeInsets.only(top: 5, bottom: 5),
                           decoration: new BoxDecoration(
-                            border: new Border.all(color: ColorHoraEntrada ,width: 2),
+                            border: new Border.all(color: ColorHoraEntrada ,width: (okEntrada == true)? 1 : 2),
                             color: Colors.white,
                             borderRadius: new BorderRadius.all(
                                 const Radius.circular(5.0)),
@@ -193,10 +200,10 @@ class _HoraState extends State<ZHora> {
                       ),
                       new Expanded(
                         child: new Container(
-                            margin: EdgeInsets.only(right: 10, left: 10),
+                            margin: EdgeInsets.only(right: 5, left: 5),
                             padding: EdgeInsets.only(top: 5, bottom: 5),
                             decoration: new BoxDecoration(
-                              border: new Border.all(color: ColorHoraSaida ,width: 2),
+                              border: new Border.all(color: ColorHoraSaida ,width: (okSaida == true)?1: 2),
                               color: Colors.white,
                               borderRadius: new BorderRadius.all(
                                   const Radius.circular(5.0)),
@@ -268,7 +275,7 @@ class _HoraState extends State<ZHora> {
                           margin: EdgeInsets.only(right: 10),
                           padding: EdgeInsets.only(top: 5, bottom: 5),
                           decoration: new BoxDecoration(
-                            border: new Border.all(color: ColorIntervalo ,width: 2),
+                            border: new Border.all(color: ColorIntervalo ,width:(okIntervalo == true)? 1:2),
                             color: Colors.white,
                             borderRadius: new BorderRadius.all(
                                 const Radius.circular(5.0)),
@@ -350,7 +357,9 @@ class _HoraState extends State<ZHora> {
             context, _focusEntrada, _focusSaida);
         okEntrada = true;
         setState(() {
-          ColorHoraEntrada = const Color(0xff1AC15D);
+          ColorHoraEntrada = Colors.grey;
+          horarioTrabalhado();
+          ajustarDmaisUm();
         });
       }
     }
@@ -388,7 +397,7 @@ class _HoraState extends State<ZHora> {
       } else {
         okEntrada = true;
         setState(() {
-          ColorHoraEntrada = const Color(0xff1AC15D);
+          ColorHoraEntrada = Colors.grey;
         });
       }
     }
@@ -440,7 +449,8 @@ class _HoraState extends State<ZHora> {
         okSaida = true;
 
         setState(() {
-          ColorHoraSaida = const Color(0xff1AC15D);
+          ColorHoraSaida = Colors.grey;
+          horarioTrabalhado();
         });
       }
     }
@@ -478,7 +488,7 @@ class _HoraState extends State<ZHora> {
       } else {
         okSaida = true;
         setState(() {
-          ColorHoraSaida = const Color(0xff1AC15D);
+          ColorHoraSaida = Colors.grey;
         });
       }
     }
@@ -707,7 +717,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = true;
 
         setState(() {
-          ColorIntervalo = const Color(0xff1AC15D);
+          ColorIntervalo = Colors.grey;
         });
       }
     } else {
@@ -730,7 +740,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = true;
 
         setState(() {
-          ColorIntervalo = const Color(0xff1AC15D);
+          ColorIntervalo = Colors.grey;
         });
       }
     }
@@ -752,7 +762,7 @@ class _HoraState extends State<ZHora> {
       else{
         okIntervalo = true;
         setState(() {
-          ColorIntervalo = const Color(0xff1AC15D);
+          ColorIntervalo = Colors.grey;
         });
       }
     } else {
@@ -767,7 +777,7 @@ class _HoraState extends State<ZHora> {
       else{
         okIntervalo = true;
         setState(() {
-          ColorIntervalo = const Color(0xff1AC15D);
+          ColorIntervalo = Colors.grey;
         });
       }
     }
