@@ -23,6 +23,7 @@ dependencies:
   flare_flutter: ^1.5.1
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

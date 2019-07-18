@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:z_components/components/z-cadastro-usuario.dart';
@@ -14,6 +15,7 @@ import 'package:z_components/components/z-empresa.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-local.dart';
 import 'package:z_components/components/z-perfil.dart';
+import 'package:z_components/config/z-tipos-baseline.dart';
 
 void main() => runApp(MyApp());
 
@@ -67,6 +69,19 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var controllerData = new TextEditingController();
   var controllerSenha = new TextEditingController();
   var controllerRepetirSenha = new TextEditingController();
+  var controllerRua = new TextEditingController();
+  var controllerCEP = new TextEditingController();
+  var controllerCNPJ = new TextEditingController();
+  var controllerNumero = new TextEditingController();
+  FocusNode nomeFocus;
+  FocusNode emailFocus;
+  FocusNode cpfFocus;
+  FocusNode celularFocus;
+  FocusNode mesFocus;
+  FocusNode ruaFocus;
+  FocusNode numeroFocus;
+  FocusNode CEPFocus;
+  FocusNode CNPJFocus;
 
   bool value = false;
   var _controllerFim = new TextEditingController();
@@ -102,17 +117,34 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     Icons.voice_chat,
     Icons.view_stream
   ];
-  List <dynamic> listaOnTap = [
-    (){print("1");},
-        (){print("2");},
-        (){print("3");},
-        (){print("4");},
-        (){print("5");},
-        (){print("6");},
-        (){print("7");},
-        (){print("8");},
-        (){print("9");},
-
+  List<dynamic> listaOnTap = [
+    () {
+      print("1");
+    },
+    () {
+      print("2");
+    },
+    () {
+      print("3");
+    },
+    () {
+      print("4");
+    },
+    () {
+      print("5");
+    },
+    () {
+      print("6");
+    },
+    () {
+      print("7");
+    },
+    () {
+      print("8");
+    },
+    () {
+      print("9");
+    },
   ];
 
   var _key = new GlobalKey<ZCargoState>();
@@ -122,6 +154,15 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   @override
   void initState() {
+    nomeFocus = new FocusNode();
+    emailFocus = new FocusNode();
+    cpfFocus = new FocusNode();
+    celularFocus = new FocusNode();
+    mesFocus = new FocusNode();
+    ruaFocus = new FocusNode();
+    numeroFocus = new FocusNode();
+    CEPFocus = new FocusNode();
+    CNPJFocus = new FocusNode();
     super.initState();
   }
 
@@ -142,29 +183,28 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                    new InformacaoBatida(
-                      bottomChild: new Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(bottom: 5),
-                          child: new ButtonTheme(
-                            minWidth: 145,
-                            child: new RaisedButton(
-                                color: Color(0xff2bbab4),
-                                child: new Text(
-                                  "ENTENDI",
-                                  style: new TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                shape: new RoundedRectangleBorder(
-                                    borderRadius:
-                                    new BorderRadius.circular(30.0))),
-                          )),
-                    )),
+                    builder: (context) => new InformacaoBatida(
+                          bottomChild: new Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(bottom: 5),
+                              child: new ButtonTheme(
+                                minWidth: 145,
+                                child: new RaisedButton(
+                                    color: Color(0xff2bbab4),
+                                    child: new Text(
+                                      "ENTENDI",
+                                      style: new TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0))),
+                              )),
+                        )),
               );
             },
             child: new Container(
@@ -177,15 +217,81 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
           ),
         ),
         body: new ListView(children: <Widget>[
+          new ZBaseLine(
+            proximoFocus: cpfFocus,
+            CNPJFocus: CNPJFocus,
+            context: context,
+            zTipos: ZTipoBaseline.isCNPJ,
+            controllerCNPJ: controllerCNPJ,
+          ),
+          new ZBaseLine(
+            proximoFocus: CEPFocus,
+            cpfFocus: cpfFocus,
+            context: context,
+            zTipos: ZTipoBaseline.isCPF,
+            controllerCPF: controllerCPF,
+          ),
+          new ZBaseLine(
+            proximoFocus: mesFocus,
+            CEPFocus: CEPFocus,
+            context: context,
+            zTipos: ZTipoBaseline.isCEP,
+            controllerCEP: controllerCEP,
+          ),
+          new ZBaseLine(
+            proximoFocus: nomeFocus,
+            mesFocus: mesFocus,
+            context: context,
+            zTipos: ZTipoBaseline.isDataNascimento,
+            controllerData: controllerData,
+          ),
+          new ZBaseLine(
+            proximoFocus: celularFocus,
+            nomeFocus: nomeFocus,
+            context: context,
+            zTipos: ZTipoBaseline.isNomeCompleto,
+            controllerNome: controllerNome,
+          ),
+          new ZBaseLine(
+            proximoFocus: emailFocus,
+            celularFocus: celularFocus,
+            context: context,
+            zTipos: ZTipoBaseline.isCelular,
+            controllerCelular: controllerCelular,
+          ),
+          new ZBaseLine(
+            proximoFocus: numeroFocus,
+            emailFocus: emailFocus,
+            context: context,
+            zTipos: ZTipoBaseline.isEmail,
+            controllerEmail: controllerEmail,
+          ),
+          new ZBaseLine(
+            padraoFocus: numeroFocus,
+            proximoFocus: ruaFocus,
+            context: context,
+            zTipos: ZTipoBaseline.semTituloNumero,
+            text: "Número",
+            hintText: "Número",
+            controllerPadrao: controllerNumero,
+          ),
+          new ZBaseLine(
+            padraoFocus: ruaFocus,
+            context: context,
+            zTipos: ZTipoBaseline.semTituloText,
+            text: "Rua",
+            hintText: "Rua",
+            controllerPadrao: controllerRua,
+          ),
           new ZEmpresa(
             onChange: (item) {
               print("${item.titulo}");
             },
             key: _keyEmpresa,
             token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
-            idUser: "6fab6b97-9227-4e29-935a-39f3f7a8ca5f" ,
-            valorPadrao: "49e30e86-7864-4594-818d-3cc572189dcb" ,
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            idUser: "6fab6b97-9227-4e29-935a-39f3f7a8ca5f",
+            valorPadrao: "49e30e86-7864-4594-818d-3cc572189dcb",
           ),
           new ZCargo(
             onChange: (item) {
@@ -193,7 +299,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _key,
             token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
             valorPadrao: '758ad32f-c564-4c0a-8f24-3de9d7acf554',
           ),
           new ZEscala(
@@ -202,7 +308,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyEscala,
             token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
             valorPadrao: '9398cc94-f64f-4cb8-a391-5525201d7713',
           ),
           new ZHora(
@@ -216,59 +322,57 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyLocal,
             token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
             idEmpresa: "638ee1f4-649e-415f-9e60-a2b504972379",
             valorPadrao: "e9bebc02-f63c-4c56-9f7d-711d7d0191c2",
           ),
           new ZButton(
             text: "CADASTRO USUARIO",
-
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>
-                new ZCadastroUsuario(
-                  onTapVoltar: () {
-                    Navigator.of(context).pop();
-                  },
-                  context: context,
-                  controllerNome: controllerNome,
-                  controllerCPF: controllerCPF,
-                  controllerEmail: controllerEmail,
-                  controllerCelular: controllerCelular,
-                  controllerData: controllerData,
-                  controllerSenha: controllerSenha,
-                  controllerRepetirSenha: controllerRepetirSenha,
-                  onPressed: () {
-                    print(controllerNome.text);
-                    print(controllerCPF.text);
-                    print(controllerEmail.text);
-                    print(controllerCelular.text);
-                    print(controllerData.text);
-                    print(controllerSenha.text);
-                    print(controllerRepetirSenha.text);
-                  },
-                )),
+                MaterialPageRoute(
+                    builder: (context) => new ZCadastroUsuario(
+                          onTapVoltar: () {
+                            Navigator.of(context).pop();
+                          },
+                          context: context,
+                          controllerNome: controllerNome,
+                          controllerCPF: controllerCPF,
+                          controllerEmail: controllerEmail,
+                          controllerCelular: controllerCelular,
+                          controllerData: controllerData,
+                          controllerSenha: controllerSenha,
+                          controllerRepetirSenha: controllerRepetirSenha,
+                          onPressed: () {
+                            print(controllerNome.text);
+                            print(controllerCPF.text);
+                            print(controllerEmail.text);
+                            print(controllerCelular.text);
+                            print(controllerData.text);
+                            print(controllerSenha.text);
+                            print(controllerRepetirSenha.text);
+                          },
+                        )),
               );
-            },),
+            },
+          ),
           new ZButton(
             text: "PERFIL",
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        ZPerfil(
-                          onTapVoltar: () =>
-                              Navigator.of(context).pop()
-                          ,
+                    builder: (context) => ZPerfil(
+                          onTapVoltar: () => Navigator.of(context).pop(),
                           listaIcones: icones,
-                          listaTextos: titulos,listaOnTap: listaOnTap,
+                          listaTextos: titulos,
+                          listaOnTap: listaOnTap,
                           numeroQuadrados: titulos.length,
                           statusInfo: true,
                           textoContato: "(11)9 98679893",
                           textoLocalizacao:
-                          "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
+                              "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
                           tituloHeader: "Giuliano Ortiz",
                           textoTituloInfo: "Giuliano Ortiz",
                           textoLocalInfo: "Sede - Xolis ltda.",
@@ -282,7 +386,20 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               );
             },
           ),
-
+          ZButton(
+            text: "TESTE",
+            onPressed: () {
+              print(controllerRua.text);
+              print(controllerNumero.text);
+              print(controllerCelular.text);
+              print(controllerNome.text);
+              print(controllerData.text);
+              print(controllerCEP.text);
+              print(controllerCPF.text);
+              print(controllerCNPJ.text);
+              print(controllerEmail.text);
+            },
+          )
         ]));
   }
 }
