@@ -289,7 +289,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyEmpresa,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODYxNDEsImV4cCI6MTU2NDA5MDk0MSwiaWF0IjoxNTYzNDg2MTQxfQ.SdWm6Dvy8ovACuOCYABLpfaWprbdmUJc6jYA3taSPf4",
             idUser: "6fab6b97-9227-4e29-935a-39f3f7a8ca5f",
             valorPadrao: "49e30e86-7864-4594-818d-3cc572189dcb",
           ),
@@ -299,7 +299,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _key,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODYxNDEsImV4cCI6MTU2NDA5MDk0MSwiaWF0IjoxNTYzNDg2MTQxfQ.SdWm6Dvy8ovACuOCYABLpfaWprbdmUJc6jYA3taSPf4",
             valorPadrao: '758ad32f-c564-4c0a-8f24-3de9d7acf554',
           ),
           new ZEscala(
@@ -308,8 +308,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyEscala,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
-            valorPadrao: '9398cc94-f64f-4cb8-a391-5525201d7713',
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODYxNDEsImV4cCI6MTU2NDA5MDk0MSwiaWF0IjoxNTYzNDg2MTQxfQ.SdWm6Dvy8ovACuOCYABLpfaWprbdmUJc6jYA3taSPf4",
+            valorPadrao: "5x2",
           ),
           new ZHora(
             controllerIntervalo: _controllerIntervalo,
@@ -322,7 +322,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyLocal,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODYxNDEsImV4cCI6MTU2NDA5MDk0MSwiaWF0IjoxNTYzNDg2MTQxfQ.SdWm6Dvy8ovACuOCYABLpfaWprbdmUJc6jYA3taSPf4",
             idEmpresa: "638ee1f4-649e-415f-9e60-a2b504972379",
             valorPadrao: "e9bebc02-f63c-4c56-9f7d-711d7d0191c2",
           ),

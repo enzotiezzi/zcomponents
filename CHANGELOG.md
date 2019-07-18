@@ -1,3 +1,7 @@
+## 0.2.5
+
+* Correction ZESCALA!
+
 ## 0.2.4
 
 * Correction ZBASELINE!
