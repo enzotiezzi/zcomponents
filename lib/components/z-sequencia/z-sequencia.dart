@@ -64,17 +64,21 @@ class ZSequenciaState extends State<ZSequencia> {
   Widget _buildSequencia() {
     var seqs = new List<Widget>();
 
-    for(int i = 0; i < _sequencia.length; i++)
+    for (int i = 0; i < _sequencia.length; i++)
       seqs.add(_buildItemSequencia(i));
 
-    return new Container(
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(6.0))
-      ),
-      padding: const EdgeInsets.all(4.0),
-      child: new Row(
-        children: seqs,
+    return new Material(
+      elevation: 2.0,
+      borderRadius: BorderRadius.all(Radius.circular(6.0)),
+      child: new Container(
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+        ),
+        padding: const EdgeInsets.all(4.0),
+        child: new Row(
+          children: seqs,
+        ),
       ),
     );
   }
