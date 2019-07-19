@@ -13,9 +13,9 @@ class QuadroPessoalService extends Service{
 
   QuadroPessoalService(this.token, this.idConta) : super(token);
 
-  Future<List<PosicaoAlocacaoSequenciaViewModel>> buscarSequencia(String idPosicaoAlocacao) async{
+  Future<List<PosicaoAlocacaoSequenciaViewModel>> buscarSequencia(String idColaborador) async{
     try{
-      var url = "${_URL}/buscar-sequencia/${idPosicaoAlocacao}/${idConta}";
+      var url = "${_URL}/buscar-sequencia/${idColaborador}/${idConta}";
 
       var response = await http.get(url, headers: headers);
 
