@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:z_components/components/z-cadastro-usuario.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia.dart';
-import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
-import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/components/z-empresa.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-local.dart';
-import 'package:z_components/components/z-perfil.dart';
 import 'package:z_components/components/z-collection.dart';
-import 'package:z_components/components/z-collection-item.dart';
 
 
-import 'package:z_components/config/z-tipos-baseline.dart';
 
 void main() => runApp(MyApp());
 
