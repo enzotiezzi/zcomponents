@@ -21,7 +21,7 @@ class ZSequencia extends StatefulWidget {
 }
 
 class ZSequenciaState extends State<ZSequencia> {
-  var indexDia = -3;
+  var indexDia = 0;
 
   Map<String, String> _diasSemana = {
     "Monday": "SEG",
@@ -41,6 +41,8 @@ class ZSequenciaState extends State<ZSequencia> {
   void initState() {
     super.initState();
 
+    indexDia = -3;
+
     _quadroPessoalService =
         new QuadroPessoalService(widget.token, widget.idConta);
 
@@ -49,6 +51,8 @@ class ZSequenciaState extends State<ZSequencia> {
 
   @override
   Widget build(BuildContext context) {
+    indexDia = -3;
+
     return _sequencia.length == 0 ? _buildLoad() : _buildSequencia();
   }
 
