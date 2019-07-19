@@ -24,8 +24,8 @@ class ZBaseLine extends StatelessWidget {
   FocusNode celularFocus;
   FocusNode mesFocus;
   FocusNode padraoFocus;
-  FocusNode CEPFocus;
-  FocusNode CNPJFocus;
+  FocusNode cEPFocus;
+  FocusNode cNPJFocus;
   FocusNode proximoFocus;
 
   final Key key;
@@ -56,7 +56,7 @@ class ZBaseLine extends StatelessWidget {
 
   String email;
   String cPF;
-  String CNPJ;
+  String cNPJ;
   String celular;
   String value;
   var controllerEmail = new TextEditingController();
@@ -93,9 +93,9 @@ class ZBaseLine extends StatelessWidget {
       this.onChangedCEP,
       this.controllerCNPJ,
       this.controllerCEP,
-      this.CNPJFocus,
+      this.cNPJFocus,
       this.proximoFocus,
-      this.CEPFocus})
+      this.cEPFocus})
       : super(key: key) {
     if (zTipos == ZTipoBaseline.isEmail) {
       init();
@@ -501,9 +501,9 @@ class ZBaseLine extends StatelessWidget {
                           child: new TextField(
                             onSubmitted: (text) {
                               _fieldFocusChange(
-                                  context, CEPFocus, proximoFocus);
+                                  context, cEPFocus, proximoFocus);
                             },
-                            focusNode: CEPFocus,
+                            focusNode: cEPFocus,
                             controller: controllerCEP,
                             keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
@@ -552,18 +552,18 @@ class ZBaseLine extends StatelessWidget {
                           child: new TextField(
                             onSubmitted: (text) {
                               _fieldFocusChange(
-                                  context, CNPJFocus, proximoFocus);
+                                  context, cNPJFocus, proximoFocus);
                             },
                             controller: controllerCNPJ,
                             onChanged: (text) {
-                              CNPJ = text;
+                              cNPJ = text;
                               countCNPJ = 0;
                               if(text.length == 18){
                                 _fieldFocusChange(
-                                    context, CNPJFocus, proximoFocus);
+                                    context, cNPJFocus, proximoFocus);
                               }
                             },
-                            focusNode: CNPJFocus,
+                            focusNode: cNPJFocus,
                             keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
@@ -635,9 +635,9 @@ class ZBaseLine extends StatelessWidget {
   }
 
   void initCNPJ() {
-    CNPJFocus.addListener(() {
-      if (!CNPJFocus.hasFocus && countCNPJ == 0) {
-        if (!CNPJValidator.isValid(CNPJ)) {
+    cNPJFocus.addListener(() {
+      if (!cNPJFocus.hasFocus && countCNPJ == 0) {
+        if (!CNPJValidator.isValid(cNPJ)) {
           showAlertDialogNew("Erro", "CNPJ inválido");
         }
       }

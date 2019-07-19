@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:z_components/components/z-cadastro-usuario.dart';
@@ -10,7 +9,6 @@ import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-empresa.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-local.dart';
@@ -84,8 +82,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   FocusNode mesFocus;
   FocusNode ruaFocus;
   FocusNode numeroFocus;
-  FocusNode CEPFocus;
-  FocusNode CNPJFocus;
+  FocusNode cEPFocus;
+  FocusNode cNPJFocus;
 
   bool value = false;
   var _controllerFim = new TextEditingController();
@@ -154,7 +152,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     },
   ];
 
-  var _key = new GlobalKey<ZCargoState>();
   var _keyEscala = new GlobalKey<ZEscalaState>();
   var _keyLocal = new GlobalKey<ZLocalState>();
   var _keyEmpresa = new GlobalKey<ZEmpresaState>();
@@ -168,8 +165,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     mesFocus = new FocusNode();
     ruaFocus = new FocusNode();
     numeroFocus = new FocusNode();
-    CEPFocus = new FocusNode();
-    CNPJFocus = new FocusNode();
+    cEPFocus = new FocusNode();
+    cNPJFocus = new FocusNode();
     super.initState();
   }
 
@@ -226,13 +223,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         body: new ListView(children: <Widget>[
           new ZBaseLine(
             proximoFocus: cpfFocus,
-            CNPJFocus: CNPJFocus,
+            cNPJFocus: cNPJFocus,
             context: context,
             zTipos: ZTipoBaseline.isCNPJ,
             controllerCNPJ: controllerCNPJ,
           ),
           new ZBaseLine(
-            proximoFocus: CEPFocus,
+            proximoFocus: cEPFocus,
             cpfFocus: cpfFocus,
             context: context,
             zTipos: ZTipoBaseline.isCPF,
@@ -240,7 +237,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
           ),
           new ZBaseLine(
             proximoFocus: mesFocus,
-            CEPFocus: CEPFocus,
+            cEPFocus: cEPFocus,
             context: context,
             zTipos: ZTipoBaseline.isCEP,
             controllerCEP: controllerCEP,
@@ -296,7 +293,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyEmpresa,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODYxNDEsImV4cCI6MTU2NDA5MDk0MSwiaWF0IjoxNTYzNDg2MTQxfQ.SdWm6Dvy8ovACuOCYABLpfaWprbdmUJc6jYA3taSPf4",
             idUser: "6fab6b97-9227-4e29-935a-39f3f7a8ca5f",
             valorPadrao: "49e30e86-7864-4594-818d-3cc572189dcb",
           ),
@@ -318,25 +315,14 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               }
             },
           ),
-          new ZCargo(
-            onChange: (item) {
-              print("${item.titulo}");
-              print("${item.valor}");
-              print("${item.chave}");
-            },
-            key: _key,
-            token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
-            valorPadrao: '28d6d5e0-ad6a-406b-9626-fd0bc632eb9b',
-          ),
           new ZEscala(
             onChange: (item) {
               print("${item.titulo}");
             },
             key: _keyEscala,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
-            valorPadrao: '9398cc94-f64f-4cb8-a391-5525201d7713',
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODYxNDEsImV4cCI6MTU2NDA5MDk0MSwiaWF0IjoxNTYzNDg2MTQxfQ.SdWm6Dvy8ovACuOCYABLpfaWprbdmUJc6jYA3taSPf4",
+            valorPadrao: "5x2",
           ),
           new ZHora(
             controllerIntervalo: _controllerIntervalo,
@@ -349,7 +335,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             },
             key: _keyLocal,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODYxNDEsImV4cCI6MTU2NDA5MDk0MSwiaWF0IjoxNTYzNDg2MTQxfQ.SdWm6Dvy8ovACuOCYABLpfaWprbdmUJc6jYA3taSPf4",
             idEmpresa: "638ee1f4-649e-415f-9e60-a2b504972379",
             valorPadrao: "e9bebc02-f63c-4c56-9f7d-711d7d0191c2",
           ),

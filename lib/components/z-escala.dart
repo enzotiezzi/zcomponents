@@ -42,7 +42,7 @@ class ZEscalaState extends State<ZEscala> {
         titulo: "Escalas",
         lista: _escalas
             .map((x) => new ZCollectionItem(
-                chave: x.idEscala, titulo: x.nome, valor: x.escala))
+                chave: x.escala, titulo: x.nome, valor: x.escala))
             .toList(),
         onChange: (item) {
           _itemSelecionado = item;
@@ -64,7 +64,7 @@ class ZEscalaState extends State<ZEscala> {
       });
       _keyZCollection.currentState.buscarValorPadrao(_escalas
           .map((x) => new ZCollectionItem(
-          chave: x.idEscala, titulo: x.nome, valor: x.escala))
+          chave: x.escala, titulo: x.nome, valor: x.escala))
           .toList());
     }
   }
