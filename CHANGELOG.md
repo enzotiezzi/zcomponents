@@ -1,3 +1,7 @@
+## 0.2.8
+
+* Correction ZSEQUENCIA!
+
 ## 0.2.7
 
 * New Component: ZSEQUENCIA!

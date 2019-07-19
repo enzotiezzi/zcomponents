@@ -7,12 +7,6 @@ import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/components/z-empresa.dart';
-import 'package:z_components/components/z-escala.dart';
-import 'package:z_components/components/z-local.dart';
-import 'package:z_components/components/z-collection.dart';
-
-
 
 void main() => runApp(MyApp());
 
@@ -81,15 +75,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   FocusNode cNPJFocus;
 
   bool value = false;
-  var _controllerFim = new TextEditingController();
-  var _controllerIntervalo = new TextEditingController();
-  var _controllerHorarioInicio = new TextEditingController();
   ZBaseLine valideNome;
   ZBaseLine valideCPF;
   ZBaseLine valideData;
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
-  var _keyStatus = new GlobalKey<ZCollectionState>();
 
   String vp;
 
@@ -146,10 +136,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
       print("9");
     },
   ];
-
-  var _keyEscala = new GlobalKey<ZEscalaState>();
-  var _keyLocal = new GlobalKey<ZLocalState>();
-  var _keyEmpresa = new GlobalKey<ZEmpresaState>();
 
   @override
   void initState() {
