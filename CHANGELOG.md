@@ -1,3 +1,7 @@
+## 0.2.7
+
+* New Component: ZSEQUENCIA!
+
 ## 0.2.6
 
 * Correction BASELINE!
