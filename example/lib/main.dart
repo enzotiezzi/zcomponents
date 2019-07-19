@@ -15,6 +15,10 @@ import 'package:z_components/components/z-empresa.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-local.dart';
 import 'package:z_components/components/z-perfil.dart';
+import 'package:z_components/components/z-collection.dart';
+import 'package:z_components/components/z-collection-item.dart';
+
+
 import 'package:z_components/config/z-tipos-baseline.dart';
 
 void main() => runApp(MyApp());
@@ -92,6 +96,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideData;
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
+  var _keyStatus = new GlobalKey<ZCollectionState>();
+
+  String vp;
 
   String _value = "open";
 
@@ -293,14 +300,34 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             idUser: "6fab6b97-9227-4e29-935a-39f3f7a8ca5f",
             valorPadrao: "49e30e86-7864-4594-818d-3cc572189dcb",
           ),
+          new ZCollection(
+            key: _keyStatus,
+            titulo: "Status*",
+            valorPadrao: "efdfdfgd",
+            lista: ["Ativo", "Inativo"]
+                .map((x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
+                .toList(),
+            onChange: (item) {
+              if (item == null) {
+
+              } else {
+               print(item.chave);
+                print(item.valor);
+                print(item.titulo);
+
+              }
+            },
+          ),
           new ZCargo(
             onChange: (item) {
               print("${item.titulo}");
+              print("${item.valor}");
+              print("${item.chave}");
             },
             key: _key,
             token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjI3Nzg5NDYsImV4cCI6MTU2MzM4Mzc0NiwiaWF0IjoxNTYyNzc4OTQ2fQ.qQ6UVUZGy9HZ8Z9Ay4wUZXpLtttEBfCGIzKi6bcKstY",
-            valorPadrao: '758ad32f-c564-4c0a-8f24-3de9d7acf554',
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
+            valorPadrao: '28d6d5e0-ad6a-406b-9626-fd0bc632eb9b',
           ),
           new ZEscala(
             onChange: (item) {

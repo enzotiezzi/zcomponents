@@ -65,7 +65,7 @@ class ZCollectionState extends State<ZCollection> {
                           ),
                         )
                       : new Text(
-                          "${_itemSelecionado?.valor ?? ""}",
+                    (_itemSelecionado?.valor.length >16)? "${_itemSelecionado?.valor.substring(0, 16) ?? ""}...":_itemSelecionado?.valor,
                           style: new TextStyle(
                             color: Colors.grey,
                           ),
