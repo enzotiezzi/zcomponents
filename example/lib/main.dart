@@ -10,11 +10,15 @@ import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-empresa.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-local.dart';
 import 'package:z_components/components/z-perfil.dart';
+import 'package:z_components/components/z-collection.dart';
+import 'package:z_components/components/z-collection-item.dart';
+
+
+import 'package:z_components/config/z-tipos-baseline.dart';
 
 void main() => runApp(MyApp());
 
@@ -68,6 +72,19 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var controllerData = new TextEditingController();
   var controllerSenha = new TextEditingController();
   var controllerRepetirSenha = new TextEditingController();
+  var controllerRua = new TextEditingController();
+  var controllerCEP = new TextEditingController();
+  var controllerCNPJ = new TextEditingController();
+  var controllerNumero = new TextEditingController();
+  FocusNode nomeFocus;
+  FocusNode emailFocus;
+  FocusNode cpfFocus;
+  FocusNode celularFocus;
+  FocusNode mesFocus;
+  FocusNode ruaFocus;
+  FocusNode numeroFocus;
+  FocusNode cEPFocus;
+  FocusNode cNPJFocus;
 
   bool value = false;
   var _controllerFim = new TextEditingController();
@@ -78,6 +95,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideData;
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
+  var _keyStatus = new GlobalKey<ZCollectionState>();
+
+  String vp;
 
   String _value = "open";
 
@@ -133,13 +153,21 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     },
   ];
 
-  var _key = new GlobalKey<ZCargoState>();
   var _keyEscala = new GlobalKey<ZEscalaState>();
   var _keyLocal = new GlobalKey<ZLocalState>();
   var _keyEmpresa = new GlobalKey<ZEmpresaState>();
 
   @override
   void initState() {
+    nomeFocus = new FocusNode();
+    emailFocus = new FocusNode();
+    cpfFocus = new FocusNode();
+    celularFocus = new FocusNode();
+    mesFocus = new FocusNode();
+    ruaFocus = new FocusNode();
+    numeroFocus = new FocusNode();
+    cEPFocus = new FocusNode();
+    cNPJFocus = new FocusNode();
     super.initState();
   }
 

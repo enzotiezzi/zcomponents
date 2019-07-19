@@ -1,3 +1,15 @@
+## 0.2.6
+
+* Correction BASELINE!
+
+## 0.2.5
+
+* Correction ZESCALA!
+
+## 0.2.4
+
+* Correction ZBASELINE!
+
 ## 0.2.3
 
 * Correction ZHORA!

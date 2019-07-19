@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
+import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 
 class ZBaseLine extends StatelessWidget {
   bool valideMes;
@@ -16,25 +18,37 @@ class ZBaseLine extends StatelessWidget {
   bool valideNome;
 
   Widget _zBaseLine;
-
-  final Key key;
-  final BuildContext context;
-  final ZTipoBaseline zTipos;
-
   FocusNode nomeFocus;
   FocusNode emailFocus;
   FocusNode cpfFocus;
   FocusNode celularFocus;
   FocusNode mesFocus;
+  FocusNode padraoFocus;
+  FocusNode cEPFocus;
+  FocusNode cNPJFocus;
+  FocusNode proximoFocus;
+
+  final Key key;
+  final BuildContext context;
+  final ZTipoBaseline zTipos;
 
   String dia;
   String ano;
   String mes;
   String nome;
+  String text;
+  String hintText;
 
   int intDias;
   int intMes;
   int intAno;
+  int countNome = 1;
+  int countCPF = 1;
+  int countCelular = 1;
+  int countEmail = 1;
+  int countData = 1;
+  int countCNPJ = 1;
+  int countCEP = 1;
 
   String total;
 
@@ -42,6 +56,7 @@ class ZBaseLine extends StatelessWidget {
 
   String email;
   String cPF;
+  String cNPJ;
   String celular;
   String value;
   var controllerEmail = new TextEditingController();
@@ -49,6 +64,12 @@ class ZBaseLine extends StatelessWidget {
   var controllerCPF = new TextEditingController();
   var controllerCelular = new TextEditingController();
   var controllerData = new TextEditingController();
+  var controllerPadrao = new TextEditingController();
+  var controllerCEP = new TextEditingController();
+  var controllerCNPJ = new TextEditingController();
+
+  var onChangedCEP;
+
 
   ZBaseLine(
       {this.value,
@@ -59,7 +80,22 @@ class ZBaseLine extends StatelessWidget {
       this.controllerData,
       this.controllerCelular,
       this.controllerCPF,
-      this.controllerNome})
+      this.controllerNome,
+      this.mesFocus,
+      this.emailFocus,
+      this.celularFocus,
+      this.cpfFocus,
+      this.nomeFocus,
+      this.controllerPadrao,
+      this.hintText,
+      this.padraoFocus,
+      this.text,
+      this.onChangedCEP,
+      this.controllerCNPJ,
+      this.controllerCEP,
+      this.cNPJFocus,
+      this.proximoFocus,
+      this.cEPFocus})
       : super(key: key) {
     if (zTipos == ZTipoBaseline.isEmail) {
       init();
@@ -75,6 +111,9 @@ class ZBaseLine extends StatelessWidget {
     }
     if (zTipos == ZTipoBaseline.isDataNascimento) {
       initMes();
+    }
+    if (zTipos == ZTipoBaseline.isCNPJ) {
+      initCNPJ();
     }
 
     switch (zTipos) {
@@ -105,6 +144,10 @@ class ZBaseLine extends StatelessWidget {
                             controller: controllerNome,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, nomeFocus, proximoFocus);
+                            },
                             decoration: InputDecoration(
                               hintText: "Nome Completo",
                               hintStyle: new TextStyle(
@@ -113,6 +156,7 @@ class ZBaseLine extends StatelessWidget {
                             ),
                             onChanged: (text) {
                               nome = text;
+                              countNome = 0;
                             },
                           ),
                         ))
@@ -146,13 +190,22 @@ class ZBaseLine extends StatelessWidget {
                             controller: controllerCPF,
                             onChanged: (text) {
                               cPF = text;
+                              countCPF = 0;
+                              if (cPF.length == 14) {
+                                _fieldFocusChange(
+                                    context, cpfFocus, proximoFocus);
+                              }
+                            },
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, cpfFocus, proximoFocus);
                             },
                             focusNode: cpfFocus,
                             keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
                             decoration: InputDecoration(
-                              hintText: "* . * . * - **",
+                              hintText: "*** . *** . *** - **",
                               hintStyle: new TextStyle(
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
@@ -196,8 +249,12 @@ class ZBaseLine extends StatelessWidget {
                             keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, celularFocus, proximoFocus);
+                            },
                             decoration: InputDecoration(
-                              hintText: "( * ) 9 ** - ***",
+                              hintText: "( ** ) 9 **** - ****",
                               hintStyle: new TextStyle(
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
@@ -211,6 +268,11 @@ class ZBaseLine extends StatelessWidget {
                             ],
                             onChanged: (text) {
                               celular = text;
+                              countCelular = 0;
+                              if (celular.length == 14) {
+                                _fieldFocusChange(
+                                    context, celularFocus, proximoFocus);
+                              }
                             },
                           ),
                         ))
@@ -241,6 +303,10 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, emailFocus, proximoFocus);
+                            },
                             controller: controllerEmail,
                             focusNode: emailFocus,
                             cursorColor: Color(0xFF2BBAB4),
@@ -253,6 +319,7 @@ class ZBaseLine extends StatelessWidget {
                             ),
                             onChanged: (text) {
                               email = text.trim();
+                              countEmail = 0;
                             },
                           ),
                         ))
@@ -283,6 +350,10 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, mesFocus, proximoFocus);
+                            },
                             focusNode: mesFocus,
                             controller: controllerData,
                             keyboardType: TextInputType.number,
@@ -302,8 +373,211 @@ class ZBaseLine extends StatelessWidget {
                             ],
                             onChanged: (text) {
                               total = text;
+                              countData = 0;
                               validaMes();
+                              if (text.length == 10) {
+                                _fieldFocusChange(
+                                    context, mesFocus, proximoFocus);
+                              }
                             },
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            ));
+        break;
+      case ZTipoBaseline.semTituloText:
+        _zBaseLine = new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            text,
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, padraoFocus, proximoFocus);
+                            },
+                            focusNode: padraoFocus,
+                            controller: controllerPadrao,
+                            keyboardType: TextInputType.text,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: hintText,
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                            onChanged: (text) {},
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            ));
+        break;
+      case ZTipoBaseline.semTituloNumero:
+        _zBaseLine = new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            text,
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, padraoFocus, proximoFocus);
+                            },
+                            focusNode: padraoFocus,
+                            controller: controllerPadrao,
+                            keyboardType: TextInputType.number,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: hintText,
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                            onChanged: (text) {},
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            ));
+        break;
+      case ZTipoBaseline.isCEP:
+        _zBaseLine = new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            "CEP",
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, cEPFocus, proximoFocus);
+                            },
+                            focusNode: cEPFocus,
+                            controller: controllerCEP,
+                            keyboardType: TextInputType.number,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: "CEP",
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                            inputFormatters: [
+                              MaskedTextInputFormatterShifter(
+                                  maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"),
+                              BlacklistingTextInputFormatter(
+                                  RegExp("[\\\\,.]")),
+                            ],
+                            onChanged: onChangedCEP
+                          ),
+                        ))
+                  ],
+                ),
+              ],
+            ));
+        break;
+      case ZTipoBaseline.isCNPJ:
+        _zBaseLine = new Container(
+            color: Colors.white,
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        flex: 3,
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, bottom: 12.0, left: 16.0),
+                          child: new Text(
+                            "CNPJ",
+                            style: new TextStyle(color: Color(0xFF999999)),
+                          ),
+                        )),
+                    new Expanded(
+                        flex: 7,
+                        child: new Container(
+                          margin: const EdgeInsets.only(left: 8.0, right: 16.0),
+                          child: new TextField(
+                            onSubmitted: (text) {
+                              _fieldFocusChange(
+                                  context, cNPJFocus, proximoFocus);
+                            },
+                            controller: controllerCNPJ,
+                            onChanged: (text) {
+                              cNPJ = text;
+                              countCNPJ = 0;
+                              if(text.length == 18){
+                                _fieldFocusChange(
+                                    context, cNPJFocus, proximoFocus);
+                              }
+                            },
+                            focusNode: cNPJFocus,
+                            keyboardType: TextInputType.number,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: new TextStyle(color: Color(0xFF000000)),
+                            decoration: InputDecoration(
+                              hintText: "** . *** . *** / **** - **",
+                              hintStyle: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Color(0xFF000000).withOpacity(0.3)),
+                            ),
+                            inputFormatters: [
+                              MaskedTextInputFormatterShifter(
+                                  maskONE: "XX.XXX.XXX/XXXX-XX",
+                                  maskTWO: "XX.XXX.XXX/XXXX-XX")
+                            ],
                           ),
                         ))
                   ],
@@ -322,44 +596,50 @@ class ZBaseLine extends StatelessWidget {
   void initNome() {
     nomeFocus = FocusNode();
     nomeFocus.addListener(() {
-      if (!nomeFocus.hasFocus) {
+      if (!nomeFocus.hasFocus && countNome == 0) {
         _valideNome();
       }
     });
   }
 
   void init() {
-    emailFocus = FocusNode();
     emailFocus.addListener(() {
-      if (!emailFocus.hasFocus) {
+      if (!emailFocus.hasFocus && countEmail == 0) {
         _validarEmail();
       }
     });
   }
 
   void initCpf() {
-    cpfFocus = FocusNode();
     cpfFocus.addListener(() {
-      if (!cpfFocus.hasFocus) {
+      if (!cpfFocus.hasFocus && countCPF == 0) {
         _validarCPF();
       }
     });
   }
 
   void initCelular() {
-    celularFocus = FocusNode();
     celularFocus.addListener(() {
-      if (!celularFocus.hasFocus) {
+      if (!celularFocus.hasFocus && countCelular == 0) {
         _validarCelular();
       }
     });
   }
 
   void initMes() {
-    mesFocus = FocusNode();
     mesFocus.addListener(() {
-      if (!mesFocus.hasFocus) {
+      if (!mesFocus.hasFocus && countData == 0) {
         mesHasFocus();
+      }
+    });
+  }
+
+  void initCNPJ() {
+    cNPJFocus.addListener(() {
+      if (!cNPJFocus.hasFocus && countCNPJ == 0) {
+        if (!CNPJValidator.isValid(cNPJ)) {
+          showAlertDialogNew("Erro", "CNPJ inválido");
+        }
       }
     });
   }
@@ -576,4 +856,14 @@ class ZBaseLine extends StatelessWidget {
               ),
             ));
   }
+
+  void _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    if (nextFocus != null) {
+      FocusScope.of(context).requestFocus(nextFocus);
+    }
+  }
+
+
 }

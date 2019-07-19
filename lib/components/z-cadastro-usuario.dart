@@ -512,6 +512,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
                     zButtonType: ZButtonType.isContained,
                     text: "CADASTRAR USUÁRIO",
+                    onPressed: (){},
 
                   )
                 : ZButton(
