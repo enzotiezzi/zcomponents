@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:z_components/components/z-float-button.dart';
+import 'package:z_components/components/z-nome-reduzido.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-baseline.dart';
@@ -202,25 +203,31 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ),
         ),
-        body: new Column(children: <Widget>[new Container(
-          color: Colors.grey,
-          padding: const EdgeInsets.all(16.0),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new ZSequencia(
-                token:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
-                idConta: "486A49B3-47D1-4D76-80DF-079EB82D6D8F",
-                idColaborador: "548D524D-A6DE-4D8A-945E-A706AD2F87F2",
-              )
-            ],
-          ),
-        ),
-
-        ZBaseLine(zTipos: ZTipoBaseline.isDataNascimento,controllerData: controllerData,context: context,mesFocus: mesFocus,)
-
-        ],));
+        body: new Column(
+          children: <Widget>[
+            new Container(
+              color: Colors.grey,
+              padding: const EdgeInsets.all(16.0),
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new ZSequencia(
+                    token:
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
+                    idConta: "486A49B3-47D1-4D76-80DF-079EB82D6D8F",
+                    idColaborador: "548D524D-A6DE-4D8A-945E-A706AD2F87F2",
+                  )
+                ],
+              ),
+            ),
+            ZBaseLine(
+              zTipos: ZTipoBaseline.isDataNascimento,
+              controllerData: controllerData,
+              context: context,
+              mesFocus: mesFocus,
+            )
+          ],
+        ));
   }
 }
 
