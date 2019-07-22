@@ -7,6 +7,7 @@ import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:z_components/config/z-tipos-baseline.dart';
 
 void main() => runApp(MyApp());
 
@@ -201,7 +202,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ),
         ),
-        body: new Container(
+        body: new Column(children: <Widget>[new Container(
           color: Colors.grey,
           padding: const EdgeInsets.all(16.0),
           child: new Row(
@@ -215,7 +216,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               )
             ],
           ),
-        ));
+        ),
+
+        ZBaseLine(zTipos: ZTipoBaseline.isDataNascimento,controllerData: controllerData,context: context,mesFocus: mesFocus,)
+
+        ],));
   }
 }
 
