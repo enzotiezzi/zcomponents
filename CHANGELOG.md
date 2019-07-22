@@ -1,3 +1,11 @@
+## 0.3.0
+
+* Correction ZBaseline!
+
+## 0.2.9
+
+* Correction ZBaseline!
+
 ## 0.2.8
 
 * Correction ZSEQUENCIA!

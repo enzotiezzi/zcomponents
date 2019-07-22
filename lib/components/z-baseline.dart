@@ -67,7 +67,7 @@ class ZBaseLine extends StatelessWidget {
   var controllerPadrao = new TextEditingController();
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
-
+var onChangedTextPadrao;
   var onChangedCEP;
 
 
@@ -91,6 +91,7 @@ class ZBaseLine extends StatelessWidget {
       this.padraoFocus,
       this.text,
       this.onChangedCEP,
+        this.onChangedTextPadrao,
       this.controllerCNPJ,
       this.controllerCEP,
       this.cNPJFocus,
@@ -424,7 +425,7 @@ class ZBaseLine extends StatelessWidget {
                                   fontSize: 14.0,
                                   color: Color(0xFF000000).withOpacity(0.3)),
                             ),
-                            onChanged: (text) {},
+                            onChanged: onChangedTextPadrao,
                           ),
                         ))
                   ],
@@ -596,7 +597,7 @@ class ZBaseLine extends StatelessWidget {
   void initNome() {
     nomeFocus = FocusNode();
     nomeFocus.addListener(() {
-      if (!nomeFocus.hasFocus && countNome == 0) {
+      if (!nomeFocus.hasFocus && countNome == 0 && nome != "") {
         _valideNome();
       }
     });
@@ -604,7 +605,7 @@ class ZBaseLine extends StatelessWidget {
 
   void init() {
     emailFocus.addListener(() {
-      if (!emailFocus.hasFocus && countEmail == 0) {
+      if (!emailFocus.hasFocus && countEmail == 0 && email != "") {
         _validarEmail();
       }
     });
@@ -612,7 +613,7 @@ class ZBaseLine extends StatelessWidget {
 
   void initCpf() {
     cpfFocus.addListener(() {
-      if (!cpfFocus.hasFocus && countCPF == 0) {
+      if (!cpfFocus.hasFocus && countCPF == 0 && cPF != "") {
         _validarCPF();
       }
     });
@@ -620,7 +621,7 @@ class ZBaseLine extends StatelessWidget {
 
   void initCelular() {
     celularFocus.addListener(() {
-      if (!celularFocus.hasFocus && countCelular == 0) {
+      if (!celularFocus.hasFocus && countCelular == 0 && celular !="") {
         _validarCelular();
       }
     });
@@ -628,7 +629,7 @@ class ZBaseLine extends StatelessWidget {
 
   void initMes() {
     mesFocus.addListener(() {
-      if (!mesFocus.hasFocus && countData == 0) {
+      if (!mesFocus.hasFocus && countData == 0 && total != "") {
         mesHasFocus();
       }
     });
@@ -636,7 +637,7 @@ class ZBaseLine extends StatelessWidget {
 
   void initCNPJ() {
     cNPJFocus.addListener(() {
-      if (!cNPJFocus.hasFocus && countCNPJ == 0) {
+      if (!cNPJFocus.hasFocus && countCNPJ == 0 && cNPJ != "") {
         if (!CNPJValidator.isValid(cNPJ)) {
           showAlertDialogNew("Erro", "CNPJ inválido");
         }
