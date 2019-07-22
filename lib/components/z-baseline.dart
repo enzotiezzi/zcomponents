@@ -597,7 +597,7 @@ var onChangedTextPadrao;
   void initNome() {
     nomeFocus = FocusNode();
     nomeFocus.addListener(() {
-      if (!nomeFocus.hasFocus && countNome == 0) {
+      if (!nomeFocus.hasFocus && countNome == 0 && nome != "") {
         _valideNome();
       }
     });
