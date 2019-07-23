@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZNomeReduzido extends StatefulWidget {
   String text;
+  var textStyle;
 
-  ZNomeReduzido({this.text});
+  ZNomeReduzido({this.text, this.textStyle});
 
   @override
   _ZNomeReduzidoState createState() => _ZNomeReduzidoState();
@@ -34,12 +36,12 @@ class _ZNomeReduzidoState extends State<ZNomeReduzido> {
                 ),
               ),
               new Container(
-                child: new Text(ultimoReduzido),
+                child: new Text(ultimoReduzido, style: widget.textStyle,),
               )
             ],
           )
         : new Container(
-            child: new Text(texto),
+            child: new Text(texto, style: widget.textStyle),
           );
   }
 

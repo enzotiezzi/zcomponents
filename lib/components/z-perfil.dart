@@ -46,7 +46,7 @@ class ZPerfil extends StatefulWidget {
       this.textoHoraIntervaloInfo,
       this.textoTituloInfo,
       this.textoCargoInfo,
-        this.listaOnTap,
+      this.listaOnTap,
       this.tituloHeader});
 
   @override
@@ -58,19 +58,24 @@ class _ZPerfilState extends State<ZPerfil> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: CupertinoNavigationBar(
-        middle: new Container(child: new Text("PERFIL DO COLABORADOR", style: TextStyle(color: Colors.black),),),
-     leading: new GestureDetector(
-       onTap: widget.onTapVoltar,
-       child: new Container(
-         padding: EdgeInsets.only(right: 20.0),
-         color: Colors.transparent,
-         child: new Icon(
-           Icons.arrow_back_ios,
-           size: 20.0,
-           color: const Color(0xff2BB9B4),
-         ),
-       ),
-     ),
+        middle: new Container(
+          child: new Text(
+            "PERFIL DO COLABORADOR",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        leading: new GestureDetector(
+          onTap: widget.onTapVoltar,
+          child: new Container(
+            padding: EdgeInsets.only(right: 20.0),
+            color: Colors.transparent,
+            child: new Icon(
+              Icons.arrow_back_ios,
+              size: 20.0,
+              color: const Color(0xff2BB9B4),
+            ),
+          ),
+        ),
       ),
       body: _body(),
     );
@@ -132,18 +137,22 @@ class _ZPerfilState extends State<ZPerfil> {
           zTipos: ZTipoTextos.isPadrao,
           text: widget.textoContato,
         ),
-        ZText(
-          zTipos: ZTipoTextos.isTitulo,
-          tituloText: "LOCALIZAÇÃO",
-        ),
-        new Container(
-          margin: EdgeInsets.only(bottom: 20.0),
-          child: ZText(
-            tituloText: "Endereço",
-            text: widget.textoLocalizacao,
-            zTipos: ZTipoTextos.isPadrao,
-          ),
-        )
+        (widget.textoLocalizacao == null || widget.textoLocalizacao == "")
+            ? new Container()
+            : ZText(
+                zTipos: ZTipoTextos.isTitulo,
+                tituloText: "LOCALIZAÇÃO",
+              ),
+        (widget.textoLocalizacao == null || widget.textoLocalizacao == "")
+            ? new Container()
+            : new Container(
+                margin: EdgeInsets.only(bottom: 20.0),
+                child: ZText(
+                  tituloText: "Endereço",
+                  text: widget.textoLocalizacao,
+                  zTipos: ZTipoTextos.isPadrao,
+                ),
+              )
       ],
     );
   }

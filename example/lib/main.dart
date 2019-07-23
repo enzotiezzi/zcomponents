@@ -9,6 +9,8 @@ import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
+import 'package:z_components/components/z_button.dart';
+import 'package:z_components/components/z-perfil.dart';
 
 void main() => runApp(MyApp());
 
@@ -203,7 +205,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ),
         ),
-        body: new Column(
+        body: new Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Container(
               color: Colors.grey,
@@ -225,7 +227,41 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               controllerData: controllerData,
               context: context,
               mesFocus: mesFocus,
-            )
+            ),
+            new ZNomeReduzido(
+              text: "Giuliano Ortiz Goria",
+              textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+            ),
+            new ZButton(
+              text: "PERFIL",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ZPerfil(
+                        onTapVoltar: () {
+                          Navigator.of(context).pop();
+                        },
+                        listaIcones: icones,
+                        listaTextos: titulos,
+                        numeroQuadrados:0,
+                        statusInfo: true,
+                        textoContato: "(11)9 98679893",
+                        textoLocalizacao:
+                        "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
+                        tituloHeader: "Giuliano Ortiz",
+                        textoTituloInfo: "Giuliano Ortiz",
+                        textoLocalInfo: "Sede - Xolis ltda.",
+                        textoCargoInfo: "Garoto de TI",
+                        textoEscalaInfo: "5x2(seg-sex)",
+                        textoHoraEntradaInfo: "09:00",
+                        textoHoraSaidaInfo: "15:30",
+                        textoHoraIntervaloInfo: "1:00",
+                        textoCodigoInfo: "012345",
+                      )),
+                );
+              },
+            ),
           ],
         ));
   }
