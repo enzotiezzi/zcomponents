@@ -4,6 +4,8 @@ import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z_tabbar.dart';
+import 'package:z_components/components/z-hora-padrao.dart';
+
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
@@ -86,7 +88,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideCelular;
 
   String vp;
-
+  var _controllerFim = new TextEditingController();
+  var _controllerIntervalo = new TextEditingController();
+  var _controllerHorarioInicio = new TextEditingController();
   String _value = "open";
 
   List<String> titulos = [
@@ -205,6 +209,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ),
         ),
+
         body: new Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Container(

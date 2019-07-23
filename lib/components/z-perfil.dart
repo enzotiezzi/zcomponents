@@ -27,6 +27,7 @@ class ZPerfil extends StatefulWidget {
   bool statusInfo;
   var image;
   var onTapVoltar;
+  var onTapImage;
 
   ZPerfil(
       {this.tituloAppBar,
@@ -47,6 +48,7 @@ class ZPerfil extends StatefulWidget {
       this.textoTituloInfo,
       this.textoCargoInfo,
       this.listaOnTap,
+      this.onTapImage,
       this.tituloHeader});
 
   @override
@@ -57,6 +59,7 @@ class _ZPerfilState extends State<ZPerfil> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: const Color(0xffEFEFF4),
       appBar: CupertinoNavigationBar(
         middle: new Container(
           child: new Text(
@@ -90,6 +93,7 @@ class _ZPerfilState extends State<ZPerfil> {
             new Container(color: const Color(0xffF0F0F0),
               padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
               child: ZItemTile(
+                onTapImage: widget.onTapImage,
                 image: widget.image,
                 status: widget.statusInfo,
                 textoCodigo: widget.textoCodigoInfo,

@@ -140,6 +140,7 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardAppearance: Brightness.light,
                             textCapitalization: TextCapitalization.words,
                             focusNode: nomeFocus,
                             controller: controllerNome,
@@ -188,6 +189,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardAppearance: Brightness.light,
+
                             controller: controllerCPF,
                             onChanged: (text) {
                               cPF = text;
@@ -245,6 +248,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardAppearance: Brightness.light,
+
                             controller: controllerCelular,
                             focusNode: celularFocus,
                             keyboardType: TextInputType.number,
@@ -304,6 +309,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardAppearance: Brightness.light,
+
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, emailFocus, proximoFocus);
@@ -360,6 +367,7 @@ var onChangedTextPadrao;
                             keyboardType: TextInputType.number,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
+                            keyboardAppearance: Brightness.light,
                             decoration: InputDecoration(
                               hintText: "dd / mm / aaaa",
                               hintStyle: new TextStyle(
@@ -410,6 +418,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardAppearance: Brightness.light,
+
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, padraoFocus, proximoFocus);
@@ -455,6 +465,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardAppearance: Brightness.light,
+
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, padraoFocus, proximoFocus);
@@ -500,7 +512,9 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
-                            onSubmitted: (text) {
+                              keyboardAppearance: Brightness.light,
+
+                              onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, cEPFocus, proximoFocus);
                             },
@@ -551,6 +565,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            keyboardAppearance: Brightness.light,
+
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, cNPJFocus, proximoFocus);

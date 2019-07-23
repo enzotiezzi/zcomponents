@@ -163,6 +163,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 margin: const EdgeInsets.only(
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
+                                  keyboardAppearance: Brightness.light,
                                   onSubmitted: (term) {
                                     _fieldFocusChange(
                                         context, nomeFocus, cpfFocus);
@@ -212,6 +213,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 margin: const EdgeInsets.only(
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
+                                  keyboardAppearance: Brightness.light,
+
                                   onSubmitted: (term) {
                                     _fieldFocusChange(
                                         context, cpfFocus, celularFocus);
@@ -271,6 +274,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 margin: const EdgeInsets.only(
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
+                                  keyboardAppearance: Brightness.light,
+
                                   onSubmitted: (term) {
                                     _fieldFocusChange(
                                         context, celularFocus, emailFocus);
@@ -331,6 +336,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 margin: const EdgeInsets.only(
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
+                                  keyboardAppearance: Brightness.light,
+
                                   onSubmitted: (term) {
                                     _fieldFocusChange(
                                         context, emailFocus, mesFocus);
@@ -379,6 +386,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 margin: const EdgeInsets.only(
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
+                                  keyboardAppearance: Brightness.light,
+
                                   onSubmitted: (term) {
                                     mesFocus.unfocus();
                                   },

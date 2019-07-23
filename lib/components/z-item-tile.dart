@@ -13,6 +13,7 @@ class ZItemTile extends StatefulWidget {
   bool status;
   var funcao;
   var image;
+  var onTapImage;
 
   ZItemTile(
       {this.textoCinco: "",
@@ -26,8 +27,8 @@ class ZItemTile extends StatefulWidget {
       this.textoCodigo: "",
       this.status: false,
       this.image,
-      this.isExpand:""
-      });
+      this.onTapImage,
+      this.isExpand: ""});
 
   @override
   _ZItemTileState createState() => _ZItemTileState();
@@ -46,29 +47,36 @@ class _ZItemTileState extends State<ZItemTile> {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           new Expanded(
-            flex: 2,
-            child: new Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Color(0xFFCECECE),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5.0),
-                      bottomLeft: Radius.circular(5.0))),
 
-
-              height: 105.0,
-
-              child: (widget.image == null)?new Icon(
-                Icons.insert_photo,
-                color: Color(0xFFffffff),
-              ): new Container(decoration: BoxDecoration(  borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5.0),
-                  bottomLeft: Radius.circular(5.0)),color: Colors.white, image: DecorationImage(
-                image: widget.image,
-                fit: BoxFit.cover,
-              ) ),),
-            ),
-          ),
+              flex: 2,
+              child: new GestureDetector(
+                onTap: widget.onTapImage,
+                child: new Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+        color: Color(0xFFCECECE),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5.0),
+                          bottomLeft: Radius.circular(5.0))),
+                  height: 105.0,
+                  child: (widget.image == null)
+                      ? new Icon(
+                          Icons.insert_photo,
+    color: Color(0xFFffffff),
+                        )
+                      : new Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5.0),
+                                  bottomLeft: Radius.circular(5.0)),
+                              color: Colors.white,
+                              image: DecorationImage(
+                                image: widget.image,
+                                fit: BoxFit.cover,
+                              )),
+                        ),
+                ),
+              )),
           new Expanded(
               flex: 8,
               child: new InkWell(
@@ -78,36 +86,38 @@ class _ZItemTileState extends State<ZItemTile> {
                     new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                    (widget.isExpand == "isExpand") ? new Container(
-                          width:
-                          (MediaQuery.of(context).size.width /
-                              2.1),
-                          margin:
-                              EdgeInsets.only(left: 8.0, bottom: 4.0, top: 8.0),
-                          child: new Text(
-                            widget.textoTitulo,
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                color: Color(0xFF000000),
-                                fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,
-                          ),
-                        ):new Container(
-                      width:
-                      (MediaQuery.of(context).size.width /
-                          2.0),
-                      margin:
-                      EdgeInsets.only(left: 8.0, bottom: 4.0, top: 8.0),
-                      child: new Text(
-                        widget.textoTitulo,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(0xFF000000),
-                            fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
+                        (widget.isExpand == "isExpand")
+                            ? new Container(
+                                width:
+                                    (MediaQuery.of(context).size.width / 2.1),
+                                margin: EdgeInsets.only(
+                                    left: 8.0, bottom: 4.0, top: 8.0),
+                                child: new Text(
+                                  widget.textoTitulo,
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: Color(0xFF000000),
+                                      fontWeight: FontWeight.w600),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )
+                            : new Container(
+                                width:
+                                    (MediaQuery.of(context).size.width / 2.0),
+                                margin: EdgeInsets.only(
+                                    left: 8.0, bottom: 4.0, top: 8.0),
+                                child: new Text(
+                                  widget.textoTitulo,
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: Color(0xFF000000),
+                                      fontWeight: FontWeight.w600),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
                         new Container(
-                          margin:
-                              EdgeInsets.only(left: 8.0, bottom: 4.0, top: 8.0, right: 8.0),
+                          margin: EdgeInsets.only(
+                              left: 8.0, bottom: 4.0, top: 8.0, right: 8.0),
                           child: new Text(
                             widget.textoCodigo,
                             style: TextStyle(
@@ -146,42 +156,49 @@ class _ZItemTileState extends State<ZItemTile> {
                             ),
                           ],
                         ),
-      (widget.status == true)?new Row(
-                          children: <Widget>[
-                            new Container(
-                              height: 10.0,
-                              width: 10.0,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: const Color(0xff1AC15D)),
-                            ),
-                            new Container(margin: EdgeInsets.only(right: 8.0, left: 2.0),
-                              child: new Text(
-                                "Ativo",
-                                style:
-                                    TextStyle(fontSize: 12.0,color: const Color(0xff999999)),
-                              ),
-                            )
-                          ],
-                        ):  new Row(
-        children: <Widget>[
-          new Container(
-            height: 10.0,
-            width: 10.0,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xff999999)),
-          ),
-          new Container(margin: EdgeInsets.only(right: 8.0, left: 2.0),
-            child: new Text(
-              "Inativo",
-              style:
-              TextStyle(fontSize: 12.0,color: const Color(0xff999999)),
-            ),
-          )
-        ],
-      )
-
+                        (widget.status == true)
+                            ? new Row(
+                                children: <Widget>[
+                                  new Container(
+                                    height: 10.0,
+                                    width: 10.0,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xff1AC15D)),
+                                  ),
+                                  new Container(
+                                    margin:
+                                        EdgeInsets.only(right: 8.0, left: 2.0),
+                                    child: new Text(
+                                      "Ativo",
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          color: const Color(0xff999999)),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : new Row(
+                                children: <Widget>[
+                                  new Container(
+                                    height: 10.0,
+                                    width: 10.0,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xff999999)),
+                                  ),
+                                  new Container(
+                                    margin:
+                                        EdgeInsets.only(right: 8.0, left: 2.0),
+                                    child: new Text(
+                                      "Inativo",
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          color: const Color(0xff999999)),
+                                    ),
+                                  )
+                                ],
+                              )
                       ],
                     ),
                     new Row(
@@ -196,8 +213,7 @@ class _ZItemTileState extends State<ZItemTile> {
                           ),
                         ),
                         new Container(
-                          margin: EdgeInsets.only(
-                              right: 3.0, bottom: 4.0),
+                          margin: EdgeInsets.only(right: 3.0, bottom: 4.0),
                           child: new Text(
                             widget.textoTres,
                             style: TextStyle(
@@ -262,7 +278,6 @@ class _ZItemTileState extends State<ZItemTile> {
                 ),
                 onTap: widget.funcao,
               )),
-
         ],
       ),
     );
