@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Correction ZPerfil!
+
 ## 0.3.0
 
 * Correction ZBaseline!
