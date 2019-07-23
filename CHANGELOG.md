@@ -1,3 +1,7 @@
+## 0.3.3
+
+* Update for Keyboard Light on IOS!
+
 ## 0.3.2
 
 * Correction ZPerfil!

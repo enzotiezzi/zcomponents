@@ -65,6 +65,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
               child: new Container(
                 width: MediaQuery.of(context).size.width / 1.25,
                 child: new TextField(
+                  keyboardAppearance: Brightness.light,
                   decoration: InputDecoration.collapsed(hintText: "Busca"),
                   style: TextStyle(fontSize: 19.0, color: Colors.black),
                   onChanged: (text) {
