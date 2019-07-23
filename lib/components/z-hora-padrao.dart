@@ -174,6 +174,7 @@ class _HoraState extends State<ZHora> {
                           ),
                           child: new Container(
                               child: new TextField(
+                                keyboardAppearance: Brightness.light,
                                 textAlign: TextAlign.center,
                                 controller: widget.controllerHoraEntrada,
                                 onSubmitted: (term) {
@@ -213,6 +214,7 @@ class _HoraState extends State<ZHora> {
                                 new Container(
                                   margin: _visibles ? const EdgeInsets.only(right: 10): const EdgeInsets.only(right: 0),
                                     child: new TextField(
+                                      keyboardAppearance: Brightness.light,
                                       onSubmitted: (term) {
                                         _fieldFocusChange(
                                             context, _focusSaida, _focusSaida);
@@ -283,6 +285,7 @@ class _HoraState extends State<ZHora> {
                           child: new Container(
                              // margin: EdgeInsets.only(left: 30.0),
                               child: new TextField(
+                                keyboardAppearance: Brightness.light,
                                 textAlign: TextAlign.center,
                                 onSubmitted: (term) {
                                   _fieldFocusChange(
