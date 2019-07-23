@@ -87,8 +87,8 @@ class _ZPerfilState extends State<ZPerfil> {
         ZHeader(
           titulo: widget.tituloHeader,
           children: <Widget>[
-            new Container(
-              margin: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 5.0),
+            new Container(color: const Color(0xffF0F0F0),
+              padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
               child: ZItemTile(
                 image: widget.image,
                 status: widget.statusInfo,

@@ -50,7 +50,7 @@ class _ZItemTileState extends State<ZItemTile> {
             child: new Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: Color(0xFFF0F0F0),
+                  color: Color(0xFFCECECE),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(5.0),
                       bottomLeft: Radius.circular(5.0))),
@@ -60,7 +60,7 @@ class _ZItemTileState extends State<ZItemTile> {
 
               child: (widget.image == null)?new Icon(
                 Icons.insert_photo,
-                color: Color(0xFFC7C7CC),
+                color: Color(0xFFffffff),
               ): new Container(decoration: BoxDecoration(  borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(5.0),
                   bottomLeft: Radius.circular(5.0)),color: Colors.white, image: DecorationImage(
