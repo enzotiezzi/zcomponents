@@ -5,8 +5,9 @@ import 'package:z_components/components/z-collection-item.dart';
 class ZCollectionList extends StatefulWidget {
   final List<ZCollectionItem> lista;
   final String titulo;
+  final ZCollectionItem ultimoValor;
 
-  ZCollectionList({this.lista, this.titulo: ""});
+  ZCollectionList({this.lista, this.titulo: "",this.ultimoValor});
 
   @override
   State<StatefulWidget> createState() => _ZCollectionListState();
@@ -18,7 +19,6 @@ class _ZCollectionListState extends State<ZCollectionList> {
   @override
   void initState() {
     _listaFiltro = widget.lista;
-
     super.initState();
   }
 
@@ -27,7 +27,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
     return new Scaffold(
       appBar: new CupertinoNavigationBar(
           leading: new GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => _selecionarItem(widget.ultimoValor),
             child: new Container(
               padding: EdgeInsets.only(right: 20.0),
               color: Colors.transparent,
@@ -101,7 +101,9 @@ class _ZCollectionListState extends State<ZCollectionList> {
             _listaFiltro[index].valor = "${_listaFiltro[index].valor.substring(0, 16)}...";
           }
         return new ListTile(
-          onTap: () => _selecionarItem(item),
+          onTap: () {
+            _selecionarItem(item);
+          } ,
           title: new Text("${item.titulo ?? item.valor}"),
           trailing: new Icon(
             Icons.chevron_right,
