@@ -42,7 +42,7 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                 children: <Widget>[
                   new Container(
                     margin: EdgeInsets.only(
-                        bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
+                        bottom: 6.0, top: 8.0, left: 8.0, right: 8.0),
                     child: new Icon(
                       widget.listaIcones[index],
                       color: const Color(0xff2BBAB4),
@@ -81,7 +81,7 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
               children: <Widget>[
                 new Container(
                   margin: EdgeInsets.only(
-                      bottom: 10.0, top: 18.0, left: 8.0, right: 8.0),
+                      bottom: 6.0, top: 8.0, left: 8.0, right: 8.0),
                   child: new Icon(
                     widget.listaIcones[index],
                     color: const Color(0xff2BBAB4),

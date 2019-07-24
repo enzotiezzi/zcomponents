@@ -1,3 +1,7 @@
+## 0.3.4
+
+* Update ZCollection!
+
 ## 0.3.3
 
 * Update for Keyboard Light on IOS!

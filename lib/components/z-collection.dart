@@ -23,6 +23,7 @@ class ZCollection extends StatefulWidget {
 
 class ZCollectionState extends State<ZCollection> {
   ZCollectionItem _itemSelecionado;
+  String _anterior = "Selecione";
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
@@ -30,7 +31,7 @@ class ZCollectionState extends State<ZCollection> {
   void initState() {
     buscarValorPadrao(widget.lista);
     _itemSelecionado = new ZCollectionItem();
-
+    //setarvalor();
     super.initState();
   }
 
@@ -57,15 +58,15 @@ class ZCollectionState extends State<ZCollection> {
               title: new Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  (_itemSelecionado?.valor == null)
+                  (_itemSelecionado?.valor == null && _anterior == "Selecione")
                       ? new Text(
-                          "Selecione",
+                          _anterior,
                           style: new TextStyle(
                             color: Colors.grey,
                           ),
                         )
                       : new Text(
-                    (_itemSelecionado?.valor.length >16)? "${_itemSelecionado?.valor.substring(0, 16) ?? ""}...":_itemSelecionado?.valor,
+                    (_itemSelecionado?.valor.length >14)? "${_itemSelecionado?.valor.substring(0, 14) ?? ""}...":_itemSelecionado?.valor,
                           style: new TextStyle(
                             color: Colors.grey,
                           ),
@@ -100,7 +101,21 @@ class ZCollectionState extends State<ZCollection> {
     }
 
   }
+  void setarvalor(){
+    if(_itemSelecionado?.valor != null)
+      {
+        setState(() {
+          _anterior = _itemSelecionado?.valor;
 
+        });
+      }
+  }
+/*
+  return ZCollectionList(
+  lista: widget.lista,
+  titulo: widget.titulo,
+  );
+*/
 
   void _irParaSelecaoDeItemHorizontal() async {
     _itemSelecionado = await Navigator.push<ZCollectionItem>(
@@ -111,6 +126,7 @@ class ZCollectionState extends State<ZCollection> {
             return ZCollectionList(
               lista: widget.lista,
               titulo: widget.titulo,
+              ultimoValor:  _itemSelecionado,
             );
           },
           transitionsBuilder: (BuildContext context,
@@ -131,7 +147,8 @@ class ZCollectionState extends State<ZCollection> {
               ),
             );
           },
-        ));
+        )
+    );
     if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
     setState(() {});
