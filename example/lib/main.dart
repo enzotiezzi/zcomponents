@@ -249,7 +249,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                         },
                         listaIcones: icones,
                         listaTextos: titulos,
-                        numeroQuadrados:0,
+                        numeroQuadrados:6,
                         statusInfo: true,
                         textoContato: "(11)9 98679893",
                         textoLocalizacao:
@@ -263,6 +263,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                         textoHoraSaidaInfo: "15:30",
                         textoHoraIntervaloInfo: "1:00",
                         textoCodigoInfo: "012345",
+                        listaOnTap: listaOnTap,
                       )),
                 );
               },
