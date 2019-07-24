@@ -26,6 +26,7 @@ class ZItemTile extends StatefulWidget {
       this.funcao,
       this.textoCodigo: "",
       this.status: false,
+
       this.image,
       this.onTapImage,
       this.isExpand: ""});
