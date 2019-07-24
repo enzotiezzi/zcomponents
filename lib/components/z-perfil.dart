@@ -18,8 +18,6 @@ class ZPerfil extends StatefulWidget {
   String textoHoraIntervaloInfo;
   String textoCodigoInfo;
   String tituloHeader;
-  String textoContato;
-  String textoLocalizacao;
   int numeroQuadrados;
   List<String> listaTextos;
   List<IconData> listaIcones;
@@ -32,7 +30,6 @@ class ZPerfil extends StatefulWidget {
   ZPerfil(
       {this.tituloAppBar,
       this.onTapVoltar,
-      this.textoLocalizacao,
       this.listaIcones,
       this.listaTextos,
       this.numeroQuadrados,
@@ -40,7 +37,6 @@ class ZPerfil extends StatefulWidget {
       this.statusInfo,
       this.textoHoraEntradaInfo,
       this.textoCodigoInfo,
-      this.textoContato,
       this.textoLocalInfo,
       this.textoEscalaInfo,
       this.textoHoraSaidaInfo,
@@ -132,31 +128,7 @@ class _ZPerfilState extends State<ZPerfil> {
             listaOnTap: widget.listaOnTap,
           ),
         ),
-        ZText(
-          zTipos: ZTipoTextos.isTitulo,
-          tituloText: "CONTATO",
-        ),
-        ZText(
-          tituloText: "Telefone",
-          zTipos: ZTipoTextos.isPadrao,
-          text: widget.textoContato,
-        ),
-        (widget.textoLocalizacao == null || widget.textoLocalizacao == "")
-            ? new Container()
-            : ZText(
-                zTipos: ZTipoTextos.isTitulo,
-                tituloText: "LOCALIZAÇÃO",
-              ),
-        (widget.textoLocalizacao == null || widget.textoLocalizacao == "")
-            ? new Container()
-            : new Container(
-                margin: EdgeInsets.only(bottom: 20.0),
-                child: ZText(
-                  tituloText: "Endereço",
-                  text: widget.textoLocalizacao,
-                  zTipos: ZTipoTextos.isPadrao,
-                ),
-              )
+
       ],
     );
   }

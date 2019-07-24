@@ -4,8 +4,6 @@ import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z_tabbar.dart';
-import 'package:z_components/components/z-hora-padrao.dart';
-
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
@@ -251,9 +249,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                         listaTextos: titulos,
                         numeroQuadrados:0,
                         statusInfo: true,
-                        textoContato: "(11)9 98679893",
-                        textoLocalizacao:
-                        "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
                         tituloHeader: "Giuliano Ortiz",
                         textoTituloInfo: "Giuliano Ortiz",
                         textoLocalInfo: "Sede - Xolis ltda.",
