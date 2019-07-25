@@ -16,7 +16,9 @@ class ZLoading extends StatelessWidget {
   final bool animating;
   final double radius;
   final ZPlatform zPlatform;
-  
+  final Color color;
+
+
   ZLoading({
     this.context,
     this.key,
@@ -29,6 +31,7 @@ class ZLoading extends StatelessWidget {
     this.animating = true,
     this.radius = 15.0,
     this.zPlatform = ZPlatform.isPlatform,
+    this.color: const Color(0xff2BB9B4),
   }) : super(key: key) {
     _zLoading = new Container(
       width: 60,
@@ -36,7 +39,7 @@ class ZLoading extends StatelessWidget {
       child: new Card(
           elevation: 6,
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-          color: const Color(0xff2BB9B4),
+          color: this.color,
           child:
           new Stack(
             children: <Widget>[
@@ -46,7 +49,7 @@ class ZLoading extends StatelessWidget {
                   borderRadius: new BorderRadius.circular(25.0),
                 ),
                 child: new Material(
-                  color: const Color(0xff2BB9B4),
+                  color: this.color,
                   borderRadius: new BorderRadius.circular(25.0),
                   child: new SizedBox(
                     width: 50,
