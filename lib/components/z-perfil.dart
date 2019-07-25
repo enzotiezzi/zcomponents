@@ -23,7 +23,7 @@ class ZPerfil extends StatefulWidget {
   List<IconData> listaIcones;
   List<dynamic> listaOnTap;
   bool statusInfo;
-  var image;
+  Widget imagemPerfil;
   var onTapVoltar;
   var onTapImage;
 
@@ -33,7 +33,7 @@ class ZPerfil extends StatefulWidget {
       this.listaIcones,
       this.listaTextos,
       this.numeroQuadrados,
-      this.image,
+      this.imagemPerfil,
       this.statusInfo,
       this.textoHoraEntradaInfo,
       this.textoCodigoInfo,
@@ -90,7 +90,7 @@ class _ZPerfilState extends State<ZPerfil> {
               padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
               child: ZItemTile(
                 onTapImage: widget.onTapImage,
-                image: widget.image,
+                imagemPerfil: widget.imagemPerfil,
                 status: widget.statusInfo,
                 textoCodigo: widget.textoCodigoInfo,
                 textoSete: widget.textoHoraIntervaloInfo,
