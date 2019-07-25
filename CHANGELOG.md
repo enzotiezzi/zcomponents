@@ -1,3 +1,7 @@
+## 0.3.5
+
+* Update ZPerfil!
+
 ## 0.3.4
 
 * Update ZCollection!

@@ -120,6 +120,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     Icons.voice_chat,
     Icons.view_stream
   ];
+
   List<dynamic> listaOnTap = [
     () {
       print("1");
@@ -214,8 +215,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ),
         ),
-
-        body: new Column(crossAxisAlignment: CrossAxisAlignment.start,
+        body: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Container(
               color: Colors.grey,
@@ -243,11 +244,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
             ),
             new ZCargo(
-              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
+              token:
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
               key: _keyCargo,
             ),
             new ZEscala(
-              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
+              token:
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
               key: _keyEscala,
               //valorPadrao: widget.escala,
             ),
@@ -255,10 +258,18 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               key: _keyStatus,
               titulo: "Status*",
               //valorPadrao: valorPadraoStatus,
+<<<<<<< HEAD
               lista: ["Ativo", "Inativo"].map((x) => new ZCollectionItem(chave: x, titulo: x, valor: x)).toList(),
               onChange: (item) {
 
               },
+=======
+              lista: ["Ativo", "Inativo"]
+                  .map(
+                      (x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
+                  .toList(),
+              onChange: (item) {},
+>>>>>>> 70c430f64e28d240a123beecb9526739539f0a4b
             ),
             new ZButton(
               text: "PERFIL",
@@ -267,26 +278,25 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ZPerfil(
-                        onTapVoltar: () {
-                          Navigator.of(context).pop();
-                        },
-                        listaIcones: icones,
-                        listaTextos: titulos,
-                        numeroQuadrados:0,
-                        statusInfo: true,
-                        textoContato: "(11)9 98679893",
-                        textoLocalizacao:
-                        "Rua do Poeta, 18, ,A2 Jardim Julieta, São Paulo - SP, Brasil, 02161160",
-                        tituloHeader: "Giuliano Ortiz",
-                        textoTituloInfo: "Giuliano Ortiz",
-                        textoLocalInfo: "Sede - Xolis ltda.",
-                        textoCargoInfo: "Garoto de TI",
-                        textoEscalaInfo: "5x2(seg-sex)",
-                        textoHoraEntradaInfo: "09:00",
-                        textoHoraSaidaInfo: "15:30",
-                        textoHoraIntervaloInfo: "1:00",
-                        textoCodigoInfo: "012345",
-                      )),
+                            onTapVoltar: () {
+                              Navigator.of(context).pop();
+                            },
+
+                            listaIcones: icones,
+                            listaTextos: titulos,
+                            numeroQuadrados: 6,
+                            statusInfo: true,
+                            tituloHeader: "Giuliano Ortiz",
+                            textoTituloInfo: "Giuliano Ortiz",
+                            textoLocalInfo: "Sede - Xolis ltda.",
+                            textoCargoInfo: "Garoto de TI",
+                            textoEscalaInfo: "5x2(seg-sex)",
+                            textoHoraEntradaInfo: "09:00",
+                            textoHoraSaidaInfo: "15:30",
+                            textoHoraIntervaloInfo: "1:00",
+                            textoCodigoInfo: "012345",
+                            listaOnTap: listaOnTap,
+                          )),
                 );
               },
             ),
