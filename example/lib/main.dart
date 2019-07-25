@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia.dart';
+import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/components/z-collection-item.dart';
@@ -239,6 +240,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               context: context,
               mesFocus: mesFocus,
             ),
+            ZBaseLine(
+              zTipos: ZTipoBaseline.isCNPJ,
+              cNPJFocus: cNPJFocus,
+              controllerCNPJ: controllerCNPJ,
+              context: context,
+            ),
             new ZNomeReduzido(
               text: "Giuliano Ortiz Goria",
               textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
@@ -274,7 +281,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                             onTapVoltar: () {
                               Navigator.of(context).pop();
                             },
-
                             listaIcones: icones,
                             listaTextos: titulos,
                             numeroQuadrados: 6,
@@ -293,6 +299,25 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 );
               },
             ),
+            new Row(
+              children: <Widget>[
+                ZLoading(
+                  color: Colors.purple,
+                ),
+                ZLoading(
+                  color: Colors.yellow,
+                ),
+                ZLoading(
+                  color: Colors.blueGrey,
+                ),
+                ZLoading(
+                  color: Colors.amber,
+                ),
+                ZLoading(
+                  color: Colors.red,
+                ),
+              ],
+            )
           ],
         ));
   }
