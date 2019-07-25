@@ -258,18 +258,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               key: _keyStatus,
               titulo: "Status*",
               //valorPadrao: valorPadraoStatus,
-<<<<<<< HEAD
-              lista: ["Ativo", "Inativo"].map((x) => new ZCollectionItem(chave: x, titulo: x, valor: x)).toList(),
-              onChange: (item) {
-
-              },
-=======
               lista: ["Ativo", "Inativo"]
                   .map(
                       (x) => new ZCollectionItem(chave: x, titulo: x, valor: x))
                   .toList(),
               onChange: (item) {},
->>>>>>> 70c430f64e28d240a123beecb9526739539f0a4b
             ),
             new ZButton(
               text: "PERFIL",
