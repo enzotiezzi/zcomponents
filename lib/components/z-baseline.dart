@@ -593,7 +593,9 @@ var onChangedTextPadrao;
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
                                   maskONE: "XX.XXX.XXX/XXXX-XX",
-                                  maskTWO: "XX.XXX.XXX/XXXX-XX")
+                                  maskTWO: "XX.XXX.XXX/XXXX-XX"),
+                              BlacklistingTextInputFormatter(
+                                  RegExp("[ ]")),
                             ],
                           ),
                         ))

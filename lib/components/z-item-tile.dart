@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class ZItemTile extends StatefulWidget {
   String isExpand;
@@ -12,7 +14,7 @@ class ZItemTile extends StatefulWidget {
   String textoCodigo;
   bool status;
   var funcao;
-  var image;
+  Widget imagemPerfil;
   var onTapImage;
 
   ZItemTile(
@@ -27,7 +29,7 @@ class ZItemTile extends StatefulWidget {
       this.textoCodigo: "",
       this.status: false,
 
-      this.image,
+      this.imagemPerfil,
       this.onTapImage,
       this.isExpand: ""});
 
@@ -60,7 +62,7 @@ class _ZItemTileState extends State<ZItemTile> {
                           topLeft: Radius.circular(5.0),
                           bottomLeft: Radius.circular(5.0))),
                   height: 105.0,
-                  child: (widget.image == null)
+                  child: (widget.imagemPerfil == null)
                       ? new Icon(
                           Icons.insert_photo,
     color: Color(0xFFffffff),
@@ -71,10 +73,8 @@ class _ZItemTileState extends State<ZItemTile> {
                                   topLeft: Radius.circular(5.0),
                                   bottomLeft: Radius.circular(5.0)),
                               color: Colors.white,
-                              image: DecorationImage(
-                                image: widget.image,
-                                fit: BoxFit.cover,
-                              )),
+                              ),
+                          child: widget.imagemPerfil,
                         ),
                 ),
               )),
