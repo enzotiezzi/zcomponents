@@ -46,7 +46,8 @@ class _ZTextState extends State<ZText> {
               ],
             ),
           ],
-        )):    new Container(
+        )):
+    new Container(
       padding: EdgeInsets.only(left: 15.0, bottom: 8.0, top: 16.0),
       alignment: Alignment.centerLeft,
       child: new Text(
