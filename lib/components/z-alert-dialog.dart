@@ -10,10 +10,16 @@ class ZAlertDialog extends StatelessWidget {
   final EdgeInsetsGeometry contentPadding;
   final ZDialog zDialog;
   final Widget child;
+  final Color colorLine;
+  final Color colorBackgroundLinear;
+  final Color colorLoadLinear;
 
   ZAlertDialog({
     this.child,
     this.key,
+    this.colorLine = const Color(0xffC7C7CC),
+    this.colorBackgroundLinear = const Color(0xffCECECE),
+    this.colorLoadLinear = const Color(0xff2BBAB4),
     this.contentPadding = const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
     this.zDialog = ZDialog.zDialog,
   })  : assert(contentPadding != null),
@@ -29,7 +35,7 @@ class ZAlertDialog extends StatelessWidget {
             width: double.infinity,
             height: 5,
             decoration: new BoxDecoration(
-                color: Color(0xffC7C7CC),
+                color: colorLine,
                 borderRadius: new BorderRadius.only(
                     topLeft:  const  Radius.circular(5.0),
                     topRight: const  Radius.circular(5.0))
@@ -153,6 +159,32 @@ class ZAlertDialog extends StatelessWidget {
                     new Icon(Icons.check_circle,color: Color(0xff1AC15D),)
                   ],
                 ),
+                (child == null)?
+                new Container():
+                child
+              ],
+            ),
+          ),
+        );
+        break;
+      case ZDialog.linearLoad:
+        _zAlertDialog = AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 0,
+          key: this.key,
+          title: new LinearProgressIndicator(
+            backgroundColor: colorBackgroundLinear,
+            valueColor:
+            new AlwaysStoppedAnimation<Color>(colorLoadLinear),
+          ),
+          titlePadding: EdgeInsets.all(0.0),
+          contentPadding: this.contentPadding,
+          content:new Container(
+            margin: const EdgeInsets.only(top: 12),
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
                 (child == null)?
                 new Container():
                 child

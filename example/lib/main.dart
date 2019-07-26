@@ -15,6 +15,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z-perfil.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/config/z-dialog.dart';
 
 void main() => runApp(MyApp());
 
@@ -72,6 +74,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
   var controllerNumero = new TextEditingController();
+
   FocusNode nomeFocus;
   FocusNode emailFocus;
   FocusNode cpfFocus;
@@ -163,6 +166,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     cEPFocus = new FocusNode();
     cNPJFocus = new FocusNode();
     super.initState();
+    Future.delayed(new Duration(milliseconds: 1000), () {
+      dialogCargoJornada("Esta é a sua jornada de trabalho?","5x2 (de SEG à SEX) das 08:00 às 17:48 com 1:00 de intervalo.");
+    }
+    );
+
   }
 
   @override
@@ -294,6 +302,162 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               },
             ),
           ],
+        ));
+  }
+  void olaColab(String nomeColab,{Function onOkPressed = null}){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => new ZAlertDialog(
+          colorLine: const Color(0xff2BBAB4),
+          zDialog: ZDialog.normal,
+          child: new Container(
+            padding: new EdgeInsets.only(top:16.0,bottom: 10.0),
+            child: new Column(
+              children: <Widget>[
+                new Container(
+                  child: new Text(
+                    "Olá,",
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 17.0),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                new Container(
+                  padding: new EdgeInsets.all(8.0),
+                  child: new Text(
+                    nomeColab,
+                    style: new TextStyle(color: const Color(0xff2BBAB4),fontWeight: FontWeight.bold,fontSize: 17),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                new Container(
+                  padding: new EdgeInsets.only(left:8.0,right: 8.0,bottom: 12.0,top: 8.0),
+                  child: new Text(
+                    "Como este é o seu primeiro acesso,\n vamos confirmar alguns dados.",
+                    style: new TextStyle(color: const Color(0xFF707070),fontSize: 15),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                new Divider(
+                  color: const Color(0xffdbdbdb),
+                ),
+                new Container(
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Container(
+                        margin: new EdgeInsets.only(left: 4),
+                        child: new InkWell(
+                            borderRadius:
+                            new BorderRadius.all(const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () {
+                              Navigator.pop(context);
+                              if(onOkPressed != null)onOkPressed();
+                            },
+                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "OK",
+                                style: new TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w900),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
+  void dialogCargoJornada(String text, String text2,{Function onNaoPressed = null,Function onSimPressed = null}){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => new ZAlertDialog(
+          colorLine: const Color(0xff2BBAB4),
+          zDialog: ZDialog.normal,
+          child: new Container(
+            padding: new EdgeInsets.only(top:16.0,bottom: 10.0),
+            child: new Column(
+              children: <Widget>[
+                new Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  child: new Text(
+                    text,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16.0),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                new Container(
+                  padding: new EdgeInsets.all(8.0),
+                  child: new Text(
+                    text2,
+                    style: new TextStyle(color: const Color(0xff2BBAB4),fontWeight: FontWeight.normal,fontSize: 17),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                new Divider(
+                  color: const Color(0xffdbdbdb),
+                ),
+                new Container(
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Container(
+                        child: new InkWell(
+                            borderRadius:
+                            new BorderRadius.all(const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () {
+                              Navigator.pop(context);
+                              if(onNaoPressed != null)onNaoPressed();
+                            },                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "NÃO",
+                                style: new TextStyle(
+                                    color: Color(0xff707070),
+                                    fontWeight: FontWeight.normal),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                        ),
+                      ),
+                      new Container(
+                        child: new InkWell(
+                            borderRadius:
+                            new BorderRadius.all(const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () {
+                              Navigator.pop(context);
+                              if(onSimPressed != null)onSimPressed();
+                            },
+                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "SIM",
+                                style: new TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w900),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ));
   }
 }
