@@ -1,3 +1,7 @@
+## 0.3.7
+
+* Update ZPerfil!
+
 ## 0.3.6
 
 * Update ZEscala!
