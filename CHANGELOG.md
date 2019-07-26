@@ -1,6 +1,6 @@
 ## 0.3.7
 
-* Update ZPerfil!
+* Update Zload, ZBaseLine(CNPJ) and new type AlertDialog(AlertLinearLoad)!
 
 ## 0.3.6
 
