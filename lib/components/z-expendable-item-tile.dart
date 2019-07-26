@@ -71,7 +71,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
           child: new ZItemTile(
             isExpand: "isExpand",
             funcao: widget.funcao,
-            image: widget.image,
+            imagemPerfil: widget.image,
             status: widget.status,
             textoCodigo: widget.textoCodigo,
             textoSete: widget.textoSete,
