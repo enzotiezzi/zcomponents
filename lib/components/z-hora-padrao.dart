@@ -42,9 +42,9 @@ class _HoraState extends State<ZHora> {
   int _intHoraSaida = 0;
   int _intMinutoSaida;
 
-  Color ColorHoraEntrada = Colors.grey;
-  Color ColorHoraSaida = Colors.grey;
-  Color ColorIntervalo = Colors.grey;
+  Color colorHoraEntrada = Colors.grey;
+  Color colorHoraSaida = Colors.grey;
+  Color colorIntervalo = Colors.grey;
 
   String _horaIntervalo;
   String _minutoIntervalo;
@@ -167,7 +167,7 @@ class _HoraState extends State<ZHora> {
                           margin: EdgeInsets.only(left: 10),
                           padding: EdgeInsets.only(top: 5, bottom: 5),
                           decoration: new BoxDecoration(
-                            border: new Border.all(color: ColorHoraEntrada ,width: (okEntrada == true)? 1 : 2),
+                            border: new Border.all(color: colorHoraEntrada ,width: (okEntrada == true)? 1 : 2),
                             color: Colors.white,
                             borderRadius: new BorderRadius.all(
                                 const Radius.circular(5.0)),
@@ -204,7 +204,7 @@ class _HoraState extends State<ZHora> {
                             margin: EdgeInsets.only(right: 5, left: 5),
                             padding: EdgeInsets.only(top: 5, bottom: 5),
                             decoration: new BoxDecoration(
-                              border: new Border.all(color: ColorHoraSaida ,width: (okSaida == true)?1: 2),
+                              border: new Border.all(color: colorHoraSaida ,width: (okSaida == true)?1: 2),
                               color: Colors.white,
                               borderRadius: new BorderRadius.all(
                                   const Radius.circular(5.0)),
@@ -277,7 +277,7 @@ class _HoraState extends State<ZHora> {
                           margin: EdgeInsets.only(right: 10),
                           padding: EdgeInsets.only(top: 5, bottom: 5),
                           decoration: new BoxDecoration(
-                            border: new Border.all(color: ColorIntervalo ,width:(okIntervalo == true)? 1:2),
+                            border: new Border.all(color: colorIntervalo ,width:(okIntervalo == true)? 1:2),
                             color: Colors.white,
                             borderRadius: new BorderRadius.all(
                                 const Radius.circular(5.0)),
@@ -334,7 +334,7 @@ class _HoraState extends State<ZHora> {
         _fieldFocusChange(context, _focusEntrada, _focusEntrada);
         okEntrada = false;
         setState(() {
-          ColorHoraEntrada = const Color(0xffE53629);
+          colorHoraEntrada = const Color(0xffE53629);
         });
 
       } else if (_intHoraEntrada > 23 &&
@@ -343,7 +343,7 @@ class _HoraState extends State<ZHora> {
         _fieldFocusChange(context, _focusEntrada, _focusEntrada);
         okEntrada = false;
         setState(() {
-          ColorHoraEntrada = const Color(0xffE53629);
+          colorHoraEntrada = const Color(0xffE53629);
         });
 
       } else if (_intHoraEntrada < 24 &&
@@ -352,7 +352,7 @@ class _HoraState extends State<ZHora> {
         _fieldFocusChange(context, _focusEntrada, _focusEntrada);
         okEntrada = false;
         setState(() {
-          ColorHoraEntrada = const Color(0xffE53629);
+          colorHoraEntrada = const Color(0xffE53629);
         });
 
       } else {
@@ -360,7 +360,7 @@ class _HoraState extends State<ZHora> {
             context, _focusEntrada, _focusSaida);
         okEntrada = true;
         setState(() {
-          ColorHoraEntrada = Colors.grey;
+          colorHoraEntrada = Colors.grey;
           horarioTrabalhado();
           ajustarDmaisUm();
         });
@@ -380,27 +380,27 @@ class _HoraState extends State<ZHora> {
           _intMinutoEntrada > 59) {
         okEntrada = false;
         setState(() {
-          ColorHoraEntrada = const Color(0xffE53629);
+          colorHoraEntrada = const Color(0xffE53629);
         });
 
       } else if (_intHoraEntrada > 23 &&
           _intMinutoEntrada < 59) {
         okEntrada = false;
         setState(() {
-          ColorHoraEntrada = const Color(0xffE53629);
+          colorHoraEntrada = const Color(0xffE53629);
         });
 
       } else if (_intHoraEntrada < 24 &&
           _intMinutoEntrada > 59) {
         okEntrada = false;
         setState(() {
-          ColorHoraEntrada = const Color(0xffE53629);
+          colorHoraEntrada = const Color(0xffE53629);
         });
 
       } else {
         okEntrada = true;
         setState(() {
-          ColorHoraEntrada = Colors.grey;
+          colorHoraEntrada = Colors.grey;
         });
       }
     }
@@ -421,7 +421,7 @@ class _HoraState extends State<ZHora> {
         _fieldFocusChange(context, _focusSaida, _focusSaida);
         okSaida = false;
         setState(() {
-          ColorHoraSaida = const Color(0xffE53629);
+          colorHoraSaida = const Color(0xffE53629);
         });
       } else if (_intHoraSaida > 23 &&
           _intMinutoSaida < 59) {
@@ -431,7 +431,7 @@ class _HoraState extends State<ZHora> {
         okSaida = false;
 
         setState(() {
-          ColorHoraSaida = const Color(0xffE53629);
+          colorHoraSaida = const Color(0xffE53629);
         });
 
       } else if (_intHoraSaida < 23 &&
@@ -443,7 +443,7 @@ class _HoraState extends State<ZHora> {
         okSaida = false;
 
         setState(() {
-          ColorHoraSaida = const Color(0xffE53629);
+          colorHoraSaida = const Color(0xffE53629);
         });
 
       } else {
@@ -452,7 +452,7 @@ class _HoraState extends State<ZHora> {
         okSaida = true;
 
         setState(() {
-          ColorHoraSaida = Colors.grey;
+          colorHoraSaida = Colors.grey;
           horarioTrabalhado();
         });
       }
@@ -470,14 +470,14 @@ class _HoraState extends State<ZHora> {
           _intMinutoSaida > 59) {
         okSaida = false;
         setState(() {
-          ColorHoraSaida = const Color(0xffE53629);
+          colorHoraSaida = const Color(0xffE53629);
         });
       } else if (_intHoraSaida > 23 &&
           _intMinutoSaida < 59) {
         okSaida = false;
 
         setState(() {
-          ColorHoraSaida = const Color(0xffE53629);
+          colorHoraSaida = const Color(0xffE53629);
         });
 
       } else if (_intHoraSaida < 23 &&
@@ -485,13 +485,13 @@ class _HoraState extends State<ZHora> {
         okSaida = false;
 
         setState(() {
-          ColorHoraSaida = const Color(0xffE53629);
+          colorHoraSaida = const Color(0xffE53629);
         });
 
       } else {
         okSaida = true;
         setState(() {
-          ColorHoraSaida = Colors.grey;
+          colorHoraSaida = Colors.grey;
         });
       }
     }
@@ -512,7 +512,7 @@ class _HoraState extends State<ZHora> {
         _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
         okIntervalo = false;
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
       } else if (_intHoraIntervalo > 23 &&
           _intMinutoIntervalo < 59) {
@@ -522,7 +522,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = false;
 
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
       } else if (_intHoraIntervalo < 23 &&
           _intMinutoIntervalo > 59) {
@@ -532,7 +532,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = false;
 
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
       } else {
         horarioTrabalhado();
@@ -552,20 +552,20 @@ class _HoraState extends State<ZHora> {
           _intMinutoIntervalo > 59) {
         okIntervalo = false;
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
       } else if (_intHoraIntervalo > 23 &&
           _intMinutoIntervalo < 59) {
         okIntervalo = false;
 
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
       } else if (_intHoraIntervalo < 23 &&
           _intMinutoIntervalo > 59) {
         okIntervalo = false;
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
       } else {
         horarioTrabalhadoPadrao();
@@ -709,7 +709,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = false;
 
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
         _fieldFocusChange(context,
             _focusIntervalo, _focusIntervalo);
@@ -720,7 +720,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = true;
 
         setState(() {
-          ColorIntervalo = Colors.grey;
+          colorIntervalo = Colors.grey;
         });
       }
     } else {
@@ -732,7 +732,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = false;
 
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
         _fieldFocusChange(context,
             _focusIntervalo, _focusIntervalo);
@@ -743,7 +743,7 @@ class _HoraState extends State<ZHora> {
         okIntervalo = true;
 
         setState(() {
-          ColorIntervalo = Colors.grey;
+          colorIntervalo = Colors.grey;
         });
       }
     }
@@ -757,7 +757,7 @@ class _HoraState extends State<ZHora> {
       if (_intHoraIntervalo >= _horarioTrabalhado) {
         okIntervalo = false;
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
         _fieldFocusChange(context,
             _focusIntervalo, _focusIntervalo);
@@ -765,7 +765,7 @@ class _HoraState extends State<ZHora> {
       else{
         okIntervalo = true;
         setState(() {
-          ColorIntervalo = Colors.grey;
+          colorIntervalo = Colors.grey;
         });
       }
     } else {
@@ -774,13 +774,13 @@ class _HoraState extends State<ZHora> {
       if (_intHoraIntervalo >= _horarioTrabalhado) {
         okIntervalo = false;
         setState(() {
-          ColorIntervalo = const Color(0xffE53629);
+          colorIntervalo = const Color(0xffE53629);
         });
       }
       else{
         okIntervalo = true;
         setState(() {
-          ColorIntervalo = Colors.grey;
+          colorIntervalo = Colors.grey;
         });
       }
     }
