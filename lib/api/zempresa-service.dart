@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:z_components/api/service.dart';
 import 'package:z_components/interface/i-zempresa-service.dart';
 import 'package:z_components/settings/api-settings.dart';
-import 'package:z_components/view-model/company-viewmodel.dart';
+import 'package:z_components/view-model/company-components-viewmodel.dart';
 
 class ZEmpresaService extends Service implements IZEmpresaService {
   static final String _URL_API = "${ApiSettings.ENDPOINT}/empresas";
