@@ -736,7 +736,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ));
   }
 }
-
 class AppSwitch with ChangeNotifier {
   AppSwitch();
 
