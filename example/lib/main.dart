@@ -20,10 +20,9 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/zp-grafico.dart';
 import 'package:z_components/components/z-expendable-item-tile.dart';
-
-
-
+import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/config/z-dialog.dart';
+import 'package:z_components/components/z_switch.dart';
 
 void main() => runApp(MyApp());
 
@@ -98,6 +97,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideData;
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
+  bool isSwitched = true;
 
   var _controllerFim = new TextEditingController();
   var _controllerIntervalo = new TextEditingController();
@@ -177,13 +177,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     cEPFocus = new FocusNode();
     cNPJFocus = new FocusNode();
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
@@ -284,48 +283,48 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   .toList(),
               onChange: (item) {},
             ),
-           new Row(
-             children: <Widget>[
-               new ZButton(
-                 text: "PERFIL",
-                 onPressed: () {
-                   Navigator.push(
-                     context,
-                     MaterialPageRoute(
-                         builder: (context) => ZPerfil(
-                           onTapVoltar: () {
-                             Navigator.of(context).pop();
-                           },
-                           listaIcones: icones,
-                           listaTextos: titulos,
-                           numeroQuadrados: 6,
-                           statusInfo: true,
-                           tituloHeader: "Giuliano Ortiz",
-                           textoTituloInfo: "Giuliano Ortiz",
-                           textoLocalInfo: "Sede - Xolis ltda.",
-                           textoCargoInfo: "Garoto de TI",
-                           textoEscalaInfo: "5x2(seg-sex)",
-                           textoHoraEntradaInfo: "09:00",
-                           textoHoraSaidaInfo: "15:30",
-                           textoHoraIntervaloInfo: "1:00",
-                           textoCodigoInfo: "012345",
-                           listaOnTap: listaOnTap,
-                         )),
-                   );
-                 },
-               ),
-             ],
-           ),
+            new Row(
+              children: <Widget>[
+                new ZButton(
+                  text: "PERFIL",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ZPerfil(
+                                onTapVoltar: () {
+                                  Navigator.of(context).pop();
+                                },
+                                listaIcones: icones,
+                                listaTextos: titulos,
+                                numeroQuadrados: 6,
+                                statusInfo: true,
+                                tituloHeader: "Giuliano Ortiz",
+                                textoTituloInfo: "Giuliano Ortiz",
+                                textoLocalInfo: "Sede - Xolis ltda.",
+                                textoCargoInfo: "Garoto de TI",
+                                textoEscalaInfo: "5x2(seg-sex)",
+                                textoHoraEntradaInfo: "09:00",
+                                textoHoraSaidaInfo: "15:30",
+                                textoHoraIntervaloInfo: "1:00",
+                                textoCodigoInfo: "012345",
+                                listaOnTap: listaOnTap,
+                              )),
+                    );
+                  },
+                ),
+              ],
+            ),
             new Row(
               children: <Widget>[
                 ZLoading(
                   color: Colors.purple,
                 ),
                 ZLoading(
-                  color: Colors.yellow,
+                  color: Colors.lightBlueAccent,
                 ),
                 ZLoading(
-                  color: Colors.blueGrey,
+                  color: Colors.lightGreenAccent,
                 ),
                 ZLoading(
                   color: Colors.amber,
@@ -341,55 +340,77 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               controllerHoraEntrada: _controllerHorarioInicio,
             ),
             new Container(
-              margin: const EdgeInsets.only(top: 20,bottom: 20),
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
               child: new ZPGrafico(),
             ),
-            new ZExpendableItemTile(
-
+            new ZExpendableItemTile(),
+            new Container(
+              width: 50.0,
+              child: new Icon(Icons.search),
+            ),
+            new ZTile(
+                leading: new Text("Z TILE TEXT KKKKKKkkkkkkkkkkkkkkkkkkkk",
+                    style: TextStyle(color: Color(0xFF000000), fontSize: 14.0)),
+                trailing: new Row(
+                  children: <Widget>[
+                    new GestureDetector(
+                      child: new Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Color(0xFFC4C4C4),
+                      ),
+                      onTap: () {
+                        print('teste');
+                      },
+                    )
+                  ],
+                )),
+            new Container(
+              width: 50.0,
+              child: new Icon(Icons.search),
             ),
             new Column(
-             children: <Widget>[
-               new ZButton(
-                 text: "Dialog Normal",
-                 onPressed: () {
-                   showAlertDialogNewNormal();
-                 },
-               ),
-               new ZButton(
-                 text: "Dialog Erro",
-                 onPressed: () {
-                   showAlertDialogNew();
-                 },
-               ),
-               new ZButton(
-                 text: "Dialgo Alert",
-                 onPressed: () {
-                   showAlertDialogNewAlert();
-                 },
-               ),
-               new ZButton(
-                 text: "Dialog Succes",
-                 onPressed: () {
-                   showAlertDialogNewSuccess();
-                 },
-               ),
-               new ZButton(
-                 text: "Dialog Load",
-                 onPressed: () {
-                   showAlertDialogNewProgress();
-                 },
-               ),
-             ],
-           ),
+              children: <Widget>[
+                new ZButton(
+                  text: "Dialog Normal",
+                  onPressed: () {
+                    showAlertDialogNewNormal();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialog Erro",
+                  onPressed: () {
+                    showAlertDialogNew();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialgo Alert",
+                  onPressed: () {
+                    showAlertDialogNewAlert();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialog Succes",
+                  onPressed: () {
+                    showAlertDialogNewSuccess();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialog Load",
+                  onPressed: () {
+                    showAlertDialogNewProgress();
+                  },
+                ),
+              ],
+            ),
           ],
         ));
   }
+
   void showAlertDialogNew() async {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.erro,
               child: new Column(
                 children: <Widget>[
@@ -398,7 +419,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     children: <Widget>[
                       new Container(
                         margin: const EdgeInsets.all(20),
-                        child: new Text("Dialog Test",style: new TextStyle(fontWeight: FontWeight.bold),),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   ),
@@ -406,15 +430,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        padding: const EdgeInsets.only(left:10.0, right: 10.0,bottom: 10.0,),
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
-                            new Text(
-                                "Este aqui eh um dialogo teste de um tipo",
+                            new Text("Este aqui eh um dialogo teste de um tipo",
                                 style: new TextStyle(fontSize: 14),
                                 textAlign: TextAlign.center),
-
                           ],
                         ),
                       )
@@ -426,7 +452,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -445,12 +471,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ));
   }
+
   void showAlertDialogNewAlert() async {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.alert,
               child: new Column(
                 children: <Widget>[
@@ -459,7 +485,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     children: <Widget>[
                       new Container(
                         margin: const EdgeInsets.all(20),
-                        child: new Text("Dialog Test",style: new TextStyle(fontWeight: FontWeight.bold),),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   ),
@@ -467,15 +496,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        padding: const EdgeInsets.only(left:10.0, right: 10.0,bottom: 10.0,),
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
-                            new Text(
-                                "Este aqui eh um dialogo teste de um tipo",
+                            new Text("Este aqui eh um dialogo teste de um tipo",
                                 style: new TextStyle(fontSize: 14),
                                 textAlign: TextAlign.center),
-
                           ],
                         ),
                       )
@@ -487,7 +518,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -506,12 +537,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ));
   }
+
   void showAlertDialogNewSuccess() async {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.sucess,
               child: new Column(
                 children: <Widget>[
@@ -520,7 +551,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     children: <Widget>[
                       new Container(
                         margin: const EdgeInsets.all(20),
-                        child: new Text("Dialog Test",style: new TextStyle(fontWeight: FontWeight.bold),),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   ),
@@ -528,15 +562,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        padding: const EdgeInsets.only(left:10.0, right: 10.0,bottom: 10.0,),
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
-                            new Text(
-                                "Este aqui eh um dialogo teste de um tipo",
+                            new Text("Este aqui eh um dialogo teste de um tipo",
                                 style: new TextStyle(fontSize: 14),
                                 textAlign: TextAlign.center),
-
                           ],
                         ),
                       )
@@ -548,7 +584,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -567,12 +603,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ));
   }
+
   void showAlertDialogNewNormal() async {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.normal,
               child: new Column(
                 children: <Widget>[
@@ -581,7 +617,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     children: <Widget>[
                       new Container(
                         margin: const EdgeInsets.all(20),
-                        child: new Text("Dialog Test",style: new TextStyle(fontWeight: FontWeight.bold),),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   ),
@@ -589,15 +628,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        padding: const EdgeInsets.only(left:10.0, right: 10.0,bottom: 10.0,),
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
-                            new Text(
-                                "Este aqui eh um dialogo teste de um tipo",
+                            new Text("Este aqui eh um dialogo teste de um tipo",
                                 style: new TextStyle(fontSize: 14),
                                 textAlign: TextAlign.center),
-
                           ],
                         ),
                       )
@@ -609,7 +650,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -628,12 +669,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ));
   }
+
   void showAlertDialogNewProgress() async {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.linearLoad,
               child: new Column(
                 children: <Widget>[
@@ -642,7 +683,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     children: <Widget>[
                       new Container(
                         margin: const EdgeInsets.all(20),
-                        child: new Text("Dialog Test",style: new TextStyle(fontWeight: FontWeight.bold),),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   ),
@@ -650,15 +694,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        padding: const EdgeInsets.only(left:10.0, right: 10.0,bottom: 10.0,),
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
-                            new Text(
-                                "Este aqui eh um dialogo teste de um tipo",
+                            new Text("Este aqui eh um dialogo teste de um tipo",
                                 style: new TextStyle(fontSize: 14),
                                 textAlign: TextAlign.center),
-
                           ],
                         ),
                       )
@@ -670,7 +716,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
