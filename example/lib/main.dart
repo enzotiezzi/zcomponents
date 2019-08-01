@@ -17,7 +17,12 @@ import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z-perfil.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/components/z-hora-padrao.dart';
+import 'package:z_components/components/zp-grafico.dart';
+import 'package:z_components/components/z-expendable-item-tile.dart';
+import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/config/z-dialog.dart';
+import 'package:z_components/components/z_switch.dart';
 
 void main() => runApp(MyApp());
 
@@ -92,6 +97,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ZBaseLine valideData;
   ZBaseLine valideEmail;
   ZBaseLine valideCelular;
+  bool isSwitched = true;
+
+  var _controllerFim = new TextEditingController();
+  var _controllerIntervalo = new TextEditingController();
+  var _controllerHorarioInicio = new TextEditingController();
 
   var _keyEscala = new GlobalKey<ZEscalaState>();
 
@@ -167,17 +177,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     cEPFocus = new FocusNode();
     cNPJFocus = new FocusNode();
     super.initState();
-    Future.delayed(new Duration(milliseconds: 1000), () {
-      dialogCargoJornada("Esta é a sua jornada de trabalho?","5x2 (de SEG à SEX) das 08:00 às 17:48 com 1:00 de intervalo.");
-    }
-    );
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
@@ -224,8 +229,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ),
         ),
-        body: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: new ListView(
           children: <Widget>[
             new Container(
               color: Colors.grey,
@@ -279,33 +283,37 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   .toList(),
               onChange: (item) {},
             ),
-            new ZButton(
-              text: "PERFIL",
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ZPerfil(
-                            onTapVoltar: () {
-                              Navigator.of(context).pop();
-                            },
-                            listaIcones: icones,
-                            listaTextos: titulos,
-                            numeroQuadrados: 6,
-                            statusInfo: true,
-                            tituloHeader: "Giuliano Ortiz",
-                            textoTituloInfo: "Giuliano Ortiz",
-                            textoLocalInfo: "Sede - Xolis ltda.",
-                            textoCargoInfo: "Garoto de TI",
-                            textoEscalaInfo: "5x2(seg-sex)",
-                            textoHoraEntradaInfo: "09:00",
-                            textoHoraSaidaInfo: "15:30",
-                            textoHoraIntervaloInfo: "1:00",
-                            textoCodigoInfo: "012345",
-                            listaOnTap: listaOnTap,
-                          )),
-                );
-              },
+            new Row(
+              children: <Widget>[
+                new ZButton(
+                  text: "PERFIL",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ZPerfil(
+                                onTapVoltar: () {
+                                  Navigator.of(context).pop();
+                                },
+                                listaIcones: icones,
+                                listaTextos: titulos,
+                                numeroQuadrados: 6,
+                                statusInfo: true,
+                                tituloHeader: "Giuliano Ortiz",
+                                textoTituloInfo: "Giuliano Ortiz",
+                                textoLocalInfo: "Sede - Xolis ltda.",
+                                textoCargoInfo: "Garoto de TI",
+                                textoEscalaInfo: "5x2(seg-sex)",
+                                textoHoraEntradaInfo: "09:00",
+                                textoHoraSaidaInfo: "15:30",
+                                textoHoraIntervaloInfo: "1:00",
+                                textoCodigoInfo: "012345",
+                                listaOnTap: listaOnTap,
+                              )),
+                    );
+                  },
+                ),
+              ],
             ),
             new Row(
               children: <Widget>[
@@ -313,10 +321,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   color: Colors.purple,
                 ),
                 ZLoading(
-                  color: Colors.yellow,
+                  color: Colors.lightBlueAccent,
                 ),
                 ZLoading(
-                  color: Colors.blueGrey,
+                  color: Colors.lightGreenAccent,
                 ),
                 ZLoading(
                   color: Colors.amber,
@@ -325,165 +333,407 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   color: Colors.red,
                 ),
               ],
-            )
+            ),
+            new ZHora(
+              controllerIntervalo: _controllerIntervalo,
+              controllerHoraSaida: _controllerFim,
+              controllerHoraEntrada: _controllerHorarioInicio,
+            ),
+            new Container(
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
+              child: new ZPGrafico(),
+            ),
+            new ZExpendableItemTile(),
+            new Container(
+              width: 50.0,
+              child: new Icon(Icons.search),
+            ),
+            new ZTile(
+                leading: new Text("Z TILE TEXT KKKKKKkkkkkkkkkkkkkkkkkkkk",
+                    style: TextStyle(color: Color(0xFF000000), fontSize: 14.0)),
+                trailing: new Row(
+                  children: <Widget>[
+                    new GestureDetector(
+                      child: new Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Color(0xFFC4C4C4),
+                      ),
+                      onTap: () {
+                        print('teste');
+                      },
+                    )
+                  ],
+                )),
+            new Container(
+              width: 50.0,
+              child: new Icon(Icons.search),
+            ),
+            new Column(
+              children: <Widget>[
+                new ZButton(
+                  text: "Dialog Normal",
+                  onPressed: () {
+                    showAlertDialogNewNormal();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialog Erro",
+                  onPressed: () {
+                    showAlertDialogNew();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialgo Alert",
+                  onPressed: () {
+                    showAlertDialogNewAlert();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialog Succes",
+                  onPressed: () {
+                    showAlertDialogNewSuccess();
+                  },
+                ),
+                new ZButton(
+                  text: "Dialog Load",
+                  onPressed: () {
+                    showAlertDialogNewProgress();
+                  },
+                ),
+              ],
+            ),
           ],
         ));
   }
-  void olaColab(String nomeColab,{Function onOkPressed = null}){
+
+  void showAlertDialogNew() async {
     showDialog(
         context: context,
-        barrierDismissible: false,
-        builder: (context) => new ZAlertDialog(
-          colorLine: const Color(0xff2BBAB4),
-          zDialog: ZDialog.normal,
-          child: new Container(
-            padding: new EdgeInsets.only(top:16.0,bottom: 10.0),
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  child: new Text(
-                    "Olá,",
-                    style: new TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 17.0),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Container(
-                  padding: new EdgeInsets.all(8.0),
-                  child: new Text(
-                    nomeColab,
-                    style: new TextStyle(color: const Color(0xff2BBAB4),fontWeight: FontWeight.bold,fontSize: 17),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Container(
-                  padding: new EdgeInsets.only(left:8.0,right: 8.0,bottom: 12.0,top: 8.0),
-                  child: new Text(
-                    "Como este é o seu primeiro acesso,\n vamos confirmar alguns dados.",
-                    style: new TextStyle(color: const Color(0xFF707070),fontSize: 15),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Divider(
-                  color: const Color(0xffdbdbdb),
-                ),
-                new Container(
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ZAlertDialog(
+              zDialog: ZDialog.erro,
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        margin: new EdgeInsets.only(left: 4),
-                        child: new InkWell(
-                            borderRadius:
-                            new BorderRadius.all(const Radius.circular(20.0)),
-                            splashColor: const Color(0xffe6e6e6),
-                            onTap: () {
-                              Navigator.pop(context);
-                              if(onOkPressed != null)onOkPressed();
-                            },
-                            child: new Container(
-                              padding: const EdgeInsets.all(12),
-                              child: new Text(
-                                "OK",
-                                style: new TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w900),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
+                        margin: const EdgeInsets.all(20),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
                         ),
                       )
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-        ));
-  }
-  void dialogCargoJornada(String text, String text2,{Function onNaoPressed = null,Function onSimPressed = null}){
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => new ZAlertDialog(
-          colorLine: const Color(0xff2BBAB4),
-          zDialog: ZDialog.normal,
-          child: new Container(
-            padding: new EdgeInsets.only(top:16.0,bottom: 10.0),
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: new Text(
-                    text,
-                    style: new TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16.0),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Container(
-                  padding: new EdgeInsets.all(8.0),
-                  child: new Text(
-                    text2,
-                    style: new TextStyle(color: const Color(0xff2BBAB4),fontWeight: FontWeight.normal,fontSize: 17),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Divider(
-                  color: const Color(0xffdbdbdb),
-                ),
-                new Container(
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        child: new InkWell(
-                            borderRadius:
-                            new BorderRadius.all(const Radius.circular(20.0)),
-                            splashColor: const Color(0xffe6e6e6),
-                            onTap: () {
-                              Navigator.pop(context);
-                              if(onNaoPressed != null)onNaoPressed();
-                            },                            child: new Container(
-                              padding: const EdgeInsets.all(12),
-                              child: new Text(
-                                "NÃO",
-                                style: new TextStyle(
-                                    color: Color(0xff707070),
-                                    fontWeight: FontWeight.normal),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: new Column(
+                          children: <Widget>[
+                            new Text("Este aqui eh um dialogo teste de um tipo",
+                                style: new TextStyle(fontSize: 14),
+                                textAlign: TextAlign.center),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  void showAlertDialogNewAlert() async {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ZAlertDialog(
+              zDialog: ZDialog.alert,
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
                       new Container(
-                        child: new InkWell(
-                            borderRadius:
-                            new BorderRadius.all(const Radius.circular(20.0)),
-                            splashColor: const Color(0xffe6e6e6),
-                            onTap: () {
-                              Navigator.pop(context);
-                              if(onSimPressed != null)onSimPressed();
-                            },
-                            child: new Container(
-                              padding: const EdgeInsets.all(12),
-                              child: new Text(
-                                "SIM",
-                                style: new TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w900),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
+                        margin: const EdgeInsets.all(20),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
                         ),
                       )
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-        ));
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: new Column(
+                          children: <Widget>[
+                            new Text("Este aqui eh um dialogo teste de um tipo",
+                                style: new TextStyle(fontSize: 14),
+                                textAlign: TextAlign.center),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  void showAlertDialogNewSuccess() async {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ZAlertDialog(
+              zDialog: ZDialog.sucess,
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        margin: const EdgeInsets.all(20),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: new Column(
+                          children: <Widget>[
+                            new Text("Este aqui eh um dialogo teste de um tipo",
+                                style: new TextStyle(fontSize: 14),
+                                textAlign: TextAlign.center),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  void showAlertDialogNewNormal() async {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ZAlertDialog(
+              zDialog: ZDialog.normal,
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        margin: const EdgeInsets.all(20),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: new Column(
+                          children: <Widget>[
+                            new Text("Este aqui eh um dialogo teste de um tipo",
+                                style: new TextStyle(fontSize: 14),
+                                textAlign: TextAlign.center),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  void showAlertDialogNewProgress() async {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ZAlertDialog(
+              zDialog: ZDialog.linearLoad,
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        margin: const EdgeInsets.all(20),
+                        child: new Text(
+                          "Dialog Test",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: new Column(
+                          children: <Widget>[
+                            new Text("Este aqui eh um dialogo teste de um tipo",
+                                style: new TextStyle(fontSize: 14),
+                                textAlign: TextAlign.center),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
   }
 }
 
