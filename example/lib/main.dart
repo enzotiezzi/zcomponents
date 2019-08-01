@@ -329,9 +329,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 ZLoading(
                   color: Colors.amber,
                 ),
-                ZLoading(
-                  color: Colors.red,
-                ),
               ],
             ),
             new ZHora(
