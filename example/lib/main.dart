@@ -348,27 +348,21 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               width: 50.0,
               child: new Icon(Icons.search),
             ),
-            new ZTile(onTap: () {
-              print(1);
-            },
-                leading: new Container(width: MediaQuery.of(context).size.width/1.2,
-                  child: new Text(
-                    "Z TILE TEXT KKKKKKkkkkkkkkkkkkkkkkkkkkkk",
-                    style: TextStyle(color: Color(0xFF000000), fontSize: 14.0,),
-                    overflow: TextOverflow.clip,),),
-                trailing: new Row(
-                  children: <Widget>[
-                    new GestureDetector(
-                      child: new Icon(
-                        Icons.keyboard_arrow_right,
-                        color: Color(0xFFC4C4C4),
-                      ),
-                      onTap: () {
-                        print('teste');
-                      },
-                    )
-                  ],
-                )),
+            new ZTile(
+              onTap: () {
+
+              },
+              leading: new Text(
+                "Parâmetros de usuário",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              trailing: new Icon(
+                Icons.keyboard_arrow_right,
+                color: const Color(0xffC3C3C8),
+              ),
+            ),
             new Container(
               width: 50.0,
               child: new Icon(Icons.search),

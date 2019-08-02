@@ -23,7 +23,7 @@ class _ZTileState extends State<ZTile> {
           children: <Widget>[
             new Container(
               child: widget.leading,
-              margin: new EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+              margin: new EdgeInsets.only(left: 16.0, top: 10.0, bottom: 10.0),
             ),
             new Container(
               child: widget.trailing,
