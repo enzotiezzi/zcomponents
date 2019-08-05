@@ -20,12 +20,20 @@ class ZExpendableItemTile extends StatefulWidget {
   Widget iconeTres;
   Widget iconeQuatro;
   bool status;
-  var funcao;
+  Function funcao;
   var image;
   var funcaoIconeUm;
   var funcaoIconeDois;
   var funcaoIconeTres;
   var funcaoIconeQuatro;
+  Widget imagemPerfil;
+  var onTapVoltar;
+  var onTapImage;
+  String idConta;
+  String token;
+  String cpf;
+
+
 
   ZExpendableItemTile(
       {this.textoCinco: "",
@@ -70,17 +78,12 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
         header: new Expanded(
           child: new ZItemTile(
             isExpand: "isExpand",
+            onTapImage: widget.onTapImage,
+            imagemPerfil: widget.imagemPerfil,
+            token: widget.token,
+            cpf: widget.cpf,
+            idConta: widget.idConta,
             funcao: widget.funcao,
-            imagemPerfil: widget.image,
-            status: widget.status,
-            textoCodigo: widget.textoCodigo,
-            textoSete: widget.textoSete,
-             textoSeis: widget.textoSeis,
-            textoCinco: widget.textoCinco,
-            textoQuatro: widget.textoQuatro,
-            textoTres: widget.textoTres,
-            textoDois: widget.textoDois,
-            textoTitulo: widget.textoTitulo,
           ),
         ),
         children: <Widget>[

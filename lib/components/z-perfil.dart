@@ -8,6 +8,9 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZPerfil extends StatefulWidget {
+  String idConta;
+  String token;
+  String cpf;
   Widget tituloAppBar;
   String textoTituloInfo;
   String textoLocalInfo;
@@ -26,6 +29,8 @@ class ZPerfil extends StatefulWidget {
   Widget imagemPerfil;
   var onTapVoltar;
   var onTapImage;
+  String isExpand;
+  Function funcao;
 
   ZPerfil(
       {this.tituloAppBar,
@@ -92,14 +97,11 @@ class _ZPerfilState extends State<ZPerfil> {
                 onTapImage: widget.onTapImage,
                 imagemPerfil: widget.imagemPerfil,
                 status: widget.statusInfo,
-                textoCodigo: widget.textoCodigoInfo,
-                textoSete: widget.textoHoraIntervaloInfo,
-                textoSeis: widget.textoHoraSaidaInfo,
-                textoCinco: widget.textoHoraEntradaInfo,
-                textoQuatro: widget.textoEscalaInfo,
-                textoTres: widget.textoCargoInfo,
-                textoDois: widget.textoLocalInfo,
-                textoTitulo: widget.textoTituloInfo,
+                token: widget.token,
+                cpf: widget.cpf,
+                idConta: widget.idConta,
+                isExpand: widget.isExpand,
+                funcao: widget.funcao,
               ),
             )
           ],

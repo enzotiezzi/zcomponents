@@ -28,4 +28,5 @@ class ZEscalaService extends Service implements IZEscalaService {
       return null;
     }
   }
+
 }
