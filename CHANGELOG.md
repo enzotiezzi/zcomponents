@@ -1,3 +1,7 @@
+## 0.4.5
+
+* Update ZLOCAL!
+
 ## 0.4.4
 
 * Update ZLOCAL!
