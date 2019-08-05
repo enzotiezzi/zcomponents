@@ -4,18 +4,19 @@ import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/interface/i-zlocal-service.dart';
 import 'package:z_components/view-model/centrocusto-viewmodel.dart';
+import 'package:z_components/view-model/filtro-viewmodel.dart';
 
 class ZLocal extends StatefulWidget {
   final String token;
   final ValueChanged<ZCollectionItem> onChange;
-  final String idEmpresa;
+  final FiltroViewModel filtro;
   final Key key;
   final String valorPadrao;
 
   ZLocal(
       {this.key,
       @required this.token,
-      @required this.idEmpresa,
+      @required this.filtro,
       this.onChange,
       this.valorPadrao});
 
@@ -59,7 +60,7 @@ class ZLocalState extends State<ZLocal> {
   }
 
   void _listarLocais() async {
-    var centroCustos = await _service.listarCentrosCusto();
+    var centroCustos = await _service.listarCentrosCusto(filtro: widget.filtro);
 
     if (centroCustos != null && centroCustos.length > 0) {
       setState(() {
