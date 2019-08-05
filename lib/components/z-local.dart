@@ -37,7 +37,7 @@ class ZLocalState extends State<ZLocal> {
   @override
   void initState() {
     super.initState();
-    _service = new ZLocalService(widget.token, widget.idEmpresa);
+    _service = new ZLocalService(widget.token);
     _listarLocais();
   }
 
