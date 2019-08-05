@@ -349,7 +349,7 @@ var onChangedTextPadrao;
                           padding: const EdgeInsets.only(
                               top: 12.0, bottom: 12.0, left: 16.0),
                           child: new Text(
-                            "Data Nascimento",
+                            "Data de Nascimento",
                             style: new TextStyle(color: Color(0xFF999999)),
                           ),
                         )),

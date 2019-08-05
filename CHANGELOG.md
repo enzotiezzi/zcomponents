@@ -1,3 +1,15 @@
+## 0.4.4
+
+* Update ZLOCAL!
+
+## 0.4.3
+
+* Update ZTile!
+
+## 0.4.2
+
+* Update!
+
 ## 0.4.1
 
 * Update!
