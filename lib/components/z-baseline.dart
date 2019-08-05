@@ -715,7 +715,7 @@ var onChangedTextPadrao;
           if (bisexto == true) {
             if (intDias > 29) {
               showAlertDialogNew(
-                  "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+                  "Dia Inválido!", "Insira um valor de dia entre 01 e 29.");
             } else {
               valideMes = true;
             }

@@ -1,4 +1,8 @@
-## 0.4.
+## 0.4.4
+
+* Update ZLOCAL!
+
+## 0.4.3
 
 * Update ZTile!
 

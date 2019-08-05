@@ -60,7 +60,7 @@ class _ZExpansionState extends State<ZExpansion> with TickerProviderStateMixin{
                   MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     (widget.childTitle == null)?
-                        new Container():widget.childTitle
+                        new Container():widget.childTitle,
                   ],
                 ),
               ),
