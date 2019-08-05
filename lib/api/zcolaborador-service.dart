@@ -9,19 +9,20 @@ import 'package:http/http.dart' as http;
 class ZColaboradorService extends Service implements IZColaboradorService {
   final String token;
   final String idConta;
+  final String cpf;
 
   static final String _URL_API_QUADRO =
       "${ApiSettings.ENDPOINT}/quadro-pessoal";
   static final String _URL_API_COLABORADOR =
       "${ApiSettings.ENDPOINT}/colaboradores";
 
-  ZColaboradorService(this.token, this.idConta) : super(token);
+  ZColaboradorService(this.token, this.idConta, this.cpf) : super(token);
 
   @override
-  Future<ColaboradorViewModel> buscarPerfilColaborador(String cpf) async {
+  Future<ColaboradorViewModel> buscarPerfilColaborador() async {
     try {
 
-      var url = "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf";
+      var url = "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf/$idConta";
 
       var response = await http.get(url, headers: await headers);
 

@@ -1,3 +1,7 @@
+## 0.4.6
+
+* Update ZItemTile!
+
 ## 0.4.5
 
 * Update ZLOCAL!

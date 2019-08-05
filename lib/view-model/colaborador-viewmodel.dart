@@ -7,13 +7,10 @@ class ColaboradorViewModel {
   String idCentroCusto;
   String idPosicaoAlocacao;
   String centroCusto;
-  String nomeCargo;
+  String cargo;
   String idCargo;
   String nome;
   String cpf;
-  String horaInicio;
-  String horaFim;
-  String horaIntervalo;
   String escala;
   String idEmpresa;
   String celular;
@@ -35,12 +32,9 @@ class ColaboradorViewModel {
         this.cpf: "",
         this.idCentroCusto: "",
         this.centroCusto: "",
-        this.horaInicio: "08:00",
-        this.horaFim: "17:48",
-        this.horaIntervalo: "01:00",
         this.escala: "",
         this.nomeColaborador: "",
-        this.nomeCargo: "",
+        this.cargo: "",
         this.idEmpresa: "",
         this.celular: "",
         this.nomeCentroCusto: "",
@@ -60,18 +54,15 @@ class ColaboradorViewModel {
       "nome": this.nome,
       "cpf": this.cpf,
       "centroCusto": this.centroCusto,
-      "horaInicio": this.horaInicio,
-      "horaFim": this.horaFim,
-      "horaIntervalo": this.horaIntervalo,
       "escala": this.escala,
       "nomeColaborador": this.nomeColaborador,
-      "nomeCargo": this.nomeCargo,
       "idEmpresa": this.idEmpresa,
       "celular": this.celular,
       "nomeCentroCusto": this.nomeCentroCusto,
       "sequenciaEscala": this.sequencias.map((x) => x.toMap()).toList(),
       "idCargo": this.idCargo,
-      "primeiraFolga": this.primeiraFolga
+      "primeiraFolga": this.primeiraFolga,
+      "cargo": this.cargo,
     };
   }
 
@@ -83,12 +74,9 @@ class ColaboradorViewModel {
         cpf: json['cpf'],
         centroCusto: json['centroCusto'],
         idCentroCusto: json['idCentroCusto'],
-        horaInicio: json['horaInicio'],
-        horaFim: json['horaFim'],
-        horaIntervalo: json['horaIntervalo'],
         escala: json['escala'],
         nomeColaborador: json['nomeColaborador'],
-        nomeCargo: json['nomeCargo'],
+        cargo: json['cargo'],
         idEmpresa: json['idEmpresa'],
         celular: json['celular'],
         nomeCentroCusto: json['nomeCentroCusto'],

@@ -243,8 +243,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
             new ZItemTile(
               token:
-                  'c0oTNqGIB-0:APA91bGHza8Itn79VGXVoZysJr34a6TQMl8R6J0h8VU-1qzl7KL8rXrOrjlS4WpUk7rRAvGs17AbGlMUOpfz56bTLDee4SXQ97aPTI7O9gkDiamy0rZrrnKt8av15sNBJLGsLKD2CNmJ',
-              cpf: '27494732845',
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+              cpf: '447.930.638-29',
+              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+              status: true,
             ),
             new Container(
               color: Colors.grey,
