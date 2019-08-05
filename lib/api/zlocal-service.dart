@@ -18,7 +18,7 @@ class ZLocalService extends Service implements IZLocalService {
   ZLocalService(this.token, {this.filtro}) : super(token);
 
   @override
-  Future<List<CentroCustoViewModel>> listarCentrosCusto() async {
+  Future<List<CentroCustoViewModel>> listarCentrosCusto({FiltroViewModel filtro}) async {
     try {
 
       var url = "$_uRL/buscar-centros-custo-empresa";
