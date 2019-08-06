@@ -32,25 +32,29 @@ class ZPerfil extends StatefulWidget {
   String isExpand;
   Function funcao;
 
-  ZPerfil(
-      {this.tituloAppBar,
-      this.onTapVoltar,
-      this.listaIcones,
-      this.listaTextos,
-      this.numeroQuadrados,
-      this.imagemPerfil,
-      this.statusInfo,
-      this.textoHoraEntradaInfo,
-      this.textoCodigoInfo,
-      this.textoLocalInfo,
-      this.textoEscalaInfo,
-      this.textoHoraSaidaInfo,
-      this.textoHoraIntervaloInfo,
-      this.textoTituloInfo,
-      this.textoCargoInfo,
-      this.listaOnTap,
-      this.onTapImage,
-      this.tituloHeader});
+  ZPerfil({
+    this.tituloAppBar,
+    this.onTapVoltar,
+    this.listaIcones,
+    this.listaTextos,
+    this.numeroQuadrados,
+    this.imagemPerfil,
+    this.statusInfo,
+    this.textoHoraEntradaInfo,
+    this.textoCodigoInfo,
+    this.textoLocalInfo,
+    this.textoEscalaInfo,
+    this.textoHoraSaidaInfo,
+    this.textoHoraIntervaloInfo,
+    this.textoTituloInfo,
+    this.textoCargoInfo,
+    this.listaOnTap,
+    this.onTapImage,
+    this.tituloHeader,
+    this.token,
+    this.cpf,
+    this.idConta,
+  });
 
   @override
   _ZPerfilState createState() => _ZPerfilState();
@@ -91,8 +95,10 @@ class _ZPerfilState extends State<ZPerfil> {
         ZHeader(
           titulo: widget.tituloHeader,
           children: <Widget>[
-            new Container(color: const Color(0xffF0F0F0),
-              padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
+            new Container(
+              color: const Color(0xffF0F0F0),
+              padding: EdgeInsets.only(
+                  right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
               child: ZItemTile(
                 onTapImage: widget.onTapImage,
                 imagemPerfil: widget.imagemPerfil,
@@ -130,7 +136,6 @@ class _ZPerfilState extends State<ZPerfil> {
             listaOnTap: widget.listaOnTap,
           ),
         ),
-
       ],
     );
   }
