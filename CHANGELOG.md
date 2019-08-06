@@ -1,3 +1,19 @@
+## 0.4.6
+
+* Update ZItemTile!
+
+## 0.4.5
+
+* Update ZLOCAL!
+
+## 0.4.4
+
+* Update ZLOCAL!
+
+## 0.4.3
+
+* Update ZTile!
+
 ## 0.4.2
 
 * Update!

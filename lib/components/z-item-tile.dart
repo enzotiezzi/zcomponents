@@ -1,33 +1,24 @@
 import 'package:flutter/material.dart';
-
+import 'package:z_components/api/zcolaborador-service.dart';
+import 'package:z_components/interface/i-zcolaborador-service.dart';
+import 'package:z_components/view-model/colaborador-viewmodel.dart';
 
 class ZItemTile extends StatefulWidget {
+  final String idConta;
+  final String token;
+  final String cpf;
   String isExpand;
-  String textoTitulo;
-  String textoDois;
-  String textoTres;
-  String textoQuatro;
-  String textoCinco;
-  String textoSeis;
-  String textoSete;
-  String textoCodigo;
   bool status;
-  var funcao;
+  Function funcao;
   Widget imagemPerfil;
-  var onTapImage;
+  Function onTapImage;
 
   ZItemTile(
-      {this.textoCinco: "",
-      this.textoDois: "",
-      this.textoQuatro: "",
-      this.textoSeis: "",
-      this.textoSete: "",
-      this.textoTitulo: "",
-      this.textoTres: "",
+      {this.idConta,
+      this.token,
+      this.cpf,
       this.funcao,
-      this.textoCodigo: "",
       this.status: false,
-
       this.imagemPerfil,
       this.onTapImage,
       this.isExpand: ""});
@@ -37,6 +28,19 @@ class ZItemTile extends StatefulWidget {
 }
 
 class _ZItemTileState extends State<ZItemTile> {
+  ColaboradorViewModel colaboradorViewModel;
+
+  IZColaboradorService _colaboradorService;
+
+  @override
+  void initState() {
+    super.initState();
+    _colaboradorService = ZColaboradorService(widget.token, widget.idConta, widget.cpf);
+
+    _buscarInformacaoColaborador();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -49,14 +53,13 @@ class _ZItemTileState extends State<ZItemTile> {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           new Expanded(
-
               flex: 2,
               child: new GestureDetector(
                 onTap: widget.onTapImage,
                 child: new Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-        color: Color(0xFFCECECE),
+                      color: Color(0xFFCECECE),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(5.0),
                           bottomLeft: Radius.circular(5.0))),
@@ -64,15 +67,15 @@ class _ZItemTileState extends State<ZItemTile> {
                   child: (widget.imagemPerfil == null)
                       ? new Icon(
                           Icons.insert_photo,
-    color: Color(0xFFffffff),
+                          color: Color(0xFFffffff),
                         )
                       : new Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5.0),
-                                  bottomLeft: Radius.circular(5.0)),
-                              color: Colors.white,
-                              ),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5.0),
+                                bottomLeft: Radius.circular(5.0)),
+                            color: Colors.white,
+                          ),
                           child: widget.imagemPerfil,
                         ),
                 ),
@@ -92,40 +95,34 @@ class _ZItemTileState extends State<ZItemTile> {
                                     (MediaQuery.of(context).size.width / 2.1),
                                 margin: EdgeInsets.only(
                                     left: 8.0, bottom: 4.0, top: 8.0),
-                                child: new Text(
-                                  widget.textoTitulo,
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Color(0xFF000000),
-                                      fontWeight: FontWeight.w600),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                child: (colaboradorViewModel == null)
+                                    ? new Text('')
+                                    : new Text(
+                                        colaboradorViewModel.nome,
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Color(0xFF000000),
+                                            fontWeight: FontWeight.w600),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                               )
                             : new Container(
                                 width:
                                     (MediaQuery.of(context).size.width / 2.0),
                                 margin: EdgeInsets.only(
                                     left: 8.0, bottom: 4.0, top: 8.0),
-                                child: new Text(
-                                  widget.textoTitulo,
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Color(0xFF000000),
-                                      fontWeight: FontWeight.w600),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                child: (colaboradorViewModel == null)
+                                    ? new Text('')
+                                    : new Text(
+                                        colaboradorViewModel.nome,
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Color(0xFF000000),
+                                            fontWeight: FontWeight.w600),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                               ),
-                        new Container(
-                          margin: EdgeInsets.only(
-                              left: 8.0, bottom: 4.0, top: 8.0, right: 8.0),
-                          child: new Text(
-                            widget.textoCodigo,
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                color: Color(0xFF000000),
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
+
                       ],
                     ),
                     new Row(
@@ -145,8 +142,10 @@ class _ZItemTileState extends State<ZItemTile> {
                             new Container(
                               width: (MediaQuery.of(context).size.width / 2.3),
                               margin: EdgeInsets.only(right: 3.0, bottom: 4.0),
-                              child: new Text(
-                                widget.textoDois,
+                              child: (colaboradorViewModel == null)?
+                              new Text(''):
+                              new Text(
+                                colaboradorViewModel.nomeCentroCusto,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: Color(0xFFA3A3A3),
@@ -214,8 +213,10 @@ class _ZItemTileState extends State<ZItemTile> {
                         ),
                         new Container(
                           margin: EdgeInsets.only(right: 3.0, bottom: 4.0),
-                          child: new Text(
-                            widget.textoTres,
+                          child: (colaboradorViewModel == null)?
+                          new Text(''):
+                          new Text(
+                            colaboradorViewModel.cargo,
                             style: TextStyle(
                                 color: Color(0xFFA3A3A3),
                                 fontSize: 12.0,
@@ -236,8 +237,10 @@ class _ZItemTileState extends State<ZItemTile> {
                         ),
                         new Container(
                           padding: EdgeInsets.only(bottom: 8.0, left: 4.0),
-                          child: new Text(
-                            "${widget.textoQuatro} ${widget.textoCinco} - ${widget.textoSeis}",
+                          child: (colaboradorViewModel == null)?
+                          new Text (''):
+                          new Text(
+                            "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
                             style: TextStyle(
                                 color: Color(0xFFA3A3A3),
                                 fontSize: 12.0,
@@ -264,8 +267,16 @@ class _ZItemTileState extends State<ZItemTile> {
                         ),
                         new Container(
                           padding: EdgeInsets.only(bottom: 8.0, left: 2.0),
-                          child: new Text(
-                            "${widget.textoSete})",
+                          child: (colaboradorViewModel == null)?
+                          new Text(
+                            ")",
+                            style: TextStyle(
+                                color: Color(0xFFA3A3A3),
+                                fontSize: 10.0,
+                                fontWeight: FontWeight.w500),
+                          ):
+                          new Text(
+                            "${colaboradorViewModel.tempoPausa})",
                             style: TextStyle(
                                 color: Color(0xFFA3A3A3),
                                 fontSize: 10.0,
@@ -282,4 +293,17 @@ class _ZItemTileState extends State<ZItemTile> {
       ),
     );
   }
+
+  Future _buscarInformacaoColaborador() async {
+      var colaborador =
+      await _colaboradorService.buscarPerfilColaborador();
+
+      setState(() {
+        colaboradorViewModel = colaborador;
+      });
+
+
+  }
+
+
 }

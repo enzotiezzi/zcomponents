@@ -23,6 +23,8 @@ import 'package:z_components/components/z-expendable-item-tile.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z_switch.dart';
+import 'package:z_components/components/z-expansion-tile.dart';
+import 'package:z_components/components/z-item-tile.dart';
 
 void main() => runApp(MyApp());
 
@@ -136,31 +138,31 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   ];
 
   List<dynamic> listaOnTap = [
-        () {
+    () {
       print("1");
     },
-        () {
+    () {
       print("2");
     },
-        () {
+    () {
       print("3");
     },
-        () {
+    () {
       print("4");
     },
-        () {
+    () {
       print("5");
     },
-        () {
+    () {
       print("6");
     },
-        () {
+    () {
       print("7");
     },
-        () {
+    () {
       print("8");
     },
-        () {
+    () {
       print("9");
     },
   ];
@@ -196,29 +198,28 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                    new InformacaoBatida(
-                      bottomChild: new Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(bottom: 5),
-                          child: new ButtonTheme(
-                            minWidth: 145,
-                            child: new RaisedButton(
-                                color: Color(0xff2bbab4),
-                                child: new Text(
-                                  "ENTENDI",
-                                  style: new TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                shape: new RoundedRectangleBorder(
-                                    borderRadius:
-                                    new BorderRadius.circular(30.0))),
-                          )),
-                    )),
+                    builder: (context) => new InformacaoBatida(
+                          bottomChild: new Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(bottom: 5),
+                              child: new ButtonTheme(
+                                minWidth: 145,
+                                child: new RaisedButton(
+                                    color: Color(0xff2bbab4),
+                                    child: new Text(
+                                      "ENTENDI",
+                                      style: new TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0))),
+                              )),
+                        )),
               );
             },
             child: new Container(
@@ -233,6 +234,22 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         body: new ListView(
           children: <Widget>[
             new ZBaseLine(zTipos: ZTipoBaseline.isNomeCompleto,controllerNome: _controllerFim,nomeFocus: nomeFocus,),
+
+            new ZExpansion(
+              childTitle: new IconButton(
+                onPressed: () {},
+                icon: new Icon(Icons.arrow_back_ios),
+                iconSize: 20.0,
+              ),
+              titulo: 'TESTE',
+            ),
+            new ZItemTile(
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+              cpf: '447.930.638-29',
+              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+              status: true,
+            ),
             new Container(
               color: Colors.grey,
               padding: const EdgeInsets.all(16.0),
@@ -241,7 +258,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 children: <Widget>[
                   new ZSequencia(
                     token:
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
                     idConta: "486A49B3-47D1-4D76-80DF-079EB82D6D8F",
                     idColaborador: "548D524D-A6DE-4D8A-945E-A706AD2F87F2",
                   )
@@ -264,15 +281,14 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               text: "Giuliano Ortiz Goria",
               textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
             ),
-
             new ZCargo(
               token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
               key: _keyCargo,
             ),
             new ZEscala(
               token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjM0ODA5NzYsImV4cCI6MTU2NDA4NTc3NiwiaWF0IjoxNTYzNDgwOTc2fQ.xK3ROTSn6rP-9ODwGou4wA5mwa4vgeC5gGqyigMIix4",
               key: _keyEscala,
               //valorPadrao: widget.escala,
             ),
@@ -294,8 +310,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              ZPerfil(
+                          builder: (context) => ZPerfil(
                                 onTapVoltar: () {
                                   Navigator.of(context).pop();
                                 },
@@ -350,9 +365,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               child: new Icon(Icons.search),
             ),
             new ZTile(
-              onTap: () {
-
-              },
+              onTap: () {},
               leading: new Text(
                 "Parâmetros de usuário",
                 style: TextStyle(
@@ -410,8 +423,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.erro,
               child: new Column(
                 children: <Widget>[
@@ -436,10 +448,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           right: 10.0,
                           bottom: 10.0,
                         ),
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
                             new Text("Este aqui eh um dialogo teste de um tipo",
@@ -456,7 +465,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -480,8 +489,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.alert,
               child: new Column(
                 children: <Widget>[
@@ -506,10 +514,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           right: 10.0,
                           bottom: 10.0,
                         ),
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
                             new Text("Este aqui eh um dialogo teste de um tipo",
@@ -526,7 +531,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -550,8 +555,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.sucess,
               child: new Column(
                 children: <Widget>[
@@ -576,10 +580,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           right: 10.0,
                           bottom: 10.0,
                         ),
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
                             new Text("Este aqui eh um dialogo teste de um tipo",
@@ -596,7 +597,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -620,8 +621,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.normal,
               child: new Column(
                 children: <Widget>[
@@ -646,10 +646,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           right: 10.0,
                           bottom: 10.0,
                         ),
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
                             new Text("Este aqui eh um dialogo teste de um tipo",
@@ -666,7 +663,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -690,8 +687,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     showDialog(
         context: context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.linearLoad,
               child: new Column(
                 children: <Widget>[
@@ -716,10 +712,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           right: 10.0,
                           bottom: 10.0,
                         ),
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
                             new Text("Este aqui eh um dialogo teste de um tipo",
@@ -736,7 +729,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                      new BorderRadius.all(const Radius.circular(20.0)),
+                          new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
