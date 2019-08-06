@@ -11,7 +11,7 @@ class ZPerfil extends StatefulWidget {
   String idConta;
   String token;
   String cpf;
-  Widget tituloAppBar;
+  String tituloAppBar;
   String textoTituloInfo;
   String textoLocalInfo;
   String textoCargoInfo;
@@ -64,7 +64,7 @@ class _ZPerfilState extends State<ZPerfil> {
       appBar: CupertinoNavigationBar(
         middle: new Container(
           child: new Text(
-            "PERFIL DO COLABORADOR",
+            widget.tituloAppBar,
             style: TextStyle(color: Colors.black),
           ),
         ),
