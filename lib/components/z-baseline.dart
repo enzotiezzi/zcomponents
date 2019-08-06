@@ -146,6 +146,10 @@ var onChangedTextPadrao;
                             controller: controllerNome,
                             cursorColor: Color(0xFF2BBAB4),
                             style: new TextStyle(color: Color(0xFF000000)),
+                            inputFormatters: [
+                              BlacklistingTextInputFormatter(
+                                  RegExp("[\\\\/,.]")),
+                            ],
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, nomeFocus, proximoFocus);

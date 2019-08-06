@@ -232,6 +232,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
+            new ZBaseLine(zTipos: ZTipoBaseline.isNomeCompleto,controllerNome: _controllerFim,nomeFocus: nomeFocus,),
             new Container(
               color: Colors.grey,
               padding: const EdgeInsets.all(16.0),
