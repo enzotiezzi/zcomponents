@@ -233,6 +233,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
+            new ZBaseLine(zTipos: ZTipoBaseline.isNomeCompleto,controllerNome: _controllerFim,nomeFocus: nomeFocus,),
+
             new ZExpansion(
               childTitle: new IconButton(
                 onPressed: () {},
