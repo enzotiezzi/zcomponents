@@ -6,8 +6,9 @@ class ZPerfilItem extends StatefulWidget {
   List<String> listaTextos;
   List<IconData> listaIcones;
   List<dynamic> listaOnTap;
+  Color color;
 
-  ZPerfilItem({this.numeroQuadrados = 0, this.listaIcones, this.listaTextos, this.listaOnTap});
+  ZPerfilItem({this.numeroQuadrados = 0, this.listaIcones, this.listaTextos, this.listaOnTap, this.color});
 
   @override
   _ZPerfilItemState createState() => _ZPerfilItemState();
@@ -45,7 +46,7 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                         bottom: 6.0, top: 8.0, left: 8.0, right: 8.0),
                     child: new Icon(
                       widget.listaIcones[index],
-                      color: const Color(0xff2BBAB4),
+                      color: widget.color,
                     ),
                   ),
                   new Container(
@@ -84,7 +85,7 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                       bottom: 6.0, top: 8.0, left: 8.0, right: 8.0),
                   child: new Icon(
                     widget.listaIcones[index],
-                    color: const Color(0xff2BBAB4),
+                    color: widget.color,
                   ),
                 ),
                 new Container(

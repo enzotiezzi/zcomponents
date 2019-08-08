@@ -11,7 +11,7 @@ class ZPerfil extends StatefulWidget {
   String idConta;
   String token;
   String cpf;
-  Widget tituloAppBar;
+  String tituloAppBar;
   String textoTituloInfo;
   String textoLocalInfo;
   String textoCargoInfo;
@@ -31,26 +31,32 @@ class ZPerfil extends StatefulWidget {
   var onTapImage;
   String isExpand;
   Function funcao;
+  Color color;
 
-  ZPerfil(
-      {this.tituloAppBar,
-      this.onTapVoltar,
-      this.listaIcones,
-      this.listaTextos,
-      this.numeroQuadrados,
-      this.imagemPerfil,
-      this.statusInfo,
-      this.textoHoraEntradaInfo,
-      this.textoCodigoInfo,
-      this.textoLocalInfo,
-      this.textoEscalaInfo,
-      this.textoHoraSaidaInfo,
-      this.textoHoraIntervaloInfo,
-      this.textoTituloInfo,
-      this.textoCargoInfo,
-      this.listaOnTap,
-      this.onTapImage,
-      this.tituloHeader});
+  ZPerfil({
+    this.tituloAppBar,
+    this.onTapVoltar,
+    this.listaIcones,
+    this.listaTextos,
+    this.numeroQuadrados,
+    this.imagemPerfil,
+    this.statusInfo,
+    this.textoHoraEntradaInfo,
+    this.textoCodigoInfo,
+    this.textoLocalInfo,
+    this.textoEscalaInfo,
+    this.textoHoraSaidaInfo,
+    this.textoHoraIntervaloInfo,
+    this.textoTituloInfo,
+    this.textoCargoInfo,
+    this.listaOnTap,
+    this.onTapImage,
+    this.tituloHeader,
+    this.token,
+    this.cpf,
+    this.idConta,
+    this.color,
+  });
 
   @override
   _ZPerfilState createState() => _ZPerfilState();
@@ -64,7 +70,7 @@ class _ZPerfilState extends State<ZPerfil> {
       appBar: CupertinoNavigationBar(
         middle: new Container(
           child: new Text(
-            "PERFIL DO COLABORADOR",
+            widget.tituloAppBar,
             style: TextStyle(color: Colors.black),
           ),
         ),
@@ -76,7 +82,7 @@ class _ZPerfilState extends State<ZPerfil> {
             child: new Icon(
               Icons.arrow_back_ios,
               size: 20.0,
-              color: const Color(0xff2BB9B4),
+              color: widget.color,
             ),
           ),
         ),
@@ -91,8 +97,10 @@ class _ZPerfilState extends State<ZPerfil> {
         ZHeader(
           titulo: widget.tituloHeader,
           children: <Widget>[
-            new Container(color: const Color(0xffF0F0F0),
-              padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
+            new Container(
+              color: const Color(0xffF0F0F0),
+              padding: EdgeInsets.only(
+                  right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
               child: ZItemTile(
                 onTapImage: widget.onTapImage,
                 imagemPerfil: widget.imagemPerfil,
@@ -128,9 +136,9 @@ class _ZPerfilState extends State<ZPerfil> {
             listaTextos: widget.listaTextos,
             listaIcones: widget.listaIcones,
             listaOnTap: widget.listaOnTap,
+            color: widget.color,
           ),
         ),
-
       ],
     );
   }
