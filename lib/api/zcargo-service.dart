@@ -27,6 +27,7 @@ class ZCargoService extends Service implements IZCargoService {
 
       return l;
     } catch (e) {
+      print(e);
       return null;
     }
   }
