@@ -141,7 +141,7 @@ class _ZItemTileState extends State<ZItemTile> {
                               ),
                             ),
                             new Container(
-                              width: (MediaQuery.of(context).size.width / 2.1),
+                              width: (MediaQuery.of(context).size.width / 2.4),
                               margin: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
                               child: (colaboradorViewModel == null)
                                   ? new Text('')
