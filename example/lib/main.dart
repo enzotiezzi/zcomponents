@@ -243,13 +243,39 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
               titulo: 'TESTE',
             ),
-            new ZItemTile(
-              token:
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
-              cpf: '447.930.638-29',
-              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              status: true,
-            ),
+           new ZItemTile(
+             token:
+             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+             cpf: '447.930.638-29',
+             idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+             status: true,
+           ),
+           new Container(height: 17.0,),
+           new ZExpendableItemTile(
+               token:
+               'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+               cpf: '447.930.638-29',
+               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+               status: true,
+             onTapImage: (){},
+             imagemPerfil: new Container(),
+             funcao: (){},
+             funcaoIconeDois: (){},
+             funcaoIconeQuatro: (){},
+             funcaoIconeTres: (){},
+             funcaoIconeUm: (){},
+             iconeDois: new Icon(Icons.arrow_forward_ios),
+             iconeQuatro:  new Icon(Icons.arrow_forward_ios),
+             iconeTres:  new Icon(Icons.arrow_forward_ios),
+             iconeUm:  new Icon(Icons.arrow_forward_ios),
+             onTapVoltar: (){},
+             textoIconeDois: 'teste',
+             textoIconeQuatro: 'teste',
+             textoIconeTres: 'teste',
+             textoIconeUm: 'teste',
+             textoTitulo: 'teste',
+             ),
+            new Container(height: 17.0,),
             new ZCargo(
 
               token:

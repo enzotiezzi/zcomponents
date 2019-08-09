@@ -33,8 +33,6 @@ class ZExpendableItemTile extends StatefulWidget {
   String token;
   String cpf;
 
-
-
   ZExpendableItemTile(
       {this.textoCinco: "",
       this.textoDois: "",
@@ -58,7 +56,14 @@ class ZExpendableItemTile extends StatefulWidget {
       this.textoIconeDois: "",
       this.textoIconeQuatro: "",
       this.textoIconeTres: "",
-      this.textoIconeUm: ""});
+      this.textoIconeUm: "",
+      this.token,
+      this.cpf,
+      this.idConta,
+      this.imagemPerfil,
+      this.onTapImage,
+      this.onTapVoltar,
+      });
 
   @override
   _ZExpendableItemTileState createState() => _ZExpendableItemTileState();
@@ -67,14 +72,20 @@ class ZExpendableItemTile extends StatefulWidget {
 class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
   @override
   Widget build(BuildContext context) {
-    return new Container(margin: EdgeInsets.only(left: 5.0, right: 5.0),
-      decoration: BoxDecoration(       color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(7.0)),),
+    return new Container(
+      margin: EdgeInsets.only(left: 16.0, right: 16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(6.0)),
+      ),
       child: ConfigurableExpansionTile(
-        animatedWidgetFollowingHeader: new Container(padding: EdgeInsets.all(5.0),child: new Icon(
-          Icons.arrow_drop_down,
-          color: Colors.black,
-        ),),
+        animatedWidgetFollowingHeader: new Container(
+          padding: EdgeInsets.only(left: 4.0, right: 4.0, top: 0.0, bottom: 0.0),
+          child: new Icon(
+            Icons.arrow_drop_down,
+            color: Colors.black,
+          ),
+        ),
         header: new Expanded(
           child: new ZItemTile(
             isExpand: "isExpand",
@@ -106,9 +117,9 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                         new Container(
                           child: widget.iconeUm,
                         ),
-                        new Text("${widget.textoIconeUm}",
+                        new Text("${widget.textoIconeUm}".toUpperCase(),
                             style: TextStyle(
-                                fontSize: 10.0, color: const Color(0xff2BB9B4)))
+                                fontSize: 10.0, color: const Color(0xff2BB9B4),))
                       ],
                     ),
                   ),
@@ -125,7 +136,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                     child: new Column(
                       children: <Widget>[
                         new Container(child: widget.iconeDois),
-                        new Text(widget.textoIconeDois,
+                        new Text(widget.textoIconeDois.toUpperCase(),
                             style: TextStyle(
                                 fontSize: 10.0, color: const Color(0xff2BB9B4)))
                       ],
@@ -145,7 +156,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                     child: new Column(
                       children: <Widget>[
                         new Container(child: widget.iconeTres),
-                        new Text(widget.textoIconeTres,
+                        new Text(widget.textoIconeTres.toUpperCase(),
                             style: TextStyle(
                                 fontSize: 10.0, color: const Color(0xff2BB9B4)))
                       ],
@@ -162,7 +173,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                       children: <Widget>[
                         new Container(child: widget.iconeQuatro),
                         new Text(
-                          widget.textoIconeQuatro,
+                          widget.textoIconeQuatro.toUpperCase(),
                           style: TextStyle(
                               fontSize: 10.0, color: const Color(0xff2BB9B4)),
                         )

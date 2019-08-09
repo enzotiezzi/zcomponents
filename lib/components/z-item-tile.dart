@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/api/zcolaborador-service.dart';
+import 'package:z_components/components/z-nome-reduzido.dart';
 import 'package:z_components/interface/i-zcolaborador-service.dart';
 import 'package:z_components/view-model/colaborador-viewmodel.dart';
 
@@ -35,18 +36,21 @@ class _ZItemTileState extends State<ZItemTile> {
   @override
   void initState() {
     super.initState();
-    _colaboradorService = ZColaboradorService(widget.token, widget.idConta, widget.cpf);
+    _colaboradorService =
+        ZColaboradorService(widget.token, widget.idConta, widget.cpf);
 
     _buscarInformacaoColaborador();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return new Container(
+      margin: EdgeInsets.only(
+          left: 1.0, right: 0.0, bottom: 0.0, top: 0.0),
+      height: 90.0,
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(7.0))),
+          borderRadius: BorderRadius.all(Radius.circular(6.0))),
       alignment: Alignment.centerLeft,
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -59,11 +63,11 @@ class _ZItemTileState extends State<ZItemTile> {
                 child: new Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Color(0xFFCECECE),
+                      color: Color(0xFF000000),
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5.0),
-                          bottomLeft: Radius.circular(5.0))),
-                  height: 105.0,
+                          topLeft: Radius.circular(6.0),
+                          bottomLeft: Radius.circular(6.0),
+                      )),
                   child: (widget.imagemPerfil == null)
                       ? new Icon(
                           Icons.insert_photo,
@@ -74,7 +78,7 @@ class _ZItemTileState extends State<ZItemTile> {
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(5.0),
                                 bottomLeft: Radius.circular(5.0)),
-                            color: Colors.white,
+                            color: Colors.transparent,
                           ),
                           child: widget.imagemPerfil,
                         ),
@@ -94,16 +98,15 @@ class _ZItemTileState extends State<ZItemTile> {
                                 width:
                                     (MediaQuery.of(context).size.width / 2.1),
                                 margin: EdgeInsets.only(
-                                    left: 8.0, bottom: 4.0, top: 8.0),
+                                    left: 6.0, bottom: 6.0, top: 6.0),
                                 child: (colaboradorViewModel == null)
                                     ? new Text('')
-                                    : new Text(
-                                        colaboradorViewModel.nome,
-                                        style: TextStyle(
-                                            fontSize: 15.0,
+                                    : new ZNomeReduzido(
+                                        text: colaboradorViewModel.nome,
+                                        textStyle: TextStyle(
+                                            fontSize: 14.0,
                                             color: Color(0xFF000000),
                                             fontWeight: FontWeight.w600),
-                                        overflow: TextOverflow.ellipsis,
                                       ),
                               )
                             : new Container(
@@ -113,16 +116,14 @@ class _ZItemTileState extends State<ZItemTile> {
                                     left: 8.0, bottom: 4.0, top: 8.0),
                                 child: (colaboradorViewModel == null)
                                     ? new Text('')
-                                    : new Text(
-                                        colaboradorViewModel.nome,
-                                        style: TextStyle(
-                                            fontSize: 15.0,
+                                    : new ZNomeReduzido(
+                                        text: colaboradorViewModel.nome,
+                                        textStyle: TextStyle(
+                                            fontSize: 14.0,
                                             color: Color(0xFF000000),
                                             fontWeight: FontWeight.w600),
-                                        overflow: TextOverflow.ellipsis,
                                       ),
                               ),
-
                       ],
                     ),
                     new Row(
@@ -132,26 +133,26 @@ class _ZItemTileState extends State<ZItemTile> {
                           children: <Widget>[
                             new Container(
                               margin: EdgeInsets.only(
-                                  left: 8.0, right: 4.0, bottom: 4.0),
+                                  left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
                               child: new Icon(
                                 Icons.my_location,
                                 color: Color(0xFFA3A3A3),
-                                size: 20.0,
+                                size: 16.0,
                               ),
                             ),
                             new Container(
-                              width: (MediaQuery.of(context).size.width / 2.3),
-                              margin: EdgeInsets.only(right: 3.0, bottom: 4.0),
-                              child: (colaboradorViewModel == null)?
-                              new Text(''):
-                              new Text(
-                                colaboradorViewModel.nomeCentroCusto,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Color(0xFFA3A3A3),
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.normal),
-                              ),
+                              width: (MediaQuery.of(context).size.width / 2.1),
+                              margin: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                              child: (colaboradorViewModel == null)
+                                  ? new Text('')
+                                  : new Text(
+                                      colaboradorViewModel.nomeCentroCusto,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Color(0xFFA3A3A3),
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.normal),
+                                    ),
                             ),
                           ],
                         ),
@@ -204,51 +205,51 @@ class _ZItemTileState extends State<ZItemTile> {
                       children: <Widget>[
                         new Container(
                           margin: EdgeInsets.only(
-                              left: 8.0, right: 4.0, bottom: 4.0),
+                              left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
                           child: new Icon(
                             Icons.work,
-                            size: 20,
+                            size: 16,
                             color: Color(0xFFA3A3A3),
                           ),
                         ),
                         new Container(
-                          margin: EdgeInsets.only(right: 3.0, bottom: 4.0),
-                          child: (colaboradorViewModel == null)?
-                          new Text(''):
-                          new Text(
-                            colaboradorViewModel.cargo,
-                            style: TextStyle(
-                                color: Color(0xFFA3A3A3),
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.normal),
-                          ),
+                          margin: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                          child: (colaboradorViewModel == null)
+                              ? new Text('')
+                              : new Text(
+                                  colaboradorViewModel.cargo,
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.normal),
+                                ),
                         ),
                       ],
                     ),
                     new Row(
                       children: <Widget>[
                         new Container(
-                          padding: EdgeInsets.only(bottom: 8.0, left: 8.0),
+                          padding: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
                           child: new Icon(
                             Icons.access_time,
-                            size: 20,
+                            size: 16,
                             color: Color(0xFFA3A3A3),
                           ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(bottom: 8.0, left: 4.0),
-                          child: (colaboradorViewModel == null)?
-                          new Text (''):
-                          new Text(
-                            "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
-                            style: TextStyle(
-                                color: Color(0xFFA3A3A3),
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w700),
-                          ),
+                          padding: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          child: (colaboradorViewModel == null)
+                              ? new Text('')
+                              : new Text(
+                                  "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w700),
+                                ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(bottom: 8.0, left: 4.0),
+                          padding: EdgeInsets.only(left: 4.0, right: 0.0, bottom: 6.0, top: 0.0),
                           child: new Text(
                             "(",
                             style: TextStyle(
@@ -258,7 +259,7 @@ class _ZItemTileState extends State<ZItemTile> {
                           ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(bottom: 8.0),
+                          padding: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
                           child: new Icon(
                             Icons.restaurant_menu,
                             color: Color(0xFFA3A3A3),
@@ -266,17 +267,27 @@ class _ZItemTileState extends State<ZItemTile> {
                           ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(bottom: 8.0, left: 2.0),
-                          child: (colaboradorViewModel == null)?
-                          new Text(
+                          padding: EdgeInsets.only(left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          child: (colaboradorViewModel == null)
+                              ? new Text(
+                                  "",
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              : new Text(
+                                  "${colaboradorViewModel.tempoPausa}",
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                        ),
+                        new Container(
+                          padding: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          child: new Text(
                             ")",
-                            style: TextStyle(
-                                color: Color(0xFFA3A3A3),
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w500),
-                          ):
-                          new Text(
-                            "${colaboradorViewModel.tempoPausa})",
                             style: TextStyle(
                                 color: Color(0xFFA3A3A3),
                                 fontSize: 10.0,
@@ -289,19 +300,20 @@ class _ZItemTileState extends State<ZItemTile> {
                 ),
                 onTap: widget.funcao,
               )),
+          new Container(color: Colors.grey,
+            height: 90.0,
+            width: 0.2,
+          ),
         ],
       ),
     );
   }
 
   Future _buscarInformacaoColaborador() async {
-      var colaborador =
-      await _colaboradorService.buscarPerfilColaborador();
+    var colaborador = await _colaboradorService.buscarPerfilColaborador();
 
-      setState(() {
-        colaboradorViewModel = colaborador;
-      });
+    setState(() {
+      colaboradorViewModel = colaborador;
+    });
   }
-
-
 }
