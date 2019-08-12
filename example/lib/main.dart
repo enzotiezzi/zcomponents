@@ -25,6 +25,8 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z_switch.dart';
 import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
+import 'package:z_components/components/z-header.dart';
+import 'package:z_components/config/z-tipo-header.dart';
 
 void main() => runApp(MyApp());
 
@@ -233,8 +235,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
-            new ZBaseLine(zTipos: ZTipoBaseline.isNomeCompleto,controllerNome: _controllerFim,nomeFocus: nomeFocus,),
-
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.isNomeCompleto,
+              controllerNome: _controllerFim,
+              nomeFocus: nomeFocus,
+            ),
             new ZExpansion(
               childTitle: new IconButton(
                 onPressed: () {},
@@ -243,43 +248,132 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
               titulo: 'TESTE',
             ),
-           new ZItemTile(
-             token:
-                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
-             cpf: '447.930.638-29',
-             idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-             status: true,
-           ),
-           new Container(height: 17.0,),
-           new ZExpendableItemTile(
-               token:
-               'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
-               cpf: '447.930.638-29',
-               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-               status: true,
-             onTapImage: (){},
-             imagemPerfil: new Container(),
-             funcao: (){},
-             funcaoIconeDois: (){},
-             funcaoIconeQuatro: (){},
-             funcaoIconeTres: (){},
-             funcaoIconeUm: (){},
-             iconeDois: new Icon(Icons.arrow_forward_ios),
-             iconeQuatro:  new Icon(Icons.arrow_forward_ios),
-             iconeTres:  new Icon(Icons.arrow_forward_ios),
-             iconeUm:  new Icon(Icons.arrow_forward_ios),
-             onTapVoltar: (){},
-             textoIconeDois: 'teste',
-             textoIconeQuatro: 'teste',
-             textoIconeTres: 'teste',
-             textoIconeUm: 'teste',
-             textoTitulo: 'teste',
-             ),
-            new Container(height: 17.0,),
-            new ZCargo(
-
+            new ZItemTile(
               token:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              cpf: '447.930.638-29',
+              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+              status: true,
+            ),
+            new Container(
+              height: 17.0,
+            ),
+
+
+
+
+
+
+            new ZHeader(
+              zTipos: ZTipoHeader.isExpansion,
+              titulosAppBar: true,
+
+              child: new Container(
+                  color: const Color(0xfff0f0f0),
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  bottom: 6.0,
+                  top: 6.0,
+                ),
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                            new Container(
+                              child: new Icon(
+                                Icons.person,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            new Container(
+                              width:
+                              MediaQuery.of(context).size.width / 3,
+                              margin: EdgeInsets.only(left: 5.0),
+                              child: new Text(
+                                "VICTOR",
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+
+
+
+
+                          new Container(
+                            margin: EdgeInsets.only(left: 6.0),
+                            child: new Icon(
+                              Icons.my_location,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          new Container(
+                              width:
+                              MediaQuery.of(context).size.width / 3.2,
+                              margin: EdgeInsets.only(left: 8.0),
+                              child: new Text(
+                                    "ZELLAR TESTE DE TAMANHO",
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+
+                              ),
+                      ],
+
+                  ),),
+              children: <Widget>[
+                new Container(
+                  child: new ZItemTile(
+                    token:
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+                    cpf: '447.930.638-29',
+                    idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+                    status: true,
+                  ),
+                )
+              ],
+            ),
+
+
+
+
+
+
+
+
+
+
+            new Container(
+              height: 17.0,
+            ),
+            new ZExpendableItemTile(
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              cpf: '447.930.638-29',
+              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+              status: true,
+              onTapImage: () {},
+              imagemPerfil: new Container(),
+              funcao: () {},
+              funcaoIconeDois: () {},
+              funcaoIconeQuatro: () {},
+              funcaoIconeTres: () {},
+              funcaoIconeUm: () {},
+              iconeDois: new Icon(Icons.arrow_forward_ios),
+              iconeQuatro: new Icon(Icons.arrow_forward_ios),
+              iconeTres: new Icon(Icons.arrow_forward_ios),
+              iconeUm: new Icon(Icons.arrow_forward_ios),
+              onTapVoltar: () {},
+              textoIconeDois: 'teste',
+              textoIconeQuatro: 'teste',
+              textoIconeTres: 'teste',
+              textoIconeUm: 'teste',
+              textoTitulo: 'teste',
+            ),
+            new Container(
+              height: 17.0,
+            ),
+            new ZCargo(
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
               key: _keyCargo,
             ),
             new Container(
@@ -290,7 +384,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 children: <Widget>[
                   new ZSequencia(
                     token:
-                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
                     idConta: "486A49B3-47D1-4D76-80DF-079EB82D6D8F",
                     idColaborador: "548D524D-A6DE-4D8A-945E-A706AD2F87F2",
                   )
@@ -315,7 +409,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
             new ZEscala(
               token:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
               key: _keyEscala,
               //valorPadrao: widget.escala,
             ),
@@ -358,9 +452,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                                 color: Color(0xFF000000),
                                 idConta: '486a49b3-47d1-4d76-80df-079eb82d6d8f',
                                 cpf: '41776112806',
-                                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUyNzkyMjgsImV4cCI6MTU2NTg4NDAyOCwiaWF0IjoxNTY1Mjc5MjI4fQ.QNsJ5DfVH1lRXGirD-ONCH4URIA81HEFmKjljiWhCdU',
-                                imagemPerfil: new Container() ,
-                                onTapImage: (){},
+                                token:
+                                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUyNzkyMjgsImV4cCI6MTU2NTg4NDAyOCwiaWF0IjoxNTY1Mjc5MjI4fQ.QNsJ5DfVH1lRXGirD-ONCH4URIA81HEFmKjljiWhCdU',
+                                imagemPerfil: new Container(),
+                                onTapImage: () {},
                                 tituloAppBar: 'teste',
                               )),
                     );

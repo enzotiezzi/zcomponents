@@ -62,7 +62,7 @@ class ZHeader extends StatelessWidget {
       case ZTipoHeader.isExpansion:
         _zHeader = new Material(
           elevation: 4.0,
-          color: const Color(0xFFF7F7F7),
+          color: const Color(0xfff0f0f0),
           child: new ConfigurableExpansionTile(
             initiallyExpanded: true,
             bottomBorderOn: true,
