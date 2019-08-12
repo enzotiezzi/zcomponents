@@ -33,6 +33,7 @@ class ZPerfil extends StatefulWidget {
   Function funcao;
   Color color;
 
+
   ZPerfil({
     this.tituloAppBar,
     this.onTapVoltar,

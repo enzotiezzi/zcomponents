@@ -245,7 +245,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
            new ZItemTile(
              token:
-             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
              cpf: '447.930.638-29',
              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
              status: true,
@@ -253,7 +253,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
            new Container(height: 17.0,),
            new ZExpendableItemTile(
                token:
-               'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
+               'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
                cpf: '447.930.638-29',
                idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
                status: true,
