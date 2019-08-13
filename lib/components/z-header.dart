@@ -64,7 +64,7 @@ class ZHeader extends StatelessWidget {
           elevation: 4.0,
           color: const Color(0xfff0f0f0),
           child: new ConfigurableExpansionTile(
-            initiallyExpanded: true,
+            initiallyExpanded: false,
             bottomBorderOn: true,
             animatedWidgetFollowingHeader: new Icon(Icons.arrow_drop_down),
             header: new Expanded(
