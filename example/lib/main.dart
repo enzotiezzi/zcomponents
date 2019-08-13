@@ -269,7 +269,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               titulosAppBar: true,
 
               child: new Container(
-                  color: const Color(0xfff0f0f0),
+                  color: const Color(0xff000000),
                 padding: const EdgeInsets.only(
                   left: 16.0,
                   bottom: 6.0,
