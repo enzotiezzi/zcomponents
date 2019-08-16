@@ -273,7 +273,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
              textoIconeQuatro: 'teste',
              textoIconeTres: 'teste',
              textoIconeUm: 'teste',
-             textoTitulo: 'teste',
+
              ),
             new Container(height: 17.0,),
             new ZCargo(
