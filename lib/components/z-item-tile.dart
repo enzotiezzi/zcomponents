@@ -46,7 +46,7 @@ class _ZItemTileState extends State<ZItemTile> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.only(
-          left: 1.0, right: 0.0, bottom: 0.0, top: 0.0),
+          left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
       height: 90.0,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -63,7 +63,7 @@ class _ZItemTileState extends State<ZItemTile> {
                 child: new Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Color(0xFF000000),
+                      color: Color(0xFF808080),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(6.0),
                           bottomLeft: Radius.circular(6.0),
@@ -149,9 +149,9 @@ class _ZItemTileState extends State<ZItemTile> {
                                       colaboradorViewModel.nomeCentroCusto,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          color: Color(0xFFA3A3A3),
+                                          color: Color(0xFF808080),
                                           fontSize: 12.0,
-                                          fontWeight: FontWeight.normal),
+                                          fontWeight: FontWeight.w600),
                                     ),
                             ),
                           ],
@@ -194,7 +194,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                       "Inativo",
                                       style: TextStyle(
                                           fontSize: 12.0,
-                                          color: const Color(0xff999999)),
+                                          color: const Color(0xFF808080)),
                                     ),
                                   )
                                 ],
@@ -219,9 +219,9 @@ class _ZItemTileState extends State<ZItemTile> {
                               : new Text(
                                   colaboradorViewModel.cargo,
                                   style: TextStyle(
-                                      color: Color(0xFFA3A3A3),
+                                      color: Color(0xFF808080),
                                       fontSize: 12.0,
-                                      fontWeight: FontWeight.normal),
+                                      fontWeight: FontWeight.w600),
                                 ),
                         ),
                       ],
@@ -243,9 +243,9 @@ class _ZItemTileState extends State<ZItemTile> {
                               : new Text(
                                   "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
                                   style: TextStyle(
-                                      color: Color(0xFFA3A3A3),
+                                      color: Color(0xFF808080),
                                       fontSize: 12.0,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w600),
                                 ),
                         ),
                         new Container(
@@ -253,9 +253,9 @@ class _ZItemTileState extends State<ZItemTile> {
                           child: new Text(
                             "(",
                             style: TextStyle(
-                                color: Color(0xFFA3A3A3),
+                                color: Color(0xFF808080),
                                 fontSize: 10.0,
-                                fontWeight: FontWeight.w500),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                         new Container(
@@ -272,16 +272,16 @@ class _ZItemTileState extends State<ZItemTile> {
                               ? new Text(
                                   "",
                                   style: TextStyle(
-                                      color: Color(0xFFA3A3A3),
+                                      color: Color(0xFF808080),
                                       fontSize: 10.0,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600),
                                 )
                               : new Text(
                                   "${colaboradorViewModel.tempoPausa}",
                                   style: TextStyle(
-                                      color: Color(0xFFA3A3A3),
+                                      color: Color(0xFF808080),
                                       fontSize: 10.0,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600),
                                 ),
                         ),
                         new Container(
@@ -289,9 +289,9 @@ class _ZItemTileState extends State<ZItemTile> {
                           child: new Text(
                             ")",
                             style: TextStyle(
-                                color: Color(0xFFA3A3A3),
+                                color: Color(0xFF808080),
                                 fontSize: 10.0,
-                                fontWeight: FontWeight.w500),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ],
