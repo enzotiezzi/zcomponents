@@ -31,6 +31,8 @@ class ZPerfil extends StatefulWidget {
   var onTapImage;
   String isExpand;
   Function funcao;
+  Color color;
+
 
   ZPerfil({
     this.tituloAppBar,
@@ -54,6 +56,7 @@ class ZPerfil extends StatefulWidget {
     this.token,
     this.cpf,
     this.idConta,
+    this.color,
   });
 
   @override
@@ -80,7 +83,7 @@ class _ZPerfilState extends State<ZPerfil> {
             child: new Icon(
               Icons.arrow_back_ios,
               size: 20.0,
-              color: const Color(0xff2BB9B4),
+              color: widget.color,
             ),
           ),
         ),
@@ -134,6 +137,7 @@ class _ZPerfilState extends State<ZPerfil> {
             listaTextos: widget.listaTextos,
             listaIcones: widget.listaIcones,
             listaOnTap: widget.listaOnTap,
+            color: widget.color,
           ),
         ),
       ],
