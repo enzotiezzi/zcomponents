@@ -95,8 +95,6 @@ class _ZItemTileState extends State<ZItemTile> {
                       children: <Widget>[
                         (widget.isExpand == "isExpand")
                             ? new Container(
-                                width:
-                                    (MediaQuery.of(context).size.width / 2.1),
                                 margin: EdgeInsets.only(
                                     left: 6.0, bottom: 6.0, top: 6.0),
                                 child: (colaboradorViewModel == null)
