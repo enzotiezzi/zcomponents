@@ -258,67 +258,53 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Container(
               height: 17.0,
             ),
-
-
-
-
-
-
             new ZHeader(
               zTipos: ZTipoHeader.isExpansion,
               titulosAppBar: true,
-
               child: new Container(
-                  color: const Color(0xff000000),
+                color: const Color(0xff000000),
                 padding: const EdgeInsets.only(
                   left: 16.0,
                   bottom: 6.0,
                   top: 6.0,
                 ),
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                            new Container(
-                              child: new Icon(
-                                Icons.person,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            new Container(
-                              width:
-                              MediaQuery.of(context).size.width / 3,
-                              margin: EdgeInsets.only(left: 5.0),
-                              child: new Text(
-                                "VICTOR",
-                                textAlign: TextAlign.left,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-
-
-
-
-                          new Container(
-                            margin: EdgeInsets.only(left: 6.0),
-                            child: new Icon(
-                              Icons.my_location,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          new Container(
-                              width:
-                              MediaQuery.of(context).size.width / 3.2,
-                              margin: EdgeInsets.only(left: 8.0),
-                              child: new Text(
-                                    "ZELLAR TESTE DE TAMANHO",
-                                    textAlign: TextAlign.left,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-
-                              ),
-                      ],
-
-                  ),),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    new Container(
+                      child: new Icon(
+                        Icons.person,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    new Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      margin: EdgeInsets.only(left: 5.0),
+                      child: new Text(
+                        "VICTOR",
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    new Container(
+                      margin: EdgeInsets.only(left: 6.0),
+                      child: new Icon(
+                        Icons.my_location,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    new Container(
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      margin: EdgeInsets.only(left: 8.0),
+                      child: new Text(
+                        "ZELLAR TESTE DE TAMANHO",
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               children: <Widget>[
                 new Container(
                   child: new ZItemTile(
@@ -331,16 +317,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 )
               ],
             ),
-
-
-
-
-
-
-
-
-
-
             new Container(
               height: 17.0,
             ),
@@ -366,7 +342,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               textoIconeQuatro: 'teste',
               textoIconeTres: 'teste',
               textoIconeUm: 'teste',
-              textoTitulo: 'teste',
             ),
             new Container(
               height: 17.0,

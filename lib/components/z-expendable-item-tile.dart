@@ -3,14 +3,6 @@ import 'package:z_components/components/z-item-tile.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 
 class ZExpendableItemTile extends StatefulWidget {
-  String textoTitulo;
-  String textoDois;
-  String textoTres;
-  String textoQuatro;
-  String textoCinco;
-  String textoSeis;
-  String textoSete;
-  String textoCodigo;
   String textoIconeUm;
   String textoIconeDois;
   String textoIconeTres;
@@ -34,15 +26,8 @@ class ZExpendableItemTile extends StatefulWidget {
   String cpf;
 
   ZExpendableItemTile(
-      {this.textoCinco: "",
-      this.textoDois: "",
-      this.textoQuatro: "",
-      this.textoSeis: "",
-      this.textoSete: "",
-      this.textoTitulo: "",
-      this.textoTres: "",
+      {
       this.funcao,
-      this.textoCodigo: "",
       this.status: false,
       this.image,
       this.funcaoIconeDois,
