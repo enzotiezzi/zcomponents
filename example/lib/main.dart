@@ -188,9 +188,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     numeroFocus = new FocusNode();
     cEPFocus = new FocusNode();
     cNPJFocus = new FocusNode();
-<<<<<<< HEAD
+
     super.initState();
-=======
 
     _db = new ZDatabase(version: 1, dbName: "teste", entidades: [new Pessoa()]);
 
@@ -208,12 +207,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     var b = await rep.listarPessoas();
 
     print("");
->>>>>>> f05edb747cb12df77b7dbe204881d83371956cf3
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return Scaffold(
         backgroundColor: Colors.grey,
         floatingActionButton: ZFloatButton(
@@ -550,9 +547,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
           ],
         ));
-=======
-    return new Scaffold();
->>>>>>> f05edb747cb12df77b7dbe204881d83371956cf3
   }
 
   void showAlertDialogNew() async {
