@@ -27,8 +27,10 @@ import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/infra/database.dart';
+import 'package:z_components/infra/db/database.dart';
 import 'package:z_components_example/entities/pessoa.dart';
+import 'package:z_components_example/repositories/i-pessoa-repository.dart';
+import 'package:z_components_example/repositories/pessoa-repository.dart';
 
 void main() => runApp(MyApp());
 
@@ -188,6 +190,21 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     cNPJFocus = new FocusNode();
 
     _db = new ZDatabase(version: 1, dbName: "teste", entidades: [new Pessoa()]);
+
+    _db.init().then((_){
+      _query();
+    });
+  }
+
+  void _query() async{
+    IPessoaRepository rep = new PessoaRepository();
+
+    rep.insert(new Pessoa(nome: "Andreza", idade: 20));
+
+    var a = await rep.findById(1);
+    var b = await rep.listarPessoas();
+
+    print("");
   }
 
   @override
