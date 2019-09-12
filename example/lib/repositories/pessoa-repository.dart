@@ -34,6 +34,6 @@ class PessoaRepository implements IPessoaRepository{
 
   @override
   Future<int> update(Pessoa entity) {
-    _context.update(entity);
+    return _context.update(entity);
   }
 }
