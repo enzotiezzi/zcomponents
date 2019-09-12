@@ -2,10 +2,10 @@ import 'package:injector/injector.dart';
 import 'package:z_components/infra/entities/z-entity.dart';
 import 'package:z_components/infra/interfaces/i-context.dart';
 import 'package:z_components_example/entities/pessoa.dart';
-
+import 'package:z_components/infra/abstract-repository.dart';
 import 'i-pessoa-repository.dart';
 
-class PessoaRepository implements IPessoaRepository{
+class PessoaRepository extends AbstractRepository<Pessoa> implements IPessoaRepository{
   IContext _context = Injector.appInstance.getDependency<IContext>();
 
   @override
@@ -20,20 +20,5 @@ class PessoaRepository implements IPessoaRepository{
     var res = await _context.queryMultipleAsync("SELECT * FROM PESSOA");
 
     return res.map((x) => Pessoa()..fromMap(x)).toList();
-  }
-
-  @override
-  Future<int> delete(Pessoa entity) {
-    return _context.delete(entity);
-  }
-
-  @override
-  Future<int> insert(Pessoa entity) {
-    return _context.insert(entity);
-  }
-
-  @override
-  Future<int> update(Pessoa entity) {
-    return _context.update(entity);
   }
 }
