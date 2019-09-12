@@ -280,6 +280,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               cpf: '447.930.638-29',
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
               status: true,
+              escala: "5x2",
+              nome: "VICTOR MARQUES",
+              nomeCentroCusto: "ZELLAR",
+              horaEntrada: "09:00",
+              horaSaida: "18h00",
+              tempoPausa: "01:00",
+              cargo: "DEV",
             ),
             new Container(
               height: 17.0,
