@@ -1,3 +1,19 @@
+## 0.6.0
+
+* Update!
+
+## 0.5.9
+
+* Update!
+
+## 0.5.8
+
+* Update!
+
+## 0.5.7
+
+* Update!
+
 ## 0.5.6
 
 * Update ZItemTile!
