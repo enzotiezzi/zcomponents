@@ -11,6 +11,7 @@ import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 
 class ZBaseLine extends StatelessWidget {
+  bool enable;
   bool valideMes;
   bool valideCPF;
   bool valideEmail;
@@ -67,12 +68,12 @@ class ZBaseLine extends StatelessWidget {
   var controllerPadrao = new TextEditingController();
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
-var onChangedTextPadrao;
+  var onChangedTextPadrao;
   var onChangedCEP;
 
-
   ZBaseLine(
-      {this.value,
+      {this.enable = true,
+      this.value,
       this.key,
       this.context,
       this.zTipos = ZTipoBaseline.isNomeCompleto,
@@ -91,7 +92,7 @@ var onChangedTextPadrao;
       this.padraoFocus,
       this.text,
       this.onChangedCEP,
-        this.onChangedTextPadrao,
+      this.onChangedTextPadrao,
       this.controllerCNPJ,
       this.controllerCEP,
       this.cNPJFocus,
@@ -194,7 +195,6 @@ var onChangedTextPadrao;
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
                             keyboardAppearance: Brightness.light,
-
                             controller: controllerCPF,
                             onChanged: (text) {
                               cPF = text;
@@ -253,7 +253,6 @@ var onChangedTextPadrao;
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
                             keyboardAppearance: Brightness.light,
-
                             controller: controllerCelular,
                             focusNode: celularFocus,
                             keyboardType: TextInputType.number,
@@ -314,7 +313,6 @@ var onChangedTextPadrao;
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
                             keyboardAppearance: Brightness.light,
-
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, emailFocus, proximoFocus);
@@ -422,8 +420,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            enabled: enable,
                             keyboardAppearance: Brightness.light,
-
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, padraoFocus, proximoFocus);
@@ -469,8 +467,8 @@ var onChangedTextPadrao;
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            enabled: enable,
                             keyboardAppearance: Brightness.light,
-
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, padraoFocus, proximoFocus);
@@ -517,30 +515,28 @@ var onChangedTextPadrao;
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
                               keyboardAppearance: Brightness.light,
-
                               onSubmitted: (text) {
-                              _fieldFocusChange(
-                                  context, cEPFocus, proximoFocus);
-                            },
-                            focusNode: cEPFocus,
-                            controller: controllerCEP,
-                            keyboardType: TextInputType.number,
-                            cursorColor: Color(0xFF2BBAB4),
-                            style: new TextStyle(color: Color(0xFF000000)),
-                            decoration: InputDecoration(
-                              hintText: "CEP",
-                              hintStyle: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Color(0xFF000000).withOpacity(0.3)),
-                            ),
-                            inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[\\\\,.]")),
-                            ],
-                            onChanged: onChangedCEP
-                          ),
+                                _fieldFocusChange(
+                                    context, cEPFocus, proximoFocus);
+                              },
+                              focusNode: cEPFocus,
+                              controller: controllerCEP,
+                              keyboardType: TextInputType.number,
+                              cursorColor: Color(0xFF2BBAB4),
+                              style: new TextStyle(color: Color(0xFF000000)),
+                              decoration: InputDecoration(
+                                hintText: "CEP",
+                                hintStyle: new TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000).withOpacity(0.3)),
+                              ),
+                              inputFormatters: [
+                                MaskedTextInputFormatterShifter(
+                                    maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"),
+                                BlacklistingTextInputFormatter(
+                                    RegExp("[\\\\,.]")),
+                              ],
+                              onChanged: onChangedCEP),
                         ))
                   ],
                 ),
@@ -570,7 +566,6 @@ var onChangedTextPadrao;
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
                             keyboardAppearance: Brightness.light,
-
                             onSubmitted: (text) {
                               _fieldFocusChange(
                                   context, cNPJFocus, proximoFocus);
@@ -579,7 +574,7 @@ var onChangedTextPadrao;
                             onChanged: (text) {
                               cNPJ = text;
                               countCNPJ = 0;
-                              if(text.length == 18){
+                              if (text.length == 18) {
                                 _fieldFocusChange(
                                     context, cNPJFocus, proximoFocus);
                               }
@@ -598,8 +593,7 @@ var onChangedTextPadrao;
                               MaskedTextInputFormatterShifter(
                                   maskONE: "XX.XXX.XXX/XXXX-XX",
                                   maskTWO: "XX.XXX.XXX/XXXX-XX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[ ]")),
+                              BlacklistingTextInputFormatter(RegExp("[ ]")),
                             ],
                           ),
                         ))
@@ -643,7 +637,7 @@ var onChangedTextPadrao;
 
   void initCelular() {
     celularFocus.addListener(() {
-      if (!celularFocus.hasFocus && countCelular == 0 && celular !="") {
+      if (!celularFocus.hasFocus && countCelular == 0 && celular != "") {
         _validarCelular();
       }
     });
@@ -887,6 +881,4 @@ var onChangedTextPadrao;
       FocusScope.of(context).requestFocus(nextFocus);
     }
   }
-
-
 }
