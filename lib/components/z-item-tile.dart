@@ -8,6 +8,13 @@ class ZItemTile extends StatefulWidget {
   final String idConta;
   final String token;
   final String cpf;
+  String tempoPausa;
+  String escala;
+  String horaEntrada;
+  String horaSaida;
+  String cargo;
+  String nomeCentroCusto;
+  String nome;
   String isExpand;
   bool status;
   Function funcao;
@@ -18,6 +25,13 @@ class ZItemTile extends StatefulWidget {
       {this.idConta,
       this.token,
       this.cpf,
+      this.tempoPausa,
+      this.escala,
+      this.horaEntrada,
+      this.horaSaida,
+      this.cargo,
+      this.nomeCentroCusto,
+      this.nome,
       this.funcao,
       this.status: false,
       this.imagemPerfil,
@@ -45,9 +59,8 @@ class _ZItemTileState extends State<ZItemTile> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: EdgeInsets.only(
-          left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
-      height: 90.0,
+      margin: EdgeInsets.only(left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
+      height: MediaQuery.of(context).size.height / 7,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(6.0))),
@@ -65,8 +78,8 @@ class _ZItemTileState extends State<ZItemTile> {
                   decoration: BoxDecoration(
                       color: Color(0xFF808080),
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(6.0),
-                          bottomLeft: Radius.circular(6.0),
+                        topLeft: Radius.circular(6.0),
+                        bottomLeft: Radius.circular(6.0),
                       )),
                   child: (widget.imagemPerfil == null)
                       ? new Icon(
@@ -95,14 +108,12 @@ class _ZItemTileState extends State<ZItemTile> {
                       children: <Widget>[
                         (widget.isExpand == "isExpand")
                             ? new Container(
-                                width:
-                                    (MediaQuery.of(context).size.width / 2.1),
                                 margin: EdgeInsets.only(
                                     left: 6.0, bottom: 6.0, top: 6.0),
-                                child: (colaboradorViewModel == null)
+                                child: (widget.nome == null)
                                     ? new Text('')
                                     : new ZNomeReduzido(
-                                        text: colaboradorViewModel.nome,
+                                        text: widget.nome,
                                         textStyle: TextStyle(
                                             fontSize: 14.0,
                                             color: Color(0xFF000000),
@@ -114,10 +125,10 @@ class _ZItemTileState extends State<ZItemTile> {
                                     (MediaQuery.of(context).size.width / 2.0),
                                 margin: EdgeInsets.only(
                                     left: 8.0, bottom: 4.0, top: 8.0),
-                                child: (colaboradorViewModel == null)
+                                child: (widget.nome == null)
                                     ? new Text('')
                                     : new ZNomeReduzido(
-                                        text: colaboradorViewModel.nome,
+                                        text: widget.nome,
                                         textStyle: TextStyle(
                                             fontSize: 14.0,
                                             color: Color(0xFF000000),
@@ -142,11 +153,12 @@ class _ZItemTileState extends State<ZItemTile> {
                             ),
                             new Container(
                               width: (MediaQuery.of(context).size.width / 2.4),
-                              margin: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
-                              child: (colaboradorViewModel == null)
+                              margin: EdgeInsets.only(
+                                  left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                              child: (widget.nomeCentroCusto == null)
                                   ? new Text('')
                                   : new Text(
-                                      colaboradorViewModel.nomeCentroCusto,
+                                      widget.nomeCentroCusto,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           color: Color(0xFF808080),
@@ -213,11 +225,12 @@ class _ZItemTileState extends State<ZItemTile> {
                           ),
                         ),
                         new Container(
-                          margin: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
-                          child: (colaboradorViewModel == null)
+                          margin: EdgeInsets.only(
+                              left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                          child: (widget.cargo == null)
                               ? new Text('')
                               : new Text(
-                                  colaboradorViewModel.cargo,
+                                  widget.cargo,
                                   style: TextStyle(
                                       color: Color(0xFF808080),
                                       fontSize: 12.0,
@@ -229,7 +242,8 @@ class _ZItemTileState extends State<ZItemTile> {
                     new Row(
                       children: <Widget>[
                         new Container(
-                          padding: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          padding: EdgeInsets.only(
+                              left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
                           child: new Icon(
                             Icons.access_time,
                             size: 16,
@@ -237,11 +251,14 @@ class _ZItemTileState extends State<ZItemTile> {
                           ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: (colaboradorViewModel == null)
+                          padding: EdgeInsets.only(
+                              left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          child: (widget.escala == null ||
+                                  widget.horaEntrada == null ||
+                                  widget.horaSaida == null)
                               ? new Text('')
                               : new Text(
-                                  "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
+                                  "${widget.escala} ${widget.horaEntrada} - ${widget.horaSaida}",
                                   style: TextStyle(
                                       color: Color(0xFF808080),
                                       fontSize: 12.0,
@@ -249,7 +266,8 @@ class _ZItemTileState extends State<ZItemTile> {
                                 ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(left: 4.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          padding: EdgeInsets.only(
+                              left: 4.0, right: 0.0, bottom: 6.0, top: 0.0),
                           child: new Text(
                             "(",
                             style: TextStyle(
@@ -259,7 +277,8 @@ class _ZItemTileState extends State<ZItemTile> {
                           ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          padding: EdgeInsets.only(
+                              left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
                           child: new Icon(
                             Icons.restaurant_menu,
                             color: Color(0xFFA3A3A3),
@@ -267,8 +286,9 @@ class _ZItemTileState extends State<ZItemTile> {
                           ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: (colaboradorViewModel == null)
+                          padding: EdgeInsets.only(
+                              left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          child: (widget.tempoPausa == null)
                               ? new Text(
                                   "",
                                   style: TextStyle(
@@ -277,7 +297,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                       fontWeight: FontWeight.w600),
                                 )
                               : new Text(
-                                  "${colaboradorViewModel.tempoPausa}",
+                                  "${widget.tempoPausa}",
                                   style: TextStyle(
                                       color: Color(0xFF808080),
                                       fontSize: 10.0,
@@ -285,7 +305,8 @@ class _ZItemTileState extends State<ZItemTile> {
                                 ),
                         ),
                         new Container(
-                          padding: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
+                          padding: EdgeInsets.only(
+                              left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
                           child: new Text(
                             ")",
                             style: TextStyle(
@@ -300,7 +321,8 @@ class _ZItemTileState extends State<ZItemTile> {
                 ),
                 onTap: widget.funcao,
               )),
-          new Container(color: Colors.grey,
+          new Container(
+            color: Colors.grey,
             height: 90.0,
             width: 0.2,
           ),

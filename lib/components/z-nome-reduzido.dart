@@ -36,7 +36,10 @@ class _ZNomeReduzidoState extends State<ZNomeReduzido> {
                 ),
               ),
               new Container(
-                child: new Text(ultimoReduzido, style: widget.textStyle,),
+                child: new Text(
+                  ultimoReduzido,
+                  style: widget.textStyle,
+                ),
               )
             ],
           )
