@@ -5,20 +5,20 @@ import 'package:z_components/infra/interfaces/i-command.dart';
 import 'interfaces/i-context.dart';
 
 class AbstractRepository<T extends ZEntity> implements ICommand<T> {
-  IContext _context = Injector.appInstance.getDependency<IContext>();
+  IContext db = Injector.appInstance.getDependency<IContext>();
 
   @override
   Future<int> delete(T entity) {
-    return _context.delete(entity);
+    return db.delete(entity);
   }
 
   @override
   Future<int> insert(T entity) {
-    return _context.insert(entity);
+    return db.insert(entity);
   }
 
   @override
   Future<int> update(T entity) {
-    return _context.update(entity);
+    return db.update(entity);
   }
 }
