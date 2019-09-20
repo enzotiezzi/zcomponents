@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-perfil-item.dart';
-import 'package:z_components/components/z-text.dart';
 import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZPerfil extends StatefulWidget {
-  Widget tituloAppBar;
+  String idConta;
+  String token;
+  String cpf;
+  String tituloAppBar;
   String textoTituloInfo;
   String textoLocalInfo;
   String textoCargoInfo;
@@ -26,26 +27,35 @@ class ZPerfil extends StatefulWidget {
   Widget imagemPerfil;
   var onTapVoltar;
   var onTapImage;
+  String isExpand;
+  Function funcao;
+  Color color;
 
-  ZPerfil(
-      {this.tituloAppBar,
-      this.onTapVoltar,
-      this.listaIcones,
-      this.listaTextos,
-      this.numeroQuadrados,
-      this.imagemPerfil,
-      this.statusInfo,
-      this.textoHoraEntradaInfo,
-      this.textoCodigoInfo,
-      this.textoLocalInfo,
-      this.textoEscalaInfo,
-      this.textoHoraSaidaInfo,
-      this.textoHoraIntervaloInfo,
-      this.textoTituloInfo,
-      this.textoCargoInfo,
-      this.listaOnTap,
-      this.onTapImage,
-      this.tituloHeader});
+
+  ZPerfil({
+    this.tituloAppBar,
+    this.onTapVoltar,
+    this.listaIcones,
+    this.listaTextos,
+    this.numeroQuadrados,
+    this.imagemPerfil,
+    this.statusInfo,
+    this.textoHoraEntradaInfo,
+    this.textoCodigoInfo,
+    this.textoLocalInfo,
+    this.textoEscalaInfo,
+    this.textoHoraSaidaInfo,
+    this.textoHoraIntervaloInfo,
+    this.textoTituloInfo,
+    this.textoCargoInfo,
+    this.listaOnTap,
+    this.onTapImage,
+    this.tituloHeader,
+    this.token,
+    this.cpf,
+    this.idConta,
+    this.color,
+  });
 
   @override
   _ZPerfilState createState() => _ZPerfilState();
@@ -59,7 +69,7 @@ class _ZPerfilState extends State<ZPerfil> {
       appBar: CupertinoNavigationBar(
         middle: new Container(
           child: new Text(
-            "PERFIL DO COLABORADOR",
+            widget.tituloAppBar,
             style: TextStyle(color: Colors.black),
           ),
         ),
@@ -71,7 +81,7 @@ class _ZPerfilState extends State<ZPerfil> {
             child: new Icon(
               Icons.arrow_back_ios,
               size: 20.0,
-              color: const Color(0xff2BB9B4),
+              color: widget.color,
             ),
           ),
         ),
@@ -86,20 +96,25 @@ class _ZPerfilState extends State<ZPerfil> {
         ZHeader(
           titulo: widget.tituloHeader,
           children: <Widget>[
-            new Container(color: const Color(0xffF0F0F0),
-              padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
-              child: ZItemTile(
+            new Container(
+              color: const Color(0xffF0F0F0),
+              padding: EdgeInsets.only(
+                  right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
+              child: ZItemTile(nome: widget.textoTituloInfo,
+                escala: widget.textoEscalaInfo,
+                cargo: widget.textoCargoInfo,
+                horaEntrada: widget.textoHoraEntradaInfo,
+                horaSaida: widget.textoHoraSaidaInfo,
+                tempoPausa: widget.textoHoraIntervaloInfo,
+                nomeCentroCusto: widget.textoLocalInfo,
                 onTapImage: widget.onTapImage,
                 imagemPerfil: widget.imagemPerfil,
                 status: widget.statusInfo,
-                textoCodigo: widget.textoCodigoInfo,
-                textoSete: widget.textoHoraIntervaloInfo,
-                textoSeis: widget.textoHoraSaidaInfo,
-                textoCinco: widget.textoHoraEntradaInfo,
-                textoQuatro: widget.textoEscalaInfo,
-                textoTres: widget.textoCargoInfo,
-                textoDois: widget.textoLocalInfo,
-                textoTitulo: widget.textoTituloInfo,
+                token: widget.token,
+                cpf: widget.cpf,
+                idConta: widget.idConta,
+                isExpand: widget.isExpand,
+                funcao: widget.funcao,
               ),
             )
           ],
@@ -126,9 +141,9 @@ class _ZPerfilState extends State<ZPerfil> {
             listaTextos: widget.listaTextos,
             listaIcones: widget.listaIcones,
             listaOnTap: widget.listaOnTap,
+            color: widget.color,
           ),
         ),
-
       ],
     );
   }

@@ -25,7 +25,9 @@ class ZEscalaService extends Service implements IZEscalaService {
 
       return l;
     } catch (e) {
+      print(e);
       return null;
     }
   }
+
 }

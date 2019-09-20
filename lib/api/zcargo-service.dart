@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:z_components/api/service.dart';
 import 'package:z_components/interface/i-zcargo-service.dart';
 import 'package:z_components/settings/api-settings.dart';
@@ -27,6 +26,7 @@ class ZCargoService extends Service implements IZCargoService {
 
       return l;
     } catch (e) {
+      print(e);
       return null;
     }
   }
