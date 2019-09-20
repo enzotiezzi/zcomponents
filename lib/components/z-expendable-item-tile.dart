@@ -270,7 +270,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                             ),
                                           ),
                                           new Container(
-                                            width: (_largura<=360)?_largura /4:_largura /3.2,
+                                            width: (_largura<=450)?_largura /4:_largura /3.2,
                                             margin: EdgeInsets.only(
                                                 left: 6.0, right: 0.0, bottom: 2.0, top: 0.0),
                                             child: new Text(
