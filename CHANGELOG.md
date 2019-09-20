@@ -1,3 +1,7 @@
+## 0.6.4
+
+* Update ZTILE! new Styles with ScreensAdapter!
+
 ## 0.6.3
 
 * Update!
