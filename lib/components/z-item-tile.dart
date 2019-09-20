@@ -1,35 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/api/zcolaborador-service.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
+import 'package:z_components/config/z-type-tile.dart';
 import 'package:z_components/interface/i-zcolaborador-service.dart';
 import 'package:z_components/view-model/colaborador-viewmodel.dart';
 
 class ZItemTile extends StatefulWidget {
   final String idConta;
   final String token;
+  final String inicioIntervalo;
+  final String voltaIntervalo;
   final String cpf;
-  String tempoPausa;
-  String escala;
-  String horaEntrada;
-  String horaSaida;
-  String cargo;
-  String nomeCentroCusto;
-  String nome;
-  String isExpand;
-  bool status;
-  Function funcao;
-  Widget imagemPerfil;
-  Function onTapImage;
+  final String codEmpresa;
+  final Function onPressedIconBatida;
+  final String tempoPausa;
+  final String jornada;
+  final String telefone;
+  final String email;
+  final String endereco;
+  final String escala;
+  final String horaEntrada;
+  final String horaSaida;
+  final String cargo;
+  final String nomeCentroCusto;
+  final String nome;
+  final String isExpand;
+  final bool status;
+  final String re;
+  final Function funcao;
+  final Widget imagemPerfil;
+  final Function onTapImage;
+  final Color colorBatida;
+  final ZTypeTile zTypeTile;
 
   ZItemTile(
       {this.idConta,
+        this.re,
+        this.inicioIntervalo,
+        this.voltaIntervalo,
+        this.jornada,
+        this.codEmpresa,
+        this.onPressedIconBatida,
+        this.zTypeTile = ZTypeTile.isColab,
       this.token,
       this.cpf,
+        this.colorBatida = Colors.grey,
+        this.telefone,
       this.tempoPausa,
+        this.endereco,
       this.escala,
       this.horaEntrada,
       this.horaSaida,
       this.cargo,
+        this.email,
       this.nomeCentroCusto,
       this.nome,
       this.funcao,
@@ -46,6 +69,9 @@ class _ZItemTileState extends State<ZItemTile> {
   ColaboradorViewModel colaboradorViewModel;
 
   IZColaboradorService _colaboradorService;
+  double _largura;
+  double _altura;
+
 
   @override
   void initState() {
@@ -58,277 +84,731 @@ class _ZItemTileState extends State<ZItemTile> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      margin: EdgeInsets.only(left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
-      height: MediaQuery.of(context).size.height / 7,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(6.0))),
-      alignment: Alignment.centerLeft,
-      child: new Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          new Expanded(
-              flex: 2,
-              child: new GestureDetector(
-                onTap: widget.onTapImage,
-                child: new Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Color(0xFF808080),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(6.0),
-                        bottomLeft: Radius.circular(6.0),
-                      )),
-                  child: (widget.imagemPerfil == null)
-                      ? new Icon(
-                          Icons.insert_photo,
-                          color: Color(0xFFffffff),
-                        )
-                      : new Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5.0),
-                                bottomLeft: Radius.circular(5.0)),
-                            color: Colors.transparent,
-                          ),
-                          child: widget.imagemPerfil,
+    _largura = MediaQuery.of(context).size.width;
+    switch(widget.zTypeTile)
+    {
+      case ZTypeTile.isColab:
+        return IntrinsicHeight(
+              child: new Container(
+          margin: EdgeInsets.only(left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(6.0))),
+          alignment: Alignment.centerLeft,
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              new Expanded(
+                  flex: 20,
+                  child: new GestureDetector(
+                    onTap: widget.onTapImage,
+                    child: new Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF808080),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6.0),
+                            bottomLeft: Radius.circular(6.0),
+                          )),
+                      child: (widget.imagemPerfil == null)
+                          ? new Icon(
+                        Icons.insert_photo,
+                        color: Color(0xFFffffff),
+                      )
+                          : new Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5.0),
+                              bottomLeft: Radius.circular(5.0)),
+                          color: Colors.transparent,
                         ),
-                ),
-              )),
-          new Expanded(
-              flex: 8,
-              child: new InkWell(
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: widget.imagemPerfil,
+                      ),
+                    ),
+                  )),
+              new Expanded(
+                  flex: 100,
+                  child: new InkWell(
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        (widget.isExpand == "isExpand")
-                            ? new Container(
-                                margin: EdgeInsets.only(
-                                    left: 6.0, bottom: 6.0, top: 6.0),
-                                child: (widget.nome == null)
-                                    ? new Text('')
-                                    : new ZNomeReduzido(
-                                        text: widget.nome,
-                                        textStyle: TextStyle(
-                                            fontSize: 14.0,
-                                            color: Color(0xFF000000),
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                              )
-                            : new Container(
-                                width:
-                                    (MediaQuery.of(context).size.width / 2.0),
-                                margin: EdgeInsets.only(
-                                    left: 8.0, bottom: 4.0, top: 8.0),
-                                child: (widget.nome == null)
-                                    ? new Text('')
-                                    : new ZNomeReduzido(
-                                        text: widget.nome,
-                                        textStyle: TextStyle(
-                                            fontSize: 14.0,
-                                            color: Color(0xFF000000),
-                                            fontWeight: FontWeight.w600),
-                                      ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            (widget.isExpand == "isExpand")
+                                ? new Container(
+                              margin: EdgeInsets.only(left: 6.0, bottom: 6.0, top: 6.0),
+                              child: (widget.nome == null)
+                                  ? new Text('')
+                                  : new ZNomeReduzido(
+                                text: widget.nome,
+                                textStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000),
+                                    fontWeight: FontWeight.w600),
                               ),
+                            )
+                                : new Container(
+                              width:
+                              (_largura / 2.0),
+                              margin: EdgeInsets.only(left: 6.0, bottom: 6.0, top: 6.0),
+                              child: (widget.nome == null)
+                                  ? new Text('')
+                                  : new ZNomeReduzido(
+                                text: widget.nome,
+                                textStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000),
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            new Container(
+                              //width: (MediaQuery.of(context).size.width / 2.4),
+                                margin: EdgeInsets.only(right:6),
+                                child: new Text(widget.re ?? "",style: new TextStyle(color: Color(0xFF000000),fontSize: 12,fontWeight: FontWeight.w700),)
+                            ),
+                          ],
+                        ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            new Row(
+                              children: <Widget>[
+                                new Container(
+                                  margin: EdgeInsets.only(
+                                      left: 6.0, right: 0.0, bottom: 2.0, top: 0.0),
+                                  child: new Icon(
+                                    Icons.my_location,
+                                    color: Color(0xFFA3A3A3),
+                                    size: 16.0,
+                                  ),
+                                ),
+                                new Container(
+                                  width: (MediaQuery.of(context).size.width / 2.4),
+                                  margin: EdgeInsets.only(
+                                      left: 6.0, bottom: 2.0),
+                                  child: (widget.nomeCentroCusto == null)
+                                      ? new Text('')
+                                      : new Text(
+                                    widget.nomeCentroCusto,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Color(0xFF808080),
+                                        fontSize: 10.0,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            (widget.status == true)
+                                ? new Row(
+                              children: <Widget>[
+                                new Container(
+                                  height: 10.0,
+                                  width: 10.0,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: const Color(0xff1AC15D)),
+                                ),
+                                new Container(
+                                  margin:
+                                  EdgeInsets.only(right: 6.0, left: 4.0),
+                                  child: new Text(
+                                    "Ativo",
+                                    style: TextStyle(fontWeight: FontWeight.w700,
+                                        fontSize: 12.0,),
+                                  ),
+                                )
+                              ],
+                            )
+                                : new Row(
+                              children: <Widget>[
+                                new Container(
+                                  height: 10.0,
+                                  width: 10.0,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: const Color(0xff999999)),
+                                ),
+                                new Container(
+                                  margin:
+                                  EdgeInsets.only(right: 8.0, left: 2.0),
+                                  child: new Text(
+                                    "Inativo",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        color: const Color(0xFF808080)),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        new Row(
+                          children: <Widget>[
+                            new Expanded(
+                              flex: 5,
+                              child: new Container(
+                                width: _largura / 2.3,
+                                child: new Row(
+                                  children: <Widget>[
+                                    new Container(
+                                      margin: EdgeInsets.only(
+                                          left: 6.0, right: 0.0, bottom: 2.0, top: 0.0),
+                                      child: new Icon(
+                                        Icons.work,
+                                        size: 16,
+                                        color: Color(0xFFA3A3A3),
+                                      ),
+                                    ),
+                                    new Container(
+                                      width: (_largura<360)?_largura /3.3:_largura /3,
+                                      margin: EdgeInsets.only(
+                                          left: 6.0, right: 0.0, bottom: 2.0, top: 0.0),
+                                      child: new Text(
+                                        widget.cargo ?? "",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Color(0xFF808080),
+                                            fontSize: 10.0,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          new Expanded(
+                            flex: 5,
+                            child:  new Row(
+                            children: <Widget>[
+                              new Container(
+                                margin: EdgeInsets.only(right: 0.0, bottom: 4.0, top: 0.0),
+                                child: new Icon(
+                                  Icons.date_range,
+                                  size: 16,
+                                  color: Color(0xFFA3A3A3),
+                                ),
+                              ),
+                              new Container(
+                                width: _largura/5,
+                                margin: EdgeInsets.only(
+                                    left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                                child: new Text(
+                                  widget.escala ?? "",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Color(0xFF808080),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ],
+                          ) ,)
+                          ],
+                        ),
+                        new Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                          new Expanded(
+                            flex: 5,
+                            child: new Container(
+                              width: _largura / 2.3,
+                              child:  new Row(
+                                children: <Widget>[
+                                  new Container(
+                                    padding: EdgeInsets.only(
+                                        left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                    child: new Icon(
+                                      Icons.access_time,
+                                      size: 16,
+                                      color: Color(0xFFA3A3A3),
+                                    ),
+                                  ),
+                                  new Container(
+                                    padding: EdgeInsets.only(
+                                        left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                    child: (widget.escala == null ||
+                                        widget.horaEntrada == null ||
+                                        widget.horaSaida == null)
+                                        ? new Text('')
+                                        : new Text(
+                                      "(${widget.jornada}) ${widget.horaEntrada}-${widget.horaSaida}",
+                                      style: TextStyle(
+                                          color: Color(0xFF808080),
+                                          fontSize: (_largura<360)?8.0:10,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                           new Expanded(
+                             flex: 5,
+                             child: new Container(
+                               child:  new Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                 mainAxisSize: MainAxisSize.max,
+                                 children: <Widget>[
+                                  new Row(
+                                    children: <Widget>[
+                                      new Container(
+                                        padding: EdgeInsets.only(
+                                            left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                        child: new Icon(
+                                          Icons.restaurant_menu,
+                                          color: Color(0xFFA3A3A3),
+                                          size: 14.0,
+                                        ),
+                                      ),
+                                      new Container(
+                                        padding: EdgeInsets.only(
+                                            left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                        child: new Text(
+                                          "(${widget.tempoPausa})" ?? "",
+                                          style: TextStyle(
+                                              color: Color(0xFF808080),
+                                              fontSize: (_largura<360)?8.0:10,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                      new Container(
+                                        padding: EdgeInsets.only(
+                                            left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                        child: new Text(
+                                          widget.inicioIntervalo ?? "",
+                                          style: TextStyle(
+                                              color: Color(0xFF808080),
+                                              fontSize: (_largura<360)?8.0:10,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                      new Container(
+                                        padding: EdgeInsets.only(
+                                            left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                        child: new Text(
+                                          "-${widget.voltaIntervalo}" ?? "",
+                                          style: TextStyle(
+                                              color: Color(0xFF808080),
+                                              fontSize: (_largura<360)?8.0:10,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                   new Container(
+                                     margin: EdgeInsets.only(right: 6,bottom: 6),
+                                     alignment: Alignment.topCenter,
+                                     //margin:  EdgeInsets.only(left: _largura/40,bottom: 6),
+                                     child: new InkWell(
+                                       onTap: widget.onPressedIconBatida,
+                                       child:
+                                       new Icon(Icons.alarm_on,color: widget.colorBatida,size: 18,),
+                                     ),
+                                   )
+                                 ],
+                               ),
+                             ),
+                           )
+                          ],
+                        )
                       ],
                     ),
-                    new Row(
+                    onTap: widget.funcao,
+                  )),
+              new Container(
+                color: Colors.grey,
+                height: 90.0,
+                width: 0.2,
+              ),
+            ],
+          ),
+        ));
+        break;
+      case ZTypeTile.isUser:
+
+        return IntrinsicHeight(
+            child:new Container(
+          margin: EdgeInsets.only(left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(6.0))),
+          alignment: Alignment.centerLeft,
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              new Expanded(
+                  flex: 20,
+                  child: new GestureDetector(
+                    onTap: widget.onTapImage,
+                    child: new Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF808080),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6.0),
+                            bottomLeft: Radius.circular(6.0),
+                          )),
+                      child: (widget.imagemPerfil == null)
+                          ? new Icon(
+                        Icons.insert_photo,
+                        color: Color(0xFFffffff),
+                      )
+                          : new Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5.0),
+                              bottomLeft: Radius.circular(5.0)),
+                          color: Colors.transparent,
+                        ),
+                        child: widget.imagemPerfil,
+                      ),
+                    ),
+                  )),
+              new Expanded(
+                  flex: 100,
+                  child: new InkWell(
+                    child: new Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            (widget.isExpand == "isExpand")
+                                ? new Container(
+                              margin: EdgeInsets.only(
+                                  left: 6.0, bottom: 6.0, top: 6.0),
+                              child: (widget.nome == null)
+                                  ? new Text('')
+                                  : new ZNomeReduzido(
+                                text: widget.nome,
+                                textStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000),
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            )
+                                : new Container(
+                              width:
+                              (_largura / 3.0),
+                              margin: EdgeInsets.only(
+                                  left:6.0, bottom: 6.0, top: 6.0),
+                              child: (widget.nome == null)
+                                  ? new Text('')
+                                  : new ZNomeReduzido(
+                                text: widget.nome,
+                                textStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000),
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            new Container(
+                                //width: (MediaQuery.of(context).size.width / 2.4),
+                                margin: EdgeInsets.only(right:6),
+                                child: new Text(widget.cpf ?? "",style: new TextStyle(color: Color(0xFF000000),fontSize: 12),)
+                            ),
+                          ],
+                        ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                              new Row(
+                                children: <Widget>[
+                                  new Container(
+                                    margin: EdgeInsets.only(
+                                        left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                                    child: new Icon(
+                                      Icons.phone,
+                                      color: Color(0xFF808080),
+                                      size: 16.0,
+                                    ),
+                                  ),
+                                  new Container(
+                                      width: (_largura<360)?_largura/3.4:_largura / 3.8,
+                                      margin: EdgeInsets.only(
+                                          left: 6.0,bottom: 4.0),
+                                      child: new Text(widget.telefone ?? "",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: new TextStyle(fontSize: 12, color: Color(0xFF808080),),)
+                                  ),
+                                ],
+                              ),
+                            new Row(
+                                children: <Widget>[
+                                  new Container(
+                                    margin: EdgeInsets.only(right: 0.0, left: 4,bottom: 4.0, top: 0.0),
+                                    child: new Icon(
+                                      Icons.alternate_email,
+                                      color: Color(0xFF808080),
+                                      size: 16.0,
+                                    ),
+                                  ),
+                                  new Container(
+                                      width: (_largura<360)? _largura * 0.33:_largura * 0.38,
+                                      height: 15,
+                                      margin: EdgeInsets.only(
+                                          left: 4.0,bottom: 8.0),
+                                      child: new ListView(
+                                          scrollDirection: Axis.horizontal,
+                                          children: <Widget>[
+                                            new Text(widget.email ?? "",
+                                              style: new TextStyle(fontSize: 12,
+                                                color: Color(0xFF808080),),)
+                                          ])),
+                                ],
+                            )
+                          ],
+                        ),
+                        new Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Container(
+                              margin: EdgeInsets.only(left: 6.0),
+                              child: new Icon(
+                                Icons.location_on,
+                                size: 16,
+                                color: Color(0xFF808080),
+                              ),
+                            ),
+                            new Container(
+                                width: (_largura<360)?_largura / 1.42:_largura / 1.4,
+                              margin: EdgeInsets.only(
+                                  left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                              child: new Text(widget.endereco?? "",style: new TextStyle(fontSize: 12, color: Color(0xFF808080),),)
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    onTap: widget.funcao,
+                  )),
+              new Container(
+                color: Colors.grey,
+                height: 90.0,
+                width: 0.2,
+              ),
+            ],
+          ),
+        ));
+        break;
+      case ZTypeTile.isEmpresa:
+        return new Container(
+          margin: EdgeInsets.only(left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(6.0))),
+          alignment: Alignment.centerLeft,
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              new Expanded(
+                  child: new InkWell(
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            (widget.isExpand == "isExpand")
+                                ? new Container(
+                              margin: EdgeInsets.only(
+                                  left: 6.0, bottom: 6.0, top: 6.0),
+                              child: (widget.nome == null)
+                                  ? new Text('')
+                                  : new ZNomeReduzido(
+                                text: widget.nome,
+                                textStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000),
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            )
+                                : new Container(
+                              width:
+                              (_largura / 2.0),
+                              margin: EdgeInsets.only(
+                                  left: 8.0, bottom: 4.0, top: 8.0),
+                              child: (widget.nome == null)
+                                  ? new Text('')
+                                  : new ZNomeReduzido(
+                                text: widget.nome,
+                                textStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000),
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            new Container(
+                              width: (_largura / 4.5),
+                                margin: EdgeInsets.only(right:4),
+                                child: new Text(widget.codEmpresa ?? "",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: new TextStyle(color: Color(0xFF000000),fontSize: 12),)
+                            ),
+                          ],
+                        ),
+
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            new Row(
+                              children: <Widget>[
+                                new Container(
+                                  margin: EdgeInsets.only(
+                                      left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                                  child: new Icon(
+                                    Icons.my_location,
+                                    color: Color(0xFFA3A3A3),
+                                    size: 16.0,
+                                  ),
+                                ),
+                                new Container(
+                                  width: (_largura / 1.45),
+                                  margin: EdgeInsets.only(
+                                      left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                                  child: new Text(
+                                    widget.nomeCentroCusto ?? "",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Color(0xFF808080),
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            (widget.status == true)
+                                ? new Row(
+                              children: <Widget>[
+                                new Container(
+                                  height: 10.0,
+                                  width: 10.0,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: const Color(0xff1AC15D)),
+                                ),
+                                new Container(
+                                  margin:
+                                  EdgeInsets.only(right: 6.0, left: 2.0),
+                                  child: new Text(
+                                    "Ativo",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        color: const Color(0xff999999)),
+                                  ),
+                                )
+                              ],
+                            )
+                                : new Row(
+                              children: <Widget>[
+                                new Container(
+                                  height: 10.0,
+                                  width: 10.0,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: const Color(0xff999999)),
+                                ),
+                                new Container(
+                                  margin:
+                                  EdgeInsets.only(right: 8.0, left: 2.0),
+                                  child: new Text(
+                                    "Inativo",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        color: const Color(0xFF808080)),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                         new Row(
                           children: <Widget>[
                             new Container(
                               margin: EdgeInsets.only(
                                   left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
                               child: new Icon(
-                                Icons.my_location,
+                                Icons.location_on,
+                                size: 16,
                                 color: Color(0xFFA3A3A3),
-                                size: 16.0,
                               ),
                             ),
                             new Container(
-                              width: (MediaQuery.of(context).size.width / 2.4),
+                              width: (_largura<360)?_largura/1.15:_largura/ 1.1,
                               margin: EdgeInsets.only(
                                   left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
-                              child: (widget.nomeCentroCusto == null)
-                                  ? new Text('')
-                                  : new Text(
-                                      widget.nomeCentroCusto,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          color: Color(0xFF808080),
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.w600),
-                                    ),
+                              child:  new Text(
+                                widget.endereco ?? "",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Color(0xFF808080),
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ],
                         ),
-                        (widget.status == true)
-                            ? new Row(
-                                children: <Widget>[
-                                  new Container(
-                                    height: 10.0,
-                                    width: 10.0,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: const Color(0xff1AC15D)),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            new Row(
+                              children: <Widget>[
+                                new Container(
+                                  padding: EdgeInsets.only(
+                                      left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                  child: new Icon(
+                                    Icons.work,
+                                    size: 16,
+                                    color: Color(0xFFA3A3A3),
                                   ),
-                                  new Container(
-                                    margin:
-                                        EdgeInsets.only(right: 8.0, left: 2.0),
-                                    child: new Text(
-                                      "Ativo",
-                                      style: TextStyle(
-                                          fontSize: 12.0,
-                                          color: const Color(0xff999999)),
-                                    ),
-                                  )
-                                ],
-                              )
-                            : new Row(
-                                children: <Widget>[
-                                  new Container(
-                                    height: 10.0,
-                                    width: 10.0,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: const Color(0xff999999)),
+                                ),
+                                new Container(
+                                  width: (_largura / 1.2),
+                                  margin: EdgeInsets.only(
+                                      left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
+                                  child: new Text(
+                                    widget.cargo?? "",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Color(0xFF808080),
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w600),
                                   ),
-                                  new Container(
-                                    margin:
-                                        EdgeInsets.only(right: 8.0, left: 2.0),
-                                    child: new Text(
-                                      "Inativo",
-                                      style: TextStyle(
-                                          fontSize: 12.0,
-                                          color: const Color(0xFF808080)),
-                                    ),
-                                  )
-                                ],
-                              )
+                                ),
+                              ],
+                            ),
+                            new Container(
+                              margin: EdgeInsets.only(right: (_largura<360)? 4:6,bottom: 6),
+                              child: new InkWell(
+                                onTap: widget.onPressedIconBatida,
+                                child:
+                                new Icon(Icons.alarm_on,color: widget.colorBatida,size: 18,),
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
-                    new Row(
-                      children: <Widget>[
-                        new Container(
-                          margin: EdgeInsets.only(
-                              left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
-                          child: new Icon(
-                            Icons.work,
-                            size: 16,
-                            color: Color(0xFFA3A3A3),
-                          ),
-                        ),
-                        new Container(
-                          margin: EdgeInsets.only(
-                              left: 6.0, right: 0.0, bottom: 4.0, top: 0.0),
-                          child: (widget.cargo == null)
-                              ? new Text('')
-                              : new Text(
-                                  widget.cargo,
-                                  style: TextStyle(
-                                      color: Color(0xFF808080),
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                        ),
-                      ],
-                    ),
-                    new Row(
-                      children: <Widget>[
-                        new Container(
-                          padding: EdgeInsets.only(
-                              left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: new Icon(
-                            Icons.access_time,
-                            size: 16,
-                            color: Color(0xFFA3A3A3),
-                          ),
-                        ),
-                        new Container(
-                          padding: EdgeInsets.only(
-                              left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: (widget.escala == null ||
-                                  widget.horaEntrada == null ||
-                                  widget.horaSaida == null)
-                              ? new Text('')
-                              : new Text(
-                                  "${widget.escala} ${widget.horaEntrada} - ${widget.horaSaida}",
-                                  style: TextStyle(
-                                      color: Color(0xFF808080),
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                        ),
-                        new Container(
-                          padding: EdgeInsets.only(
-                              left: 4.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: new Text(
-                            "(",
-                            style: TextStyle(
-                                color: Color(0xFF808080),
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        new Container(
-                          padding: EdgeInsets.only(
-                              left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: new Icon(
-                            Icons.restaurant_menu,
-                            color: Color(0xFFA3A3A3),
-                            size: 14.0,
-                          ),
-                        ),
-                        new Container(
-                          padding: EdgeInsets.only(
-                              left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: (widget.tempoPausa == null)
-                              ? new Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Color(0xFF808080),
-                                      fontSize: 10.0,
-                                      fontWeight: FontWeight.w600),
-                                )
-                              : new Text(
-                                  "${widget.tempoPausa}",
-                                  style: TextStyle(
-                                      color: Color(0xFF808080),
-                                      fontSize: 10.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                        ),
-                        new Container(
-                          padding: EdgeInsets.only(
-                              left: 0.0, right: 0.0, bottom: 6.0, top: 0.0),
-                          child: new Text(
-                            ")",
-                            style: TextStyle(
-                                color: Color(0xFF808080),
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                onTap: widget.funcao,
-              )),
-          new Container(
-            color: Colors.grey,
-            height: 90.0,
-            width: 0.2,
+                    onTap: widget.funcao,
+                  )),
+              new Container(
+                color: Colors.grey,
+                height: 90.0,
+                width: 0.2,
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        );
+        break;
+    }
+    return build(context);
   }
 
   Future _buscarInformacaoColaborador() async {

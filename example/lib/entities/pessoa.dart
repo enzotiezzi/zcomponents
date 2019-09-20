@@ -1,46 +1,34 @@
 import 'package:z_components/infra/entities/z-entity.dart';
 import 'package:z_components/infra/db/database-utils.dart';
+import 'package:z_components/infra/schema/z-column.dart';
+import 'package:z_components/infra/schema/z-table.dart';
 
 class Pessoa extends ZEntity {
   String nome;
   int idade;
 
-  Pessoa({this.nome, this.idade});
+  Pessoa({this.nome, this.idade, int id, String idConta})
+      : super(id: id, idConta: idConta);
 
   @override
   Map<String, dynamic> toMap() {
-    return {
-      "ID": this.id,
-      "NOME": this.nome,
-      "IDADE": this.idade
-    };
+    return {"ID": this.id, "NOME": this.nome, "IDADE": this.idade};
   }
 
   @override
   void buildTable() {
     setTableName();
-    this.table = {
-      DatabaseUtils.COLUMNS: [
-        {
-          DatabaseUtils.VERSION: 1,
-          DatabaseUtils.COLUMN_NAME: "ID",
-          DatabaseUtils.COLUMN_TYPE: DatabaseUtils.INTEGER,
-          DatabaseUtils.PRIMARY_KEY: true,
-          DatabaseUtils.AUTO_INCREMENT: true,
-          DatabaseUtils.NOT_NULL: true
-        },
-        {
-          DatabaseUtils.VERSION: 1,
-          DatabaseUtils.COLUMN_NAME: "NOME",
-          DatabaseUtils.COLUMN_TYPE: DatabaseUtils.TEXT
-        },
-        {
-          DatabaseUtils.VERSION: 1,
-          DatabaseUtils.COLUMN_NAME: "IDADE",
-          DatabaseUtils.COLUMN_TYPE: DatabaseUtils.INTEGER
-        }
-      ]
-    };
+    this.table = new ZTable(version: 1, columns: [
+      new ZColumn(
+          version: 1,
+          name: "ID",
+          type: DatabaseUtils.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          notNull: true),
+      new ZColumn(version: 1, name: "NOME", type: DatabaseUtils.TEXT),
+      new ZColumn(version: 1, name: "IDADE", type: DatabaseUtils.INTEGER)
+    ]);
   }
 
   @override

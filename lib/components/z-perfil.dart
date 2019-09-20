@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-perfil-item.dart';
-import 'package:z_components/components/z-text.dart';
 import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZPerfil extends StatefulWidget {
   String idConta;

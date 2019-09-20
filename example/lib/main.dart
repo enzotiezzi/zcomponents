@@ -14,6 +14,7 @@ import 'package:z_components/components/z_navigationbar.dart';
 import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
+import 'package:z_components/config/z-type-tile.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z-perfil.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
@@ -22,15 +23,19 @@ import 'package:z_components/components/zp-grafico.dart';
 import 'package:z_components/components/z-expendable-item-tile.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/config/z-dialog.dart';
-import 'package:z_components/components/z_switch.dart';
 import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/infra/db/database.dart';
+/*
 import 'package:z_components_example/entities/pessoa.dart';
+import 'package:z_components_example/repositories/i-monstro-repository.dart';
 import 'package:z_components_example/repositories/i-pessoa-repository.dart';
-import 'package:z_components_example/repositories/pessoa-repository.dart';
+import 'package:z_components_example/repositories/monstro-repository.dart';
+import 'package:z_components_example/repositories/pessoa-repository.dart';*/
+
+import 'entities/monstro.dart';
 
 void main() => runApp(MyApp());
 
@@ -191,23 +196,31 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
     super.initState();
 
-    _db = new ZDatabase(version: 1, dbName: "teste", entidades: [new Pessoa()]);
 
-    _db.init().then((_){
+   // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
+
+  /*  _db.init().then((_){
       _query();
-    });
+    });*/
   }
 
-  void _query() async{
+/*  void _query() async{
     IPessoaRepository rep = new PessoaRepository();
 
     rep.insert(new Pessoa(nome: "Andreza", idade: 20));
 
+    IMonstroRepository _monstroRepository = new MonstroRepository();
+
+    _monstroRepository.insert(new Monstro(nome: "Gustavo", habilidade: "Super forca"));
+
     var a = await rep.findById(1);
     var b = await rep.listarPessoas();
 
+
+    var ma = await _monstroRepository.findById(1);
+
     print("");
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -274,9 +287,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
               titulo: 'TESTE',
             ),
-            new ZItemTile(
-              token:
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+          /*  new ZItemTile(
+              zTypeTile: ZTypeTile.isUser,
+              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
               status: true,
@@ -287,6 +300,39 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               horaSaida: "18h00",
               tempoPausa: "01:00",
               cargo: "DEV",
+            ),*/
+           /* new ZItemTile(
+              nome: "Aleff Apararecido dos Santos Lima",
+              zTypeTile: ZTypeTile.isUser,
+              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              cpf: '447.930.638-29',
+              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+              telefone: "(00) 9 1234-5678",
+              email: "gustavo.ortiz.zellartec@email.com.br",
+              rua: "Rua Lorem ipsum, Nº 123, Bairro Adipiscing - São Paulo - SP",
+            ),*/
+            new ZItemTile(
+              status: true,
+              zTypeTile: ZTypeTile.isUser,
+              cpf: "333.972.458-00",
+              escala: "5x2x6x1",
+              tempoPausa: "01:00",
+              inicioIntervalo: "11:00",
+              voltaIntervalo: "12:00",
+              horaSaida: "18:00",
+              re: "909.280",
+              jornada: "12:00",
+              horaEntrada: "06:00",
+              telefone: "(00) 9 1234-5678",
+              email: "aldjnldjnsadadn@ksdkm.com.br",
+              nomeCentroCusto: "Sede - Fernando ltda.",
+              nome: "Aleff Apararecido dos Santos Lima",
+              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+              codEmpresa: "012345.012938p193812938120001",
+              cargo: "Assist. Tec. Seg. Trab.",
+              endereco: "Rua Lorem ipsum, Nº 123, Bairro Adipiscing - São Paulo - SivjhvkhvkhvP",
+              colorBatida: Color(0xff1AC15D),
             ),
             new Container(
               height: 17.0,
@@ -354,9 +400,20 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               height: 17.0,
             ),
             new ZExpendableItemTile(
-              token:
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              nome: "Gustavo Ortiz",
+              nomeCentroCusto: "Sede - Fernando ltda.",
+              tempoPausa: "01:00",
+              inicioIntervalo: "11:00",
+              voltaIntervalo: "12:00",
+              escala: "5x2x6x1",
+              horaSaida: "18:00",
+              jornada: "12:00",
+              horaEntrada: "06:00",
+              re: "909.293",
+              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
+              cargo: "Assist. Tec. Seg. Trab.",
+              colorBatida: Color(0xff1AC15D),
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
               status: true,
               onTapImage: () {},
