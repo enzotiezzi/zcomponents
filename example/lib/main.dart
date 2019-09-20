@@ -225,7 +225,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Color(0xffEFEFF4),
         floatingActionButton: ZFloatButton(
           onPressed: () {},
         ),
@@ -311,9 +311,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               email: "gustavo.ortiz.zellartec@email.com.br",
               rua: "Rua Lorem ipsum, Nº 123, Bairro Adipiscing - São Paulo - SP",
             ),*/
-            new ZItemTile(
+            new Container(
+              child:
+              new ZItemTile(
               status: true,
-              zTypeTile: ZTypeTile.isEmpresa,
+              zTypeTile: ZTypeTile.isColab,
               cpf: "333.972.458-00",
               escala: "5x2x6x1",
               tempoPausa: "01:00",
@@ -324,16 +326,15 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               jornada: "12:00",
               horaEntrada: "06:00",
               telefone: "(00) 9 1234-5678",
-              email: "aldjnldjnsadadn@ksdkm.com.br",
-              nomeCentroCusto: "Sede - Fernando ltda.",
-              nome: "Aleff Apararecido dos Santos Lima",
+              nomeCentroCusto: ";k;km ;m;m;km;kllmlkm;km;km;km;km;m;m;km;klm;km;km;km;k;;l;ll;;ll;l;l;l;",
+              nome: "Gusoh ASjisaidjas",
               token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              codEmpresa: "012345.012938p193812938120001",
-              cargo: "Assist. Tec. Seg. Trab.",
-              endereco: "Rua Lorem ipsum, Nº 123, Bairro Adipiscing - São Paulo - SivjhvkhvkhvP",
+              codEmpresa: "",
+              cargo: "asojnasojnaspnfapskfnapskdnapskdnaskdnadspn",
+              endereco: "",
               colorBatida: Color(0xff1AC15D),
-            ),
+            ),),
             new Container(
               height: 17.0,
             ),
@@ -398,6 +399,40 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
             new Container(
               height: 17.0,
+            ),
+            new ZExpendableItemTile(
+              nome: "Gustavo Ortiz",
+              nomeCentroCusto: "Sede - Fernando ltda.",
+              tempoPausa: "01:00",
+              inicioIntervalo: "11:00",
+              voltaIntervalo: "12:00",
+              escala: "5x2x6x1",
+              horaSaida: "18:00",
+              jornada: "12:00",
+              horaEntrada: "06:00",
+              re: "909.293",
+              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              cpf: '447.930.638-29',
+              cargo: "Assist. Tec. Seg. Trab.",
+              colorBatida: Color(0xff1AC15D),
+              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+              status: true,
+              onTapImage: () {},
+              imagemPerfil: new Container(),
+              funcao: () {},
+              funcaoIconeDois: () {},
+              funcaoIconeQuatro: () {},
+              funcaoIconeTres: () {},
+              funcaoIconeUm: () {},
+              iconeDois: new Icon(Icons.arrow_forward_ios),
+              iconeQuatro: new Icon(Icons.arrow_forward_ios),
+              iconeTres: new Icon(Icons.arrow_forward_ios),
+              iconeUm: new Icon(Icons.arrow_forward_ios),
+              onTapVoltar: () {},
+              textoIconeDois: 'teste',
+              textoIconeQuatro: 'teste',
+              textoIconeTres: 'teste',
+              textoIconeUm: 'teste',
             ),
             new ZExpendableItemTile(
               nome: "Gustavo Ortiz",
