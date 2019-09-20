@@ -28,6 +28,14 @@ import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/infra/db/database.dart';
+/*
+import 'package:z_components_example/entities/pessoa.dart';
+import 'package:z_components_example/repositories/i-monstro-repository.dart';
+import 'package:z_components_example/repositories/i-pessoa-repository.dart';
+import 'package:z_components_example/repositories/monstro-repository.dart';
+import 'package:z_components_example/repositories/pessoa-repository.dart';*/
+
+import 'entities/monstro.dart';
 
 void main() => runApp(MyApp());
 
@@ -188,23 +196,31 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
     super.initState();
 
-   // _db = new ZDatabase(version: 1, dbName: "teste", entidades: [new Pessoa()]);
+
+   // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
   /*  _db.init().then((_){
       _query();
     });*/
   }
 
-  void _query() async{
-/*    IPessoaRepository rep = new PessoaRepository();
+/*  void _query() async{
+    IPessoaRepository rep = new PessoaRepository();
 
     rep.insert(new Pessoa(nome: "Andreza", idade: 20));
+
+    IMonstroRepository _monstroRepository = new MonstroRepository();
+
+    _monstroRepository.insert(new Monstro(nome: "Gustavo", habilidade: "Super forca"));
 
     var a = await rep.findById(1);
     var b = await rep.listarPessoas();
 
-    print("");*/
-  }
+
+    var ma = await _monstroRepository.findById(1);
+
+    print("");
+  }*/
 
   @override
   Widget build(BuildContext context) {
