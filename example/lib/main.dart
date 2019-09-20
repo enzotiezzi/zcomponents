@@ -313,7 +313,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),*/
             new ZItemTile(
               status: true,
-              zTypeTile: ZTypeTile.isUser,
+              zTypeTile: ZTypeTile.isEmpresa,
               cpf: "333.972.458-00",
               escala: "5x2x6x1",
               tempoPausa: "01:00",
