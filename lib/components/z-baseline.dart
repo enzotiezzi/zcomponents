@@ -802,7 +802,7 @@ class ZBaseLine extends StatelessWidget {
       }else{
       valideCelular = false;
       showAlertDialogNew(
-          "Celular Inválido!", "Por Favor, Todos celulares no Brasil devem começar com 9.");
+          "Celular Inválido!", "Os celulares no Brasil devem começar com 9. Por Favor digite novamente o seu celular.");
       }
     }
   }

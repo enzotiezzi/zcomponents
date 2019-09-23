@@ -1,6 +1,6 @@
 ## 0.6.6
 
-* Update ZBaseLine!
+* Update!
 
 ## 0.6.5
 
