@@ -49,6 +49,8 @@ class ZPerfil extends StatefulWidget {
     this.tituloAppBar,
     this.onTapVoltar,
     this.listaIcones,
+    this.inicioIntervalo,
+    this.voltaIntervalo,
     this.listaTextos,
     this.numeroQuadrados,
     this.imagemPerfil,
