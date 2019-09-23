@@ -279,6 +279,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               controllerNome: _controllerFim,
               nomeFocus: nomeFocus,
             ),
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.isCelular,
+              controllerCelular: controllerCelular,
+              celularFocus: celularFocus,
+              context: context,
+            ),
             new ZExpansion(
               childTitle: new IconButton(
                 onPressed: () {},
