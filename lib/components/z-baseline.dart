@@ -9,6 +9,8 @@ import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
 
 class ZBaseLine extends StatelessWidget {
   bool enable;
@@ -269,16 +271,14 @@ class ZBaseLine extends StatelessWidget {
                                   color: Color(0xFF000000).withOpacity(0.3)),
                             ),
                             inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: "(XX)XXXXX-XXXX",
-                                  maskTWO: "(XX)XXXXX-XXXX"),
+                              MaskTextInputFormatter(mask: "(##) # ####-####", filter: { "#": RegExp(r'[0-9]') }),
                               BlacklistingTextInputFormatter(
                                   RegExp("[\\\\,.]")),
                             ],
                             onChanged: (text) {
                               celular = text;
                               countCelular = 0;
-                              if (celular.length == 14) {
+                              if (celular.length == 16) {
                                 _fieldFocusChange(
                                     context, celularFocus, proximoFocus);
                               }
@@ -790,12 +790,20 @@ class ZBaseLine extends StatelessWidget {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, digitar o seu celular.");
-    } else if (celular.length < 14) {
+    } else if (celular.length < 16) {
+      valideCelular = false;
+       showAlertDialogNew(
+          "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
+    } else if (celular.length == 16) {
+      var splitCelular = celular.split(" ");
+
+      if (splitCelular[1] == "9"){
+        valideCelular = true;
+      }else{
       valideCelular = false;
       showAlertDialogNew(
-          "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
-    } else {
-      valideCelular = true;
+          "Celular Inválido!", "Os celulares no Brasil devem começar com 9. Por Favor digite novamente o seu celular.");
+      }
     }
   }
 
