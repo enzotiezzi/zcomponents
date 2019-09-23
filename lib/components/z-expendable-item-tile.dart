@@ -14,6 +14,8 @@ class ZExpendableItemTile extends StatefulWidget {
   String escala;
   final String voltaIntervalo;
   Color colorBatida;
+  Color colorTextExpandItens;
+  double fontSizeTextExpand;
 
   String re;
   String nomeCC;
@@ -47,6 +49,8 @@ class ZExpendableItemTile extends StatefulWidget {
 
   ZExpendableItemTile(
       {
+        this.fontSizeTextExpand = 10.0,
+        this.colorTextExpandItens = Colors.black,
         this.jornada,
         this.colorBatida,
         this.onPressedIconBatida,
@@ -455,9 +459,9 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                             new Container(
                               child: widget.iconeUm,
                             ),
-                            new Text("${widget.textoIconeUm}".toUpperCase(),
+                            new Text("${widget.textoIconeUm}",
                                 style: TextStyle(
-                                  fontSize: 10.0, color: const Color(0xff2BB9B4),))
+                                  fontSize: widget.fontSizeTextExpand, color: widget.colorTextExpandItens,))
                           ],
                         ),
                       ),
@@ -474,9 +478,9 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                         child: new Column(
                           children: <Widget>[
                             new Container(child: widget.iconeDois),
-                            new Text(widget.textoIconeDois.toUpperCase(),
+                            new Text(widget.textoIconeDois,
                                 style: TextStyle(
-                                    fontSize: 10.0, color: const Color(0xff2BB9B4)))
+                                    fontSize: widget.fontSizeTextExpand, color: widget.colorTextExpandItens))
                           ],
                         ),
                       ),
@@ -494,9 +498,9 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                         child: new Column(
                           children: <Widget>[
                             new Container(child: widget.iconeTres),
-                            new Text(widget.textoIconeTres.toUpperCase(),
+                            new Text(widget.textoIconeTres,
                                 style: TextStyle(
-                                    fontSize: 10.0, color: const Color(0xff2BB9B4)))
+                                    fontSize: widget.fontSizeTextExpand, color: widget.colorTextExpandItens))
                           ],
                         ),
                       ),
@@ -511,9 +515,9 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                           children: <Widget>[
                             new Container(child: widget.iconeQuatro),
                             new Text(
-                              widget.textoIconeQuatro.toUpperCase(),
+                              widget.textoIconeQuatro,
                               style: TextStyle(
-                                  fontSize: 10.0, color: const Color(0xff2BB9B4)),
+                                  fontSize: widget.fontSizeTextExpand, color: widget.colorTextExpandItens),
                             )
                           ],
                         ),

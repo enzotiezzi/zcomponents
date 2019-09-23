@@ -98,8 +98,7 @@ class _ZPerfilState extends State<ZPerfil> {
           children: <Widget>[
             new Container(
               color: const Color(0xffF0F0F0),
-              padding: EdgeInsets.only(
-                  right: 10.0, left: 10.0, bottom: 5.0, top: 5.0),
+              padding: EdgeInsets.only(bottom: 5.0, top: 5.0),
               child: ZItemTile(nome: widget.textoTituloInfo,
                 escala: widget.textoEscalaInfo,
                 cargo: widget.textoCargoInfo,
