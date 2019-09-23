@@ -55,12 +55,12 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                         ? new Text(
                       widget.listaTextos[index],
                       style:
-                      TextStyle(color: const Color(0xff999999)),
+                      TextStyle(color: const Color(0xff707070)),
                     )
                         : new Text(
                       widget.listaTextos[index],
                       style:
-                      TextStyle(color: const Color(0xff999999)),
+                      TextStyle(color: const Color(0xff707070)),
                     ),
                   )
                 ],
@@ -94,12 +94,12 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                       ? new Text(
                     widget.listaTextos[index],
                     style:
-                    TextStyle(color: const Color(0xff999999)),
+                    TextStyle(color: const Color(0xff707070)),
                   )
                       : new Text(
                     widget.listaTextos[index],
                     style:
-                    TextStyle(color: const Color(0xff999999)),
+                    TextStyle(color: const Color(0xff707070)),
                   ),
                 )
               ],
