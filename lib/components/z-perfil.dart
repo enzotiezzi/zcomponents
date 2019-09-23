@@ -4,14 +4,18 @@ import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/config/z-tipo-header.dart';
+import 'package:z_components/config/z-type-tile.dart';
 
 class ZPerfil extends StatefulWidget {
   String idConta;
   String token;
   String cpf;
   String tituloAppBar;
+  String inicioIntervalo;
+  String voltaIntervalo;
   String textoTituloInfo;
   String textoLocalInfo;
+  String jornada;
   String textoCargoInfo;
   String textoEscalaInfo;
   String textoHoraEntradaInfo;
@@ -19,6 +23,8 @@ class ZPerfil extends StatefulWidget {
   String textoHoraIntervaloInfo;
   String textoCodigoInfo;
   String tituloHeader;
+  String re;
+  Color colorBatida;
   int numeroQuadrados;
   List<String> listaTextos;
   List<IconData> listaIcones;
@@ -28,11 +34,18 @@ class ZPerfil extends StatefulWidget {
   var onTapVoltar;
   var onTapImage;
   String isExpand;
+  Function funcaoIconBatida;
+
   Function funcao;
   Color color;
 
 
   ZPerfil({
+    this.re: "",
+    this.colorBatida: Colors.grey,
+    this.funcao,
+    this.funcaoIconBatida,
+    this.jornada: "",
     this.tituloAppBar,
     this.onTapVoltar,
     this.listaIcones,
@@ -94,13 +107,23 @@ class _ZPerfilState extends State<ZPerfil> {
     return new Column(
       children: <Widget>[
         ZHeader(
-          titulo: widget.tituloHeader,
+          child: new Container(
+    margin: const EdgeInsets.only(top: 8,bottom: 8,left: 20),
+    child: new Text("${widget.tituloHeader}",style: new TextStyle(fontWeight: FontWeight.w400,fontSize: 18),),),
           children: <Widget>[
             new Container(
               color: const Color(0xffF0F0F0),
               padding: EdgeInsets.only(bottom: 5.0, top: 5.0),
-              child: ZItemTile(nome: widget.textoTituloInfo,
+              child: ZItemTile(
+                zTypeTile: ZTypeTile.isColab,
+                nome: widget.textoTituloInfo,
                 escala: widget.textoEscalaInfo,
+                re: widget.re,
+                jornada: widget.jornada,
+                colorBatida: widget.colorBatida,
+                inicioIntervalo:widget.inicioIntervalo,
+                voltaIntervalo: widget.voltaIntervalo,
+                onPressedIconBatida: widget.funcaoIconBatida,
                 cargo: widget.textoCargoInfo,
                 horaEntrada: widget.textoHoraEntradaInfo,
                 horaSaida: widget.textoHoraSaidaInfo,
