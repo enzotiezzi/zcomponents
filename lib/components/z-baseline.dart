@@ -196,6 +196,7 @@ class ZBaseLine extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: new TextField(
+                            enabled: this.enable,
                             keyboardAppearance: Brightness.light,
                             controller: controllerCPF,
                             onChanged: (text) {

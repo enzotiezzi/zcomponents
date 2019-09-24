@@ -340,12 +340,18 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                           ),
                                           new Container(
                                             padding: EdgeInsets.only(
-                                                left: 6.0, right: 0.0, bottom: 6.0, top: 0.0),
+                                                left: 6.0, right: 0.0, bottom: 6.0, top: 2.0),
                                             child: (widget.escala == null ||
                                                 widget.horaEntrada == null ||
                                                 widget.horaSaida == null)
                                                 ? new Text("")
-                                                : new Text(
+                                                : (widget.jornada == null || widget.jornada == "")?new Text(
+                                              "${widget.horaEntrada}-${widget.horaSaida}",
+                                              style: TextStyle(
+                                                  color: Color(0xFF808080),
+                                                  fontSize: (_largura<360)?8.0:10,
+                                                  fontWeight: FontWeight.w700),
+                                            ):new Text(
                                               "(${widget.jornada}) ${widget.horaEntrada}-${widget.horaSaida}",
                                               style: TextStyle(
                                                   color: Color(0xFF808080),
