@@ -1,3 +1,7 @@
+## 0.6.9
+
+*Update Z-Expanded-Item-Tile
+
 ## 0.6.8
 
 *Update Zperfil & ZItemTile
