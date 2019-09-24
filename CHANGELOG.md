@@ -1,6 +1,10 @@
+## 0.6.8
+
+*Update Zperfil & ZItemTile
+
 ## 0.6.7
 
-* Update!
+* Update ZCheckCPF!
 
 ## 0.6.6
 

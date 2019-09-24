@@ -39,7 +39,6 @@ class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin {
                 showAlertDialogNew(
                     "Atenção!", "Não é possivel se cadastrar sem CPF");
               }
-              _temcpf = !_temcpf;
             });
           },
           child: new Row(

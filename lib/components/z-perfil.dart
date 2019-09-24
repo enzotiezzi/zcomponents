@@ -38,39 +38,43 @@ class ZPerfil extends StatefulWidget {
 
   Function funcao;
   Color color;
+  String endereco;
+  String telefone;
+  String email;
 
-
-  ZPerfil({
-    this.re: "",
-    this.colorBatida: Colors.grey,
-    this.funcao,
-    this.funcaoIconBatida,
-    this.jornada: "",
-    this.tituloAppBar,
-    this.onTapVoltar,
-    this.listaIcones,
-    this.inicioIntervalo,
-    this.voltaIntervalo,
-    this.listaTextos,
-    this.numeroQuadrados,
-    this.imagemPerfil,
-    this.statusInfo,
-    this.textoHoraEntradaInfo,
-    this.textoCodigoInfo,
-    this.textoLocalInfo,
-    this.textoEscalaInfo,
-    this.textoHoraSaidaInfo,
-    this.textoHoraIntervaloInfo,
-    this.textoTituloInfo,
-    this.textoCargoInfo,
-    this.listaOnTap,
-    this.onTapImage,
-    this.tituloHeader,
-    this.token,
-    this.cpf,
-    this.idConta,
-    this.color,
-  });
+  ZPerfil(
+      {this.re: "",
+      this.colorBatida: Colors.grey,
+      this.funcao,
+      this.funcaoIconBatida,
+      this.jornada: "",
+      this.tituloAppBar,
+      this.onTapVoltar,
+      this.listaIcones,
+      this.inicioIntervalo,
+      this.voltaIntervalo,
+      this.listaTextos,
+      this.numeroQuadrados,
+      this.imagemPerfil,
+      this.statusInfo,
+      this.textoHoraEntradaInfo,
+      this.textoCodigoInfo,
+      this.textoLocalInfo,
+      this.textoEscalaInfo,
+      this.textoHoraSaidaInfo,
+      this.textoHoraIntervaloInfo,
+      this.textoTituloInfo,
+      this.textoCargoInfo,
+      this.listaOnTap,
+      this.onTapImage,
+      this.tituloHeader,
+      this.token,
+      this.cpf,
+      this.idConta,
+      this.color,
+      this.telefone,
+      this.email,
+      this.endereco});
 
   @override
   _ZPerfilState createState() => _ZPerfilState();
@@ -110,35 +114,28 @@ class _ZPerfilState extends State<ZPerfil> {
       children: <Widget>[
         ZHeader(
           child: new Container(
-    margin: const EdgeInsets.only(top: 8,bottom: 8,left: 20),
-    child: new Text("${widget.tituloHeader}",style: new TextStyle(fontWeight: FontWeight.w400,fontSize: 18),),),
+            margin: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
+            child: new Text(
+              "${widget.tituloHeader}",
+              style: new TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+            ),
+          ),
           children: <Widget>[
             new Container(
               color: const Color(0xffF0F0F0),
               padding: EdgeInsets.only(bottom: 5.0, top: 5.0),
               child: ZItemTile(
-                zTypeTile: ZTypeTile.isColab,
+                zTypeTile: ZTypeTile.isUser,
                 nome: widget.textoTituloInfo,
-                escala: widget.textoEscalaInfo,
-                re: widget.re,
-                jornada: widget.jornada,
-                colorBatida: widget.colorBatida,
-                inicioIntervalo:widget.inicioIntervalo,
-                voltaIntervalo: widget.voltaIntervalo,
-                onPressedIconBatida: widget.funcaoIconBatida,
-                cargo: widget.textoCargoInfo,
-                horaEntrada: widget.textoHoraEntradaInfo,
-                horaSaida: widget.textoHoraSaidaInfo,
-                tempoPausa: widget.textoHoraIntervaloInfo,
                 nomeCentroCusto: widget.textoLocalInfo,
                 onTapImage: widget.onTapImage,
                 imagemPerfil: widget.imagemPerfil,
-                status: widget.statusInfo,
-                token: widget.token,
                 cpf: widget.cpf,
-                idConta: widget.idConta,
                 isExpand: widget.isExpand,
                 funcao: widget.funcao,
+                email: widget.email,
+                endereco: widget.endereco,
+                telefone: widget.telefone,
               ),
             )
           ],
