@@ -344,7 +344,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                             child: (widget.escala == null ||
                                                 widget.horaEntrada == null ||
                                                 widget.horaSaida == null)
-                                                ? new Text('')
+                                                ? new Text("")
                                                 : new Text(
                                               "(${widget.jornada}) ${widget.horaEntrada}-${widget.horaSaida}",
                                               style: TextStyle(
@@ -378,7 +378,13 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                                 new Container(
                                                   padding: EdgeInsets.only(
                                                       left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
-                                                  child: new Text(
+                                                  child:
+                                                  (widget.tempoPausa ==
+                                                      null ||
+                                                      widget.tempoPausa ==
+                                                          "")?
+                                                      new Text(""):
+                                                  new Text(
                                                     "(${widget.tempoPausa})" ?? "",
                                                     style: TextStyle(
                                                         color: Color(0xFF808080),
@@ -389,7 +395,10 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                                 new Container(
                                                   padding: EdgeInsets.only(
                                                       left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
-                                                  child: new Text(
+                                                  child:  (widget.inicioIntervalo ==
+                                                      null ||
+                                                      widget.inicioIntervalo ==
+                                                          "")?new Text(""):new Text(
                                                     widget.inicioIntervalo ?? "",
                                                     style: TextStyle(
                                                         color: Color(0xFF808080),
@@ -400,8 +409,12 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                                 new Container(
                                                   padding: EdgeInsets.only(
                                                       left: 2.0, right: 0.0, bottom: 6.0, top: 0.0),
-                                                  child: new Text(
-                                                    "-${widget.voltaIntervalo}" ?? "",
+                                                  child: (widget.voltaIntervalo ==
+                                                      null ||
+                                                      widget.voltaIntervalo ==
+                                                          "")?new Text(""):new Text(
+                                                      "-${widget.voltaIntervalo}" ??
+                                                          "",
                                                     style: TextStyle(
                                                         color: Color(0xFF808080),
                                                         fontSize: (_largura<360)?8.0:10,
