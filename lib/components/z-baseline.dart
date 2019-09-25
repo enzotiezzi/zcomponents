@@ -67,36 +67,36 @@ class ZBaseLine extends StatelessWidget {
   var controllerPadrao = new TextEditingController();
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
-var onChangedTextPadrao;
+  var onChangedTextPadrao;
   var onChangedCEP;
 
 
   ZBaseLine(
       {this.value,
-      this.key,
-      this.context,
-      this.zTipos = ZTipoBaseline.isNomeCompleto,
-      this.controllerEmail,
-      this.controllerData,
-      this.controllerCelular,
-      this.controllerCPF,
-      this.controllerNome,
-      this.mesFocus,
-      this.emailFocus,
-      this.celularFocus,
-      this.cpfFocus,
-      this.nomeFocus,
-      this.controllerPadrao,
-      this.hintText,
-      this.padraoFocus,
-      this.text,
-      this.onChangedCEP,
+        this.key,
+        this.context,
+        this.zTipos = ZTipoBaseline.isNomeCompleto,
+        this.controllerEmail,
+        this.controllerData,
+        this.controllerCelular,
+        this.controllerCPF,
+        this.controllerNome,
+        this.mesFocus,
+        this.emailFocus,
+        this.celularFocus,
+        this.cpfFocus,
+        this.nomeFocus,
+        this.controllerPadrao,
+        this.hintText,
+        this.padraoFocus,
+        this.text,
+        this.onChangedCEP,
         this.onChangedTextPadrao,
-      this.controllerCNPJ,
-      this.controllerCEP,
-      this.cNPJFocus,
-      this.proximoFocus,
-      this.cEPFocus})
+        this.controllerCNPJ,
+        this.controllerCEP,
+        this.cNPJFocus,
+        this.proximoFocus,
+        this.cEPFocus})
       : super(key: key) {
     if (zTipos == ZTipoBaseline.isEmail) {
       init();
@@ -519,27 +519,27 @@ var onChangedTextPadrao;
                               keyboardAppearance: Brightness.light,
 
                               onSubmitted: (text) {
-                              _fieldFocusChange(
-                                  context, cEPFocus, proximoFocus);
-                            },
-                            focusNode: cEPFocus,
-                            controller: controllerCEP,
-                            keyboardType: TextInputType.number,
-                            cursorColor: Color(0xFF2BBAB4),
-                            style: new TextStyle(color: Color(0xFF000000)),
-                            decoration: InputDecoration(
-                              hintText: "CEP",
-                              hintStyle: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Color(0xFF000000).withOpacity(0.3)),
-                            ),
-                            inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[\\\\,.]")),
-                            ],
-                            onChanged: onChangedCEP
+                                _fieldFocusChange(
+                                    context, cEPFocus, proximoFocus);
+                              },
+                              focusNode: cEPFocus,
+                              controller: controllerCEP,
+                              keyboardType: TextInputType.number,
+                              cursorColor: Color(0xFF2BBAB4),
+                              style: new TextStyle(color: Color(0xFF000000)),
+                              decoration: InputDecoration(
+                                hintText: "CEP",
+                                hintStyle: new TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF000000).withOpacity(0.3)),
+                              ),
+                              inputFormatters: [
+                                MaskedTextInputFormatterShifter(
+                                    maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"),
+                                BlacklistingTextInputFormatter(
+                                    RegExp("[\\\\,.]")),
+                              ],
+                              onChanged: onChangedCEP
                           ),
                         ))
                   ],
@@ -822,62 +822,62 @@ var onChangedTextPadrao;
     showDialog(
         context: context,
         builder: (BuildContext context) => ZAlertDialog(
-              zDialog: ZDialog.erro,
-              child: new Column(
+          zDialog: ZDialog.erro,
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        margin: const EdgeInsets.all(8),
-                        child: new Text(
-                          title,
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                      )
-                    ],
-                  ),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        margin: const EdgeInsets.only(
-                            left: 16, right: 16, bottom: 16),
-                        child: new Text(
-                          message,
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                              color: const Color(0xff707070), fontSize: 13),
-                        ),
-                      )
-                    ],
-                  ),
-                  new Divider(
-                    color: const Color(0xffdbdbdb),
-                  ),
                   new Container(
-                    child: new InkWell(
-                      borderRadius:
-                          new BorderRadius.all(const Radius.circular(20.0)),
-                      splashColor: const Color(0xffe6e6e6),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: new Container(
-                        padding: const EdgeInsets.all(12),
-                        child: new Text(
-                          "ENTENDI",
-                          style: new TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                    margin: const EdgeInsets.all(8),
+                    child: new Text(
+                      title,
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-                    margin: const EdgeInsets.only(bottom: 8),
                   )
                 ],
               ),
-            ));
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    margin: const EdgeInsets.only(
+                        left: 16, right: 16, bottom: 16),
+                    child: new Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(
+                          color: const Color(0xff707070), fontSize: 13),
+                    ),
+                  )
+                ],
+              ),
+              new Divider(
+                color: const Color(0xffdbdbdb),
+              ),
+              new Container(
+                child: new InkWell(
+                  borderRadius:
+                  new BorderRadius.all(const Radius.circular(20.0)),
+                  splashColor: const Color(0xffe6e6e6),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Container(
+                    padding: const EdgeInsets.all(12),
+                    child: new Text(
+                      "ENTENDI",
+                      style: new TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                margin: const EdgeInsets.only(bottom: 8),
+              )
+            ],
+          ),
+        ));
   }
 
   void _fieldFocusChange(

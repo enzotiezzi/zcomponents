@@ -47,7 +47,7 @@ class _ZItemTileState extends State<ZItemTile> {
     return new Container(
       margin: EdgeInsets.only(
           left: 1.0, right: 1.0, bottom: 0.0, top: 0.0),
-      height: MediaQuery.of(context).size.height/8,
+      height: MediaQuery.of(context).size.height/7,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(6.0))),

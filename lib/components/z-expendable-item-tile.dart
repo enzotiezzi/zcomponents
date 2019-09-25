@@ -47,7 +47,7 @@ class ZExpendableItemTile extends StatefulWidget {
       this.idConta,
       this.imagemPerfil,
       this.onTapImage,
-      this.onTapVoltar,
+      this.onTapVoltar, String textoTitulo,
       });
 
   @override

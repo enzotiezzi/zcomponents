@@ -30,12 +30,14 @@ class ZCadastroUsuario extends StatefulWidget {
   var controllerRepetirSenha = new TextEditingController();
 
   var onTapVoltar;
+  var onTapTermosUso;
 
   ZCadastroUsuario({
     this.controllerRepetirSenha,
     this.controllerSenha,
     this.tituloAppBar,
     this.onTapVoltar,
+    this.onTapTermosUso,
     this.key,
     this.context,
     this.onPressed,
@@ -457,12 +459,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           zTipos: ZTipoSenha.isRepetirSenha,
         ),
         new Container(
-          child: new GestureDetector(
-            onTap: () {
-              setState(() {
-                _termos = !_termos;
-              });
-            },
+
+
             child: new Container(
                 margin: EdgeInsets.only(
                     left: 75.0, right: 75.0, top: 15.0, bottom: 0.0),
@@ -478,7 +476,12 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                       padding: EdgeInsets.all(2),
                       child: new Row(
                         children: <Widget>[
-                          new Container(
+                          new GestureDetector(
+                            onTap: (){
+                              _termos = !_termos;
+                            },
+                            child: new Container(
+                            //gesture aqui
                               decoration: BoxDecoration(
                                   color: (_termos == false)
                                       ? Colors.white
@@ -495,8 +498,13 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 child: new Icon(Icons.check,
                                     color: Colors.white,
                                     size: (_termos == true) ? 20.0 : 0.0),
-                              )),
-                          new Container(
+                              )),),
+
+
+                          new GestureDetector(
+                            onTap: widget.onTapTermosUso,
+                            child: new Container(
+                            // outro aqui
                             margin: EdgeInsets.only(left: 4.0),
                             child: new Text(
                               "ACEITO OS TERMOS DE USO",
@@ -505,11 +513,12 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   fontSize: 13.0,
                                   color: const Color(0xff2BB9B4)),
                             ),
-                          )
+                          ),)
+
                         ],
                       ),
                     ))),
-          ),
+
         ),
         new Container(
             alignment: Alignment.center,

@@ -81,7 +81,8 @@ class ZCollectionState extends State<ZCollection> {
           ],
         ),
       ),
-      onTap: _irParaSelecaoDeItemHorizontal,
+      onTap:
+      _irParaSelecaoDeItemHorizontal,
     );
   }
 
@@ -118,13 +119,16 @@ class ZCollectionState extends State<ZCollection> {
 */
 
   void _irParaSelecaoDeItemHorizontal() async {
+
     _itemSelecionado = await Navigator.push<ZCollectionItem>(
         context,
         new PageRouteBuilder(
           pageBuilder: (BuildContext context, Animation animation,
               Animation secondaryAnimation) {
             return ZCollectionList(
+
               lista: widget.lista,
+
               titulo: widget.titulo,
               ultimoValor:  _itemSelecionado,
             );
