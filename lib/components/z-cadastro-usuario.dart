@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-check-cpf.dart';
 import 'package:z_components/components/z-header.dart';
@@ -154,7 +155,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 child: new Text(
                                   "Nome Completo",
                                   style:
-                                      new TextStyle(color: Color(0xFF999999)),
+                                  new TextStyle(color: Color(0xFF999999)),
                                 ),
                               )),
                           new Expanded(
@@ -176,13 +177,13 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   controller: widget.controllerNome,
                                   cursorColor: Color(0xFF2BBAB4),
                                   style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  new TextStyle(color: Color(0xFF000000)),
                                   decoration: InputDecoration(
                                     hintText: "Nome Completo",
                                     hintStyle: new TextStyle(
                                         fontSize: 14.0,
                                         color:
-                                            Color(0xFF000000).withOpacity(0.3)),
+                                        Color(0xFF000000).withOpacity(0.3)),
                                   ),
                                 ),
                               ))
@@ -204,7 +205,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 child: new Text(
                                   "CPF",
                                   style:
-                                      new TextStyle(color: Color(0xFF999999)),
+                                  new TextStyle(color: Color(0xFF999999)),
                                 ),
                               )),
                           new Expanded(
@@ -231,14 +232,14 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   keyboardType: TextInputType.number,
                                   cursorColor: Color(0xFF2BBAB4),
                                   style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  new TextStyle(color: Color(0xFF000000)),
                                   decoration: InputDecoration(
                                     isDense: false,
                                     hintText: "*** . *** . *** - **",
                                     hintStyle: new TextStyle(
                                         fontSize: 14.0,
                                         color:
-                                            Color(0xFF000000).withOpacity(0.3)),
+                                        Color(0xFF000000).withOpacity(0.3)),
                                   ),
                                   inputFormatters: [
                                     MaskedTextInputFormatterShifter(
@@ -265,7 +266,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 child: new Text(
                                   "Celular",
                                   style:
-                                      new TextStyle(color: Color(0xFF999999)),
+                                  new TextStyle(color: Color(0xFF999999)),
                                 ),
                               )),
                           new Expanded(
@@ -282,7 +283,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   },
                                   onChanged: (text) {
                                     countCelular = 0;
-                                    if (text.length == 14) {
+                                    if (text.length == 16) {
                                       _fieldFocusChange(
                                           context, celularFocus, emailFocus);
                                     }
@@ -292,18 +293,18 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   keyboardType: TextInputType.number,
                                   cursorColor: Color(0xFF2BBAB4),
                                   style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  new TextStyle(color: Color(0xFF000000)),
                                   decoration: InputDecoration(
                                     hintText: "( ** ) 9 **** - ****",
                                     hintStyle: new TextStyle(
                                         fontSize: 14.0,
                                         color:
-                                            Color(0xFF000000).withOpacity(0.3)),
+                                        Color(0xFF000000).withOpacity(0.3)),
                                   ),
                                   inputFormatters: [
-                                    MaskedTextInputFormatterShifter(
-                                        maskONE: "(XX)XXXXX-XXXX",
-                                        maskTWO: "(XX)XXXXX-XXXX"),
+                                    MaskTextInputFormatter(
+                                        mask: "(##) # ####-####",
+                                        filter: { "#": RegExp(r'[0-9]')}),
                                     BlacklistingTextInputFormatter(
                                         RegExp("[\\\\,.]")),
                                   ],
@@ -327,7 +328,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 child: new Text(
                                   "E-mail",
                                   style:
-                                      new TextStyle(color: Color(0xFF999999)),
+                                  new TextStyle(color: Color(0xFF999999)),
                                 ),
                               )),
                           new Expanded(
@@ -349,13 +350,13 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   focusNode: emailFocus,
                                   cursorColor: Color(0xFF2BBAB4),
                                   style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  new TextStyle(color: Color(0xFF000000)),
                                   decoration: InputDecoration(
                                     hintText: "email@email.com.br",
                                     hintStyle: new TextStyle(
                                         fontSize: 14.0,
                                         color:
-                                            Color(0xFF000000).withOpacity(0.3)),
+                                        Color(0xFF000000).withOpacity(0.3)),
                                   ),
                                 ),
                               ))
@@ -377,7 +378,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                 child: new Text(
                                   "Data Nascimento",
                                   style:
-                                      new TextStyle(color: Color(0xFF999999)),
+                                  new TextStyle(color: Color(0xFF999999)),
                                 ),
                               )),
                           new Expanded(
@@ -403,13 +404,13 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   keyboardType: TextInputType.number,
                                   cursorColor: Color(0xFF2BBAB4),
                                   style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  new TextStyle(color: Color(0xFF000000)),
                                   decoration: InputDecoration(
                                     hintText: "dd / mm / aaaa",
                                     hintStyle: new TextStyle(
                                         fontSize: 14.0,
                                         color:
-                                            Color(0xFF000000).withOpacity(0.3)),
+                                        Color(0xFF000000).withOpacity(0.3)),
                                   ),
                                   inputFormatters: [
                                     MaskedTextInputFormatterShifter(
@@ -516,21 +517,21 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
             child: (_termos == false)
                 ? ZButton(
-                    color: Colors.grey,
-                    padding: EdgeInsets.only(
-                        top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
-                    zButtonType: ZButtonType.isContained,
-                    text: "CADASTRAR USUÁRIO",
-                    onPressed: (){},
+              color: Colors.grey,
+              padding: EdgeInsets.only(
+                  top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
+              zButtonType: ZButtonType.isContained,
+              text: "CADASTRAR USUÁRIO",
+              onPressed: () {},
 
-                  )
+            )
                 : ZButton(
-                    padding: EdgeInsets.only(
-                        top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
-                    zButtonType: ZButtonType.isContained,
-                    text: "CADASTRAR USUÁRIO",
-                    onPressed: widget.onPressed,
-                  )),
+              padding: EdgeInsets.only(
+                  top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
+              zButtonType: ZButtonType.isContained,
+              text: "CADASTRAR USUÁRIO",
+              onPressed: widget.onPressed,
+            )),
       ],
     );
   }
@@ -633,7 +634,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   void showAlertDialogNew(String title, String message) async {
     showDialog(
         context: context,
-        builder: (BuildContext context) => ZAlertDialog(
+        builder: (BuildContext context) =>
+            ZAlertDialog(
               zDialog: ZDialog.erro,
               child: new Column(
                 children: <Widget>[
@@ -654,7 +656,10 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.6,
                         margin: const EdgeInsets.only(
                             left: 16, right: 16, bottom: 16),
                         child: new Text(
@@ -672,7 +677,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                   new Container(
                     child: new InkWell(
                       borderRadius:
-                          new BorderRadius.all(const Radius.circular(20.0)),
+                      new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
                         Navigator.pop(context);
@@ -738,14 +743,17 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void mesHasFocus() {
-   if (widget.controllerData.text.length < 10 && widget.controllerData.text.length >= 1) {
+    if (widget.controllerData.text.length < 10 &&
+        widget.controllerData.text.length >= 1) {
       showAlertDialogNew("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
     }
   }
 
   void _valideNome() {
-    if (widget.controllerNome.text.split(' ').length < 2 && widget.controllerNome.text.length >=1) {
+    if (widget.controllerNome.text
+        .split(' ')
+        .length < 2 && widget.controllerNome.text.length >= 1) {
       valideNome = false;
       showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
     } else {
@@ -754,7 +762,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarCPF() {
-    if (!CPFValidator.isValid(widget.controllerCPF.text) && widget.controllerCPF.text.length >= 1) {
+    if (!CPFValidator.isValid(widget.controllerCPF.text) &&
+        widget.controllerCPF.text.length >= 1) {
       valideCPF = false;
       showAlertDialogNew("CPF Inválido!", "Por Favor insira um CPF válido.");
     } else {
@@ -763,7 +772,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarCelular() {
-    if (widget.controllerCelular.text.length < 14 && widget.controllerCelular.text.length >= 1 ) {
+    if (widget.controllerCelular.text.length < 16 &&
+        widget.controllerCelular.text.length >= 1) {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
@@ -773,7 +783,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarEmail() {
-   if (!EmailValidator.validate(widget.controllerEmail.text.trim()) && widget.controllerEmail.text.length >= 1) {
+    if (!EmailValidator.validate(widget.controllerEmail.text.trim()) &&
+        widget.controllerEmail.text.length >= 1) {
       valideEmail = false;
       showAlertDialogNew(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");
@@ -782,8 +793,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     }
   }
 
-  _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus,
+      FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
