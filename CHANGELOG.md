@@ -1,3 +1,7 @@
+## 0.7.1
+
+*Update ZCadastro
+
 ## 0.7.0
 
 *Update Z-Expanded-Item-Tile
