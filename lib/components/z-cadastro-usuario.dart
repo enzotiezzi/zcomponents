@@ -504,7 +504,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
         new Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
-            child: (_termos == false)
+            child: (widget.termos == false)
                 ? ZButton(
                     color: Colors.grey,
                     padding: EdgeInsets.only(
