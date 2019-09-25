@@ -461,7 +461,9 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             children: <Widget>[
               new GestureDetector(
                 onTap: () {
-                  widget.termos = !widget.termos;
+                  setState(() {
+                    widget.termos = !widget.termos;
+                  });
                 },
                 child: new Container(
                     //gesture aqui
