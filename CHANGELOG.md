@@ -1,14 +1,30 @@
+## 0.7.4
+
+* Flare downgrade, ZCadstro DialogClick!
+
+## 0.7.3
+
+* ZCadastro
+
+## 0.7.2
+
+* ZCadastro
+
+## 0.7.1
+
+* Update ZCadastro
+
 ## 0.7.0
 
-*Update Z-Expanded-Item-Tile
+* Update Z-Expanded-Item-Tile
 
 ## 0.6.9
 
-*Update Z-Expanded-Item-Tile
+* Update Z-Expanded-Item-Tile
 
 ## 0.6.8
 
-*Update Zperfil & ZItemTile
+* Update Zperfil & ZItemTile
 
 ## 0.6.7
 

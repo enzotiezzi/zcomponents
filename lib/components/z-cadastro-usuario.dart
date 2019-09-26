@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-check-cpf.dart';
 import 'package:z_components/components/z-header.dart';
@@ -16,7 +17,8 @@ import 'package:z_components/config/z-tipo-senha.dart';
 class ZCadastroUsuario extends StatefulWidget {
   Widget zTelaCadastro;
   Widget tituloAppBar;
-
+  var onTapTermosUso;
+  bool termos;
   Key key;
 
   final BuildContext context;
@@ -31,20 +33,21 @@ class ZCadastroUsuario extends StatefulWidget {
 
   var onTapVoltar;
 
-  ZCadastroUsuario({
-    this.controllerRepetirSenha,
-    this.controllerSenha,
-    this.tituloAppBar,
-    this.onTapVoltar,
-    this.key,
-    this.context,
-    this.onPressed,
-    this.controllerData,
-    this.controllerCelular,
-    this.controllerCPF,
-    this.controllerNome,
-    this.controllerEmail,
-  });
+  ZCadastroUsuario(
+      {this.controllerRepetirSenha,
+      this.controllerSenha,
+      this.tituloAppBar,
+      this.onTapVoltar,
+      this.key,
+      this.context,
+      this.onPressed,
+      this.controllerData,
+      this.controllerCelular,
+      this.controllerCPF,
+      this.controllerNome,
+      this.controllerEmail,
+      this.onTapTermosUso,
+      this.termos: false});
 
   @override
   _ZCadastroUsuarioState createState() => _ZCadastroUsuarioState();
@@ -214,7 +217,6 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
                                   keyboardAppearance: Brightness.light,
-
                                   onSubmitted: (term) {
                                     _fieldFocusChange(
                                         context, cpfFocus, celularFocus);
@@ -275,14 +277,13 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
                                   keyboardAppearance: Brightness.light,
-
                                   onSubmitted: (term) {
                                     _fieldFocusChange(
                                         context, celularFocus, emailFocus);
                                   },
                                   onChanged: (text) {
                                     countCelular = 0;
-                                    if (text.length == 14) {
+                                    if (text.length == 16) {
                                       _fieldFocusChange(
                                           context, celularFocus, emailFocus);
                                     }
@@ -301,9 +302,9 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                             Color(0xFF000000).withOpacity(0.3)),
                                   ),
                                   inputFormatters: [
-                                    MaskedTextInputFormatterShifter(
-                                        maskONE: "(XX)XXXXX-XXXX",
-                                        maskTWO: "(XX)XXXXX-XXXX"),
+                                    MaskTextInputFormatter(
+                                        mask: "(##) # ####-####",
+                                        filter: {"#": RegExp(r'[0-9]')}),
                                     BlacklistingTextInputFormatter(
                                         RegExp("[\\\\,.]")),
                                   ],
@@ -337,7 +338,6 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
                                   keyboardAppearance: Brightness.light,
-
                                   onSubmitted: (term) {
                                     _fieldFocusChange(
                                         context, emailFocus, mesFocus);
@@ -387,7 +387,6 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                     left: 8.0, right: 16.0),
                                 child: new TextField(
                                   keyboardAppearance: Brightness.light,
-
                                   onSubmitted: (term) {
                                     mesFocus.unfocus();
                                   },
@@ -457,72 +456,62 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           zTipos: ZTipoSenha.isRepetirSenha,
         ),
         new Container(
-          child: new GestureDetector(
-            onTap: () {
-              setState(() {
-                _termos = !_termos;
-              });
-            },
-            child: new Container(
-                margin: EdgeInsets.only(
-                    left: 75.0, right: 75.0, top: 15.0, bottom: 0.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                child: new Material(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    elevation: 1,
-                    child: new Container(
-                      padding: EdgeInsets.all(2),
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                              decoration: BoxDecoration(
-                                  color: (_termos == false)
-                                      ? Colors.white
-                                      : Color(0xff2BB9B4),
-                                  border: Border.all(
-                                      color: Colors.grey.withOpacity(0.6)),
-                                  shape: BoxShape.circle),
-                              height: 25.0,
-                              width: 25.0,
-                              child: new AnimatedSize(
-                                duration: Duration(milliseconds: 5000),
-                                curve: Curves.fastOutSlowIn,
-                                vsync: this,
-                                child: new Icon(Icons.check,
-                                    color: Colors.white,
-                                    size: (_termos == true) ? 20.0 : 0.0),
-                              )),
-                          new Container(
-                            margin: EdgeInsets.only(left: 4.0),
-                            child: new Text(
-                              "ACEITO OS TERMOS DE USO",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13.0,
-                                  color: const Color(0xff2BB9B4)),
-                            ),
-                          )
-                        ],
-                      ),
-                    ))),
+          padding: EdgeInsets.all(2),
+          child: new Row(
+            children: <Widget>[
+              new GestureDetector(
+                onTap: () {
+                  setState(() {
+                    widget.termos = !widget.termos;
+                  });
+                },
+                child: new Container(
+                    //gesture aqui
+                    decoration: BoxDecoration(
+                        color: (widget.termos == false)
+                            ? Colors.white
+                            : Color(0xff2BB9B4),
+                        border: Border.all(color: Colors.grey.withOpacity(0.6)),
+                        shape: BoxShape.circle),
+                    height: 25.0,
+                    width: 25.0,
+                    child: new AnimatedSize(
+                      duration: Duration(milliseconds: 5000),
+                      curve: Curves.fastOutSlowIn,
+                      vsync: this,
+                      child: new Icon(Icons.check,
+                          color: Colors.white,
+                          size: (widget.termos == true) ? 20.0 : 0.0),
+                    )),
+              ),
+              new GestureDetector(
+                onTap: widget.onTapTermosUso,
+                child: new Container(
+                  // outro aqui
+                  margin: EdgeInsets.only(left: 4.0),
+                  child: new Text(
+                    "ACEITO OS TERMOS DE USO",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13.0,
+                        color: const Color(0xff2BB9B4)),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
         new Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
-            child: (_termos == false)
+            child: (widget.termos == false)
                 ? ZButton(
                     color: Colors.grey,
                     padding: EdgeInsets.only(
                         top: 12.0, bottom: 12.0, right: 40.0, left: 40.0),
                     zButtonType: ZButtonType.isContained,
                     text: "CADASTRAR USUÁRIO",
-                    onPressed: (){},
-
+                    onPressed: () {},
                   )
                 : ZButton(
                     padding: EdgeInsets.only(
@@ -678,6 +667,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         Navigator.pop(context);
                       },
                       child: new Container(
+                        width: double.infinity,
                         padding: const EdgeInsets.all(12),
                         child: new Text(
                           "ENTENDI",
@@ -738,14 +728,16 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void mesHasFocus() {
-   if (widget.controllerData.text.length < 10 && widget.controllerData.text.length >= 1) {
+    if (widget.controllerData.text.length < 10 &&
+        widget.controllerData.text.length >= 1) {
       showAlertDialogNew("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
     }
   }
 
   void _valideNome() {
-    if (widget.controllerNome.text.split(' ').length < 2 && widget.controllerNome.text.length >=1) {
+    if (widget.controllerNome.text.split(' ').length < 2 &&
+        widget.controllerNome.text.length >= 1) {
       valideNome = false;
       showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
     } else {
@@ -754,7 +746,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarCPF() {
-    if (!CPFValidator.isValid(widget.controllerCPF.text) && widget.controllerCPF.text.length >= 1) {
+    if (!CPFValidator.isValid(widget.controllerCPF.text) &&
+        widget.controllerCPF.text.length >= 1) {
       valideCPF = false;
       showAlertDialogNew("CPF Inválido!", "Por Favor insira um CPF válido.");
     } else {
@@ -763,7 +756,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarCelular() {
-    if (widget.controllerCelular.text.length < 14 && widget.controllerCelular.text.length >= 1 ) {
+    if (widget.controllerCelular.text.length < 16 &&
+        widget.controllerCelular.text.length >= 1) {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
@@ -773,7 +767,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarEmail() {
-   if (!EmailValidator.validate(widget.controllerEmail.text.trim()) && widget.controllerEmail.text.length >= 1) {
+    if (!EmailValidator.validate(widget.controllerEmail.text.trim()) &&
+        widget.controllerEmail.text.length >= 1) {
       valideEmail = false;
       showAlertDialogNew(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");
