@@ -667,6 +667,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         Navigator.pop(context);
                       },
                       child: new Container(
+                        width: double.infinity,
                         padding: const EdgeInsets.all(12),
                         child: new Text(
                           "ENTENDI",
