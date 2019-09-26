@@ -1,3 +1,7 @@
+## 0.7.6
+
+* uptade NomeReduzido!
+
 ## 0.7.5
 
 * Deleted FLARE!
