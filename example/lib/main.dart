@@ -11,7 +11,6 @@ import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
-import 'package:z_components/components/z-instrucao-batida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/config/z-type-tile.dart';
@@ -233,43 +232,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
           leading: new Icon(Icons.print),
           middle: new Container(
             child: new Text('teste'),
-          ),
-          trailing: new GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => new InformacaoBatida(
-                          bottomChild: new Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.only(bottom: 5),
-                              child: new ButtonTheme(
-                                minWidth: 145,
-                                child: new RaisedButton(
-                                    color: Color(0xff2bbab4),
-                                    child: new Text(
-                                      "ENTENDI",
-                                      style: new TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0))),
-                              )),
-                        )),
-              );
-            },
-            child: new Container(
-              child: new Icon(
-                Icons.info,
-                color: Colors.blue,
-                size: 19.0,
-              ),
-            ),
           ),
         ),
         body: new ListView(
