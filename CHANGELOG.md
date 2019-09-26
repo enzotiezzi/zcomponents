@@ -1,3 +1,7 @@
+## 0.7.5
+
+* Deleted FLARE!
+
 ## 0.7.4
 
 * Flare downgrade, ZCadastro DialogClick!
