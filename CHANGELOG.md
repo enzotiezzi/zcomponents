@@ -8,7 +8,7 @@
 
 ## 0.7.4
 
-* Flare downgrade, ZCadstro DialogClick!
+* Flare downgrade, ZCadastro DialogClick!
 
 ## 0.7.3
 
