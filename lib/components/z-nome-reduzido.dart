@@ -59,6 +59,7 @@ class _ZNomeReduzidoState extends State<ZNomeReduzido> {
   void nomeReduzido(String text) {
     if(text != null)
       {
+        text = text.trim();
         if(text.contains(" "))
         {
           primeiroReduzido = text.substring(0, text.indexOf(" ")).trim();

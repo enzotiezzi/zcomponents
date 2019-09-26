@@ -247,6 +247,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               celularFocus: celularFocus,
               context: context,
             ),
+            new ZNomeReduzido(
+              text: "Alexandre Kupperman ",
+            ),
             new ZExpansion(
               childTitle: new IconButton(
                 onPressed: () {},
