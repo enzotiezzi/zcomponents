@@ -17,7 +17,7 @@ class ZEscalaService extends Service implements IZEscalaService {
     try {
       var url = "$_uRL/listar-escalas";
 
-      var response = await http.get(url, headers: await headers);
+      var response = await http.get(url, headers:  headers);
 
       var l = ((json.decode(response.body) as List)
               .map((i) => new EscalaViewModel.fromJson(i)))

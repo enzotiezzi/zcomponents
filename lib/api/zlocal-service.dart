@@ -23,7 +23,7 @@ class ZLocalService extends Service implements IZLocalService {
 
       var url = "$_uRL/buscar-centros-custo-empresa";
 
-      var response = await http.post(url, body: json.encode(filtro.toMap()), headers: await headers);
+      var response = await http.post(url, body: json.encode(filtro.toMap()), headers:  headers);
 
       var l = ((json.decode(response.body) as List)
           .map((i) => new CentroCustoViewModel.fromJson(i)))

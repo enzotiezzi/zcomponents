@@ -1,6 +1,4 @@
-import 'package:injector/injector.dart';
-import 'package:z_components/infra/entities/z-entity.dart';
-import 'package:z_components/infra/interfaces/i-context.dart';
+
 import 'package:z_components_example/entities/pessoa.dart';
 import 'package:z_components/infra/abstract-repository.dart';
 import 'i-pessoa-repository.dart';
