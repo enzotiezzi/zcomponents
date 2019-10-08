@@ -1,3 +1,7 @@
+## 0.7.7
+
+* uptade!
+
 ## 0.7.6
 
 * uptade NomeReduzido!
