@@ -7,22 +7,21 @@ class ZPGrafico extends StatefulWidget {
 
   final bool initiallyExpanded;
 
-  _ZPGraficoState state;
-  String titulo;
+  final String titulo;
 
-  GestureTapCallback onTapItem1;
-  GestureTapCallback onTapItem2;
-  GestureTapCallback onTapItem3;
+  final GestureTapCallback onTapItem1;
+  final GestureTapCallback onTapItem2;
+  final GestureTapCallback onTapItem3;
 
-  String tituloCenterCircle;
+  final String tituloCenterCircle;
 
-  double valueItem1;
-  double valueItem2;
-  double valueItem3;
+  final double valueItem1;
+  final double valueItem2;
+  final double valueItem3;
 
-  String tituloItem1;
-  String tituloItem2;
-  String tituloItem3;
+  final String tituloItem1;
+  final String tituloItem2;
+  final String tituloItem3;
 
 
   ZPGrafico({Key key,
@@ -41,11 +40,8 @@ class ZPGrafico extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ZPGraficoState createState() {
-    state = new _ZPGraficoState();
+  State<StatefulWidget> createState() => _ZPGraficoState();
 
-    return state;
-  }
 }
 
 class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin{

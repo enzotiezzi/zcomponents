@@ -1,51 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:z_components/components/z-item-tile.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
-import 'package:z_components/config/z-type-tile.dart';
 
 class ZExpendableItemTile extends StatefulWidget {
-  String textoIconeUm;
-  String textoIconeDois;
-  String textoIconeTres;
-  String textoIconeQuatro;
-  Widget iconeUm;
-  String cargo;
-  String escala;
-  final String voltaIntervalo;
-  Color colorBatida;
-  Color colorTextExpandItens;
-  double fontSizeTextExpand;
-
-  String re;
-  String nomeCC;
-  String tempoPausa;
-  String horaSaida;
-  String nomeColab;
-  Widget iconeDois;
-  String horaEntrada;
-  Widget iconeTres;
+  final String textoIconeUm;
+  final String textoIconeDois;
+  final String textoIconeTres;
+  final String textoIconeQuatro;
+  final Widget iconeUm;
+  final String cargo;
+  final String escala;
+  final Color colorBatida;
+  final Color colorTextExpandItens;
+  final double fontSizeTextExpand;
+  final String re;
+  final String nomeCC;
+  final String tempoPausa;
+  final String horaSaida;
+  final String nomeColab;
+  final Widget iconeDois;
+  final String horaEntrada;
+  final Widget iconeTres;
+  final Widget iconeQuatro;
+  final bool status;
+  final Function funcao;
+  final Function image;
+  final Function funcaoIconeUm;
+  final Function funcaoIconeDois;
+  final Function funcaoIconeTres;
+  final Function funcaoIconeQuatro;
+  final Widget imagemPerfil;
+  final Function onTapVoltar;
+  final Function onTapImage;
+  final String idConta;
+  final String token;
+  final String cpf;
+  final String jornada;
+  final Function onPressedIconBatida;
+  final String nomeCentroCusto;
   final String nome;
   final String inicioIntervalo;
-
-  Widget iconeQuatro;
-  bool status;
-  Function funcao;
-  var image;
-  var funcaoIconeUm;
-  var funcaoIconeDois;
-  var funcaoIconeTres;
-  var funcaoIconeQuatro;
-  Widget imagemPerfil;
-  var onTapVoltar;
-  var onTapImage;
-  String idConta;
-  String token;
-  final String nomeCentroCusto;
-  String cpf;
-  String jornada;
-  final Function onPressedIconBatida;
-
+  final String voltaIntervalo;
 
   ZExpendableItemTile(
       {

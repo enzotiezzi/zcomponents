@@ -1,13 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:z_components/infra/entities/z-entity.dart';
-import 'package:z_components/infra/interfaces/i-command.dart';
 import 'package:z_components/infra/interfaces/i-context.dart';
-import 'package:z_components/infra/interfaces/i-query.dart';
 import 'package:injector/injector.dart';
 
 class ZDatabase implements IContext {

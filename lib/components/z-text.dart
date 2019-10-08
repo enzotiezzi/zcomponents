@@ -3,9 +3,9 @@ import 'package:z_components/config/z-tipo-textos.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZText extends StatefulWidget {
-  String text;
-  String tituloText;
-  ZTipoTextos zTipos;
+  final String text;
+  final String tituloText;
+  final ZTipoTextos zTipos;
 
   ZText({this.text: "", this.tituloText: "", this.zTipos: ZTipoTextos.isPadrao});
 

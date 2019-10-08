@@ -33,8 +33,10 @@ class ZLoading extends StatelessWidget {
     this.zPlatform = ZPlatform.isPlatform,
     this.color: const Color(0xff2BB9B4),
   }) : super(key: key) {
-    _zLoading = new Container(
-      width: 60,
+    _zLoading = new Row(
+      children: <Widget>[
+    new Container(
+    width: 60,
       height: 60,
       child: new Card(
           elevation: 6,
@@ -49,21 +51,21 @@ class ZLoading extends StatelessWidget {
                   borderRadius: new BorderRadius.circular(25.0),
                 ),
                 child: new Material(
-                  color: this.color,
-                  borderRadius: new BorderRadius.circular(25.0),
-                  child: new SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(
-                      key: this.key,
-                      value: this.value,
-                      backgroundColor: this.backgroundColor,
-                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                      strokeWidth: this.strokeWidth,
-                      semanticsLabel: this.semanticsLabel,
-                      semanticsValue: this.semanticsValue,
-                    ),
-                  )
+                    color: this.color,
+                    borderRadius: new BorderRadius.circular(25.0),
+                    child: new SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        key: this.key,
+                        value: this.value,
+                        backgroundColor: this.backgroundColor,
+                        valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                        strokeWidth: this.strokeWidth,
+                        semanticsLabel: this.semanticsLabel,
+                        semanticsValue: this.semanticsValue,
+                      ),
+                    )
                 ),
               ),
               new Container(
@@ -79,6 +81,8 @@ class ZLoading extends StatelessWidget {
             ],
           )
       ),
+    )
+      ],
     );
   }
 

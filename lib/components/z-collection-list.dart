@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-collection-item.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZCollectionList extends StatefulWidget {
   final List<ZCollectionItem> lista;
@@ -104,7 +105,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
           onTap: () {
             _selecionarItem(item);
           } ,
-          title: new Text("${item.titulo ?? item.valor}"),
+          title: new Text("${item.titulo ?? item.valor}",style: MainStyle.get(context).mainStyleTextBaseLineInput,),
           trailing: new Icon(
             Icons.chevron_right,
             color: Colors.grey,

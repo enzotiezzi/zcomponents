@@ -4,18 +4,14 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZCheckCPF extends StatefulWidget {
-  _ZCheckCPFState state;
 
   ZCheckCPF({
     Key key,
   }) : super(key: key);
 
   @override
-  _ZCheckCPFState createState() {
-    state = new _ZCheckCPFState();
+  State<StatefulWidget> createState() => _ZCheckCPFState();
 
-    return state;
-  }
 }
 
 class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin {

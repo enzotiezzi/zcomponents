@@ -15,7 +15,7 @@ class QuadroPessoalService extends Service{
 
   Future<List<PosicaoAlocacaoSequenciaViewModel>> buscarSequencia(String idColaborador) async{
     try{
-      var url = "${_URL}/buscar-sequencia/${idColaborador}/${idConta}";
+      var url = "$_URL/buscar-sequencia/$idColaborador/$idConta}";
 
       var response = await http.get(url, headers: headers);
 
@@ -29,7 +29,7 @@ class QuadroPessoalService extends Service{
 
   Future<List<String>> listarTouFColaborador(String idColaborador) async{
     try{
-      var url = "${_URL}/listar-touf-colaborador/${idColaborador}/${idConta}";
+      var url = "$_URL/listar-touf-colaborador/$idColaborador/$idConta";
       
       var response = await http.get(url, headers: headers);
 

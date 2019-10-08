@@ -799,7 +799,7 @@ class _HoraState extends State<ZHora> {
 
   _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
+      currentFocus.unfocus();
+      FocusScope.of(context).requestFocus(nextFocus);
   }
 }

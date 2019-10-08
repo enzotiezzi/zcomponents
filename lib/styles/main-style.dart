@@ -23,7 +23,7 @@ class _MainStyle {
 
   TextStyle get mainStyleTextBaseLineHint {
     return new TextStyle(
-        color: Color(0xFF000000).withOpacity(0.3),
+        color: Color(0xffc7c7c7),
         letterSpacing: - 0.24,
         fontWeight: FontWeight.w400,
         fontSize: MediaQuerySize.get(context).fontSize);

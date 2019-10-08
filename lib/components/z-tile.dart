@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ZTile extends StatefulWidget {
-  Widget leading;
-  Widget trailing;
-  GestureTapCallback onTap;
+  final Widget leading;
+  final Widget trailing;
+  final GestureTapCallback onTap;
 
   ZTile({this.leading, this.trailing, this.onTap});
 

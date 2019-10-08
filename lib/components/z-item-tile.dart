@@ -72,7 +72,6 @@ class _ZItemTileState extends State<ZItemTile> {
 
   IZColaboradorService _colaboradorService;
   double _largura;
-  double _altura;
 
   @override
   void initState() {

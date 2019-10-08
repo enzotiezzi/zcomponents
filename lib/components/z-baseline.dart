@@ -21,7 +21,6 @@ class ZBaseLine extends StatefulWidget {
   bool valideCelular;
   bool valideNome;
 
-  Widget _zBaseLine;
   FocusNode nomeFocus;
   FocusNode emailFocus;
   FocusNode cpfFocus;
@@ -599,7 +598,7 @@ class ZBaseLineState extends State<ZBaseLine> {
               ],
             ));
         break;
-    };
+    }
     return build(context);
   }
 

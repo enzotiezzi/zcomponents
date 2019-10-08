@@ -235,6 +235,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
+            new ZLoading(),
+            new ZHeader(titulo: "Titulo",child: new Text("IHUIHIY"),children: <Widget>[
+              new Text("asdljnljnalsjnljnda")
+            ],),
+
             new ZText(text: "OLAasdasS",tituloText: "AKI"),
             new ZBaseLine(
               zTipos: ZTipoBaseline.isNomeCompleto,
@@ -249,6 +254,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
             new ZNomeReduzido(
               text: "Alexandre Kupperman ",
+            ),
+            new ZText(
+              tituloText: "aaaaaa",text: "bbbbbbbbbbb",
             ),
             new ZExpansion(
               childTitle: new IconButton(
@@ -325,7 +333,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     new Container(
                       child: new Icon(
                         Icons.person,
-                        color: Colors.grey,
+                        color: Colors .grey,
                       ),
                     ),
                     new Container(

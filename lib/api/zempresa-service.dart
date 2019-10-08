@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:z_components/api/service.dart';
 import 'package:z_components/interface/i-zempresa-service.dart';
@@ -18,7 +17,7 @@ class ZEmpresaService extends Service implements IZEmpresaService {
   Future<List<CompanyViewModel>> list() async {
     try {
       var url =
-          "$_URL_API/buscar-empresa-por-usuario-app/${idUser}/ZPonto";
+          "$_URL_API/buscar-empresa-por-usuario-app/$idUser/ZPonto";
       var response = await http.get(url, headers:  headers);
       var l = (json.decode(response.body) as List)
           .map((i) => new CompanyViewModel.fromJson(i));

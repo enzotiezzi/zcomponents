@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-collection-list.dart';
+import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZCollection extends StatefulWidget {
   final String titulo;
@@ -50,23 +52,23 @@ class ZCollectionState extends State<ZCollection> {
               width: 130,
               child: new Text(
                 widget.titulo,
-                style: TextStyle(fontSize: 15.0),
+                style: MainStyle.get(context).mainStyleTextBaseLine
               ),
             ),
             new Expanded(
-                child: ListTile(
-              title: new Row(
+                child: ZTile(
+              leading: new Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   (_itemSelecionado?.valor == null && _anterior == "Selecione")
                       ? new Text(
                           _anterior,
-                          style: new TextStyle(
-                            color: Colors.grey,
-                          ),
+                          style: MainStyle.get(context).mainStyleTextBaseLineHint,
                         )
                       : new Text(
-                    (_itemSelecionado?.valor.length >14)? "${_itemSelecionado?.valor.substring(0, 14) ?? ""}...":_itemSelecionado?.valor,
+                          (_itemSelecionado?.valor.length > 14)
+                              ? "${_itemSelecionado?.valor.substring(0, 14) ?? ""}..."
+                              : _itemSelecionado?.valor,
                           style: new TextStyle(
                             color: Colors.grey,
                           ),
@@ -85,13 +87,11 @@ class ZCollectionState extends State<ZCollection> {
     );
   }
 
-  void buscarValorPadrao( List<ZCollectionItem> lista) {
-
+  void buscarValorPadrao(List<ZCollectionItem> lista) {
     if (lista != null && lista.length > 0) {
       if (widget.valorPadrao != null) {
-        var vP = lista
-            .where((lista) => lista.chave == widget.valorPadrao)
-            .first;
+        var vP =
+            lista.where((lista) => lista.chave == widget.valorPadrao).first;
         if (vP != null) {
           setState(() {
             _itemSelecionado = vP;
@@ -99,17 +99,16 @@ class ZCollectionState extends State<ZCollection> {
         }
       }
     }
-
   }
-  void setarvalor(){
-    if(_itemSelecionado?.valor != null)
-      {
-        setState(() {
-          _anterior = _itemSelecionado?.valor;
 
-        });
-      }
+  void setarvalor() {
+    if (_itemSelecionado?.valor != null) {
+      setState(() {
+        _anterior = _itemSelecionado?.valor;
+      });
+    }
   }
+
 /*
   return ZCollectionList(
   lista: widget.lista,
@@ -126,7 +125,7 @@ class ZCollectionState extends State<ZCollection> {
             return ZCollectionList(
               lista: widget.lista,
               titulo: widget.titulo,
-              ultimoValor:  _itemSelecionado,
+              ultimoValor: _itemSelecionado,
             );
           },
           transitionsBuilder: (BuildContext context,
@@ -147,8 +146,7 @@ class ZCollectionState extends State<ZCollection> {
               ),
             );
           },
-        )
-    );
+        ));
     if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
     setState(() {});

@@ -7,10 +7,7 @@ import 'package:mask_shifter/mask_shifter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-check-cpf.dart';
-import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-pin-senha.dart';
-import 'package:z_components/components/z_button.dart';
-import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -82,7 +79,6 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   String mes;
 
   String teste;
-  bool _termos = false;
 
   bool cancelar = false;
 
@@ -536,7 +532,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     );
   }
 
-  Widget _titulo() {
+  Widget titulo() {
     return new Material(
       child: Container(
         decoration: BoxDecoration(
@@ -549,7 +545,6 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             style: MainStyle.get(context).titleStyleText),
       ),
     );
-    ;
   }
 
   void validaMes() {
