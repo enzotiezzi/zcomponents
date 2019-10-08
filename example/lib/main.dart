@@ -27,6 +27,7 @@ import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/infra/db/database.dart';
+import 'package:z_components/components/z-text.dart';
 /*
 import 'package:z_components_example/entities/pessoa.dart';
 import 'package:z_components_example/repositories/i-monstro-repository.dart';
@@ -249,6 +250,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             ),
             new ZNomeReduzido(
               text: "Alexandre Kupperman ",
+            ),
+            new ZText(
+              tituloText: "aaaaaa",text: "bbbbbbbbbbb",
             ),
             new ZExpansion(
               childTitle: new IconButton(

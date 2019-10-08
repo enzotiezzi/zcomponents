@@ -6,7 +6,7 @@ class ZText extends StatefulWidget {
   String tituloText;
   ZTipoTextos zTipos;
 
-  ZText({this.text: "", this.tituloText: "", this.zTipos});
+  ZText({this.text: "", this.tituloText: "", this.zTipos: ZTipoTextos.isPadrao});
 
   @override
   _ZTextState createState() => _ZTextState();
