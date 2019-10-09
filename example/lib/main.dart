@@ -397,7 +397,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
               status: true,
               onTapImage: () {},
-              imagemPerfil: new Container(),
+              imagemPerfil: new ZLoading(),
               funcao: () {},
               funcaoIconeDois: () {},
               funcaoIconeQuatro: () {},
