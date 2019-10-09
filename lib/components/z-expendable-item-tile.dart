@@ -14,6 +14,7 @@ class ZExpendableItemTile extends StatefulWidget {
   final Color colorTextExpandItens;
   final double fontSizeTextExpand;
   final String re;
+  final String horario;
   final String nomeCC;
   final String tempoPausa;
   final String horaSaida;
@@ -22,7 +23,6 @@ class ZExpendableItemTile extends StatefulWidget {
   final String horaEntrada;
   final Widget iconeTres;
   final Widget iconeQuatro;
-  final bool status;
   final Function funcao;
   final Function image;
   final Function funcaoIconeUm;
@@ -41,6 +41,8 @@ class ZExpendableItemTile extends StatefulWidget {
   final String nome;
   final String inicioIntervalo;
   final String voltaIntervalo;
+  final String status;
+  final Color colorStatus;
 
   ZExpendableItemTile(
       {
@@ -51,8 +53,10 @@ class ZExpendableItemTile extends StatefulWidget {
         this.onPressedIconBatida,
         this.voltaIntervalo,
   this.tempoPausa,
+        this.colorStatus = Colors.grey,
         this.horaEntrada,
         this.cargo,
+        this.horario= "",
         this.re,
         this.inicioIntervalo,
         this.nomeCentroCusto,
@@ -61,7 +65,7 @@ class ZExpendableItemTile extends StatefulWidget {
         this.nomeCC,
       this.funcao,
         this.nomeColab,
-      this.status: false,
+      this.status = "",
       this.image,
       this.funcaoIconeDois,
       this.funcaoIconeQuatro,
@@ -208,44 +212,22 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                         ),
                                       ],
                                     ),
-                                    (widget.status == true)
-                                        ? new Row(
+                                    new Row(
                                       children: <Widget>[
                                         new Container(
                                           height: 10.0,
                                           width: 10.0,
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              color: const Color(0xff1AC15D)),
+                                              color: widget.colorStatus),
                                         ),
                                         new Container(
                                           margin:
                                           EdgeInsets.only(right: 6.0, left: 4.0),
                                           child: new Text(
-                                            "Ativo",
+                                            widget.status,
                                             style: TextStyle(fontWeight: FontWeight.w700,
                                               fontSize: 12.0,),
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                        : new Row(
-                                      children: <Widget>[
-                                        new Container(
-                                          height: 10.0,
-                                          width: 10.0,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: const Color(0xff999999)),
-                                        ),
-                                        new Container(
-                                          margin:
-                                          EdgeInsets.only(right: 8.0, left: 2.0),
-                                          child: new Text(
-                                            "Inativo",
-                                            style: TextStyle(
-                                                fontSize: 12.0,
-                                                color: const Color(0xFF808080)),
                                           ),
                                         )
                                       ],
@@ -336,18 +318,8 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                           new Container(
                                             padding: EdgeInsets.only(
                                                 left: 6.0, right: 0.0, bottom: 6.0, top: 2.0),
-                                            child: (widget.escala == null ||
-                                                widget.horaEntrada == null ||
-                                                widget.horaSaida == null)
-                                                ? new Text("")
-                                                : (widget.jornada == null || widget.jornada == "")?new Text(
-                                              "${widget.horaEntrada}-${widget.horaSaida}",
-                                              style: TextStyle(
-                                                  color: Color(0xFF808080),
-                                                  fontSize: (_largura<360)?8.0:10,
-                                                  fontWeight: FontWeight.w700),
-                                            ):new Text(
-                                              "(${widget.jornada}) ${widget.horaEntrada}-${widget.horaSaida}",
+                                            child: new Text(
+                                              widget.horario,
                                               style: TextStyle(
                                                   color: Color(0xFF808080),
                                                   fontSize: (_largura<360)?8.0:10,
@@ -386,7 +358,7 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                                                           "")?
                                                       new Text(""):
                                                   new Text(
-                                                    "(${widget.tempoPausa})" ?? "",
+                                                    "${widget.tempoPausa}" ?? "",
                                                     style: TextStyle(
                                                         color: Color(0xFF808080),
                                                         fontSize: (_largura<=360)?8.0:10,

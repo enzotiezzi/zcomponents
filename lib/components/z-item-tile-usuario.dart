@@ -7,19 +7,21 @@ import 'package:z_components/view-model/usuario-viewmodel.dart';
 class ZItemTileUsuario extends StatefulWidget {
   final String idConta;
   final String token;
+  final Color colorStatus;
   final String cpf;
-  String isExpand;
-  bool status;
-  Function funcao;
-  Widget imagemPerfil;
-  Function onTapImage;
+  final String status;
+  final String isExpand;
+  final Function funcao;
+  final Widget imagemPerfil;
+  final Function onTapImage;
 
   ZItemTileUsuario(
       {this.idConta,
+        this.colorStatus = Colors.grey,
         this.token,
         this.cpf,
         this.funcao,
-        this.status: false,
+        this.status = "",
         this.imagemPerfil,
         this.onTapImage,
         this.isExpand: ""});
@@ -156,42 +158,20 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                             ),
                           ],
                         ),
-                        (widget.status == true)
-                            ? new Row(
+                        new Row(
                           children: <Widget>[
                             new Container(
                               height: 10.0,
                               width: 10.0,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: const Color(0xff1AC15D)),
+                                  color: widget.colorStatus),
                             ),
                             new Container(
                               margin:
                               EdgeInsets.only(right: 8.0, left: 2.0),
                               child: new Text(
-                                "Ativo",
-                                style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: const Color(0xff999999)),
-                              ),
-                            )
-                          ],
-                        )
-                            : new Row(
-                          children: <Widget>[
-                            new Container(
-                              height: 10.0,
-                              width: 10.0,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: const Color(0xff999999)),
-                            ),
-                            new Container(
-                              margin:
-                              EdgeInsets.only(right: 8.0, left: 2.0),
-                              child: new Text(
-                                "Inativo",
+                                widget.status,
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     color: const Color(0xff999999)),

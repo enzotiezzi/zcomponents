@@ -292,7 +292,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Container(
               child:
               new ZItemTile(
-              status: true,
+              status: "Aki",
+              colorStatus: Colors.yellow,
+              horario: "akiii",
               zTypeTile: ZTypeTile.isColab,
               cpf: "333.972.458-00",
               escala: "5x2x6x1",
@@ -370,7 +372,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
                     cpf: '447.930.638-29',
                     idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-                    status: true,
                   ),
                 )
               ],
@@ -394,7 +395,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              status: true,
+              status: "AKI",
               onTapImage: () {},
               imagemPerfil: new Container(),
               funcao: () {},
@@ -428,8 +429,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              status: true,
+              status: "AKI",
+              colorStatus: Colors.red,
               onTapImage: () {},
+              horario: "00:00",
               imagemPerfil: new Container(),
               funcao: () {},
               funcaoIconeDois: () {},

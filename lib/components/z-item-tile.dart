@@ -25,19 +25,24 @@ class ZItemTile extends StatefulWidget {
   final String nomeCentroCusto;
   final String nome;
   final String isExpand;
-  final bool status;
   final String re;
   final Function funcao;
   final Function tabCard;
   final Widget imagemPerfil;
+  final String horario;
   final Function onTapImage;
   final Color colorBatida;
   final ZTypeTile zTypeTile;
+  final Color colorStatus;
+  final String status;
 
   ZItemTile(
+
       {this.idConta,
+        this.colorStatus = Colors.grey,
       this.re,
       this.tabCard,
+        this.horario = "",
       this.inicioIntervalo,
       this.voltaIntervalo,
       this.jornada,
@@ -58,7 +63,7 @@ class ZItemTile extends StatefulWidget {
       this.nomeCentroCusto,
       this.nome,
       this.funcao,
-      this.status: false,
+      this.status: "",
       this.imagemPerfil,
       this.onTapImage,
       this.isExpand: ""});
@@ -235,58 +240,31 @@ class _ZItemTileState extends State<ZItemTile> {
                                               ),
                                             ],
                                           ),
-                                          (widget.status == true)
-                                              ? new Row(
-                                                  children: <Widget>[
-                                                    new Container(
-                                                      height: 10.0,
-                                                      width: 10.0,
-                                                      decoration: BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: const Color(
-                                                              0xff1AC15D)),
-                                                    ),
-                                                    new Container(
-                                                      margin: EdgeInsets.only(
-                                                          right: 6.0,
-                                                          left: 4.0),
-                                                      child: new Text(
-                                                        "Ativo",
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 12.0,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                )
-                                              : new Row(
-                                                  children: <Widget>[
-                                                    new Container(
-                                                      height: 10.0,
-                                                      width: 10.0,
-                                                      decoration: BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: const Color(
-                                                              0xff999999)),
-                                                    ),
-                                                    new Container(
-                                                      margin: EdgeInsets.only(
-                                                          right: 8.0,
-                                                          left: 2.0),
-                                                      child: new Text(
-                                                        "Inativo",
-                                                        style: TextStyle(
-                                                            fontSize: 12.0,
-                                                            color: const Color(
-                                                                0xFF808080)),
-                                                      ),
-                                                    )
-                                                  ],
-                                                )
+                                          new Row(
+                                            children: <Widget>[
+                                              new Container(
+                                                height: 10.0,
+                                                width: 10.0,
+                                                decoration: BoxDecoration(
+                                                    shape:
+                                                    BoxShape.circle,
+                                                    color: widget.colorStatus
+                                                ),
+                                              ),
+                                              new Container(
+                                                margin: EdgeInsets.only(
+                                                    right: 8.0,
+                                                    left: 2.0),
+                                                child: new Text(
+                                                  widget.status,
+                                                  style: TextStyle(
+                                                      fontSize: 12.0,
+                                                      color: const Color(
+                                                          0xFF808080)),
+                                                ),
+                                              )
+                                            ],
+                                          )
                                         ],
                                       ),
                                       new Row(
@@ -402,60 +380,19 @@ class _ZItemTileState extends State<ZItemTile> {
                                                         right: 0.0,
                                                         bottom: 6.0,
                                                         top: 0.0),
-                                                    child: (widget.jornada ==
-                                                                null ||
-                                                            widget
-                                                                    .jornada ==
-                                                                "")
-                                                        ? new Text(
-                                                            "${widget.horaEntrada}-${widget.horaSaida}",
-                                                            style: TextStyle(
-                                                                color: Color(
-                                                                    0xFF808080),
-                                                                fontSize:
-                                                                    (_largura <
-                                                                            360)
-                                                                        ? 8.0
-                                                                        : 10,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
-                                                          )
-                                                        : (widget
-                                                                        .horaEntrada ==
-                                                                    null ||
-                                                                widget.horaEntrada ==
-                                                                    "" ||
-                                                                widget.horaSaida ==
-                                                                    null ||
-                                                                widget.horaSaida ==
-                                                                    "")
-                                                            ? new Text(
-                                                                "(${widget.jornada})",
-                                                                style: TextStyle(
-                                                                    color: Color(
-                                                                        0xFF808080),
-                                                                    fontSize: (_largura <
-                                                                            360)
-                                                                        ? 8.0
-                                                                        : 10,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700),
-                                                              )
-                                                            : new Text(
-                                                                "(${widget.jornada}) ${widget.horaEntrada}-${widget.horaSaida}",
-                                                                style: TextStyle(
-                                                                    color: Color(
-                                                                        0xFF808080),
-                                                                    fontSize: (_largura <
-                                                                            360)
-                                                                        ? 8.0
-                                                                        : 10,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700),
-                                                              ),
+                                                    child: new Text(
+                                                      widget.horario,
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xFF808080),
+                                                          fontSize: (_largura <
+                                                              360)
+                                                              ? 8.0
+                                                              : 10,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w700),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -499,7 +436,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                                     "")
                                                             ? new Text("")
                                                             : new Text(
-                                                                "(${widget.tempoPausa})" ??
+                                                                "${widget.tempoPausa}" ??
                                                                     "",
                                                                 style: TextStyle(
                                                                     color: Color(
@@ -939,53 +876,28 @@ class _ZItemTileState extends State<ZItemTile> {
                                           ),
                                         ],
                                       ),
-                                      (widget.status == true)
-                                          ? new Row(
-                                              children: <Widget>[
-                                                new Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: const Color(
-                                                          0xff1AC15D)),
-                                                ),
-                                                new Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 6.0, left: 2.0),
-                                                  child: new Text(
-                                                    "Ativo",
-                                                    style: TextStyle(
-                                                        fontSize: 12.0,
-                                                        color: const Color(
-                                                            0xff999999)),
-                                                  ),
-                                                )
-                                              ],
-                                            )
-                                          : new Row(
-                                              children: <Widget>[
-                                                new Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: const Color(
-                                                          0xff999999)),
-                                                ),
-                                                new Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 8.0, left: 2.0),
-                                                  child: new Text(
-                                                    "Inativo",
-                                                    style: TextStyle(
-                                                        fontSize: 12.0,
-                                                        color: const Color(
-                                                            0xFF808080)),
-                                                  ),
-                                                )
-                                              ],
-                                            )
+                                      new Row(
+                                        children: <Widget>[
+                                          new Container(
+                                            height: 10.0,
+                                            width: 10.0,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: widget.colorStatus),
+                                          ),
+                                          new Container(
+                                            margin: EdgeInsets.only(
+                                                right: 8.0, left: 2.0),
+                                            child: new Text(
+                                              widget.status,
+                                              style: TextStyle(
+                                                  fontSize: 12.0,
+                                                  color: const Color(
+                                                      0xFF808080)),
+                                            ),
+                                          )
+                                        ],
+                                      )
                                     ],
                                   ),
                                   new Row(

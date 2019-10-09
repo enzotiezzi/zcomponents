@@ -1,3 +1,7 @@
+## 0.7.9
+
+* uptade ZItemTile!
+
 ## 0.7.8
 
 * uptade ZLOAD!
