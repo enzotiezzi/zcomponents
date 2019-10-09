@@ -235,7 +235,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
-            new ZLoading(),
             new ZHeader(titulo: "Titulo",child: new Text("IHUIHIY"),children: <Widget>[
               new Text("asdljnljnalsjnljnda")
             ],),
@@ -397,7 +396,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
               status: true,
               onTapImage: () {},
-              imagemPerfil: new ZLoading(),
+              imagemPerfil: new Container(),
               funcao: () {},
               funcaoIconeDois: () {},
               funcaoIconeQuatro: () {},
