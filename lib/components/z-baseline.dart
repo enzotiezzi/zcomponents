@@ -827,8 +827,7 @@ class ZBaseLineState extends State<ZBaseLine> {
                     margin: const EdgeInsets.all(8),
                     child: new Text(
                       title,
-                      style: new TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                        style: MainStyle.get(context).styleTittleDialog
                     ),
                   )
                 ],
@@ -844,7 +843,7 @@ class ZBaseLineState extends State<ZBaseLine> {
                       message,
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          color: const Color(0xff707070), fontSize: 13),
+                          color: const Color(0xff707070), fontSize:MainStyle.get(context).fontSizeEntradaSaida),
                     ),
                   )
                 ],
@@ -861,10 +860,11 @@ class ZBaseLineState extends State<ZBaseLine> {
                     Navigator.pop(context);
                   },
                   child: new Container(
+                    width: double.infinity,
                     padding: const EdgeInsets.all(12),
                     child: new Text(
-                      "ENTENDI",
-                      style: new TextStyle(fontWeight: FontWeight.bold),
+                      "ENTENDI",textAlign: TextAlign.center,
+                      style: new TextStyle(fontWeight: FontWeight.bold,fontSize:   MainStyle.get(context).fontSizeLeadinCancelar),
                     ),
                   ),
                 ),
