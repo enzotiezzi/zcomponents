@@ -25,7 +25,9 @@ class _MediaQuery {
   double get tittleFontSize {
     return Paramenters(width: width,height: height).titleFontSize;
   }
-
+  double get styleTittleDialogSize {
+    return Paramenters(width: width,height: height).tittleFontSizeDialog;
+  }
   double get fontSizeButton {
     return Paramenters(width: width,height: height).fontSizeButton;
   }
@@ -41,6 +43,7 @@ class _MediaQuery {
   double get  fontSizeTermos{
     return Paramenters(width: width,height: height).fontSizeTermos;
   }
+
   double get  fontSizeLeadinCancelar{
     return Paramenters(width: width,height: height).fontSizeLeadinCancelar;
   }

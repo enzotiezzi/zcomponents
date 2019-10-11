@@ -241,7 +241,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
             new ZText(text: "OLAasdasS",tituloText: "AKI"),
             new ZBaseLine(
-              zTipos: ZTipoBaseline.isNomeCompleto,
+              zTipos: ZTipoBaseline.isCPF,
+              cpfFocus: nomeFocus,
+              controllerCPF: _controllerFim,
               controllerNome: _controllerFim,
               nomeFocus: nomeFocus,
             ),

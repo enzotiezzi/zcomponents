@@ -106,6 +106,13 @@ class _MainStyle {
         fontSize: MediaQuerySize.get(context).fontSizeButton);
   }
 
+  TextStyle get styleTittleDialog {
+    return new TextStyle(
+        color:  MediaQuerySize.get(context).color,
+        fontWeight: FontWeight.w700,
+        fontSize: MediaQuerySize.get(context).styleTittleDialogSize);
+  }
+
   double get marginRightLeft  {
     return 16.0;
   }
@@ -116,6 +123,10 @@ class _MainStyle {
 
   Color get backgroundColor {
     return Color(0xffff0f0f0);
+  }
+
+  double get fontSizeEntradaSaida{
+    return MediaQuerySize.get(context).fontSize;
   }
 
   double get sizePin{
