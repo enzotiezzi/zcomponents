@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZPinSenha extends StatelessWidget {
   Widget _zPinSenha;
@@ -32,7 +33,7 @@ class ZPinSenha extends StatelessWidget {
                 width: 100,
                 child: new Text(
                   "Senha",
-                  style: new TextStyle(color: Color(0xFF999999)),
+                  style: MainStyle.get(context).mainStyleTextBaseLine,
                 ),
               ),
               new Expanded(
@@ -46,8 +47,8 @@ class ZPinSenha extends StatelessWidget {
                           hasTextBorderColor: const Color(0xffC7C7CC),
                           isCupertino: true,
                           maxLength: numeroQuadrados,
-                          pinBoxHeight: 40.0,
-                          pinBoxWidth: 40.0,
+                          pinBoxHeight: MainStyle.get(context).sizePin,
+                          pinBoxWidth: MainStyle.get(context).sizePin,
                           maskCharacter: "*",
                           pinTextAnimatedSwitcherTransition:
                               ProvidedPinBoxTextAnimation.scalingTransition,
@@ -73,7 +74,8 @@ class ZPinSenha extends StatelessWidget {
                 width: 100,
                 child: new Text(
                   "Repetir \nSenha",
-                  style: new TextStyle(color: Color(0xFF999999)),                ),
+                  style: MainStyle.get(context).mainStyleTextBaseLine,
+                ),
               ),
               new Expanded(
                   child: new Container(
@@ -85,8 +87,8 @@ class ZPinSenha extends StatelessWidget {
                           hasTextBorderColor: const Color(0xffC7C7CC),
                           isCupertino: true,
                           maxLength: numeroQuadrados,
-                          pinBoxHeight: 40.0,
-                          pinBoxWidth: 40.0,
+                          pinBoxHeight: MainStyle.get(context).sizePin,
+                          pinBoxWidth: MainStyle.get(context).sizePin,
                           maskCharacter: "*",
                           pinTextAnimatedSwitcherTransition:
                               ProvidedPinBoxTextAnimation.scalingTransition,

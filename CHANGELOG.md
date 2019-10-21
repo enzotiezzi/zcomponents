@@ -1,3 +1,19 @@
+## 0.8.0
+
+* uptade!
+
+## 0.7.9
+
+* uptade ZItemTile!
+
+## 0.7.8
+
+* uptade ZLOAD!
+
+## 0.7.7
+
+* uptade!
+
 ## 0.7.6
 
 * uptade NomeReduzido!

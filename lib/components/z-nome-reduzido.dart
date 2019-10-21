@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZNomeReduzido extends StatefulWidget {
-  String text;
-  var textStyle;
+  final String text;
+  final TextStyle textStyle;
 
   ZNomeReduzido({this.text, this.textStyle});
 

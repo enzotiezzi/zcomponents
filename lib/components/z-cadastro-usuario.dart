@@ -7,19 +7,18 @@ import 'package:mask_shifter/mask_shifter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-check-cpf.dart';
-import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-pin-senha.dart';
-import 'package:z_components/components/z_button.dart';
-import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZCadastroUsuario extends StatefulWidget {
   Widget zTelaCadastro;
-  Widget tituloAppBar;
   var onTapTermosUso;
   bool termos;
   Key key;
+
+  final bool possuiCPF;
 
   final BuildContext context;
   var controllerEmail = new TextEditingController();
@@ -36,7 +35,7 @@ class ZCadastroUsuario extends StatefulWidget {
   ZCadastroUsuario(
       {this.controllerRepetirSenha,
       this.controllerSenha,
-      this.tituloAppBar,
+      this.possuiCPF = true,
       this.onTapVoltar,
       this.key,
       this.context,
@@ -80,10 +79,16 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   String mes;
 
   String teste;
-  bool _termos = false;
+
+  bool cancelar = false;
 
   @override
   void initState() {
+    Future.delayed(new Duration(milliseconds: 0), () {
+      setState(() {
+        cancelar = true;
+      });
+    });
     init();
     initMes();
     initCelular();
@@ -97,19 +102,24 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
         appBar: CupertinoNavigationBar(
-          middle: widget.tituloAppBar,
-          leading: new GestureDetector(
-            onTap: widget.onTapVoltar,
-            child: new Container(
-              padding: EdgeInsets.only(right: 20.0),
-              color: Colors.transparent,
-              child: new Icon(
-                Icons.arrow_back_ios,
-                size: 20.0,
-                color: const Color(0xff2BB9B4),
-              ),
-            ),
-          ),
+          middle: new Text("CADASTRO USUÁRIO",style: MainStyle.get(context).titleStyleText,),
+          leading:  Align(
+          widthFactor: 0.8,
+          alignment: Alignment.center,
+          child:new GestureDetector(
+            child: (cancelar == false)?new Text("",style: new TextStyle(color: Colors.transparent),): Text('Cancelar',style: new TextStyle(color: Color(0xffE53629),fontSize: MainStyle.get(context).fontSizeLeadinCancelar),),
+            onTap: (){
+              Navigator.pop(context);
+            },
+          )
+        ),trailing:  Align(
+          widthFactor: 0.8,
+          alignment: Alignment.center,
+          child:(widget.termos == false)?new Text("",style: new TextStyle(color: Colors.transparent),): new GestureDetector(
+            child: Text('Cadastrar',style: new TextStyle(color: Color(0xff1F8782),fontSize: MainStyle.get(context).fontSizeLeadinCancelar),),
+            onTap: widget.onPressed,
+          )
+        )
         ),
         body: _body());
   }
@@ -117,7 +127,6 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   Widget _body() {
     return new Column(
       children: <Widget>[
-        _titulo(),
         new Expanded(
           child: _buildBody(),
         ),
@@ -133,10 +142,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
               border: Border(bottom: BorderSide(color: Colors.grey))),
           padding: EdgeInsets.only(left: 15.0, top: 15.0, bottom: 15.0),
           alignment: Alignment.centerLeft,
-          child: new Text(
-            "DADOS PESSOAIS",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
-          ),
+          child: new Text("DADOS PESSOAIS",
+              style: MainStyle.get(context).mainStyleTextTitle),
         ),
         new Container(
           decoration: BoxDecoration(
@@ -150,16 +157,15 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                       new Row(
                         children: <Widget>[
                           new Expanded(
-                              flex: 3,
-                              child: new Container(
-                                padding: const EdgeInsets.only(
-                                    top: 12.0, bottom: 12.0, left: 16.0),
-                                child: new Text(
-                                  "Nome Completo",
-                                  style:
-                                      new TextStyle(color: Color(0xFF999999)),
-                                ),
-                              )),
+                            flex: 3,
+                            child: new Container(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, bottom: 12.0, left: 16.0),
+                              child: new Text("Nome Completo",
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLine),
+                            ),
+                          ),
                           new Expanded(
                               flex: 7,
                               child: new Container(
@@ -178,15 +184,12 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   focusNode: nomeFocus,
                                   controller: widget.controllerNome,
                                   cursorColor: Color(0xFF2BBAB4),
-                                  style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLineInput,
                                   decoration: InputDecoration(
-                                    hintText: "Nome Completo",
-                                    hintStyle: new TextStyle(
-                                        fontSize: 14.0,
-                                        color:
-                                            Color(0xFF000000).withOpacity(0.3)),
-                                  ),
+                                      hintText: "Nome Completo",
+                                      hintStyle: MainStyle.get(context)
+                                          .mainStyleTextBaseLineHint),
                                 ),
                               ))
                         ],
@@ -206,8 +209,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                     top: 12.0, bottom: 12.0, left: 16.0),
                                 child: new Text(
                                   "CPF",
-                                  style:
-                                      new TextStyle(color: Color(0xFF999999)),
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLine,
                                 ),
                               )),
                           new Expanded(
@@ -232,16 +235,13 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   focusNode: cpfFocus,
                                   keyboardType: TextInputType.number,
                                   cursorColor: Color(0xFF2BBAB4),
-                                  style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLineInput,
                                   decoration: InputDecoration(
-                                    isDense: false,
-                                    hintText: "*** . *** . *** - **",
-                                    hintStyle: new TextStyle(
-                                        fontSize: 14.0,
-                                        color:
-                                            Color(0xFF000000).withOpacity(0.3)),
-                                  ),
+                                      isDense: false,
+                                      hintText: "*** . *** . *** - **",
+                                      hintStyle: MainStyle.get(context)
+                                          .mainStyleTextBaseLineHint),
                                   inputFormatters: [
                                     MaskedTextInputFormatterShifter(
                                         maskONE: "XXX.XXX.XXX-XX",
@@ -264,11 +264,9 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                               child: new Container(
                                 padding: const EdgeInsets.only(
                                     top: 12.0, bottom: 12.0, left: 16.0),
-                                child: new Text(
-                                  "Celular",
-                                  style:
-                                      new TextStyle(color: Color(0xFF999999)),
-                                ),
+                                child: new Text("Celular",
+                                    style: MainStyle.get(context)
+                                        .mainStyleTextBaseLine),
                               )),
                           new Expanded(
                               flex: 7,
@@ -292,15 +290,12 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   focusNode: celularFocus,
                                   keyboardType: TextInputType.number,
                                   cursorColor: Color(0xFF2BBAB4),
-                                  style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLineInput,
                                   decoration: InputDecoration(
-                                    hintText: "( ** ) 9 **** - ****",
-                                    hintStyle: new TextStyle(
-                                        fontSize: 14.0,
-                                        color:
-                                            Color(0xFF000000).withOpacity(0.3)),
-                                  ),
+                                      hintText: "( ** ) 9 **** - ****",
+                                      hintStyle: MainStyle.get(context)
+                                          .mainStyleTextBaseLineHint),
                                   inputFormatters: [
                                     MaskTextInputFormatter(
                                         mask: "(##) # ####-####",
@@ -325,11 +320,9 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                               child: new Container(
                                 padding: const EdgeInsets.only(
                                     top: 12.0, bottom: 12.0, left: 16.0),
-                                child: new Text(
-                                  "E-mail",
-                                  style:
-                                      new TextStyle(color: Color(0xFF999999)),
-                                ),
+                                child: new Text("E-mail",
+                                    style: MainStyle.get(context)
+                                        .mainStyleTextBaseLine),
                               )),
                           new Expanded(
                               flex: 7,
@@ -348,15 +341,12 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   controller: widget.controllerEmail,
                                   focusNode: emailFocus,
                                   cursorColor: Color(0xFF2BBAB4),
-                                  style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLineInput,
                                   decoration: InputDecoration(
-                                    hintText: "email@email.com.br",
-                                    hintStyle: new TextStyle(
-                                        fontSize: 14.0,
-                                        color:
-                                            Color(0xFF000000).withOpacity(0.3)),
-                                  ),
+                                      hintText: "email@email.com.br",
+                                      hintStyle: MainStyle.get(context)
+                                          .mainStyleTextBaseLineHint),
                                 ),
                               ))
                         ],
@@ -374,11 +364,9 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                               child: new Container(
                                 padding: const EdgeInsets.only(
                                     top: 12.0, bottom: 12.0, left: 16.0),
-                                child: new Text(
-                                  "Data Nascimento",
-                                  style:
-                                      new TextStyle(color: Color(0xFF999999)),
-                                ),
+                                child: new Text("Data Nascimento",
+                                    style: MainStyle.get(context)
+                                        .mainStyleTextBaseLine),
                               )),
                           new Expanded(
                               flex: 7,
@@ -401,15 +389,12 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   controller: widget.controllerData,
                                   keyboardType: TextInputType.number,
                                   cursorColor: Color(0xFF2BBAB4),
-                                  style:
-                                      new TextStyle(color: Color(0xFF000000)),
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLineInput,
                                   decoration: InputDecoration(
-                                    hintText: "dd / mm / aaaa",
-                                    hintStyle: new TextStyle(
-                                        fontSize: 14.0,
-                                        color:
-                                            Color(0xFF000000).withOpacity(0.3)),
-                                  ),
+                                      hintText: "dd / mm / aaaa",
+                                      hintStyle: MainStyle.get(context)
+                                          .mainStyleTextBaseLineHint),
                                   inputFormatters: [
                                     MaskedTextInputFormatterShifter(
                                         maskONE: "XX/XX/XXXX",
@@ -426,17 +411,22 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             ],
           ),
         ),
+        (widget.possuiCPF == true)
+            ? new Container(
+                margin: EdgeInsets.only(top: 5.0),
+                alignment: Alignment.centerRight,
+                child: new ZCheckCPF(),
+              )
+            : new Container(),
         new Container(
-          margin: EdgeInsets.only(top: 5.0),
-          alignment: Alignment.centerRight,
-          child: new ZCheckCPF(),
-        ),
-        new Container(
-          padding: EdgeInsets.only(left: 15.0, bottom: 15.0, top: 8),
+          padding: EdgeInsets.only(
+              left: 15.0,
+              bottom: 15.0,
+              top: (widget.possuiCPF == true) ? 8 : 15),
           alignment: Alignment.centerLeft,
           child: new Text(
             "SEGURANÇA",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+            style: MainStyle.get(context).mainStyleTextTitle,
           ),
         ),
         new ZPinSenha(
@@ -456,52 +446,69 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           zTipos: ZTipoSenha.isRepetirSenha,
         ),
         new Container(
-          padding: EdgeInsets.all(2),
-          child: new Row(
+          margin: const EdgeInsets.only(top: 10),
+          child:
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              new GestureDetector(
-                onTap: () {
-                  setState(() {
-                    widget.termos = !widget.termos;
-                  });
-                },
-                child: new Container(
-                    //gesture aqui
-                    decoration: BoxDecoration(
-                        color: (widget.termos == false)
-                            ? Colors.white
-                            : Color(0xff2BB9B4),
-                        border: Border.all(color: Colors.grey.withOpacity(0.6)),
-                        shape: BoxShape.circle),
-                    height: 25.0,
-                    width: 25.0,
-                    child: new AnimatedSize(
-                      duration: Duration(milliseconds: 5000),
-                      curve: Curves.fastOutSlowIn,
-                      vsync: this,
-                      child: new Icon(Icons.check,
-                          color: Colors.white,
-                          size: (widget.termos == true) ? 20.0 : 0.0),
-                    )),
-              ),
-              new GestureDetector(
-                onTap: widget.onTapTermosUso,
-                child: new Container(
-                  // outro aqui
-                  margin: EdgeInsets.only(left: 4.0),
-                  child: new Text(
-                    "ACEITO OS TERMOS DE USO",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13.0,
-                        color: const Color(0xff2BB9B4)),
-                  ),
+              new Material(
+                elevation: 1,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
-              )
+                child: new Row(
+                  children: <Widget>[
+                    new GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          widget.termos = !widget.termos;
+                        });
+                      },
+                      child: new Container(
+                          margin: const EdgeInsets.all(2),
+                          //gesture aqui
+                          decoration: BoxDecoration(
+                              color: (widget.termos == false)
+                                  ? Colors.white
+                                  : Color(0xff2BB9B4),
+                              border:
+                              Border.all(color: Colors.grey.withOpacity(0.6)),
+                              shape: BoxShape.circle),
+                          height: 25.0,
+                          width: 25.0,
+                          child: new AnimatedSize(
+                            duration: Duration(milliseconds: 5000),
+                            curve: Curves.fastOutSlowIn,
+                            vsync: this,
+                            child: new Icon(Icons.check,
+                                color: Colors.white,
+                                size: (widget.termos == true) ? 20.0 : 0.0),
+                          )),
+                    ),
+                    new GestureDetector(
+                      onTap: widget.onTapTermosUso,
+                      child: new Container(
+                        margin: EdgeInsets.only(
+                            top: 4.0, bottom: 4, right: 12, left: 16),
+                        child: new Text(
+                          "ACEITO OS TERMOS DE USO",
+                          style: new TextStyle(
+                            color: Color(0xff2bbab4),
+                              fontSize: MainStyle.get(context).fontSizeTermos
+                              ,fontWeight: FontWeight.w700
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
-        new Container(
+     /*   new Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
             child: (widget.termos == false)
@@ -519,14 +526,24 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                     zButtonType: ZButtonType.isContained,
                     text: "CADASTRAR USUÁRIO",
                     onPressed: widget.onPressed,
-                  )),
+                  )
+        ),*/
       ],
     );
   }
 
-  Widget _titulo() {
-    return new ZHeader(
-      titulo: "CADASTRO DE USUÁRIO",
+  Widget titulo() {
+    return new Material(
+      child: Container(
+        decoration: BoxDecoration(
+            color: const Color(0xFFF7F7F7),
+            border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.7)))),
+        alignment: Alignment.center,
+        padding: const EdgeInsets.only(left: 16.0, bottom: 8.0, top: 8.0),
+        child: new Text("CADASTRO DE USUÁRIO",
+            style: MainStyle.get(context).titleStyleText),
+      ),
     );
   }
 

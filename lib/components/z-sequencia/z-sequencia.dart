@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:z_components/api/quadro-pessoal-service.dart';
 import 'package:z_components/components/z_loading.dart';
-import 'package:z_components/view-model/posicao-alocacao-sequencia-viewmodel.dart';
 
 class ZSequencia extends StatefulWidget {
   final String idColaborador;

@@ -5,7 +5,6 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 
 class ZHoraUmCampo extends StatefulWidget {
-  _ZHoraUmCampoState state;
   String titulo;
 
   ZHoraUmCampo({Key key,
@@ -14,11 +13,8 @@ class ZHoraUmCampo extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ZHoraUmCampoState createState() {
-    state = new _ZHoraUmCampoState();
+  State<StatefulWidget> createState() => _ZHoraUmCampoState();
 
-    return state;
-  }
 }
 
 class _ZHoraUmCampoState extends State<ZHoraUmCampo> {

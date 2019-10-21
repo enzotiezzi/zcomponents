@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZHeaderExpansion extends StatefulWidget {
-  _ZHeaderExpansionState state;
-  String titulo;
-  bool collapsed;
-  GestureTapCallback onTap;
+  final String titulo;
+  final bool collapsed;
+  final GestureTapCallback onTap;
 
 
   ZHeaderExpansion({Key key,
@@ -14,11 +14,8 @@ class ZHeaderExpansion extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ZHeaderExpansionState createState() {
-    state = new _ZHeaderExpansionState();
+  State<StatefulWidget> createState() => _ZHeaderExpansionState();
 
-    return state;
-  }
 }
 
 class _ZHeaderExpansionState extends State<ZHeaderExpansion> with TickerProviderStateMixin{
@@ -44,13 +41,9 @@ class _ZHeaderExpansionState extends State<ZHeaderExpansion> with TickerProvider
                 border:
                 Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.7)))),
             alignment: Alignment.center,
-            padding: const EdgeInsets.only(left: 16.0, bottom: 8.0, top: 8.0),
+            padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
             child: new Text(widget.titulo,
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.bold,
-                )),
+                style: MainStyle.get(context).titleStyleText,),
           ),
           new Row(
             mainAxisAlignment: MainAxisAlignment.end,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-collection-list.dart';
 import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZCollection extends StatefulWidget {
   final String titulo;
@@ -51,7 +52,7 @@ class ZCollectionState extends State<ZCollection> {
               width: 130,
               child: new Text(
                 widget.titulo,
-                style: TextStyle(fontSize: 15.0),
+                style: MainStyle.get(context).mainStyleTextBaseLine
               ),
             ),
             new Expanded(
@@ -62,9 +63,7 @@ class ZCollectionState extends State<ZCollection> {
                   (_itemSelecionado?.valor == null && _anterior == "Selecione")
                       ? new Text(
                           _anterior,
-                          style: new TextStyle(
-                            color: Colors.grey,
-                          ),
+                          style: MainStyle.get(context).mainStyleTextBaseLineHint,
                         )
                       : new Text(
                           (_itemSelecionado?.valor.length > 14)

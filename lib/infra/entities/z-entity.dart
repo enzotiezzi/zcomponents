@@ -57,7 +57,6 @@ abstract class ZEntity{
       bool primaryKey = c.primaryKey;
       bool autoIncrement = c.autoIncrement;
       bool notNull = c.notNull;
-      int version = c.version;
 
       var cmd = "$columnName $type";
 

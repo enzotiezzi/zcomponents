@@ -7,40 +7,40 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/config/z-type-tile.dart';
 
 class ZPerfil extends StatefulWidget {
-  String idConta;
-  String token;
-  String cpf;
-  String tituloAppBar;
-  String inicioIntervalo;
-  String voltaIntervalo;
-  String textoTituloInfo;
-  String textoLocalInfo;
-  String jornada;
-  String textoCargoInfo;
-  String textoEscalaInfo;
-  String textoHoraEntradaInfo;
-  String textoHoraSaidaInfo;
-  String textoHoraIntervaloInfo;
-  String textoCodigoInfo;
-  String tituloHeader;
-  String re;
-  Color colorBatida;
-  int numeroQuadrados;
-  List<String> listaTextos;
-  List<IconData> listaIcones;
-  List<dynamic> listaOnTap;
-  bool statusInfo;
-  Widget imagemPerfil;
-  var onTapVoltar;
-  var onTapImage;
-  String isExpand;
-  Function funcaoIconBatida;
+  final String idConta;
+  final String token;
+  final String cpf;
+  final String tituloAppBar;
+  final String inicioIntervalo;
+  final String voltaIntervalo;
+  final String textoTituloInfo;
+  final String textoLocalInfo;
+  final String jornada;
+  final String textoCargoInfo;
+  final String textoEscalaInfo;
+  final String textoHoraEntradaInfo;
+  final String textoHoraSaidaInfo;
+  final String textoHoraIntervaloInfo;
+  final String textoCodigoInfo;
+  final String tituloHeader;
+  final String re;
+  final Color colorBatida;
+  final int numeroQuadrados;
+  final List<String> listaTextos;
+  final List<IconData> listaIcones;
+  final List<dynamic> listaOnTap;
+  final bool statusInfo;
+  final Widget imagemPerfil;
+  final Function onTapVoltar;
+  final Function onTapImage;
+  final String isExpand;
+  final Function funcaoIconBatida;
 
-  Function funcao;
-  Color color;
-  String endereco;
-  String telefone;
-  String email;
+  final Function funcao;
+  final Color color;
+  final String endereco;
+  final String telefone;
+  final String email;
 
   ZPerfil(
       {this.re: "",
@@ -74,7 +74,8 @@ class ZPerfil extends StatefulWidget {
       this.color,
       this.telefone,
       this.email,
-      this.endereco});
+      this.endereco,
+        this.isExpand});
 
   @override
   _ZPerfilState createState() => _ZPerfilState();

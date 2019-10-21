@@ -1,5 +1,4 @@
 import 'package:z_components/infra/entities/z-entity.dart';
-import 'package:z_components/infra/interfaces/i-query.dart';
 
 import 'i-command.dart';
 

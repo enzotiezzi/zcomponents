@@ -2,10 +2,9 @@ import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 
 class ZExpansion extends StatefulWidget {
-  _ZExpansionState state;
-  String titulo;
-  Widget childExpand;
-  Widget childTitle;
+  final String titulo;
+  final Widget childExpand;
+  final Widget childTitle;
 
 
   ZExpansion({Key key,
@@ -15,11 +14,7 @@ class ZExpansion extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ZExpansionState createState() {
-    state = new _ZExpansionState();
-
-    return state;
-  }
+  State<StatefulWidget> createState() => _ZExpansionState();
 }
 
 class _ZExpansionState extends State<ZExpansion> with TickerProviderStateMixin{

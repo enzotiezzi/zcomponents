@@ -15,7 +15,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/config/z-type-tile.dart';
 import 'package:z_components/components/z_button.dart';
-import 'package:z_components/components/z-perfil.dart';
+import 'package:z_components/components/z-cadastro-usuario.dart';
+import 'package:z_components/components/z-text.dart';
+
+
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/zp-grafico.dart';
@@ -26,8 +29,6 @@ import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/infra/db/database.dart';
-import 'package:z_components/components/z-text.dart';
 /*
 import 'package:z_components_example/entities/pessoa.dart';
 import 'package:z_components_example/repositories/i-monstro-repository.dart';
@@ -35,7 +36,6 @@ import 'package:z_components_example/repositories/i-pessoa-repository.dart';
 import 'package:z_components_example/repositories/monstro-repository.dart';
 import 'package:z_components_example/repositories/pessoa-repository.dart';*/
 
-import 'entities/monstro.dart';
 
 void main() => runApp(MyApp());
 
@@ -178,8 +178,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     },
   ];
 
-  ZDatabase _db;
-
   @override
   void initState() {
     super.initState();
@@ -237,8 +235,15 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
+            new ZHeader(titulo: "Titulo",child: new Text("IHUIHIY"),children: <Widget>[
+              new Text("asdljnljnalsjnljnda")
+            ],),
+
+            new ZText(text: "OLAasdasS",tituloText: "AKI"),
             new ZBaseLine(
-              zTipos: ZTipoBaseline.isNomeCompleto,
+              zTipos: ZTipoBaseline.isCPF,
+              cpfFocus: nomeFocus,
+              controllerCPF: _controllerFim,
               controllerNome: _controllerFim,
               nomeFocus: nomeFocus,
             ),
@@ -289,7 +294,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Container(
               child:
               new ZItemTile(
-              status: true,
+              status: "Aki",
+              colorStatus: Colors.yellow,
+              horario: "akiii",
               zTypeTile: ZTypeTile.isColab,
               cpf: "333.972.458-00",
               escala: "5x2x6x1",
@@ -329,7 +336,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     new Container(
                       child: new Icon(
                         Icons.person,
-                        color: Colors.grey,
+                        color: Colors .grey,
                       ),
                     ),
                     new Container(
@@ -367,7 +374,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
                     cpf: '447.930.638-29',
                     idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-                    status: true,
                   ),
                 )
               ],
@@ -391,7 +397,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              status: true,
+              status: "AKI",
               onTapImage: () {},
               imagemPerfil: new Container(),
               funcao: () {},
@@ -425,8 +431,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
               idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              status: true,
+              status: "AKI",
+              colorStatus: Colors.red,
               onTapImage: () {},
+              horario: "00:00",
               imagemPerfil: new Container(),
               funcao: () {},
               funcaoIconeDois: () {},
@@ -512,33 +520,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ZPerfil(
-                                onTapVoltar: () {
-                                  Navigator.of(context).pop();
-                                },
-                                listaIcones: icones,
-                                listaTextos: titulos,
-                                numeroQuadrados: 6,
-                                statusInfo: true,
-                                tituloHeader: "Giuliano Ortiz",
-                                textoTituloInfo: "Giuliano Ortiz",
-                                textoLocalInfo: "Sede - Xolis ltda.",
-                                textoCargoInfo: "Garoto de TI",
-                                textoEscalaInfo: "5x2(seg-sex)",
-                                textoHoraEntradaInfo: "09:00",
-                                textoHoraSaidaInfo: "15:30",
-                                textoHoraIntervaloInfo: "1:00",
-                                textoCodigoInfo: "012345",
-                                listaOnTap: listaOnTap,
-                                color: Color(0xFF000000),
-                                idConta: '486a49b3-47d1-4d76-80df-079eb82d6d8f',
-                                cpf: '41776112806',
-                                token:
-                                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUyNzkyMjgsImV4cCI6MTU2NTg4NDAyOCwiaWF0IjoxNTY1Mjc5MjI4fQ.QNsJ5DfVH1lRXGirD-ONCH4URIA81HEFmKjljiWhCdU',
-                                imagemPerfil: new Container(),
-                                onTapImage: () {},
-                                tituloAppBar: 'teste',
-                              )),
+                          builder: (context) => ZCadastroUsuario()),
                     );
                   },
                 ),
