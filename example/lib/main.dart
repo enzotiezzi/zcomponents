@@ -294,9 +294,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Container(
               child:
               new ZItemTile(
-              status: "Aki",
-              colorStatus: Colors.yellow,
-              horario: "akiii",
+              status: "ativo",
+              horario: "08:00",
               zTypeTile: ZTypeTile.isColab,
               cpf: "333.972.458-00",
               escala: "5x2x6x1",

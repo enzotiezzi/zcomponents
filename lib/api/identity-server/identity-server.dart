@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:z_components/view-model/user-claims.dart';
 import 'i-identity-server.dart';
 
-class IdentityServer implements IIdentityServer {
+/*class IdentityServer implements IIdentityServer {
   String keyAccessToken;
   String keyRefreshToken;
   String keyTokenExpirationDate;
@@ -98,6 +98,7 @@ class IdentityServer implements IIdentityServer {
           String expirationToken =
               result.accessTokenExpirationDateTime.toIso8601String();
 
+
           // salvando dados obtidos pela requisição de um novo acess token
           await _sharedPreferences.setString(keyAccessToken, newAcesstoken);
           await _sharedPreferences.setString(refreshToken, newRefreshToken);
@@ -147,4 +148,4 @@ class IdentityServer implements IIdentityServer {
       await _sharedPreferences.setString(keyUserName, _user.cpf);
     }
   }
-}
+}*/

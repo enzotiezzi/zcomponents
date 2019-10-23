@@ -37,12 +37,11 @@ class ZItemTile extends StatefulWidget {
   final String status;
 
   ZItemTile(
-
       {this.idConta,
-        this.colorStatus = Colors.grey,
+      this.colorStatus = Colors.grey,
       this.re,
       this.tabCard,
-        this.horario = "",
+      this.horario = "",
       this.inicioIntervalo,
       this.voltaIntervalo,
       this.jornada,
@@ -246,15 +245,21 @@ class _ZItemTileState extends State<ZItemTile> {
                                                 height: 10.0,
                                                 width: 10.0,
                                                 decoration: BoxDecoration(
-                                                    shape:
-                                                    BoxShape.circle,
-                                                    color: widget.colorStatus
-                                                ),
+                                                    shape: BoxShape.circle,
+                                                    color: (widget.status
+                                                                .toLowerCase() ==
+                                                            "ativo")
+                                                        ? Colors.green
+                                                        : (widget.status
+                                                                    .toLowerCase() ==
+                                                                "inativo")
+                                                            ? Colors.red
+                                                            : widget
+                                                                .colorStatus),
                                               ),
                                               new Container(
                                                 margin: EdgeInsets.only(
-                                                    right: 8.0,
-                                                    left: 2.0),
+                                                    right: 8.0, left: 2.0),
                                                 child: new Text(
                                                   widget.status,
                                                   style: TextStyle(
@@ -376,22 +381,77 @@ class _ZItemTileState extends State<ZItemTile> {
                                                   ),
                                                   new Container(
                                                     padding: EdgeInsets.only(
+                                                        left: 2.0,
+                                                        right: 0.0,
+                                                        bottom: 6.0,
+                                                        top: 0.0),
+                                                    child: (widget.horaEntrada ==
+                                                                null ||
+                                                            widget.horaEntrada ==
+                                                                "")
+                                                        ? new Text("")
+                                                        : new Text(
+                                                            widget.horaEntrada ??
+                                                                "",
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF808080),
+                                                                fontSize:
+                                                                    (_largura <
+                                                                            360)
+                                                                        ? 8.0
+                                                                        : 10,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700),
+                                                          ),
+                                                  ),
+                                                  new Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 2.0,
+                                                        right: 0.0,
+                                                        bottom: 6.0,
+                                                        top: 0.0),
+                                                    child: (widget.horaSaida ==
+                                                                null ||
+                                                            widget.horaSaida ==
+                                                                "")
+                                                        ? new Text("")
+                                                        : new Text(
+                                                            "-${widget.horaSaida}" ??
+                                                                "",
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF808080),
+                                                                fontSize:
+                                                                    (_largura <
+                                                                            360)
+                                                                        ? 8.0
+                                                                        : 10,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700),
+                                                          ),
+                                                  ),
+                                                  new Container(
+                                                    padding: EdgeInsets.only(
                                                         left: 6.0,
                                                         right: 0.0,
                                                         bottom: 6.0,
                                                         top: 0.0),
-                                                    child: new Text(
-                                                      widget.horario,
+                                                    child: 
+                                                    (widget.horario == null||widget.horario == "")?new Text(""):
+                                                    new Text(
+                                                      "(${widget.horario})",
                                                       style: TextStyle(
-                                                          color: Color(
-                                                              0xFF808080),
-                                                          fontSize: (_largura <
-                                                              360)
-                                                              ? 8.0
-                                                              : 10,
+                                                          color:
+                                                              Color(0xFF808080),
+                                                          fontSize:
+                                                              (_largura < 360)
+                                                                  ? 8.0
+                                                                  : 10,
                                                           fontWeight:
-                                                          FontWeight
-                                                              .w700),
+                                                              FontWeight.w700),
                                                     ),
                                                   ),
                                                 ],
@@ -422,33 +482,6 @@ class _ZItemTileState extends State<ZItemTile> {
                                                               Color(0xFFA3A3A3),
                                                           size: 14.0,
                                                         ),
-                                                      ),
-                                                      new Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 2.0,
-                                                                right: 0.0,
-                                                                bottom: 6.0,
-                                                                top: 0.0),
-                                                        child: (widget.tempoPausa ==
-                                                                    null ||
-                                                                widget.tempoPausa ==
-                                                                    "")
-                                                            ? new Text("")
-                                                            : new Text(
-                                                                "${widget.tempoPausa}" ??
-                                                                    "",
-                                                                style: TextStyle(
-                                                                    color: Color(
-                                                                        0xFF808080),
-                                                                    fontSize: (_largura <
-                                                                            360)
-                                                                        ? 8.0
-                                                                        : 10,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700),
-                                                              ),
                                                       ),
                                                       new Container(
                                                         padding:
@@ -491,6 +524,33 @@ class _ZItemTileState extends State<ZItemTile> {
                                                             ? new Text("")
                                                             : new Text(
                                                                 "-${widget.voltaIntervalo}" ??
+                                                                    "",
+                                                                style: TextStyle(
+                                                                    color: Color(
+                                                                        0xFF808080),
+                                                                    fontSize: (_largura <
+                                                                            360)
+                                                                        ? 8.0
+                                                                        : 10,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700),
+                                                              ),
+                                                      ),
+                                                      new Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 2.0,
+                                                                right: 0.0,
+                                                                bottom: 6.0,
+                                                                top: 0.0),
+                                                        child: (widget.tempoPausa ==
+                                                                    null ||
+                                                                widget.tempoPausa ==
+                                                                    "")
+                                                            ? new Text("")
+                                                            : new Text(
+                                                                "(${widget.tempoPausa})" ??
                                                                     "",
                                                                 style: TextStyle(
                                                                     color: Color(
@@ -883,7 +943,16 @@ class _ZItemTileState extends State<ZItemTile> {
                                             width: 10.0,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: widget.colorStatus),
+                                                color: (widget.status
+                                                    .toLowerCase() ==
+                                                    "ativo")
+                                                    ? Colors.green
+                                                    : (widget.status
+                                                    .toLowerCase() ==
+                                                    "inativo")
+                                                    ? Colors.red
+                                                    : widget
+                                                    .colorStatus),
                                           ),
                                           new Container(
                                             margin: EdgeInsets.only(
@@ -892,8 +961,8 @@ class _ZItemTileState extends State<ZItemTile> {
                                               widget.status,
                                               style: TextStyle(
                                                   fontSize: 12.0,
-                                                  color: const Color(
-                                                      0xFF808080)),
+                                                  color:
+                                                      const Color(0xFF808080)),
                                             ),
                                           )
                                         ],

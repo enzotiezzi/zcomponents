@@ -1,6 +1,6 @@
 import 'package:z_components/view-model/user-claims.dart';
 
-abstract class IIdentityServer {
+/*abstract class IIdentityServer {
   Future getRefreshToken();
 
   Future login();
@@ -10,4 +10,4 @@ abstract class IIdentityServer {
   Future setIdColaborador();
 
   Future setUserInfo();
-}
+}*/
