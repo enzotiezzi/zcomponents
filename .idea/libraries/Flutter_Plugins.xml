@@ -1,6 +1,12 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
-    <CLASSES />
+    <CLASSES>
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.6+4" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.3+5" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.2.0" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://C:/src/flutter/.pub-cache/git/flutter_appauth-3ba02b0fd3dbd4615d40c2c6d9685fad69e84214" />
+    </CLASSES>
     <JAVADOC />
     <SOURCES />
   </library>
