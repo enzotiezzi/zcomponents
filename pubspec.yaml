@@ -27,7 +27,7 @@ dependencies:
   injector: ^1.0.8
   flutter_appauth:
     git:
-      url: https://github.com/MaikuB/flutter_appauth
+      url: https://github.com/VictorsAlves/flutter_appAuth2
   shared_preferences: ^0.5.3+1
   dio: ^2.0.4
 
