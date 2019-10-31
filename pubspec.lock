@@ -93,11 +93,9 @@ packages:
   flutter_appauth:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "9e64e6b698731a5e415c7ed5d2c32b79dedd30e0"
-      url: "https://github.com/VictorsAlves/flutter_appAuth2"
-    source: git
+      name: flutter_appauth
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.4.2"
   flutter_cache_manager:
     dependency: transitive
