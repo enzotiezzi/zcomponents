@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
-import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-collection.dart';
+import 'package:z_components/components/z-button-card-box.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
@@ -13,12 +13,11 @@ import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z_navigationbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
+import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-type-tile.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z-cadastro-usuario.dart';
 import 'package:z_components/components/z-text.dart';
-
-
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/zp-grafico.dart';
@@ -28,14 +27,12 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
-import 'package:z_components/config/z-tipo-header.dart';
 /*
 import 'package:z_components_example/entities/pessoa.dart';
 import 'package:z_components_example/repositories/i-monstro-repository.dart';
 import 'package:z_components_example/repositories/i-pessoa-repository.dart';
 import 'package:z_components_example/repositories/monstro-repository.dart';
 import 'package:z_components_example/repositories/pessoa-repository.dart';*/
-
 
 void main() => runApp(MyApp());
 
@@ -235,11 +232,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 8),
+              child: new Text("Z-Header:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
             new ZHeader(titulo: "Titulo",child: new Text("IHUIHIY"),children: <Widget>[
               new Text("asdljnljnalsjnljnda")
             ],),
-
-            new ZText(text: "OLAasdasS",tituloText: "AKI"),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 8),
+              child: new Text("Z-Baseline:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
             new ZBaseLine(
               zTipos: ZTipoBaseline.isCPF,
               cpfFocus: nomeFocus,
@@ -253,11 +256,58 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               celularFocus: celularFocus,
               context: context,
             ),
-            new ZNomeReduzido(
-              text: "Alexandre Kupperman ",
+            ZBaseLine(
+              zTipos: ZTipoBaseline.isDataNascimento,
+              controllerData: controllerData,
+              context: context,
+              mesFocus: mesFocus,
+            ),
+            ZBaseLine(
+              zTipos: ZTipoBaseline.isCNPJ,
+              cNPJFocus: cNPJFocus,
+              controllerCNPJ: controllerCNPJ,
+              context: context,
+            ),
+            ZBaseLine(
+              zTipos: ZTipoBaseline.isCPF,
+              cpfFocus: cpfFocus,
+              controllerCPF: controllerCPF,
+              context: context,
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-NomeReduzido:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 20,bottom: 8,),
+              child: new Text("Um exemplo abaixo quando se tem somente dois nomes no Nome Completo:",style: new TextStyle(fontWeight: FontWeight.w300),),
+            ),
+           new Container(
+             margin: const EdgeInsets.only(left: 24,bottom: 16),
+             child:  new ZNomeReduzido(
+               text: "Alexandre Kuperman",textStyle: TextStyle(fontWeight: FontWeight.w500),
+             ),
+           ),
+            new Container(
+              margin: const EdgeInsets.only(left: 20,bottom: 8,),
+              child: new Text("Outro exemplo quando se tem três ou mais nomes no Nome Completo(Giuliano Ortiz Glória):",style: new TextStyle(fontWeight: FontWeight.w300),),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 24),
+              child:  new ZNomeReduzido(
+                text: "Giuliano Ortiz Goria",textStyle: TextStyle(fontWeight: FontWeight.w500),
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Text:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZText(
               tituloText: "aaaaaa",text: "bbbbbbbbbbb",
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Expansion:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZExpansion(
               childTitle: new IconButton(
@@ -292,6 +342,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               rua: "Rua Lorem ipsum, Nº 123, Bairro Adipiscing - São Paulo - SP",
             ),*/
             new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-ItemTile:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
+            new Container(
               child:
               new ZItemTile(
               status: "Aki",
@@ -317,70 +371,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               endereco: "",
               colorBatida: Color(0xff1AC15D),
             ),),
+
             new Container(
-              height: 17.0,
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-ItemTile-Expendable:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
-            new ZHeader(
-              zTipos: ZTipoHeader.isExpansion,
-              titulosAppBar: true,
-              child: new Container(
-                color: const Color(0xff000000),
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                  bottom: 6.0,
-                  top: 6.0,
-                ),
-                child: new Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    new Container(
-                      child: new Icon(
-                        Icons.person,
-                        color: Colors .grey,
-                      ),
-                    ),
-                    new Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      margin: EdgeInsets.only(left: 5.0),
-                      child: new Text(
-                        "VICTOR",
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    new Container(
-                      margin: EdgeInsets.only(left: 6.0),
-                      child: new Icon(
-                        Icons.my_location,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    new Container(
-                      width: MediaQuery.of(context).size.width / 3.2,
-                      margin: EdgeInsets.only(left: 8.0),
-                      child: new Text(
-                        "ZELLAR TESTE DE TAMANHO",
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              children: <Widget>[
-                new Container(
-                  child: new ZItemTile(
-                    token:
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
-                    cpf: '447.930.638-29',
-                    idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-                  ),
-                )
-              ],
-            ),
-            new Container(
-              height: 17.0,
-            ),
+
             new ZExpendableItemTile(
               nome: "Gustavo Ortiz",
               nomeCentroCusto: "Sede - Fernando ltda.",
@@ -452,7 +448,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               textoIconeUm: 'teste',
             ),
             new Container(
-              height: 17.0,
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Cargo:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZCargo(
               token:
@@ -460,47 +457,18 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               key: _keyCargo,
             ),
             new Container(
-              color: Colors.grey,
-              padding: const EdgeInsets.all(16.0),
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new ZSequencia(
-                    token:
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
-                    idConta: "486A49B3-47D1-4D76-80DF-079EB82D6D8F",
-                    idColaborador: "548D524D-A6DE-4D8A-945E-A706AD2F87F2",
-                  )
-                ],
-              ),
-            ),
-            ZBaseLine(
-              zTipos: ZTipoBaseline.isDataNascimento,
-              controllerData: controllerData,
-              context: context,
-              mesFocus: mesFocus,
-            ),
-            ZBaseLine(
-              zTipos: ZTipoBaseline.isCNPJ,
-              cNPJFocus: cNPJFocus,
-              controllerCNPJ: controllerCNPJ,
-              context: context,
-            ),
-            ZBaseLine(
-              zTipos: ZTipoBaseline.isCPF,
-              cpfFocus: cpfFocus,
-              controllerCPF: controllerCPF,
-              context: context,
-            ),
-            new ZNomeReduzido(
-              text: "Giuliano Ortiz Goria",
-              textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Escala:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZEscala(
               token:
                   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjZmYWI2Yjk3LTkyMjctNGUyOS05MzVhLTM5ZjNmN2E4Y2E1ZiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI5YzZlZDk2ZC1iODM1LTQzNGEtOWE0My01NmNhMjFiZDg0YzEiLCJuYmYiOjE1NjQ3Nzc2NDgsImV4cCI6MTU2NTM4MjQ0OCwiaWF0IjoxNTY0Nzc3NjQ4fQ.uDRVATIoSb4FAYjgg5O1OYa7BZxsELvQyRaJFUqK0Pc',
               key: _keyEscala,
               //valorPadrao: widget.escala,
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Collection:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZCollection(
               key: _keyStatus,
@@ -512,35 +480,59 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   .toList(),
               onChange: (item) {},
             ),
-            new Row(
-              children: <Widget>[
-                new ZButton(
-                  text: "PERFIL",
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ZCadastroUsuario()),
-                    );
-                  },
-                ),
-              ],
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Perfil:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 20,bottom: 8,),
+              child: new Text("Z-Perfil é uma Tela, o botão abaixo abrirá-la:",style: new TextStyle(fontWeight: FontWeight.w300),),
             ),
             new Row(
               children: <Widget>[
-                ZLoading(
-                  color: Colors.purple,
-                ),
-                ZLoading(
-                  color: Colors.lightBlueAccent,
-                ),
-                ZLoading(
-                  color: Colors.lightGreenAccent,
-                ),
-                ZLoading(
-                  color: Colors.amber,
-                ),
+             new Container(
+               margin: const EdgeInsets.only(left: 24),
+               child:    new ZButton(
+                 text: "PERFIL",
+                 onPressed: () {
+                   Navigator.push(
+                     context,
+                     MaterialPageRoute(
+                         builder: (context) => ZCadastroUsuario()),
+                   );
+                 },
+               ),
+             )
               ],
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Load:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 24),
+              child:
+              new Row(
+                children: <Widget>[
+                  ZLoading(),
+                  ZLoading(
+                    color: Colors.purple,
+                  ),
+                  ZLoading(
+                    color: Colors.lightBlueAccent,
+                  ),
+                  ZLoading(
+                    color: Colors.lightGreenAccent,
+                  ),
+                  ZLoading(
+                    color: Colors.amber,
+                  ),
+                ],
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,top: 40),
+              child: new Text("Z-Hora:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZHora(
               controllerIntervalo: _controllerIntervalo,
@@ -548,13 +540,16 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               controllerHoraEntrada: _controllerHorarioInicio,
             ),
             new Container(
+              margin: const EdgeInsets.only(left: 16,top: 40),
+              child: new Text("ZP-Gráfico:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
+            new Container(
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               child: new ZPGrafico(),
             ),
-            new ZExpendableItemTile(),
             new Container(
-              width: 50.0,
-              child: new Icon(Icons.search),
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Tile:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZTile(
               onTap: () {},
@@ -570,37 +565,102 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ),
             new Container(
-              width: 50.0,
-              child: new Icon(Icons.search),
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-ButtonCardBox:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            ),
+            new ZButtonCardBox(
+              isCenter: true,
+              onClick: (){
+                print("OLHA SO");
+              },
+              icon:Icon(Icons.build),
+              text: new Text("o alaf eh um cara bem legal olha so como ele vai clan"),
+            ),
+            new ZButtonCardBox(
+              onClick: (){
+                print("OLHA SO");
+              },
+              icon:Icon(Icons.star),
+              text: new Text("Teste"),
+            ),
+            new Row(
+              children: <Widget>[
+               new Expanded(child:  new ZButtonCardBox(
+                 onClick: (){
+                   print("OLHA SO");
+                 },
+                 icon:Icon(Icons.star),
+                 text: new Text("o alaf eh um cara bem legal olha so como ",style: new TextStyle(fontSize: 12,fontWeight: FontWeight.w500),),
+               ),),
+               new Expanded(child:  new ZButtonCardBox(
+                 onClick: (){
+                   print("OLHA SO");
+                 },
+                 icon:Icon(Icons.print),
+                 text: new Text("Teste"),
+               ),)
+              ],
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
+              child: new Text("Z-Button:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new Column(
               children: <Widget>[
                 new ZButton(
-                  text: "Dialog Normal",
+                  iconLeft: Icon(Icons.star,color: Colors.white,),
+                  text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewNormal();
                   },
                 ),
                 new ZButton(
-                  text: "Dialog Erro",
+                  iconRight: Icon(Icons.star,color: Colors.white,),
+                  text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNew();
                   },
-                ),
+                ), ///z_button_empty_iconRight
                 new ZButton(
-                  text: "Dialgo Alert",
-                  onPressed: () {
-                    showAlertDialogNewAlert();
-                  },
-                ),
-                new ZButton(
-                  text: "Dialog Succes",
+                  zButtonType: ZButtonType.isOutlined,
+                  iconRight: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewSuccess();
                   },
                 ),
                 new ZButton(
-                  text: "Dialog Load",
+                  zButtonType: ZButtonType.isOutlined,
+                  iconLeft: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  text: "DIALOG NORMAL",
+                  onPressed: () {
+                    showAlertDialogNewSuccess();
+                  },
+                ),
+                new ZButton(
+                  zButtonType: ZButtonType.isTextButton,
+                  iconRight: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  text: "DIALOG NORMAL",
+                  onPressed: () {
+                    showAlertDialogNewSuccess();
+                  },
+                ),
+                new ZButton(
+                  zButtonType: ZButtonType.isTextButton,
+                  iconLeft: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  text: "DIALOG NORMAL",
+                  onPressed: () {
+                    showAlertDialogNewSuccess();
+                  },
+                ),
+                new ZButton(
+                  text: "DIALOG NORMAL",
+                  onPressed: () {
+                    showAlertDialogNewAlert();
+                  },
+                ),
+                new ZButton(
+                  text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewProgress();
                   },
@@ -841,9 +901,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
-                            new Text("Este aqui eh um dialogo teste de um tipo",
-                                style: new TextStyle(fontSize: 14),
-                                textAlign: TextAlign.center),
+                            new Text("Este aqui eh um dialogo teste de um tipo",textAlign: TextAlign.center),
                           ],
                         ),
                       )

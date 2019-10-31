@@ -1,1 +1,1 @@
-enum ZButtonType {isContained , isOutlined, isLogin, isCadastro}
+enum ZButtonType {isContained , isOutlined, isTextButton}

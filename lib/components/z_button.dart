@@ -1,174 +1,137 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:z_components/config/z-button-type.dart';
 
 class ZButton extends StatelessWidget {
-  Widget _zButton;
 
+  Widget _zButton;
   final Key key;
-  final double minSize;
   final VoidCallback onPressed;
   final String text;
-  final ValueChanged<bool> onHighlightChanged;
-  final ButtonTextTheme textTheme;
-  final Color textColor;
-  final Color disabledTextColor;
-  final Color color;
-  final Color disabledColor;
-  final EdgeInsetsGeometry padding;
-  final Color highlightColor;
-  final Color splashColor;
-  final double elevation;
-  final double highlightElevation;
-  final double disabledElevation;
-  final ShapeBorder shape;
-  final BorderRadius borderRadius;
-  final double pressedOpacity;
-  final Brightness colorBrightness;
-  final Clip clipBehavior;
-  final MaterialTapTargetSize materialTapTargetSize;
-  final Duration animationDuration;
+  final Icon iconLeft;
+  final Icon iconRight;
   final ZButtonType zButtonType;
 
   ZButton({
     this.key,
     @required this.onPressed,
     this.text,
-    this.onHighlightChanged,
-    this.textTheme,
-    this.textColor,
-    this.padding,
-    this.disabledTextColor,
-    this.color = const Color(0xff2BBAB4),
-    this.disabledColor,
-    this.highlightColor,
-    this.splashColor,
-    this.elevation,
-    this.highlightElevation,
-    this.disabledElevation,
-    this.minSize = 44.0,
-    this.pressedOpacity = 0.1,
-    this.shape,
-    this.borderRadius,
-    this.materialTapTargetSize,
-    this.clipBehavior = Clip.none,
-    this.colorBrightness,
-    this.animationDuration,
+    this.iconLeft,
+    this.iconRight,
     this.zButtonType = ZButtonType.isContained,
   }) : super(key: key) {
     switch (zButtonType) {
       case ZButtonType.isContained:
         _zButton = new RaisedButton(
           onPressed: this.onPressed,
-          child: new Text(
-            this.text,
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          child: new Container(
+            child:
+            new Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                (this.iconLeft != null)?
+                    new Container(
+                      child: this.iconLeft
+                    ):new Container(),
+                new Container(
+                  padding: const EdgeInsets.only(right: 6,left: 6),
+                  child: new Text(
+                    this.text,
+                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
+                ),
+                (this.iconRight != null)?
+                new Container(
+                  margin: const EdgeInsets.only(),
+                    child: this.iconRight
+                ):new Container(),
+              ],
+            ),
           ),
-          color: color,
+          color: const Color(0xff2BBAB4),
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0)),
-          elevation: this.elevation,
-          padding: this.padding,
-          disabledElevation: this.disabledElevation,
-          highlightElevation: this.highlightElevation,
-          splashColor: this.splashColor,
-          disabledColor: this.disabledColor,
+          padding:const EdgeInsets.only(left:10,right: 10),
+          splashColor: Colors.grey.withOpacity(0.5),
           key: this.key,
-          materialTapTargetSize: this.materialTapTargetSize,
-          clipBehavior: this.clipBehavior,
-          textTheme: this.textTheme,
-          animationDuration: this.animationDuration,
-          colorBrightness: this.colorBrightness,
-          disabledTextColor: this.disabledTextColor,
-          highlightColor: this.highlightColor,
-          onHighlightChanged: this.onHighlightChanged,
-          textColor: this.textColor,
         );
 
         break;
       case ZButtonType.isOutlined:
         _zButton = new RaisedButton(
+          highlightColor: Colors.transparent,
           onPressed: this.onPressed,
           child: new Container(
-            padding: EdgeInsets.fromLTRB(20.0, 7.0, 20.0, 7.0),
-            child: new Text(
-              this.text,
-              style: TextStyle(
-                color: const Color(0xff2BBAB4),
-              ),
+            padding: EdgeInsets.only(left: 8,right: 8,top: 6,bottom: 6),
+            child:  new Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                (this.iconLeft != null)?
+                new Container(
+                    child: this.iconLeft
+                ):new Container(),
+                new Container(
+                  padding: const EdgeInsets.only(right: 6,left: 6),
+                  child: new Text(
+                    this.text,
+                    style: TextStyle(color: Color(0xff2bbab4), fontSize: 20.0),
+                  ),
+                ),
+                (this.iconRight != null)?
+                new Container(
+                    child: this.iconRight
+                ):new Container(),
+              ],
             ),
             decoration: BoxDecoration(
                 borderRadius: new BorderRadius.circular(30.0),
                 border: Border.all(
-                  color: color
+                  color: const Color(0xff2BBAB4)
                 )),
           ),
           color: Colors.transparent,
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0)),
           elevation: 0,
-          padding: this.padding,
-          disabledElevation: this.disabledElevation,
+          padding: const EdgeInsets.only(left:10,right: 10),
           highlightElevation: 0,
           splashColor: Colors.transparent,
-          disabledColor: this.disabledColor,
           key: this.key,
-          materialTapTargetSize: this.materialTapTargetSize,
-          clipBehavior: this.clipBehavior,
-          textTheme: this.textTheme,
-          animationDuration: this.animationDuration,
-          colorBrightness: this.colorBrightness,
-          disabledTextColor: this.disabledTextColor,
-          highlightColor: Colors.transparent,
-          onHighlightChanged: this.onHighlightChanged,
-          textColor: this.textColor,
         );
         break;
-
-      case ZButtonType.isLogin:
-        _zButton = new RaisedButton(
-          padding: EdgeInsets.only(
-              left: 130.0, right: 130.0, top: 10.0, bottom: 10.0),
-          onPressed: this.onPressed,
-          color: const Color(0xff2BB9B4),
-          child: new Text(
-            "LOGIN",
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
+      case ZButtonType.isTextButton:
+        _zButton =
+        new Container(
+          child: new InkWell(
+            borderRadius:
+            new BorderRadius.all(const Radius.circular(25.0)),
+            splashColor: const Color(0xffe6e6e6),
+            onTap: this.onPressed,
+            child: new Container(
+              padding: const EdgeInsets.all(12),
+              child: new Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  (this.iconLeft != null)?
+                  new Container(
+                      child: this.iconLeft
+                  ):new Container(),
+                  new Container(
+                    padding: const EdgeInsets.only(right: 6,left: 6),
+                    child: new Text(
+                      this.text,
+                      style: TextStyle(color: Color(0xff2bbab4), fontSize: 20.0,fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  (this.iconRight != null)?
+                  new Container(
+                      child: this.iconRight
+                  ):new Container(),
+                ],
+              ),
+            ),
           ),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(25.0))),
-        );
-        break;
-
-      case ZButtonType.isCadastro:
-        _zButton = new RaisedButton(
-          onPressed: this.onPressed,
-
-          child: new Container(
-            padding: EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 4.0),
-            child: new Text("CADASTRO",style: TextStyle( color: const Color(0xFFFFFFFF),fontSize: 20.0,  ),),decoration: BoxDecoration(
-              borderRadius: new BorderRadius.circular(30.0),
-              border: Border.all(   color: const Color(0xFFFFFFFF),)),),
-          color:Colors.transparent,
-          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-          elevation: 0,
-
-          padding: this.padding,
-          disabledElevation: this.disabledElevation,
-          highlightElevation: 0,
-          splashColor: Colors.transparent,
-          disabledColor: this.disabledColor,
-          key: this.key,
-          materialTapTargetSize: this.materialTapTargetSize,
-          clipBehavior: this.clipBehavior,
-          textTheme: this.textTheme,
-          animationDuration: this.animationDuration,
-          colorBrightness: this.colorBrightness,
-          disabledTextColor: this.disabledTextColor,
-          highlightColor: Colors.transparent,
-          onHighlightChanged: this.onHighlightChanged,
-          textColor: this.textColor,
+          margin: const EdgeInsets.only(bottom: 8),
         );
         break;
     }
