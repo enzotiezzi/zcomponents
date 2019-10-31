@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZCheckCPF extends StatefulWidget {
-  _ZCheckCPFState state;
 
   ZCheckCPF({
     Key key,
   }) : super(key: key);
 
   @override
-  _ZCheckCPFState createState() {
-    state = new _ZCheckCPFState();
+  State<StatefulWidget> createState() => _ZCheckCPFState();
 
-    return state;
-  }
 }
 
 class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin {
@@ -81,10 +78,10 @@ class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin {
                               margin: EdgeInsets.only(left: 4.0),
                               child: new Text(
                                 "NÃO POSSUO CPF",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13.0,
-                                    color: Colors.black),
+                                style: new TextStyle(
+                                  fontSize: MainStyle.get(context).fontSizeTermos
+                                      ,fontWeight: FontWeight.w700
+                                ),
                               ),
                             )
                           ],

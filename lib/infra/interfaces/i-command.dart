@@ -1,4 +1,3 @@
-import 'package:z_components/infra/entities/z-entity.dart';
 
 abstract class ICommand<T> {
   Future<int> insert(T entity);

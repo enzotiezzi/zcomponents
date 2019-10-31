@@ -107,5 +107,6 @@ class ZPicker {
         initialDatePickerMode: this.initialDatePickerMode,
         selectableDayPredicate: this.selectableDayPredicate,
         textDirection: this.textDirection));
+    return _showDatePicker();
   }
 }

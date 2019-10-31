@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZPerfilItem extends StatefulWidget {
-  int numeroQuadrados;
-  List<String> listaTextos;
-  List<IconData> listaIcones;
-  List<dynamic> listaOnTap;
-  Color color;
+  final int numeroQuadrados;
+  final List<String> listaTextos;
+  final List<IconData> listaIcones;
+  final List<dynamic> listaOnTap;
+  final Color color;
 
   ZPerfilItem({this.numeroQuadrados = 0, this.listaIcones, this.listaTextos, this.listaOnTap, this.color});
 
