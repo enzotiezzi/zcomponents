@@ -25,7 +25,9 @@ dependencies:
   cached_network_image: ^1.1.1
   sqflite: ^1.1.6+4
   injector: ^1.0.8
-  flutter_appauth: ^0.4.0+1
+  flutter_appauth:
+    git:
+      url: https://github.com/VictorsAlves/flutter_appAuth2
   shared_preferences: ^0.5.3+1
   dio: ^2.0.4
 
