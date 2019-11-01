@@ -102,25 +102,48 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
         appBar: CupertinoNavigationBar(
-          middle: new Text("CADASTRO USUÁRIO",style: MainStyle.get(context).titleStyleText,),
-          leading:  Align(
-          widthFactor: 0.8,
-          alignment: Alignment.center,
-          child:new GestureDetector(
-            child: (cancelar == false)?new Text("",style: new TextStyle(color: Colors.transparent),): Text('Cancelar',style: new TextStyle(color: Color(0xffE53629),fontSize: MainStyle.get(context).fontSizeLeadinCancelar),),
-            onTap: (){
-              Navigator.pop(context);
-            },
-          )
-        ),trailing:  Align(
-          widthFactor: 0.8,
-          alignment: Alignment.center,
-          child:(widget.termos == false)?new Text("",style: new TextStyle(color: Colors.transparent),): new GestureDetector(
-            child: Text('Cadastrar',style: new TextStyle(color: Color(0xff1F8782),fontSize: MainStyle.get(context).fontSizeLeadinCancelar),),
-            onTap: widget.onPressed,
-          )
-        )
-        ),
+            middle: new Text(
+              "CADASTRO USUÁRIO",
+              style: MainStyle.get(context).titleStyleText,
+            ),
+            leading: Align(
+                widthFactor: 0.8,
+                alignment: Alignment.center,
+                child: new GestureDetector(
+                  child: (cancelar == false)
+                      ? new Text(
+                          "",
+                          style: new TextStyle(color: Colors.transparent),
+                        )
+                      : Text(
+                          'Cancelar',
+                          style: new TextStyle(
+                              color: Color(0xffE53629),
+                              fontSize: MainStyle.get(context)
+                                  .fontSizeLeadinCancelar),
+                        ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                )),
+            trailing: Align(
+                widthFactor: 0.8,
+                alignment: Alignment.center,
+                child: (widget.termos == false)
+                    ? new Text(
+                        "",
+                        style: new TextStyle(color: Colors.transparent),
+                      )
+                    : new GestureDetector(
+                        child: Text(
+                          'Cadastrar',
+                          style: new TextStyle(
+                              color: Color(0xff1F8782),
+                              fontSize: MainStyle.get(context)
+                                  .fontSizeLeadinCancelar),
+                        ),
+                        onTap: widget.onPressed,
+                      ))),
         body: _body());
   }
 
@@ -151,7 +174,12 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           child: new Column(
             children: <Widget>[
               new Container(
-                  color: Colors.white,
+                color: Colors.white,
+                child: GestureDetector(
+                  //NOME COMPLETO
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(nomeFocus);
+                  },
                   child: new Column(
                     children: <Widget>[
                       new Row(
@@ -167,38 +195,44 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                             ),
                           ),
                           new Expanded(
-                              flex: 7,
-                              child: new Container(
-                                margin: const EdgeInsets.only(
-                                    left: 8.0, right: 16.0),
-                                child: new TextField(
-                                  keyboardAppearance: Brightness.light,
-                                  onSubmitted: (term) {
-                                    _fieldFocusChange(
-                                        context, nomeFocus, cpfFocus);
-                                  },
-                                  onChanged: (text) {
-                                    countNome = 0;
-                                  },
-                                  textCapitalization: TextCapitalization.words,
-                                  focusNode: nomeFocus,
-                                  controller: widget.controllerNome,
-                                  cursorColor: Color(0xFF2BBAB4),
-                                  style: MainStyle.get(context)
-                                      .mainStyleTextBaseLineInput,
-                                  decoration: InputDecoration(
-                                      hintText: "Nome Completo",
-                                      hintStyle: MainStyle.get(context)
-                                          .mainStyleTextBaseLineHint),
-                                ),
-                              ))
+                            flex: 7,
+                            child: new Container(
+                              margin:
+                                  const EdgeInsets.only(left: 8.0, right: 16.0),
+                              child: new TextField(
+                                keyboardAppearance: Brightness.light,
+                                onSubmitted: (term) {
+                                  _fieldFocusChange(
+                                      context, nomeFocus, cpfFocus);
+                                },
+                                onChanged: (text) {
+                                  countNome = 0;
+                                },
+                                textCapitalization: TextCapitalization.words,
+                                focusNode: nomeFocus,
+                                controller: widget.controllerNome,
+                                cursorColor: Color(0xFF2BBAB4),
+                                style: MainStyle.get(context)
+                                    .mainStyleTextBaseLineInput,
+                                decoration: InputDecoration(
+                                    hintText: "Nome Completo",
+                                    hintStyle: MainStyle.get(context)
+                                        .mainStyleTextBaseLineHint),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ],
-                  )),
+                  ),
+                ),
+              ),
               new Container(
-                  color: Colors.white,
-                  child: new Column(
+                //CPF
+                color: Colors.white,
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).requestFocus(cpfFocus),
+                  child: Column(
                     children: <Widget>[
                       new Row(
                         children: <Widget>[
@@ -252,65 +286,78 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         ],
                       ),
                     ],
-                  )),
+                  ),
+                ),
+              ),
               new Container(
-                  color: Colors.white,
+                //CELULAR
+                color: Colors.white,
+                child: GestureDetector(
+                  onTap: () =>
+                      FocusScope.of(context).requestFocus(celularFocus),
                   child: new Column(
                     children: <Widget>[
                       new Row(
                         children: <Widget>[
                           new Expanded(
-                              flex: 3,
-                              child: new Container(
-                                padding: const EdgeInsets.only(
-                                    top: 12.0, bottom: 12.0, left: 16.0),
-                                child: new Text("Celular",
-                                    style: MainStyle.get(context)
-                                        .mainStyleTextBaseLine),
-                              )),
+                            flex: 3,
+                            child: new Container(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, bottom: 12.0, left: 16.0),
+                              child: new Text("Celular",
+                                  style: MainStyle.get(context)
+                                      .mainStyleTextBaseLine),
+                            ),
+                          ),
                           new Expanded(
-                              flex: 7,
-                              child: new Container(
-                                margin: const EdgeInsets.only(
-                                    left: 8.0, right: 16.0),
-                                child: new TextField(
-                                  keyboardAppearance: Brightness.light,
-                                  onSubmitted: (term) {
+                            flex: 7,
+                            child: new Container(
+                              margin:
+                                  const EdgeInsets.only(left: 8.0, right: 16.0),
+                              child: new TextField(
+                                keyboardAppearance: Brightness.light,
+                                onSubmitted: (term) {
+                                  _fieldFocusChange(
+                                      context, celularFocus, emailFocus);
+                                },
+                                onChanged: (text) {
+                                  countCelular = 0;
+                                  if (text.length == 16) {
                                     _fieldFocusChange(
                                         context, celularFocus, emailFocus);
-                                  },
-                                  onChanged: (text) {
-                                    countCelular = 0;
-                                    if (text.length == 16) {
-                                      _fieldFocusChange(
-                                          context, celularFocus, emailFocus);
-                                    }
-                                  },
-                                  controller: widget.controllerCelular,
-                                  focusNode: celularFocus,
-                                  keyboardType: TextInputType.number,
-                                  cursorColor: Color(0xFF2BBAB4),
-                                  style: MainStyle.get(context)
-                                      .mainStyleTextBaseLineInput,
-                                  decoration: InputDecoration(
-                                      hintText: "( ** ) 9 **** - ****",
-                                      hintStyle: MainStyle.get(context)
-                                          .mainStyleTextBaseLineHint),
-                                  inputFormatters: [
-                                    MaskTextInputFormatter(
-                                        mask: "(##) # ####-####",
-                                        filter: {"#": RegExp(r'[0-9]')}),
-                                    BlacklistingTextInputFormatter(
-                                        RegExp("[\\\\,.]")),
-                                  ],
-                                ),
-                              ))
+                                  }
+                                },
+                                controller: widget.controllerCelular,
+                                focusNode: celularFocus,
+                                keyboardType: TextInputType.number,
+                                cursorColor: Color(0xFF2BBAB4),
+                                style: MainStyle.get(context)
+                                    .mainStyleTextBaseLineInput,
+                                decoration: InputDecoration(
+                                    hintText: "( ** ) 9 **** - ****",
+                                    hintStyle: MainStyle.get(context)
+                                        .mainStyleTextBaseLineHint),
+                                inputFormatters: [
+                                  MaskTextInputFormatter(
+                                      mask: "(##) # ####-####",
+                                      filter: {"#": RegExp(r'[0-9]')}),
+                                  BlacklistingTextInputFormatter(
+                                      RegExp("[\\\\,.]")),
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ],
-                  )),
+                  ),
+                ),
+              ),
               new Container(
-                  color: Colors.white,
+                //E-MAIL
+                color: Colors.white,
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).requestFocus(emailFocus),
                   child: new Column(
                     children: <Widget>[
                       new Row(
@@ -352,62 +399,70 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         ],
                       ),
                     ],
-                  )),
+                  ),
+                ),
+              ),
               new Container(
-                  color: Colors.white,
+                color: Colors.white,
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).requestFocus(mesFocus),
                   child: new Column(
                     children: <Widget>[
                       new Row(
                         children: <Widget>[
                           new Expanded(
-                              flex: 3,
-                              child: new Container(
-                                padding: const EdgeInsets.only(
-                                    top: 12.0, bottom: 12.0, left: 16.0),
-                                child: new Text("Data Nascimento",
-                                    style: MainStyle.get(context)
-                                        .mainStyleTextBaseLine),
-                              )),
-                          new Expanded(
-                              flex: 7,
-                              child: new Container(
-                                margin: const EdgeInsets.only(
-                                    left: 8.0, right: 16.0),
-                                child: new TextField(
-                                  keyboardAppearance: Brightness.light,
-                                  onSubmitted: (term) {
-                                    mesFocus.unfocus();
-                                  },
-                                  onChanged: (text) {
-                                    countData = 0;
-                                    validaMes();
-                                    if (text.length == 10) {
-                                      mesFocus.unfocus();
-                                    }
-                                  },
-                                  focusNode: mesFocus,
-                                  controller: widget.controllerData,
-                                  keyboardType: TextInputType.number,
-                                  cursorColor: Color(0xFF2BBAB4),
+                            flex: 3,
+                            child: new Container(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, bottom: 12.0, left: 16.0),
+                              child: new Text("Data Nascimento",
                                   style: MainStyle.get(context)
-                                      .mainStyleTextBaseLineInput,
-                                  decoration: InputDecoration(
-                                      hintText: "dd / mm / aaaa",
-                                      hintStyle: MainStyle.get(context)
-                                          .mainStyleTextBaseLineHint),
-                                  inputFormatters: [
-                                    MaskedTextInputFormatterShifter(
-                                        maskONE: "XX/XX/XXXX",
-                                        maskTWO: "XX/XX/XXXX"),
-                                    BlacklistingTextInputFormatter(
-                                        RegExp("[\\\\,.-]")),
-                                  ],
-                                ),
-                              ))
+                                      .mainStyleTextBaseLine),
+                            ),
+                          ),
+                          new Expanded(
+                            flex: 7,
+                            child: new Container(
+                              margin:
+                                  const EdgeInsets.only(left: 8.0, right: 16.0),
+                              child: new TextField(
+                                keyboardAppearance: Brightness.light,
+                                onSubmitted: (term) {
+                                  mesFocus.unfocus();
+                                },
+                                onChanged: (text) {
+                                  countData = 0;
+                                  validaMes();
+                                  if (text.length == 10) {
+                                    mesFocus.unfocus();
+                                  }
+                                },
+                                focusNode: mesFocus,
+                                controller: widget.controllerData,
+                                keyboardType: TextInputType.number,
+                                cursorColor: Color(0xFF2BBAB4),
+                                style: MainStyle.get(context)
+                                    .mainStyleTextBaseLineInput,
+                                decoration: InputDecoration(
+                                    hintText: "dd / mm / aaaa",
+                                    hintStyle: MainStyle.get(context)
+                                        .mainStyleTextBaseLineHint),
+                                inputFormatters: [
+                                  MaskedTextInputFormatterShifter(
+                                      maskONE: "XX/XX/XXXX",
+                                      maskTWO: "XX/XX/XXXX"),
+                                  BlacklistingTextInputFormatter(
+                                      RegExp("[\\\\,.-]")),
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ],
-                  )),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -447,8 +502,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
         ),
         new Container(
           margin: const EdgeInsets.only(top: 10),
-          child:
-          new Row(
+          child: new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -467,25 +521,26 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         });
                       },
                       child: new Container(
-                          margin: const EdgeInsets.all(2),
-                          //gesture aqui
-                          decoration: BoxDecoration(
-                              color: (widget.termos == false)
-                                  ? Colors.white
-                                  : Color(0xff2BB9B4),
-                              border:
-                              Border.all(color: Colors.grey.withOpacity(0.6)),
-                              shape: BoxShape.circle),
-                          height: 25.0,
-                          width: 25.0,
-                          child: new AnimatedSize(
-                            duration: Duration(milliseconds: 5000),
-                            curve: Curves.fastOutSlowIn,
-                            vsync: this,
-                            child: new Icon(Icons.check,
-                                color: Colors.white,
-                                size: (widget.termos == true) ? 20.0 : 0.0),
-                          )),
+                        margin: const EdgeInsets.all(2),
+                        //gesture aqui
+                        decoration: BoxDecoration(
+                            color: (widget.termos == false)
+                                ? Colors.white
+                                : Color(0xff2BB9B4),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.6)),
+                            shape: BoxShape.circle),
+                        height: 25.0,
+                        width: 25.0,
+                        child: new AnimatedSize(
+                          duration: Duration(milliseconds: 5000),
+                          curve: Curves.fastOutSlowIn,
+                          vsync: this,
+                          child: new Icon(Icons.check,
+                              color: Colors.white,
+                              size: (widget.termos == true) ? 20.0 : 0.0),
+                        ),
+                      ),
                     ),
                     new GestureDetector(
                       onTap: widget.onTapTermosUso,
@@ -495,10 +550,9 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         child: new Text(
                           "ACEITO OS TERMOS DE USO",
                           style: new TextStyle(
-                            color: Color(0xff2bbab4),
-                              fontSize: MainStyle.get(context).fontSizeTermos
-                              ,fontWeight: FontWeight.w700
-                          ),
+                              color: Color(0xff2bbab4),
+                              fontSize: MainStyle.get(context).fontSizeTermos,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                     )
@@ -508,7 +562,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             ],
           ),
         ),
-     /*   new Container(
+        /*   new Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 20.0, top: 40),
             child: (widget.termos == false)
@@ -693,7 +747,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                       ),
                     ),
                     margin: const EdgeInsets.only(bottom: 8),
-                  )
+                  ),
                 ],
               ),
             ));
