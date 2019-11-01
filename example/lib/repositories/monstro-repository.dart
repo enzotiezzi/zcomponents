@@ -9,4 +9,10 @@ class MonstroRepository extends AbstractRepository<Monstro> implements IMonstroR
 
     return new Monstro()..fromMap(res);
   }
+
+  @override
+  Future<Monstro> findLast() {
+    // TODO: implement findLast
+    return null;
+  }
 }
