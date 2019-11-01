@@ -17,4 +17,10 @@ class PessoaRepository extends AbstractRepository<Pessoa> implements IPessoaRepo
 
     return res.map((x) => Pessoa()..fromMap(x)).toList();
   }
+
+  @override
+  Future<Pessoa> findLast() {
+    // TODO: implement findLast
+    return null;
+  }
 }
