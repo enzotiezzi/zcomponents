@@ -11,13 +11,15 @@ class ZPinSenha extends StatelessWidget {
   final ZTipoSenha zTipos;
   final Function(String) onChange;
   int numeroQuadrados;
+  final String titulo;
 
   ZPinSenha(
       {this.key,
       this.context,
       this.zTipos = ZTipoSenha.isSenha,
       this.onChange,
-      this.numeroQuadrados})
+      this.numeroQuadrados,
+      this.titulo})
       : super(key: key) {
     switch (zTipos) {
       case ZTipoSenha.isSenha:
@@ -32,7 +34,7 @@ class ZPinSenha extends StatelessWidget {
               new Container(
                 width: 100,
                 child: new Text(
-                  "Senha",
+                  titulo ?? "Senha",
                   style: MainStyle.get(context).mainStyleTextBaseLine,
                 ),
               ),
@@ -73,7 +75,7 @@ class ZPinSenha extends StatelessWidget {
               new Container(
                 width: 100,
                 child: new Text(
-                  "Repetir \nSenha",
+                  titulo ?? "Repetir \nSenha",
                   style: MainStyle.get(context).mainStyleTextBaseLine,
                 ),
               ),
