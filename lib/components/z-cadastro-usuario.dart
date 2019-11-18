@@ -738,13 +738,14 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                         Navigator.pop(context);
                       },
                       child: new Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(12),
-                        child: new Text(
-                          "ENTENDI",
-                          style: new TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(12),
+                          child: Center(
+                            child: new Text(
+                              "ENTENDI",
+                              style: new TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          )),
                     ),
                     margin: const EdgeInsets.only(bottom: 8),
                   ),
