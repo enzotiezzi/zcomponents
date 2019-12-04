@@ -20,31 +20,33 @@ class ZHeader extends StatefulWidget {
   final ZTipoHeader zTipos;
   final List<Widget> children;
   final bool titulosAppBar;
+  final bool initiallyExpanded;
 
-  ZHeader({
-    this.key,
-    this.type = MaterialType.canvas,
-    this.elevation = 0.0,
-    this.color,
-    this.shadowColor = const Color(0xFF000000),
-    this.textStyle,
-    this.borderRadius,
-    this.shape,
-    this.borderOnForeground = true,
-    this.clipBehavior = Clip.none,
-    this.animationDuration = kThemeChangeDuration,
-    this.child,
-    this.titulo: "",
-    this.zTipos = ZTipoHeader.isPadrao,
-    this.children = const <Widget>[],
-    this.titulosAppBar = false,
-  }) : super(key: key);
+  ZHeader(
+      {this.key,
+      this.type = MaterialType.canvas,
+      this.elevation = 0.0,
+      this.color,
+      this.shadowColor = const Color(0xFF000000),
+      this.textStyle,
+      this.borderRadius,
+      this.shape,
+      this.borderOnForeground = true,
+      this.clipBehavior = Clip.none,
+      this.animationDuration = kThemeChangeDuration,
+      this.child,
+      this.titulo: "",
+      this.zTipos = ZTipoHeader.isPadrao,
+      this.children = const <Widget>[],
+      this.titulosAppBar = false,
+      this.initiallyExpanded = false})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZHeaderState();
 }
-class ZHeaderState extends State<ZHeader> {
 
+class ZHeaderState extends State<ZHeader> {
   @override
   Widget build(BuildContext context) {
     switch (widget.zTipos) {
@@ -57,17 +59,19 @@ class ZHeaderState extends State<ZHeader> {
                     bottom: BorderSide(color: Colors.grey.withOpacity(0.7)))),
             alignment: Alignment.center,
             padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
-            child: new Text(widget.titulo,
-              style: MainStyle.get(context).titleStyleText,),
+            child: new Text(
+              widget.titulo,
+              style: MainStyle.get(context).titleStyleText,
+            ),
           ),
         );
         break;
       case ZTipoHeader.isExpansion:
-        return  new Material(
+        return new Material(
           elevation: 4.0,
           color: const Color(0xfff0f0f0),
           child: new ConfigurableExpansionTile(
-            initiallyExpanded: false,
+            initiallyExpanded: widget.initiallyExpanded,
             bottomBorderOn: true,
             animatedWidgetFollowingHeader: new Icon(Icons.arrow_drop_down),
             header: new Expanded(
@@ -77,19 +81,19 @@ class ZHeaderState extends State<ZHeader> {
                 children: <Widget>[
                   (widget.titulosAppBar == false)
                       ? new Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.only(
-                        left: 16.0, bottom: 10.0, top: 10.0),
-                    child: new Text(widget.titulo,
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
-                  )
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.only(
+                              left: 16.0, bottom: 10.0, top: 10.0),
+                          child: new Text(widget.titulo,
+                              style: new TextStyle(
+                                  fontSize: 20.0,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)),
+                        )
                       : new Container(
-                    child: widget.child,
-                  ),
+                          child: widget.child,
+                        ),
                 ],
               ),
             ),

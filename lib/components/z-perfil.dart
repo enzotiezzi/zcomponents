@@ -114,6 +114,7 @@ class _ZPerfilState extends State<ZPerfil> {
     return new Column(
       children: <Widget>[
         ZHeader(
+          titulosAppBar:true,
           child: new Container(
             margin: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
             child: new Text(

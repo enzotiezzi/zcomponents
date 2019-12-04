@@ -192,10 +192,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
     super.initState();
 
+    // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
-   // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
-
-  /*  _db.init().then((_){
+    /*  _db.init().then((_){
       _query();
     });*/
   }
@@ -244,6 +243,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               margin: const EdgeInsets.only(left: 16,bottom: 8,top: 8),
               child: new Text("Z-Baseline:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
+            new ZHeader(
+              titulo: "Titulo",
+              child: new Text("IHUIHIY"),
+              children: <Widget>[new Text("asdljnljnalsjnljnda")],
+            ),
+            new ZText(text: "OLAasdasS", tituloText: "AKI"),
             new ZBaseLine(
               zTipos: ZTipoBaseline.isCPF,
               cpfFocus: nomeFocus,
@@ -304,7 +309,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               child: new Text("Z-Text:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             ),
             new ZText(
-              tituloText: "aaaaaa",text: "bbbbbbbbbbb",
+              tituloText: "aaaaaa",
+              text: "bbbbbbbbbbb",
             ),
             new Container(
               margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
@@ -318,7 +324,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
               titulo: 'TESTE',
             ),
-          /*  new ZItemTile(
+            /*  new ZItemTile(
               zTypeTile: ZTypeTile.isUser,
               token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
@@ -332,7 +338,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               tempoPausa: "01:00",
               cargo: "DEV",
             ),*/
-           /* new ZItemTile(
+            /* new ZItemTile(
               nome: "Aleff Apararecido dos Santos Lima",
               zTypeTile: ZTypeTile.isUser,
               token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
@@ -375,8 +381,72 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Container(
               margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
               child: new Text("Z-ItemTile-Expendable:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-            ),
 
+            ),
+            new Container(
+              height: 17.0,
+            ),
+            new ZHeader(
+              zTipos: ZTipoHeader.isExpansion,
+              titulosAppBar: true,
+              child: new Container(
+                color: const Color(0xff000000),
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  bottom: 6.0,
+                  top: 6.0,
+                ),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    new Container(
+                      child: new Icon(
+                        Icons.person,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    new Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      margin: EdgeInsets.only(left: 5.0),
+                      child: new Text(
+                        "VICTOR",
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    new Container(
+                      margin: EdgeInsets.only(left: 6.0),
+                      child: new Icon(
+                        Icons.my_location,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    new Container(
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      margin: EdgeInsets.only(left: 8.0),
+                      child: new Text(
+                        "ZELLAR TESTE DE TAMANHO",
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              children: <Widget>[
+                new Container(
+                  child: new ZItemTile(
+                    token:
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+                    cpf: '447.930.638-29',
+                    idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+                  ),
+                )
+              ],
+            ),
+            new Container(
+              height: 17.0,
+            ),
             new ZExpendableItemTile(
               nome: "Gustavo Ortiz",
               nomeCentroCusto: "Sede - Fernando ltda.",
@@ -388,7 +458,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               jornada: "12:00",
               horaEntrada: "06:00",
               re: "909.293",
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
@@ -422,7 +493,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               jornada: "",
               horaEntrada: "06:00",
               re: "909.293",
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
@@ -483,10 +555,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Container(
               margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
               child: new Text("Z-Perfil:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-            ),
-            new Container(
-              margin: const EdgeInsets.only(left: 20,bottom: 8,),
-              child: new Text("Z-Perfil é uma Tela, o botão abaixo abrirá-la:",style: new TextStyle(fontWeight: FontWeight.w300),),
             ),
             new Row(
               children: <Widget>[
