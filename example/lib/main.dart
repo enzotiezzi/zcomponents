@@ -27,6 +27,7 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
+import 'package:z_components/config/z-tipo-header.dart';
 /*
 import 'package:z_components_example/entities/pessoa.dart';
 import 'package:z_components_example/repositories/i-monstro-repository.dart';
@@ -348,9 +349,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Container(
               child:
               new ZItemTile(
-              status: "Aki",
-              colorStatus: Colors.yellow,
-              horario: "akiii",
+              status: "ativo",
+              horario: "08:00",
               zTypeTile: ZTypeTile.isColab,
               cpf: "333.972.458-00",
               escala: "5x2x6x1",

@@ -165,7 +165,16 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                               width: 10.0,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: widget.colorStatus),
+                                  color: (widget.status
+                                      .toLowerCase() ==
+                                      "ativo")
+                                      ? Colors.green
+                                      : (widget.status
+                                      .toLowerCase() ==
+                                      "inativo")
+                                      ? Colors.red
+                                      : widget
+                                      .colorStatus),
                             ),
                             new Container(
                               margin:
