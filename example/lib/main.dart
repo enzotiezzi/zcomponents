@@ -18,7 +18,6 @@ import 'package:z_components/components/z_button.dart';
 import 'package:z_components/components/z-cadastro-usuario.dart';
 import 'package:z_components/components/z-text.dart';
 
-
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-hora-padrao.dart';
 import 'package:z_components/components/zp-grafico.dart';
@@ -36,7 +35,6 @@ import 'package:z_components_example/repositories/i-monstro-repository.dart';
 import 'package:z_components_example/repositories/i-pessoa-repository.dart';
 import 'package:z_components_example/repositories/monstro-repository.dart';
 import 'package:z_components_example/repositories/pessoa-repository.dart';*/
-
 
 void main() => runApp(MyApp());
 
@@ -195,10 +193,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
     super.initState();
 
+    // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
-   // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
-
-  /*  _db.init().then((_){
+    /*  _db.init().then((_){
       _query();
     });*/
   }
@@ -236,11 +233,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         ),
         body: new ListView(
           children: <Widget>[
-            new ZHeader(titulo: "Titulo",child: new Text("IHUIHIY"),children: <Widget>[
-              new Text("asdljnljnalsjnljnda")
-            ],),
-
-            new ZText(text: "OLAasdasS",tituloText: "AKI"),
+            new ZHeader(
+              titulo: "Titulo",
+              child: new Text("IHUIHIY"),
+              children: <Widget>[new Text("asdljnljnalsjnljnda")],
+            ),
+            new ZText(text: "OLAasdasS", tituloText: "AKI"),
             new ZBaseLine(
               zTipos: ZTipoBaseline.isCPF,
               cpfFocus: nomeFocus,
@@ -258,7 +256,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               text: "Alexandre Kupperman ",
             ),
             new ZText(
-              tituloText: "aaaaaa",text: "bbbbbbbbbbb",
+              tituloText: "aaaaaa",
+              text: "bbbbbbbbbbb",
             ),
             new ZExpansion(
               childTitle: new IconButton(
@@ -268,7 +267,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
               titulo: 'TESTE',
             ),
-          /*  new ZItemTile(
+            /*  new ZItemTile(
               zTypeTile: ZTypeTile.isUser,
               token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
@@ -282,7 +281,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               tempoPausa: "01:00",
               cargo: "DEV",
             ),*/
-           /* new ZItemTile(
+            /* new ZItemTile(
               nome: "Aleff Apararecido dos Santos Lima",
               zTypeTile: ZTypeTile.isUser,
               token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
@@ -293,30 +292,32 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               rua: "Rua Lorem ipsum, Nº 123, Bairro Adipiscing - São Paulo - SP",
             ),*/
             new Container(
-              child:
-              new ZItemTile(
-              status: "ativo",
-              horario: "08:00",
-              zTypeTile: ZTypeTile.isColab,
-              cpf: "333.972.458-00",
-              escala: "5x2x6x1",
-              tempoPausa: "01:00",
-              inicioIntervalo: "11:00",
-              voltaIntervalo: "12:00",
-              horaSaida: "18:00",
-              re: "909.280",
-              jornada: "12:00",
-              horaEntrada: "06:00",
-              telefone: "(00) 9 1234-5678",
-              nomeCentroCusto: ";k;km ;m;m;km;kllmlkm;km;km;km;km;m;m;km;klm;km;km;km;k;;l;ll;;ll;l;l;l;",
-              nome: "Gusoh ASjisaidjas",
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
-              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              codEmpresa: "",
-              cargo: "asojnasojnaspnfapskfnapskdnapskdnaskdnadspn",
-              endereco: "",
-              colorBatida: Color(0xff1AC15D),
-            ),),
+              child: new ZItemTile(
+                status: "ativo",
+                horario: "08:00",
+                zTypeTile: ZTypeTile.isColab,
+                cpf: "333.972.458-00",
+                escala: "5x2x6x1",
+                tempoPausa: "01:00",
+                inicioIntervalo: "11:00",
+                voltaIntervalo: "12:00",
+                horaSaida: "18:00",
+                re: "909.280",
+                jornada: "12:00",
+                horaEntrada: "06:00",
+                telefone: "(00) 9 1234-5678",
+                nomeCentroCusto:
+                    ";k;km ;m;m;km;kllmlkm;km;km;km;km;m;m;km;klm;km;km;km;k;;l;ll;;ll;l;l;l;",
+                nome: "Gusoh ASjisaidjas",
+                token:
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+                idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+                codEmpresa: "",
+                cargo: "asojnasojnaspnfapskfnapskdnapskdnaskdnadspn",
+                endereco: "",
+                colorBatida: Color(0xff1AC15D),
+              ),
+            ),
             new Container(
               height: 17.0,
             ),
@@ -336,7 +337,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     new Container(
                       child: new Icon(
                         Icons.person,
-                        color: Colors .grey,
+                        color: Colors.grey,
                       ),
                     ),
                     new Container(
@@ -392,7 +393,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               jornada: "12:00",
               horaEntrada: "06:00",
               re: "909.293",
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
@@ -426,7 +428,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               jornada: "",
               horaEntrada: "06:00",
               re: "909.293",
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
               cpf: '447.930.638-29',
               cargo: "Assist. Tec. Seg. Trab.",
               colorBatida: Color(0xff1AC15D),
@@ -520,7 +523,16 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ZCadastroUsuario()),
+                          builder: (context) => ZCadastroUsuario(
+                                controllerCelular: controllerCelular,
+                                controllerCPF: controllerCPF,
+                                controllerData: controllerData,
+                                controllerEmail: controllerEmail,
+                                controllerNome: controllerNome,
+                                controllerSenha: controllerSenha,
+                                controllerRepetirSenha: controllerRepetirSenha,
+                                possuiCPF: false,
+                              )),
                     );
                   },
                 ),
