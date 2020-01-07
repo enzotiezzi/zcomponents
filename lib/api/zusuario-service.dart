@@ -5,7 +5,6 @@ import 'package:z_components/settings/api-settings.dart';
 import 'package:http/http.dart' as http;
 import 'package:z_components/view-model/usuario-viewmodel.dart';
 
-
 class ZUsuarioService extends Service implements IZUsuarioService {
   final String token;
   final String idConta;
@@ -19,8 +18,8 @@ class ZUsuarioService extends Service implements IZUsuarioService {
   @override
   Future<UsuarioViewModel> buscarPerfilUsuario() async {
     try {
-
-      var url = "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf/$idConta";
+      var url =
+          "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf/$idConta";
 
       var response = await http.get(url, headers: headers);
 
@@ -29,5 +28,4 @@ class ZUsuarioService extends Service implements IZUsuarioService {
       return null;
     }
   }
-
 }

@@ -121,7 +121,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   String vp;
   var _keyStatus = new GlobalKey<ZCollectionState>();
 
-  String _value = "open";
+
 
   List<String> titulos = [
     "Lista de Documentos",
@@ -222,7 +222,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     return Scaffold(
         backgroundColor: Color(0xffEFEFF4),
         floatingActionButton: ZFloatButton(
-          onPressed: () {},
+          onPressed: () {
+
+          },
         ),
         appBar: ZNavigationBar(
           leading: new Icon(Icons.print),
@@ -233,15 +235,23 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         body: new ListView(
           children: <Widget>[
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 8),
-              child: new Text("Z-Header:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 8),
+              child: new Text(
+                "Z-Header:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
-            new ZHeader(titulo: "Titulo",child: new Text("IHUIHIY"),children: <Widget>[
-              new Text("asdljnljnalsjnljnda")
-            ],),
+            new ZHeader(
+              titulo: "Titulo",
+              child: new Text("IHUIHIY"),
+              children: <Widget>[new Text("asdljnljnalsjnljnda")],
+            ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 8),
-              child: new Text("Z-Baseline:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 8),
+              child: new Text(
+                "Z-Baseline:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZHeader(
               titulo: "Titulo",
@@ -281,40 +291,63 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               context: context,
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-NomeReduzido:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-            ),
-            new Container(
-              margin: const EdgeInsets.only(left: 20,bottom: 8,),
-              child: new Text("Um exemplo abaixo quando se tem somente dois nomes no Nome Completo:",style: new TextStyle(fontWeight: FontWeight.w300),),
-            ),
-           new Container(
-             margin: const EdgeInsets.only(left: 24,bottom: 16),
-             child:  new ZNomeReduzido(
-               text: "Alexandre Kuperman",textStyle: TextStyle(fontWeight: FontWeight.w500),
-             ),
-           ),
-            new Container(
-              margin: const EdgeInsets.only(left: 20,bottom: 8,),
-              child: new Text("Outro exemplo quando se tem três ou mais nomes no Nome Completo(Giuliano Ortiz Glória):",style: new TextStyle(fontWeight: FontWeight.w300),),
-            ),
-            new Container(
-              margin: const EdgeInsets.only(left: 24),
-              child:  new ZNomeReduzido(
-                text: "Giuliano Ortiz Goria",textStyle: TextStyle(fontWeight: FontWeight.w500),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-NomeReduzido:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Text:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(
+                left: 20,
+                bottom: 8,
+              ),
+              child: new Text(
+                "Um exemplo abaixo quando se tem somente dois nomes no Nome Completo:",
+                style: new TextStyle(fontWeight: FontWeight.w300),
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 24, bottom: 16),
+              child: new ZNomeReduzido(
+                text: "Alexandre Kuperman",
+                textStyle: TextStyle(fontWeight: FontWeight.w500),
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(
+                left: 20,
+                bottom: 8,
+              ),
+              child: new Text(
+                "Outro exemplo quando se tem três ou mais nomes no Nome Completo(Giuliano Ortiz Glória):",
+                style: new TextStyle(fontWeight: FontWeight.w300),
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 24),
+              child: new ZNomeReduzido(
+                text: "Giuliano Ortiz Goria",
+                textStyle: TextStyle(fontWeight: FontWeight.w500),
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Text:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZText(
               tituloText: "aaaaaa",
               text: "bbbbbbbbbbb",
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Expansion:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Expansion:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZExpansion(
               childTitle: new IconButton(
@@ -349,39 +382,45 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               rua: "Rua Lorem ipsum, Nº 123, Bairro Adipiscing - São Paulo - SP",
             ),*/
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-ItemTile:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-ItemTile:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new Container(
-              child:
-              new ZItemTile(
-              status: "ativo",
-              horario: "08:00",
-              zTypeTile: ZTypeTile.isColab,
-              cpf: "333.972.458-00",
-              escala: "5x2x6x1",
-              tempoPausa: "01:00",
-              inicioIntervalo: "11:00",
-              voltaIntervalo: "12:00",
-              horaSaida: "18:00",
-              re: "909.280",
-              jornada: "12:00",
-              horaEntrada: "06:00",
-              telefone: "(00) 9 1234-5678",
-              nomeCentroCusto: ";k;km ;m;m;km;kllmlkm;km;km;km;km;m;m;km;klm;km;km;km;k;;l;ll;;ll;l;l;l;",
-              nome: "Gusoh ASjisaidjas",
-              token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
-              idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-              codEmpresa: "",
-              cargo: "asojnasojnaspnfapskfnapskdnapskdnaskdnadspn",
-              endereco: "",
-              colorBatida: Color(0xff1AC15D),
-            ),),
-
+              child: new ZItemTile(
+                status: "ativo",
+                horario: "08:00",
+                zTypeTile: ZTypeTile.isColab,
+                cpf: "333.972.458-00",
+                escala: "5x2x6x1",
+                tempoPausa: "01:00",
+                inicioIntervalo: "11:00",
+                voltaIntervalo: "12:00",
+                horaSaida: "18:00",
+                re: "909.280",
+                jornada: "12:00",
+                horaEntrada: "06:00",
+                telefone: "(00) 9 1234-5678",
+                nomeCentroCusto:
+                    ";k;km ;m;m;km;kllmlkm;km;km;km;km;m;m;km;klm;km;km;km;k;;l;ll;;ll;l;l;l;",
+                nome: "Gusoh ASjisaidjas",
+                token:
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+                idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+                codEmpresa: "",
+                cargo: "asojnasojnaspnfapskfnapskdnapskdnaskdnadspn",
+                endereco: "",
+                colorBatida: Color(0xff1AC15D),
+              ),
+            ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-ItemTile-Expendable:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-ItemTile-Expendable:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new Container(
               height: 17.0,
@@ -520,8 +559,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               textoIconeUm: 'teste',
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Cargo:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Cargo:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZCargo(
               token:
@@ -529,8 +571,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               key: _keyCargo,
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Escala:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Escala:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZEscala(
               token:
@@ -539,8 +584,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               //valorPadrao: widget.escala,
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Collection:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Collection:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZCollection(
               key: _keyStatus,
@@ -553,34 +601,39 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               onChange: (item) {},
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Perfil:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Perfil:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new Row(
               children: <Widget>[
-             new Container(
-               margin: const EdgeInsets.only(left: 24),
-               child:    new ZButton(
-                 text: "PERFIL",
-                 onPressed: () {
-                   Navigator.push(
-                     context,
-                     MaterialPageRoute(
-                         builder: (context) => ZCadastroUsuario()),
-                   );
-                 },
-               ),
-             )
+                new Container(
+                  margin: const EdgeInsets.only(left: 24),
+                  child: new ZButton(
+                    text: "PERFIL",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ZCadastroUsuario()),
+                      );
+                    },
+                  ),
+                )
               ],
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Load:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Load:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new Container(
               margin: const EdgeInsets.only(left: 24),
-              child:
-              new Row(
+              child: new Row(
                 children: <Widget>[
                   ZLoading(),
                   ZLoading(
@@ -599,8 +652,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,top: 40),
-              child: new Text("Z-Hora:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, top: 40),
+              child: new Text(
+                "Z-Hora:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZHora(
               controllerIntervalo: _controllerIntervalo,
@@ -608,16 +664,22 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               controllerHoraEntrada: _controllerHorarioInicio,
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,top: 40),
-              child: new Text("ZP-Gráfico:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, top: 40),
+              child: new Text(
+                "ZP-Gráfico:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new Container(
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               child: new ZPGrafico(),
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Tile:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Tile:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZTile(
               onTap: () {},
@@ -633,65 +695,91 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-ButtonCardBox:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-ButtonCardBox:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new ZButtonCardBox(
               isCenter: true,
-              onClick: (){
+              onClick: () {
                 print("OLHA SO");
               },
-              icon:Icon(Icons.build),
-              text: new Text("o alaf eh um cara bem legal olha so como ele vai clan"),
+              icon: Icon(Icons.build),
+              text: new Text(
+                  "o alaf eh um cara bem legal olha so como ele vai clan"),
             ),
             new ZButtonCardBox(
-              onClick: (){
+              onClick: () {
                 print("OLHA SO");
               },
-              icon:Icon(Icons.star),
+              icon: Icon(Icons.star),
               text: new Text("Teste"),
             ),
             new Row(
               children: <Widget>[
-               new Expanded(child:  new ZButtonCardBox(
-                 onClick: (){
-                   print("OLHA SO");
-                 },
-                 icon:Icon(Icons.star),
-                 text: new Text("o alaf eh um cara bem legal olha so como ",style: new TextStyle(fontSize: 12,fontWeight: FontWeight.w500),),
-               ),),
-               new Expanded(child:  new ZButtonCardBox(
-                 onClick: (){
-                   print("OLHA SO");
-                 },
-                 icon:Icon(Icons.print),
-                 text: new Text("Teste"),
-               ),)
+                new Expanded(
+                  child: new ZButtonCardBox(
+                    onClick: () {
+                      print("OLHA SO");
+                    },
+                    icon: Icon(Icons.star),
+                    text: new Text(
+                      "o alaf eh um cara bem legal olha so como ",
+                      style: new TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+                new Expanded(
+                  child: new ZButtonCardBox(
+                    onClick: () {
+                      print("OLHA SO");
+                    },
+                    icon: Icon(Icons.print),
+                    text: new Text("Teste"),
+                  ),
+                )
               ],
             ),
             new Container(
-              margin: const EdgeInsets.only(left: 16,bottom: 8,top: 40),
-              child: new Text("Z-Button:",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              margin: const EdgeInsets.only(left: 16, bottom: 8, top: 40),
+              child: new Text(
+                "Z-Button:",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             new Column(
               children: <Widget>[
                 new ZButton(
-                  iconLeft: Icon(Icons.star,color: Colors.white,),
+                  iconLeft: Icon(
+                    Icons.star,
+                    color: Colors.white,
+                  ),
                   text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewNormal();
                   },
                 ),
                 new ZButton(
-                  iconRight: Icon(Icons.star,color: Colors.white,),
+                  iconRight: Icon(
+                    Icons.star,
+                    color: Colors.white,
+                  ),
                   text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNew();
                   },
-                ), ///z_button_empty_iconRight
+                ),
+
+                ///z_button_empty_iconRight
                 new ZButton(
                   zButtonType: ZButtonType.isOutlined,
-                  iconRight: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  iconRight: Icon(
+                    Icons.star,
+                    color: Color(0xff2BBAB4),
+                  ),
                   text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewSuccess();
@@ -699,7 +787,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 ),
                 new ZButton(
                   zButtonType: ZButtonType.isOutlined,
-                  iconLeft: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  iconLeft: Icon(
+                    Icons.star,
+                    color: Color(0xff2BBAB4),
+                  ),
                   text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewSuccess();
@@ -707,7 +798,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 ),
                 new ZButton(
                   zButtonType: ZButtonType.isTextButton,
-                  iconRight: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  iconRight: Icon(
+                    Icons.star,
+                    color: Color(0xff2BBAB4),
+                  ),
                   text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewSuccess();
@@ -715,7 +809,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                 ),
                 new ZButton(
                   zButtonType: ZButtonType.isTextButton,
-                  iconLeft: Icon(Icons.star,color: Color(0xff2BBAB4),),
+                  iconLeft: Icon(
+                    Icons.star,
+                    color: Color(0xff2BBAB4),
+                  ),
                   text: "DIALOG NORMAL",
                   onPressed: () {
                     showAlertDialogNewSuccess();
@@ -969,7 +1066,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
-                            new Text("Este aqui eh um dialogo teste de um tipo",textAlign: TextAlign.center),
+                            new Text("Este aqui eh um dialogo teste de um tipo",
+                                textAlign: TextAlign.center),
                           ],
                         ),
                       )

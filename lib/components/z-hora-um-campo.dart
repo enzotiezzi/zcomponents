@@ -7,14 +7,10 @@ import 'package:z_components/config/z-dialog.dart';
 class ZHoraUmCampo extends StatefulWidget {
   String titulo;
 
-  ZHoraUmCampo({Key key,
-  @required this.titulo
-
-  }) : super(key: key);
+  ZHoraUmCampo({Key key, @required this.titulo}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ZHoraUmCampoState();
-
 }
 
 class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
@@ -29,8 +25,6 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
   int _intHoraEntrada = 0;
   int _intMinutoEntrada;
 
-
-
   @override
   void initState() {
     super.initState();
@@ -38,8 +32,7 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
   }
 
   void dismiss() {
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override
@@ -62,48 +55,41 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
           padding: EdgeInsets.only(top: 5, bottom: 5),
           decoration: new BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.all(
-                const Radius.circular(5.0)),
+            borderRadius: new BorderRadius.all(const Radius.circular(5.0)),
           ),
           child: new Container(
-            width: 100,
-              child: new TextField(textAlign: TextAlign.center,
+              width: 100,
+              child: new TextField(
+                textAlign: TextAlign.center,
                 onSubmitted: (term) {
-                  _fieldFocusChange(
-                      context, _focusEntrada, _focusEntrada);
+                  _fieldFocusChange(context, _focusEntrada, _focusEntrada);
                 },
                 inputFormatters: [
                   MaskedTextInputFormatterShifter(
                       maskONE: "XX:XX", maskTWO: "XX:XX"),
-                  BlacklistingTextInputFormatter(
-                      RegExp("[/\\\\,.-]")),
+                  BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
                 ],
                 focusNode: _focusEntrada,
                 keyboardType: TextInputType.number,
                 //controller: _binding.controllerHorarioInicio,
-                decoration:
-                InputDecoration.collapsed(hintText: ""),
+                decoration: InputDecoration.collapsed(hintText: ""),
                 onChanged: (text) {
                   _horaEntrada = text.substring(0, 2);
                   _minutoEntrada = text.substring(3, 5);
                   _intHoraEntrada = int.parse(_horaEntrada);
                   _intMinutoEntrada = int.parse(_minutoEntrada);
                   if (text.length == 5) {
-                    if (_intHoraEntrada > 23 &&
-                        _intMinutoEntrada > 59) {
+                    if (_intHoraEntrada > 23 && _intMinutoEntrada > 59) {
                       showAlertDialogNew("Horario Inválido!",
                           "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
-                    } else if (_intHoraEntrada > 23 &&
-                        _intMinutoEntrada < 59) {
+                    } else if (_intHoraEntrada > 23 && _intMinutoEntrada < 59) {
                       showAlertDialogNew("Hora Inválida!",
                           "Por favor insira um valor de hora entre 00 e 23.");
-                    } else if (_intHoraEntrada < 24 &&
-                        _intMinutoEntrada > 59) {
+                    } else if (_intHoraEntrada < 24 && _intMinutoEntrada > 59) {
                       showAlertDialogNew("Minuto Inválido!",
                           "Por favor insira um valor de minuto entre 00 e 59.");
                     } else {
-                      _fieldFocusChange(
-                          context, _focusEntrada, _focusEntrada);
+                      _fieldFocusChange(context, _focusEntrada, _focusEntrada);
                     }
                   }
                 },
@@ -117,64 +103,63 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
     showDialog(
         context: context,
         builder: (BuildContext context) => ZAlertDialog(
-          zDialog: ZDialog.erro,
-          child: new Column(
-            children: <Widget>[
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              zDialog: ZDialog.erro,
+              child: new Column(
                 children: <Widget>[
-                  new Container(
-                    margin: const EdgeInsets.all(8),
-                    child: new Text(
-                      title,
-                      style: new TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                  )
-                ],
-              ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    margin: const EdgeInsets.only(
-                        left: 16, right: 16, bottom: 16),
-                    child: new Text(
-                      message,
-                      textAlign: TextAlign.center,
-                      style: new TextStyle(
-                          color: const Color(0xff707070), fontSize: 13),
-                    ),
-                  )
-                ],
-              ),
-              new Divider(
-                color: const Color(0xffdbdbdb),
-              ),
-              new Container(
-                child: new InkWell(
-                  borderRadius:
-                  new BorderRadius.all(const Radius.circular(20.0)),
-                  splashColor: const Color(0xffe6e6e6),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Container(
-                    padding: const EdgeInsets.all(12),
-                    child: new Text(
-                      "ENTENDI",
-                      style: new TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        margin: const EdgeInsets.all(8),
+                        child: new Text(
+                          title,
+                          style: new TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                margin: const EdgeInsets.only(bottom: 8),
-              )
-            ],
-          ),
-        ));
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        margin: const EdgeInsets.only(
+                            left: 16, right: 16, bottom: 16),
+                        child: new Text(
+                          message,
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                              color: const Color(0xff707070), fontSize: 13),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(
+                    color: const Color(0xffdbdbdb),
+                  ),
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "ENTENDI",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+                ],
+              ),
+            ));
   }
-
 
   _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {

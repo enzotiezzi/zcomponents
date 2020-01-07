@@ -1,1 +1,1 @@
-enum ZTipoSenha {isSenha , isRepetirSenha}
+enum ZTipoSenha { isSenha, isRepetirSenha }

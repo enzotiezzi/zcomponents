@@ -5,7 +5,6 @@ import 'package:z_components/settings/api-settings.dart';
 import 'package:z_components/view-model/colaborador-viewmodel.dart';
 import 'package:http/http.dart' as http;
 
-
 class ZColaboradorService extends Service implements IZColaboradorService {
   final String token;
   final String idConta;
@@ -19,8 +18,8 @@ class ZColaboradorService extends Service implements IZColaboradorService {
   @override
   Future<ColaboradorViewModel> buscarPerfilColaborador() async {
     try {
-
-      var url = "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf/$idConta";
+      var url =
+          "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf/$idConta";
 
       var response = await http.get(url, headers: headers);
 
@@ -29,5 +28,4 @@ class ZColaboradorService extends Service implements IZColaboradorService {
       return null;
     }
   }
-
 }

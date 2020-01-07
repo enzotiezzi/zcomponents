@@ -5,13 +5,12 @@ class EscalaViewModel {
   String padraodPS;
   String escala;
 
-  EscalaViewModel({
-    this.idEscala: "",
-    this.status: "",
-    this.nome: "",
-    this.padraodPS: "",
-    this.escala: ""
-  });
+  EscalaViewModel(
+      {this.idEscala: "",
+      this.status: "",
+      this.nome: "",
+      this.padraodPS: "",
+      this.escala: ""});
 
   factory EscalaViewModel.fromJson(Map<String, dynamic> json) {
     return new EscalaViewModel(
@@ -19,8 +18,7 @@ class EscalaViewModel {
         status: json['status'],
         nome: json['nome'],
         padraodPS: json['padraodPS'],
-        escala: json["escala"]
-    );
+        escala: json["escala"]);
   }
 
   Map toMap() {

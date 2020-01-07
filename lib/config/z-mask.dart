@@ -1,1 +1,1 @@
-enum ZMask {isCPF, isTelefone, isData, isCNPJ, isPadrao, isCEP}
+enum ZMask { isCPF, isTelefone, isData, isCNPJ, isPadrao, isCEP }

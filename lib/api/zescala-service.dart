@@ -17,11 +17,10 @@ class ZEscalaService extends Service implements IZEscalaService {
     try {
       var url = "$_uRL/listar-escalas";
 
-      var response = await http.get(url, headers:  headers);
+      var response = await http.get(url, headers: headers);
 
       var l = ((json.decode(response.body) as List)
-              .map((i) => new EscalaViewModel.fromJson(i)))
-          .toList();
+          .map((i) => new EscalaViewModel.fromJson(i))).toList();
 
       return l;
     } catch (e) {
@@ -29,5 +28,4 @@ class ZEscalaService extends Service implements IZEscalaService {
       return null;
     }
   }
-
 }

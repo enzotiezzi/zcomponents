@@ -8,7 +8,7 @@ class ZCollectionList extends StatefulWidget {
   final String titulo;
   final ZCollectionItem ultimoValor;
 
-  ZCollectionList({this.lista, this.titulo: "",this.ultimoValor});
+  ZCollectionList({this.lista, this.titulo: "", this.ultimoValor});
 
   @override
   State<StatefulWidget> createState() => _ZCollectionListState();
@@ -53,7 +53,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
       decoration: BoxDecoration(
           color: Colors.white,
           border:
-          Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.2)))),
+              Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.2)))),
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -72,8 +72,10 @@ class _ZCollectionListState extends State<ZCollectionList> {
                   onChanged: (text) {
                     text = text.toLowerCase();
                     setState(() {
-                      if(text.length > 0)
-                        _listaFiltro = widget.lista.where((x) => x.valor.toLowerCase().contains(text)).toList();
+                      if (text.length > 0)
+                        _listaFiltro = widget.lista
+                            .where((x) => x.valor.toLowerCase().contains(text))
+                            .toList();
                       else
                         _listaFiltro = widget.lista;
                     });
@@ -97,15 +99,18 @@ class _ZCollectionListState extends State<ZCollectionList> {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         var item = _listaFiltro[index];
-        if(_listaFiltro[index].valor.length > 16)
-          {
-            _listaFiltro[index].valor = "${_listaFiltro[index].valor.substring(0, 16)}...";
-          }
+        if (_listaFiltro[index].valor.length > 16) {
+          _listaFiltro[index].valor =
+              "${_listaFiltro[index].valor.substring(0, 16)}...";
+        }
         return new ListTile(
           onTap: () {
             _selecionarItem(item);
-          } ,
-          title: new Text("${item.titulo ?? item.valor}",style: MainStyle.get(context).mainStyleTextBaseLineInput,),
+          },
+          title: new Text(
+            "${item.titulo ?? item.valor}",
+            style: MainStyle.get(context).mainStyleTextBaseLineInput,
+          ),
           trailing: new Icon(
             Icons.chevron_right,
             color: Colors.grey,
@@ -115,7 +120,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
     );
   }
 
-  void _selecionarItem(ZCollectionItem item){
+  void _selecionarItem(ZCollectionItem item) {
     Navigator.of(context).pop(item);
   }
 }

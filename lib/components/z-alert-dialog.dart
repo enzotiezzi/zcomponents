@@ -28,7 +28,8 @@ class ZAlertDialog extends StatelessWidget {
       case ZDialog.normal:
         _zAlertDialog = AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           elevation: 0,
           key: this.key,
           title: new Container(
@@ -37,27 +38,22 @@ class ZAlertDialog extends StatelessWidget {
             decoration: new BoxDecoration(
                 color: colorLine,
                 borderRadius: new BorderRadius.only(
-                    topLeft:  const  Radius.circular(5.0),
-                    topRight: const  Radius.circular(5.0))
-            ),
+                    topLeft: const Radius.circular(5.0),
+                    topRight: const Radius.circular(5.0))),
           ),
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
-          content:
-            new Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                (child == null)?
-                    new Container():
-                child
-              ],
-            ),
+          content: new Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[(child == null) ? new Container() : child],
+          ),
         );
         break;
       case ZDialog.alert:
         _zAlertDialog = AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           elevation: 0,
           key: this.key,
           title: new Container(
@@ -66,27 +62,26 @@ class ZAlertDialog extends StatelessWidget {
             decoration: new BoxDecoration(
                 color: const Color(0xffFFB520),
                 borderRadius: new BorderRadius.only(
-                    topLeft:  const  Radius.circular(5.0),
-                    topRight: const  Radius.circular(5.0))
-            ),
+                    topLeft: const Radius.circular(5.0),
+                    topRight: const Radius.circular(5.0))),
           ),
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
-          content:new Container(
+          content: new Container(
             margin: const EdgeInsets.only(top: 12),
-            child:
-            new Column(
+            child: new Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new Icon(Icons.warning,color: Color(0xffFFB520),)
+                    new Icon(
+                      Icons.warning,
+                      color: Color(0xffFFB520),
+                    )
                   ],
                 ),
-                (child == null)?
-                new Container():
-                child
+                (child == null) ? new Container() : child
               ],
             ),
           ),
@@ -95,7 +90,8 @@ class ZAlertDialog extends StatelessWidget {
       case ZDialog.erro:
         _zAlertDialog = AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           elevation: 0,
           key: this.key,
           title: new Container(
@@ -104,27 +100,26 @@ class ZAlertDialog extends StatelessWidget {
             decoration: new BoxDecoration(
                 color: const Color(0xffE53629),
                 borderRadius: new BorderRadius.only(
-                    topLeft:  const  Radius.circular(5.0),
-                    topRight: const  Radius.circular(5.0))
-            ),
+                    topLeft: const Radius.circular(5.0),
+                    topRight: const Radius.circular(5.0))),
           ),
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
-          content:new Container(
+          content: new Container(
             margin: const EdgeInsets.only(top: 12),
-            child:
-            new Column(
+            child: new Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new Icon(Icons.error,color: Color(0xffE53629),)
+                    new Icon(
+                      Icons.error,
+                      color: Color(0xffE53629),
+                    )
                   ],
                 ),
-                (child == null)?
-                new Container():
-                child
+                (child == null) ? new Container() : child
               ],
             ),
           ),
@@ -133,7 +128,8 @@ class ZAlertDialog extends StatelessWidget {
       case ZDialog.sucess:
         _zAlertDialog = AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           elevation: 0,
           key: this.key,
           title: new Container(
@@ -142,13 +138,12 @@ class ZAlertDialog extends StatelessWidget {
             decoration: new BoxDecoration(
                 color: const Color(0xff1AC15D),
                 borderRadius: new BorderRadius.only(
-                    topLeft:  const  Radius.circular(5.0),
-                    topRight: const  Radius.circular(5.0))
-            ),
+                    topLeft: const Radius.circular(5.0),
+                    topRight: const Radius.circular(5.0))),
           ),
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
-          content:new Container(
+          content: new Container(
             margin: const EdgeInsets.only(top: 12),
             child: new Column(
               mainAxisSize: MainAxisSize.min,
@@ -156,12 +151,13 @@ class ZAlertDialog extends StatelessWidget {
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new Icon(Icons.check_circle,color: Color(0xff1AC15D),)
+                    new Icon(
+                      Icons.check_circle,
+                      color: Color(0xff1AC15D),
+                    )
                   ],
                 ),
-                (child == null)?
-                new Container():
-                child
+                (child == null) ? new Container() : child
               ],
             ),
           ),
@@ -170,25 +166,21 @@ class ZAlertDialog extends StatelessWidget {
       case ZDialog.linearLoad:
         _zAlertDialog = AlertDialog(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           elevation: 0,
           key: this.key,
           title: new LinearProgressIndicator(
             backgroundColor: colorBackgroundLinear,
-            valueColor:
-            new AlwaysStoppedAnimation<Color>(colorLoadLinear),
+            valueColor: new AlwaysStoppedAnimation<Color>(colorLoadLinear),
           ),
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
-          content:new Container(
+          content: new Container(
             margin: const EdgeInsets.only(top: 12),
             child: new Column(
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                (child == null)?
-                new Container():
-                child
-              ],
+              children: <Widget>[(child == null) ? new Container() : child],
             ),
           ),
         );

@@ -1,1 +1,1 @@
-enum ZTipoHeader {isExpansion , isPadrao}
+enum ZTipoHeader { isExpansion, isPadrao }

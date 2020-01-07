@@ -15,14 +15,12 @@ class ZCargoService extends Service implements IZCargoService {
   @override
   Future<List<CargoViewModel>> listarCargos() async {
     try {
-
       var url = "$_URL/listar-cargos";
 
       var response = await http.get(url, headers: headers);
 
       var l = ((json.decode(response.body) as List)
-              .map((i) => new CargoViewModel.fromJson(i)))
-          .toList();
+          .map((i) => new CargoViewModel.fromJson(i))).toList();
 
       return l;
     } catch (e) {

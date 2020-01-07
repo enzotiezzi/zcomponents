@@ -1,1 +1,1 @@
-enum ZTypeTile {isColab ,isUser, isEmpresa}
+enum ZTypeTile { isColab, isUser, isEmpresa }

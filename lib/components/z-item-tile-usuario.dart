@@ -17,14 +17,14 @@ class ZItemTileUsuario extends StatefulWidget {
 
   ZItemTileUsuario(
       {this.idConta,
-        this.colorStatus = Colors.grey,
-        this.token,
-        this.cpf,
-        this.funcao,
-        this.status = "",
-        this.imagemPerfil,
-        this.onTapImage,
-        this.isExpand: ""});
+      this.colorStatus = Colors.grey,
+      this.token,
+      this.cpf,
+      this.funcao,
+      this.status = "",
+      this.imagemPerfil,
+      this.onTapImage,
+      this.isExpand: ""});
 
   @override
   _ZItemTileUsuarioState createState() => _ZItemTileUsuarioState();
@@ -38,10 +38,10 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
   @override
   void initState() {
     super.initState();
-    _colaboradorService = ZColaboradorService(widget.token, widget.idConta, widget.cpf);
+    _colaboradorService =
+        ZColaboradorService(widget.token, widget.idConta, widget.cpf);
 
     _buscarInformacaoUsuario();
-
   }
 
   @override
@@ -69,18 +69,18 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                   height: 105.0,
                   child: (widget.imagemPerfil == null)
                       ? new Icon(
-                    Icons.insert_photo,
-                    color: Color(0xFFffffff),
-                  )
+                          Icons.insert_photo,
+                          color: Color(0xFFffffff),
+                        )
                       : new Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5.0),
-                          bottomLeft: Radius.circular(5.0)),
-                      color: Colors.white,
-                    ),
-                    child: widget.imagemPerfil,
-                  ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5.0),
+                                bottomLeft: Radius.circular(5.0)),
+                            color: Colors.white,
+                          ),
+                          child: widget.imagemPerfil,
+                        ),
                 ),
               )),
           new Expanded(
@@ -94,38 +94,37 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                       children: <Widget>[
                         (widget.isExpand == "isExpand")
                             ? new Container(
-                          width:
-                          (MediaQuery.of(context).size.width / 2.1),
-                          margin: EdgeInsets.only(
-                              left: 8.0, bottom: 4.0, top: 8.0),
-                          child: (colaboradorViewModel == null)
-                              ? new Text('')
-                              : new Text(
-                            colaboradorViewModel.nome,
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                color: Color(0xFF000000),
-                                fontWeight: FontWeight.w600),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
+                                width:
+                                    (MediaQuery.of(context).size.width / 2.1),
+                                margin: EdgeInsets.only(
+                                    left: 8.0, bottom: 4.0, top: 8.0),
+                                child: (colaboradorViewModel == null)
+                                    ? new Text('')
+                                    : new Text(
+                                        colaboradorViewModel.nome,
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Color(0xFF000000),
+                                            fontWeight: FontWeight.w600),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                              )
                             : new Container(
-                          width:
-                          (MediaQuery.of(context).size.width / 2.0),
-                          margin: EdgeInsets.only(
-                              left: 8.0, bottom: 4.0, top: 8.0),
-                          child: (colaboradorViewModel == null)
-                              ? new Text('')
-                              : new Text(
-                            colaboradorViewModel.nome,
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                color: Color(0xFF000000),
-                                fontWeight: FontWeight.w600),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-
+                                width:
+                                    (MediaQuery.of(context).size.width / 2.0),
+                                margin: EdgeInsets.only(
+                                    left: 8.0, bottom: 4.0, top: 8.0),
+                                child: (colaboradorViewModel == null)
+                                    ? new Text('')
+                                    : new Text(
+                                        colaboradorViewModel.nome,
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Color(0xFF000000),
+                                            fontWeight: FontWeight.w600),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                              ),
                       ],
                     ),
                     new Row(
@@ -145,16 +144,16 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                             new Container(
                               width: (MediaQuery.of(context).size.width / 2.3),
                               margin: EdgeInsets.only(right: 3.0, bottom: 4.0),
-                              child: (colaboradorViewModel == null)?
-                              new Text(''):
-                              new Text(
-                                colaboradorViewModel.nomeCentroCusto,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Color(0xFFA3A3A3),
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.normal),
-                              ),
+                              child: (colaboradorViewModel == null)
+                                  ? new Text('')
+                                  : new Text(
+                                      colaboradorViewModel.nomeCentroCusto,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Color(0xFFA3A3A3),
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.normal),
+                                    ),
                             ),
                           ],
                         ),
@@ -165,20 +164,16 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                               width: 10.0,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: (widget.status
-                                      .toLowerCase() ==
-                                      "ativo")
-                                      ? Colors.green
-                                      : (widget.status
-                                      .toLowerCase() ==
-                                      "inativo")
-                                      ? Colors.red
-                                      : widget
-                                      .colorStatus),
+                                  color:
+                                      (widget.status.toLowerCase() == "ativo")
+                                          ? Colors.green
+                                          : (widget.status.toLowerCase() ==
+                                                  "inativo")
+                                              ? Colors.red
+                                              : widget.colorStatus),
                             ),
                             new Container(
-                              margin:
-                              EdgeInsets.only(right: 8.0, left: 2.0),
+                              margin: EdgeInsets.only(right: 8.0, left: 2.0),
                               child: new Text(
                                 widget.status,
                                 style: TextStyle(
@@ -203,15 +198,15 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                         ),
                         new Container(
                           margin: EdgeInsets.only(right: 3.0, bottom: 4.0),
-                          child: (colaboradorViewModel == null)?
-                          new Text(''):
-                          new Text(
-                            colaboradorViewModel.cargo,
-                            style: TextStyle(
-                                color: Color(0xFFA3A3A3),
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.normal),
-                          ),
+                          child: (colaboradorViewModel == null)
+                              ? new Text('')
+                              : new Text(
+                                  colaboradorViewModel.cargo,
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.normal),
+                                ),
                         ),
                       ],
                     ),
@@ -227,15 +222,15 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                         ),
                         new Container(
                           padding: EdgeInsets.only(bottom: 8.0, left: 4.0),
-                          child: (colaboradorViewModel == null)?
-                          new Text (''):
-                          new Text(
-                            "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
-                            style: TextStyle(
-                                color: Color(0xFFA3A3A3),
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w700),
-                          ),
+                          child: (colaboradorViewModel == null)
+                              ? new Text('')
+                              : new Text(
+                                  "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w700),
+                                ),
                         ),
                         new Container(
                           padding: EdgeInsets.only(bottom: 8.0, left: 4.0),
@@ -257,21 +252,21 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                         ),
                         new Container(
                           padding: EdgeInsets.only(bottom: 8.0, left: 2.0),
-                          child: (colaboradorViewModel == null)?
-                          new Text(
-                            ")",
-                            style: TextStyle(
-                                color: Color(0xFFA3A3A3),
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w500),
-                          ):
-                          new Text(
-                            "${colaboradorViewModel.tempoPausa})",
-                            style: TextStyle(
-                                color: Color(0xFFA3A3A3),
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w500),
-                          ),
+                          child: (colaboradorViewModel == null)
+                              ? new Text(
+                                  ")",
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              : new Text(
+                                  "${colaboradorViewModel.tempoPausa})",
+                                  style: TextStyle(
+                                      color: Color(0xFFA3A3A3),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w500),
+                                ),
                         ),
                       ],
                     )
@@ -285,15 +280,10 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
   }
 
   Future _buscarInformacaoUsuario() async {
-    var colaborador =
-    await _colaboradorService.buscarPerfilColaborador();
+    var colaborador = await _colaboradorService.buscarPerfilColaborador();
 
     setState(() {
       colaboradorViewModel = colaborador;
     });
-
-
   }
-
-
 }
