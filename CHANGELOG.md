@@ -1,3 +1,7 @@
+## 0.8.4
+
+* uptade ZPinSenha!
+
 ## 0.8.3
 
 * uptade!
