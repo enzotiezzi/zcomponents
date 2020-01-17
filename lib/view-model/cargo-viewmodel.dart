@@ -5,13 +5,12 @@ class CargoViewModel {
   String nivelCargo;
   String cBO;
 
-  CargoViewModel({
-    this.idCargo: "",
-    this.industria: "",
-    this.nome: "",
-    this.nivelCargo: "",
-    this.cBO: ""
-  });
+  CargoViewModel(
+      {this.idCargo: "",
+      this.industria: "",
+      this.nome: "",
+      this.nivelCargo: "",
+      this.cBO: ""});
 
   factory CargoViewModel.fromJson(Map<String, dynamic> json) {
     return new CargoViewModel(
@@ -19,8 +18,7 @@ class CargoViewModel {
         industria: json['industria'],
         nome: json['nome'],
         nivelCargo: json['nivelCargo'],
-        cBO: json["cBO"]
-    );
+        cBO: json["cBO"]);
   }
 
   Map toMap() {

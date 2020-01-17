@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-platform.dart';
 
 class ZAlertDialogCustom extends StatelessWidget {
-
   final Key key;
   final Widget title;
   final EdgeInsetsGeometry titlePadding;
@@ -46,7 +45,7 @@ class ZAlertDialogCustom extends StatelessWidget {
     switch (zPlatform) {
       case ZPlatform.isPlatform:
         if (Platform.isAndroid) {
-         AlertDialog(
+          AlertDialog(
             backgroundColor: this.backgroundColor,
             shape: this.shape,
             elevation: this.elevation,
@@ -61,7 +60,7 @@ class ZAlertDialogCustom extends StatelessWidget {
             titleTextStyle: this.titleTextStyle,
           );
         } else {
-        CupertinoAlertDialog(
+          CupertinoAlertDialog(
             actions: this.actions,
             title: this.title,
             content: this.content,
@@ -72,7 +71,7 @@ class ZAlertDialogCustom extends StatelessWidget {
         }
         break;
       case ZPlatform.isAndroid:
-       AlertDialog(
+        AlertDialog(
           backgroundColor: this.backgroundColor,
           shape: this.shape,
           elevation: this.elevation,
@@ -88,7 +87,7 @@ class ZAlertDialogCustom extends StatelessWidget {
         );
         break;
       case ZPlatform.isIOS:
-      CupertinoAlertDialog(
+        CupertinoAlertDialog(
           actions: this.actions,
           title: this.title,
           content: this.content,

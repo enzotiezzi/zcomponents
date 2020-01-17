@@ -39,7 +39,7 @@ class ZPinSenha extends StatelessWidget {
               ),
               new Expanded(
                   child: new Container(
-                      margin: EdgeInsets.only(right: 20.0,top: 8),
+                      margin: EdgeInsets.only(right: 20.0, top: 8),
                       child: new PinCodeTextField(
                         highlightColor: const Color(0xff2BBAB4),
                         highlight: true,
@@ -79,7 +79,7 @@ class ZPinSenha extends StatelessWidget {
               ),
               new Expanded(
                   child: new Container(
-                      margin: EdgeInsets.only(right: 20.0,top: 8),
+                      margin: EdgeInsets.only(right: 20.0, top: 8),
                       child: new PinCodeTextField(
                         highlightColor: const Color(0xff2BBAB4),
                         highlight: true,

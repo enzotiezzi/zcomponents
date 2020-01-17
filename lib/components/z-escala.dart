@@ -11,7 +11,6 @@ class ZEscala extends StatefulWidget {
   final ValueChanged<ZCollectionItem> onChange;
   final String valorPadrao;
 
-
   ZEscala({this.key, @required this.token, this.onChange, this.valorPadrao});
 
   @override
@@ -39,20 +38,18 @@ class ZEscalaState extends State<ZEscala> {
   @override
   Widget build(BuildContext context) {
     return new ZCollection(
-        titulo: "Escalas",
-        lista: _escalas
-            .map((x) => new ZCollectionItem(
-                chave: x.escala, titulo: x.nome, valor: x.nome))
-            .toList(),
-        onChange: (item) {
-          _itemSelecionado = item;
-          if (widget.onChange != null) widget.onChange(item);
-        },
+      titulo: "Escalas",
+      lista: _escalas
+          .map((x) => new ZCollectionItem(
+              chave: x.escala, titulo: x.nome, valor: x.nome))
+          .toList(),
+      onChange: (item) {
+        _itemSelecionado = item;
+        if (widget.onChange != null) widget.onChange(item);
+      },
       valorPadrao: widget.valorPadrao,
       key: _keyZCollection,
-
-        );
-
+    );
   }
 
   void _listarEscalas() async {
@@ -64,7 +61,7 @@ class ZEscalaState extends State<ZEscala> {
       });
       _keyZCollection.currentState.buscarValorPadrao(_escalas
           .map((x) => new ZCollectionItem(
-          chave: x.escala, titulo: x.nome, valor: x.escala))
+              chave: x.escala, titulo: x.nome, valor: x.escala))
           .toList());
     }
   }

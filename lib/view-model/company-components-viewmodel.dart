@@ -20,23 +20,23 @@ class CompanyViewModel {
 
   CompanyViewModel(
       {this.idEmpresa: "",
-        this.nome: "",
-        this.codigo: "",
-        this.endereco: "",
-        this.bairro: "",
-        this.cidade: "",
-        this.estado: "",
-        this.cep: "",
-        this.complemento: "",
-        this.numero,
-        this.cnpj: "",
-        this.razaoSocial: "",
-        this.telefone: "",
-        this.userId,
-        this.cPFOuCNPJ,
-        this.contexto,
-        this.latitude,
-        this.longitude});
+      this.nome: "",
+      this.codigo: "",
+      this.endereco: "",
+      this.bairro: "",
+      this.cidade: "",
+      this.estado: "",
+      this.cep: "",
+      this.complemento: "",
+      this.numero,
+      this.cnpj: "",
+      this.razaoSocial: "",
+      this.telefone: "",
+      this.userId,
+      this.cPFOuCNPJ,
+      this.contexto,
+      this.latitude,
+      this.longitude});
 
   Map toMap() {
     return {

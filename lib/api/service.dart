@@ -1,13 +1,12 @@
 import 'dart:io';
 import 'dart:collection';
 
-abstract class Service{
-
+abstract class Service {
   final String token;
 
   Map<String, String> headers = new HashMap<String, String>();
 
-  Service(this.token){
+  Service(this.token) {
     init();
   }
 
@@ -15,5 +14,4 @@ abstract class Service{
     headers[HttpHeaders.contentTypeHeader] = "application/json";
     headers[HttpHeaders.authorizationHeader] = "Bearer $token";
   }
-
 }

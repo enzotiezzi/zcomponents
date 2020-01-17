@@ -2,7 +2,7 @@ import 'package:sqflite/sqlite_api.dart';
 import 'package:z_components/infra/schema/z-column.dart';
 import 'package:z_components/infra/schema/z-table.dart';
 
-abstract class ZEntity{
+abstract class ZEntity {
   int id;
   String idConta;
 
@@ -18,32 +18,36 @@ abstract class ZEntity{
   void buildTable();
   void setTableName();
 
-  Future createTable(Database db) async{
+  Future createTable(Database db) async {
     buildTable();
 
-    try{
+    try {
       await db.execute(_toSQL(table));
-    }catch(e){}
+    } catch (e) {}
   }
 
-  Future alterTable(Database db, ZColumn column) async{
+  Future alterTable(Database db, ZColumn column) async {
     buildTable();
 
-    var command = "ALTER TABLE $tableName ADD COLUMN ${column.name} ${column.type}";
+    var command =
+        "ALTER TABLE $tableName ADD COLUMN ${column.name} ${column.type}";
 
-    if(column.primaryKey != null && column.primaryKey) command += " PRIMARY KEY";
-    if(column.autoIncrement != null && column.autoIncrement) command += " AUTOINCREMENT";
-    if(column.notNull != null && column.notNull) command += " NOT NULL";
+    if (column.primaryKey != null && column.primaryKey)
+      command += " PRIMARY KEY";
+    if (column.autoIncrement != null && column.autoIncrement)
+      command += " AUTOINCREMENT";
+    if (column.notNull != null && column.notNull) command += " NOT NULL";
 
-    try{
+    try {
       await db.execute(command);
-    }catch(e){}
+    } catch (e) {}
   }
 
   String _toSQL(ZTable table) {
     List<ZColumn> columns = table.columns;
 
-    String command = "CREATE TABLE IF NOT EXISTS $tableName (${_extractColumns(columns)})";
+    String command =
+        "CREATE TABLE IF NOT EXISTS $tableName (${_extractColumns(columns)})";
 
     return command;
   }
@@ -60,9 +64,9 @@ abstract class ZEntity{
 
       var cmd = "$columnName $type";
 
-      if(primaryKey != null && primaryKey) cmd += " PRIMARY KEY";
-      if(autoIncrement != null && autoIncrement) cmd += " AUTOINCREMENT";
-      if(notNull != null && notNull) cmd += " NOT NULL";
+      if (primaryKey != null && primaryKey) cmd += " PRIMARY KEY";
+      if (autoIncrement != null && autoIncrement) cmd += " AUTOINCREMENT";
+      if (notNull != null && notNull) cmd += " NOT NULL";
 
       command.add(cmd);
     });

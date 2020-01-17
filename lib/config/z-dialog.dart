@@ -1,1 +1,1 @@
-enum ZDialog { normal, sucess, alert, erro, linearLoad ,zDialog }
+enum ZDialog { normal, sucess, alert, erro, linearLoad, zDialog }

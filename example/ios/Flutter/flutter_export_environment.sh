@@ -4,6 +4,13 @@ export "FLUTTER_ROOT=/Users/victormarques/Desktop/flutter"
 export "FLUTTER_APPLICATION_PATH=/Users/victormarques/Documents/projetos/zcomponents/example"
 export "FLUTTER_TARGET=/Users/victormarques/Documents/projetos/zcomponents/example/lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
+<<<<<<< HEAD
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"
 export "FLUTTER_FRAMEWORK_DIR=/Users/victormarques/Desktop/flutter/bin/cache/artifacts/engine/ios"
 export "TRACK_WIDGET_CREATION=true"
+=======
+export "SYMROOT=${SOURCE_ROOT}/../build\ios"
+export "FLUTTER_FRAMEWORK_DIR=C:\flutter\bin\cache\artifacts\engine\ios"
+export "FLUTTER_BUILD_NAME=1.0.0"
+export "FLUTTER_BUILD_NUMBER=1"
+>>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4

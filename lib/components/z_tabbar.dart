@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/config/z-platform.dart';
 
-class ZtabBar extends StatelessWidget {
+ class ZtabBar extends StatelessWidget {
   Widget _zTabBar;
 
   final List<BottomNavigationBarItem> items;

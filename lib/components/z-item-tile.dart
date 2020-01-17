@@ -439,20 +439,25 @@ class _ZItemTileState extends State<ZItemTile> {
                                                         right: 0.0,
                                                         bottom: 6.0,
                                                         top: 0.0),
-                                                    child: 
-                                                    (widget.horario == null||widget.horario == "")?new Text(""):
-                                                    new Text(
-                                                      "(${widget.horario})",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF808080),
-                                                          fontSize:
-                                                              (_largura < 360)
-                                                                  ? 8.0
-                                                                  : 10,
-                                                          fontWeight:
-                                                              FontWeight.w700),
-                                                    ),
+                                                    child: (widget.horario ==
+                                                                null ||
+                                                            widget.horario ==
+                                                                "")
+                                                        ? new Text("")
+                                                        : new Text(
+                                                            "(${widget.horario})",
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF808080),
+                                                                fontSize:
+                                                                    (_largura <
+                                                                            360)
+                                                                        ? 8.0
+                                                                        : 10,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700),
+                                                          ),
                                                   ),
                                                 ],
                                               ),
@@ -944,15 +949,14 @@ class _ZItemTileState extends State<ZItemTile> {
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: (widget.status
-                                                    .toLowerCase() ==
-                                                    "ativo")
+                                                            .toLowerCase() ==
+                                                        "ativo")
                                                     ? Colors.green
                                                     : (widget.status
-                                                    .toLowerCase() ==
-                                                    "inativo")
-                                                    ? Colors.red
-                                                    : widget
-                                                    .colorStatus),
+                                                                .toLowerCase() ==
+                                                            "inativo")
+                                                        ? Colors.red
+                                                        : widget.colorStatus),
                                           ),
                                           new Container(
                                             margin: EdgeInsets.only(

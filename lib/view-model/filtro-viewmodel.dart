@@ -10,11 +10,11 @@ class FiltroViewModel {
 
   FiltroViewModel(
       {this.idsEmpresa,
-        this.idsResponsavel,
-        this.idsCentroCusto,
-        this.nome,
-        this.data,
-        this.ordem});
+      this.idsResponsavel,
+      this.idsCentroCusto,
+      this.nome,
+      this.data,
+      this.ordem});
 
   Map toMap() {
     return {

@@ -1,1 +1,1 @@
-enum ZHorario {isNormal, isPadrao }
+enum ZHorario { isNormal, isPadrao }
