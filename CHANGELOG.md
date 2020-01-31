@@ -1,3 +1,7 @@
+## 0.8.5
+
+* uptade cached image!
+
 ## 0.8.4
 
 * uptade ZPinSenha!
