@@ -1,3 +1,7 @@
+## 0.8.5
+
+* uptade ZTreeView!
+
 ## 0.8.4
 
 * uptade ZPinSenha!
