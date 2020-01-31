@@ -1,3 +1,7 @@
+## 0.8.6
+
+* treeView!
+
 ## 0.8.5
 
 * uptade cached image!
