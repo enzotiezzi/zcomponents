@@ -30,10 +30,13 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: new Column(
-        children: listaNovo(),
-      ),
+    return new ListView(
+      children: <Widget>[
+        _buildSearchBar(),
+        new Column(
+          children: listaNovo(),
+        )
+      ],
     );
   }
 
