@@ -1,3 +1,7 @@
+## 0.8.7
+
+* treeViewBusca!
+
 ## 0.8.6
 
 * treeView!
