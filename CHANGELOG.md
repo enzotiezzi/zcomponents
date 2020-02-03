@@ -1,6 +1,10 @@
+## 0.8.6
+
+* treeView!
+
 ## 0.8.5
 
-* uptade ZTreeView!
+* uptade cached image!
 
 ## 0.8.4
 

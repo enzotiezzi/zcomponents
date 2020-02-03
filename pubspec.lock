@@ -21,7 +21,11 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "2.3.0"
+=======
     version: "2.4.0"
+>>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
   boolean_selector:
     dependency: transitive
     description:
@@ -29,6 +33,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+<<<<<<< HEAD
+  cached_network_image:
+    dependency: "direct main"
+    description:
+      name: cached_network_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.1"
+=======
+>>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
   charcode:
     dependency: transitive
     description:
@@ -183,7 +197,11 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "1.1.7"
+=======
     version: "1.1.8"
+>>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
   path:
     dependency: transitive
     description:
@@ -191,7 +209,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.4"
+<<<<<<< HEAD
+  path_provider:
+=======
   pedantic:
+>>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
     dependency: transitive
     description:
       name: pedantic
@@ -204,7 +226,11 @@ packages:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "1.8.0+1"
+=======
     version: "2.4.0"
+>>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
   pin_code_text_field:
     dependency: "direct main"
     description:
