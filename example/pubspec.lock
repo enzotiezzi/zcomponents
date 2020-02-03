@@ -7,25 +7,15 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.3.0"
-  boolean_selector:
-=======
     version: "2.0.11"
   args:
->>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
     dependency: transitive
     description:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.0.5"
-  cached_network_image:
-=======
     version: "1.5.2"
   async:
->>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
     dependency: transitive
     description:
       name: async
@@ -200,11 +190,7 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.1.7"
-=======
     version: "1.1.8"
->>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
   path:
     dependency: transitive
     description:
@@ -212,11 +198,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.4"
-<<<<<<< HEAD
-  path_provider:
-=======
   pedantic:
->>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
     dependency: transitive
     description:
       name: pedantic
@@ -229,11 +211,7 @@ packages:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.8.0+1"
-=======
     version: "2.4.0"
->>>>>>> a7668183f18febd65e81a0d645f32fdb8fc735f4
   pin_code_text_field:
     dependency: transitive
     description:
@@ -350,7 +328,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.4"
+    version: "0.8.6"
 sdks:
   dart: ">=2.4.0 <3.0.0"
   flutter: ">=1.5.0 <2.0.0"
