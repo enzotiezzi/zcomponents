@@ -1,4 +1,3 @@
-import 'package:circular_check_box/circular_check_box.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class ZTreeView extends StatefulWidget {
 }
 
 class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
-  List<ZTreeViewViewModel> listTreeOriginal;
+  List<ZTreeViewViewModel> treeViewList = new List();
   List<List<GlobalKey>> listaKey = new List<List<GlobalKey>>();
   bool testeAki = false;
   int testeRecursao = 0;
@@ -27,14 +26,28 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
   double size = 0.0;
   bool select = false;
   double sizeEdit = 22.0;
+  GlobalKey containerKey = new GlobalKey<_ZTreeViewState>();
+  int profArvore = 0;
+  int auxProfArvore = 0;
+  int contadorBuscas = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    treeViewList = widget.lisTree;
+    preencherListaDeBusca();
+  }
 
   @override
   Widget build(BuildContext context) {
     return new ListView(
       children: <Widget>[
         _buildSearchBar(),
-        new Column(
-          children: listaNovo(),
+        new Container(
+          key: containerKey,
+          child: new Column(
+            children: listaNovo(),
+          ),
         )
       ],
     );
@@ -46,250 +59,269 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
     }
 
     int j = 0;
-    if (testeAki == false) {
-      List<GlobalKey> lista = new List<GlobalKey>();
 
-      for (int i = 0; i < widget.lisTree.length; i++) {
-        widget.lisTree[i].index = 0;
-        GlobalKey key = new GlobalKey<_ZTreeViewState>();
-        lista.add(key);
-      }
-      listaKey.add(lista);
+    List<GlobalKey> lista = new List<GlobalKey>();
+
+    for (int i = 0; i < treeViewList.length; i++) {
+      treeViewList[i].index = 0;
+      GlobalKey key = new GlobalKey<_ZTreeViewState>();
+      lista.add(key);
     }
+    listaKey.add(lista);
 
     List<Widget> list = new List();
-    widget.lisTree.forEach((item) {
+    treeViewList.forEach((item) {
       item.indexAuxiliar = j;
 
-      list.add((!listaId.contains(item.nome) && listaId.length != 0)
-          ? new Container()
-          : (item.filhos.length == 0)
-              ? new GestureDetector(
-                  onTap: () {
-                    if (widget.teste != null) {
-                      var res = widget.teste(item.idNivel);
-                    }
-                  },
-                  child: new Container(
-                      color: Colors.white,
-                      child: new ConfigurableExpansionTile(
-                        key: listaKey[0][j],
-                        animatedWidgetPrecedingHeader: (item.filhos.length != 0)
-                            ? new Icon(Icons.arrow_drop_down)
-                            : new Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.transparent,
-                              ),
-                        borderColorStart: Colors.grey.withOpacity(0.3),
-                        borderColorEnd: Colors.grey.withOpacity(0.3),
-                        bottomBorderOn: true,
-                        onExpansionChanged: (bool value) {
-                          for (int i = 0; i < listaKey[0].length; i++) {
-                            if (i != item.indexAuxiliar) {
-                              listaKey[0][i] = new GlobalKey<_ZTreeViewState>();
-                            } else {}
-                          }
-                          setState(() {
-                            for (int i = 0; i < item.filhos.length; i++) {
-                              if (item.filhos[i].aberto == true) {
-                                item.filhos[i].aberto = false;
-                              }
-                              limparBoolsFilhosTree(
-                                  ambienteHierarquicoViewModel: item.filhos[i]);
-                            }
-                          });
-                        },
-                        header: new Expanded(
-                          child: new Container(
-                            child: new Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                new Container(
-                                  child: new Row(
-                                    children: <Widget>[
-                                      new Container(
-                                        // margin: EdgeInsets.only(left: _margin),
-                                        color: Colors.grey.withOpacity(0.5),
-                                        width: 1.5,
-                                        height: 45,
-                                      ),
-                                      new GestureDetector(
-                                        child: new Container(
-                                          width: 145,
-                                          color: Colors.transparent,
-                                          padding: EdgeInsets.only(
-                                              top: 10.0,
-                                              bottom: 10.0,
-                                              left: 6.0,
-                                              right: 30.0),
-                                          child: new Text(
-                                            "${item.nome}",
-                                            style: new TextStyle(
-                                              fontSize: 11,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                AnimatedSize(
-                                    vsync: this,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.fastOutSlowIn,
-                                    reverseDuration:
-                                        Duration(milliseconds: 500),
-                                    child: new GestureDetector(
-                                      onTap: () {
-                                        if (widget.teste != null) {
-                                          var res = widget.teste(item.idNivel);
-                                        }
-                                      },
-                                      child: new Container(
-                                        color: Colors.transparent,
-                                        padding: const EdgeInsets.only(
-                                            right: 16,
-                                            left: 40.0,
-                                            bottom: 10.0,
-                                            top: 10.0),
-                                        child: new Icon(
-                                          Icons.keyboard_arrow_right,
-                                          color: Color(0xff999999),
-                                          size: 16,
-                                        ),
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          ),
-                        ),
-                        children: <Widget>[
-                          (widget.lisTree.length != 0)
-                              ? new Container(
-                                  child: new Column(
-                                  children: lista2Novo(
-                                      nivel: item,
-                                      margin: 1.0,
-                                      posicaoAnterior: 0),
-                                ))
-                              : new Container()
-                        ],
-                      )),
-                )
-              : new Container(
-                  color: Colors.white,
-                  child: new ConfigurableExpansionTile(
-                    key: listaKey[0][j],
-                    animatedWidgetPrecedingHeader: (item.filhos.length != 0)
-                        ? new Icon(Icons.arrow_drop_down)
-                        : new Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.transparent,
-                          ),
-                    borderColorStart: Colors.grey.withOpacity(0.3),
-                    borderColorEnd: Colors.grey.withOpacity(0.3),
-                    bottomBorderOn: true,
-                    onExpansionChanged: (bool value) {
-                      for (int i = 0; i < listaKey[0].length; i++) {
-                        if (i != item.indexAuxiliar) {
-                          listaKey[0][i] = new GlobalKey<_ZTreeViewState>();
-                        } else {}
-                      }
-                      setState(() {
-                        for (int i = 0; i < item.filhos.length; i++) {
-                          if (item.filhos[i].aberto == true) {
-                            item.filhos[i].aberto = false;
-                          }
-                          limparBoolsFilhosTree(
-                              ambienteHierarquicoViewModel: item.filhos[i]);
-                        }
-                      });
-
-                      if (item.filhos.length == 0) {
-                        if (widget.teste != null) {
-                          var res = widget.teste(item.idNivel);
-                        }
-                      }
-                    },
-                    header: new Expanded(
-                      child: new Container(
-                        child: new Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Container(
-                              child: new Row(
-                                children: <Widget>[
-                                  new Container(
-                                    // margin: EdgeInsets.only(left: _margin),
-                                    color: Colors.grey.withOpacity(0.5),
-                                    width: 1.5,
-                                    height: 45,
-                                  ),
-                                  new GestureDetector(
-                                    child: new Container(
-                                      width: 145,
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.only(
-                                          top: 10.0,
-                                          bottom: 10.0,
-                                          left: 6.0,
-                                          right: 30.0),
-                                      child: new Text(
-                                        "${item.nome}",
-                                        style: new TextStyle(
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            AnimatedSize(
-                                vsync: this,
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.fastOutSlowIn,
-                                reverseDuration: Duration(milliseconds: 500),
-                                child: new GestureDetector(
-                                  onTap: () {
-                                    if (widget.teste != null) {
-                                      var res = widget.teste(item.idNivel);
-                                    }
-                                  },
-                                  child: new Container(
-                                    color: Colors.transparent,
-                                    padding: const EdgeInsets.only(
-                                        right: 16,
-                                        left: 40.0,
-                                        bottom: 10.0,
-                                        top: 10.0),
-                                    child: new Icon(
-                                      Icons.keyboard_arrow_right,
-                                      color: Color(0xff999999),
-                                      size: 16,
-                                    ),
-                                  ),
-                                ))
-                          ],
-                        ),
-                      ),
-                    ),
-                    children: <Widget>[
-                      (widget.lisTree.length != 0)
-                          ? new Container(
-                              child: new Column(
-                              children: lista2Novo(
-                                  nivel: item, margin: 1.0, posicaoAnterior: 0),
-                            ))
-                          : new Container()
-                    ],
-                  )));
+      list.add(_itemListaNovo(item, j));
       j++;
     });
     testeAki = true;
     return list;
+  }
+
+  Widget _itemListaNovo(item, j) {
+    if (!listaId.contains(item.idNivel) && listaId.length != 0) {
+      return new Container();
+    } else if (item.filhos.length == 0) {
+      return new GestureDetector(
+        onTap: () {
+          if (widget.teste != null) {
+            var res = widget.teste(item.idNivel);
+          }
+        },
+        child: new Container(
+            color: Colors.white,
+            child: new ConfigurableExpansionTile(
+              animatedWidgetPrecedingHeader: (item.filhos.length != 0)
+                  ? new Icon(Icons.arrow_drop_down)
+                  : new Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.transparent,
+                    ),
+              borderColorStart: Colors.grey.withOpacity(0.3),
+              borderColorEnd: Colors.grey.withOpacity(0.3),
+              bottomBorderOn: true,
+              onExpansionChanged: (bool value) {
+                for (int i = 0; i < listaKey[0].length; i++) {
+                  if (i != item.indexAuxiliar) {
+                    listaKey[0][i] = new GlobalKey<_ZTreeViewState>();
+                  } else {}
+                }
+                setState(() {
+                  for (int i = 0; i < item.filhos.length; i++) {
+                    if (item.filhos[i].aberto == true) {
+                      item.filhos[i].aberto = false;
+                    }
+                    limparBoolsFilhosTree(
+                        ambienteHierarquicoViewModel: item.filhos[i]);
+                  }
+                });
+              },
+              header: new Expanded(
+                child: new Container(
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      new Container(
+                        child: new Row(
+                          children: <Widget>[
+                            new Container(
+                              // margin: EdgeInsets.only(left: _margin),
+                              color: Colors.grey.withOpacity(0.5),
+                              width: 1.5,
+                              height: 45,
+                            ),
+                            new GestureDetector(
+                              child: new Container(
+                                width: 145,
+                                color: Colors.transparent,
+                                padding: EdgeInsets.only(
+                                    top: 10.0,
+                                    bottom: 10.0,
+                                    left: 6.0,
+                                    right: 30.0),
+                                child: new Text(
+                                  "${item.nome}",
+                                  style: new TextStyle(
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      AnimatedSize(
+                          vsync: this,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.fastOutSlowIn,
+                          reverseDuration: Duration(milliseconds: 500),
+                          child: new GestureDetector(
+                            onTap: () {
+                              if (widget.teste != null) {
+                                var res = widget.teste(item.idNivel);
+                              }
+                            },
+                            child: new Container(
+                              color: Colors.transparent,
+                              padding: const EdgeInsets.only(
+                                  right: 16,
+                                  left: 40.0,
+                                  bottom: 10.0,
+                                  top: 10.0),
+                              child: new Icon(
+                                Icons.keyboard_arrow_right,
+                                color: Color(0xff999999),
+                                size: 16,
+                              ),
+                            ),
+                          ))
+                    ],
+                  ),
+                ),
+              ),
+              children: <Widget>[
+                _definirFilho(item, 1.0, 0),
+              ],
+            )),
+      );
+    } else {
+      return new Container(
+          color: Colors.white,
+          child: new ConfigurableExpansionTile(
+            key: listaKey[0][j],
+            animatedWidgetPrecedingHeader: (item.filhos.length != 0)
+                ? new Icon(Icons.arrow_drop_down)
+                : new Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.transparent,
+                  ),
+            borderColorStart: Colors.grey.withOpacity(0.3),
+            borderColorEnd: Colors.grey.withOpacity(0.3),
+            bottomBorderOn: true,
+            onExpansionChanged: (bool value) {
+              for (int i = 0; i < listaKey[0].length; i++) {
+                if (i != item.indexAuxiliar) {
+                  listaKey[0][i] = new GlobalKey<_ZTreeViewState>();
+                } else {}
+              }
+              setState(() {
+                for (int i = 0; i < item.filhos.length; i++) {
+                  if (item.filhos[i].aberto == true) {
+                    item.filhos[i].aberto = false;
+                  }
+                  limparBoolsFilhosTree(
+                      ambienteHierarquicoViewModel: item.filhos[i]);
+                }
+              });
+
+              if (item.filhos.length == 0) {
+                if (widget.teste != null) {
+                  var res = widget.teste(item.idNivel);
+                }
+              }
+            },
+            header: new Expanded(
+              child: new Container(
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Container(
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            // margin: EdgeInsets.only(left: _margin),
+                            color: Colors.grey.withOpacity(0.5),
+                            width: 1.5,
+                            height: 45,
+                          ),
+                          new GestureDetector(
+                            child: new Container(
+                              width: 145,
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(
+                                  top: 10.0,
+                                  bottom: 10.0,
+                                  left: 6.0,
+                                  right: 30.0),
+                              child: new Text(
+                                "${item.nome}",
+                                style: new TextStyle(
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    AnimatedSize(
+                        vsync: this,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.fastOutSlowIn,
+                        reverseDuration: Duration(milliseconds: 500),
+                        child: new GestureDetector(
+                          onTap: () {
+                            if (widget.teste != null) {
+                              var res = widget.teste(item.idNivel);
+                            }
+                          },
+                          child: new Container(
+                            color: Colors.transparent,
+                            padding: const EdgeInsets.only(
+                                right: 16, left: 40.0, bottom: 10.0, top: 10.0),
+                            child: new Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xff999999),
+                              size: 16,
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+            children: <Widget>[
+              _definirFilho(item, 1.0, 0),
+            ],
+          ));
+    }
+  }
+
+  Color definirCorExpansionTile(item) {
+    if (item.filhos.length != 0) {
+      return Color(0xff2bbab4);
+    } else {
+      return Colors.grey.withOpacity(0.3);
+    }
+  }
+
+  IconData definirIconeExpansionTile(item) {
+    if (item.filhos.length != 0) {
+      if (item.aberto == null || item.aberto == false) {
+        return Icons.arrow_drop_up;
+      } else {
+        return Icons.arrow_drop_down;
+      }
+    }
+  }
+
+  Widget _definirFilho(item, j, index) {
+    if (item.filhos.length != 0) {
+      return new Container(
+          child: new Column(
+        children: lista2Novo(
+          nivel: item,
+          margin: j,
+          posicaoAnterior: index,
+        ),
+      ));
+    } else {
+      return new Container();
+    }
   }
 
   List<Widget> lista2Novo(
@@ -298,22 +330,21 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
     List<GlobalKey> lista = new List<GlobalKey>();
     int posAnterior = posicaoAnterior;
     int total;
-    if (testeAki == false) {
-      total = testeRecursao + 1;
 
-      testeRecursao++;
+    total = testeRecursao + 1;
+
+    testeRecursao++;
+
+    if (nivel.filhos.length == 0) {
+      GlobalKey key = new GlobalKey<_ZTreeViewState>();
+      lista.add(key);
     }
-    if (testeAki == false) {
-      if (nivel.filhos.length == 0) {
-        GlobalKey key = new GlobalKey<_ZTreeViewState>();
-        lista.add(key);
-      }
-      for (int i = 0; i < nivel.filhos.length; i++) {
-        GlobalKey key = new GlobalKey<_ZTreeViewState>();
-        lista.add(key);
-      }
-      listaKey.add(lista);
+    for (int i = 0; i < nivel.filhos.length; i++) {
+      GlobalKey key = new GlobalKey<_ZTreeViewState>();
+      lista.add(key);
     }
+    listaKey.add(lista);
+
     var j = margin;
     j++;
     List<Widget> list = new List();
@@ -322,297 +353,198 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
       if (testeAki == false) {
         item.index = total;
       }
-      list.add((!listaId.contains(item.idNivel) && listaId.length != 0)
-          ? new Container()
-          : (item.filhos.length == 0)
-              ? new GestureDetector(
-                  onTap: () {
-                    if (widget.teste != null) {
-                      var res = widget.teste(item.idNivel);
-                    }
-                  },
-                  child: new Container(
-                      color: Colors.white,
-                      child: new ConfigurableExpansionTile(
-                        key: listaKey[(item.index)][p],
-                        borderColorStart: Colors.grey.withOpacity(0.3),
-                        borderColorEnd: (item.filhos.length != 0)
-                            ? Color(0xff2bbab4)
-                            : Colors.grey.withOpacity(0.3),
-                        bottomBorderOn: true,
-                        onExpansionChanged: (bool value) {
-                          for (int i = 0;
-                              i < listaKey[item.index].length;
-                              i++) {
-                            if (i != item.indexAuxiliar) {
-                              listaKey[item.index][i] =
-                                  new GlobalKey<_ZTreeViewState>();
-                            } else {}
-                          }
-                          setState(() {
-                            if (item.aberto == false) {
-                              item.aberto = true;
-                            } else {
-                              item.aberto = false;
-                            }
-                          });
-                          if (item.filhos.length == 0) {
-                            if (widget.teste != null) {
-                              var res = widget.teste(item.idNivel);
-                            }
-                          }
-                        },
-                        header: new Expanded(
-                          child: new Container(
-                            child: new Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                new Container(
-                                  child: new Row(
-                                    children: <Widget>[
-                                      (item.filhos.length != 0)
-                                          ? (item.aberto == false)
-                                              ? new Container(
-                                                  margin: EdgeInsets.only(
-                                                      left: margin * 10),
-                                                  child: new Icon(
-                                                      Icons.arrow_drop_down),
-                                                )
-                                              : new Container(
-                                                  margin: EdgeInsets.only(
-                                                      left: margin * 10),
-                                                  child: new Icon(
-                                                      Icons.arrow_drop_up),
-                                                )
-                                          : new Container(
-                                              margin: EdgeInsets.only(
-                                                  left: margin * 10),
-                                              child: new Icon(
-                                                Icons.arrow_drop_up,
-                                                color: Colors.transparent,
-                                              ),
-                                            ),
-                                      new Container(
-                                        // margin: EdgeInsets.only(left: margin * 10),
-                                        color: Colors.grey.withOpacity(0.5),
-                                        width: 1.5,
-                                        height: 45,
-                                      ),
-                                      new GestureDetector(
-                                        child: new Container(
-                                          width: 145,
-                                          color: Colors.transparent,
-                                          padding: EdgeInsets.only(
-                                              top: 10.0,
-                                              bottom: 10.0,
-                                              left: 6.0,
-                                              right: 30.0),
-                                          child: new Text(
-                                            "${item.nome}",
-                                            style: new TextStyle(
-                                              fontSize: 11,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                AnimatedSize(
-                                    vsync: this,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.fastOutSlowIn,
-                                    reverseDuration:
-                                        Duration(milliseconds: 500),
-                                    child: new GestureDetector(
-                                      onTap: () {
-                                        if (widget.teste != null) {
-                                          var res = widget.teste(item.idNivel);
-                                        }
-                                      },
-                                      child: new Container(
-                                        color: Colors.transparent,
-                                        padding: const EdgeInsets.only(
-                                            right: 16,
-                                            left: 40.0,
-                                            bottom: 10.0,
-                                            top: 10.0),
-                                        child: new Icon(
-                                          Icons.keyboard_arrow_right,
-                                          color: Color(0xff999999),
-                                          size: 16,
-                                        ),
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          ),
-                        ),
-                        children: <Widget>[
-                          (item.filhos.length != 0)
-                              ? new Container(
-                                  child: new Column(
-                                  children: lista2Novo(
-                                    nivel: item,
-                                    margin: j,
-                                    posicaoAnterior: item.index,
-                                  ),
-                                ))
-                              : new Container()
-                        ],
-                      )),
-                )
-              : new Container(
-                  color: Colors.white,
-                  child: new ConfigurableExpansionTile(
-                    key: listaKey[(item.index)][p],
-                    borderColorStart: Colors.grey.withOpacity(0.3),
-                    borderColorEnd: (item.filhos.length != 0)
-                        ? Color(0xff2bbab4)
-                        : Colors.grey.withOpacity(0.3),
-                    bottomBorderOn: true,
-                    onExpansionChanged: (bool value) {
-                      for (int i = 0; i < listaKey[item.index].length; i++) {
-                        if (i != item.indexAuxiliar) {
-                          listaKey[item.index][i] =
-                              new GlobalKey<_ZTreeViewState>();
-                        } else {}
-                      }
-                      setState(() {
-                        if (item.aberto == false) {
-                          item.aberto = true;
-                        } else {
-                          item.aberto = false;
-                        }
-                      });
-                    },
-                    header: new Expanded(
-                      child: new Container(
-                        child: new Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Container(
-                              child: new Row(
-                                children: <Widget>[
-                                  (item.filhos.length != 0)
-                                      ? (item.aberto == false)
-                                          ? new Container(
-                                              margin: EdgeInsets.only(
-                                                  left: margin * 10),
-                                              child: new Icon(
-                                                  Icons.arrow_drop_down),
-                                            )
-                                          : new Container(
-                                              margin: EdgeInsets.only(
-                                                  left: margin * 10),
-                                              child:
-                                                  new Icon(Icons.arrow_drop_up),
-                                            )
-                                      : new Container(
-                                          margin: EdgeInsets.only(
-                                              left: margin * 10),
-                                          child: new Icon(
-                                            Icons.arrow_drop_up,
-                                            color: Colors.transparent,
-                                          ),
-                                        ),
-                                  new Container(
-                                    // margin: EdgeInsets.only(left: margin * 10),
-                                    color: Colors.grey.withOpacity(0.5),
-                                    width: 1.5,
-                                    height: 45,
-                                  ),
-                                  new GestureDetector(
-                                    child: new Container(
-                                      width: 145,
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.only(
-                                          top: 10.0,
-                                          bottom: 10.0,
-                                          left: 6.0,
-                                          right: 30.0),
-                                      child: new Text(
-                                        "${item.nome}",
-                                        style: new TextStyle(
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            (size == 20 && select == false)
-                                ? AnimatedSize(
-                                    vsync: this,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.fastOutSlowIn,
-                                    reverseDuration:
-                                        Duration(milliseconds: 500),
-                                    child: new GestureDetector(
-                                      onTap: () {
-                                        if (widget.teste != null) {
-                                          var res = widget.teste(item.idNivel);
-                                        }
-                                      },
-                                      child: new Container(
-                                        margin:
-                                            const EdgeInsets.only(right: 16),
-                                        child: new Icon(
-                                          Icons.add_circle,
-                                          color: Color(0xff2bbab4),
-                                          size: size,
-                                        ),
-                                      ),
-                                    ))
-                                : AnimatedSize(
-                                    vsync: this,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.fastOutSlowIn,
-                                    reverseDuration:
-                                        Duration(milliseconds: 500),
-                                    child: new GestureDetector(
-                                      onTap: () {
-                                        if (widget.teste != null) {
-                                          var res = widget.teste(item.idNivel);
-                                        }
-                                      },
-                                      child: new Container(
-                                        color: Colors.transparent,
-                                        padding: const EdgeInsets.only(
-                                            right: 16,
-                                            left: 40.0,
-                                            bottom: 10.0,
-                                            top: 10.0),
-                                        child: new Icon(
-                                          Icons.keyboard_arrow_right,
-                                          color: Color(0xff999999),
-                                          size: 16,
-                                        ),
-                                      ),
-                                    ))
-                          ],
-                        ),
-                      ),
-                    ),
-                    children: <Widget>[
-                      (item.filhos.length != 0)
-                          ? new Container(
-                              child: new Column(
-                              children: lista2Novo(
-                                nivel: item,
-                                margin: j,
-                                posicaoAnterior: item.index,
-                              ),
-                            ))
-                          : new Container()
-                    ],
-                  )));
+      list.add(_itemLista(item, margin, p, j));
       p++;
     });
     return list;
+  }
+
+  Widget _itemLista(item, margin, p, j) {
+    if (!listaId.contains(item.idNivel) && listaId.length != 0) {
+      return new Container();
+    } else if (item.filhos.length == 0) {
+      return new GestureDetector(
+        onTap: () {
+          if (widget.teste != null) {
+            var res = widget.teste(item.idNivel);
+          }
+        },
+        child: new Container(
+            color: Colors.white,
+            child: new ConfigurableExpansionTile(
+              borderColorStart: Colors.grey.withOpacity(0.3),
+              borderColorEnd: definirCorExpansionTile(item),
+              bottomBorderOn: true,
+              header: new Expanded(
+                child: new Container(
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      new Container(
+                        child: new Row(
+                          children: <Widget>[
+                            new Container(
+                              margin: EdgeInsets.only(left: margin * 10),
+                              child: new Icon(
+                                definirIconeExpansionTile(item),
+                                color: Colors.transparent,
+                              ),
+                            ),
+                            new Container(
+                              // margin: EdgeInsets.only(left: margin * 10),
+                              color: Colors.grey.withOpacity(0.5),
+                              width: 1.5,
+                              height: 45,
+                            ),
+                            new GestureDetector(
+                              child: new Container(
+                                width: 145,
+                                color: Colors.transparent,
+                                padding: EdgeInsets.only(
+                                    top: 10.0,
+                                    bottom: 10.0,
+                                    left: 6.0,
+                                    right: 30.0),
+                                child: new Text(
+                                  "${item.nome}",
+                                  style: new TextStyle(
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      AnimatedSize(
+                          vsync: this,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.fastOutSlowIn,
+                          reverseDuration: Duration(milliseconds: 500),
+                          child: new GestureDetector(
+                            onTap: () {
+                              if (widget.teste != null) {
+                                var res = widget.teste(item.idNivel);
+                              }
+                            },
+                            child: new Container(
+                              color: Colors.transparent,
+                              padding: const EdgeInsets.only(
+                                  right: 16,
+                                  left: 40.0,
+                                  bottom: 10.0,
+                                  top: 10.0),
+                              child: new Icon(
+                                Icons.keyboard_arrow_right,
+                                color: Color(0xff999999),
+                                size: 16,
+                              ),
+                            ),
+                          ))
+                    ],
+                  ),
+                ),
+              ),
+              children: <Widget>[
+                _definirFilho(item, j, item.index),
+              ],
+            )),
+      );
+    } else
+      return new Container(
+          color: Colors.white,
+          child: new ConfigurableExpansionTile(
+            key: listaKey[item.index][p],
+            borderColorStart: Colors.grey.withOpacity(0.3),
+            borderColorEnd: definirCorExpansionTile(item),
+            bottomBorderOn: true,
+            onExpansionChanged: (bool value) {
+              for (int i = 0; i < listaKey[item.index].length; i++) {
+                if (i != item.indexAuxiliar) {
+                  listaKey[item.index][i] = new GlobalKey<_ZTreeViewState>();
+                } else {}
+              }
+              setState(() {
+                if (item.aberto == false) {
+                  item.aberto = true;
+                } else {
+                  item.aberto = false;
+                }
+              });
+            },
+            header: new Expanded(
+              child: new Container(
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Container(
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            margin: EdgeInsets.only(left: margin * 10),
+                            child: new Icon(
+                              definirIconeExpansionTile(item),
+                              color: Colors.black,
+                            ),
+                          ),
+                          new Container(
+                            // margin: EdgeInsets.only(left: margin * 10),
+                            color: Colors.grey.withOpacity(0.5),
+                            width: 1.5,
+                            height: 45,
+                          ),
+                          new GestureDetector(
+                            child: new Container(
+                              width: 145,
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(
+                                  top: 10.0,
+                                  bottom: 10.0,
+                                  left: 6.0,
+                                  right: 30.0),
+                              child: new Text(
+                                "${item.nome}",
+                                style: new TextStyle(
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    AnimatedSize(
+                        vsync: this,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.fastOutSlowIn,
+                        reverseDuration: Duration(milliseconds: 500),
+                        child: new GestureDetector(
+                          onTap: () {
+                            if (widget.teste != null) {
+                              var res = widget.teste(item.idNivel);
+                            }
+                          },
+                          child: new Container(
+                            color: Colors.transparent,
+                            padding: const EdgeInsets.only(
+                                right: 16, left: 40.0, bottom: 10.0, top: 10.0),
+                            child: new Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xff999999),
+                              size: 16,
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+            children: <Widget>[
+              _definirFilho(item, j, item.index),
+            ],
+          ));
   }
 
   Widget _buildSearchBar() {
@@ -651,6 +583,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                         style: TextStyle(fontSize: 19.0, color: Colors.black),
                         onChanged: (text) {
                           montarListaPossiveisItens(text);
+                          preencherContadorListaDeBusca(text);
                         },
                       ),
                     )
@@ -670,14 +603,17 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
   }
 
   void preencherListaDeBusca() {
-    var lista = widget.lisTree;
+    var lista = widget.lisTree
+        .map((item) => new ZTreeViewViewModel.clone(item))
+        .toList();
     for (int i = 0; i < lista.length; i++) {
-      buscaProfundidade(widget.lisTree[i]);
+      buscaProfundidade(lista[i]);
     }
+    print(profArvore);
   }
 
   void preencherListaDeBuscaFiltrada(lista, String id) {
-    lista = listTreeOriginal
+    lista = widget.lisTree
         .map((item) => new ZTreeViewViewModel.clone(item))
         .toList();
     for (int i = 0; i < lista.length; i++) {
@@ -687,14 +623,20 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
 
   void buscaProfundidade(ZTreeViewViewModel base) {
     if (base.filhos.isEmpty) {
-      if (base.jaPassou == false) {
+      auxProfArvore++;
+      if (auxProfArvore > profArvore) {
+        profArvore = auxProfArvore;
+      }
+      auxProfArvore = 0;
+      if (base.jaPassou == null || base.jaPassou == false) {
+        auxProfArvore++;
         listaBusca.add(new ItemBuscaViewModel(
             nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
       }
       base.jaPassou = true;
     }
     base.filhos.forEach((filho) {
-      if (base.jaPassou == false) {
+      if (base.jaPassou == null || base.jaPassou == false) {
         listaBusca.add(new ItemBuscaViewModel(
             nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
       }
@@ -706,9 +648,10 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
 
   void buscaProfundidadeFiltrada(ZTreeViewViewModel base, String id) {
     if (base.filhos.isEmpty) {
-      if (base.jaPassou == false && base.nome == id) {
+      if ((base.jaPassou == null || base.jaPassou == false) &&
+          base.nome == id) {
         listaId.add(base.idNivel);
-        var lista = listTreeOriginal
+        var lista = widget.lisTree
             .map((item) => new ZTreeViewViewModel.clone(item))
             .toList();
         preencherListaDeBuscaFiltrada(lista, base.idNivelPai);
@@ -716,11 +659,11 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
       base.jaPassou = true;
     }
     base.filhos.forEach((filho) {
-      if (base.jaPassou == false) {
+      if (base.jaPassou == null || base.jaPassou == false) {
         base.jaPassou = true;
       }
       if (base.idNivel == id && !listaId.contains(base.idNivel)) {
-        var lista = listTreeOriginal
+        var lista = widget.lisTree
             .map((item) => new ZTreeViewViewModel.clone(item))
             .toList();
         listaId.add(base.idNivel);
@@ -746,6 +689,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
     for (int i = 0; i < listaPossiveisId.length; i++) {
       preencherListaDeBuscaFiltrada(new List(), listaPossiveisId[i]);
     }
+    containerKey = new GlobalKey<_ZTreeViewState>();
     setState(() {});
   }
 
@@ -770,5 +714,44 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
       limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos[i]);
     }
     setState(() {});
+  }
+
+  void preencherContadorListaDeBusca(text) {
+    var lista = widget.lisTree
+        .map((item) => new ZTreeViewViewModel.clone(item))
+        .toList();
+    for (int i = 0; i < lista.length; i++) {
+      buscaProfundidadeContador(lista[i], text);
+      if (treeViewList[i].possiveisBuscas == null) {
+        treeViewList[i].possiveisBuscas = 0;
+      }
+      treeViewList[i].possiveisBuscas = contadorBuscas;
+      contadorBuscas = 0;
+    }
+  }
+
+  void buscaProfundidadeContador(ZTreeViewViewModel base, text) {
+    if (base.filhos.isEmpty) {
+      if (base.jaPassou == false) {
+        if (base.nome.toLowerCase().contains(text)) {
+          contadorBuscas++;
+        }
+        listaBusca.add(new ItemBuscaViewModel(
+            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
+      }
+      base.jaPassou = true;
+    }
+    base.filhos.forEach((filho) {
+      if (base.jaPassou == false) {
+        if (base.nome.toLowerCase().contains(text)) {
+          contadorBuscas++;
+        }
+        listaBusca.add(new ItemBuscaViewModel(
+            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
+      }
+      base.jaPassou = true;
+      buscaProfundidadeContador(filho, text);
+    });
+    listaBuscaFiltrada = listaBusca;
   }
 }
