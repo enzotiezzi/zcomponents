@@ -1,3 +1,7 @@
+## 0.8.9
+
+* treeViewBuscaArrumada!
+
 ## 0.8.8
 
 * treeViewBuscaArrumada!
