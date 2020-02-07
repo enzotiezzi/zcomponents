@@ -6,9 +6,9 @@ import 'package:z_components/view-model/z-tree-view-viewmodel.dart';
 
 class ZTreeView extends StatefulWidget {
   List<ZTreeViewViewModel> lisTree;
-  String Function(String) teste;
+  void Function(String) onTap;
 
-  ZTreeView({this.lisTree, this.teste});
+  ZTreeView({this.lisTree, this.onTap});
 
   @override
   _ZTreeViewState createState() => _ZTreeViewState();
@@ -30,6 +30,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
   int profArvore = 0;
   int auxProfArvore = 0;
   int contadorBuscas = 0;
+  bool comecouBusca = false;
 
   @override
   void initState() {
@@ -86,8 +87,8 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
     } else if (item.filhos.length == 0) {
       return new GestureDetector(
         onTap: () {
-          if (widget.teste != null) {
-            var res = widget.teste(item.idNivel);
+          if (widget.onTap != null) {
+            var res = widget.onTap(item.idNivel);
           }
         },
         child: new Container(
@@ -96,9 +97,9 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
               animatedWidgetPrecedingHeader: (item.filhos.length != 0)
                   ? new Icon(Icons.arrow_drop_down)
                   : new Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.transparent,
-                    ),
+                Icons.arrow_drop_down,
+                color: Colors.transparent,
+              ),
               borderColorStart: Colors.grey.withOpacity(0.3),
               borderColorEnd: Colors.grey.withOpacity(0.3),
               bottomBorderOn: true,
@@ -153,31 +154,36 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                      AnimatedSize(
-                          vsync: this,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.fastOutSlowIn,
-                          reverseDuration: Duration(milliseconds: 500),
-                          child: new GestureDetector(
-                            onTap: () {
-                              if (widget.teste != null) {
-                                var res = widget.teste(item.idNivel);
-                              }
-                            },
-                            child: new Container(
-                              color: Colors.transparent,
-                              padding: const EdgeInsets.only(
-                                  right: 16,
-                                  left: 40.0,
-                                  bottom: 10.0,
-                                  top: 10.0),
-                              child: new Icon(
-                                Icons.keyboard_arrow_right,
-                                color: Color(0xff999999),
-                                size: 16,
-                              ),
-                            ),
-                          ))
+                      new Row(
+                        children: <Widget>[
+                          _contadorResultadosBusca(item),
+                          AnimatedSize(
+                              vsync: this,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.fastOutSlowIn,
+                              reverseDuration: Duration(milliseconds: 500),
+                              child: new GestureDetector(
+                                onTap: () {
+                                  if (widget.onTap != null) {
+                                    var res = widget.onTap(item.idNivel);
+                                  }
+                                },
+                                child: new Container(
+                                  color: Colors.transparent,
+                                  padding: const EdgeInsets.only(
+                                      right: 16,
+                                      left: 40.0,
+                                      bottom: 10.0,
+                                      top: 10.0),
+                                  child: new Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: Color(0xff999999),
+                                    size: 16,
+                                  ),
+                                ),
+                              ))
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -195,9 +201,9 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
             animatedWidgetPrecedingHeader: (item.filhos.length != 0)
                 ? new Icon(Icons.arrow_drop_down)
                 : new Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.transparent,
-                  ),
+              Icons.arrow_drop_down,
+              color: Colors.transparent,
+            ),
             borderColorStart: Colors.grey.withOpacity(0.3),
             borderColorEnd: Colors.grey.withOpacity(0.3),
             bottomBorderOn: true,
@@ -218,8 +224,8 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
               });
 
               if (item.filhos.length == 0) {
-                if (widget.teste != null) {
-                  var res = widget.teste(item.idNivel);
+                if (widget.onTap != null) {
+                  var res = widget.onTap(item.idNivel);
                 }
               }
             },
@@ -258,28 +264,31 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    AnimatedSize(
-                        vsync: this,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.fastOutSlowIn,
-                        reverseDuration: Duration(milliseconds: 500),
-                        child: new GestureDetector(
-                          onTap: () {
-                            if (widget.teste != null) {
-                              var res = widget.teste(item.idNivel);
-                            }
-                          },
-                          child: new Container(
-                            color: Colors.transparent,
-                            padding: const EdgeInsets.only(
-                                right: 16, left: 40.0, bottom: 10.0, top: 10.0),
-                            child: new Icon(
-                              Icons.keyboard_arrow_right,
-                              color: Color(0xff999999),
-                              size: 16,
-                            ),
-                          ),
-                        ))
+                    new Row(
+                        children: <Widget>[
+                          _contadorResultadosBusca(item),
+                          AnimatedSize(
+                              vsync: this,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.fastOutSlowIn,
+                              reverseDuration: Duration(milliseconds: 500),
+                              child: new GestureDetector(
+                                onTap: () {
+                                  if (widget.onTap != null) {
+                                    var res = widget.onTap(item.idNivel);
+                                  }
+                                },
+                                child: new Container(
+                                  color: Colors.transparent,
+                                  padding: const EdgeInsets.only(
+                                      right: 16, left: 40.0, bottom: 10.0, top: 10.0),
+                                  child: new Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: Color(0xff999999),
+                                    size: 16,
+                                  ),
+                                ),
+                              ))])
                   ],
                 ),
               ),
@@ -301,10 +310,10 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
 
   IconData definirIconeExpansionTile(item) {
     if (item.filhos.length != 0) {
-      if (item.aberto == null || item.aberto == false) {
-        return Icons.arrow_drop_up;
-      } else {
+      if (item.aberto == null || item.aberto == true) {
         return Icons.arrow_drop_down;
+      } else {
+        return Icons.arrow_drop_up;
       }
     }
   }
@@ -313,12 +322,12 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
     if (item.filhos.length != 0) {
       return new Container(
           child: new Column(
-        children: lista2Novo(
-          nivel: item,
-          margin: j,
-          posicaoAnterior: index,
-        ),
-      ));
+            children: lista2Novo(
+              nivel: item,
+              margin: j,
+              posicaoAnterior: index,
+            ),
+          ));
     } else {
       return new Container();
     }
@@ -365,8 +374,8 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
     } else if (item.filhos.length == 0) {
       return new GestureDetector(
         onTap: () {
-          if (widget.teste != null) {
-            var res = widget.teste(item.idNivel);
+          if (widget.onTap != null) {
+            var res = widget.onTap(item.idNivel);
           }
         },
         child: new Container(
@@ -424,8 +433,8 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                           reverseDuration: Duration(milliseconds: 500),
                           child: new GestureDetector(
                             onTap: () {
-                              if (widget.teste != null) {
-                                var res = widget.teste(item.idNivel);
+                              if (widget.onTap != null) {
+                                var res = widget.onTap(item.idNivel);
                               }
                             },
                             child: new Container(
@@ -466,10 +475,10 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                 } else {}
               }
               setState(() {
-                if (item.aberto == false) {
-                  item.aberto = true;
-                } else {
+                if (item.aberto==null||item.aberto == true) {
                   item.aberto = false;
+                } else {
+                  item.aberto = true;
                 }
               });
             },
@@ -515,6 +524,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
+
                     AnimatedSize(
                         vsync: this,
                         duration: Duration(milliseconds: 500),
@@ -522,14 +532,17 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                         reverseDuration: Duration(milliseconds: 500),
                         child: new GestureDetector(
                           onTap: () {
-                            if (widget.teste != null) {
-                              var res = widget.teste(item.idNivel);
+                            if (widget.onTap != null) {
+                              var res = widget.onTap(item.idNivel);
                             }
                           },
                           child: new Container(
                             color: Colors.transparent,
                             padding: const EdgeInsets.only(
-                                right: 16, left: 40.0, bottom: 10.0, top: 10.0),
+                                right: 16,
+                                left: 40.0,
+                                bottom: 10.0,
+                                top: 10.0),
                             child: new Icon(
                               Icons.keyboard_arrow_right,
                               color: Color(0xff999999),
@@ -537,6 +550,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                             ),
                           ),
                         ))
+
                   ],
                 ),
               ),
@@ -579,11 +593,18 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                       width: MediaQuery.of(context).size.width / 1.40,
                       child: new TextField(
                         decoration:
-                            InputDecoration.collapsed(hintText: "Busca"),
+                        InputDecoration.collapsed(hintText: "Busca"),
                         style: TextStyle(fontSize: 19.0, color: Colors.black),
                         onChanged: (text) {
                           montarListaPossiveisItens(text);
                           preencherContadorListaDeBusca(text);
+                          if (text.length > 0) {
+                            comecouBusca = true;
+                          } else {
+                            comecouBusca = false;
+                          }
+                          containerKey = new GlobalKey<_ZTreeViewState>();
+                          setState(() {});
                         },
                       ),
                     )
@@ -716,6 +737,26 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
     setState(() {});
   }
 
+  Widget _contadorResultadosBusca(item) {
+    if (comecouBusca == false) {
+      return new Container();
+    } else {
+      return new Container(
+        margin: EdgeInsets.only(right: 24.0),
+        padding: EdgeInsets.only(left: 8.0, right: 8.0),
+        decoration: BoxDecoration(
+            border: Border.all(color: Color(0xffcccccc)),
+            borderRadius: BorderRadius.circular(12.0)),
+        child: new Container(
+          child: new Text(
+            "${item.possiveisBuscas}",
+            style: TextStyle(color: Color(0xff000000)),
+          ),
+        ),
+      );
+    }
+  }
+
   void preencherContadorListaDeBusca(text) {
     var lista = widget.lisTree
         .map((item) => new ZTreeViewViewModel.clone(item))
@@ -732,7 +773,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
 
   void buscaProfundidadeContador(ZTreeViewViewModel base, text) {
     if (base.filhos.isEmpty) {
-      if (base.jaPassou == false) {
+      if (base.jaPassou == null || base.jaPassou == false) {
         if (base.nome.toLowerCase().contains(text)) {
           contadorBuscas++;
         }
@@ -742,7 +783,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
       base.jaPassou = true;
     }
     base.filhos.forEach((filho) {
-      if (base.jaPassou == false) {
+      if (base.jaPassou == null || base.jaPassou == false) {
         if (base.nome.toLowerCase().contains(text)) {
           contadorBuscas++;
         }
