@@ -32,6 +32,20 @@ class Paramenters {
     return fontSize;
   }
 
+  double get iconSizePadrao{
+    double size = 0;
+
+    if(width <= xs)
+    {
+      size = 20;
+    }
+    else if (width > xs && width <= x )
+    {
+      size = 24;
+    }
+    return size;
+  }
+
   double get subTitleFontSize {
     double fontSize = 0;
 

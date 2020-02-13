@@ -125,9 +125,16 @@ class _MainStyle {
   Color get backgroundColor {
     return Color(0xffff0f0f0);
   }
+  double get fontSizePadrao{
+    return MediaQuerySize.get(context).fontSize;
+  }
 
   double get fontSizeEntradaSaida {
     return MediaQuerySize.get(context).fontSize;
+  }
+
+  double get iconSizePadrao {
+    return MediaQuerySize.get(context).iconSizePadrao;
   }
 
   double get sizePin {

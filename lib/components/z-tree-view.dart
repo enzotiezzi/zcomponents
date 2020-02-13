@@ -337,7 +337,6 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
       {ZTreeViewViewModel nivel, double margin, int posicaoAnterior}) {
     int p = 0;
     List<GlobalKey> lista = new List<GlobalKey>();
-    int posAnterior = posicaoAnterior;
     int total;
 
     total = testeRecursao + 1;

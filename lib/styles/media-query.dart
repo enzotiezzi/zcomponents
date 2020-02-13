@@ -31,6 +31,9 @@ class _MediaQuery {
   double get fontSizeButton {
     return Paramenters(width: width, height: height).fontSizeButton;
   }
+  double get  iconSizePadrao{
+    return Paramenters(width: width,height: height).iconSizePadrao;
+  }
 
   double get subTitleFontSize {
     return Paramenters(width: width, height: height).subTitleFontSize;
