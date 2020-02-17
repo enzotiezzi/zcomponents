@@ -7,8 +7,6 @@ import 'dart:convert';
 
 import 'package:z_components/view-model/filtro-viewmodel.dart';
 
-
-
 class ZLocalService extends Service implements IZLocalService {
   String _uRL = "${ApiSettings.ENDPOINT}/zponto";
 
@@ -18,21 +16,20 @@ class ZLocalService extends Service implements IZLocalService {
   ZLocalService(this.token, {this.filtro}) : super(token);
 
   @override
-  Future<List<CentroCustoViewModel>> listarCentrosCusto({FiltroViewModel filtro}) async {
+  Future<List<CentroCustoViewModel>> listarCentrosCusto(
+      {FiltroViewModel filtro}) async {
     try {
-
       var url = "$_uRL/buscar-centros-custo-empresa";
 
-      var response = await http.post(url, body: json.encode(filtro.toMap()), headers:  headers);
+      var response = await http.post(url,
+          body: json.encode(filtro.toMap()), headers: headers);
 
       var l = ((json.decode(response.body) as List)
-          .map((i) => new CentroCustoViewModel.fromJson(i)))
-          .toList();
+          .map((i) => new CentroCustoViewModel.fromJson(i))).toList();
 
       return l;
     } catch (e) {
       return null;
     }
   }
-
 }

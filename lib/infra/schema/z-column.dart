@@ -1,4 +1,4 @@
-class ZColumn{
+class ZColumn {
   int version;
 
   String name;
@@ -7,5 +7,11 @@ class ZColumn{
   bool autoIncrement;
   bool notNull;
 
-  ZColumn({this.version, this.name, this.type, this.primaryKey, this.autoIncrement, this.notNull});
+  ZColumn(
+      {this.version,
+      this.name,
+      this.type,
+      this.primaryKey,
+      this.autoIncrement,
+      this.notNull});
 }

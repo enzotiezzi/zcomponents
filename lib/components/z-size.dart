@@ -54,6 +54,9 @@ class ZSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(child: new Padding(padding: padding, child: child), height: _height, width: _width);
+    return SizedBox(
+        child: new Padding(padding: padding, child: child),
+        height: _height,
+        width: _width);
   }
 }

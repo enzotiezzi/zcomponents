@@ -76,20 +76,21 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: new Color(0xFFF7F7F7),
       leading: (voltar == true)
           ? new GestureDetector(
-        onTap: this.onTap,
-        child: new Container(
-          padding: EdgeInsets.only(right: 20.0),
-          color: Colors.transparent,
-          child: new Icon(
-            Icons.arrow_back_ios,
-            size: 20.0,
-            color: const Color(0xff2BB9B4),
-          ),
-        ),
-      )
-
+              onTap: this.onTap,
+              child: new Container(
+                padding: EdgeInsets.only(right: 20.0),
+                color: Colors.transparent,
+                child: new Icon(
+                  Icons.arrow_back_ios,
+                  size: 20.0,
+                  color: const Color(0xff2BB9B4),
+                ),
+              ),
+            )
           : this.leading,
-      middle: new Container(child: this.middle,),
+      middle: new Container(
+        child: this.middle,
+      ),
       trailing:
           new Container(child: trailing, padding: EdgeInsets.only(right: 16.0)),
       border: this.border,

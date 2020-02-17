@@ -1,1 +1,1 @@
-enum ZTipoTextos {isTitulo , isPadrao}
+enum ZTipoTextos { isTitulo, isPadrao }

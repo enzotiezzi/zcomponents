@@ -75,7 +75,7 @@ class ZPerfil extends StatefulWidget {
       this.telefone,
       this.email,
       this.endereco,
-        this.isExpand});
+      this.isExpand});
 
   @override
   _ZPerfilState createState() => _ZPerfilState();
@@ -114,7 +114,7 @@ class _ZPerfilState extends State<ZPerfil> {
     return new Column(
       children: <Widget>[
         ZHeader(
-          titulosAppBar:true,
+          titulosAppBar: true,
           child: new Container(
             margin: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
             child: new Text(

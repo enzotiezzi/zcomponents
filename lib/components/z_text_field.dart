@@ -56,97 +56,102 @@ class ZTextField extends StatelessWidget {
   final ZPlatform zPlatform;
   final ZMask zMask;
 
-  ZTextField(
-      {this.keyboardType,
-      this.decorationCupertino = const BoxDecoration(
-        border: Border(
-            top: BorderSide(
-              color: CupertinoColors.lightBackgroundGray,
-              style: BorderStyle.solid,
-              width: 0.0,
-            ),
-            bottom: BorderSide(
-              color: CupertinoColors.lightBackgroundGray,
-              style: BorderStyle.solid,
-              width: 0.0,
-            ),
-            left: BorderSide(
-              color: CupertinoColors.lightBackgroundGray,
-              style: BorderStyle.solid,
-              width: 0.0,
-            ),
-            right: BorderSide(
-              color: CupertinoColors.lightBackgroundGray,
-              style: BorderStyle.solid,
-              width: 0.0,
-            )),
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-      ),
-      Key key,
-      this.controller,
-      this.focusNode,
-      this.decoration,
-      this.padding = const EdgeInsets.all(6.0),
-      this.placeholder,
-      this.placeholderStyle = const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xFFC2C2C2)),
-      this.prefix,
-      this.prefixMode = OverlayVisibilityMode.always,
-      this.suffix,
-      this.suffixMode = OverlayVisibilityMode.always,
-      this.clearButtonMode = OverlayVisibilityMode.never,
-      this.textInputAction,
-      this.textCapitalization = TextCapitalization.none,
-      this.style,
-      this.strutStyle,
-      this.textAlign = TextAlign.start,
-      this.autofocus = false,
-      this.obscureText = false,
-      this.autocorrect = true,
-      this.maxLines = 1,
-      this.minLines,
-      this.expands = false,
-      this.maxLength,
-      this.maxLengthEnforced = true,
-      this.onChanged,
-      this.onEditingComplete,
-      this.onSubmitted,
-      this.enabled,
-      this.cursorWidth = 2.0,
-      this.cursorRadius = const Radius.circular(2.0),
-      this.cursorColor,
-      this.keyboardAppearance,
-      this.scrollPadding = const EdgeInsets.all(20.0),
-      this.dragStartBehavior = DragStartBehavior.start,
-      this.scrollPhysics,
-      this.textDirection,
-      this.enableInteractiveSelection,
-      this.onTap,
-      this.buildCounter,
-      this.zPlatform = ZPlatform.isPlatform,
-      this.zMask = ZMask.isPadrao,
-      })
-      : super(key: key) {
-    switch(zMask){
+  ZTextField({
+    this.keyboardType,
+    this.decorationCupertino = const BoxDecoration(
+      border: Border(
+          top: BorderSide(
+            color: CupertinoColors.lightBackgroundGray,
+            style: BorderStyle.solid,
+            width: 0.0,
+          ),
+          bottom: BorderSide(
+            color: CupertinoColors.lightBackgroundGray,
+            style: BorderStyle.solid,
+            width: 0.0,
+          ),
+          left: BorderSide(
+            color: CupertinoColors.lightBackgroundGray,
+            style: BorderStyle.solid,
+            width: 0.0,
+          ),
+          right: BorderSide(
+            color: CupertinoColors.lightBackgroundGray,
+            style: BorderStyle.solid,
+            width: 0.0,
+          )),
+      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+    ),
+    Key key,
+    this.controller,
+    this.focusNode,
+    this.decoration,
+    this.padding = const EdgeInsets.all(6.0),
+    this.placeholder,
+    this.placeholderStyle = const TextStyle(
+        fontWeight: FontWeight.w300, color: const Color(0xFFC2C2C2)),
+    this.prefix,
+    this.prefixMode = OverlayVisibilityMode.always,
+    this.suffix,
+    this.suffixMode = OverlayVisibilityMode.always,
+    this.clearButtonMode = OverlayVisibilityMode.never,
+    this.textInputAction,
+    this.textCapitalization = TextCapitalization.none,
+    this.style,
+    this.strutStyle,
+    this.textAlign = TextAlign.start,
+    this.autofocus = false,
+    this.obscureText = false,
+    this.autocorrect = true,
+    this.maxLines = 1,
+    this.minLines,
+    this.expands = false,
+    this.maxLength,
+    this.maxLengthEnforced = true,
+    this.onChanged,
+    this.onEditingComplete,
+    this.onSubmitted,
+    this.enabled,
+    this.cursorWidth = 2.0,
+    this.cursorRadius = const Radius.circular(2.0),
+    this.cursorColor,
+    this.keyboardAppearance,
+    this.scrollPadding = const EdgeInsets.all(20.0),
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.scrollPhysics,
+    this.textDirection,
+    this.enableInteractiveSelection,
+    this.onTap,
+    this.buildCounter,
+    this.zPlatform = ZPlatform.isPlatform,
+    this.zMask = ZMask.isPadrao,
+  }) : super(key: key) {
+    switch (zMask) {
       case ZMask.isPadrao:
-    break;
+        break;
       case ZMask.isTelefone:
-        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "(XX) XXXXX-XXXX", maskTWO: "(XX) XXXXX-XXXX"));
+        inputFormatters.add(MaskedTextInputFormatterShifter(
+            maskONE: "(XX) XXXXX-XXXX", maskTWO: "(XX) XXXXX-XXXX"));
         inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[,]:")));
         break;
       case ZMask.isCPF:
-        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XXX.XXX.XXX-XX", maskTWO: "XXX.XXX.XXX-XX"));
+        inputFormatters.add(MaskedTextInputFormatterShifter(
+            maskONE: "XXX.XXX.XXX-XX", maskTWO: "XXX.XXX.XXX-XX"));
         inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
         break;
       case ZMask.isData:
-        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"));
+        inputFormatters.add(MaskedTextInputFormatterShifter(
+            maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"));
         inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
         break;
       case ZMask.isCNPJ:
-        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XX.XXX.XXX/XXXX-XX", maskTWO: "XX.XXX.XXX/XXXX-XX"));
+        inputFormatters.add(MaskedTextInputFormatterShifter(
+            maskONE: "XX.XXX.XXX/XXXX-XX", maskTWO: "XX.XXX.XXX/XXXX-XX"));
         inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
         break;
       case ZMask.isCEP:
-        inputFormatters.add(MaskedTextInputFormatterShifter(maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"));
+        inputFormatters.add(MaskedTextInputFormatterShifter(
+            maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"));
         inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
         break;
     }

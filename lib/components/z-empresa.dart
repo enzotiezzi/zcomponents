@@ -14,10 +14,10 @@ class ZEmpresa extends StatefulWidget {
 
   ZEmpresa(
       {this.key,
-        @required this.token,
-        @required this.idUser,
-        this.onChange,
-        this.valorPadrao});
+      @required this.token,
+      @required this.idUser,
+      this.onChange,
+      this.valorPadrao});
 
   @override
   State<StatefulWidget> createState() => ZEmpresaState();
@@ -47,7 +47,7 @@ class ZEmpresaState extends State<ZEmpresa> {
       titulo: "Empresas",
       lista: _empresas
           .map((x) => new ZCollectionItem(
-          chave: x.idEmpresa, titulo: x.nome, valor: x.nome))
+              chave: x.idEmpresa, titulo: x.nome, valor: x.nome))
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
@@ -68,7 +68,7 @@ class ZEmpresaState extends State<ZEmpresa> {
 
       _keyZCollection.currentState.buscarValorPadrao(listaEmpresa
           .map((x) => new ZCollectionItem(
-          chave: x.idEmpresa, titulo: x.nome, valor: x.nome))
+              chave: x.idEmpresa, titulo: x.nome, valor: x.nome))
           .toList());
     }
   }

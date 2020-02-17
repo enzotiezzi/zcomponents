@@ -1,5 +1,4 @@
-class ApiSettings{
-
+class ApiSettings {
   static String ENDPOINT = "https://app.zellar.com.br/apis";
   static String ENDPOINTNOAPI = "https://app.zellar.com.br";
 

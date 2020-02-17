@@ -18,7 +18,6 @@ class ZLoading extends StatelessWidget {
   final ZPlatform zPlatform;
   final Color color;
 
-
   ZLoading({
     this.context,
     this.key,
@@ -38,10 +37,10 @@ class ZLoading extends StatelessWidget {
       height: 60,
       child: new Card(
           elevation: 6,
-          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0)),
           color: this.color,
-          child:
-          new Stack(
+          child: new Stack(
             children: <Widget>[
               new Container(
                 padding: EdgeInsets.all(5.0),
@@ -49,36 +48,37 @@ class ZLoading extends StatelessWidget {
                   borderRadius: new BorderRadius.circular(25.0),
                 ),
                 child: new Material(
-                  color: this.color,
-                  borderRadius: new BorderRadius.circular(25.0),
-                  child: new SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(
-                      key: this.key,
-                      value: this.value,
-                      backgroundColor: this.backgroundColor,
-                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                      strokeWidth: this.strokeWidth,
-                      semanticsLabel: this.semanticsLabel,
-                      semanticsValue: this.semanticsValue,
-                    ),
-                  )
-                ),
+                    color: this.color,
+                    borderRadius: new BorderRadius.circular(25.0),
+                    child: new SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        key: this.key,
+                        value: this.value,
+                        backgroundColor: this.backgroundColor,
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.white),
+                        strokeWidth: this.strokeWidth,
+                        semanticsLabel: this.semanticsLabel,
+                        semanticsValue: this.semanticsValue,
+                      ),
+                    )),
               ),
               new Container(
                 child: new Center(
                   child: new Container(
                     height: 19,
-                    width:19 ,
-                    child: Image(image: AssetImage('assets/z.png'),fit: BoxFit.scaleDown,),
+                    width: 19,
+                    child: Image(
+                      image: AssetImage('assets/z.png'),
+                      fit: BoxFit.scaleDown,
+                    ),
                   ),
                 ),
               )
-
             ],
-          )
-      ),
+          )),
     );
   }
 

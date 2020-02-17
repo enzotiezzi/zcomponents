@@ -4,14 +4,12 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZCheckCPF extends StatefulWidget {
-
   ZCheckCPF({
     Key key,
   }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ZCheckCPFState();
-
 }
 
 class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin {
@@ -79,9 +77,9 @@ class _ZCheckCPFState extends State<ZCheckCPF> with TickerProviderStateMixin {
                               child: new Text(
                                 "NÃO POSSUO CPF",
                                 style: new TextStyle(
-                                  fontSize: MainStyle.get(context).fontSizeTermos
-                                      ,fontWeight: FontWeight.w700
-                                ),
+                                    fontSize:
+                                        MainStyle.get(context).fontSizeTermos,
+                                    fontWeight: FontWeight.w700),
                               ),
                             )
                           ],

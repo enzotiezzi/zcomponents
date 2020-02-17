@@ -1,4 +1,4 @@
-class ZCollectionItem{
+class ZCollectionItem {
   final String chave;
   String valor;
   String titulo;

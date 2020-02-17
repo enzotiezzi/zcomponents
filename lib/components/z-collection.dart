@@ -50,10 +50,8 @@ class ZCollectionState extends State<ZCollection> {
           children: <Widget>[
             new Container(
               width: 130,
-              child: new Text(
-                widget.titulo,
-                style: MainStyle.get(context).mainStyleTextBaseLine
-              ),
+              child: new Text(widget.titulo,
+                  style: MainStyle.get(context).mainStyleTextBaseLine),
             ),
             new Expanded(
                 child: ZTile(
@@ -63,7 +61,8 @@ class ZCollectionState extends State<ZCollection> {
                   (_itemSelecionado?.valor == null && _anterior == "Selecione")
                       ? new Text(
                           _anterior,
-                          style: MainStyle.get(context).mainStyleTextBaseLineHint,
+                          style:
+                              MainStyle.get(context).mainStyleTextBaseLineHint,
                         )
                       : new Text(
                           (_itemSelecionado?.valor.length > 14)

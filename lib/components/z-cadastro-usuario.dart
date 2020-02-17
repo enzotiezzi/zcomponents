@@ -102,48 +102,51 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
     return new Scaffold(
         backgroundColor: Color(0xffefeff4),
         appBar: CupertinoNavigationBar(
-            middle: new Text(
-              "CADASTRO USUÁRIO",
-              style: MainStyle.get(context).titleStyleText,
+          middle: new Text(
+            "CADASTRO USUÁRIO",
+            style: MainStyle.get(context).titleStyleText,
+          ),
+          leading: Align(
+            widthFactor: 0.8,
+            alignment: Alignment.center,
+            child: new GestureDetector(
+              child: (cancelar == false)
+                  ? new Text(
+                      "",
+                      style: new TextStyle(color: Colors.transparent),
+                    )
+                  : Text(
+                      'Cancelar',
+                      style: new TextStyle(
+                          color: Color(0xffE53629),
+                          fontSize:
+                              MainStyle.get(context).fontSizeLeadinCancelar),
+                    ),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
-            leading: Align(
-                widthFactor: 0.8,
-                alignment: Alignment.center,
-                child: new GestureDetector(
-                  child: (cancelar == false)
-                      ? new Text(
-                          "",
-                          style: new TextStyle(color: Colors.transparent),
-                        )
-                      : Text(
-                          'Cancelar',
-                          style: new TextStyle(
-                              color: Color(0xffE53629),
-                              fontSize: MainStyle.get(context)
-                                  .fontSizeLeadinCancelar),
-                        ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                )),
-            trailing: Align(
-                widthFactor: 0.8,
-                alignment: Alignment.center,
-                child: (widget.termos == false)
-                    ? new Text(
-                        "",
-                        style: new TextStyle(color: Colors.transparent),
-                      )
-                    : new GestureDetector(
-                        child: Text(
-                          'Cadastrar',
-                          style: new TextStyle(
-                              color: Color(0xff1F8782),
-                              fontSize: MainStyle.get(context)
-                                  .fontSizeLeadinCancelar),
-                        ),
-                        onTap: widget.onPressed,
-                      ))),
+          ),
+          trailing: Align(
+            widthFactor: 0.8,
+            alignment: Alignment.center,
+            child: (widget.termos == false)
+                ? new Text(
+                    "",
+                    style: new TextStyle(color: Colors.transparent),
+                  )
+                : new GestureDetector(
+                    child: Text(
+                      'Cadastrar',
+                      style: new TextStyle(
+                          color: Color(0xff1F8782),
+                          fontSize:
+                              MainStyle.get(context).fontSizeLeadinCancelar),
+                    ),
+                    onTap: widget.onPressed,
+                  ),
+          ),
+        ),
         body: _body());
   }
 
@@ -237,52 +240,54 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                       new Row(
                         children: <Widget>[
                           new Expanded(
-                              flex: 3,
-                              child: new Container(
-                                padding: const EdgeInsets.only(
-                                    top: 12.0, bottom: 12.0, left: 16.0),
-                                child: new Text(
-                                  "CPF",
-                                  style: MainStyle.get(context)
-                                      .mainStyleTextBaseLine,
-                                ),
-                              )),
+                            flex: 3,
+                            child: new Container(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, bottom: 12.0, left: 16.0),
+                              child: new Text(
+                                "CPF",
+                                style: MainStyle.get(context)
+                                    .mainStyleTextBaseLine,
+                              ),
+                            ),
+                          ),
                           new Expanded(
-                              flex: 7,
-                              child: new Container(
-                                margin: const EdgeInsets.only(
-                                    left: 8.0, right: 16.0),
-                                child: new TextField(
-                                  keyboardAppearance: Brightness.light,
-                                  onSubmitted: (term) {
+                            flex: 7,
+                            child: new Container(
+                              margin:
+                                  const EdgeInsets.only(left: 8.0, right: 16.0),
+                              child: new TextField(
+                                keyboardAppearance: Brightness.light,
+                                onSubmitted: (term) {
+                                  _fieldFocusChange(
+                                      context, cpfFocus, celularFocus);
+                                },
+                                onChanged: (text) {
+                                  countCPF = 0;
+                                  if (text.length == 14) {
                                     _fieldFocusChange(
                                         context, cpfFocus, celularFocus);
-                                  },
-                                  onChanged: (text) {
-                                    countCPF = 0;
-                                    if (text.length == 14) {
-                                      _fieldFocusChange(
-                                          context, cpfFocus, celularFocus);
-                                    }
-                                  },
-                                  controller: widget.controllerCPF,
-                                  focusNode: cpfFocus,
-                                  keyboardType: TextInputType.number,
-                                  cursorColor: Color(0xFF2BBAB4),
-                                  style: MainStyle.get(context)
-                                      .mainStyleTextBaseLineInput,
-                                  decoration: InputDecoration(
-                                      isDense: false,
-                                      hintText: "*** . *** . *** - **",
-                                      hintStyle: MainStyle.get(context)
-                                          .mainStyleTextBaseLineHint),
-                                  inputFormatters: [
-                                    MaskedTextInputFormatterShifter(
-                                        maskONE: "XXX.XXX.XXX-XX",
-                                        maskTWO: "XXX.XXX.XXX-XX")
-                                  ],
-                                ),
-                              ))
+                                  }
+                                },
+                                controller: widget.controllerCPF,
+                                focusNode: cpfFocus,
+                                keyboardType: TextInputType.number,
+                                cursorColor: Color(0xFF2BBAB4),
+                                style: MainStyle.get(context)
+                                    .mainStyleTextBaseLineInput,
+                                decoration: InputDecoration(
+                                    isDense: false,
+                                    hintText: "*** . *** . *** - **",
+                                    hintStyle: MainStyle.get(context)
+                                        .mainStyleTextBaseLineHint),
+                                inputFormatters: [
+                                  MaskedTextInputFormatterShifter(
+                                      maskONE: "XXX.XXX.XXX-XX",
+                                      maskTWO: "XXX.XXX.XXX-XX")
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -372,30 +377,31 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                         .mainStyleTextBaseLine),
                               )),
                           new Expanded(
-                              flex: 7,
-                              child: new Container(
-                                margin: const EdgeInsets.only(
-                                    left: 8.0, right: 16.0),
-                                child: new TextField(
-                                  keyboardAppearance: Brightness.light,
-                                  onSubmitted: (term) {
-                                    _fieldFocusChange(
-                                        context, emailFocus, mesFocus);
-                                  },
-                                  onChanged: (text) {
-                                    countEmail = 0;
-                                  },
-                                  controller: widget.controllerEmail,
-                                  focusNode: emailFocus,
-                                  cursorColor: Color(0xFF2BBAB4),
-                                  style: MainStyle.get(context)
-                                      .mainStyleTextBaseLineInput,
-                                  decoration: InputDecoration(
-                                      hintText: "email@email.com.br",
-                                      hintStyle: MainStyle.get(context)
-                                          .mainStyleTextBaseLineHint),
-                                ),
-                              ))
+                            flex: 7,
+                            child: new Container(
+                              margin:
+                                  const EdgeInsets.only(left: 8.0, right: 16.0),
+                              child: new TextField(
+                                keyboardAppearance: Brightness.light,
+                                onSubmitted: (term) {
+                                  _fieldFocusChange(
+                                      context, emailFocus, mesFocus);
+                                },
+                                onChanged: (text) {
+                                  countEmail = 0;
+                                },
+                                controller: widget.controllerEmail,
+                                focusNode: emailFocus,
+                                cursorColor: Color(0xFF2BBAB4),
+                                style: MainStyle.get(context)
+                                    .mainStyleTextBaseLineInput,
+                                decoration: InputDecoration(
+                                    hintText: "email@email.com.br",
+                                    hintStyle: MainStyle.get(context)
+                                        .mainStyleTextBaseLineHint),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -692,66 +698,67 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
 
   void showAlertDialogNew(String title, String message) async {
     showDialog(
-        context: context,
-        builder: (BuildContext context) => ZAlertDialog(
-              zDialog: ZDialog.erro,
-              child: new Column(
-                children: <Widget>[
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        margin: const EdgeInsets.all(8),
-                        child: new Text(
-                          title,
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                      )
-                    ],
+      context: context,
+      builder: (BuildContext context) => ZAlertDialog(
+        zDialog: ZDialog.erro,
+        child: new Column(
+          children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  margin: const EdgeInsets.all(8),
+                  child: new Text(
+                    title,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        margin: const EdgeInsets.only(
-                            left: 16, right: 16, bottom: 16),
-                        child: new Text(
-                          message,
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                              color: const Color(0xff707070), fontSize: 13),
-                        ),
-                      )
-                    ],
+                ),
+              ],
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  margin:
+                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                  child: new Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                        color: const Color(0xff707070), fontSize: 13),
                   ),
-                  new Divider(
-                    color: const Color(0xffdbdbdb),
-                  ),
-                  new Container(
-                    child: new InkWell(
-                      borderRadius:
-                          new BorderRadius.all(const Radius.circular(20.0)),
-                      splashColor: const Color(0xffe6e6e6),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: new Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(12),
-                          child: Center(
-                            child: new Text(
-                              "ENTENDI",
-                              style: new TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          )),
+                ),
+              ],
+            ),
+            new Divider(
+              color: const Color(0xffdbdbdb),
+            ),
+            new Container(
+              child: new InkWell(
+                borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+                splashColor: const Color(0xffe6e6e6),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: new Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  child: Center(
+                    child: new Text(
+                      "ENTENDI",
+                      style: new TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    margin: const EdgeInsets.only(bottom: 8),
                   ),
-                ],
+                ),
               ),
-            ));
+              margin: const EdgeInsets.only(bottom: 8),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void initNome() {

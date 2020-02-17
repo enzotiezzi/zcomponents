@@ -1,4 +1,4 @@
-class DatabaseUtils{
+class DatabaseUtils {
   static const String TABLE_NAME = "TABLE_NAME";
   static const String VERSION = "VERSION";
   static const String COLUMNS = "COLUMNS";

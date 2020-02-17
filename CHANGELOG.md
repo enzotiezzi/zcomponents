@@ -1,3 +1,27 @@
+## 0.9.0
+
+* nomenclatura metodos e dashboard!
+
+## 0.8.9
+
+* treeViewBuscaArrumada!
+
+## 0.8.8
+
+* treeViewBuscaArrumada!
+
+## 0.8.7
+
+* treeViewBusca!
+
+## 0.8.6
+
+* treeView!
+
+## 0.8.5
+
+* uptade cached image!
+
 ## 0.8.4
 
 * uptade ZPinSenha!

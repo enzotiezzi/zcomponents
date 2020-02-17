@@ -8,19 +8,18 @@ class PosicaoAlocacaoSequenciaViewModel {
   String toF;
   String apelido;
 
-  PosicaoAlocacaoSequenciaViewModel({
-    this.idPosicaoAlocacaoSequencia: "",
-    this.idPosicaoAlocacao: "",
-    this.sequencia: 0,
-    this.horaInicio: "",
-    this.horaFim: "",
-    this.horaIntervalo: "",
-    this.apelido: "",
-    this.toF: ""
-  });
+  PosicaoAlocacaoSequenciaViewModel(
+      {this.idPosicaoAlocacaoSequencia: "",
+      this.idPosicaoAlocacao: "",
+      this.sequencia: 0,
+      this.horaInicio: "",
+      this.horaFim: "",
+      this.horaIntervalo: "",
+      this.apelido: "",
+      this.toF: ""});
 
-  Map toMap(){
-    return{
+  Map toMap() {
+    return {
       "sequencia": sequencia,
       "horaInicio": horaInicio,
       "horaFim": horaFim,
@@ -30,16 +29,16 @@ class PosicaoAlocacaoSequenciaViewModel {
     };
   }
 
-  factory PosicaoAlocacaoSequenciaViewModel.fromJson(Map<String, dynamic> json){
+  factory PosicaoAlocacaoSequenciaViewModel.fromJson(
+      Map<String, dynamic> json) {
     return new PosicaoAlocacaoSequenciaViewModel(
-      idPosicaoAlocacao: json["idPosicaoAlocacao"],
-      horaIntervalo: json["horaIntervalo"],
-      horaFim: json["horaFim"],
-      horaInicio: json["horaInicio"],
-      apelido: json["apelido"],
-      idPosicaoAlocacaoSequencia: json["idPosicaoAlocacaoSequencia"],
-      sequencia: json["sequencia"],
-      toF: json["toF"]
-    );
+        idPosicaoAlocacao: json["idPosicaoAlocacao"],
+        horaIntervalo: json["horaIntervalo"],
+        horaFim: json["horaFim"],
+        horaInicio: json["horaInicio"],
+        apelido: json["apelido"],
+        idPosicaoAlocacaoSequencia: json["idPosicaoAlocacaoSequencia"],
+        sequencia: json["sequencia"],
+        toF: json["toF"]);
   }
 }

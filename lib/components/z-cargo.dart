@@ -11,7 +11,6 @@ class ZCargo extends StatefulWidget {
   final ValueChanged<ZCollectionItem> onChange;
   final String valorPadrao;
 
-
   ZCargo({this.key, @required this.token, this.onChange, this.valorPadrao});
 
   @override
@@ -62,7 +61,7 @@ class ZCargoState extends State<ZCargo> {
       });
       _keyZCollection.currentState.buscarValorPadrao(_cargos
           .map((x) => new ZCollectionItem(
-          chave: x.idCargo, titulo: x.nome, valor: x.nome))
+              chave: x.idCargo, titulo: x.nome, valor: x.nome))
           .toList());
     }
   }
