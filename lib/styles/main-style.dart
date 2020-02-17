@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/styles/media-query.dart';
 
@@ -12,6 +13,30 @@ class _MainStyle {
   BuildContext context;
 
   _MainStyle({this.context});
+
+  Scaffold getDefaultScaffold(String title, Widget body) => new Scaffold(
+      backgroundColor: _defaultScaffoldColor,
+      appBar: _getDefaultCupertinoNavigationBar("$title"),
+      body: body);
+
+  Color get _defaultScaffoldColor => const Color(0xffEFEFF4);
+
+  CupertinoNavigationBar _getDefaultCupertinoNavigationBar(String text) =>
+      CupertinoNavigationBar(
+        leading: new GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: new Container(
+            padding: EdgeInsets.only(right: 20.0),
+            color: Colors.transparent,
+            child: new Icon(
+              Icons.arrow_back_ios,
+              size: 20.0,
+              color: const Color(0xff2BB9B4),
+            ),
+          ),
+        ),
+        middle: new Text("$text"),
+      );
 
   TextStyle get mainStyleTextBaseLine {
     return new TextStyle(
@@ -125,7 +150,8 @@ class _MainStyle {
   Color get backgroundColor {
     return Color(0xffff0f0f0);
   }
-  double get fontSizePadrao{
+
+  double get fontSizePadrao {
     return MediaQuerySize.get(context).fontSize;
   }
 
