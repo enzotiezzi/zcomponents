@@ -28,7 +28,6 @@ import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/components/z-progress-dialog.dart';
 /*
 import 'package:z_components_example/entities/pessoa.dart';
 import 'package:z_components_example/repositories/i-monstro-repository.dart';
