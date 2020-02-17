@@ -28,8 +28,7 @@ import 'package:z_components/components/z-expansion-tile.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/components/z-progress-dialog.dart';
-
+import 'package:z_components/components/z-conta/z-conta.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,34 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(child: ComponentExemploClasse()),
-        bottomNavigationBar: ZtabBar(
-          backgroundColor: Colors.teal,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              title: Text('Business'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              title: Text('School'),
-            ),
-          ],
-          onTap: (index) => index = index,
-          currentIndex: 0,
-          iconSize: 16,
-          inactiveColor: Colors.black,
-          activeColor: Colors.black,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.black45,
-          // currentIndex: _selectedIndex,
-        ),
-      ),
+      home: new ZConta(token: "",)
     );
   }
 }

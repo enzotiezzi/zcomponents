@@ -33,7 +33,7 @@ dependencies:
   pull_to_refresh: ^1.5.7
   flutter_spinkit: ^2.1.0
   percent_indicator: ^2.1.1+1
-
+  after_init: ^0.1.2
 
 
 dev_dependencies:
