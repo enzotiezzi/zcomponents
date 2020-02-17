@@ -84,7 +84,6 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: true,
       backgroundColor: Color(0xffEFEFF4),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: _buildbody(),
     );
   }
@@ -159,7 +158,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
           enablePullDown: true,
           controller: widget.refreshController,
           onRefresh: () async {
-            await atualizar();
+            await pullToRefresh();
           },
           header: ClassicHeader(
             idleText: "Puxe para atualizar",
@@ -497,7 +496,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
         enablePullDown: true,
         controller: widget.refreshController,
         onRefresh: () async {
-          await atualizar();
+          await pullToRefresh();
         },
         header: ClassicHeader(
           idleText: "Puxe para atualizar",
@@ -909,7 +908,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
               enablePullDown: true,
               controller: widget.refreshController,
               onRefresh: () async {
-                await atualizar();
+                await pullToRefresh();
               },
               header: ClassicHeader(
                 idleText: "Puxe para atualizar",
@@ -1242,7 +1241,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
         enablePullDown: true,
         controller: widget.refreshController,
         onRefresh: () async {
-          await atualizar();
+          await pullToRefresh();
         },
         header: ClassicHeader(
           idleText: "Puxe para atualizar",
@@ -1388,7 +1387,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                 enablePullDown: true,
                 controller: widget.refreshController,
                 onRefresh: () async {
-                  await atualizar();
+                  await pullToRefresh();
                 },
                 header: ClassicHeader(
                   idleText: "Puxe para atualizar",
@@ -1720,7 +1719,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
         enablePullDown: true,
         controller: widget.refreshController,
         onRefresh: () async {
-          await atualizar();
+          await pullToRefresh();
         },
         header: ClassicHeader(
           idleText: "Puxe para atualizar",
@@ -1948,7 +1947,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
     });
   }
 
-  Future<void> atualizar() async {
+  Future pullToRefresh() async {
     limparAnimacoesEListas();
     await widget.refresh;
   }
