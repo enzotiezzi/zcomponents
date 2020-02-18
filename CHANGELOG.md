@@ -1,6 +1,7 @@
 ## 0.9.0
 
-* nomenclatura metodos e dashboard!
+* Nomenclatura metodos e dashboard.
+* Novos componente: ZProgressDialog e ZConta!
 
 ## 0.8.9
 

@@ -29,6 +29,7 @@ import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
+import 'package:z_components/components/z-progress-dialog.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new ZConta(token: "",)
+      home: new ComponentExemploClasse()
     );
   }
 }
@@ -59,6 +60,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
   var controllerNumero = new TextEditingController();
+
+  final key = GlobalKey<ZProgressDialogState>();
 
   FocusNode nomeFocus;
   FocusNode emailFocus;
@@ -88,6 +91,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   String vp;
   var _keyStatus = new GlobalKey<ZCollectionState>();
+
+  double valuess = 0.1;
 
 
 
@@ -148,6 +153,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   void initState() {
     super.initState();
 
+
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
     cpfFocus = new FocusNode();
@@ -191,7 +197,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         backgroundColor: Color(0xffEFEFF4),
         floatingActionButton: ZFloatButton(
           onPressed: () {
-
+            refrehs();
+            showProgress();
           },
         ),
         appBar: ZNavigationBar(
@@ -1132,6 +1139,35 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ));
   }
+  void refrehs(){
+    Future.delayed(Duration(seconds: 3),(){
+      key.currentState.refresh(0.35,"Carregando Fotos");
+    });
+    Future.delayed(Duration(seconds: 6),(){
+      key.currentState.refresh(0.6,"So mais um momento");
+    });
+    Future.delayed(Duration(seconds: 9),(){
+      key.currentState.refresh(0.85,"Estamos quase lá");
+    });
+    Future.delayed(Duration(seconds: 12),(){
+      key.currentState.refresh(1.0,"Carregamento Completo!!",sucess: true);
+    });
+    Future.delayed(Duration(seconds: 15),(){
+      Navigator.pop(context);
+    });
+  }
+
+  Future showProgress() async {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ZProgressDialog(
+          message: "Executando!",
+          barrierDismissible: false,
+          progressBarValue: valuess,
+          key: key,
+        ));
+  }
 }
 
 class AppSwitch with ChangeNotifier {
@@ -1144,6 +1180,8 @@ class AppSwitch with ChangeNotifier {
     _value = text;
     notifyListeners();
   }
+
+
 
   bool get value => _value;
 
