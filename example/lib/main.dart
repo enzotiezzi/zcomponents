@@ -1152,6 +1152,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     Future.delayed(Duration(seconds: 12),(){
       key.currentState.refresh(1.0,"Carregamento Completo!!",sucess: true);
     });
+    Future.delayed(Duration(seconds: 15),(){
+      Navigator.pop(context);
+    });
   }
 
   Future showProgress() async {
