@@ -36,8 +36,9 @@ abstract class IView<T extends StatefulWidget> {
   Future<T> navigateNamedReplacement(String route) {
     return Navigator.pushReplacementNamed(state.context, route);
   }
-  void navigatorPushNamedAndRemoveUntil(String route, )  {
-    Navigator.pushNamedAndRemoveUntil(state.context,route,
+
+  Future<T> navigatorPushNamedAndRemoveUntil(String route, )  {
+    return Navigator.pushNamedAndRemoveUntil(state.context,route,
             (Route<dynamic> route) => false);
   }
 

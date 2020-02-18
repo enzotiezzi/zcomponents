@@ -40,16 +40,19 @@ class _ZContaState extends State<ZConta> with AfterInitMixin<ZConta> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new GestureDetector(
-              onTap: (){
-                _view.showDialogVinculo();
-
-              },
-              child: new Container(
-                margin: const EdgeInsets.only(top: 16),
-                child:
-              new Text("Adicionar Conta",style: new TextStyle(fontWeight: FontWeight.normal,fontSize: 16,color: Color(0xff2bbab4)),),)
-            )
-
+                onTap: () {
+                  _view.showDialogVinculo();
+                },
+                child: new Container(
+                  margin: const EdgeInsets.only(top: 16),
+                  child: new Text(
+                    "Adicionar Conta",
+                    style: new TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                        color: Color(0xff2bbab4)),
+                  ),
+                ))
           ],
         ),
         new ListView.builder(
@@ -60,8 +63,8 @@ class _ZContaState extends State<ZConta> with AfterInitMixin<ZConta> {
 
               return new ListTile(
                 leading: new CircleAvatar(
-                  backgroundColor: MainStyle.APP_THEME,
-                  child: new Icon(Icons.business_center),
+                  backgroundColor: Colors.teal,
+                  child: new Text("${item.conta[0]}"),
                 ),
                 title: new Text("${item.conta}"),
                 subtitle: new Text(item.ativa ? "Conta ativa" : "Ativar conta"),
@@ -72,5 +75,4 @@ class _ZContaState extends State<ZConta> with AfterInitMixin<ZConta> {
       ],
     );
   }
-
 }
