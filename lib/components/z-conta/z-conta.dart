@@ -1,8 +1,11 @@
 import 'package:after_init/after_init.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta-view.dart';
 import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/components/z_button.dart';
+import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/conta-view-model.dart';
 
@@ -31,22 +34,43 @@ class _ZContaState extends State<ZConta> with AfterInitMixin<ZConta> {
   }
 
   Widget _buildBody() {
-    return new ListView.builder(
-        shrinkWrap: true,
-        itemCount: _view.contas.length,
-        itemBuilder: (context, index) {
-          var item = _view.contas[index];
+    return new Column(
+      children: <Widget>[
+        new Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new GestureDetector(
+              onTap: (){
+                _view.showDialogVinculo();
 
-          return new ListTile(
-            leading: new CircleAvatar(
-              backgroundColor: MainStyle.APP_THEME,
-              child: new Icon(Icons.business_center),
-            ),
-            title: new Text("${item.conta}"),
-            subtitle: new Text(item.ativa ? "Conta ativa" : "Ativar conta"),
-            trailing: new Icon(Icons.arrow_forward_ios),
-            onTap: () => _view.selecionarConta(item),
-          );
-        });
+              },
+              child: new Container(
+                margin: const EdgeInsets.only(top: 16),
+                child:
+              new Text("Adicionar Conta",style: new TextStyle(fontWeight: FontWeight.normal,fontSize: 16,color: Color(0xff2bbab4)),),)
+            )
+
+          ],
+        ),
+        new ListView.builder(
+            shrinkWrap: true,
+            itemCount: _view.contas.length,
+            itemBuilder: (context, index) {
+              var item = _view.contas[index];
+
+              return new ListTile(
+                leading: new CircleAvatar(
+                  backgroundColor: MainStyle.APP_THEME,
+                  child: new Icon(Icons.business_center),
+                ),
+                title: new Text("${item.conta}"),
+                subtitle: new Text(item.ativa ? "Conta ativa" : "Ativar conta"),
+                trailing: new Icon(Icons.arrow_forward_ios),
+                onTap: () => _view.selecionarConta(item),
+              );
+            })
+      ],
+    );
   }
+
 }

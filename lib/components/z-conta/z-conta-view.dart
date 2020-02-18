@@ -157,4 +157,102 @@ class ZContaView extends IView<ZConta> {
         ],),),
     ));
   }
+
+  void showDialogVinculo() async {
+    showDialog(
+        context: state.context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ZAlertDialog(
+          zDialog: ZDialog.normal,
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    margin: const EdgeInsets.only(top: 16,bottom: 16),
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: new Text(
+                      "Digite o Código de sua nova conta.",
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    padding: const EdgeInsets.only(
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: new Column(
+                      children: <Widget>[
+                        new TextField(
+                          textAlign: TextAlign.center,
+                          onChanged: (text){
+                          },
+                          textCapitalization: TextCapitalization.characters,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: 'Código',
+                            counterText: "",
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              new Divider(
+                color: const Color(0xffdbdbdb),
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  new Container(
+                    child: new InkWell(
+                      borderRadius:
+                      new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "Cancelar",
+                          style: new TextStyle(fontWeight: FontWeight.normal),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  ),new Container(
+                    child: new InkWell(
+                      borderRadius:
+                      new BorderRadius.all(const Radius.circular(20.0)),
+                      splashColor: const Color(0xffe6e6e6),
+                      onTap: () {
+                      },
+                      child: new Container(
+                        padding: const EdgeInsets.all(12),
+                        child: new Text(
+                          "Vincular",
+                          style: new TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  )
+
+                ],
+              )
+            ],
+          ),
+        ));
+  }
+
 }
