@@ -39,8 +39,8 @@ class _ZContaState extends State<ZConta> with AfterInitMixin<ZConta> {
 
           return new ListTile(
             leading: new CircleAvatar(
-              backgroundColor: MainStyle.APP_THEME,
-              child: new Icon(Icons.business_center),
+              backgroundColor: Colors.teal,
+              child: new Text("${item.conta[0]}"),
             ),
             title: new Text("${item.conta}"),
             subtitle: new Text(item.ativa ? "Conta ativa" : "Ativar conta"),
