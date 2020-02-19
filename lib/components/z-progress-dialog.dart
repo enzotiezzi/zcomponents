@@ -52,7 +52,6 @@ class ZProgressDialogState extends State<ZProgressDialog>
                 child: GestureDetector(
                   onTap: () {},
                   child: new Container(
-                      height: 106,
                       width: MediaQuery.of(context).size.width * 0.80,
                       padding: const EdgeInsets.all(0),
                       decoration: new BoxDecoration(
@@ -101,10 +100,12 @@ class ZProgressDialogState extends State<ZProgressDialog>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new Container(
+                                      width: MediaQuery.of(context).size.width * 0.70,
                                         margin: const EdgeInsets.only(
                                             top: 16, bottom: 16),
                                         child: new Text(
                                           widget.message,
+                                          textAlign: TextAlign.center,
                                           style: new TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ))

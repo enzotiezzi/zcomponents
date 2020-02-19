@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new ZConta()
+      home: new ComponentExemploClasse()
     );
   }
 }
@@ -1147,10 +1147,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
       key.currentState.refresh(0.6,"So mais um momento");
     });
     Future.delayed(Duration(seconds: 9),(){
-      key.currentState.refresh(0.85,"Estamos quase lá");
+      key.currentState.refresh(0.85,"Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn");
     });
     Future.delayed(Duration(seconds: 12),(){
-      key.currentState.refresh(1.0,"Carregamento Completo!!",sucess: true);
+      key.currentState.refresh(1.0,"Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn",sucess: true);
     });
     Future.delayed(Duration(seconds: 15),(){
       Navigator.pop(context);

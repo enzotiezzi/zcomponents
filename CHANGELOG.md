@@ -1,3 +1,7 @@
+## 0.9.1
+
+* Ajuste ZprogressDialog
+
 ## 0.9.0
 
 * Nomenclatura metodos e dashboard.
