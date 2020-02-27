@@ -30,6 +30,7 @@ import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
+import 'package:z_components/components/z-log/z-log.dart';
 
 void main() => runApp(MyApp());
 
@@ -153,6 +154,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   void initState() {
     super.initState();
 
+    var zLog = new ZLog();
+
+    zLog.initLog();
 
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
@@ -165,6 +169,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     cNPJFocus = new FocusNode();
 
     super.initState();
+
+
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
