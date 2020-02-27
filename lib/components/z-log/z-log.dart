@@ -31,7 +31,7 @@ class ZLog {
   }
 
   Future<bool> log(ZLogViewModel zLogViewModel) async {
-    var res = await _logService.log(zLogViewModel);
+    var res = false; // await _logService.log(zLogViewModel);
 
     await _logRepository.insert(new ZLogEntity(
         user: zLogViewModel.user,
