@@ -31,6 +31,9 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-log/z-log.dart';
+import 'package:z_components/components/z-identity-server/z-identity-server.dart';
+import 'package:after_init/after_init.dart';
+import 'package:after_layout/after_layout.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,9 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: new ComponentExemploClasse()
-    );
+        debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
   }
 }
 
@@ -49,7 +50,8 @@ class ComponentExemploClasse extends StatefulWidget {
   _ComponentExemploClasseState createState() => _ComponentExemploClasseState();
 }
 
-class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
+class _ComponentExemploClasseState extends State<ComponentExemploClasse>
+    with AfterLayoutMixin<ComponentExemploClasse> {
   var controllerEmail = new TextEditingController();
   var controllerNome = new TextEditingController();
   var controllerCPF = new TextEditingController();
@@ -94,8 +96,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var _keyStatus = new GlobalKey<ZCollectionState>();
 
   double valuess = 0.1;
-
-
 
   List<String> titulos = [
     "Lista de Documentos",
@@ -154,6 +154,19 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   void initState() {
     super.initState();
 
+    new IdentityServer(
+        clientId: "ZPonto",
+        redirectURI: "net.openid.appzponto:/oauth2redirect",
+        scopes: [
+          'openid',
+          'profile',
+          'email',
+          'offline_access',
+          'moltres.acesso.api.full'
+        ]).authorize().then((tokenViewModel){
+          print(tokenViewModel.accessToken);
+    });
+
     var zLog = new ZLog();
 
     zLog.initLog();
@@ -169,8 +182,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     cNPJFocus = new FocusNode();
 
     super.initState();
-
-
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
@@ -1145,20 +1156,24 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
               ),
             ));
   }
-  void refrehs(){
-    Future.delayed(Duration(seconds: 3),(){
-      key.currentState.refresh(0.35,"Carregando Fotos");
+
+  void refrehs() {
+    Future.delayed(Duration(seconds: 3), () {
+      key.currentState.refresh(0.35, "Carregando Fotos");
     });
-    Future.delayed(Duration(seconds: 6),(){
-      key.currentState.refresh(0.6,"So mais um momento");
+    Future.delayed(Duration(seconds: 6), () {
+      key.currentState.refresh(0.6, "So mais um momento");
     });
-    Future.delayed(Duration(seconds: 9),(){
-      key.currentState.refresh(0.85,"Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn");
+    Future.delayed(Duration(seconds: 9), () {
+      key.currentState.refresh(0.85,
+          "Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn");
     });
-    Future.delayed(Duration(seconds: 12),(){
-      key.currentState.refresh(1.0,"Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn",sucess: true);
+    Future.delayed(Duration(seconds: 12), () {
+      key.currentState.refresh(1.0,
+          "Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn",
+          sucess: true);
     });
-    Future.delayed(Duration(seconds: 15),(){
+    Future.delayed(Duration(seconds: 15), () {
       Navigator.pop(context);
     });
   }
@@ -1168,12 +1183,15 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         context: context,
         barrierDismissible: true,
         builder: (BuildContext context) => ZProgressDialog(
-          message: "Executando!",
-          barrierDismissible: false,
-          progressBarValue: valuess,
-          key: key,
-        ));
+              message: "Executando!",
+              barrierDismissible: false,
+              progressBarValue: valuess,
+              key: key,
+            ));
   }
+
+  @override
+  void afterFirstLayout(BuildContext context) {}
 }
 
 class AppSwitch with ChangeNotifier {
@@ -1186,8 +1204,6 @@ class AppSwitch with ChangeNotifier {
     _value = text;
     notifyListeners();
   }
-
-
 
   bool get value => _value;
 
