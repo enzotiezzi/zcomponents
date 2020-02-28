@@ -4,4 +4,7 @@ abstract class ICommand<T> {
   Future<int> update(T entity);
 
   Future<int> delete(T entity);
+
+  Future<int> deleteAll(T entity);
+
 }

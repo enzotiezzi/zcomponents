@@ -1,3 +1,11 @@
+## 0.9.3
+
+* Ajuste CorrecaoZEspelhoPonto
+
+## 0.9.2
+
+* Ajuste ZEspelhoDePonto
+
 ## 0.9.1
 
 * Ajuste ZprogressDialog

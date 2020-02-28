@@ -62,6 +62,13 @@ class ZDatabase implements IContext {
   }
 
   @override
+  Future<int> deleteAll(ZEntity entity) async {
+    entity.setTableName();
+
+    return await _db.delete(entity.tableName);
+  }
+
+  @override
   Future<int> insert(ZEntity entity) async {
     entity.setTableName();
 
