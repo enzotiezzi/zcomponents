@@ -30,6 +30,7 @@ import 'package:z_components/components/z-header.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
+import 'package:z_components/components/z-log/z-log.dart';
 
 void main() => runApp(MyApp());
 
@@ -153,6 +154,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   void initState() {
     super.initState();
 
+    var zLog = new ZLog();
+
+    zLog.initLog();
 
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
@@ -165,6 +169,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     cNPJFocus = new FocusNode();
 
     super.initState();
+
+
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
@@ -1147,10 +1153,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
       key.currentState.refresh(0.6,"So mais um momento");
     });
     Future.delayed(Duration(seconds: 9),(){
-      key.currentState.refresh(0.85,"Estamos quase lá");
+      key.currentState.refresh(0.85,"Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn");
     });
     Future.delayed(Duration(seconds: 12),(){
-      key.currentState.refresh(1.0,"Carregamento Completo!!",sucess: true);
+      key.currentState.refresh(1.0,"Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn",sucess: true);
     });
     Future.delayed(Duration(seconds: 15),(){
       Navigator.pop(context);
