@@ -13,6 +13,11 @@ class AbstractRepository<T extends ZEntity> implements ICommand<T> {
   }
 
   @override
+  Future<int> deleteAll(T entity) {
+    return db.deleteAll(entity);
+  }
+
+  @override
   Future<int> insert(T entity) {
     return db.insert(entity);
   }
