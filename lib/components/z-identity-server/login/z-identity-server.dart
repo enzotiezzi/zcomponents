@@ -90,6 +90,7 @@ class IdentityServer {
 
     final url =
         Uri.https('identity-server-dev.zellar.com.br', '/connect/authorize', {
+      'inApp': 'true',
       'response_type': 'code',
       'client_id': clientId,
       'redirect_uri': redirectURI,

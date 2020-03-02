@@ -31,9 +31,11 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-log/z-log.dart';
-import 'package:z_components/components/z-identity-server/z-identity-server.dart';
+import 'package:z_components/components/z-identity-server/register/z-register-user.dart';
+import 'package:z_components/components/z-identity-server/login/z-identity-server.dart';
 import 'package:after_init/after_init.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:z_components/api/token-parser.dart';
 
 void main() => runApp(MyApp());
 
@@ -154,24 +156,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   void initState() {
     super.initState();
 
-    var identityServer = new IdentityServer(
-        clientId: "ZPonto",
-        redirectURI: "net.openid.appzponto:/oauth2redirect",
-        scopes: [
-          'openid',
-          'profile',
-          'email',
-          'offline_access',
-          'moltres.acesso.api.full'
-        ]);
+    new ZRegisterUser().signUp((){});
 
-    identityServer.authorize().then((tokenViewModel) {
-      print(tokenViewModel.accessToken);
-
-      identityServer.refreshToken(tokenViewModel.refreshToken).then((value) {
-        print(value.refreshToken);
-      });
-    });
     var zLog = new ZLog();
 
     zLog.initLog();
