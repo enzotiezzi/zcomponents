@@ -44,7 +44,7 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
 
     scrollController = new ScrollController();
 
-    _scrollarParaDiaDeHoje();
+  //  _scrollarParaDiaDeHoje();
   }
 
   String formatarData(String data) {
