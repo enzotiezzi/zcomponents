@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 class ZColumn {
   int version;
 
@@ -8,9 +10,9 @@ class ZColumn {
   bool notNull;
 
   ZColumn(
-      {this.version,
-      this.name,
-      this.type,
+      {@required this.version,
+      @required this.name,
+      @required this.type,
       this.primaryKey,
       this.autoIncrement,
       this.notNull});

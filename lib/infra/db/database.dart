@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/infra/entities/z-entity.dart';
 import 'package:z_components/infra/interfaces/i-context.dart';
 import 'package:injector/injector.dart';
@@ -27,9 +28,7 @@ class ZDatabase implements IContext {
       entities.forEach((e) async => await e.createTable(db));
     }, onUpgrade: _onUpgrade);
 
-    Injector.appInstance.clearAll();
-
-    Injector.appInstance.registerDependency<IContext>((_) => this);
+    ZInjector.registerDependency<IContext>(this);
   }
 
   FutureOr<void> _onUpgrade(Database db, int oldVersion, int newVersion) {
@@ -60,6 +59,13 @@ class ZDatabase implements IContext {
 
     return await _db
         .delete(entity.tableName, where: "id=?", whereArgs: [entity.id]);
+  }
+
+  @override
+  Future<int> deleteAll(ZEntity entity) async {
+    entity.setTableName();
+
+    return await _db.delete(entity.tableName);
   }
 
   @override

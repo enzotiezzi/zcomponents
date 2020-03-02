@@ -1,15 +1,21 @@
 import 'package:injector/injector.dart';
+import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/infra/entities/z-entity.dart';
 import 'package:z_components/infra/interfaces/i-command.dart';
 
 import 'interfaces/i-context.dart';
 
 class AbstractRepository<T extends ZEntity> implements ICommand<T> {
-  IContext db = Injector.appInstance.getDependency<IContext>();
+  IContext db = ZInjector.getDependency<IContext>();
 
   @override
   Future<int> delete(T entity) {
     return db.delete(entity);
+  }
+
+  @override
+  Future<int> deleteAll(T entity) {
+    return db.deleteAll(entity);
   }
 
   @override
