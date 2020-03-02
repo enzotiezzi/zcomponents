@@ -13,12 +13,19 @@ class IdentityServer {
   String clientId;
   String redirectURI;
   List<String> scopes;
+  String authorizeURL;
+  String tokenURL;
 
   final _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   String _codeVerifier;
 
-  IdentityServer({this.clientId, this.redirectURI, this.scopes});
+  IdentityServer(
+      {@required this.clientId,
+      @required this.redirectURI,
+      @required this.scopes,
+      @required this.authorizeURL,
+      @required this.tokenURL});
 
   Future<ZTokenViewModel> authorize() async {
     try {
