@@ -154,7 +154,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   void initState() {
     super.initState();
 
-    var identityServer = new IdentityServer(
+    var identityServer = new ZIdentityServer(
         clientId: "ZPonto",
         redirectURI: "net.openid.appzponto:/oauth2redirect",
         scopes: [

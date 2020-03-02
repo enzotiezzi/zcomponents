@@ -1,3 +1,7 @@
+## 0.9.4
+
+* Ajuste mudançaParaZIdentityServe
+
 ## 0.9.3
 
 * Ajuste CorrecaoZEspelhoPonto

@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:randombytes/randombytes.dart';
 import 'package:z_components/components/z-identity-server/z-token-viewmodel.dart';
 
-class IdentityServer {
+class ZIdentityServer {
   String clientId;
   String redirectURI;
   List<String> scopes;
@@ -18,7 +18,7 @@ class IdentityServer {
 
   String _codeVerifier;
 
-  IdentityServer({this.clientId, this.redirectURI, this.scopes});
+  ZIdentityServer({this.clientId, this.redirectURI, this.scopes});
 
   Future<ZTokenViewModel> authorize() async {
     try {
