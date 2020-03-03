@@ -1,3 +1,7 @@
+## 0.9.5
+
+* Ajuste ZInjector
+
 ## 0.9.4
 
 * Ajuste mudançaParaZIdentityServe
