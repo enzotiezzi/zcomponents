@@ -1,3 +1,7 @@
+## 0.9.7
+
+* Ajuste Zindentity logout
+
 ## 0.9.6
 
 * Ajuste Zindentity logout
