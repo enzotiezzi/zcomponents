@@ -89,7 +89,7 @@ class ZIdentityServer {
 
     await _flutterWebviewPlugin.onUrlChanged.first;
 
-    _flutterWebviewPlugin.close();
+    await _flutterWebviewPlugin.close();
     _flutterWebviewPlugin.dispose();
   }
 
