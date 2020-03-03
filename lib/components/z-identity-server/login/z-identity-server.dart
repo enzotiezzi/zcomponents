@@ -29,10 +29,10 @@ class ZIdentityServer {
 
   Future<ZTokenViewModel> authorize() async {
     try {
-      _flutterWebviewPlugin.launch(_generateURI());
-
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
-          (url) => url.contains("code=") && url.contains(redirectURI));
+              (url) => url.contains("code=") && url.contains(redirectURI));
+
+      _flutterWebviewPlugin.launch(_generateURI());
 
       _flutterWebviewPlugin.close();
       _flutterWebviewPlugin.dispose();
