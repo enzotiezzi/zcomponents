@@ -13,12 +13,19 @@ class ZIdentityServer {
   String clientId;
   String redirectURI;
   List<String> scopes;
+  String authorizeURL;
+  String tokenURL;
 
   final _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   String _codeVerifier;
 
-  ZIdentityServer({this.clientId, this.redirectURI, this.scopes});
+  ZIdentityServer(
+      {@required this.clientId,
+      @required this.redirectURI,
+      @required this.scopes,
+      @required this.authorizeURL,
+      @required this.tokenURL});
 
   Future<ZTokenViewModel> authorize() async {
     try {
@@ -83,6 +90,7 @@ class ZIdentityServer {
 
     final url =
         Uri.https('identity-server-dev.zellar.com.br', '/connect/authorize', {
+      'inApp': 'true',
       'response_type': 'code',
       'client_id': clientId,
       'redirect_uri': redirectURI,
