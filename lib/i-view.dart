@@ -8,6 +8,7 @@ abstract class IView<T extends StatefulWidget> {
   IView(this.state);
 
   Future<void> initView();
+  Future<void> afterBuild();
 
   Future<void> reloadView() async {
     await initView();

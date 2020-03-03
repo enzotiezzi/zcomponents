@@ -83,6 +83,16 @@ class ZIdentityServer {
     }
   }
 
+  Future<void> logOut() async {
+    await _flutterWebviewPlugin
+        .launch("https://identity-server-dev.zellar.com.br/account/logout");
+
+    await _flutterWebviewPlugin.onUrlChanged.first;
+
+    _flutterWebviewPlugin.close();
+    _flutterWebviewPlugin.dispose();
+  }
+
   String _generateURI() {
     var state = _generateState();
     _codeVerifier = _generateCodeVerifier();
