@@ -16,7 +16,7 @@ class ZIdentityServer {
   String authorizeURL;
   String tokenURL;
 
-  final _flutterWebviewPlugin = new FlutterWebviewPlugin();
+  var _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   String _codeVerifier;
 
@@ -29,6 +29,8 @@ class ZIdentityServer {
 
   Future<ZTokenViewModel> authorize() async {
     try {
+      _flutterWebviewPlugin = new FlutterWebviewPlugin();
+
       _flutterWebviewPlugin.onUrlChanged.listen((url) {
         if (url.contains("code=") && url.contains(redirectURI))
           _flutterWebviewPlugin.reload();
@@ -89,6 +91,8 @@ class ZIdentityServer {
   }
 
   Future<void> logOut(Function onLogOut) async {
+    _flutterWebviewPlugin = new FlutterWebviewPlugin();
+
     await _flutterWebviewPlugin.launch(
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
         javascriptChannels: <JavascriptChannel>[
