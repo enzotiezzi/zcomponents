@@ -12,7 +12,7 @@ class ZRegisterUser {
     await _flutterWebviewPlugin.launch(_register_url,
         javascriptChannels: <JavascriptChannel>[
           new JavascriptChannel(
-              name: "register",
+              name: "fecharWebView",
               onMessageReceived: (javaScriptMessage) async {
                 await _flutterWebviewPlugin.close();
                 _flutterWebviewPlugin.dispose();

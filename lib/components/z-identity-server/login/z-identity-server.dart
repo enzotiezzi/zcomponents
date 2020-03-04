@@ -29,10 +29,15 @@ class ZIdentityServer {
 
   Future<ZTokenViewModel> authorize() async {
     try {
-      var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
-              (url) => url.contains("code=") && url.contains(redirectURI));
+      _flutterWebviewPlugin.onUrlChanged.listen((url) {
+        if (url.contains("code=") && url.contains(redirectURI))
+          _flutterWebviewPlugin.reload();
+      });
 
       _flutterWebviewPlugin.launch(_generateURI());
+
+      var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
+          (url) => url.contains("code=") && url.contains(redirectURI));
 
       _flutterWebviewPlugin.close();
       _flutterWebviewPlugin.dispose();
@@ -83,14 +88,20 @@ class ZIdentityServer {
     }
   }
 
-  Future<void> logOut() async {
-    await _flutterWebviewPlugin
-        .launch("https://identity-server-dev.zellar.com.br/account/logout");
+  Future<void> logOut(Function onLogOut) async {
+    await _flutterWebviewPlugin.launch(
+        "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
+        javascriptChannels: <JavascriptChannel>[
+          new JavascriptChannel(
+              name: "fecharWebView",
+              onMessageReceived: (message) {
+                _flutterWebviewPlugin.close().then((_) {
+                  _flutterWebviewPlugin.dispose();
 
-    await _flutterWebviewPlugin.onUrlChanged.first;
-
-    await _flutterWebviewPlugin.close();
-    _flutterWebviewPlugin.dispose();
+                  if (onLogOut != null) onLogOut();
+                });
+              })
+        ].toSet());
   }
 
   String _generateURI() {

@@ -45,11 +45,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: ZConta(
-          token:
-              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM5MDNiNGRkOWVlZGJmOTQ3OGZmNDU5ZTM0YmU1ODhmIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODMyNTY1MzksImV4cCI6MTU4MzI2MDEzOSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpUb3RlbSIsInN1YiI6IjlkNzVmM2YwLTExZjctNDE0ZS04ZGE3LTBjMWQyZjYyMWNiYSIsImF1dGhfdGltZSI6MTU4MzI1NjUzOSwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IjlmZDM5NTc4LTQyZDMtNGM5MS1hNjg3LWFmNjM2ODhmNjEwMiIsImlkQ29sYWJvcmFkb3IiOiJGMjg1QTE5MC1CNTQzLTREQkItQkM5My05NzRGMzNGMDY0MTkiLCJpZEFjY291bnQiOiI0ODZBNDlCMy00N0QxLTRENzYtODBERi0wNzlFQjgyRDZEOEYiLCJhY2NvdW50IjoiWmVsbGFyVGVuYW50IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDQ3LjIwNy4zNjgtNDAiLCJlbWFpbCI6IjQ0Ny4yMDcuMzY4LTQwQGVtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IjQ0Ny4yMDcuMzY4LTQwIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImVtYWlsIiwibW9sdHJlcy5hY2Vzc28uYXBpLmZ1bGwiLCJvZmZsaW5lX2FjY2VzcyJdLCJhbXIiOlsicHdkIl19.NqXwrODI0KJUAvp0mT5r61MoKm5ETwd6SQ07PLa2BcAWdu7iItWKVVKg-mRIWZSwsKOZyJntk8ueLXjhWl1jczRfktO6rMutvO3XiXGN-qmPtjU0LYk_TqWoi-fS06SC-XzC4LDvbhrS0WEVt6FmBlswDzZKVaAsQ0zFdpPeaMWZ6-XzjRURIzlbgzo2E1GkmApkgQVoEx3Knr4B9dHzIGVUhCsKtfVifAmlRsNJpNg4xmt5-Wf35N_Kk4EmD80u2STJG3_rGPJIcs4AW7iaDG2iAabhw0_vVvYrJUmRxzWi_rAqOx4HgfD7hAeoLxDfG3JLn8eg346-wgQKizoilA",
-        ));
+        debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
   }
 }
 
@@ -60,6 +56,20 @@ class ComponentExemploClasse extends StatefulWidget {
 
 class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     with AfterLayoutMixin<ComponentExemploClasse> {
+  String _clientId = 'ZPonto';
+  String _redirectUrl = 'net.openid.appzponto:/oauth2redirect';
+  String _issuer = 'https://identity-server-dev.zellar.com.br';
+
+  String _discoveryUrl =
+      'https://identity-server-dev.zellar.com.br/.well-known/openid-configuration';
+  List<String> _scopes = [
+    'openid',
+    'profile',
+    'email',
+    'offline_access',
+    'moltres.acesso.api.full'
+  ];
+
   var controllerEmail = new TextEditingController();
   var controllerNome = new TextEditingController();
   var controllerCPF = new TextEditingController();
@@ -162,14 +172,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   void initState() {
     super.initState();
 
-    //new ZRegisterUser().signUp(() {});
+    var identity = new ZIdentityServer(
+        clientId: _clientId, redirectURI: _redirectUrl, scopes: _scopes);
 
-    var zLog = new ZLog();
-
-    zLog.initLog().then((_) {
-      var a = ZInjector.getDependency<IContext>();
-
-      zLog.initLog();
+    identity.authorize().then((_) {
+      identity.logOut(() {
+        identity.authorize();
+      });
     });
 
     nomeFocus = new FocusNode();
