@@ -21,12 +21,11 @@ class ZIdentityServer {
 
   String _codeVerifier;
 
-  ZIdentityServer(
-      {@required this.clientId,
-      @required this.redirectURI,
-      @required this.scopes,
-      @required this.authorizeURL,
-      @required this.tokenURL});
+  ZIdentityServer({@required this.clientId,
+    @required this.redirectURI,
+    @required this.scopes,
+    @required this.authorizeURL,
+    @required this.tokenURL});
 
   Future<ZTokenViewModel> authorize() async {
     try {
@@ -40,12 +39,14 @@ class ZIdentityServer {
       _flutterWebviewPlugin.launch(_generateURI());
 
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
-          (url) => url.contains("code=") && url.contains(redirectURI));
+              (url) => url.contains("code=") && url.contains(redirectURI));
 
       _flutterWebviewPlugin.close();
       _flutterWebviewPlugin.dispose();
 
-      var code = Uri.parse(url).queryParameters['code'];
+      var code = Uri
+          .parse(url)
+          .queryParameters['code'];
 
       final response = await http.post(
           'https://identity-server-dev.zellar.com.br/connect/token',
@@ -113,15 +114,16 @@ class ZIdentityServer {
     var codeChallengeBase64 = _generateCodeChallenge(_codeVerifier);
 
     final url =
-        Uri.https('identity-server-dev.zellar.com.br', '/connect/authorize', {
-      'inApp': 'true',
-      'response_type': 'code',
-      'client_id': clientId,
-      'redirect_uri': redirectURI,
-      'scope': scopes.join(" "),
-      'state': state,
-      'code_challenge': codeChallengeBase64,
-      'code_challenge_method': 'S256'
+    Uri.https('identity-server-dev.zellar.com.br', '/connect/authorize', {
+    'tipoSenha': 'pin',
+    'inApp': 'true',
+    'response_type': 'code',
+    'client_id': clientId,
+    'redirect_uri': redirectURI,
+    'scope': scopes.join(" "),
+    'state': state,
+    'code_challenge': codeChallengeBase64,
+    'code_challenge_method': 'S256'
     }).toString();
 
     return url;
@@ -135,7 +137,9 @@ class ZIdentityServer {
 
   String _generateCodeChallenge(String codeVerifier) {
     return _toBase64URLEncode(
-        x.sha256.convert(new Utf8Encoder().convert(codeVerifier)).bytes);
+        x.sha256
+            .convert(new Utf8Encoder().convert(codeVerifier))
+            .bytes);
   }
 
   String _generateState() {

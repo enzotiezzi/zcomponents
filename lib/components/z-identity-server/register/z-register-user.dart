@@ -2,10 +2,12 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:z_components/components/z-identity-server/js-channels.dart';
 
 class ZRegisterUser {
-  final _flutterWebviewPlugin = new FlutterWebviewPlugin();
+  FlutterWebviewPlugin _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   Future<void> signUp(Function onSignUpComplete,
       {Map<String, String> additionalParameters}) async {
+    _flutterWebviewPlugin = new FlutterWebviewPlugin();
+
     if (additionalParameters == null) additionalParameters = {};
 
     additionalParameters.addAll({"inApp": "true", "tipoSenha": "pin"});
