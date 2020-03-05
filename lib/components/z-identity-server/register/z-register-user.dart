@@ -13,11 +13,12 @@ class ZRegisterUser {
 
     await _flutterWebviewPlugin.launch(uri.toString(),
         javascriptChannels: <JavascriptChannel>[
-          JsChannels.getChanngelFecharWebView((javaScriptMessage) async {
-            await _flutterWebviewPlugin.close();
-            _flutterWebviewPlugin.dispose();
+          JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+            _flutterWebviewPlugin.close().then((_) {
+              _flutterWebviewPlugin.dispose();
 
-            if (onSignUpComplete != null) onSignUpComplete();
+              if (onSignUpComplete != null) onSignUpComplete();
+            });
           }),
         ].toSet());
   }
