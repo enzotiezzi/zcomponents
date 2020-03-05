@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 import 'package:crypto/crypto.dart' as x;
 import 'package:http/http.dart' as http;
 import 'package:randombytes/randombytes.dart';
+import 'package:z_components/components/z-identity-server/js-channels.dart';
 import 'package:z_components/components/z-identity-server/z-token-viewmodel.dart';
 
 class ZIdentityServer {
@@ -96,15 +97,12 @@ class ZIdentityServer {
     await _flutterWebviewPlugin.launch(
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
         javascriptChannels: <JavascriptChannel>[
-          new JavascriptChannel(
-              name: "fecharWebView",
-              onMessageReceived: (message) {
-                _flutterWebviewPlugin.close().then((_) {
-                  _flutterWebviewPlugin.dispose();
+          JsChannels.getChanngelFecharWebView((javaScriptMessage) async {
+            await _flutterWebviewPlugin.close();
+            _flutterWebviewPlugin.dispose();
 
-                  if (onLogOut != null) onLogOut();
-                });
-              })
+            if (onLogOut != null) onLogOut();
+          })
         ].toSet());
   }
 

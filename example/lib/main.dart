@@ -33,11 +33,11 @@ import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-log/z-log.dart';
 import 'package:z_components/components/z-identity-server/register/z-register-user.dart';
 import 'package:z_components/components/z-identity-server/login/z-identity-server.dart';
+import 'package:z_components/components/z-identity-server/vincular-conta/vinculo-conta.dart';
+import 'package:z_components/components/z-identity-server/token-info.dart';
+import 'package:z_components/api/token-parser.dart';
 import 'package:after_init/after_init.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:z_components/api/token-parser.dart';
-import 'package:z_components/components/z-injector/z-injector.dart';
-import 'package:z_components/infra/interfaces/i-context.dart';
 
 void main() => runApp(MyApp());
 
@@ -175,11 +175,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     var identity = new ZIdentityServer(
         clientId: _clientId, redirectURI: _redirectUrl, scopes: _scopes);
 
-    identity.authorize().then((_) {
-      identity.logOut(() {
-        identity.authorize();
-      });
+    identity.authorize().then((token) {
+      print(token.accessToken);
+      var t = TokenInfo.fromJson(TokenParser.parseJwt(token.accessToken));
+      print(t.idConta);
     });
+
+    /*ZRegisterUser().signUp(() {
+
+    });*/
+
+    //VinculoConta(token: "").vincularConta((){});
 
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();

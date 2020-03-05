@@ -1,24 +1,24 @@
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:z_components/components/z-identity-server/js-channels.dart';
 
 class ZRegisterUser {
   final _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
-  final String _register_url =
-      "https://identity-server-dev.zellar.com.br/account/register?tipoSenha=pin&inApp=true";
+  Future<void> signUp(Function onSignUpComplete,
+      Map<String, dynamic> additionalParameters) async {
+    additionalParameters.addAll({"inApp": true, "tipoSenha": "pin"});
 
-  final String _DONE = "DONE";
+    var uri = new Uri.https("identity-server-dev.zellar.com.br",
+        "/account/register", additionalParameters);
 
-  Future<void> signUp(Function onSignUpComplete()) async {
-    await _flutterWebviewPlugin.launch(_register_url,
+    await _flutterWebviewPlugin.launch(uri.toString(),
         javascriptChannels: <JavascriptChannel>[
-          new JavascriptChannel(
-              name: "fecharWebView",
-              onMessageReceived: (javaScriptMessage) async {
-                await _flutterWebviewPlugin.close();
-                _flutterWebviewPlugin.dispose();
+          JsChannels.getChanngelFecharWebView((javaScriptMessage) async {
+            await _flutterWebviewPlugin.close();
+            _flutterWebviewPlugin.dispose();
 
-                if (onSignUpComplete != null) onSignUpComplete();
-              })
+            if (onSignUpComplete != null) onSignUpComplete();
+          }),
         ].toSet());
   }
 }
