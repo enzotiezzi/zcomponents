@@ -1,3 +1,7 @@
+## 0.9.8+6
+
+* Ajuste Zindentity cadastrar
+
 ## 0.9.8+5
 
 * Ajuste Zindentity cadastrar
