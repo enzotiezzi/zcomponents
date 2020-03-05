@@ -97,11 +97,12 @@ class ZIdentityServer {
     await _flutterWebviewPlugin.launch(
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
         javascriptChannels: <JavascriptChannel>[
-          JsChannels.getChanngelFecharWebView((javaScriptMessage) async {
-            await _flutterWebviewPlugin.close();
-            _flutterWebviewPlugin.dispose();
+          JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+            _flutterWebviewPlugin.close().then((_) {
+              _flutterWebviewPlugin.dispose();
 
-            if (onLogOut != null) onLogOut();
+              if (onLogOut != null) onLogOut();
+            });
           })
         ].toSet());
   }

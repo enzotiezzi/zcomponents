@@ -175,15 +175,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     var identity = new ZIdentityServer(
         clientId: _clientId, redirectURI: _redirectUrl, scopes: _scopes);
 
-    identity.authorize().then((token) {
-      print(token.accessToken);
-      var t = TokenInfo.fromJson(TokenParser.parseJwt(token.accessToken));
-      print(t.idConta);
+    ZRegisterUser().signUp(() {
+      identity.authorize().then((token) {
+        print(token.accessToken);
+        var t = TokenInfo.fromJson(TokenParser.parseJwt(token.accessToken));
+        print(t.idConta);
+      });
     });
-
-    /*ZRegisterUser().signUp(() {
-
-    });*/
 
     //VinculoConta(token: "").vincularConta((){});
 
