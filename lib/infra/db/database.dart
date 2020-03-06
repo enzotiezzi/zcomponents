@@ -6,7 +6,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/infra/entities/z-entity.dart';
 import 'package:z_components/infra/interfaces/i-context.dart';
-import 'package:injector/injector.dart';
 
 class ZDatabase implements IContext {
   List<ZEntity> entities;

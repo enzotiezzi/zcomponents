@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
-import 'package:z_components/components/z_button.dart';
-import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/styles/main-style.dart';
