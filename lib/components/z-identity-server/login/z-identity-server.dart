@@ -95,7 +95,17 @@ class ZIdentityServer {
   Future<void> logOut(Function onLogOut, {String token}) async {
     _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
-    await _flutterWebviewPlugin.evalJavascript('document.cookie = "accessToken=$token"');
+    if (Platform.isIOS) {
+      _flutterWebviewPlugin.onUrlChanged.listen((url) {
+        if (url.toLowerCase().contains("account/login")) {
+          _flutterWebviewPlugin.close().then((_) {
+            _flutterWebviewPlugin.dispose();
+
+            if (onLogOut != null) onLogOut();
+          });
+        }
+      });
+    }
 
     await _flutterWebviewPlugin.launch(
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
