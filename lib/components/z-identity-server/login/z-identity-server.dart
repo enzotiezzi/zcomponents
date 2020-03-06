@@ -95,6 +95,8 @@ class ZIdentityServer {
   Future<void> logOut(Function onLogOut) async {
     _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
+    await _flutterWebviewPlugin.onUrlChanged.listen((url) => print(url));
+
     await _flutterWebviewPlugin.launch(
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
         javascriptChannels: <JavascriptChannel>[
