@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -94,17 +95,19 @@ class ZIdentityServer {
   Future<void> logOut(Function onLogOut) async {
     _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
-    _flutterWebviewPlugin.onUrlChanged.listen((url) {
-      print("logout identity: $url");
+    if (Platform.isIOS) {
+      _flutterWebviewPlugin.onUrlChanged.listen((url) {
+        print("logout identity: $url");
 
-      if (url.toLowerCase().contains("account/login")) {
-        _flutterWebviewPlugin.close().then((_) {
-          _flutterWebviewPlugin.dispose();
+        if (url.toLowerCase().contains("account/login")) {
+          _flutterWebviewPlugin.close().then((_) {
+            _flutterWebviewPlugin.dispose();
 
-          if (onLogOut != null) onLogOut();
-        });
-      }
-    });
+            if (onLogOut != null) onLogOut();
+          });
+        }
+      });
+    }
 
     await _flutterWebviewPlugin.launch(
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
