@@ -99,4 +99,10 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
           duration: new Duration(milliseconds: 1000), curve: Curves.ease);
     });
   }
+
+  @override
+  Future<void> afterBuild() {
+    // TODO: implement afterBuild
+    return null;
+  }
 }

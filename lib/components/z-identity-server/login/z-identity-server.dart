@@ -1,25 +1,42 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:uuid/uuid.dart';
 import 'package:crypto/crypto.dart' as x;
 import 'package:http/http.dart' as http;
 import 'package:randombytes/randombytes.dart';
+import 'package:z_components/components/z-identity-server/js-channels.dart';
 import 'package:z_components/components/z-identity-server/z-token-viewmodel.dart';
 
 class ZIdentityServer {
   String clientId;
   String redirectURI;
   List<String> scopes;
+  String authorizeURL;
+  String tokenURL;
 
-  final _flutterWebviewPlugin = new FlutterWebviewPlugin();
+  var _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   String _codeVerifier;
 
-  ZIdentityServer({this.clientId, this.redirectURI, this.scopes});
+  ZIdentityServer(
+      {@required this.clientId,
+      @required this.redirectURI,
+      @required this.scopes,
+      @required this.authorizeURL,
+      @required this.tokenURL});
 
   Future<ZTokenViewModel> authorize() async {
     try {
+      _flutterWebviewPlugin = new FlutterWebviewPlugin();
+
+      _flutterWebviewPlugin.onUrlChanged.listen((url) {
+        if (url.contains("code=") && url.contains(redirectURI))
+          _flutterWebviewPlugin.reload();
+      });
+
       _flutterWebviewPlugin.launch(_generateURI());
 
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
@@ -74,6 +91,35 @@ class ZIdentityServer {
     }
   }
 
+  Future<void> logOut(Function onLogOut, {String token}) async {
+    _flutterWebviewPlugin = new FlutterWebviewPlugin();
+
+    if (Platform.isIOS) {
+      _flutterWebviewPlugin.onUrlChanged.listen((url) {
+        if (url.toLowerCase().contains("account/login")) {
+          _flutterWebviewPlugin.close().then((_) {
+            _flutterWebviewPlugin.dispose();
+
+            if (onLogOut != null) onLogOut();
+          });
+        }
+      });
+    }
+
+    await _flutterWebviewPlugin.launch(
+        "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
+        headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
+        javascriptChannels: <JavascriptChannel>[
+          JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+            _flutterWebviewPlugin.close().then((_) {
+              _flutterWebviewPlugin.dispose();
+
+              if (onLogOut != null) onLogOut();
+            });
+          })
+        ].toSet());
+  }
+
   String _generateURI() {
     var state = _generateState();
     _codeVerifier = _generateCodeVerifier();
@@ -81,6 +127,8 @@ class ZIdentityServer {
 
     final url =
         Uri.https('identity-server-dev.zellar.com.br', '/connect/authorize', {
+      'tipoSenha': 'pin',
+      'inApp': 'true',
       'response_type': 'code',
       'client_id': clientId,
       'redirect_uri': redirectURI,

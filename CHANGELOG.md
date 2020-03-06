@@ -1,3 +1,68 @@
+## 0.9.8+12
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+11
+
+* Ajuste Zindentity cadastrar
+
+
+## 0.9.8+10
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+9
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+8
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+7
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+6
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+5
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+4
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+3
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+2
+
+* Ajuste Zindentity cadastrar
+
+## 0.9.8+1
+
+* Ajuste Zindentity logout
+
+## 0.9.8
+
+* Ajuste Zindentity logout
+
+## 0.9.7
+
+* Ajuste Zindentity logout
+
+## 0.9.6
+
+* Ajuste Zindentity logout
+
+## 0.9.5
+
+* Ajuste ZInjector
+
 ## 0.9.4
 
 * Ajuste mudançaParaZIdentityServe

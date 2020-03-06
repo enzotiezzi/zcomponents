@@ -15,7 +15,8 @@ class DialogUtils {
     _context = context;
   }
 
-  Future showAlertDialogErro(String title, String message, {String errorMessage}) async {
+  Future showAlertDialogErro(String title, String message,
+      {String errorMessage}) async {
     return showDialog(
         context: _context,
         barrierDismissible: true,
@@ -452,16 +453,15 @@ class DialogUtils {
             ));
   }
 
-  Future showZProgressDialog(String messagem,double barValue,var key) {
-
-    showDialog(
+  Future showZProgressDialog(String messagem, double barValue, var key) {
+    return showDialog(
         context: _context,
         builder: (BuildContext context) => new ZProgressDialog(
-          message: messagem,
-          barrierDismissible: false,
-          progressBarValue: barValue,
-          key: key,
-        ));
+              message: messagem,
+              barrierDismissible: false,
+              progressBarValue: barValue,
+              key: key,
+            ));
   }
 
   void dismiss() {

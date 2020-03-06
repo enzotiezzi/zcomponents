@@ -1,4 +1,5 @@
 import 'package:after_init/after_init.dart';
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-conta/z-conta-view.dart';
@@ -13,19 +14,21 @@ class ZConta extends StatefulWidget {
   State<StatefulWidget> createState() => _ZContaState();
 }
 
-class _ZContaState extends State<ZConta> with AfterInitMixin<ZConta> {
+class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
   ZContaView _view;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _view = new ZContaView(this);
+    _view.initView();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MainStyle.get(context)
         .getDefaultScaffold("MINHAS CONTAS", _buildBody());
-  }
-
-  @override
-  void didInitState() {
-    _view = new ZContaView(this);
-    _view.initView();
   }
 
   Widget _buildBody() {
@@ -69,5 +72,10 @@ class _ZContaState extends State<ZConta> with AfterInitMixin<ZConta> {
             })
       ],
     );
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    _view.afterBuild();
   }
 }
