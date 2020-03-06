@@ -92,25 +92,12 @@ class ZIdentityServer {
     }
   }
 
-  Future<void> logOut(Function onLogOut) async {
+  Future<void> logOut(Function onLogOut, {String token}) async {
     _flutterWebviewPlugin = new FlutterWebviewPlugin();
-
-    if (Platform.isIOS) {
-      _flutterWebviewPlugin.onUrlChanged.listen((url) {
-        print("logout identity: $url");
-
-        if (url.toLowerCase().contains("account/login")) {
-          _flutterWebviewPlugin.close().then((_) {
-            _flutterWebviewPlugin.dispose();
-
-            if (onLogOut != null) onLogOut();
-          });
-        }
-      });
-    }
 
     await _flutterWebviewPlugin.launch(
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
+        headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
         javascriptChannels: <JavascriptChannel>[
           JsChannels.getChanngelFecharWebView((javaScriptMessage) {
             _flutterWebviewPlugin.close().then((_) {
