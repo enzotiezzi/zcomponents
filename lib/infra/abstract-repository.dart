@@ -1,4 +1,3 @@
-import 'package:injector/injector.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/infra/entities/z-entity.dart';
 import 'package:z_components/infra/interfaces/i-command.dart';

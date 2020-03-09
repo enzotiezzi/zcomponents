@@ -2,13 +2,8 @@ import 'package:after_init/after_init.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta-view.dart';
-import 'package:z_components/components/z-tile.dart';
-import 'package:z_components/components/z_button.dart';
-import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
-import 'package:z_components/view-model/conta-view-model.dart';
 
 class ZConta extends StatefulWidget {
   String token;
