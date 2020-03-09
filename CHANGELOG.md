@@ -1,3 +1,8 @@
+## 0.9.8+14
+
+* Ajuste Zindentity logout!
+
+
 ## 0.9.8+13
 
 * Ajuste Zindentity cadastrar e logar!
