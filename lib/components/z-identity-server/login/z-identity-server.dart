@@ -38,7 +38,14 @@ class ZIdentityServer {
           _flutterWebviewPlugin.reload();
       });
 
-      _flutterWebviewPlugin.launch(_generateURI());
+      await _flutterWebviewPlugin.launch(_generateURI().toString(),
+          javascriptChannels: <JavascriptChannel>[
+            JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+              _flutterWebviewPlugin.close().then((_) {
+                _flutterWebviewPlugin.dispose();
+              });
+            }),
+          ].toSet());
 
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
           (url) => url.contains("code=") && url.contains(redirectURI));

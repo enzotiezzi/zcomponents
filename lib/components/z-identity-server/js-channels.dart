@@ -6,4 +6,10 @@ class JsChannels {
     return new JavascriptChannel(
         name: "fecharWebView", onMessageReceived: onMessageReceived);
   }
+
+  static JavascriptChannel getChanngelOkWebView(
+      Function(JavascriptMessage) onMessageReceived) {
+    return new JavascriptChannel(
+        name: "okWebView", onMessageReceived: onMessageReceived);
+  }
 }
