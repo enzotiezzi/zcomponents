@@ -117,7 +117,7 @@ class ZIdentityServer {
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
         headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
         javascriptChannels: <JavascriptChannel>[
-          JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+          JsChannels.getChanngelOkWebView((javaScriptMessage) {
             _flutterWebviewPlugin.close().then((_) {
               _flutterWebviewPlugin.dispose();
 
