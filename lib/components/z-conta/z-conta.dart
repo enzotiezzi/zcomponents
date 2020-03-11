@@ -4,11 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-conta/z-conta-view.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/conta-view-model.dart';
 
 class ZConta extends StatefulWidget {
   String token;
+  Function(ContaViewModel) onBindAccount;
+  Function(ContaViewModel) onAccountChange;
 
-  ZConta({@required this.token});
+  ZConta({@required this.token, this.onBindAccount, this.onAccountChange});
 
   @override
   State<StatefulWidget> createState() => _ZContaState();
@@ -65,7 +68,7 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
                   child: new Text("${item.nomeFantasia[0]}", style: new TextStyle(color: item.corSecundaria),),
                 ),
                 title: new Text("${item.nomeFantasia}"),
-                subtitle: new Text(item.ativo ? "Conta ativa" : "Ativar conta"),
+                subtitle: new Text(_view.verificarContaAtiva(item.idConta) ? "Conta ativa" : "Ativar conta"),
                 trailing: new Icon(Icons.arrow_forward_ios),
                 onTap: () => _view.selecionarConta(item),
               );

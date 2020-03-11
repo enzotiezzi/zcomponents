@@ -4,4 +4,5 @@ abstract class IContaServce{
   Future<List<ContaViewModel>> listarContasUsuario();
   Future<ContaViewModel> localizarConta(String codigoAtivacao);
   Future<bool> associarConta(String idConta);
+  Future<bool> trocarContaAtiva(String idConta);
 }

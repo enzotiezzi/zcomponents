@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/api/conta/conta-service.dart';
@@ -22,26 +23,10 @@ class ZContaView extends IView<ZConta> {
 
   DialogUtils _dialogUtils;
 
-  final GlobalKey<ZProgressDialogState> _globalKey =
+  GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
 
-  ZIdentityServer _zIdentityServer;
-
-  String _clientId = 'ZPonto';
-  String _redirectUrl = 'net.openid.appzponto:/oauth2redirect';
-
-  List<String> _scopes = [
-    'openid',
-    'profile',
-    'email',
-    'offline_access',
-    'moltres.acesso.api.full'
-  ];
-
-  ZContaView(State<ZConta> state) : super(state) {
-    _zIdentityServer = new ZIdentityServer(
-        clientId: _clientId, redirectURI: _redirectUrl, scopes: _scopes);
-  }
+  ZContaView(State<ZConta> state) : super(state);
 
   @override
   Future<void> initView() async {
@@ -52,7 +37,7 @@ class ZContaView extends IView<ZConta> {
   }
 
   Future<void> selecionarConta(ContaViewModel conta) async {
-    if (!conta.ativo)
+    if (!verificarContaAtiva(conta.idConta))
       _showDialogContaSelecionada(conta);
     else
       _showDialogContaJaAtiva(conta);
@@ -76,7 +61,9 @@ class ZContaView extends IView<ZConta> {
                     ),
                     new Container(
                       child: new Text(
-                          "Deseja trocar para a conta: ${conta.nomeFantasia} ?"),
+                        "Deseja trocar para a conta: ${conta.nomeFantasia} ?",
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     new Container(
                       padding: const EdgeInsets.all(4.0),
@@ -115,7 +102,11 @@ class ZContaView extends IView<ZConta> {
                             borderRadius: new BorderRadius.all(
                                 const Radius.circular(20.0)),
                             splashColor: const Color(0xffe6e6e6),
-                            onTap: () async {},
+                            onTap: () async {
+                              await _trocarConta(conta);
+
+                              Navigator.pop(context);
+                            },
                             child: new Container(
                               padding: const EdgeInsets.all(12),
                               child: new Text(
@@ -153,7 +144,9 @@ class ZContaView extends IView<ZConta> {
                     ),
                     new Container(
                       child: new Text(
-                          "${conta.nomeFantasia} já é sua conta ativa"),
+                        "${conta.nomeFantasia} já é sua conta ativa",
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -266,8 +259,10 @@ class ZContaView extends IView<ZConta> {
                           borderRadius:
                               new BorderRadius.all(const Radius.circular(20.0)),
                           splashColor: const Color(0xffe6e6e6),
-                          onTap: () {
-                            _confirmarVinculo(codigoAtivacao);
+                          onTap: () async {
+                            await _pesquisarConta(codigoAtivacao);
+
+                            Navigator.pop(context);
                           },
                           child: new Container(
                             padding: const EdgeInsets.all(12),
@@ -287,10 +282,6 @@ class ZContaView extends IView<ZConta> {
   }
 
   Future<void> _listarContas() async {
-    var token = await _zIdentityServer.authorize();
-
-    _contaService = new ContaService(token.accessToken);
-
     _dialogUtils.showZProgressDialog(
         "Carregando suas contas...", 0.5, _globalKey);
 
@@ -310,7 +301,8 @@ class ZContaView extends IView<ZConta> {
           .refresh(1.0, "Houve um erro ao carregar as contas", sucess: false);
     }
 
-    Future.delayed(new Duration(seconds: 1), () => _dialogUtils.dismiss());
+    await Future.delayed(
+        new Duration(seconds: 1), () => _dialogUtils.dismiss());
   }
 
   @override
@@ -325,7 +317,7 @@ class ZContaView extends IView<ZConta> {
     return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
   }
 
-  Future _confirmarVinculo(String codigoAtivacao) async {
+  Future<bool> _pesquisarConta(String codigoAtivacao) async {
     _dialogUtils.showZProgressDialog("Buscando conta", 0.3, _globalKey);
 
     var conta = await _contaService.localizarConta(codigoAtivacao);
@@ -333,23 +325,28 @@ class ZContaView extends IView<ZConta> {
     if (conta != null) {
       _globalKey.currentState.refresh(1.0, "Conta encontrada", sucess: true);
 
-      Future.delayed(new Duration(seconds: 1), () async {
+      await Future.delayed(new Duration(seconds: 1), () async {
         _dialogUtils.dismiss();
 
         var res = await _showDialogConfirmarVinculo(conta);
 
-        if (res == null || !res) {
-          _dialogUtils.showAlertDialogErro(
-              "Erro", "Não foi possível fazer o vínculo com essa conta.");
-        } else {
-          _dialogUtils.showSuccessDialog("Vínculo feito com sucesso");
+        if (res != null && res) {
+          contas.add(conta);
+
+          state.setState(() {});
         }
+
+        return res;
       });
     } else {
       _globalKey.currentState
           .refresh(1.0, "Não foi possível encontrar a conta", sucess: false);
 
-      Future.delayed(new Duration(seconds: 1), () => _dialogUtils.dismiss());
+      await Future.delayed(new Duration(seconds: 1), () {
+        _dialogUtils.dismiss();
+
+        return false;
+      });
     }
   }
 
@@ -371,7 +368,9 @@ class ZContaView extends IView<ZConta> {
                     ),
                     new Container(
                       child: new Text(
-                          "Deseja se vincular à conta: ${conta.nomeFantasia} ?"),
+                        "Deseja se vincular à conta: ${conta.nomeFantasia} ?",
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -402,7 +401,7 @@ class ZContaView extends IView<ZConta> {
                                 const Radius.circular(20.0)),
                             splashColor: const Color(0xffe6e6e6),
                             onTap: () async {
-                              var res = await _vincularConta(conta.idConta);
+                              var res = await _vincularConta(conta);
 
                               Navigator.pop(context, res);
                             },
@@ -425,9 +424,59 @@ class ZContaView extends IView<ZConta> {
             ));
   }
 
-  Future<bool> _vincularConta(String idConta) async {
-    var res = await _contaService.associarConta(idConta);
+  Future<bool> _vincularConta(ContaViewModel conta) async {
+    if (!_verificarSeContaJaVinculada(conta.idConta)) {
+      _dialogUtils.showZProgressDialog("Vinculando Conta", 0.5, _globalKey);
 
-    return res;
+      var res = await _contaService.associarConta(conta.idConta);
+
+      if (res) {
+        _globalKey.currentState
+            .refresh(1.0, "Vínculo feito com sucesso.", sucess: true);
+
+        if (state.widget.onBindAccount != null)
+          state.widget.onBindAccount(conta);
+      } else {
+        _globalKey.currentState.refresh(
+            1.0, "Não foi possível fazer o vínculo com essa conta.",
+            sucess: false);
+      }
+
+      await Future.delayed(
+          new Duration(seconds: 1), () => _dialogUtils.dismiss());
+
+      return res;
+    } else {
+      await _dialogUtils.showAlertDialog(
+          "Atenção", "Você já está vinculado à esta conta.", "OK");
+
+      return false;
+    }
+  }
+
+  bool _verificarSeContaJaVinculada(String idConta) {
+    return contas.where((x) => x.idConta == idConta).toList().length > 0;
+  }
+
+  Future _trocarConta(ContaViewModel conta) async {
+    _dialogUtils.showZProgressDialog("Trocando de conta", 0.5, _globalKey);
+
+    var res = await _contaService.trocarContaAtiva(conta.idConta);
+
+    if (res) {
+      _globalKey.currentState
+          .refresh(1.0, "Conta trocada com sucesso.", sucess: true);
+
+      state.setState(() {});
+
+      if (state.widget.onAccountChange != null)
+        state.widget.onAccountChange(conta);
+    } else {
+      _globalKey.currentState
+          .refresh(1.0, "Não foi possível trocar de conta.", sucess: false);
+    }
+
+    await Future.delayed(
+        new Duration(seconds: 1), () => _dialogUtils.dismiss());
   }
 }
