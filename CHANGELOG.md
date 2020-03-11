@@ -1,3 +1,7 @@
+## 0.9.9
+
+* ZConta!
+
 ## 0.9.8+14
 
 * Ajuste Zindentity logout!
