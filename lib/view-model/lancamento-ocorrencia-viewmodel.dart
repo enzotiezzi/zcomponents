@@ -1,8 +1,3 @@
-import 'package:z_components/infra/db/database-utils.dart';
-import 'package:z_components/infra/entities/z-entity.dart';
-import 'package:z_components/infra/schema/z-column.dart';
-import 'package:z_components/infra/schema/z-table.dart';
-
 class ZLancamentoOcorrenciaViewModel {
   String idLancamento;
   String idOcorrencia;

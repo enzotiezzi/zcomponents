@@ -10,13 +10,10 @@ import 'package:z_components/components/z-identity-server/login/z-identity-serve
 import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-identity-server/vincular-conta/vinculo-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-import 'package:z_components/components/z_button.dart';
-import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/conta-view-model.dart';
-import 'package:http/http.dart' as http;
 
 class ZContaView extends IView<ZConta> {
   List<ContaViewModel> contas;
