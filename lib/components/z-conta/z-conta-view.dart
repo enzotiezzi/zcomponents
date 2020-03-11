@@ -17,8 +17,6 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/conta-view-model.dart';
 
 class ZContaView extends IView<ZConta> {
-  List<ContaViewModel> contas;
-
   IContaServce _contaService;
 
   DialogUtils _dialogUtils;
@@ -30,8 +28,6 @@ class ZContaView extends IView<ZConta> {
 
   @override
   Future<void> initView() async {
-    contas = new List<ContaViewModel>();
-
     _contaService = new ContaService(state.widget.token);
     _dialogUtils = new DialogUtils(state.context);
   }
@@ -281,35 +277,6 @@ class ZContaView extends IView<ZConta> {
             ));
   }
 
-  Future<void> _listarContas() async {
-    _dialogUtils.showZProgressDialog(
-        "Carregando suas contas...", 0.5, _globalKey);
-
-    var contas = await _contaService.listarContasUsuario();
-
-    if (contas != null) {
-      _globalKey.currentState
-          .refresh(1.0, "Contas carregadas com sucesso", sucess: true);
-
-      if (state.mounted) {
-        state.setState(() {
-          this.contas = contas;
-        });
-      }
-    } else {
-      _globalKey.currentState
-          .refresh(1.0, "Houve um erro ao carregar as contas", sucess: false);
-    }
-
-    await Future.delayed(
-        new Duration(seconds: 1), () => _dialogUtils.dismiss());
-  }
-
-  @override
-  Future<void> afterBuild() async {
-    _listarContas();
-  }
-
   bool verificarContaAtiva(String idConta) {
     var tokenInfo =
         TokenInfo.fromJson(TokenParser.parseJwt(state.widget.token));
@@ -331,7 +298,7 @@ class ZContaView extends IView<ZConta> {
         var res = await _showDialogConfirmarVinculo(conta);
 
         if (res != null && res) {
-          contas.add(conta);
+          state.widget.contas.add(conta);
 
           state.setState(() {});
         }
@@ -455,7 +422,7 @@ class ZContaView extends IView<ZConta> {
   }
 
   bool _verificarSeContaJaVinculada(String idConta) {
-    return contas.where((x) => x.idConta == idConta).toList().length > 0;
+    return state.widget.contas.where((x) => x.idConta == idConta).toList().length > 0;
   }
 
   Future _trocarConta(ContaViewModel conta) async {
@@ -478,5 +445,11 @@ class ZContaView extends IView<ZConta> {
 
     await Future.delayed(
         new Duration(seconds: 1), () => _dialogUtils.dismiss());
+  }
+
+  @override
+  Future<void> afterBuild() {
+    // TODO: implement afterBuild
+    return null;
   }
 }

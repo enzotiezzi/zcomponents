@@ -8,10 +8,16 @@ import 'package:z_components/view-model/conta-view-model.dart';
 
 class ZConta extends StatefulWidget {
   String token;
+  List<ContaViewModel> contas;
   Function(ContaViewModel) onBindAccount;
   Function(ContaViewModel) onAccountChange;
 
-  ZConta({@required this.token, this.onBindAccount, this.onAccountChange});
+  ZConta({
+    @required this.token,
+    @required this.contas,
+    this.onBindAccount,
+    this.onAccountChange,
+  });
 
   @override
   State<StatefulWidget> createState() => _ZContaState();
@@ -58,17 +64,22 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
         ),
         new ListView.builder(
             shrinkWrap: true,
-            itemCount: _view.contas.length,
+            itemCount: widget.contas.length,
             itemBuilder: (context, index) {
-              var item = _view.contas[index];
+              var item = widget.contas[index];
 
               return new ListTile(
                 leading: new CircleAvatar(
                   backgroundColor: item.corPrimaria,
-                  child: new Text("${item.nomeFantasia[0]}", style: new TextStyle(color: item.corSecundaria),),
+                  child: new Text(
+                    "${item.nomeFantasia[0]}",
+                    style: new TextStyle(color: item.corSecundaria),
+                  ),
                 ),
                 title: new Text("${item.nomeFantasia}"),
-                subtitle: new Text(_view.verificarContaAtiva(item.idConta) ? "Conta ativa" : "Ativar conta"),
+                subtitle: new Text(_view.verificarContaAtiva(item.idConta)
+                    ? "Conta ativa"
+                    : "Ativar conta"),
                 trailing: new Icon(Icons.arrow_forward_ios),
                 onTap: () => _view.selecionarConta(item),
               );
