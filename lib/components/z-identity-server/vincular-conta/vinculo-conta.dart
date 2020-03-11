@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:z_components/components/z-identity-server/js-channels.dart';
 
 class VinculoConta {
@@ -25,7 +26,6 @@ class VinculoConta {
 
             if (onBindAccount != null) onBindAccount();
           }),
-        ].toSet(),
-        headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+        ].toSet());
   }
 }

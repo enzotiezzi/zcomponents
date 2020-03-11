@@ -7,6 +7,10 @@ class MainStyle {
   static const Color APP_THEME = Colors.amber;
 
   static _MainStyle get(BuildContext context) => _MainStyle(context: context);
+
+  static Color hexToColor(String code) {
+    return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  }
 }
 
 class _MainStyle {

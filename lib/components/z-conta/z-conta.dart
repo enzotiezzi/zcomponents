@@ -13,7 +13,7 @@ import 'package:z_components/view-model/conta-view-model.dart';
 class ZConta extends StatefulWidget {
   String token;
 
-  ZConta({this.token});
+  ZConta({@required this.token});
 
   @override
   State<StatefulWidget> createState() => _ZContaState();
@@ -66,11 +66,11 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
 
               return new ListTile(
                 leading: new CircleAvatar(
-                  backgroundColor: Colors.teal,
-                  child: new Text("${item.conta[0]}"),
+                  backgroundColor: item.corPrimaria,
+                  child: new Text("${item.nomeFantasia[0]}", style: new TextStyle(color: item.corSecundaria),),
                 ),
-                title: new Text("${item.conta}"),
-                subtitle: new Text(item.ativa ? "Conta ativa" : "Ativar conta"),
+                title: new Text("${item.nomeFantasia}"),
+                subtitle: new Text(item.ativo ? "Conta ativa" : "Ativar conta"),
                 trailing: new Icon(Icons.arrow_forward_ios),
                 onTap: () => _view.selecionarConta(item),
               );
