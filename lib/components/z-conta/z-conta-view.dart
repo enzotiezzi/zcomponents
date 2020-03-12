@@ -22,7 +22,7 @@ class ZContaView extends IView<ZConta> {
   DialogUtils _dialogUtils;
 
   GlobalKey<ZProgressDialogState> _globalKey =
-  new GlobalKey<ZProgressDialogState>();
+      new GlobalKey<ZProgressDialogState>();
 
   ZContaView(State<ZConta> state) : super(state);
 
@@ -42,143 +42,134 @@ class ZContaView extends IView<ZConta> {
   Future _showDialogContaSelecionada(ContaViewModel conta) async {
     return showDialog(
         context: state.context,
-        builder: (context) =>
-        new ZAlertDialog(
-          zDialog: ZDialog.alert,
-          child: new Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new Text(
-                    "TROCAR CONTA",
-                    style: MainStyle
-                        .get(context)
-                        .mainStyleTextTitle,
-                  ),
-                ),
-                new Container(
-                  child: new Text(
-                    "Deseja trocar para a conta: ${conta.nomeFantasia} ?",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Container(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new Text(
-                    "Ao trocar a conta você só poderá ver informações da conta ${conta
-                        .nomeFantasia}",
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        fontSize: MainStyle
-                            .get(context)
-                            .subTitleFontSize),
-                  ),
-                ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        builder: (context) => new ZAlertDialog(
+              zDialog: ZDialog.alert,
+              child: new Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: new Column(
                   children: <Widget>[
                     new Container(
-                      child: new InkWell(
-                        borderRadius: new BorderRadius.all(
-                            const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "CANCELAR",
-                            style: new TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: Color(0xff707070)),
-                          ),
-                        ),
+                      padding: const EdgeInsets.all(4.0),
+                      child: new Text(
+                        "TROCAR CONTA",
+                        style: MainStyle.get(context).mainStyleTextTitle,
                       ),
-                      margin: const EdgeInsets.only(bottom: 8),
                     ),
                     new Container(
-                      child: new InkWell(
-                        borderRadius: new BorderRadius.all(
-                            const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () async {
-                          await _trocarConta(conta);
-
-                          Navigator.pop(context);
-                        },
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "CONFIRMAR",
-                            style:
-                            new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                      child: new Text(
+                        "Deseja trocar para a conta: ${conta.nomeFantasia} ?",
+                        textAlign: TextAlign.center,
                       ),
-                      margin: const EdgeInsets.only(bottom: 8),
+                    ),
+                    new Container(
+                      padding: const EdgeInsets.all(4.0),
+                      child: new Text(
+                        "Ao trocar a conta você só poderá ver informações da conta ${conta.nomeFantasia}",
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(
+                            fontSize: MainStyle.get(context).subTitleFontSize),
+                      ),
+                    ),
+                    new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        new Container(
+                          child: new InkWell(
+                            borderRadius: new BorderRadius.all(
+                                const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "CANCELAR",
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    color: Color(0xff707070)),
+                              ),
+                            ),
+                          ),
+                          margin: const EdgeInsets.only(bottom: 8),
+                        ),
+                        new Container(
+                          child: new InkWell(
+                            borderRadius: new BorderRadius.all(
+                                const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () async {
+                              await _trocarConta(conta);
+
+                              Navigator.pop(context);
+                            },
+                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "CONFIRMAR",
+                                style:
+                                    new TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          margin: const EdgeInsets.only(bottom: 8),
+                        )
+                      ],
                     )
                   ],
-                )
-              ],
-            ),
-          ),
-        ));
+                ),
+              ),
+            ));
   }
 
   Future _showDialogContaJaAtiva(ContaViewModel conta) async {
     return showDialog(
         context: state.context,
-        builder: (context) =>
-        new ZAlertDialog(
-          zDialog: ZDialog.alert,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new Text(
-                    "ATENÇÃO",
-                    style: MainStyle
-                        .get(context)
-                        .mainStyleTextTitle,
-                  ),
-                ),
-                new Container(
-                  child: new Text(
-                    "${conta.nomeFantasia} já é sua conta ativa",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        builder: (context) => new ZAlertDialog(
+              zDialog: ZDialog.alert,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: new Column(
                   children: <Widget>[
                     new Container(
-                      child: new InkWell(
-                        borderRadius: new BorderRadius.all(
-                            const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () => Navigator.pop(context),
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "OK",
-                            style:
-                            new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                      padding: const EdgeInsets.all(4.0),
+                      child: new Text(
+                        "ATENÇÃO",
+                        style: MainStyle.get(context).mainStyleTextTitle,
                       ),
-                      margin: const EdgeInsets.only(bottom: 8),
+                    ),
+                    new Container(
+                      child: new Text(
+                        "${conta.nomeFantasia} já é sua conta ativa",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        new Container(
+                          child: new InkWell(
+                            borderRadius: new BorderRadius.all(
+                                const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () => Navigator.pop(context),
+                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "OK",
+                                style:
+                                    new TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          margin: const EdgeInsets.only(bottom: 8),
+                        )
+                      ],
                     )
                   ],
-                )
-              ],
-            ),
-          ),
-        ));
+                ),
+              ),
+            ));
   }
 
   Future<void> showDialogVinculo() async {
@@ -187,8 +178,7 @@ class ZContaView extends IView<ZConta> {
     return showDialog(
         context: state.context,
         barrierDismissible: true,
-        builder: (BuildContext context) =>
-            ZAlertDialog(
+        builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.normal,
               child: new Column(
                 children: <Widget>[
@@ -197,10 +187,7 @@ class ZContaView extends IView<ZConta> {
                     children: <Widget>[
                       new Container(
                         margin: const EdgeInsets.only(top: 16, bottom: 16),
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: new Text(
                           "Digite o Código de sua nova conta.",
                           textAlign: TextAlign.center,
@@ -214,10 +201,7 @@ class ZContaView extends IView<ZConta> {
                     children: <Widget>[
                       new Container(
                         padding: const EdgeInsets.only(),
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: new Column(
                           children: <Widget>[
                             new TextField(
@@ -231,7 +215,7 @@ class ZContaView extends IView<ZConta> {
                                 hintText: 'Código',
                                 counterText: "",
                                 contentPadding:
-                                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                    EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0)),
                               ),
@@ -250,7 +234,7 @@ class ZContaView extends IView<ZConta> {
                       new Container(
                         child: new InkWell(
                           borderRadius:
-                          new BorderRadius.all(const Radius.circular(20.0)),
+                              new BorderRadius.all(const Radius.circular(20.0)),
                           splashColor: const Color(0xffe6e6e6),
                           onTap: () {
                             Navigator.pop(context);
@@ -260,7 +244,7 @@ class ZContaView extends IView<ZConta> {
                             child: new Text(
                               "CANCELAR",
                               style:
-                              new TextStyle(fontWeight: FontWeight.normal),
+                                  new TextStyle(fontWeight: FontWeight.normal),
                             ),
                           ),
                         ),
@@ -269,7 +253,7 @@ class ZContaView extends IView<ZConta> {
                       new Container(
                         child: new InkWell(
                           borderRadius:
-                          new BorderRadius.all(const Radius.circular(20.0)),
+                              new BorderRadius.all(const Radius.circular(20.0)),
                           splashColor: const Color(0xffe6e6e6),
                           onTap: () async {
                             await _pesquisarConta(codigoAtivacao);
@@ -294,10 +278,14 @@ class ZContaView extends IView<ZConta> {
   }
 
   bool verificarContaAtiva(String idConta) {
-    var tokenInfo =
-    TokenInfo.fromJson(TokenParser.parseJwt(state.widget.token));
+    if (idConta != null) {
+      var tokenInfo =
+          TokenInfo.fromJson(TokenParser.parseJwt(state.widget.token));
 
-    return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
+      return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
+    }
+
+    return false;
   }
 
   Future<bool> _pesquisarConta(String codigoAtivacao) async {
@@ -336,78 +324,75 @@ class ZContaView extends IView<ZConta> {
   Future<bool> _showDialogConfirmarVinculo(ContaViewModel conta) async {
     return showDialog(
         context: state.context,
-        builder: (context) =>
-        new ZAlertDialog(
-          zDialog: ZDialog.alert,
-          child: new Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new Text(
-                    "VINCULAR CONTA",
-                    style: MainStyle
-                        .get(context)
-                        .mainStyleTextTitle,
-                  ),
-                ),
-                new Container(
-                  child: new Text(
-                    "Deseja se vincular à conta: ${conta.nomeFantasia} ?",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        builder: (context) => new ZAlertDialog(
+              zDialog: ZDialog.alert,
+              child: new Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: new Column(
                   children: <Widget>[
                     new Container(
-                      child: new InkWell(
-                        borderRadius: new BorderRadius.all(
-                            const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () {
-                          Navigator.pop(context, false);
-                        },
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "CANCELAR",
-                            style: new TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: Color(0xff707070)),
-                          ),
-                        ),
+                      padding: const EdgeInsets.all(4.0),
+                      child: new Text(
+                        "VINCULAR CONTA",
+                        style: MainStyle.get(context).mainStyleTextTitle,
                       ),
-                      margin: const EdgeInsets.only(bottom: 8),
                     ),
                     new Container(
-                      child: new InkWell(
-                        borderRadius: new BorderRadius.all(
-                            const Radius.circular(20.0)),
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () async {
-                          var res = await _vincularConta(conta);
-
-                          Navigator.pop(context, res);
-                        },
-                        child: new Container(
-                          padding: const EdgeInsets.all(12),
-                          child: new Text(
-                            "VINCULAR",
-                            style:
-                            new TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                      child: new Text(
+                        "Deseja se vincular à conta: ${conta.nomeFantasia} ?",
+                        textAlign: TextAlign.center,
                       ),
-                      margin: const EdgeInsets.only(bottom: 8),
+                    ),
+                    new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        new Container(
+                          child: new InkWell(
+                            borderRadius: new BorderRadius.all(
+                                const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () {
+                              Navigator.pop(context, false);
+                            },
+                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "CANCELAR",
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    color: Color(0xff707070)),
+                              ),
+                            ),
+                          ),
+                          margin: const EdgeInsets.only(bottom: 8),
+                        ),
+                        new Container(
+                          child: new InkWell(
+                            borderRadius: new BorderRadius.all(
+                                const Radius.circular(20.0)),
+                            splashColor: const Color(0xffe6e6e6),
+                            onTap: () async {
+                              var res = await _vincularConta(conta);
+
+                              Navigator.pop(context, res);
+                            },
+                            child: new Container(
+                              padding: const EdgeInsets.all(12),
+                              child: new Text(
+                                "VINCULAR",
+                                style:
+                                    new TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          margin: const EdgeInsets.only(bottom: 8),
+                        )
+                      ],
                     )
                   ],
-                )
-              ],
-            ),
-          ),
-        ));
+                ),
+              ),
+            ));
   }
 
   Future<bool> _vincularConta(ContaViewModel conta) async {
@@ -443,9 +428,9 @@ class ZContaView extends IView<ZConta> {
   bool _verificarSeContaJaVinculada(String idConta) {
     if (idConta != null)
       return state.widget.contas
-          .where((x) => x.idConta.toLowerCase() == idConta.toLowerCase())
-          .toList()
-          .length >
+              .where((x) => x.idConta.toLowerCase() == idConta.toLowerCase())
+              .toList()
+              .length >
           0;
 
     return false;
