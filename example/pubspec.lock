@@ -410,7 +410,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.9.8+14"
+    version: "0.9.10+1"
 sdks:
   dart: ">=2.5.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.4 <2.0.0"

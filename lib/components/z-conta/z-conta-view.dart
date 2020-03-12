@@ -393,7 +393,7 @@ class ZContaView extends IView<ZConta> {
 
   Future<bool> _vincularConta(ContaViewModel conta) async {
     if (!_verificarSeContaJaVinculada(conta.idConta)) {
-      _dialogUtils.showZProgressDialog("Vinculando Conta", 0.5, _globalKey);
+      _dialogUtils.showZProgressDialog("Vinculando conta", 0.5, _globalKey);
 
       var res = await _contaService.associarConta(conta.idConta);
 
@@ -422,7 +422,11 @@ class ZContaView extends IView<ZConta> {
   }
 
   bool _verificarSeContaJaVinculada(String idConta) {
-    return state.widget.contas.where((x) => x.idConta == idConta).toList().length > 0;
+    return state.widget.contas
+            .where((x) => x.idConta.toLowerCase() == idConta.toLowerCase())
+            .toList()
+            .length >
+        0;
   }
 
   Future _trocarConta(ContaViewModel conta) async {
