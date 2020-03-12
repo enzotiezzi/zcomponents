@@ -1,3 +1,15 @@
+## 0.9.10+1
+
+* fix teste conexão
+
+## 0.9.10
+
+* api Identity server e cores
+
+## 0.9.9
+
+* ZConta!
+
 ## 0.9.8+14
 
 * Ajuste Zindentity logout!
