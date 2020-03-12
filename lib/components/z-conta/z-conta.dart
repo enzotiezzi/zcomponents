@@ -80,7 +80,7 @@ class ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
                 title: new Text("${item.nomeFantasia}"),
                 subtitle: new Text(_view.verificarContaAtiva(item.idConta)
                     ? "Conta ativa"
-                    : "Ativar conta"),
+                    : ""),
                 trailing: new Icon(Icons.arrow_forward_ios),
                 onTap: () => _view.selecionarConta(item),
               );
