@@ -18,14 +18,9 @@ abstract class Service {
   String exceptionMessage = "";
   Map<String, String> headers = new HashMap<String, String>();
 
-  SharedPreferences sharedPreferences;
-
   Service(this.token);
 
   Future buildAuthorizationHeaders() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-
-    headers[HttpHeaders.contentTypeHeader] = "application/json";
     headers[HttpHeaders.authorizationHeader] = "Bearer $token";
   }
 
@@ -35,6 +30,9 @@ abstract class Service {
 
     try {
       await buildAuthorizationHeaders();
+
+      if (body != null)
+        headers[HttpHeaders.contentTypeHeader] = "application/json";
 
       switch (method) {
         case HTTP_GET:

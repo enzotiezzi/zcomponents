@@ -3,11 +3,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-conta/z-conta-view.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/conta-view-model.dart';
 
 class ZConta extends StatefulWidget {
   String token;
+  List<ContaViewModel> contas;
+  Function(ContaViewModel) onBindAccount;
+  Function(ContaViewModel) onAccountChange;
 
-  ZConta({this.token});
+  ZConta({
+    @required this.token,
+    @required this.contas,
+    this.onBindAccount,
+    this.onAccountChange,
+  });
 
   @override
   State<StatefulWidget> createState() => _ZContaState();
@@ -54,17 +63,22 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
         ),
         new ListView.builder(
             shrinkWrap: true,
-            itemCount: _view.contas.length,
+            itemCount: widget.contas.length,
             itemBuilder: (context, index) {
-              var item = _view.contas[index];
+              var item = widget.contas[index];
 
               return new ListTile(
                 leading: new CircleAvatar(
-                  backgroundColor: Colors.teal,
-                  child: new Text("${item.conta[0]}"),
+                  backgroundColor: item.corPrimaria,
+                  child: new Text(
+                    "${item.nomeFantasia[0]}",
+                    style: new TextStyle(color: item.corSecundaria),
+                  ),
                 ),
-                title: new Text("${item.conta}"),
-                subtitle: new Text(item.ativa ? "Conta ativa" : "Ativar conta"),
+                title: new Text("${item.nomeFantasia}"),
+                subtitle: new Text(_view.verificarContaAtiva(item.idConta)
+                    ? "Conta ativa"
+                    : "Ativar conta"),
                 trailing: new Icon(Icons.arrow_forward_ios),
                 onTap: () => _view.selecionarConta(item),
               );

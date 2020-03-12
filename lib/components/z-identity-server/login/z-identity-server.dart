@@ -37,7 +37,14 @@ class ZIdentityServer {
           _flutterWebviewPlugin.reload();
       });
 
-      _flutterWebviewPlugin.launch(_generateURI());
+      await _flutterWebviewPlugin.launch(_generateURI().toString(),
+          javascriptChannels: <JavascriptChannel>[
+            JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+              _flutterWebviewPlugin.close().then((_) {
+                _flutterWebviewPlugin.dispose();
+              });
+            }),
+          ].toSet());
 
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
           (url) => url.contains("code=") && url.contains(redirectURI));
@@ -110,7 +117,7 @@ class ZIdentityServer {
         "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
         headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
         javascriptChannels: <JavascriptChannel>[
-          JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+          JsChannels.getChanngelOkWebView((javaScriptMessage) {
             _flutterWebviewPlugin.close().then((_) {
               _flutterWebviewPlugin.dispose();
 
