@@ -1,3 +1,7 @@
+## 0.9.10+2
+
+* update zconta
+
 ## 0.9.10+1
 
 * fix teste conexão
