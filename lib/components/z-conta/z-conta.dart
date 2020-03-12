@@ -12,18 +12,19 @@ class ZConta extends StatefulWidget {
   Function(ContaViewModel) onBindAccount;
   Function(ContaViewModel) onAccountChange;
 
-  ZConta({
-    @required this.token,
-    @required this.contas,
-    this.onBindAccount,
-    this.onAccountChange,
-  });
+  ZConta(
+      {@required this.token,
+      @required this.contas,
+      this.onBindAccount,
+      this.onAccountChange,
+      GlobalKey key})
+      : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ZContaState();
+  State<StatefulWidget> createState() => ZContaState();
 }
 
-class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
+class ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
   ZContaView _view;
 
   @override
@@ -70,10 +71,10 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
 
               return new ListTile(
                 leading: new CircleAvatar(
-                  backgroundColor: MainStyle.get(context).primaryColor,
+                  backgroundColor: item.corPrimaria,
                   child: new Text(
                     "${item.nomeFantasia[0]}",
-                    style: new TextStyle(color: MainStyle.get(context).secondaryColor),
+                    style: new TextStyle(color: item.corSecundaria),
                   ),
                 ),
                 title: new Text("${item.nomeFantasia}"),
@@ -91,5 +92,12 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
   @override
   void afterFirstLayout(BuildContext context) {
     _view.afterBuild();
+  }
+
+  void updateToken(String token) {
+    if (mounted)
+      setState(() {
+        widget.token = token;
+      });
   }
 }
