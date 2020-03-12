@@ -278,11 +278,12 @@ class ZContaView extends IView<ZConta> {
   }
 
   bool verificarContaAtiva(String idConta) {
-    if (idConta != null) {
-      var tokenInfo =
-          TokenInfo.fromJson(TokenParser.parseJwt(state.widget.token));
+    var tokenInfo =
+        TokenInfo.fromJson(TokenParser.parseJwt(state.widget.token));
 
-      return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
+    if (tokenInfo != null) {
+      if (tokenInfo.idConta != null)
+        return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
     }
 
     return false;
