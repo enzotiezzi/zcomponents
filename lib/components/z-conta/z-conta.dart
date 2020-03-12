@@ -57,7 +57,7 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
                     style: new TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
-                        color: Color(0xff2bbab4)),
+                        color: MainStyle.get(context).primaryColor),
                   ),
                 ))
           ],
@@ -70,10 +70,10 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
 
               return new ListTile(
                 leading: new CircleAvatar(
-                  backgroundColor: item.corPrimaria,
+                  backgroundColor: MainStyle.get(context).primaryColor,
                   child: new Text(
                     "${item.nomeFantasia[0]}",
-                    style: new TextStyle(color: item.corSecundaria),
+                    style: new TextStyle(color: MainStyle.get(context).secondaryColor),
                   ),
                 ),
                 title: new Text("${item.nomeFantasia}"),

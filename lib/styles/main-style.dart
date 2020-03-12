@@ -15,7 +15,16 @@ class MainStyle {
 class _MainStyle {
   BuildContext context;
 
+  Color _primaryColor = const Color(0xff2bbab4);
+  Color _secondaryColor = const Color(0xff801f92);
+
   _MainStyle({this.context});
+
+  Color get primaryColor => _primaryColor;
+  set primaryColor(Color primaryColor) => _primaryColor = primaryColor;
+
+  Color get secondaryColor => _secondaryColor;
+  set secondaryColor(Color secondaryColor) => _secondaryColor = secondaryColor;
 
   Scaffold getDefaultScaffold(String title, Widget body) => new Scaffold(
       backgroundColor: _defaultScaffoldColor,
