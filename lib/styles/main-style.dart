@@ -43,7 +43,7 @@ class _MainStyle {
             child: new Icon(
               Icons.arrow_back_ios,
               size: 20.0,
-              color: const Color(0xff2BB9B4),
+              color: primaryColor,
             ),
           ),
         ),
