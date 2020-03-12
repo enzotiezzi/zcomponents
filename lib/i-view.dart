@@ -20,25 +20,25 @@ abstract class IView<T extends StatefulWidget> {
     });
   }
 
-  Future<T> navigate(Widget presenter) {
+  Future<T> navigate<T>(Widget presenter) {
     return Navigator.push(
         state.context, new MaterialPageRoute(builder: (context) => presenter));
   }
 
-  Future<T> navigateReplacement(Widget presenter) {
+  Future<T> navigateReplacement<T>(Widget presenter) {
     return Navigator.pushReplacement(
         state.context, new MaterialPageRoute(builder: (context) => presenter));
   }
 
-  Future<T> navigateNamed(String route) {
+  Future<T> navigateNamed<T>(String route) {
     return Navigator.pushNamed(state.context, route);
   }
 
-  Future<T> navigateNamedReplacement(String route) {
+  Future<T> navigateNamedReplacement<T>(String route) {
     return Navigator.pushReplacementNamed(state.context, route);
   }
 
-  Future<T> navigatorPushNamedAndRemoveUntil(String route, )  {
+  Future<T> navigatorPushNamedAndRemoveUntil<T>(String route, )  {
     return Navigator.pushNamedAndRemoveUntil(state.context,route,
             (Route<dynamic> route) => false);
   }
