@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:z_components/api/teste-conexao/i-teste-conexao-service.dart';
+import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/api/token-parser.dart';
 import 'package:z_components/components/z-identity-server/login/z-identity-server.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
@@ -18,8 +19,7 @@ class IdentityServer implements IIdentityServer {
 
   SharedPreferences _sharedPreferences;
 
-  ITesteConexaoService _testeConexaoService =
-      ZInjector.getDependency<ITesteConexaoService>();
+  ITesteConexaoService _testeConexaoService = new TesteConexaoService();
 
   TokenInfo _user;
 
