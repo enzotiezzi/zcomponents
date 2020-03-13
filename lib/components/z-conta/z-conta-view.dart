@@ -406,19 +406,16 @@ class ZContaView extends IView<ZConta> {
         _globalKey.currentState
             .refresh(1.0, "Vínculo feito com sucesso.", sucess: true);
 
-        await Future.delayed(
-            new Duration(seconds: 1), () => _dialogUtils.dismiss());
-
         if (state.widget.onBindAccount != null)
           await state.widget.onBindAccount(conta);
       } else {
         _globalKey.currentState.refresh(
             1.0, "Não foi possível fazer o vínculo com essa conta.",
             sucess: false);
-
-        await Future.delayed(
-            new Duration(seconds: 1), () => _dialogUtils.dismiss());
       }
+
+      await Future.delayed(
+          new Duration(seconds: 1), () => _dialogUtils.dismiss());
 
       return res;
     } else {
@@ -451,18 +448,15 @@ class ZContaView extends IView<ZConta> {
 
       state.setState(() {});
 
-      await Future.delayed(
-          new Duration(seconds: 1), () => _dialogUtils.dismiss());
-
       if (state.widget.onAccountChange != null)
         await state.widget.onAccountChange(conta);
     } else {
       _globalKey.currentState
           .refresh(1.0, "Não foi possível trocar de conta.", sucess: false);
-
-      await Future.delayed(
-          new Duration(seconds: 1), () => _dialogUtils.dismiss());
     }
+
+    await Future.delayed(
+        new Duration(seconds: 1), () => _dialogUtils.dismiss());
   }
 
   @override
