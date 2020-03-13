@@ -1,3 +1,7 @@
+## 0.9.10+9
+
+* zerando headers a cada requisicao
+
 ## 0.9.10+8
 
 * voltando ordem de eventos
