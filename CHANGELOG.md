@@ -1,3 +1,7 @@
+## 0.9.10+7
+
+* arrumando ordem de eventos
+
 ## 0.9.10+6
 
 * await account change and bind account
