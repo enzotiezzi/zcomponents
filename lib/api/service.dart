@@ -22,6 +22,8 @@ abstract class Service {
   Service(this.token);
 
   Future buildAuthorizationHeaders() async {
+    headers = {};
+
     headers[HttpHeaders.authorizationHeader] = "Bearer $token";
   }
 
