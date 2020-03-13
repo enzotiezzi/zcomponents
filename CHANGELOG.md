@@ -1,3 +1,7 @@
+## 0.9.10+6
+
+* await account change and bind account
+
 ## 0.9.10+5
 
 * update zconta
