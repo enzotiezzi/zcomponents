@@ -1,3 +1,7 @@
+## 0.9.10+11
+
+* Update IdentityServer
+
 ## 0.9.10+10
 
 * relogin
