@@ -52,8 +52,22 @@ class ZIdentityServer {
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
           (url) => url.contains("code=") && url.contains(redirectURI));
 
-      _flutterWebviewPlugin.close();
-      _flutterWebviewPlugin.dispose();
+      _flutterWebviewPlugin.onUrlChanged.listen((url) {
+        if (url == "https://identity-server-dev.zellar.com.br") {
+          _flutterWebviewPlugin.getCookies().then((cookies) {
+            if(cookies.containsKey(' idsrv.session')){
+              _sharedPreferences.setString("idsrv.session", cookies[' idsrv.session']);
+            }
+
+            _flutterWebviewPlugin
+                .close()
+                .then((_) => _flutterWebviewPlugin.dispose());
+          });
+        }
+      });
+
+      await _flutterWebviewPlugin
+          .reloadUrl("https://identity-server-dev.zellar.com.br");
 
       var code = Uri.parse(url).queryParameters['code'];
 
