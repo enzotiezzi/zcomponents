@@ -407,7 +407,7 @@ class ZContaView extends IView<ZConta> {
             .refresh(1.0, "Vínculo feito com sucesso.", sucess: true);
 
         if (state.widget.onBindAccount != null)
-          state.widget.onBindAccount(conta);
+          await state.widget.onBindAccount(conta);
       } else {
         _globalKey.currentState.refresh(
             1.0, "Não foi possível fazer o vínculo com essa conta.",
@@ -449,7 +449,7 @@ class ZContaView extends IView<ZConta> {
       state.setState(() {});
 
       if (state.widget.onAccountChange != null)
-        state.widget.onAccountChange(conta);
+        await state.widget.onAccountChange(conta);
     } else {
       _globalKey.currentState
           .refresh(1.0, "Não foi possível trocar de conta.", sucess: false);

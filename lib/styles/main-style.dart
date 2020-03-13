@@ -15,8 +15,8 @@ class MainStyle {
 class _MainStyle {
   BuildContext context;
 
-  Color _primaryColor = const Color(0xff2bbab4);
-  Color _secondaryColor = const Color(0xff801f92);
+  Color _primaryColor = new Color(0xff2bbab4);
+  Color _secondaryColor = new Color(0xff801f92);
 
   _MainStyle({this.context});
 
