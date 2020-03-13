@@ -51,7 +51,7 @@ class IdentityServer implements IIdentityServer {
             .toIso8601String(),
       );
 
-      setUserInfo();
+      await setUserInfo();
     }
   }
 
