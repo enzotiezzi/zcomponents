@@ -1,3 +1,7 @@
+## 0.9.10+10
+
+* relogin
+
 ## 0.9.10+9
 
 * zerando headers a cada requisicao
