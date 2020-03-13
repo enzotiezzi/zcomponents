@@ -1,3 +1,7 @@
+## 0.9.10+8
+
+* voltando ordem de eventos
+
 ## 0.9.10+7
 
 * arrumando ordem de eventos
