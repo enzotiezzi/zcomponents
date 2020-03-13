@@ -34,9 +34,7 @@ dependencies:
   flutter_spinkit: ^4.1.2
   percent_indicator: ^2.1.1+1
   after_init: ^0.1.2
-  flutter_webview_plugin:
-    git:
-      url: https://github.com/mueller-wulff/flutter_webview_plugin.git
+  flutter_webview_plugin: ^0.3.10+1
   uuid: ^2.0.4
   randombytes: ^0.1.1
   after_layout: ^1.0.7+2
