@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:crypto/crypto.dart' as x;
 import 'package:http/http.dart' as http;
 import 'package:randombytes/randombytes.dart';
 import 'package:z_components/components/z-identity-server/js-channels.dart';
+import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-identity-server/z-token-viewmodel.dart';
 
 class ZIdentityServer {
@@ -18,6 +20,7 @@ class ZIdentityServer {
   String tokenURL;
 
   var _flutterWebviewPlugin = new FlutterWebviewPlugin();
+  SharedPreferences _sharedPreferences;
 
   String _codeVerifier;
 
@@ -54,20 +57,11 @@ class ZIdentityServer {
 
       var code = Uri.parse(url).queryParameters['code'];
 
-      final response = await http.post(
-          'https://identity-server-dev.zellar.com.br/connect/token',
-          headers: {
-            "CONTENT-TYPE": "application/x-www-form-urlencoded"
-          },
-          body: {
-            'client_id': clientId,
-            'redirect_uri': redirectURI,
-            'grant_type': 'authorization_code',
-            'code': code,
-            'code_verifier': _codeVerifier
-          });
+      _sharedPreferences = await SharedPreferences.getInstance();
 
-      var tokenViewModel = ZTokenViewModel.fromJson(json.decode(response.body));
+      await _sharedPreferences.setString("code", code);
+
+      var tokenViewModel = await _getToken(code);
 
       return tokenViewModel;
     } catch (e) {
@@ -169,5 +163,38 @@ class ZIdentityServer {
         .replaceAll("/", "_")
         .replaceAll("\\", "_")
         .replaceAll("=", "");
+  }
+
+  Future<ZTokenViewModel> _getToken(String code) async {
+    try {
+      final response = await http.post(
+          'https://identity-server-dev.zellar.com.br/connect/token',
+          headers: {
+            "CONTENT-TYPE": "application/x-www-form-urlencoded"
+          },
+          body: {
+            'client_id': clientId,
+            'redirect_uri': redirectURI,
+            'grant_type': 'authorization_code',
+            'code': code,
+            'code_verifier': _codeVerifier
+          });
+
+      var tokenViewModel = ZTokenViewModel.fromJson(json.decode(response.body));
+
+      return tokenViewModel;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<ZTokenViewModel> reAuthorize() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+
+    var code = _sharedPreferences.getString("code");
+
+    var tokenViewModel = await _getToken(code);
+
+    return tokenViewModel;
   }
 }

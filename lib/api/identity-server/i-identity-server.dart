@@ -5,6 +5,8 @@ abstract class IIdentityServer {
 
   Future login();
 
+  Future reLogin();
+
   TokenInfo getUserClaims();
 
   Future setIdColaborador();
