@@ -43,7 +43,6 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
 
     scrollController = new ScrollController();
 
-  //  _scrollarParaDiaDeHoje();
   }
 
   String formatarData(String data) {
@@ -82,22 +81,6 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
     var date = DateTime.parse(data);
 
     return "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}";
-  }
-
-  void _scrollarParaDiaDeHoje() {
-    double offset = 0.0;
-
-    var deltaDias = dataFimFolha.difference(dataInicioFolha).inDays; // meu 100%
-    var deltaAtual = dataFimFolha
-        .difference(DateTime.now())
-        .inDays; // % de dias que ja passou
-
-    double offsetRelativo = 1000 - ((deltaAtual / deltaDias) * 1000) + 1;
-
-    Future.delayed(new Duration(seconds: 1), () {
-      scrollController.animateTo((offsetRelativo / 100.0).round() * 100.0,
-          duration: new Duration(milliseconds: 1000), curve: Curves.ease);
-    });
   }
 
   @override

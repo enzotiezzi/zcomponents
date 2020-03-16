@@ -174,24 +174,4 @@ class IdentityServer implements IIdentityServer {
   Future<Null> forceRefreshToken() async {
     await _refreshToken();
   }
-
-  @override
-  Future reLogin() async{
-    var authorizeAndExchangeCode = await _zIdentityServer.reAuthorize();
-
-    if (authorizeAndExchangeCode != null) {
-      await _sharedPreferences.setString(
-          ApiSettings.API_TOKEN, authorizeAndExchangeCode.accessToken);
-      await _sharedPreferences.setString(
-          ApiSettings.REFRESH_TOKEN, authorizeAndExchangeCode.refreshToken);
-      await _sharedPreferences.setString(
-        ApiSettings.TOKEN_EXPIRATION_DATE,
-        DateTime.now()
-            .add(Duration(seconds: authorizeAndExchangeCode.expiresIn))
-            .toIso8601String(),
-      );
-
-      setUserInfo();
-    }
-  }
 }

@@ -1,10 +1,8 @@
-import 'dart:io';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/view-model/batida-viewmodel.dart';
 import 'package:z_components/view-model/espelhodeponto-viewmodel.dart';
-
 import 'dialog-ocorrencia.dart';
 import 'espelho-de-ponto-view.dart';
 
@@ -32,7 +30,6 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
 
   @override
   Widget build(BuildContext context) {
-    double _larguraTela = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: _body(),

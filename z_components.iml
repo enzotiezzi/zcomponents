@@ -27,8 +27,11 @@
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/z_components/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/z_components/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/z_components/example/build" />
+<<<<<<< HEAD
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/z_components/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/ios/Flutter/App.framework/flutter_assets/packages" />
+=======
+>>>>>>> b3edb03d09397acaa0a23fcb52565f0e19f40793
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />

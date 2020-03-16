@@ -19,7 +19,7 @@ class ZIdentityServer {
   String authorizeURL;
   String tokenURL;
 
-  var _flutterWebviewPlugin = new FlutterWebviewPlugin();
+  FlutterWebviewPlugin _flutterWebviewPlugin = new FlutterWebviewPlugin();
   SharedPreferences _sharedPreferences;
 
   String _codeVerifier;
@@ -52,14 +52,24 @@ class ZIdentityServer {
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
           (url) => url.contains("code=") && url.contains(redirectURI));
 
-      _flutterWebviewPlugin.close();
-      _flutterWebviewPlugin.dispose();
+      _flutterWebviewPlugin.onUrlChanged.listen((url) {
+        if (url == "https://identity-server-dev.zellar.com.br") {
+          _flutterWebviewPlugin.getCookies().then((cookies) {
+            if(cookies.containsKey(' idsrv.session')){
+              _sharedPreferences.setString("idsrv.session", cookies[' idsrv.session']);
+            }
+
+            _flutterWebviewPlugin
+                .close()
+                .then((_) => _flutterWebviewPlugin.dispose());
+          });
+        }
+      });
+
+      await _flutterWebviewPlugin
+          .reloadUrl("https://identity-server-dev.zellar.com.br");
 
       var code = Uri.parse(url).queryParameters['code'];
-
-      _sharedPreferences = await SharedPreferences.getInstance();
-
-      await _sharedPreferences.setString("code", code);
 
       var tokenViewModel = await _getToken(code);
 
@@ -74,7 +84,7 @@ class ZIdentityServer {
       final response = await http.post(
           'https://identity-server-dev.zellar.com.br/connect/token',
           headers: {
-            "CONTENT-TYPE": "application/x-www-form-urlencoded"
+            HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },
           body: {
             'client_id': clientId,
@@ -170,7 +180,7 @@ class ZIdentityServer {
       final response = await http.post(
           'https://identity-server-dev.zellar.com.br/connect/token',
           headers: {
-            "CONTENT-TYPE": "application/x-www-form-urlencoded"
+            HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },
           body: {
             'client_id': clientId,
@@ -186,15 +196,5 @@ class ZIdentityServer {
     } catch (e) {
       return null;
     }
-  }
-
-  Future<ZTokenViewModel> reAuthorize() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-
-    var code = _sharedPreferences.getString("code");
-
-    var tokenViewModel = await _getToken(code);
-
-    return tokenViewModel;
   }
 }

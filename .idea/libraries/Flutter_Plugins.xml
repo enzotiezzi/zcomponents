@@ -1,11 +1,19 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
+<<<<<<< HEAD
       <root url="file://$USER_HOME$/Desktop/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.6+3" />
       <root url="file://$PROJECT_DIR$" />
       <root url="file://$USER_HOME$/Desktop/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_webview_plugin-0.3.10+1" />
       <root url="file://$USER_HOME$/Desktop/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+4" />
       <root url="file://$USER_HOME$/Desktop/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.6+4" />
+=======
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+4" />
+      <root url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.6+4" />
+      <root url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_webview_plugin-0.3.10+1" />
+      <root url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.6+3" />
+>>>>>>> b3edb03d09397acaa0a23fcb52565f0e19f40793
     </CLASSES>
     <JAVADOC />
     <SOURCES />
