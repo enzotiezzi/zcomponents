@@ -1,3 +1,23 @@
+## 0.9.10+11
+
+* Update IdentityServer
+
+## 0.9.10+10
+
+* relogin
+
+## 0.9.10+9
+
+* zerando headers a cada requisicao
+
+## 0.9.10+8
+
+* voltando ordem de eventos
+
+## 0.9.10+7
+
+* arrumando ordem de eventos
+
 ## 0.9.10+6
 
 * await account change and bind account
