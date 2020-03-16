@@ -19,7 +19,7 @@ class ZIdentityServer {
   String authorizeURL;
   String tokenURL;
 
-  var _flutterWebviewPlugin = new FlutterWebviewPlugin();
+  FlutterWebviewPlugin _flutterWebviewPlugin = new FlutterWebviewPlugin();
   SharedPreferences _sharedPreferences;
 
   String _codeVerifier;
@@ -70,10 +70,6 @@ class ZIdentityServer {
           .reloadUrl("https://identity-server-dev.zellar.com.br");
 
       var code = Uri.parse(url).queryParameters['code'];
-
-      _sharedPreferences = await SharedPreferences.getInstance();
-
-      await _sharedPreferences.setString("code", code);
 
       var tokenViewModel = await _getToken(code);
 
@@ -200,15 +196,5 @@ class ZIdentityServer {
     } catch (e) {
       return null;
     }
-  }
-
-  Future<ZTokenViewModel> reAuthorize() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-
-    var code = _sharedPreferences.getString("code");
-
-    var tokenViewModel = await _getToken(code);
-
-    return tokenViewModel;
   }
 }
