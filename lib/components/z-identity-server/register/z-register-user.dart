@@ -21,6 +21,7 @@ class ZRegisterUser {
             _flutterWebviewPlugin.close().then((_) {
               _flutterWebviewPlugin.dispose();
 
+              if (onSignUpComplete != null) onSignUpComplete();
             });
           }),
           JsChannels.getChanngelOkWebView((javaScriptMessage) {

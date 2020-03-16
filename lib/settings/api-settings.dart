@@ -1,4 +1,10 @@
 class ApiSettings {
+  static final String API_TOKEN = "ZTOKEN";
+  static final String REFRESH_TOKEN = "REFRESH_TOKEN";
+  static final String TOKEN_EXPIRATION_DATE = "TOKEN_EXPIRATION_DATE";
+  static final String API_ID_USER = "IDUSER";
+  static final String API_USERNAME = "USERNAME";
+
   /*static final String _host = "192.168.0.4";
   static final String   ENDPOINT_API_V1 = "http://${_host}:5001/api/v1";
   static final String ENDPOINT_API = "http://${_host}:5001/moltres/apis";

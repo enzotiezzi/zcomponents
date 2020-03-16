@@ -1,3 +1,35 @@
+## 0.9.10+6
+
+* await account change and bind account
+
+## 0.9.10+5
+
+* update zconta
+
+## 0.9.10+4
+
+* update zconta
+
+## 0.9.10+3
+
+* update zconta
+
+## 0.9.10+2
+
+* update zconta
+
+## 0.9.10+1
+
+* fix teste conexão
+
+## 0.9.10
+
+* api Identity server e cores
+
+## 0.9.9
+
+* ZConta!
+
 ## 0.9.8+14
 
 * Ajuste Zindentity logout!

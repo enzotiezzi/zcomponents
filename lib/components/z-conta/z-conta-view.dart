@@ -281,7 +281,12 @@ class ZContaView extends IView<ZConta> {
     var tokenInfo =
         TokenInfo.fromJson(TokenParser.parseJwt(state.widget.token));
 
-    return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
+    if (tokenInfo != null) {
+      if (tokenInfo.idConta != null)
+        return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
+    }
+
+    return false;
   }
 
   Future<bool> _pesquisarConta(String codigoAtivacao) async {
@@ -393,7 +398,7 @@ class ZContaView extends IView<ZConta> {
 
   Future<bool> _vincularConta(ContaViewModel conta) async {
     if (!_verificarSeContaJaVinculada(conta.idConta)) {
-      _dialogUtils.showZProgressDialog("Vinculando Conta", 0.5, _globalKey);
+      _dialogUtils.showZProgressDialog("Vinculando conta", 0.5, _globalKey);
 
       var res = await _contaService.associarConta(conta.idConta);
 
@@ -402,7 +407,7 @@ class ZContaView extends IView<ZConta> {
             .refresh(1.0, "Vínculo feito com sucesso.", sucess: true);
 
         if (state.widget.onBindAccount != null)
-          state.widget.onBindAccount(conta);
+          await state.widget.onBindAccount(conta);
       } else {
         _globalKey.currentState.refresh(
             1.0, "Não foi possível fazer o vínculo com essa conta.",
@@ -422,7 +427,14 @@ class ZContaView extends IView<ZConta> {
   }
 
   bool _verificarSeContaJaVinculada(String idConta) {
-    return state.widget.contas.where((x) => x.idConta == idConta).toList().length > 0;
+    if (idConta != null)
+      return state.widget.contas
+              .where((x) => x.idConta.toLowerCase() == idConta.toLowerCase())
+              .toList()
+              .length >
+          0;
+
+    return false;
   }
 
   Future _trocarConta(ContaViewModel conta) async {
@@ -437,7 +449,7 @@ class ZContaView extends IView<ZConta> {
       state.setState(() {});
 
       if (state.widget.onAccountChange != null)
-        state.widget.onAccountChange(conta);
+        await state.widget.onAccountChange(conta);
     } else {
       _globalKey.currentState
           .refresh(1.0, "Não foi possível trocar de conta.", sucess: false);

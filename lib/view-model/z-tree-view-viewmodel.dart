@@ -8,6 +8,7 @@ class ZTreeViewViewModel {
   bool jaPassou;
   bool select;
   int possiveisBuscas;
+  String caminho;
   List<ZTreeViewViewModel> filhos = new List();
 
   ZTreeViewViewModel({
@@ -20,6 +21,7 @@ class ZTreeViewViewModel {
     this.jaPassou,
     this.filhos,
     this.possiveisBuscas,
+    this.caminho,
     this.select: false,
   });
 

@@ -11,18 +11,19 @@ class ZConta extends StatefulWidget {
   Function(ContaViewModel) onBindAccount;
   Function(ContaViewModel) onAccountChange;
 
-  ZConta({
-    @required this.token,
-    @required this.contas,
-    this.onBindAccount,
-    this.onAccountChange,
-  });
+  ZConta(
+      {@required this.token,
+      @required this.contas,
+      this.onBindAccount,
+      this.onAccountChange,
+      GlobalKey key})
+      : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ZContaState();
+  State<StatefulWidget> createState() => ZContaState();
 }
 
-class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
+class ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
   ZContaView _view;
 
   @override
@@ -56,7 +57,7 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
                     style: new TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
-                        color: Color(0xff2bbab4)),
+                        color: MainStyle.get(context).primaryColor),
                   ),
                 ))
           ],
@@ -78,7 +79,7 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
                 title: new Text("${item.nomeFantasia}"),
                 subtitle: new Text(_view.verificarContaAtiva(item.idConta)
                     ? "Conta ativa"
-                    : "Ativar conta"),
+                    : ""),
                 trailing: new Icon(Icons.arrow_forward_ios),
                 onTap: () => _view.selecionarConta(item),
               );
@@ -90,5 +91,12 @@ class _ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
   @override
   void afterFirstLayout(BuildContext context) {
     _view.afterBuild();
+  }
+
+  void updateToken(String token) {
+    if (mounted)
+      setState(() {
+        widget.token = token;
+      });
   }
 }
