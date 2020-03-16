@@ -1,3 +1,7 @@
+## 0.9.11
+
+* ZNewTreeView
+
 ## 0.9.10+11
 
 * Update IdentityServer
