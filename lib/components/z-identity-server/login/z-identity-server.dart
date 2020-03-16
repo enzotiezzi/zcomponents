@@ -84,7 +84,7 @@ class ZIdentityServer {
       final response = await http.post(
           'https://identity-server-dev.zellar.com.br/connect/token',
           headers: {
-            "CONTENT-TYPE": "application/x-www-form-urlencoded"
+            HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },
           body: {
             'client_id': clientId,
@@ -180,7 +180,7 @@ class ZIdentityServer {
       final response = await http.post(
           'https://identity-server-dev.zellar.com.br/connect/token',
           headers: {
-            "CONTENT-TYPE": "application/x-www-form-urlencoded"
+            HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },
           body: {
             'client_id': clientId,
