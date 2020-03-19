@@ -7,7 +7,7 @@ import 'package:z_components/view-model/z-tree-view-viewmodel.dart';
 
 class ZNewTreeView extends StatefulWidget {
   List<ZTreeViewViewModel> lisTree;
-  void Function(String) onTap;
+  void Function(ZTreeViewViewModel) onTap;
 
   ZNewTreeView({this.lisTree, this.onTap});
 
@@ -200,7 +200,7 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
               });
               if (item.filhos.length == 0) {
                 if (widget.onTap != null) {
-                  var res = widget.onTap(item.idNivel);
+                  var res = widget.onTap(item);
                 }
               }
             },
@@ -280,7 +280,7 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
                         child: new GestureDetector(
                           onTap: () {
                             if (widget.onTap != null) {
-                              var res = widget.onTap(item.idNivel);
+                              var res = widget.onTap(item);
                             }
                           },
                           child: new Container(
