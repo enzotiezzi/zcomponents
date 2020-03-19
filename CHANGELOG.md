@@ -1,3 +1,7 @@
+## 0.9.13
+
+* new components
+
 ## 0.9.12
 
 * ZNewTreeView
