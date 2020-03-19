@@ -1,6 +1,6 @@
 name: z_components
 description: Z_Components is a package that contains a set of standardized components to facilitate, optimize, and accelerate the development of Zellar company's Android / IOS applications.
-version: 0.9.13
+version: 0.9.14
 author: Zellar <zellarrh1@gmail.com>
 homepage: https://github.com/victortmarques/zcomponents
 
@@ -38,6 +38,12 @@ dependencies:
   uuid: ^2.0.4
   randombytes: ^0.1.1
   after_layout: ^1.0.7+2
+  image_picker: ^0.6.3+4
+  youtube_player_flutter: ^6.1.0+4
+  video_player: ^0.10.8+1
+  video_thumbnail: ^0.2.0
+  path_provider: ^1.6.5
+  chewie: ^0.9.10
 
 dev_dependencies:
   flutter_test:
