@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:z_components/components/z-card-appbar.dart';
 import 'package:z_components/components/z-float-button.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
 import 'package:z_components/components/z_loading.dart';
@@ -38,6 +39,7 @@ import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/api/token-parser.dart';
 import 'package:after_init/after_init.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:z_components/components/z-appbar.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,7 +47,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
+      debugShowCheckedModeBanner: false,
+      home: ComponentExemploClasse(),
+    );
   }
 }
 
@@ -168,10 +172,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     },
   ];
 
+
+
+
   @override
   void initState() {
     super.initState();
-
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
     cpfFocus = new FocusNode();
@@ -211,11 +217,28 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return new ZConta(
-        contas: [],
-        token:
-            "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmZTY4YmI3YTIwNWYzZWJkNmEzYjcxZWU2N2NjYmRjIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODQxMTI0OTAsImV4cCI6MTU4NjcwNDQ5MCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IkFwcFNvbGljaXRhY29lcyIsInN1YiI6IjMyYmQ5MGNkLTk4ZWQtNGM2Mi1iZmZiLTNmZTY0OWI3YmM3YiIsImF1dGhfdGltZSI6MTU4NDExMjQ4OSwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IllKTU5MWVNRSFUzN0tXRUJYNzc1T0syU0lYU1M0SUJUIiwiaWRBY2NvdW50IjoiZjhkOTA0MDUtZDY5NS00OGY0LTk0YTAtZjJlMGFiODk1ZTUwIiwiYWNjb3VudCI6IlplbGxhcjIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIzMTQuMTU5LjI2NS05MCIsImVtYWlsIjoiY29udGF0b0B6ZWxsYXIuY29tLmJyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTVJTIFVzZXIiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.hDxQpjnnyrxMuXTY-ROjnlADBb7m73ZNRQRUADHp5V-hn4RTRyMUI5DMBjxYyq5Q_Z0atvevrD-WHJKcDqg947h6tvw7i0388oQ4c1QK1IIRSpV2WS1zK8z-uvVOYpNZwIrV0XSD9FZJO50oeJzvl3CBeifXJyB7ai36xgF67Fw7VAmuO0NxVg9PJNdcr4UkjVSsYWbHjZhivr8FquV3wkq6lakLhrpKz2IxLdUMHW02R60URfqcHKDXSxl_P_EuGj0_QAP9MLqtJlkh3arH8oq5OkM1TwTJqmOROQbvwj3rlmqTX8EfR5d5_RYMRSJ3h0Qj_8k_Mfk5PVCG6Z3qKA");
+    return new Scaffold(
+        appBar: ZAppBar(
+          expandable: true,
+
+          title: "Pagina de teste",
+          cor: Colors.purple,
+          card:  ZCardAppBar(zCardAppBarType: ZCardAppBarType.isZchamados,),
+
+        ),
+        body: _bodyTest());
   }
+  Widget _bodyTest() {
+    return new Container(
+      child: Text("teste"),
+    );
+  }
+
+
+
+
+
+
 
   void showAlertDialogNew() async {
     showDialog(
