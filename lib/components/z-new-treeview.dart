@@ -38,7 +38,6 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
   void initState() {
     super.initState();
     treeViewList = widget.lisTree;
-    preencherListaDeBusca();
   }
 
   @override
@@ -73,67 +72,88 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
       item.indexAuxiliar = j;
       List<String> caminhoAkis = new List();
       montarCaminho(item.caminho, caminhoAkis);
-      list.add(new GestureDetector(
-        onTap: () {
-          widget.onTap;
-        },
-        child: new Container(
-          decoration: BoxDecoration(
-            border: new Border.all(width: 1, color: Color(0xFFCCCCCC)),
-            borderRadius: new BorderRadius.circular(4),
-          ),
+      list.add(new Container(
           margin: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0),
-          child: new Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: new BorderRadius.circular(4),
-            ),
-            padding: EdgeInsets.only(left: 16),
-            child: new Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Container(
-                  child: new Row(
-                    children: <Widget>[
-                      new Container(
-                          width: MediaQuerySize.get(context).width * 0.53,
-                          color: Colors.transparent,
-                          padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: new Text(
-                              "${item.nome}",
-                              style: new TextStyle(fontSize: 14),
-                            ),
-                          ))
-                    ],
-                  ),
+          child: new ConfigurableExpansionTile(
+            initiallyExpanded: true,
+            header: new Expanded(
+              child: new Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: new Border.all(width: 1, color: Color(0xFFCCCCCC)),
+                  borderRadius: new BorderRadius.circular(4),
                 ),
-                new Container(
-                  child: new Row(
-                    children: <Widget>[
-                      new AnimatedSize(
-                        vsync: this,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.fastOutSlowIn,
-                        reverseDuration: Duration(milliseconds: 500),
-                        child: new Container(
-                          color: Colors.transparent,
-                          padding: const EdgeInsets.only(
-                            right: 16,
-                            left: 4,
-                          ),
-                        ),
+                padding: EdgeInsets.only(left: 16),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Container(
+                      child: new Row(
+                        children: <Widget>[
+                          new GestureDetector(
+                            child: new Container(
+                                width: MediaQuerySize.get(context).width * 0.72,
+                                color: Colors.transparent,
+                                padding: EdgeInsets.only(
+                                  top: 10.0,
+                                  bottom: 10.0,
+                                  left: 6.0,
+                                ),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: new Text(
+                                    "${item.nome}",
+                                    style: new TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    new Container(
+                      child: new Row(
+                        children: <Widget>[
+                          new AnimatedSize(
+                              vsync: this,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.fastOutSlowIn,
+                              reverseDuration: Duration(milliseconds: 500),
+                              child: new GestureDetector(
+                                onTap: () {},
+                                child: new Container(
+                                    color: Colors.transparent,
+                                    padding: const EdgeInsets.only(
+                                        right: 16,
+                                        left: 8,
+                                        bottom: 10.0,
+                                        top: 10.0),
+                                    child: new Row(
+                                      children: <Widget>[new Container()],
+                                    )),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ));
+            children: <Widget>[
+              (widget.lisTree.length != 0)
+                  ? new Container(
+                      child: new Column(
+                      children: lista2Novo(
+                          nivel: item,
+                          margin: 1.0,
+                          posicaoAnterior: 0,
+                          filhos: item.filhos.length),
+                    ))
+                  : new Container(),
+            ],
+          )));
       j++;
     });
     testeAki = true;
@@ -175,36 +195,22 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
       if (testeAki == false) {
         item.index = total;
       }
-      list.add(new Container(
-          color: Colors.white,
-          child: new ConfigurableExpansionTile(
-            initiallyExpanded: (filhos == 1) ? true : false,
-            key: listaKey[(item.index)][p],
-            borderColorStart: Colors.grey.withOpacity(0.3),
-            borderColorEnd: (item.filhos.length != 0)
-                ? Color(0xff2bbab4)
-                : Colors.grey.withOpacity(0.3),
-            bottomBorderOn: true,
-            onExpansionChanged: (bool value) {
-              for (int i = 0; i < listaKey[item.index].length; i++) {
-                if (i != item.indexAuxiliar) {
-                  listaKey[item.index][i] = new GlobalKey<_ZNewTreeViewState>();
-                } else {}
-              }
-              setState(() {
-                if (item.aberto == false) {
-                  item.aberto = true;
-                } else {
-                  item.aberto = false;
-                }
-              });
-              if (item.filhos.length == 0) {
-                if (widget.onTap != null) {
-                  var res = widget.onTap(item);
-                }
-              }
-            },
-            header: new Expanded(
+      list.add(new GestureDetector(
+        onTap: () {
+          widget.onTap;
+        },
+        child: new Container(
+            decoration: BoxDecoration(
+              border: new Border.all(width: 1, color: Color(0xFFCCCCCC)),
+              borderRadius: new BorderRadius.circular(4),
+            ),
+            margin: EdgeInsets.only(top: 4.0, left: 8.0, right: 8),
+            child: new Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: new BorderRadius.circular(4),
+              ),
+              padding: EdgeInsets.only(left: 16),
               child: new Container(
                 child: new Row(
                   mainAxisSize: MainAxisSize.max,
@@ -213,180 +219,44 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
                     new Container(
                       child: new Row(
                         children: <Widget>[
-                          (item.filhos.length != 0)
-                              ? (filhos == 1)
-                                  ? (item.aberto == true)
-                                      ? new Container(
-                                          margin: EdgeInsets.only(
-                                              left: margin * 10),
-                                          child:
-                                              new Icon(Icons.arrow_drop_down),
-                                        )
-                                      : new Container(
-                                          margin: EdgeInsets.only(
-                                              left: margin * 10),
-                                          child: new Icon(Icons.arrow_drop_up),
-                                        )
-                                  : (item.aberto == false)
-                                      ? new Container(
-                                          margin: EdgeInsets.only(
-                                              left: margin * 10),
-                                          child:
-                                              new Icon(Icons.arrow_drop_down),
-                                        )
-                                      : new Container(
-                                          margin: EdgeInsets.only(
-                                              left: margin * 10),
-                                          child: new Icon(Icons.arrow_drop_up),
-                                        )
-                              : new Container(
-                                  margin: EdgeInsets.only(left: margin * 10),
-                                  child: new Icon(
-                                    Icons.arrow_drop_up,
-                                    color: Colors.transparent,
-                                  ),
-                                ),
                           new Container(
-                            // margin: EdgeInsets.only(left: margin * 10),
-                            color: Colors.grey.withOpacity(0.5),
-                            width: 1.5,
-                            height: 45,
-                          ),
-                          new GestureDetector(
-                            child: new Container(
-                              width: 145,
+                              width: MediaQuerySize.get(context).width * 0.75,
                               color: Colors.transparent,
                               padding: EdgeInsets.only(
-                                  top: 10.0,
-                                  bottom: 10.0,
-                                  left: 6.0,
-                                  right: 30.0),
-                              child: new Text(
-                                "${item.nome}",
-                                style: new TextStyle(
-                                  fontSize: 11,
-                                ),
+                                top: 10.0,
+                                bottom: 10.0,
+                                left: 6.0,
                               ),
-                            ),
-                          )
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: new Text(
+                                  "${item.nome}",
+                                  style: new TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ))
                         ],
                       ),
                     ),
-                    AnimatedSize(
-                        vsync: this,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.fastOutSlowIn,
-                        reverseDuration: Duration(milliseconds: 500),
-                        child: new GestureDetector(
-                          onTap: () {
-                            if (widget.onTap != null) {
-                              var res = widget.onTap(item);
-                            }
-                          },
-                          child: new Container(
-                            color: Colors.transparent,
-                            padding: const EdgeInsets.only(
-                                right: 16, left: 40.0, bottom: 10.0, top: 10.0),
-                            child: new Icon(
-                              Icons.keyboard_arrow_right,
-                              color: Color(0xff999999),
-                              size: 16,
-                            ),
-                          ),
-                        ))
+                    new Container(
+                      color: Colors.transparent,
+                      padding: const EdgeInsets.only(
+                          right: 16, bottom: 10.0, top: 10.0),
+                      child: new Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Color(0xff999999),
+                        size: 16,
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-            children: <Widget>[
-              (item.filhos.length != 0)
-                  ? new Container(
-                      child: new Column(
-                      children: lista2Novo(
-                          nivel: item,
-                          margin: j,
-                          posicaoAnterior: item.index,
-                          filhos: item.filhos.length),
-                    ))
-                  : new Container()
-            ],
-          )));
+            )),
+      ));
       p++;
     });
     return list;
-  }
-
-  void preencherListaDeBusca() {
-    var lista = widget.lisTree
-        .map((item) => new ZTreeViewViewModel.clone(item))
-        .toList();
-    for (int i = 0; i < lista.length; i++) {
-      buscaProfundidade(lista[i]);
-    }
-    print(profArvore);
-  }
-
-  void preencherListaDeBuscaFiltrada(lista, String id) {
-    lista = widget.lisTree
-        .map((item) => new ZTreeViewViewModel.clone(item))
-        .toList();
-    for (int i = 0; i < lista.length; i++) {
-      buscaProfundidadeFiltrada(lista[i], id);
-    }
-  }
-
-  void buscaProfundidade(ZTreeViewViewModel base) {
-    if (base.filhos.isEmpty) {
-      auxProfArvore++;
-      if (auxProfArvore > profArvore) {
-        profArvore = auxProfArvore;
-      }
-      auxProfArvore = 0;
-      if (base.jaPassou == null || base.jaPassou == false) {
-        auxProfArvore++;
-        listaBusca.add(new ItemBuscaViewModel(
-            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
-      }
-      base.jaPassou = true;
-    }
-    base.filhos.forEach((filho) {
-      if (base.jaPassou == null || base.jaPassou == false) {
-        listaBusca.add(new ItemBuscaViewModel(
-            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
-      }
-      base.jaPassou = true;
-      buscaProfundidade(filho);
-    });
-    listaBuscaFiltrada = listaBusca;
-  }
-
-  void buscaProfundidadeFiltrada(ZTreeViewViewModel base, String id) {
-    if (base.filhos.isEmpty) {
-      if ((base.jaPassou == null || base.jaPassou == false) &&
-          base.nome == id) {
-        listaId.add(base.idNivel);
-        var lista = widget.lisTree
-            .map((item) => new ZTreeViewViewModel.clone(item))
-            .toList();
-        preencherListaDeBuscaFiltrada(lista, base.idNivelPai);
-      }
-      base.jaPassou = true;
-    }
-    base.filhos.forEach((filho) {
-      if (base.jaPassou == null || base.jaPassou == false) {
-        base.jaPassou = true;
-      }
-      if (base.idNivel == id && !listaId.contains(base.idNivel)) {
-        var lista = widget.lisTree
-            .map((item) => new ZTreeViewViewModel.clone(item))
-            .toList();
-        listaId.add(base.idNivel);
-        preencherListaDeBuscaFiltrada(lista, base.idNivelPai);
-      } else {
-        buscaProfundidadeFiltrada(filho, id);
-      }
-    });
-    listaBuscaFiltrada = listaBusca;
   }
 
   void limparBoolsFilhosTree(
