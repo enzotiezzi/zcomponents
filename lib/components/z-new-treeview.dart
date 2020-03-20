@@ -197,7 +197,7 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
       }
       list.add(new GestureDetector(
         onTap: () {
-          widget.onTap;
+          widget.onTap(item);
         },
         child: new Container(
             decoration: BoxDecoration(
