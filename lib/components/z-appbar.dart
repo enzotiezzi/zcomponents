@@ -9,11 +9,14 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => Size(double.infinity, tamanho());
   Widget card;
   bool expandable;
-  String texto = "testo de teste";
+  String texto = "texto de teste";
   String title = "Dashboard";
+  String assets;
+
+
   Color cor = Color(0xff2BBAB4);
 
-  ZAppBar({this.card, this.texto, @required this.expandable,this.title, this.cor});
+  ZAppBar({this.card, @required this.texto, @required this.expandable,@required this.title, this.cor,@required this.assets });
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +36,29 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
                     new Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        (title!=null)?
                         new Container(
                           margin: const EdgeInsets.only(
                               left: 10, top: 40, bottom: 10),
                           child: new Text(
-                            "DASHBOARD",
+                            "$title",
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                           ),
-                        ),
+                        ):new Container(
+                          //margin: EdgeInsets.only(top: 20),
+                            height: 35.0,
+                            width: 35.0,
+                            decoration: new BoxDecoration(
+                              borderRadius:
+                              new BorderRadius.all(const Radius.circular(1.0)),
+                              image: DecorationImage(
+                                image: new AssetImage('$assets'),
+                                fit: BoxFit.scaleDown,
+                              ),
+                            )),
                       ],
                     ),
                     new Container(
@@ -54,7 +69,7 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
                       color: Colors.white,
                     ),
                     Text(
-                      "PRÓXIMA SO",
+                      "$texto",
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(
@@ -97,6 +112,7 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
                                 ),
                                 onTap: () => Navigator.pop(context),
                               ),
+                              (title!=null)?
                               new Container(
                                   padding: const EdgeInsets.only(
                                       top: 40, bottom: 10, left: 40),
@@ -106,7 +122,17 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18),
-                                  )),
+                                  )):new Container(
+                                height: 35.0,
+                                width: 35.0,
+                                decoration: new BoxDecoration(
+                                  borderRadius:
+                                  new BorderRadius.all(const Radius.circular(1.0)),
+                                  image: DecorationImage(
+                                    image: new AssetImage('$assets'),
+                                    fit: BoxFit.scaleDown,
+                                  ),
+                                )),
                               Container(
                                 padding: const EdgeInsets.only(
                                     top: 40, bottom: 10, left: 40),
@@ -140,11 +166,13 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      (texto!=null)?
                       Container(
                           child: Text(
                         "$texto",
                         style: TextStyle(color: Colors.white),
-                      ))
+                      )):new Container(
+                      ),
                     ],
                   ),
                   Row(

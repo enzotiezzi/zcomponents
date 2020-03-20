@@ -5,8 +5,8 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:myapp/z-photo-view-animation.dart';
-import 'package:myapp/z-hero-transition-class.dart';
+import 'package:z_components/components/z-hero-transition-class.dart';
+import 'package:z_components/components/z-photo-view-animation.dart';
 
 class ZTakePhoto extends StatefulWidget {
   List<String> fotos;

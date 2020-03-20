@@ -3,20 +3,31 @@ import 'package:flutter/material.dart';
 class ZCardAppBar extends StatefulWidget {
   final Key key;
   final ZCardAppBarType zCardAppBarType;
-  ZCardAppBar({this.key, @required this.zCardAppBarType}): super(key: key);
-  @override
-  _ZCardAppBarState createState() => _ZCardAppBarState();
-}
 
-class _ZCardAppBarState extends State<ZCardAppBar> with TickerProviderStateMixin {
+  Color backgroundColorTotalCham = const Color(0xff2bbab4);
+  Color primaryColor = const Color(0xff2bbab4);
+  Color backgroundColorChPen = Colors.white;
+  Color backgroundColorChAnda = Colors.white;
+  Color textNumbTotal = Colors.white;
+  Color textNumbPend = Colors.black;
+  Color textNumbAnd = Colors.black;
+  Color textWordTotal = Colors.white;
+  Color textWordPend = Color(0xff999999);
+  Color textWordAnda = Color(0xff999999);
+  Color corTextNumbTotal = Colors.white;
+  Color corTextNumbPend = Colors.black;
+  Color corTextNumbAnd = Colors.black;
+  Color corTextWordTotal = Colors.white;
 
-  AnimationController animationController;
+  AnimationController animationControllerTotal;
   AnimationController animationControllerPendentes;
   AnimationController animationControllerAndamento;
 
-  Animation animation;
+  Animation animationTotal;
   Animation animationAndamento;
   Animation animationPendentes;
+
+  int durationAnimation = 5;
 
   var carregouList = true;
   var carregouListPend = true;
@@ -26,51 +37,69 @@ class _ZCardAppBarState extends State<ZCardAppBar> with TickerProviderStateMixin
   var totalCh = true;
   var andamento = false;
 
-  static Color backgroundColorTotalCham = const Color(0xff2bbab4);
-  static Color primaryColorr = const Color(0xff2bbab4);
 
+  ZCardAppBar(
+      {this.key,
+      @required this.zCardAppBarType,
+      this.backgroundColorTotalCham,
+      this.primaryColor,
+      this.andamento,
+      this.animationAndamento,
+      this.animationControllerAndamento,
+      this.animationControllerPendentes,
+      this.animationControllerTotal,
+      this.animationPendentes,
+        this.animationTotal,
+        this.backgroundColorChAnda,
+        this.backgroundColorChPen,
+        this.carregouList,
+        this.carregouListAnd,
+        this.carregouListPend,
+        this.corTextNumbAnd,
+        this.corTextNumbPend,
+        this.corTextNumbTotal,
+        this.corTextWordTotal,
+        this.durationAnimation,
+        this.pendentes,
+        this.textNumbAnd,
+        this.textNumbPend,
+        this.textNumbTotal,
+        this.textWordAnda,
+        this.textWordPend,
+        this.textWordTotal,
+        this.totalCh,
+      })
+      : super(key: key);
 
-  Color corTextNumbTotal = Colors.white;
-  Color corTextNumbPend = Colors.black;
-  Color corTextNumbAnd = Colors.black;
-  Color corTextWordTotal = Colors.white;
-  Color textNumbPend = Colors.black;
-  Color backgroundColorChPen = Colors.white;
-  Color textWordPend = Color(0xff999999);
-  Color backgroundColorChAnda = Colors.white;
-  Color textNumbAnd = Colors.black;
-  Color textWordAnda = Color(0xff999999);
-  Color textNumbTotal = Colors.white;
-  Color textWordTotal = Colors.white;
+  @override
+  _ZCardAppBarState createState() => _ZCardAppBarState();
+}
 
-
+class _ZCardAppBarState extends State<ZCardAppBar>
+    with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
 
-animationController    = new AnimationController(vsync: this);
-animationControllerPendentes = new AnimationController(vsync: this);
-animationControllerAndamento =  new AnimationController(vsync: this,duration: Duration(seconds: 5));
-//animationController.forward();
-  //animationControllerPendentes.forward();
-     animationControllerAndamento.forward();
+    widget.animationControllerTotal = new AnimationController(vsync: this);
+    widget.animationControllerPendentes = new AnimationController(vsync: this);
+    widget.animationControllerAndamento = new AnimationController(
+        vsync: this, duration: Duration(seconds: 5));
 
-    animation =  IntTween(begin: 0, end: 10).animate(
+    widget.animationTotal = IntTween(begin: 0, end: 10).animate(CurvedAnimation(
+        parent: widget.animationControllerAndamento, curve: Curves.easeOut));
+
+    widget.animationAndamento = IntTween(begin: 0, end: 10).animate(
         CurvedAnimation(
-            parent: animationControllerAndamento,
-            curve: Curves.easeOut));
-    animationAndamento =IntTween(begin: 0, end: 10).animate(
-        CurvedAnimation(
-            parent: animationControllerAndamento,
+            parent: widget.animationControllerAndamento,
             curve: Curves.easeOut));
 
-    animationPendentes = IntTween(begin: 0, end: 10).animate(
+    widget.animationPendentes = IntTween(begin: 0, end: 10).animate(
         CurvedAnimation(
-            parent: animationControllerAndamento,
+            parent: widget.animationControllerAndamento,
             curve: Curves.easeOut));
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -81,7 +110,7 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
   Widget Zcard() {
     switch (widget.zCardAppBarType) {
       case ZCardAppBarType.isZchamados:
-        return  _cardTest();
+        return _cardTest();
 
         break;
       case ZCardAppBarType.isZexecutor:
@@ -92,7 +121,8 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
         break;
     }
   }
-   Widget _cardTest() {
+
+  Widget _cardTest() {
     return new Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -114,7 +144,6 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
     );
   }
 
-
   Widget _buildTotalChamadosDash() {
     return new InkWell(
       onTap: () {
@@ -125,7 +154,7 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
         width: 90,
         height: 90,
         decoration: new BoxDecoration(
-          color: backgroundColorTotalCham,
+          color: widget.backgroundColorTotalCham,
           borderRadius: BorderRadius.all(const Radius.circular(6)),
         ),
         margin: const EdgeInsets.only(left: 4, bottom: 4, top: 4),
@@ -137,24 +166,24 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AnimatedBuilder(
-                        animation: animationController,
+                        animation: widget.animationControllerTotal,
                         builder: (BuildContext context, Widget child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
-                              child: (carregouList != false)
+                              child: (widget.carregouList != false)
                                   ? new Text(
-                                      animation.value.toString(),
+                                      widget.animationTotal.value.toString(),
                                       style: new TextStyle(
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
-                                          color: corTextNumbTotal),
+                                          color: widget.corTextNumbTotal),
                                     )
                                   : new Text(
                                       "0",
                                       style: new TextStyle(
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
-                                          color: corTextNumbTotal),
+                                          color: widget.corTextNumbTotal),
                                     ));
                         }),
                   ],
@@ -187,7 +216,8 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
               child: new Text(
                 "TOTAL DE\nCHAMADOS",
                 textAlign: TextAlign.center,
-                style: new TextStyle(fontSize: 10, color: corTextWordTotal),
+                style:
+                    new TextStyle(fontSize: 10, color: widget.corTextWordTotal),
               ),
             )
           ],
@@ -206,7 +236,7 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
         width: 90,
         height: 90,
         decoration: new BoxDecoration(
-          color: backgroundColorChPen,
+          color: widget.backgroundColorChPen,
           borderRadius: BorderRadius.all(const Radius.circular(6)),
         ),
         margin: const EdgeInsets.only(left: 4, bottom: 4, top: 4, right: 4),
@@ -219,24 +249,25 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AnimatedBuilder(
-                        animation: animationControllerPendentes,
+                        animation: widget.animationControllerPendentes,
                         builder: (BuildContext context, Widget child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
-                              child: (carregouListPend != false)
+                              child: (widget.carregouListPend != false)
                                   ? new Text(
-                                      animationPendentes.value.toString(),
+                                      widget.animationPendentes.value
+                                          .toString(),
                                       style: new TextStyle(
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
-                                          color: textNumbPend),
+                                          color: widget.textNumbPend),
                                     )
                                   : new Text(
                                       "0",
                                       style: new TextStyle(
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
-                                          color: textNumbPend),
+                                          color: widget.textNumbPend),
                                     ));
                         }),
                   ],
@@ -269,7 +300,7 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
               child: new Text(
                 "CHAMADOS\nPENDENTES",
                 textAlign: TextAlign.center,
-                style: new TextStyle(fontSize: 10, color: textWordPend),
+                style: new TextStyle(fontSize: 10, color: widget.textWordPend),
               ),
             )
           ],
@@ -277,6 +308,7 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
       ),
     );
   }
+
   Widget _buildChamadosAndamentoDash() {
     return new InkWell(
       onTap: () {
@@ -287,7 +319,7 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
         width: 90,
         height: 90,
         decoration: new BoxDecoration(
-          color: backgroundColorChAnda,
+          color: widget.backgroundColorChAnda,
           borderRadius: BorderRadius.all(const Radius.circular(6)),
         ),
         margin: const EdgeInsets.only(bottom: 4, top: 4, right: 4),
@@ -299,24 +331,25 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AnimatedBuilder(
-                        animation: animationControllerAndamento,
+                        animation: widget.animationControllerAndamento,
                         builder: (BuildContext context, Widget child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
-                              child: (carregouListAnd != false)
+                              child: (widget.carregouListAnd != false)
                                   ? new Text(
-                                      animationAndamento.value.toString(),
+                                      widget.animationAndamento.value
+                                          .toString(),
                                       style: new TextStyle(
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
-                                          color: textNumbAnd),
+                                          color: widget.textNumbAnd),
                                     )
                                   : new Text(
                                       "0",
                                       style: new TextStyle(
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
-                                          color: textNumbAnd),
+                                          color: widget.textNumbAnd),
                                     ));
                         }),
                   ],
@@ -349,7 +382,7 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
               child: new Text(
                 "CHAMADOS EM\nANDAMENTO",
                 textAlign: TextAlign.center,
-                style: new TextStyle(fontSize: 10, color: textWordAnda),
+                style: new TextStyle(fontSize: 10, color: widget.textWordAnda),
               ),
             )
           ],
@@ -360,52 +393,52 @@ animationControllerAndamento =  new AnimationController(vsync: this,duration: Du
 
   void totalDeCham() {
     setState(() {
-      backgroundColorTotalCham = primaryColorr;
-      backgroundColorChPen = Colors.white;
-      backgroundColorChAnda = Colors.white;
-      textNumbTotal = Colors.white;
-      textNumbPend = Colors.black;
-      textNumbAnd = Colors.black;
-      textWordTotal = Colors.white;
-      textWordPend = Color(0xff999999);
-      textWordAnda = Color(0xff999999);
-      pendentes = false;
-      totalCh = true;
-      andamento = false;
+      widget.backgroundColorTotalCham = widget.primaryColor;
+      widget.backgroundColorChPen = Colors.white;
+      widget.backgroundColorChAnda = Colors.white;
+      widget.textNumbTotal = Colors.white;
+      widget.textNumbPend = Colors.black;
+      widget.textNumbAnd = Colors.black;
+      widget.textWordTotal = Colors.white;
+      widget.textWordPend = Color(0xff999999);
+      widget.textWordAnda = Color(0xff999999);
+      widget.pendentes = false;
+      widget.totalCh = true;
+      widget.andamento = false;
     });
   }
 
   void chamPend() {
     setState(() {
-      backgroundColorTotalCham = Colors.white;
-      backgroundColorChPen = primaryColorr;
-      backgroundColorChAnda = Colors.white;
-      textNumbTotal = Colors.black;
-      textNumbPend = Colors.white;
-      textNumbAnd = Colors.black;
-      textWordTotal = Color(0xff999999);
-      textWordPend = Colors.white;
-      textWordAnda = Color(0xff999999);
-      pendentes = true;
-      totalCh = false;
-      andamento = false;
+      widget.backgroundColorTotalCham = Colors.white;
+      widget.backgroundColorChPen = widget.primaryColor;
+      widget.backgroundColorChAnda = Colors.white;
+      widget.textNumbTotal = Colors.black;
+      widget.textNumbPend = Colors.white;
+      widget.textNumbAnd = Colors.black;
+      widget.textWordTotal = Color(0xff999999);
+      widget.textWordPend = Colors.white;
+      widget.textWordAnda = Color(0xff999999);
+      widget.pendentes = true;
+      widget.totalCh = false;
+      widget.andamento = false;
     });
   }
 
   void chamAtendimento() {
     setState(() {
-      backgroundColorTotalCham = Colors.white;
-      backgroundColorChPen = Colors.white;
-      backgroundColorChAnda = primaryColorr;
-      textNumbTotal = Colors.black;
-      textNumbPend = Colors.black;
-      textNumbAnd = Colors.white;
-      textWordTotal = Color(0xff999999);
-      textWordPend = Color(0xff999999);
-      textWordAnda = Colors.white;
-      pendentes = false;
-      totalCh = false;
-      andamento = true;
+      widget.backgroundColorTotalCham = Colors.white;
+      widget.backgroundColorChPen = Colors.white;
+      widget.backgroundColorChAnda = widget.primaryColor;
+      widget.textNumbTotal = Colors.black;
+      widget.textNumbPend = Colors.black;
+      widget.textNumbAnd = Colors.white;
+      widget.textWordTotal = Color(0xff999999);
+      widget.textWordPend = Color(0xff999999);
+      widget.textWordAnda = Colors.white;
+      widget.pendentes = false;
+      widget.totalCh = false;
+      widget.andamento = true;
     });
   }
 }

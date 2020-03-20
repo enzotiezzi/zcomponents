@@ -219,18 +219,18 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: ZAppBar(
-          expandable: true,
+          expandable: false,
+          assets: "assets/z.png",
+          texto: 'Texto informativo do app bar',
 
-          title: "Pagina de teste",
           cor: Colors.purple,
-          card:  ZCardAppBar(zCardAppBarType: ZCardAppBarType.isZchamados,),
 
         ),
         body: _bodyTest());
   }
   Widget _bodyTest() {
     return new Container(
-      child: Text("teste"),
+      child:  ZCardAppBar(zCardAppBarType: ZCardAppBarType.isZchamados,),
     );
   }
 
