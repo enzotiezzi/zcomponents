@@ -5,6 +5,7 @@ class TokenInfo {
   String cpf;
   String email;
   String nome;
+  String telefone;
 
   TokenInfo(
       {this.idUser,
@@ -12,7 +13,8 @@ class TokenInfo {
       this.idConta,
       this.cpf,
       this.email,
-      this.nome});
+      this.nome,
+      this.telefone});
 
   factory TokenInfo.fromJson(Map<String, dynamic> json) {
     return new TokenInfo(
@@ -21,6 +23,7 @@ class TokenInfo {
         idConta: json["idAccount"],
         cpf: json["preferred_username"],
         email: json["email"],
-        nome: json["name"]);
+        nome: json["name"],
+        telefone: json["telefone"]);
   }
 }

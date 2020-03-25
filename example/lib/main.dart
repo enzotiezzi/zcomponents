@@ -1,43 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:z_components/components/z-float-button.dart';
-import 'package:z_components/components/z-nome-reduzido.dart';
-import 'package:z_components/components/z_loading.dart';
-import 'package:z_components/components/z_tabbar.dart';
 import 'package:z_components/components/z-collection.dart';
-import 'package:z_components/components/z-button-card-box.dart';
-import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-baseline.dart';
-import 'package:z_components/components/z_navigationbar.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/config/z-tipos-baseline.dart';
-import 'package:z_components/config/z-button-type.dart';
-import 'package:z_components/config/z-type-tile.dart';
-import 'package:z_components/components/z_button.dart';
-import 'package:z_components/components/z-cadastro-usuario.dart';
-import 'package:z_components/components/z-text.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/components/z-hora-padrao.dart';
-import 'package:z_components/components/zp-grafico.dart';
-import 'package:z_components/components/z-expendable-item-tile.dart';
-import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/config/z-dialog.dart';
-import 'package:z_components/components/z-expansion-tile.dart';
-import 'package:z_components/components/z-item-tile.dart';
-import 'package:z_components/components/z-header.dart';
-import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-import 'package:z_components/components/z-log/z-log.dart';
-import 'package:z_components/components/z-identity-server/register/z-register-user.dart';
-import 'package:z_components/components/z-identity-server/login/z-identity-server.dart';
-import 'package:z_components/components/z-identity-server/vincular-conta/vinculo-conta.dart';
-import 'package:z_components/components/z-identity-server/token-info.dart';
-import 'package:z_components/api/token-parser.dart';
-import 'package:after_init/after_init.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:z_components/components/z-user-info/z-user-info.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
+        debugShowCheckedModeBanner: false, home: ZUserInfo(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ1Yzg2OWQ1ZmUzMDhkNzEyYTIwY2NiMTZhOGVlZTYyIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODUxNjQzODksImV4cCI6MTU4NTE2Nzk4OSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpQb250byIsInN1YiI6ImJiYzA3ZGRhLWEzNDQtNDdlZC05NGQ0LWZkODQ1MjZjYTc4OCIsImF1dGhfdGltZSI6MTU4NTE2NDM4OCwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ik9aNFlEQVRFUVhFQzdGU0dONEc0WENOQjI3RzVQWEFSIiwiaWRDb2xhYm9yYWRvciI6IjU0OEQ1MjRELUE2REUtNEQ4QS05NDVFLUE3MDZBRDJGODdGMiIsImlkQWNjb3VudCI6IjQ4NmE0OWIzLTQ3ZDEtNGQ3Ni04MGRmLTA3OWViODJkNmQ4ZiIsImFjY291bnQiOiJaZWxsYXIyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDM4LjE5Ny43MTgtMTYiLCJlbWFpbCI6ImJsYWJsYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiI0MzguMTk3LjcxOC0xNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.Q1yAZPHOMfiou6Y0_Zpn7_6m_PR8zrG-B-1haMhU1fqoEf10whIh4D71o9XfWI1V-qG-xTlSSZbDvIQ9BKhuZOcwCk1CCJ67Z14_3e1c-MH1N4jwq3xkJrmepGKQ78lrbbJJ_wG2Zz2BD_M-3RsrETiVJ4ZrYP-erMt8eWztLZ3sJI4d6-RUtWBqVa7YB5Opec9F32GT6oDt5QxbvNOPcaQqAIAmPo2Peuuv97Ugh3GLw57pH6Fd6puxv6B96s5Vt4mv3zCQsKnooLbmxWYfI6eENiFfQzLUN4MnV-eSpQ5OnphTDRmuUXndXQmRzaJI2_t7tIhbSDlSCcABPRx8_g"));
   }
 }
 
