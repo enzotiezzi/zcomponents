@@ -34,8 +34,34 @@ class ZUserInfoState extends State<ZUserInfo> {
   }
 
   Widget _buildBody() {
-    return new Column(
+    return new ListView(
+      shrinkWrap: true,
       children: <Widget>[
+        new GestureDetector(
+          child: new Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new CircleAvatar(
+                        child: new ClipRRect(
+                            borderRadius: BorderRadius.circular(16.0),
+                            child: new Image(
+                              image: _buildImagemPerfil(),
+                            )),
+                      )
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[new Text("Editar foto")],
+                  )
+                ],
+              )),
+          onTap: _view.escolherMetodoSelecionarFoto,
+        ),
         new ZBaseLine(
           zTipos: ZTipoBaseline.isNomeCompleto,
           controllerNome: _view.textEditingControllerNome,
@@ -51,6 +77,38 @@ class ZUserInfoState extends State<ZUserInfo> {
           controllerEmail: _view.textEditingControllerEmail,
           emailFocus: _view.focusNodeEmail,
         ),
+        new ZBaseLine(
+          zTipos: ZTipoBaseline.isCEP,
+          controllerCEP: _view.textEditingControllerCEP,
+          cEPFocus: _view.focusNodeCEP,
+          onChangedCEP: _view.onCEPChange,
+        ),
+        new ZBaseLine(
+          zTipos: ZTipoBaseline.semTituloText,
+          text: "Estado",
+          controllerPadrao: _view.textEditingControllerEstado,
+        ),
+        new ZBaseLine(
+          zTipos: ZTipoBaseline.semTituloText,
+          text: "Cidade",
+          controllerPadrao: _view.textEditingControllerCidade,
+        ),
+        new ZBaseLine(
+          zTipos: ZTipoBaseline.semTituloText,
+          text: "Bairro",
+          controllerPadrao: _view.textEditingControllerBairro,
+        ),
+        new ZBaseLine(
+          zTipos: ZTipoBaseline.semTituloText,
+          text: "Rua",
+          controllerPadrao: _view.textEditingControllerRua,
+        ),
+        new ZBaseLine(
+          zTipos: ZTipoBaseline.semTituloText,
+          text: "Número",
+          controllerPadrao: _view.textEditingControllerNumero,
+          padraoFocus: _view.focusNodeNumero,
+        ),
         new Container(
           padding: const EdgeInsets.all(16.0),
           child: new ZButton(
@@ -63,5 +121,12 @@ class ZUserInfoState extends State<ZUserInfo> {
         )
       ],
     );
+  }
+
+  ImageProvider _buildImagemPerfil() {
+    if (_view.imagemPerfil != null) return MemoryImage(_view.imagemPerfil);
+
+    return NetworkImage(
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
   }
 }

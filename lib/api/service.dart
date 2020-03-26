@@ -27,20 +27,21 @@ abstract class Service {
   }
 
   Future<http.Response> request(String url, String method,
-      {dynamic body, int timeout = 15}) async {
+      {dynamic body,
+      int timeout = 15,
+      bool defaultAuthorizationHeader = true}) async {
     http.Response response;
 
     try {
-      await buildAuthorizationHeaders();
+      if (defaultAuthorizationHeader) await buildAuthorizationHeaders();
 
       if (body != null)
         headers[HttpHeaders.contentTypeHeader] = "application/json";
 
       switch (method) {
         case HTTP_GET:
-          response = await http
-              .get(url, headers: this.headers)
-              .timeout(new Duration(seconds: timeout));
+          response =
+              await http.get(url, headers: headers).timeout(new Duration(seconds: timeout));
           break;
         case HTTP_POST:
           response = await http
