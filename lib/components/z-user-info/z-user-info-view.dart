@@ -9,10 +9,10 @@ import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/endereco/endereco-service.dart';
 import 'package:z_components/api/endereco/i-endereco-service.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
-import 'package:z_components/api/token-parser.dart';
+import 'package:z_components/api/user-info/i-user-info-service.dart';
+import 'package:z_components/api/user-info/user-info-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
-import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -22,6 +22,7 @@ import '../../i-view.dart';
 
 class ZUserInfoView extends IView<ZUserInfo> {
   var textEditingControllerNome = new TextEditingController();
+  var textEditingControllerDataNascimento = new TextEditingController();
   var textEditingControllerTelefone = new TextEditingController();
   var textEditingControllerEmail = new TextEditingController();
   var textEditingControllerCEP = new TextEditingController();
@@ -32,6 +33,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   var textEditingControllerNumero = new TextEditingController();
 
   var focusNodeNome = new FocusNode();
+  var focusNodeDataNascimento = new FocusNode();
   var focusNodeTelefone = new FocusNode();
   var focusNodeEmail = new FocusNode();
   var focusNodeCEP = new FocusNode();
@@ -39,6 +41,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   IEnderecoService _enderecoService;
   IArquivoService _arquivoService;
+  IUserInfoService _userInfoService;
 
   UserInfo _userInfo;
 
@@ -59,14 +62,24 @@ class ZUserInfoView extends IView<ZUserInfo> {
     _dialogUtils = new DialogUtils(state.context);
     _enderecoService = new EnderecoService();
     _arquivoService = new ArquivoService(state.widget.token);
+    _userInfoService = new UserInfoService(state.widget.token);
+
+    textEditingControllerNome.text = state.widget.userInfo?.nome;
+    textEditingControllerTelefone.text = state.widget.userInfo?.telefone;
+    textEditingControllerEmail.text = state.widget.userInfo?.email;
+    textEditingControllerCEP.text = state.widget.userInfo?.cep;
+    textEditingControllerEstado.text = state.widget.userInfo?.estado;
+    textEditingControllerCidade.text = state.widget.userInfo?.cidade;
+    textEditingControllerBairro.text = state.widget.userInfo?.bairro;
+    textEditingControllerRua.text = state.widget.userInfo?.logradouro;
+    textEditingControllerNumero.text = state.widget.userInfo?.numero;
   }
 
   @override
   Future<void> afterBuild() async {
     _dialogUtils.showZProgressDialog("Buscando informações", 0.3, _globalKey);
 
-    await _identityServer.setUserInfo();
-    var userInfo = _identityServer.getUserInfo();
+    var userInfo = await _userInfoService.buscarInformacoesUsuarioPessoa();
 
     _globalKey.currentState.refresh(1.0, "Pronto", success: true);
 
@@ -165,28 +178,57 @@ class ZUserInfoView extends IView<ZUserInfo> {
     var imagem = await ImagePicker.pickImage(source: source, imageQuality: 70);
 
     if (imagem != null) {
-      var base64 = base64Encode(imagem.readAsBytesSync());
+      var bytes = imagem.readAsBytesSync();
 
-      var res = await _arquivoService.enviarImagem(new ArquivoViewModel(
-        nome: "perfil.jpg",
-        contentType: "image/jpg",
-        descricao: "Imagem de perfil do usuário",
-        conteudo: base64,
-        tamanho: base64.length.toDouble(),
-        container: "teste",
-      ));
+      var base64 = base64Encode(bytes);
 
-      if (res != null) {
-        var anexo = await _arquivoService.buscarAnexo(res);
+      if (state.mounted) {
+        state.setState(() {
+          imagemPerfil = bytes;
+        });
 
-        if (anexo != null) {
-          if (state.mounted) {
-            state.setState(() {
-              imagemPerfil = base64Decode(anexo.conteudo);
-            });
-          }
-        }
+        _arquivoService.enviarImagem(new ArquivoViewModel(
+          nome: "perfil.jpg",
+          contentType: "image/jpg",
+          descricao: "Imagem de perfil do usuário",
+          conteudo: base64,
+          tamanho: base64.length.toDouble(),
+          container: "teste",
+        )).then((idAnexo){
+          state.widget.userInfo.idFoto = idAnexo;
+          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(idAnexo);
+        });
       }
     }
+  }
+
+  Future<void> submit() async {
+    var userInfo = new UserInfo(
+      nome: textEditingControllerNome.text,
+      bairro: textEditingControllerBairro.text,
+      logradouro: textEditingControllerRua.text,
+      cep: textEditingControllerCEP.text,
+      estado: textEditingControllerEstado.text,
+      dataNascimento: textEditingControllerDataNascimento.text,
+      cidade: textEditingControllerCidade.text,
+      telefone: textEditingControllerTelefone.text,
+      email: textEditingControllerEmail.text,
+      numero: textEditingControllerNumero.text
+    );
+
+    _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
+
+    var res = await _userInfoService.editarInformacoes(userInfo);
+
+    if(res)
+      _globalKey.currentState.refresh(1.0, "Pronto", success: true);
+    else
+      _globalKey.currentState.refresh(1.0, "Não foi possível editar as informações", success: false);
+
+    Future.delayed(new Duration(seconds: 1), (){
+      _dialogUtils.dismiss();
+
+      if(state.widget.onEditFinish != null) state.widget.onEditFinish();
+    });
   }
 }
