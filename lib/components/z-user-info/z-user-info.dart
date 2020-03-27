@@ -53,13 +53,29 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new CircleAvatar(
-                        child: new ClipRRect(
-                            borderRadius: BorderRadius.circular(16.0),
-                            child: new Image(
-                              image: _buildImagemPerfil(),
-                            )),
-                      )
+                      new Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: new BoxDecoration(
+                          color: const Color(0xff7c94b6),
+                          image: new DecorationImage(
+                            image: _buildImagemPerfil(),
+                            fit: BoxFit.cover,
+                          ),
+                          shape: BoxShape.circle,
+                          border: new Border.all(
+                            color: MainStyle.get(context).primaryColor,
+                            width: 4.0,
+                          ),
+                        ),
+                      ),
+//                      new CircleAvatar(
+//                        child: new ClipRRect(
+//                            borderRadius: BorderRadius.circular(16.0),
+//                            child: new Image(
+//                              image: _buildImagemPerfil(),
+//                            )),
+//                      )
                     ],
                   ),
                   new Row(
@@ -145,7 +161,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
     if (_view.imagemPerfil != null) return MemoryImage(_view.imagemPerfil);
 
     return NetworkImage(
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
   }
 
   @override
