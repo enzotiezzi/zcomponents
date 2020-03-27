@@ -69,13 +69,6 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
                           ),
                         ),
                       ),
-//                      new CircleAvatar(
-//                        child: new ClipRRect(
-//                            borderRadius: BorderRadius.circular(16.0),
-//                            child: new Image(
-//                              image: _buildImagemPerfil(),
-//                            )),
-//                      )
                     ],
                   ),
                   new Row(
