@@ -119,48 +119,98 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future escolherMetodoSelecionarFoto() {
-    return showModalBottomSheet(
+    return showModalBottomSheet<String>(
         context: state.context,
-        builder: (context) {
-          return new Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: new Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                new Text(
-                  "De onde você quer escolher a foto ?",
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    new Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        new IconButton(
-                            icon: new Icon(Icons.image,
-                                color: MainStyle.get(context).primaryColor),
-                            onPressed: () => escolherImagem(ImageSource.gallery)
-                                .then((_) => _dialogUtils.dismiss())),
-                        new Text("Galeria")
-                      ],
-                    ),
-                    new Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        new IconButton(
-                            icon: new Icon(Icons.camera_alt,
-                                color: MainStyle.get(context).primaryColor),
-                            onPressed: () => escolherImagem(ImageSource.camera)
-                                .then((_) => _dialogUtils.dismiss())),
-                        new Text("Câmera")
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        builder: (builder) {
+          return new Container(
+              height: 130,
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(10.0),
+                      topRight: const Radius.circular(10.0))),
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.only(top: 18, bottom: 8),
+                        child: new Text(
+                          "De onde você quer escolher a foto ?",
+                          style: new TextStyle(color: Color(0xff999999)),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(color: Color(0xffCECECE)),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Expanded(
+                          flex: 5,
+                          child: new GestureDetector(
+                            onTap: () => escolherImagem(ImageSource.camera)
+                                .then((_) => _dialogUtils.dismiss()),
+                            child: new Container(
+                              color: Colors.transparent,
+                              child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Container(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: new Icon(
+                                      Icons.camera_alt,
+                                      color: MainStyle.get(state.context).primaryColor,
+                                    ),
+                                  ),
+                                  new Container(
+                                    margin: const EdgeInsets.only(top: 6),
+                                    child: new Text(
+                                      "Usar Câmera",
+                                      style: new TextStyle(
+                                          color: Color(0xff999999)),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )),
+                      new Expanded(
+                          flex: 5,
+                          child: new GestureDetector(
+                              onTap: () => escolherImagem(ImageSource.gallery)
+                                  .then((_) => _dialogUtils.dismiss()),
+                              child: new Container(
+                                color: Colors.transparent,
+                                child: new Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    new Container(
+                                      padding: const EdgeInsets.only(top: 8),
+                                      child: new Icon(
+                                        Icons.add_photo_alternate,
+                                        color: MainStyle.get(state.context).primaryColor,
+                                      ),
+                                    ),
+                                    new Container(
+                                      margin: const EdgeInsets.only(top: 6),
+                                      child: new Text(
+                                        "Usar Galeria",
+                                        style: new TextStyle(
+                                            color: Color(0xff999999)),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )))
+                    ],
+                  ),
+                ],
+              ));
         });
   }
 
