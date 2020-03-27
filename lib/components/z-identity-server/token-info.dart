@@ -1,7 +1,7 @@
 class UserInfo {
   String idUsuario;
   String username;
-  String cpf;
+  String cPF;
   String email;
   String nome;
   String idPessoa;
@@ -15,7 +15,7 @@ class UserInfo {
   String bairro;
   String cidade;
   String estado;
-  String cep;
+  String cEP;
   String idFoto;
   String fotoBase64;
   String idConta;
@@ -24,7 +24,7 @@ class UserInfo {
   UserInfo(
       {this.idUsuario,
       this.username,
-      this.cpf,
+      this.cPF,
       this.email,
       this.nome,
       this.idPessoa,
@@ -38,7 +38,7 @@ class UserInfo {
       this.bairro,
       this.cidade,
       this.estado,
-      this.cep,
+      this.cEP,
       this.idFoto,
       this.fotoBase64,
       this.idConta,
@@ -46,52 +46,52 @@ class UserInfo {
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
     return new UserInfo(
-      idUsuario: json["IDUSUARIO"],
-      username: json["USERNAME"],
-      cpf: json["CPF"],
-      email: json["EMAIL"],
-      nome: json["NOME"],
-      idPessoa: json["IDPESSOA"],
-      nomeSocial: json["NOMESOCIAL"],
-      telefone: json["TELEFONE"],
-      celular: json["CELULAR"],
-      dataNascimento: json["DATANASCIMENTO"],
-      logradouro: json["LOGRADOURO"],
-      numero: json["NUMERO"],
-      complemento: json["COMPLEMENTO"],
-      bairro: json["BAIRRO"],
-      cidade: json["CIDADE"],
-      estado: json["ESTADO"],
-      cep: json["CEP"],
-      idFoto: json["IDFOTO"],
-      fotoBase64: json["FOTOBASE64"],
-      idConta: json["idAccount"],
+      idUsuario: json["idUsuario"],
+      username: json["username"],
+      cPF: json["cPF"],
+      email: json["email"],
+      nome: json["nome"],
+      idPessoa: json["idPessoa"],
+      nomeSocial: json["nomeSocial"],
+      telefone: json["telefone"],
+      celular: json["celular"],
+      dataNascimento: json["dataNascimento"],
+      logradouro: json["logradouro"],
+      numero: json["numero"],
+      complemento: json["complemento"],
+      bairro: json["bairro"],
+      cidade: json["cidade"],
+      estado: json["estado"],
+      cEP: json["cEP"],
+      idFoto: json["idFoto"],
+      fotoBase64: json["fotoBase64"],
+      idConta: json["idConta"],
       idColaborador: json["idColaborador"],
     );
   }
 
   Map toMap() {
     return {
-      "IDUSUARIO": idUsuario,
-      "USERNAME": username,
-      "CPF": cpf,
-      "EMAIL": email,
-      "NOME": nome,
-      "IDPESSOA": idPessoa,
-      "NOMESOCIAL": nomeSocial,
-      "TELEFONE": telefone,
-      "CELULAR": celular,
-      "DATANASCIMENTO": dataNascimento,
-      "LOGRADOURO": logradouro,
-      "NUMERO": numero,
-      "COMPLEMENTO": complemento,
-      "BAIRRO": bairro,
-      "CIDADE": cidade,
-      "ESTADO": estado,
-      "CEP": cep,
-      "IDFOTO": idFoto,
-      "FOTOBASE64": fotoBase64,
-      "idAccount": idConta,
+      "idUsuario": idUsuario,
+      "username": username,
+      "cPF": cPF,
+      "email": email,
+      "nome": nome,
+      "idPessoa": idPessoa,
+      "nomeSocial": nomeSocial,
+      "telefone": telefone,
+      "celular": celular,
+      "dataNascimento": dataNascimento,
+      "logradouro": logradouro,
+      "numero": numero,
+      "complemento": complemento,
+      "bairro": bairro,
+      "cidade": cidade,
+      "estado": estado,
+      "cEP": cEP,
+      "idFoto": idFoto,
+      "fotoBase64": fotoBase64,
+      "idConta": idConta,
       "idColaborador": idColaborador,
     };
   }
