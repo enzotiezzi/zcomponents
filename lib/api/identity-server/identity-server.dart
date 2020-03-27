@@ -7,7 +7,6 @@ import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/api/token-parser.dart';
 import 'package:z_components/components/z-identity-server/login/z-identity-server.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
-import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/settings/api-settings.dart';
 
 import 'i-identity-server.dart';
@@ -149,7 +148,7 @@ class IdentityServer implements IIdentityServer {
     _user = await _findUserInfo(token);
 
     if (_user != null) {
-      await _sharedPreferences.setString(ApiSettings.API_ID_USER, _user.idUser);
+      await _sharedPreferences.setString(ApiSettings.API_ID_USER, _user.idUsuario);
       await _sharedPreferences.setString(ApiSettings.API_USERNAME, _user.cpf);
     }
   }
