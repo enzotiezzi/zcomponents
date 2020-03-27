@@ -213,7 +213,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
       cidade: textEditingControllerCidade.text,
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
-      numero: textEditingControllerNumero.text
+      numero: textEditingControllerNumero.text,
+      idFoto: state.widget.userInfo.idFoto
     );
 
     _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
