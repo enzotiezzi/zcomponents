@@ -1,3 +1,7 @@
+## 0.9.16
+
+* new ZUserInfo 
+
 ## 0.9.15+1
 
 * ZNewTreeView arrumacao 
