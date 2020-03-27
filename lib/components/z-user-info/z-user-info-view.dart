@@ -77,23 +77,6 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   @override
   Future<void> afterBuild() async {
-    _dialogUtils.showZProgressDialog("Buscando informações", 0.3, _globalKey);
-
-    var userInfo = await _userInfoService.buscarInformacoesUsuarioPessoa();
-
-    _globalKey.currentState.refresh(1.0, "Pronto", success: true);
-
-    Future.delayed(new Duration(seconds: 1), () {
-      _dialogUtils.dismiss();
-
-      if (userInfo != null) {
-        if (state.mounted) {
-          state.setState(() {
-            _userInfo = userInfo;
-          });
-        }
-      }
-    });
   }
 
   void onCEPChange(String cep) async {
@@ -229,7 +212,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     Future.delayed(new Duration(seconds: 1), (){
       _dialogUtils.dismiss();
 
-      if(state.widget.onEditFinish != null) state.widget.onEditFinish();
+      if(state.widget.onEditFinish != null) state.widget.onEditFinish(userInfo);
     });
   }
 }

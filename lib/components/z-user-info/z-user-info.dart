@@ -15,7 +15,7 @@ class ZUserInfo extends StatefulWidget {
   String token;
   UserInfo userInfo;
 
-  Function onEditFinish;
+  Function(UserInfo ) onEditFinish;
   Function(String) onChangeProfileImage;
 
   ZUserInfo({@required this.token, @required this.userInfo, this.onEditFinish, this.onChangeProfileImage});
