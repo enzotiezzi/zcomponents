@@ -19,6 +19,7 @@ class UserInfo {
   String idFoto;
   String fotoBase64;
   String idConta;
+  String idColaborador;
 
   UserInfo(
       {this.idUsuario,
@@ -40,7 +41,8 @@ class UserInfo {
       this.cep,
       this.idFoto,
       this.fotoBase64,
-      this.idConta});
+      this.idConta,
+      this.idColaborador});
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
     return new UserInfo(
@@ -63,7 +65,8 @@ class UserInfo {
       cep: json["CEP"],
       idFoto: json["IDFOTO"],
       fotoBase64: json["FOTOBASE64"],
-      idConta: json["idAccount"]
+      idConta: json["idAccount"],
+      idColaborador: json["idColaborador"],
     );
   }
 
@@ -89,6 +92,7 @@ class UserInfo {
       "IDFOTO": idFoto,
       "FOTOBASE64": fotoBase64,
       "idAccount": idConta,
+      "idColaborador": idColaborador,
     };
   }
 }
