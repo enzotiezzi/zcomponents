@@ -14,6 +14,7 @@ class UserInfo {
   String cep;
   String numero;
   String idFoto;
+  String fotoBase64;
 
   UserInfo(
       {this.idUser,
@@ -30,7 +31,8 @@ class UserInfo {
       this.estado,
       this.logradouro,
       this.numero,
-      this.idFoto});
+      this.idFoto,
+      this.fotoBase64});
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
     return new UserInfo(
