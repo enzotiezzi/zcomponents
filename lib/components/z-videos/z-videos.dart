@@ -3,18 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/components/z-news/video.dart';
+import 'package:z_components/components/z-videos/video.dart';
 import 'package:z_components/view-model/noticia-viewmodel.dart';
 
 import 'genthumbnail.dart';
 
-class ZNews extends StatefulWidget {
+class ZVideos extends StatefulWidget {
 
 
   final List<NoticiaViewModel> noticiaViewMode;
   final ScrollController scrollC;
 
-  ZNews({
+  ZVideos({
         this.noticiaViewMode,
         this.scrollC
       });
@@ -23,7 +23,7 @@ class ZNews extends StatefulWidget {
   State<StatefulWidget> createState() => _ZNews();
 }
 
-class _ZNews extends State<ZNews> with TickerProviderStateMixin {
+class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
 
   String _tempDir;
   GenThumbnailImage _futreImage;

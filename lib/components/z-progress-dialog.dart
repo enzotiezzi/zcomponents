@@ -165,14 +165,14 @@ class ZProgressDialogState extends State<ZProgressDialog>
     );
   }
 
-  void refresh(double newValueProgress, String newValueMessage, {bool sucess}) {
-    if (sucess == null) {
-      sucess = true;
+  void refresh(double newValueProgress, String newValueMessage, {bool success}) {
+    if (success == null) {
+      success = true;
     }
     setState(() {
       widget.progressBarValue = newValueProgress;
       widget.message = newValueMessage;
-      widget.sucess = sucess;
+      widget.sucess = success;
     });
   }
 }

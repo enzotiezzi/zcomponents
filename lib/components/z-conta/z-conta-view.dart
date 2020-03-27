@@ -279,7 +279,7 @@ class ZContaView extends IView<ZConta> {
 
   bool verificarContaAtiva(String idConta) {
     var tokenInfo =
-        TokenInfo.fromJson(TokenParser.parseJwt(state.widget.token));
+        UserInfo.fromJson(TokenParser.parseJwt(state.widget.token));
 
     if (tokenInfo != null) {
       if (tokenInfo.idConta != null)
@@ -295,7 +295,7 @@ class ZContaView extends IView<ZConta> {
     var conta = await _contaService.localizarConta(codigoAtivacao);
 
     if (conta != null) {
-      _globalKey.currentState.refresh(1.0, "Conta encontrada", sucess: true);
+      _globalKey.currentState.refresh(1.0, "Conta encontrada", success: true);
 
       await Future.delayed(new Duration(seconds: 1), () async {
         _dialogUtils.dismiss();
@@ -312,7 +312,7 @@ class ZContaView extends IView<ZConta> {
       });
     } else {
       _globalKey.currentState
-          .refresh(1.0, "Não foi possível encontrar a conta", sucess: false);
+          .refresh(1.0, "Não foi possível encontrar a conta", success: false);
 
       await Future.delayed(new Duration(seconds: 1), () {
         _dialogUtils.dismiss();
@@ -404,14 +404,14 @@ class ZContaView extends IView<ZConta> {
 
       if (res) {
         _globalKey.currentState
-            .refresh(1.0, "Vínculo feito com sucesso.", sucess: true);
+            .refresh(1.0, "Vínculo feito com sucesso.", success: true);
 
         if (state.widget.onBindAccount != null)
           await state.widget.onBindAccount(conta);
       } else {
         _globalKey.currentState.refresh(
             1.0, "Não foi possível fazer o vínculo com essa conta.",
-            sucess: false);
+            success: false);
       }
 
       await Future.delayed(
@@ -444,7 +444,7 @@ class ZContaView extends IView<ZConta> {
 
     if (res) {
       _globalKey.currentState
-          .refresh(1.0, "Conta trocada com sucesso.", sucess: true);
+          .refresh(1.0, "Conta trocada com sucesso.", success: true);
 
       state.setState(() {});
 
@@ -452,7 +452,7 @@ class ZContaView extends IView<ZConta> {
         await state.widget.onAccountChange(conta);
     } else {
       _globalKey.currentState
-          .refresh(1.0, "Não foi possível trocar de conta.", sucess: false);
+          .refresh(1.0, "Não foi possível trocar de conta.", success: false);
     }
 
     await Future.delayed(
