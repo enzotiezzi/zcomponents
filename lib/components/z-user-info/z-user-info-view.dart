@@ -77,6 +77,13 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   @override
   Future<void> afterBuild() async {
+    if(state.widget.userInfo.fotoBase64.length > 0){
+      if(state.mounted) {
+        state.setState((){
+          imagemPerfil = base64Decode(state.widget.userInfo.fotoBase64);
+        });
+      }
+    }
   }
 
   void onCEPChange(String cep) async {
