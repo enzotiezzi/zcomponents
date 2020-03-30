@@ -1,7 +1,7 @@
 class BuscarInfo {
   String idUsuario;
   String username;
-  String cPF;
+  String cpf;
   String email;
   String nome;
   String idPessoa;
@@ -15,14 +15,14 @@ class BuscarInfo {
   String bairro;
   String cidade;
   String estado;
-  String cEP;
+  String cep;
   String idFoto;
   String fotoBase64;
 
   BuscarInfo({
     this.idUsuario,
     this.username,
-    this.cPF,
+    this.cpf,
     this.email,
     this.nome,
     this.idPessoa,
@@ -36,7 +36,7 @@ class BuscarInfo {
     this.bairro,
     this.cidade,
     this.estado,
-    this.cEP,
+    this.cep,
     this.idFoto,
     this.fotoBase64,
   });
@@ -45,7 +45,7 @@ class BuscarInfo {
     return new BuscarInfo(
       idUsuario: json["idUsuario"],
       username: json["username"],
-      cPF: json["cPF"],
+      cpf: json["cpf"],
       email: json["email"],
       nome: json["nome"],
       idPessoa: json["idPessoa"],
@@ -59,7 +59,7 @@ class BuscarInfo {
       bairro: json["bairro"],
       cidade: json["cidade"],
       estado: json["estado"],
-      cEP: json["cEP"],
+      cep: json["cep"],
       idFoto: json["idFoto"],
       fotoBase64: json["fotoBase64"],
     );
@@ -69,7 +69,7 @@ class BuscarInfo {
     return {
       "idUsuario": idUsuario,
       "username": username,
-      "cPF": cPF,
+      "cpf": cpf,
       "email": email,
       "nome": nome,
       "idPessoa": idPessoa,
@@ -83,7 +83,7 @@ class BuscarInfo {
       "bairro": bairro,
       "cidade": cidade,
       "estado": estado,
-      "cEP": cEP,
+      "cep": cep,
       "idFoto": idFoto,
       "fotoBase64": fotoBase64,
     };
