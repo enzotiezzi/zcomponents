@@ -74,6 +74,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerBairro.text = state.widget.userInfo?.bairro;
     textEditingControllerRua.text = state.widget.userInfo?.logradouro;
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
+    textEditingControllerDataNascimento.text = state.widget.userInfo?.dataNascimento;
   }
 
   @override
@@ -257,12 +258,12 @@ class ZUserInfoView extends IView<ZUserInfo> {
       logradouro: textEditingControllerRua.text,
       cep: textEditingControllerCEP.text,
       estado: textEditingControllerEstado.text,
-      dataNascimento: textEditingControllerDataNascimento.text,
+      dataNascimento:(textEditingControllerDataNascimento.text == "")?null:textEditingControllerDataNascimento.text,
       cidade: textEditingControllerCidade.text,
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
       numero: textEditingControllerNumero.text,
-      idFoto: state.widget.userInfo.idFoto,
+      idFoto:(state.widget.userInfo.idFoto == "")?null:state.widget.userInfo.idFoto,
 
     );
 
