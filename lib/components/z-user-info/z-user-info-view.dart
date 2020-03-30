@@ -67,7 +67,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerNome.text = state.widget.userInfo?.nome;
     textEditingControllerTelefone.text = state.widget.userInfo?.telefone;
     textEditingControllerEmail.text = state.widget.userInfo?.email;
-    textEditingControllerCEP.text = state.widget.userInfo?.cEP;
+    textEditingControllerCEP.text = state.widget.userInfo?.cep;
     textEditingControllerEstado.text = state.widget.userInfo?.estado;
     textEditingControllerCidade.text = state.widget.userInfo?.cidade;
     textEditingControllerBairro.text = state.widget.userInfo?.bairro;
@@ -247,7 +247,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
       nome: textEditingControllerNome.text,
       bairro: textEditingControllerBairro.text,
       logradouro: textEditingControllerRua.text,
-      cEP: textEditingControllerCEP.text,
+      cep: textEditingControllerCEP.text,
       estado: textEditingControllerEstado.text,
       dataNascimento: textEditingControllerDataNascimento.text,
       cidade: textEditingControllerCidade.text,

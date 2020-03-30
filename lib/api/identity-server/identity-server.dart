@@ -148,8 +148,8 @@ class IdentityServer implements IIdentityServer {
     _user = await _findUserInfo(token);
 
     if (_user != null) {
-      await _sharedPreferences.setString(ApiSettings.API_ID_USER, _user.idUsuario);
-      await _sharedPreferences.setString(ApiSettings.API_USERNAME, _user.cPF);
+      await _sharedPreferences.setString(ApiSettings.API_ID_USER, _user.idUser);
+      await _sharedPreferences.setString(ApiSettings.API_USERNAME, _user.cpf);
     }
   }
 
