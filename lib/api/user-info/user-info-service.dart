@@ -4,6 +4,7 @@ import 'package:z_components/api/service.dart';
 import 'package:z_components/api/user-info/i-user-info-service.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/settings/api-settings.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 class UserInfoService extends Service implements IUserInfoService {
   var _URL = "https://identity-server-dev.zellar.com.br/apis";
@@ -24,13 +25,13 @@ class UserInfoService extends Service implements IUserInfoService {
   }
 
   @override
-  Future<UserInfo> buscarInformacoesUsuarioPessoa() async{
+  Future<BuscarInfo> buscarInformacoesUsuarioPessoa() async{
     try {
       var url = "$_URL/usuario-pessoa";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return UserInfo.fromJson(json.decode(response.body));
+      return BuscarInfo.fromJson(json.decode(response.body));
     } catch(e){
       return null;
     }
