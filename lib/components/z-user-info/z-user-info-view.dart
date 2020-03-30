@@ -236,7 +236,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
           container: "teste",
         )).then((idAnexo){
           state.widget.userInfo.idFoto = idAnexo;
-          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(idAnexo);
+          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(base64);
         });
       }
     }
