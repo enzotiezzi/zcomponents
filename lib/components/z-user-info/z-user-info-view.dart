@@ -17,6 +17,7 @@ import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 import '../../i-view.dart';
 
@@ -43,7 +44,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
 
-  UserInfo _userInfo;
+  BuscarInfo _userInfo;
 
   IIdentityServer _identityServer;
 
@@ -58,7 +59,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   @override
   Future<void> initView() {
-    _userInfo = new UserInfo();
+    _userInfo = new BuscarInfo();
     _dialogUtils = new DialogUtils(state.context);
     _enderecoService = new EnderecoService();
     _arquivoService = new ArquivoService(state.widget.token);
@@ -243,7 +244,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> submit() async {
-    var userInfo = new UserInfo(
+    var userInfo = new BuscarInfo(
       nome: textEditingControllerNome.text,
       bairro: textEditingControllerBairro.text,
       logradouro: textEditingControllerRua.text,
@@ -254,7 +255,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
       numero: textEditingControllerNumero.text,
-      idFoto: state.widget.userInfo.idFoto
+      idFoto: state.widget.userInfo.idFoto,
+
     );
 
     _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
