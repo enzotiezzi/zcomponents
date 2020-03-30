@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-0.0.1+4" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-0.1.1+1" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+4" />
@@ -9,6 +8,7 @@
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_webview_plugin-0.3.10+1" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-5.4.2" />
+      <root url="file://$PROJECT_DIR$" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.5" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.6+4" />
       <root url="file://$PROJECT_DIR$/../Downloads/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.1.3+4" />

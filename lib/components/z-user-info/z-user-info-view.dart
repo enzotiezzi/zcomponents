@@ -17,6 +17,7 @@ import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 import '../../i-view.dart';
 
@@ -43,7 +44,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
 
-  UserInfo _userInfo;
+  BuscarInfo _userInfo;
 
   IIdentityServer _identityServer;
 
@@ -58,7 +59,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   @override
   Future<void> initView() {
-    _userInfo = new UserInfo();
+    _userInfo = new BuscarInfo();
     _dialogUtils = new DialogUtils(state.context);
     _enderecoService = new EnderecoService();
     _arquivoService = new ArquivoService(state.widget.token);
@@ -236,14 +237,21 @@ class ZUserInfoView extends IView<ZUserInfo> {
           container: "teste",
         )).then((idAnexo){
           state.widget.userInfo.idFoto = idAnexo;
-          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(idAnexo);
+          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(base64);
         });
       }
     }
   }
 
   Future<void> submit() async {
-    var userInfo = new UserInfo(
+    var userInfo = new BuscarInfo(
+      idUsuario:  state.widget.userInfo?.idUsuario,
+      username: state.widget.userInfo?.username,
+      cpf:state.widget.userInfo?.cpf,
+      nomeSocial: state.widget.userInfo?.nomeSocial,
+      idPessoa: state.widget.userInfo?.idPessoa,
+      complemento:state.widget.userInfo?.complemento,
+      celular: state.widget.userInfo?.celular,
       nome: textEditingControllerNome.text,
       bairro: textEditingControllerBairro.text,
       logradouro: textEditingControllerRua.text,
@@ -254,7 +262,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
       numero: textEditingControllerNumero.text,
-      idFoto: state.widget.userInfo.idFoto
+      idFoto: state.widget.userInfo.idFoto,
+
     );
 
     _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
