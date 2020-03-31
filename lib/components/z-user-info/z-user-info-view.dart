@@ -78,7 +78,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
     if(state.widget.userInfo.dataNascimento != null)
       {
-        if(state.widget.userInfo.dataNascimento.length == 10)
+        if(state.widget.userInfo.dataNascimento.length > 10)
         {
           textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("T")[0].substring(8, 10)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(5, 7)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(0, 4)}";
         }
