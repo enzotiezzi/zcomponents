@@ -1,3 +1,7 @@
+## 0.9.17+7
+
+* new ZUserInfo 
+
 ## 0.9.17+6
 
 * new ZUserInfo 
