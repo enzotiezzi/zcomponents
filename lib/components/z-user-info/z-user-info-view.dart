@@ -247,13 +247,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> submit() async {
-    if(textEditingControllerDataNascimento.text != "" && textEditingControllerDataNascimento.text.length < 10)
-      {
-        showAlertDialogNew("Atenção!", "Campo de Data de Nascimento incompleto");
-      }
-    else
-      {
-        var userInfo = new BuscarInfo(
+    var userInfo = new BuscarInfo(
           idUsuario:  state.widget.userInfo?.idUsuario,
           username: state.widget.userInfo?.username,
           cpf:state.widget.userInfo?.cpf,
@@ -266,7 +260,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
           logradouro: textEditingControllerRua.text,
           cep: textEditingControllerCEP.text,
           estado: textEditingControllerEstado.text,
-          dataNascimento:(textEditingControllerDataNascimento.text == "")?null:"${textEditingControllerDataNascimento.text.substring(0, 4)}-${textEditingControllerDataNascimento.text.substring(5, 7)}-${textEditingControllerDataNascimento.text.substring(8, 10)}",
+          dataNascimento:(textEditingControllerDataNascimento.text == "")?null:"${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}",
           cidade: textEditingControllerCidade.text,
           telefone: textEditingControllerTelefone.text,
           email: textEditingControllerEmail.text,
@@ -288,8 +282,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
           if(state.widget.onEditFinish != null) state.widget.onEditFinish(userInfo);
         });
-      }
   }
+
   void showAlertDialogNew(String title, String message) async {
     showDialog(
       context: state.context,
