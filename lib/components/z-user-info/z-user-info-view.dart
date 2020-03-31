@@ -15,11 +15,13 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
+import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 import '../../i-view.dart';
+import '../z-alert-dialog.dart';
 
 class ZUserInfoView extends IView<ZUserInfo> {
   var textEditingControllerNome = new TextEditingController();
@@ -245,41 +247,111 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> submit() async {
-    var userInfo = new BuscarInfo(
-      idUsuario:  state.widget.userInfo?.idUsuario,
-      username: state.widget.userInfo?.username,
-      cpf:state.widget.userInfo?.cpf,
-      nomeSocial: state.widget.userInfo?.nomeSocial,
-      idPessoa: state.widget.userInfo?.idPessoa,
-      complemento:state.widget.userInfo?.complemento,
-      celular: state.widget.userInfo?.celular,
-      nome: textEditingControllerNome.text,
-      bairro: textEditingControllerBairro.text,
-      logradouro: textEditingControllerRua.text,
-      cep: textEditingControllerCEP.text,
-      estado: textEditingControllerEstado.text,
-      dataNascimento:(textEditingControllerDataNascimento.text == "")?null:"${textEditingControllerDataNascimento.text.substring(0, 4)}-${textEditingControllerDataNascimento.text.substring(5, 7)}-${textEditingControllerDataNascimento.text.substring(8, 10)}",
-      cidade: textEditingControllerCidade.text,
-      telefone: textEditingControllerTelefone.text,
-      email: textEditingControllerEmail.text,
-      numero: textEditingControllerNumero.text,
-      idFoto:(state.widget.userInfo.idFoto == "")?null:state.widget.userInfo.idFoto,
-
-    );
-
-    _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
-
-    var res = await _userInfoService.editarInformacoes(userInfo);
-
-    if(res)
-      _globalKey.currentState.refresh(1.0, "Pronto", success: true);
+    if(textEditingControllerDataNascimento.text != "" && textEditingControllerDataNascimento.text.length < 10)
+      {
+        showAlertDialogNew("Atenção!", "Campo de Data de Nascimento incompleto");
+      }
     else
-      _globalKey.currentState.refresh(1.0, "Não foi possível editar as informações", success: false);
+      {
+        var userInfo = new BuscarInfo(
+          idUsuario:  state.widget.userInfo?.idUsuario,
+          username: state.widget.userInfo?.username,
+          cpf:state.widget.userInfo?.cpf,
+          nomeSocial: state.widget.userInfo?.nomeSocial,
+          idPessoa: state.widget.userInfo?.idPessoa,
+          complemento:state.widget.userInfo?.complemento,
+          celular: state.widget.userInfo?.celular,
+          nome: textEditingControllerNome.text,
+          bairro: textEditingControllerBairro.text,
+          logradouro: textEditingControllerRua.text,
+          cep: textEditingControllerCEP.text,
+          estado: textEditingControllerEstado.text,
+          dataNascimento:(textEditingControllerDataNascimento.text == "")?null:"${textEditingControllerDataNascimento.text.substring(0, 4)}-${textEditingControllerDataNascimento.text.substring(5, 7)}-${textEditingControllerDataNascimento.text.substring(8, 10)}",
+          cidade: textEditingControllerCidade.text,
+          telefone: textEditingControllerTelefone.text,
+          email: textEditingControllerEmail.text,
+          numero: textEditingControllerNumero.text,
+          idFoto:(state.widget.userInfo.idFoto == "")?null:state.widget.userInfo.idFoto,
+        );
 
-    Future.delayed(new Duration(seconds: 1), (){
-      _dialogUtils.dismiss();
+        _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
 
-      if(state.widget.onEditFinish != null) state.widget.onEditFinish(userInfo);
-    });
+        var res = await _userInfoService.editarInformacoes(userInfo);
+
+        if(res)
+          _globalKey.currentState.refresh(1.0, "Pronto", success: true);
+        else
+          _globalKey.currentState.refresh(1.0, "Não foi possível editar as informações", success: false);
+
+        Future.delayed(new Duration(seconds: 1), (){
+          _dialogUtils.dismiss();
+
+          if(state.widget.onEditFinish != null) state.widget.onEditFinish(userInfo);
+        });
+      }
+  }
+  void showAlertDialogNew(String title, String message) async {
+    showDialog(
+      context: state.context,
+      builder: (BuildContext context) => ZAlertDialog(
+        zDialog: ZDialog.alert,
+        child: new Column(
+          children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  margin: const EdgeInsets.all(8),
+                  child: new Text(title,
+                      style: MainStyle.get(context).styleTittleDialog),
+                )
+              ],
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  margin:
+                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                  child: new Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                        color: const Color(0xff707070),
+                        fontSize: MainStyle.get(context).fontSizeEntradaSaida),
+                  ),
+                )
+              ],
+            ),
+            new Divider(
+              color: const Color(0xffdbdbdb),
+            ),
+            new Container(
+              child: new InkWell(
+                borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+                splashColor: const Color(0xffe6e6e6),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: new Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  child: new Text(
+                    "ENTENDI",
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize:
+                        MainStyle.get(context).fontSizeLeadinCancelar),
+                  ),
+                ),
+              ),
+              margin: const EdgeInsets.only(bottom: 8),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
