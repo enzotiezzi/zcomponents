@@ -83,7 +83,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
           textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("T")[0].substring(8, 10)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(5, 7)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(0, 4)}";
         }
         else{
-          textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("/")[2]}-${state.widget.userInfo.dataNascimento.split("/")[1]}-${state.widget.userInfo.dataNascimento.split("/")[0]}";
+          textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("-")[2]}/${state.widget.userInfo.dataNascimento.split("-")[1]}/${state.widget.userInfo.dataNascimento.split("-")[0]}";
         }
       }
   }
