@@ -87,7 +87,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
         ),
         new ZBaseLine(
           zTipos: ZTipoBaseline.isDataNascimento,
-          controllerNome: _view.textEditingControllerDataNascimento,
+          controllerData: _view.textEditingControllerDataNascimento,
           mesFocus: _view.focusNodeDataNascimento,
         ),
         new ZBaseLine(
