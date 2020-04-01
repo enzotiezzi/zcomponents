@@ -10,12 +10,13 @@ import 'package:z_components/components/z_button.dart';
 import 'package:z_components/config/z-button-type.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 class ZUserInfo extends StatefulWidget {
   String token;
-  UserInfo userInfo;
+  BuscarInfo userInfo;
 
-  Function(UserInfo) onEditFinish;
+  Function(BuscarInfo) onEditFinish;
   Function(String) onChangeProfileImage;
 
   ZUserInfo({@required this.token, @required this.userInfo, this.onEditFinish, this.onChangeProfileImage});
@@ -86,7 +87,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
         ),
         new ZBaseLine(
           zTipos: ZTipoBaseline.isDataNascimento,
-          controllerNome: _view.textEditingControllerDataNascimento,
+          controllerData: _view.textEditingControllerDataNascimento,
           mesFocus: _view.focusNodeDataNascimento,
         ),
         new ZBaseLine(

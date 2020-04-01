@@ -5,6 +5,7 @@ import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 
 class ZCheckBoxView extends IView<ZCheckBox> {
   List<ZCheckBoxViewModel> listaCheck;
+  List<String> listaSelecionados;
 
   ZCheckBoxView(State<ZCheckBox> state) : super(state);
 
@@ -17,11 +18,24 @@ class ZCheckBoxView extends IView<ZCheckBox> {
   @override
   Future<void> initView() {
     listaCheck = List<ZCheckBoxViewModel>();
-    _montarViewModel();
+    listaSelecionados = List<String>();
   }
 
-  void _montarViewModel() {
-    state.widget.listaDescricao.forEach((x) => listaCheck
-        .add(new ZCheckBoxViewModel(descricao: x, foiMarcado: false)));
+  void onChange(bool isChecked, ZCheckBoxViewModel item) {
+    if (state.mounted) {
+      if (isChecked) {
+        listaSelecionados.add(item.value);
+      } else {
+        for (int i = 0; i < listaSelecionados.length; i++) {
+          if (listaSelecionados[i] == item.value) {
+            listaSelecionados.removeAt(i);
+          }
+        }
+      }
+      state.setState(() {
+        item.foiMarcado = isChecked;
+      });
+    }
+    if (state.widget.onChange != null) state.widget.onChange(listaSelecionados);
   }
 }

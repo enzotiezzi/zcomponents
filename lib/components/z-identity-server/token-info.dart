@@ -18,21 +18,21 @@ class UserInfo {
 
   UserInfo(
       {this.idUser,
-      this.idColaborador,
-      this.idConta,
-      this.cpf,
-      this.email,
-      this.nome,
-      this.telefone,
-      this.bairro,
-      this.cep,
-      this.cidade,
-      this.dataNascimento,
-      this.estado,
-      this.logradouro,
-      this.numero,
-      this.idFoto,
-      this.fotoBase64});
+        this.idColaborador,
+        this.idConta,
+        this.cpf,
+        this.email,
+        this.nome,
+        this.telefone,
+        this.bairro,
+        this.cep,
+        this.cidade,
+        this.dataNascimento,
+        this.estado,
+        this.logradouro,
+        this.numero,
+        this.idFoto,
+        this.fotoBase64});
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
     return new UserInfo(

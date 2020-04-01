@@ -15,10 +15,13 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
+import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 import '../../i-view.dart';
+import '../z-alert-dialog.dart';
 
 class ZUserInfoView extends IView<ZUserInfo> {
   var textEditingControllerNome = new TextEditingController();
@@ -43,7 +46,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
 
-  UserInfo _userInfo;
+  BuscarInfo _userInfo;
 
   IIdentityServer _identityServer;
 
@@ -58,7 +61,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   @override
   Future<void> initView() {
-    _userInfo = new UserInfo();
+    _userInfo = new BuscarInfo();
     _dialogUtils = new DialogUtils(state.context);
     _enderecoService = new EnderecoService();
     _arquivoService = new ArquivoService(state.widget.token);
@@ -73,6 +76,16 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerBairro.text = state.widget.userInfo?.bairro;
     textEditingControllerRua.text = state.widget.userInfo?.logradouro;
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
+    if(state.widget.userInfo.dataNascimento != null)
+      {
+        if(state.widget.userInfo.dataNascimento.length > 10)
+        {
+          textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("T")[0].substring(8, 10)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(5, 7)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(0, 4)}";
+        }
+        else{
+          textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("-")[2]}/${state.widget.userInfo.dataNascimento.split("-")[1]}/${state.widget.userInfo.dataNascimento.split("-")[0]}";
+        }
+      }
   }
 
   @override
@@ -236,40 +249,112 @@ class ZUserInfoView extends IView<ZUserInfo> {
           container: "teste",
         )).then((idAnexo){
           state.widget.userInfo.idFoto = idAnexo;
-          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(idAnexo);
+          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(base64);
         });
       }
     }
   }
 
   Future<void> submit() async {
-    var userInfo = new UserInfo(
-      nome: textEditingControllerNome.text,
-      bairro: textEditingControllerBairro.text,
-      logradouro: textEditingControllerRua.text,
-      cep: textEditingControllerCEP.text,
-      estado: textEditingControllerEstado.text,
-      dataNascimento: textEditingControllerDataNascimento.text,
-      cidade: textEditingControllerCidade.text,
-      telefone: textEditingControllerTelefone.text,
-      email: textEditingControllerEmail.text,
-      numero: textEditingControllerNumero.text,
-      idFoto: state.widget.userInfo.idFoto
+    var userInfo = new BuscarInfo(
+          idUsuario:  state.widget.userInfo?.idUsuario,
+          username: state.widget.userInfo?.username,
+          cpf:state.widget.userInfo?.cpf,
+          nomeSocial: state.widget.userInfo?.nomeSocial,
+          idPessoa: state.widget.userInfo?.idPessoa,
+          complemento:state.widget.userInfo?.complemento,
+          celular: state.widget.userInfo?.celular,
+          nome: textEditingControllerNome.text,
+          bairro: textEditingControllerBairro.text,
+          logradouro: textEditingControllerRua.text,
+          cep: textEditingControllerCEP.text,
+          estado: textEditingControllerEstado.text,
+          dataNascimento:(textEditingControllerDataNascimento.text == "")?null:"${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}",
+          cidade: textEditingControllerCidade.text,
+          telefone: textEditingControllerTelefone.text,
+          email: textEditingControllerEmail.text,
+          numero: textEditingControllerNumero.text,
+          idFoto:(state.widget.userInfo.idFoto == "")?null:state.widget.userInfo.idFoto,
+        );
+
+        _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
+
+        var res = await _userInfoService.editarInformacoes(userInfo);
+
+        if(res)
+          _globalKey.currentState.refresh(1.0, "Pronto", success: true);
+        else
+          _globalKey.currentState.refresh(1.0, "Não foi possível editar as informações", success: false);
+
+        Future.delayed(new Duration(seconds: 1), (){
+          _dialogUtils.dismiss();
+
+          if(state.widget.onEditFinish != null) state.widget.onEditFinish(userInfo);
+        });
+  }
+
+  void showAlertDialogNew(String title, String message) async {
+    showDialog(
+      context: state.context,
+      builder: (BuildContext context) => ZAlertDialog(
+        zDialog: ZDialog.alert,
+        child: new Column(
+          children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  margin: const EdgeInsets.all(8),
+                  child: new Text(title,
+                      style: MainStyle.get(context).styleTittleDialog),
+                )
+              ],
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  margin:
+                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                  child: new Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                        color: const Color(0xff707070),
+                        fontSize: MainStyle.get(context).fontSizeEntradaSaida),
+                  ),
+                )
+              ],
+            ),
+            new Divider(
+              color: const Color(0xffdbdbdb),
+            ),
+            new Container(
+              child: new InkWell(
+                borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+                splashColor: const Color(0xffe6e6e6),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: new Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  child: new Text(
+                    "ENTENDI",
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize:
+                        MainStyle.get(context).fontSizeLeadinCancelar),
+                  ),
+                ),
+              ),
+              margin: const EdgeInsets.only(bottom: 8),
+            )
+          ],
+        ),
+      ),
     );
-
-    _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
-
-    var res = await _userInfoService.editarInformacoes(userInfo);
-
-    if(res)
-      _globalKey.currentState.refresh(1.0, "Pronto", success: true);
-    else
-      _globalKey.currentState.refresh(1.0, "Não foi possível editar as informações", success: false);
-
-    Future.delayed(new Duration(seconds: 1), (){
-      _dialogUtils.dismiss();
-
-      if(state.widget.onEditFinish != null) state.widget.onEditFinish(userInfo);
-    });
   }
 }

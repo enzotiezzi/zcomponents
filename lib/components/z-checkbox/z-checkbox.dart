@@ -1,18 +1,25 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/components/z-checkbox/z-checkbox-view.dart';
-import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 
 class ZCheckBox extends StatefulWidget {
-  List<String> listaDescricao;
+  List<ZCheckBoxViewModel> listaDescricao;
+  String title;
+  Function(List<String>) onChange;
 
-  ZCheckBox(this.listaDescricao);
+  ZCheckBox(
+      {@required this.listaDescricao,
+      @required this.title,
+      @required this.onChange});
 
   @override
   _ZCheckBoxState createState() => _ZCheckBoxState();
 }
 
-class _ZCheckBoxState extends State<ZCheckBox> {
+class _ZCheckBoxState extends State<ZCheckBox>
+    with AfterLayoutMixin<ZCheckBox> {
   ZCheckBoxView _view;
 
   @override
@@ -24,40 +31,49 @@ class _ZCheckBoxState extends State<ZCheckBox> {
 
   @override
   Widget build(BuildContext context) {
-    return MainStyle.get(context)
-        .getDefaultScaffold("CheckBox", _buildBody());
+    return _buildBody();
   }
 
   Widget _buildBody() {
-    if (_view.listaCheck == null || _view.listaCheck.length == 0) {
-      return new Container();
-    } else {
-      return new Container(
-        child: GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: _view.listaCheck.length,
-          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: 20.0, mainAxisSpacing: 20.0, crossAxisCount: 2),
-          itemBuilder: (context, index) {
-            return new GestureDetector(
-              child: new Container(
-                color: Colors.white,
-                child: new Row(
-                  children: <Widget>[
-                    new Checkbox(
-                        value: _view.listaCheck[index].foiMarcado,
-                        onChanged: (bool) {}),
-                    new Container(
-                      child: new Text(_view.listaCheck[index].descricao),
-                    )
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      );
-    }
+    var _crossAxisSpacing = 8;
+    var _screenWidth = MediaQuery.of(context).size.width;
+    var _crossAxisCount = 2;
+    var _width = (_screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) /
+        _crossAxisCount;
+    var cellHeight = 60;
+    var _aspectRatio = _width / cellHeight;
+
+    return new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new Container(padding: EdgeInsets.only(left: 14.0, top: 14.0),
+            child: new Text("${widget.title}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
+          ),
+          new Expanded(
+            child: new GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: _crossAxisCount,
+                    childAspectRatio: _aspectRatio),
+                itemCount: widget.listaDescricao.length,
+                itemBuilder: (context, index) {
+                  var item = widget.listaDescricao[index];
+
+                  return new Row(
+                    children: <Widget>[
+                      new Checkbox(
+                          value: item.foiMarcado,
+                          onChanged: (value) => _view.onChange(value, item)),
+                      new Text("${item.descricao}")
+                    ],
+                  );
+                }),
+          )
+        ]);
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    _view.afterBuild();
   }
 }

@@ -9,12 +9,21 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
+import 'package:z_components/components/z-input-name.dart';
+import 'package:z_components/components/z-input-cpf.dart';
+import 'package:z_components/components/z-checkbox/z-checkbox.dart';
+import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
+
+import 'package:z_components/config/z-tipos-baseline.dart';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
-import 'package:z_components/components/z-checkbox/z-checkbox.dart';
+import 'package:z_components/components/z-radio-group/z-radio-group.dart';
+import 'package:z_components/components/z-radio-group/z-radio-item.dart';
+import 'package:z_components/styles/main-style.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,8 +31,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home:ComponentExemploClasse()); }
+        debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
+  }
 }
 
 class ComponentExemploClasse extends StatefulWidget {
@@ -44,6 +53,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
   var controllerNumero = new TextEditingController();
+  var textEditingControllerNome = new TextEditingController();
+  var textEditingControllerNomeB = new TextEditingController();
 
   final key = GlobalKey<ZProgressDialogState>();
 
@@ -56,6 +67,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   FocusNode numeroFocus;
   FocusNode cEPFocus;
   FocusNode cNPJFocus;
+  FocusNode focusNodeNome;
+  var focusNodeNomeB = new FocusNode();
 
   bool value = false;
   ZBaseLine valideNome;
@@ -74,6 +87,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var _keyCargo = new GlobalKey<ZCargoState>();
 
   String vp;
+  String nomeeee;
+  String cpf;
+
   var _keyStatus = new GlobalKey<ZCollectionState>();
 
   double valuess = 0.1;
@@ -134,7 +150,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   void initState() {
     super.initState();
-
+    focusNodeNome = new FocusNode();
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
     cpfFocus = new FocusNode();
@@ -175,20 +191,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      floatingActionButton: new FloatingActionButton(onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ZCheckBox(["Sim", "Não", "Talvez"])));
-      }),
-      body: new Container(),
+      appBar: new AppBar(),
+      body: new ZCheckBox(
+        title: "Gênero",
+        onChange: (value) => print(value),
+        listaDescricao: [
+          new ZCheckBoxViewModel(descricao: "Masc", value: "Masc"),
+          new ZCheckBoxViewModel(descricao: "Fem", value: "Fem"),
+          new ZCheckBoxViewModel(descricao: "Indif", value: "Indif"),
+        ],
+      ),
     );
-
-    /*new ZConta(
-        contas: [],
-        token:
-            "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmZTY4YmI3YTIwNWYzZWJkNmEzYjcxZWU2N2NjYmRjIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODQxMTI0OTAsImV4cCI6MTU4NjcwNDQ5MCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IkFwcFNvbGljaXRhY29lcyIsInN1YiI6IjMyYmQ5MGNkLTk4ZWQtNGM2Mi1iZmZiLTNmZTY0OWI3YmM3YiIsImF1dGhfdGltZSI6MTU4NDExMjQ4OSwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IllKTU5MWVNRSFUzN0tXRUJYNzc1T0syU0lYU1M0SUJUIiwiaWRBY2NvdW50IjoiZjhkOTA0MDUtZDY5NS00OGY0LTk0YTAtZjJlMGFiODk1ZTUwIiwiYWNjb3VudCI6IlplbGxhcjIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIzMTQuMTU5LjI2NS05MCIsImVtYWlsIjoiY29udGF0b0B6ZWxsYXIuY29tLmJyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTVJTIFVzZXIiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.hDxQpjnnyrxMuXTY-ROjnlADBb7m73ZNRQRUADHp5V-hn4RTRyMUI5DMBjxYyq5Q_Z0atvevrD-WHJKcDqg947h6tvw7i0388oQ4c1QK1IIRSpV2WS1zK8z-uvVOYpNZwIrV0XSD9FZJO50oeJzvl3CBeifXJyB7ai36xgF67Fw7VAmuO0NxVg9PJNdcr4UkjVSsYWbHjZhivr8FquV3wkq6lakLhrpKz2IxLdUMHW02R60URfqcHKDXSxl_P_EuGj0_QAP9MLqtJlkh3arH8oq5OkM1TwTJqmOROQbvwj3rlmqTX8EfR5d5_RYMRSJ3h0Qj_8k_Mfk5PVCG6Z3qKA");
- */
   }
 
   void showAlertDialogNew() async {

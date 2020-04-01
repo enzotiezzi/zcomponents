@@ -7,7 +7,6 @@ import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/api/token-parser.dart';
 import 'package:z_components/components/z-identity-server/login/z-identity-server.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
-import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/settings/api-settings.dart';
 
 import 'i-identity-server.dart';
