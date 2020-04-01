@@ -11,6 +11,7 @@ import 'package:z_components/components/z-photo-view-animation.dart';
 class ZTakePhoto extends StatefulWidget {
   List<String> fotos;
   final bool permissaoGaleria;
+  final String title;
   final bool fotoObrigatoria;
   final bool finalizacaoChamado;
   final Color primaryColorApp;
@@ -19,9 +20,11 @@ class ZTakePhoto extends StatefulWidget {
   ScrollController scrollControllerTela;
 
 
-  ZTakePhoto({this.fotos,
+  ZTakePhoto({
+    @required this.fotos,
     this.permissaoGaleria: true,
     this.fotoObrigatoria: false,
+    this.title: "ADICIONAR FOTO",
     this.primaryColorApp: const Color(0xff2bbab4),
     this.finalizacaoChamado: false,
     this.scrollControllerTela,
@@ -130,7 +133,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
                             padding: const EdgeInsets.only(
                                 left: 16, right: 16, top: 10, bottom: 10),
                             child: new Text(
-                              "ADICIONAR FOTO",
+                              widget.title,
                               style: new TextStyle(
                                   color: widget.primaryColorApp,
                                   fontWeight: FontWeight.w500,
