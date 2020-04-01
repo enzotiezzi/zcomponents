@@ -1,3 +1,35 @@
+## 0.9.17+7
+
+* new ZUserInfo 
+
+## 0.9.17+6
+
+* new ZUserInfo 
+
+## 0.9.17+5
+
+* new ZUserInfo 
+
+## 0.9.17+4
+
+* new ZUserInfo 
+
+## 0.9.17+3
+
+* new ZUserInfo 
+
+## 0.9.17+2
+
+* new ZUserInfo 
+
+## 0.9.17+1
+
+* new ZUserInfo 
+
+## 0.9.17
+
+* new ZUserInfo 
+
 ## 0.9.16+6
 
 * new ZUserInfo 

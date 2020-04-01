@@ -9,6 +9,11 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
+import 'package:z_components/components/z-input-name.dart';
+import 'package:z_components/components/z-input-cpf.dart';
+
+import 'package:z_components/config/z-tipos-baseline.dart';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
@@ -46,6 +51,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
   var controllerNumero = new TextEditingController();
+  var textEditingControllerNome = new TextEditingController();
+  var textEditingControllerNomeB = new TextEditingController();
+
 
   final key = GlobalKey<ZProgressDialogState>();
 
@@ -58,6 +66,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   FocusNode numeroFocus;
   FocusNode cEPFocus;
   FocusNode cNPJFocus;
+  FocusNode focusNodeNome;
+  var focusNodeNomeB = new FocusNode();
 
   bool value = false;
   ZBaseLine valideNome;
@@ -76,6 +86,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var _keyCargo = new GlobalKey<ZCargoState>();
 
   String vp;
+  String nomeeee;
+  String cpf;
+
   var _keyStatus = new GlobalKey<ZCollectionState>();
 
   double valuess = 0.1;
@@ -136,7 +149,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   void initState() {
     super.initState();
-
+    focusNodeNome = new FocusNode();
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
     cpfFocus = new FocusNode();
@@ -176,6 +189,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return new Scaffold(
       appBar: new AppBar(),
       body: new ZRadioGroup(
@@ -189,6 +203,21 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
         ],
       ),
     );
+=======
+    return  Scaffold(
+        backgroundColor: const Color(0xffEFEFF4),
+        appBar: CupertinoNavigationBar(
+          middle: new Text("TESTE DE INPUTS"),
+        ),
+        body: new Column(children: <Widget>[
+          new ZInputName(nomeFocus: focusNodeNome,controllerNome: textEditingControllerNome,proximoFocus: cpfFocus,),
+          new ZInputCPF(cpfFocus: cpfFocus,controllerCpf: controllerCPF),
+        ],)
+
+    );
+
+
+>>>>>>> 145997c62f9e800e0a319b1fb593907cc68cfda0
   }
 
   void showAlertDialogNew() async {
