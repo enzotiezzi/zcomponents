@@ -2,17 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/components/z-news/genthumbnail.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-news/video.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-news/z-news.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/view-model/noticia-viewmodel.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/zcomponents.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/zcomponents.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/example/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-appbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-card-appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-card-appbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-take-photo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-take-photo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-new-treeview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-new-treeview.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/z_components.iml" beforeDir="false" afterPath="$PROJECT_DIR$/z_components.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +30,7 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/AppSolicitacoes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">
