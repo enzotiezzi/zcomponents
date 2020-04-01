@@ -7,7 +7,6 @@ import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/api/token-parser.dart';
 import 'package:z_components/components/z-identity-server/login/z-identity-server.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
-import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/settings/api-settings.dart';
 
 import 'i-identity-server.dart';
@@ -21,7 +20,7 @@ class IdentityServer implements IIdentityServer {
 
   ITesteConexaoService _testeConexaoService = new TesteConexaoService();
 
-  TokenInfo _user;
+  UserInfo _user;
 
   ZIdentityServer _zIdentityServer;
 
@@ -114,7 +113,7 @@ class IdentityServer implements IIdentityServer {
     }
   }
 
-  Future<TokenInfo> _findUserInfo(String token) async {
+  Future<UserInfo> _findUserInfo(String token) async {
     try {
       Dio dio = new Dio();
 
@@ -127,14 +126,14 @@ class IdentityServer implements IIdentityServer {
         ),
       );
 
-      return TokenInfo.fromJson(response.data);
+      return UserInfo.fromJson(response.data);
     } catch (e) {
       print(e);
     }
   }
 
   @override
-  TokenInfo getUserClaims() {
+  UserInfo getUserInfo() {
     return _user;
   }
 
@@ -165,7 +164,7 @@ class IdentityServer implements IIdentityServer {
 
     var accessToken = _sharedPreferences.getString(ApiSettings.API_TOKEN);
 
-    var tokenInfo = TokenInfo.fromJson(TokenParser.parseJwt(accessToken));
+    var tokenInfo = UserInfo.fromJson(TokenParser.parseJwt(accessToken));
 
     return tokenInfo.idConta;
   }

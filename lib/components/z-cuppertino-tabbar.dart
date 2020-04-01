@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class ZCuppertinoTabBar<T> extends StatefulWidget {
   int tabInicial;
   final Color corTabSelecionada;
+  final Color corFundoTab;
   final String primeiraTabNome;
   final String segundaTabNome;
   final bool lockPrimeiraTab;
@@ -18,6 +19,7 @@ class ZCuppertinoTabBar<T> extends StatefulWidget {
         this.segundaTabNome: "Tab2",
         this.lockPrimeiraTab: false,
         this.lockSegundaTab: false,
+        this.corFundoTab: Colors.white,
         this.porcentagemLarguraTabLocks = 82,
         @required this.trocaDeTabs
       });
@@ -39,6 +41,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
               selectedColor: widget.corTabSelecionada,
               padding: const EdgeInsets.all(0),
               borderColor: widget.corTabSelecionada,
+              unselectedColor: widget.corFundoTab,
               onValueChanged: widget.trocaDeTabs,
               children: <int, Widget>{
                 0: new Container(
@@ -61,7 +64,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                 )
               },
             ):new Container(),
-               _buildLockTab()
+            _buildLockTab()
           ],
         )
     );
@@ -87,11 +90,11 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                       child: new Container(
                         margin: const EdgeInsets.only(top: 1,bottom: 1,left: 1),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(6.0),
-                              bottomLeft: Radius.circular(6.0),
-                            ),
-                            color: widget.corTabSelecionada,),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6.0),
+                            bottomLeft: Radius.circular(6.0),
+                          ),
+                          color: widget.corTabSelecionada,),
                         child: new Center(child: new Text(widget.primeiraTabNome,style: new TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),),
                       ),
                     ),
@@ -148,11 +151,11 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                       child: new Container(
                         margin: const EdgeInsets.all(1),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(6.0),
-                              bottomRight: Radius.circular(6.0),
-                            ),
-                            color: widget.corTabSelecionada,),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(6.0),
+                            bottomRight: Radius.circular(6.0),
+                          ),
+                          color: widget.corTabSelecionada,),
                         child: new Center(child: new Text(widget.segundaTabNome,style: new TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),),
                       ),),
                   ],
