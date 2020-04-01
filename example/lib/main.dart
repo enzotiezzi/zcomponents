@@ -11,6 +11,8 @@ import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-input-name.dart';
 import 'package:z_components/components/z-input-cpf.dart';
+import 'package:z_components/components/z-checkbox/z-checkbox.dart';
+import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 
 import 'package:z_components/config/z-tipos-baseline.dart';
 
@@ -53,7 +55,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var controllerNumero = new TextEditingController();
   var textEditingControllerNome = new TextEditingController();
   var textEditingControllerNomeB = new TextEditingController();
-
 
   final key = GlobalKey<ZProgressDialogState>();
 
@@ -191,14 +192,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(),
-      body: new ZRadioGroup(
+      body: new ZCheckBox(
         title: "Gênero",
-        groupValue: 0,
         onChange: (value) => print(value),
-        itens: [
-          new ZRadioItem(description: "Masc", value: "M"),
-          new ZRadioItem(description: "Fem", value: "F"),
-          new ZRadioItem(description: "Indif", value: "I"),
+        listaDescricao: [
+          new ZCheckBoxViewModel(descricao: "Masc", value: "Masc"),
+          new ZCheckBoxViewModel(descricao: "Fem", value: "Fem"),
+          new ZCheckBoxViewModel(descricao: "Indif", value: "Indif"),
         ],
       ),
     );
