@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-radio-group/z-radio-group-view.dart';
 import 'package:z_components/components/z-radio-group/z-radio-item.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class ZRadioGroup extends StatefulWidget {
   String title;
@@ -37,9 +38,19 @@ class _ZRadioGroupState extends State<ZRadioGroup>
     return new Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        new Text("${widget.title}"),
+       new Row(
+         mainAxisAlignment: MainAxisAlignment.start,
+         children: <Widget>[
+         new Container(
+           margin: const EdgeInsets.all(16),
+           child: new Text("${widget.title}",style: MainStyle.get(context).mainStyleTextTitle,),
+         )
+       ],),
         new Expanded(child: new GridView.count(
           crossAxisCount: 2,
+          childAspectRatio: 4.0,
+          padding: const EdgeInsets.all(0),
+
           children: List.generate(widget.itens.length, (index) {
             var item = widget.itens[index];
 
@@ -49,7 +60,7 @@ class _ZRadioGroupState extends State<ZRadioGroup>
                     value: item.checked ? 0 : 1,
                     groupValue: widget.groupValue,
                     onChanged: (value) => _view.onChange(value, item)),
-                new Text("${item.description}")
+                new Text("${item.description}",style: new TextStyle(fontSize: MainStyle.get(context).fontSizePadrao),)
               ],
             );
           }),
