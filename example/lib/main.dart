@@ -189,7 +189,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return new Scaffold(
       appBar: new AppBar(),
       body: new ZRadioGroup(
@@ -203,21 +202,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
         ],
       ),
     );
-=======
-    return  Scaffold(
-        backgroundColor: const Color(0xffEFEFF4),
-        appBar: CupertinoNavigationBar(
-          middle: new Text("TESTE DE INPUTS"),
-        ),
-        body: new Column(children: <Widget>[
-          new ZInputName(nomeFocus: focusNodeNome,controllerNome: textEditingControllerNome,proximoFocus: cpfFocus,),
-          new ZInputCPF(cpfFocus: cpfFocus,controllerCpf: controllerCPF),
-        ],)
-
-    );
-
-
->>>>>>> 145997c62f9e800e0a319b1fb593907cc68cfda0
   }
 
   void showAlertDialogNew() async {
