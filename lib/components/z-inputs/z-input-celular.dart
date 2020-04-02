@@ -21,10 +21,10 @@ class ZInputCelular extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputCelularState();
+  State<StatefulWidget> createState() => _ZInputCelularState();
 }
 
-class ZInputCelularState extends State<ZInputCelular> {
+class _ZInputCelularState extends State<ZInputCelular> {
 
   int countCelular = 0;
   DialogUtils _dialogUtils;

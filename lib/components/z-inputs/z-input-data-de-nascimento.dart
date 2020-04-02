@@ -34,10 +34,10 @@ class ZInputDataNascimento extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputDataNascimentoState();
+  State<StatefulWidget> createState() => _ZInputDataNascimentoState();
 }
 
-class ZInputDataNascimentoState extends State<ZInputDataNascimento> {
+class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
   int countcpf = 1;
   DialogUtils _dialogUtils;
   String data;

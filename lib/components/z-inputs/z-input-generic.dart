@@ -27,10 +27,10 @@ class ZInputGeneric extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputGenericState();
+  State<StatefulWidget> createState() => _ZInputGenericState();
 }
 
-class ZInputGenericState extends State<ZInputGeneric> {
+class _ZInputGenericState extends State<ZInputGeneric> {
 
   @override
   void initState() {

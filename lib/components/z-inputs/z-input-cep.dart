@@ -20,10 +20,10 @@ class ZInputCEP extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputCEPState();
+  State<StatefulWidget> createState() => _ZInputCEPState();
 }
 
-class ZInputCEPState extends State<ZInputCEP> {
+class _ZInputCEPState extends State<ZInputCEP> {
 
   DialogUtils _dialogUtils;
   String cep = "";

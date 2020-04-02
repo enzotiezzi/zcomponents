@@ -21,10 +21,10 @@ class ZInputCNPJ extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputCNPJState();
+  State<StatefulWidget> createState() => _ZInputCNPJState();
 }
 
-class ZInputCNPJState extends State<ZInputCNPJ> {
+class _ZInputCNPJState extends State<ZInputCNPJ> {
 
   int countcnpj = 1;
   DialogUtils _dialogUtils;

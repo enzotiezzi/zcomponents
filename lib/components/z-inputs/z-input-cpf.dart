@@ -19,10 +19,10 @@ class ZInputCPF extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputCPFState();
+  State<StatefulWidget> createState() => _ZInputCPFState();
 }
 
-class ZInputCPFState extends State<ZInputCPF> {
+class _ZInputCPFState extends State<ZInputCPF> {
   int countcpf = 1;
   DialogUtils _dialogUtils;
   String cpf;
