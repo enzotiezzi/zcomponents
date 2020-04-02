@@ -230,7 +230,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
               hintText: "Escreva algo...",
               inputPadraoFocus: inputPadraoFocus,
               controllerInputPadrao: controlerPadrao,
-              metodo: () {},
             ),
           ],
         ));

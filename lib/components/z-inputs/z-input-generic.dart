@@ -13,7 +13,6 @@ class ZInputGeneric extends StatefulWidget {
 
   var controllerInputPadrao = new TextEditingController();
   FocusNode proximoFocus;
-  Function metodo;
 
   ZInputGeneric({
     this.key,
@@ -22,7 +21,6 @@ class ZInputGeneric extends StatefulWidget {
     this.comMascara:false,
     @required this.titulo,
     this.textMask,
-    this.metodo,
     @required this.inputPadraoFocus,
     @required this.controllerInputPadrao,
     this.proximoFocus,
