@@ -144,11 +144,11 @@ class ZInputCelularState extends State<ZInputCelular> {
   void _validarCelular() {
     if (celular == null) {
       valideCelular = false;
-      showAlertDialogNew(
+      _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, digitar o seu celular.");
     } else if (celular.length < 16) {
       valideCelular = false;
-      showAlertDialogNew(
+      _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
     } else if (celular.length == 16) {
       var splitCelular = celular.split(" ");
@@ -157,7 +157,7 @@ class ZInputCelularState extends State<ZInputCelular> {
         valideCelular = true;
       } else {
         valideCelular = false;
-        showAlertDialogNew("Celular Inválido!",
+        _dialogUtils.showAlertDialogNewAviso("Celular Inválido!",
             "Os celulares no Brasil devem começar com 9. Por Favor digite novamente o seu celular.");
       }
     }

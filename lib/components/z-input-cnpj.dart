@@ -12,8 +12,8 @@ class ZInputCNPJ extends StatefulWidget {
 
   ZInputCNPJ(
       {this.key,
-        this.cnpjFocus,
-        this.controllerCNPJ,
+       @required this.cnpjFocus,
+       @required this.controllerCNPJ,
         this.proximoFocus,})
       : super(key: key);
 
