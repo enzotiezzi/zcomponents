@@ -24,10 +24,10 @@ class ZInputEmail extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputDataNascimentoState();
+  State<StatefulWidget> createState() => _ZInputDataNascimentoState();
 }
 
-class ZInputDataNascimentoState extends State<ZInputEmail> {
+class _ZInputDataNascimentoState extends State<ZInputEmail> {
   int emailCount = 1;
   DialogUtils _dialogUtils;
   String data;

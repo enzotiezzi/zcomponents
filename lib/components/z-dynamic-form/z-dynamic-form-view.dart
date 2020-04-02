@@ -41,7 +41,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
         case ZDynamicFormType.DATE:
           return _buildDate(x);
           break;
-
+        case ZDynamicFormType.NUMBER:
+          return _buildNumber(x);
+          break;
       }
 
       return new Container();
@@ -95,6 +97,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
       controllerData: textEditingController,
       onChange: (value) => json[item.nomeCampo] = value,
     );
+  }
+
+  Widget _buildNumber(ZDynamicFormViewModel item){
   }
 
 }

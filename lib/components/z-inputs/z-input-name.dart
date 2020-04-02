@@ -16,10 +16,10 @@ class ZInputName extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputNameState();
+  State<StatefulWidget> createState() => _ZInputNameState();
 }
 
-class ZInputNameState extends State<ZInputName> {
+class _ZInputNameState extends State<ZInputName> {
   DialogUtils _dialogUtils;
   String nome;
   int countNome = 1;
