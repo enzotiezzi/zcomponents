@@ -30,6 +30,9 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
   TextEditingController _controller3;
   TextEditingController _controller4;
   TextEditingController _controller5;
+  TextEditingController _controller6;
+  TextEditingController _controller7;
+
   FocusNode _focusNode = new FocusNode();
   List<TextEditingController> _listController;
 
@@ -40,9 +43,12 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
     _controller3 = new TextEditingController(text: widget.dadosViewModel.cargo);
     _controller4 =
         new TextEditingController(text: widget.dadosViewModel.escala);
-    _controller5 = new TextEditingController(
-        text:
-            "${widget.dadosViewModel.horaInicio} - ${widget.dadosViewModel.horaTermino} (${widget.dadosViewModel.tempoIntervalo})");
+    _controller5 =
+        new TextEditingController(text: "${widget.dadosViewModel.horaInicio}");
+    _controller6 =
+        new TextEditingController(text: "${widget.dadosViewModel.horaTermino}");
+    _controller7 = new TextEditingController(
+        text: "${widget.dadosViewModel.tempoIntervalo}");
 
     _listController = [_controller2, _controller3, _controller4, _controller5];
     super.initState();
@@ -106,7 +112,9 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
                             cargo: _controller3.text,
                             centroCusto: _controller2.text,
                             escala: _controller4.text,
-                            horaInicio: _controller5.text);
+                            horaInicio: _controller5.text,
+                            horaTermino: _controller6.text,
+                            tempoIntervalo: _controller7.text);
                     widget.finalizarAtualizacao(dadosAtualizados);
                   }
                   if (_page < 3) {
@@ -175,21 +183,36 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
   }
 
   Widget _text() {
-    return new Container(
-      child: (_page > 3)
-          ? new ZBaseLine(
+    if (_page >= 3) {
+      return new Container(
+        child: new Column(
+          children: <Widget>[
+            new ZBaseLine(
               padraoFocus: _focusNode,
               zTipos: ZTipoBaseline.semTituloText,
-              text: _titulos[3],
+              text: "Hora de Entrada",
               controllerPadrao: _controller5,
-            )
-          : new ZBaseLine(
-              padraoFocus: _focusNode,
-              zTipos: ZTipoBaseline.semTituloText,
-              text: _titulos[_page],
-              hintText: "",
-              controllerPadrao: _listController[_page],
             ),
-    );
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.semTituloText,
+              text: "Hora de Saída",
+              controllerPadrao: _controller6,
+            ),
+            new ZBaseLine(
+              zTipos: ZTipoBaseline.semTituloText,
+              text: "Tempo de Intervalo",
+              controllerPadrao: _controller7,
+            )
+          ],
+        ),
+      );
+    } else {
+      return new ZBaseLine(
+        zTipos: ZTipoBaseline.semTituloText,
+        text: _titulos[_page],
+        hintText: "",
+        controllerPadrao: _listController[_page],
+      );
+    }
   }
 }
