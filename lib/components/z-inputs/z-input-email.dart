@@ -13,9 +13,11 @@ class ZInputEmail extends StatefulWidget {
   FocusNode proximoFocus;
   String email;
   bool valideEmail;
+  ValueChanged<String> onChange;
 
   ZInputEmail(
       {this.key,
+        this.onChange,
       @required this.emailFocus,
       @required this.controllerEmail,
       this.proximoFocus})
@@ -29,7 +31,6 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
   int emailCount = 1;
   DialogUtils _dialogUtils;
   String data;
-  bool validaEmail;
 
   @override
   void initState() {
@@ -51,6 +52,9 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
         widget.controllerEmail,
         widget.proximoFocus,
         (text) {
+          if (widget.onChange != null) widget.onChange(text);
+
+
           data = text;
           emailCount = 0;
 
@@ -81,13 +85,4 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
     }
   }
 
-
-
-  void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    if (nextFocus != null) {
-      FocusScope.of(context).requestFocus(nextFocus);
-    }
-  }
 }

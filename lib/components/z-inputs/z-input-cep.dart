@@ -9,11 +9,13 @@ class ZInputCEP extends StatefulWidget {
   FocusNode cepFocus;
   var controllerCep = new TextEditingController();
   FocusNode proximoFocus;
+  ValueChanged<String> onChange;
 
   ZInputCEP(
       {this.key,
-        this.cepFocus,
-        this.controllerCep,
+        @required this.cepFocus,
+        @required this.controllerCep,
+        this.onChange,
         this.proximoFocus,})
       : super(key: key);
 
@@ -23,15 +25,13 @@ class ZInputCEP extends StatefulWidget {
 
 class ZInputCEPState extends State<ZInputCEP> {
 
-  int countcpf = 1;
   DialogUtils _dialogUtils;
-  String cpf;
-  bool valideCpf;
+  String cep = "";
 
   @override
   void initState() {
     _dialogUtils = new DialogUtils(context);
-    initNome();
+    initCep();
     super.initState();
   }
 
@@ -48,9 +48,11 @@ class ZInputCEPState extends State<ZInputCEP> {
         widget.controllerCep,
         widget.proximoFocus,
             (text) {
-          cpf = text;
-          countcpf = 0;
-          if (cpf.length == 14) {
+              if (widget.onChange != null) widget.onChange(text);
+
+              cep = text;
+          if (cep.length == 9) {
+
             _fieldFocusChange(context, widget.cepFocus,
                 widget.proximoFocus);
           }
@@ -59,11 +61,9 @@ class ZInputCEPState extends State<ZInputCEP> {
         hintText: "XXXXX-XXX");
   }
 
-  void initNome() {
+  void initCep() {
     widget.cepFocus.addListener(() {
-      if (!widget.cepFocus.hasFocus &&
-          countcpf == 0 &&
-          cpf != "") {
+      if (!widget.cepFocus.hasFocus && cep != "") {
         _validarCEP();
       }
     });
@@ -76,6 +76,9 @@ class ZInputCEPState extends State<ZInputCEP> {
     }
   }
   void _validarCEP() {
-
+    if (cep.length < 9 && cep != "") {
+      _dialogUtils.showAlertDialogNewAviso(
+          "CEP Inválido!", "Por Favor, Termine de digitar o seu cep.");
+    }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
@@ -9,11 +10,13 @@ class ZInputCNPJ extends StatefulWidget {
   FocusNode cnpjFocus;
   var controllerCNPJ = new TextEditingController();
   FocusNode proximoFocus;
+  ValueChanged<String> onChange;
 
   ZInputCNPJ(
       {this.key,
-        this.cnpjFocus,
-        this.controllerCNPJ,
+       @required this.cnpjFocus,
+       @required this.controllerCNPJ,
+        this.onChange,
         this.proximoFocus,})
       : super(key: key);
 
@@ -23,10 +26,10 @@ class ZInputCNPJ extends StatefulWidget {
 
 class ZInputCNPJState extends State<ZInputCNPJ> {
 
-  int countcpf = 1;
+  int countcnpj = 1;
   DialogUtils _dialogUtils;
-  String cpf;
-  bool valideCpf;
+  String cnpj;
+  bool valideCnpj;
 
   @override
   void initState() {
@@ -48,9 +51,11 @@ class ZInputCNPJState extends State<ZInputCNPJ> {
         widget.controllerCNPJ,
         widget.proximoFocus,
             (text) {
-          cpf = text;
-          countcpf = 0;
-          if (cpf.length == 18) {
+              if (widget.onChange != null) widget.onChange(text);
+
+              cnpj = text;
+              countcnpj = 0;
+          if (cnpj.length == 18) {
             _fieldFocusChange(context, widget.cnpjFocus,
                 widget.proximoFocus);
           }
@@ -62,8 +67,8 @@ class ZInputCNPJState extends State<ZInputCNPJ> {
   void initNome() {
     widget.cnpjFocus.addListener(() {
       if (!widget.cnpjFocus.hasFocus &&
-          countcpf == 0 &&
-          cpf != "") {
+          countcnpj == 0 &&
+          cnpj != "") {
         _validarCNPJ();
       }
     });
@@ -76,6 +81,14 @@ class ZInputCNPJState extends State<ZInputCNPJ> {
     }
   }
 
-  void _validarCNPJ() {}
+  void _validarCNPJ() {
+    if (!CNPJValidator.isValid(cnpj)) {
+      valideCnpj = false;
+      _dialogUtils.showAlertDialogNewAviso(
+          "CNPJ Inválido!", "Por Favor insira um CNPJ válido.");
+    } else {
+      valideCnpj = true;
+    }
+  }
 
 }

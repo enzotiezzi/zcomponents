@@ -10,14 +10,14 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-input-name.dart';
-import 'package:z_components/components/z-input-cpf.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 
-import 'package:z_components/components/z-input-generic.dart';
-import 'package:z_components/components/z-input-data-de-nascimento.dart';
-import 'package:z_components/components/z-input-celular.dart';
-import 'package:z_components/components/z-input-email.dart';
-import 'package:z_components/components/z-input-cep.dart';
-import 'package:z_components/components/z-input-cnpj.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
+import 'package:z_components/components/z-inputs/z-input-email.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
+import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
@@ -215,10 +215,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
             ),
             new ZInputCelular(
                 celularFocus: celularFocus,
-                controllerCelular: controllerCelular),
-            new ZInputCEP(cepFocus: cepFocus, controllerCep: controllerCEP),
+                controllerCelular: controllerCelular,),
+            new ZInputCEP(cepFocus: cepFocus, controllerCep: controllerCEP,),
             new ZInputCNPJ(
-                cnpjFocus: cnpjFocus, controllerCNPJ: controllerCNPJ),
+                cnpjFocus: cnpjFocus, controllerCNPJ: controllerCNPJ,),
             new ZInputDataNascimento(
               controllerData: controllerData,
               dataFocus: dataFocus,
@@ -226,10 +226,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
             new ZInputEmail(
                 emailFocus: emailFocus, controllerEmail: controllerEmail,),
             new ZInputGeneric(
-              titulo: "sem titulo text",
-              hintText: "xx-xx-xx",
-              textMask: "xx-xx-xx",
-              comMascara: true,
+              titulo: "Generic",
+              hintText: "Escreva algo...",
               inputPadraoFocus: inputPadraoFocus,
               controllerInputPadrao: controlerPadrao,
               metodo: () {},

@@ -4,17 +4,18 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputCPF extends StatefulWidget {
-
   final Key key;
   FocusNode cpfFocus;
   var controllerCpf = new TextEditingController();
   FocusNode proximoFocus;
+  ValueChanged<String> onChange;
 
   ZInputCPF(
       {this.key,
-        this.cpfFocus,
-        this.controllerCpf,
-        this.proximoFocus,})
+      @required this.cpfFocus,
+      @required this.controllerCpf,
+      this.proximoFocus,
+      this.onChange})
       : super(key: key);
 
   @override
@@ -22,7 +23,6 @@ class ZInputCPF extends StatefulWidget {
 }
 
 class ZInputCPFState extends State<ZInputCPF> {
-
   int countcpf = 1;
   DialogUtils _dialogUtils;
   String cpf;
@@ -41,33 +41,34 @@ class ZInputCPFState extends State<ZInputCPF> {
         context,
         "CPF:",
         TextInputType.number,
-            () {
+        () {
           FocusScope.of(context).requestFocus(widget.cpfFocus);
         },
         widget.cpfFocus,
         widget.controllerCpf,
         widget.proximoFocus,
-            (text) {
-              cpf = text;
-              countcpf = 0;
-              if (cpf.length == 14) {
-                _fieldFocusChange(context, widget.cpfFocus,
-                    widget.proximoFocus);
-              }
-        },true,
+        (text) {
+          if (widget.onChange != null) widget.onChange(text);
+
+          cpf = text;
+          countcpf = 0;
+          if (cpf.length == 14) {
+            _fieldFocusChange(context, widget.cpfFocus, widget.proximoFocus);
+          }
+        },
+        true,
         textMask: "XXX.XXX.XXX-XX",
         hintText: "XXX.XXX.XXX-XX");
   }
 
   void initNome() {
     widget.cpfFocus.addListener(() {
-      if (!widget.cpfFocus.hasFocus &&
-          countcpf == 0 &&
-          cpf != "") {
+      if (!widget.cpfFocus.hasFocus && countcpf == 0 && cpf != "") {
         _validarCPF();
       }
     });
   }
+
   void _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
@@ -75,10 +76,12 @@ class ZInputCPFState extends State<ZInputCPF> {
       FocusScope.of(context).requestFocus(nextFocus);
     }
   }
+
   void _validarCPF() {
     if (!CPFValidator.isValid(cpf)) {
       valideCpf = false;
-      _dialogUtils.showAlertDialogNewAviso("CPF Inválido!", "Por Favor insira um CPF válido.");
+      _dialogUtils.showAlertDialogNewAviso(
+          "CPF Inválido!", "Por Favor insira um CPF válido.");
     } else {
       valideCpf = true;
     }

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/zcomponents.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/components/z-appbar.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/components/z-card-appbar.dart" afterDir="false" />
@@ -34,10 +35,30 @@
 >>>>>>> d412fd8d30d4f641b0a886ce76d6a102439d255a
 =======
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-celular.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-celular.dart" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/lib/components/z-dynamic-form/z-dynamic-form-view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-dynamic-form/z-dynamic-form-view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-radio-group/z-dynamic-form-type.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-radio-group/z-dynamic-form-type.dart" afterDir="false" />
+=======
+>>>>>>> 32ab14e01c55f73da183638a94b52dde84aa4beb
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-cep.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cep.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-cnpj.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cnpj.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-email.dart" afterDir="false" />
 >>>>>>> 6789105bd17f3922b41d6ccaed998cd549fa19b8
+=======
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-name.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-name.dart" afterDir="false" />
+>>>>>>> 82a33daf7580160dbfbb5db081a4195511db8600
+=======
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" afterDir="false" />
+>>>>>>> 0fabab0a074d5612e743c220af2754f1ed96e9ef
+>>>>>>> 32ab14e01c55f73da183638a94b52dde84aa4beb
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,10 +164,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="779" y="231" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585771237855" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1585835145489">
+    <state x="461" y="162" key="SettingsEditor" timestamp="1585839931301">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585835145489" />
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585839931301" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585764254512">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
