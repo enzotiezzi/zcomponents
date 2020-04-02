@@ -82,11 +82,7 @@ class MainStyle {
                             cursorColor: Color(0xFF2BBAB4),
                             style: MainStyle.get(context)
                                 .mainStyleTextBaseLineInput,
-                            inputFormatters: [
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[\\\\/,.]")),
-                            ],
-                            onSubmitted: (text) {
+                                                    onSubmitted: (text) {
                               currentFocus.unfocus();
                               if (nextFocus != null) {
                                 FocusScope.of(context).requestFocus(nextFocus);

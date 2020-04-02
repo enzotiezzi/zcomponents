@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64cdf06c-6035-4cbd-a742-f2bc15f3cfc9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/components/z-dynamic-form/z-dynamic-form-view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-dynamic-form/z-dynamic-form.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-radio-group/z-dynamic-form-type.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-collection-item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-collection-item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-collection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-collection.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view-model/formulario-viewmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view-model/z-dynamic-form-viewmodel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-generic.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-generic.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

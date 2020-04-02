@@ -11,8 +11,8 @@ import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-input-name.dart';
 import 'package:z_components/components/z-input-cpf.dart';
-import 'package:z_components/components/z-input-sem-numero.dart';
-import 'package:z_components/components/z-input-sem-titulo.dart';
+
+import 'package:z_components/components/z-input-generic.dart';
 import 'package:z_components/components/z-input-data-de-nascimento.dart';
 import 'package:z_components/components/z-input-celular.dart';
 import 'package:z_components/components/z-input-email.dart';
@@ -165,6 +165,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     numeroFocus = new FocusNode();
     cepFocus = new FocusNode();
     cnpjFocus = new FocusNode();
+    inputPadraoFocus = new FocusNode();
 
     super.initState();
 
@@ -224,18 +225,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
             ),
             new ZInputEmail(
                 emailFocus: emailFocus, controllerEmail: controllerEmail),
-            new ZInputSemNumero(
-              titulo: "sem titulo num",
-              hintText: "xx-xx-xx",
-              textMask: "xx-xx-xx",
-              inputPadraoFocus: inputPadraoFocus,
-              controllerInputPadrao: controlerPadrao,
-              metodo: () {},
-            ),
-            new ZInputSemTitulo(
+
+            new ZInputGeneric(
               titulo: "sem titulo text",
               hintText: "xx-xx-xx",
               textMask: "xx-xx-xx",
+              comMascara: true,
               inputPadraoFocus: inputPadraoFocus,
               controllerInputPadrao: controlerPadrao,
               metodo: () {},
