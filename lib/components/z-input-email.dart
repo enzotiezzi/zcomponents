@@ -73,80 +73,17 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
   void _validarEmail() {
     if (widget.email == null) {
       widget.valideEmail = false;
-      showAlertDialogNew("E-mail Inválido!", "Por Favor insira um E-mail.");
+      _dialogUtils.showAlertDialogNewAviso("E-mail Inválido!", "Por Favor insira um E-mail.");
     } else if (!EmailValidator.validate(widget.email)) {
       widget.valideEmail = false;
-      showAlertDialogNew(
+      _dialogUtils.showAlertDialogNewAviso(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");
     } else {
       widget.valideEmail = true;
     }
   }
 
-  void showAlertDialogNew(String title, String message) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => ZAlertDialog(
-        zDialog: ZDialog.erro,
-        child: new Column(
-          children: <Widget>[
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Container(
-                  margin: const EdgeInsets.all(8),
-                  child: new Text(title,
-                      style: MainStyle.get(context).styleTittleDialog),
-                )
-              ],
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  margin:
-                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                  child: new Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        color: const Color(0xff707070),
-                        fontSize: MainStyle.get(context).fontSizeEntradaSaida),
-                  ),
-                )
-              ],
-            ),
-            new Divider(
-              color: const Color(0xffdbdbdb),
-            ),
-            new Container(
-              child: new InkWell(
-                borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
-                splashColor: const Color(0xffe6e6e6),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: new Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  child: new Text(
-                    "ENTENDI",
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize:
-                            MainStyle.get(context).fontSizeLeadinCancelar),
-                  ),
-                ),
-              ),
-              margin: const EdgeInsets.only(bottom: 8),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+
 
   void _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
