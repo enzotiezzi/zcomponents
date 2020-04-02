@@ -12,8 +12,8 @@ class ZInputCPF extends StatefulWidget {
 
   ZInputCPF(
       {this.key,
-        this.cpfFocus,
-        this.controllerCpf,
+        @required this.cpfFocus,
+        @required this.controllerCpf,
         this.proximoFocus,})
       : super(key: key);
 

@@ -12,8 +12,8 @@ class ZInputCEP extends StatefulWidget {
 
   ZInputCEP(
       {this.key,
-        this.cepFocus,
-        this.controllerCep,
+        @required this.cepFocus,
+        @required this.controllerCep,
         this.proximoFocus,})
       : super(key: key);
 

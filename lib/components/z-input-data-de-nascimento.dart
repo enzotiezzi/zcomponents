@@ -28,7 +28,7 @@ class ZInputDataNascimento extends StatefulWidget {
       {this.key,
       @required this.dataFocus,
       @required this.controllerData,
-      @required this.proximoFocus})
+       this.proximoFocus})
       : super(key: key);
 
   @override
