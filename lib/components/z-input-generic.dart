@@ -7,6 +7,7 @@ class ZInputGeneric extends StatefulWidget {
   String hintText;
   String textMask;
   String titulo;
+  bool comMascara;
   FocusNode inputPadraoFocus;
   var controllerInputPadrao = new TextEditingController();
   FocusNode proximoFocus;
@@ -15,6 +16,7 @@ class ZInputGeneric extends StatefulWidget {
   ZInputGeneric({
     this.key,
     @required this.hintText,
+    @required this.comMascara,
     @required this.titulo,
     @required this.textMask,
     @required this.metodo,
@@ -60,7 +62,7 @@ class ZInputGenericState extends State<ZInputGeneric> {
                 context, widget.inputPadraoFocus, widget.proximoFocus);
           }
         },
-        true,
+        widget.comMascara,
         textMask: "${widget.textMask}",
         hintText: "${widget.hintText}");
   }

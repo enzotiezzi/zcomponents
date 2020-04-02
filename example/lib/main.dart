@@ -165,6 +165,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     numeroFocus = new FocusNode();
     cepFocus = new FocusNode();
     cnpjFocus = new FocusNode();
+    inputPadraoFocus = new FocusNode();
 
     super.initState();
 
@@ -229,6 +230,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
               titulo: "sem titulo text",
               hintText: "xx-xx-xx",
               textMask: "xx-xx-xx",
+              comMascara: true,
               inputPadraoFocus: inputPadraoFocus,
               controllerInputPadrao: controlerPadrao,
               metodo: () {},
