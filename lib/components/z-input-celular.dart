@@ -1,4 +1,3 @@
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
@@ -46,7 +45,7 @@ class ZInputCelularState extends State<ZInputCelular> {
             () {
           FocusScope.of(context).requestFocus(widget.celularFocus);
         },
-           widget.celularFocus,
+        widget.celularFocus,
         widget.controllerCelular,
         widget.proximoFocus,
             (text) {
@@ -58,7 +57,7 @@ class ZInputCelularState extends State<ZInputCelular> {
           }
         },true,
 
-        textMask: "(XX) X XXXXX-XXXX",
+        textMask: "(XX)X XXXX-XXXX",
         hintText: "( ** ) 9 **** - ****");
   }
 
@@ -147,20 +146,10 @@ class ZInputCelularState extends State<ZInputCelular> {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, digitar o seu celular.");
-    } else if (celular.length < 16) {
+    } else if (celular.length < 15) {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
-    } else if (celular.length == 16) {
-      var splitCelular = celular.split(" ");
-
-      if (splitCelular[1] == "9") {
-        valideCelular = true;
-      } else {
-        valideCelular = false;
-        showAlertDialogNew("Celular Inválido!",
-            "Os celulares no Brasil devem começar com 9. Por Favor digite novamente o seu celular.");
-      }
     }
   }
 }

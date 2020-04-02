@@ -16,9 +16,9 @@ class ZInputEmail extends StatefulWidget {
 
   ZInputEmail(
       {this.key,
-        @required this.emailFocus,
-        @required this.controllerEmail,
-        @required this.proximoFocus})
+      @required this.emailFocus,
+      @required this.controllerEmail,
+      this.proximoFocus})
       : super(key: key);
 
   @override
@@ -30,7 +30,6 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
   DialogUtils _dialogUtils;
   String data;
   bool validaEmail;
-
 
   @override
   void initState() {
@@ -44,22 +43,22 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
     return MainStyle.styleTextInput(
         context,
         "E-mail:",
-        TextInputType.number,
-            () {
+        TextInputType.emailAddress,
+        () {
           FocusScope.of(context).requestFocus(widget.emailFocus);
         },
         widget.emailFocus,
         widget.controllerEmail,
         widget.proximoFocus,
-            (text) {
+        (text) {
           data = text;
           emailCount = 0;
-          if (data.length == 10) {
+          if (data.length > 255) {
             _fieldFocusChange(context, widget.emailFocus, widget.proximoFocus);
           }
         },
-        true,
-        textMask: "XX/XX/XXXX",
+        false,
+
         hintText: "email@exemplo.com");
   }
 
@@ -71,7 +70,7 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
     });
   }
 
-  void _validarEmail()  {
+  void _validarEmail() {
     if (widget.email == null) {
       widget.valideEmail = false;
       showAlertDialogNew("E-mail Inválido!", "Por Favor insira um E-mail.");
@@ -83,7 +82,6 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
       widget.valideEmail = true;
     }
   }
-
 
   void showAlertDialogNew(String title, String message) async {
     showDialog(
@@ -108,7 +106,7 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
                 new Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   margin:
-                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                   child: new Text(
                     message,
                     textAlign: TextAlign.center,
@@ -138,7 +136,7 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
                     style: new TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize:
-                        MainStyle.get(context).fontSizeLeadinCancelar),
+                            MainStyle.get(context).fontSizeLeadinCancelar),
                   ),
                 ),
               ),
@@ -149,6 +147,7 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
       ),
     );
   }
+
   void _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
@@ -156,5 +155,4 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
       FocusScope.of(context).requestFocus(nextFocus);
     }
   }
-
 }

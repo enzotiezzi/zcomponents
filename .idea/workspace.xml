@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/zcomponents.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/components/z-appbar.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/components/z-card-appbar.dart" afterDir="false" />
@@ -19,11 +20,17 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/example_lib_main_dart.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+=======
+>>>>>>> d412fd8d30d4f641b0a886ce76d6a102439d255a
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/lib/components/z-baseline.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-baseline.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/styles/main-style.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/styles/main-style.dart" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-generic.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-generic.dart" afterDir="false" />
+>>>>>>> d412fd8d30d4f641b0a886ce76d6a102439d255a
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
