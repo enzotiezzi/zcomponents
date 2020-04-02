@@ -59,11 +59,11 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
   }
 
   Widget _buildCPF(ZDynamicFormViewModel item) {
-    TextEditingController _textEditingController = new TextEditingController();
-    FocusNode _focusNode = new FocusNode();
+    TextEditingController textEditingController = new TextEditingController();
+    FocusNode focusNode = new FocusNode();
     return new ZInputCPF(
-      controllerCpf: _textEditingController,
-      cpfFocus: _focusNode,
+      controllerCpf: textEditingController,
+      cpfFocus: focusNode,
       onChange: (value) => json[item.nomeCampo] = value,
     );
   }
