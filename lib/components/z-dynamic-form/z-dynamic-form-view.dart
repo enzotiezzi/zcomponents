@@ -60,7 +60,7 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     return new ZInputCPF(
       controllerCpf: _controllerCPF,
       cpfFocus: _focusNodeCPF,
-
+      onChange: (value) => json[item.nomeCampo] = value,
     );
   }
 }
