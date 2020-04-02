@@ -9,6 +9,19 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
+
+import 'package:z_components/components/z-input-celular.dart';
+import 'package:z_components/components/z-input-cep.dart';
+import 'package:z_components/components/z-input-cnpj.dart';
+import 'package:z_components/components/z-input-cpf.dart';
+import 'package:z_components/components/z-input-data-de-nascimento.dart';
+import 'package:z_components/components/z-input-email.dart';
+import 'package:z_components/components/z-input-name.dart';
+import 'package:z_components/components/z-input-sem-numero.dart';
+import 'package:z_components/components/z-input-sem-titulo.dart';
+
+import 'package:z_components/config/z-tipos-baseline.dart';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
@@ -18,11 +31,11 @@ import 'package:z_components/api/identity-server/identity-server.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: ZUserInfo(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImVhNGU1YWY5OGQ2ZTZmZjNhMmNmOTc1MGNlMGQ0YzE3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODUyNTM3MjcsImV4cCI6MTU4NTI1NzMyNywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpQb250byIsInN1YiI6ImJiYzA3ZGRhLWEzNDQtNDdlZC05NGQ0LWZkODQ1MjZjYTc4OCIsImF1dGhfdGltZSI6MTU4NTI1MzcyMiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ik9aNFlEQVRFUVhFQzdGU0dONEc0WENOQjI3RzVQWEFSIiwiaWRDb2xhYm9yYWRvciI6IjU0OEQ1MjRELUE2REUtNEQ4QS05NDVFLUE3MDZBRDJGODdGMiIsImlkQWNjb3VudCI6IjQ4NmE0OWIzLTQ3ZDEtNGQ3Ni04MGRmLTA3OWViODJkNmQ4ZiIsImFjY291bnQiOiJaZWxsYXIyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDM4LjE5Ny43MTgtMTYiLCJlbWFpbCI6ImJsYWJsYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiI0MzguMTk3LjcxOC0xNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.ZsSxc59voVlTcjizRGBVuCfE0FwWnz_uUucsnzypLQKI-yf-pFgPT6VLCCQ-WF4BGgxgAEKovR2YbFCApD80XbkyXVLzqNbZSq34Tkqh54G_lFwUsg_st2GzL7oQ9aMaM-XV0cktHPSobpzqNyZkln1MkLveln67Hg7ZxB2w5rO4ECL3VBe0JPs8lmqmOijWCjUfgrmTHpeU2TVgVHnXuxZej3bAskVCRP_YWA_ayFtZz7vibTdFoBYVCQFX_AEX8hunuTmt98PXZs5aL3KngRhVyLhnYoMWv5wI_vfJx3bl0UimCN_h5wnvzJpGh5NwFmpDk_5KSfPlRiwkZQTu0g"));
+        debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
+    //ZUserInfo(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImVhNGU1YWY5OGQ2ZTZmZjNhMmNmOTc1MGNlMGQ0YzE3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODUyNTM3MjcsImV4cCI6MTU4NTI1NzMyNywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpQb250byIsInN1YiI6ImJiYzA3ZGRhLWEzNDQtNDdlZC05NGQ0LWZkODQ1MjZjYTc4OCIsImF1dGhfdGltZSI6MTU4NTI1MzcyMiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ik9aNFlEQVRFUVhFQzdGU0dONEc0WENOQjI3RzVQWEFSIiwiaWRDb2xhYm9yYWRvciI6IjU0OEQ1MjRELUE2REUtNEQ4QS05NDVFLUE3MDZBRDJGODdGMiIsImlkQWNjb3VudCI6IjQ4NmE0OWIzLTQ3ZDEtNGQ3Ni04MGRmLTA3OWViODJkNmQ4ZiIsImFjY291bnQiOiJaZWxsYXIyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDM4LjE5Ny43MTgtMTYiLCJlbWFpbCI6ImJsYWJsYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiI0MzguMTk3LjcxOC0xNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.ZsSxc59voVlTcjizRGBVuCfE0FwWnz_uUucsnzypLQKI-yf-pFgPT6VLCCQ-WF4BGgxgAEKovR2YbFCApD80XbkyXVLzqNbZSq34Tkqh54G_lFwUsg_st2GzL7oQ9aMaM-XV0cktHPSobpzqNyZkln1MkLveln67Hg7ZxB2w5rO4ECL3VBe0JPs8lmqmOijWCjUfgrmTHpeU2TVgVHnXuxZej3bAskVCRP_YWA_ayFtZz7vibTdFoBYVCQFX_AEX8hunuTmt98PXZs5aL3KngRhVyLhnYoMWv5wI_vfJx3bl0UimCN_h5wnvzJpGh5NwFmpDk_5KSfPlRiwkZQTu0g"));
   }
 }
 
@@ -33,9 +46,8 @@ class ComponentExemploClasse extends StatefulWidget {
 
 class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     with AfterLayoutMixin<ComponentExemploClasse> {
-
-
   var controllerEmail = new TextEditingController();
+  var controlerPadrao = new TextEditingController();
   var controllerNome = new TextEditingController();
   var controllerCPF = new TextEditingController();
   var controllerCelular = new TextEditingController();
@@ -46,6 +58,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var controllerCEP = new TextEditingController();
   var controllerCNPJ = new TextEditingController();
   var controllerNumero = new TextEditingController();
+  var textEditingControllerNome = new TextEditingController();
+  var textEditingControllerNomeB = new TextEditingController();
 
   final key = GlobalKey<ZProgressDialogState>();
 
@@ -53,11 +67,14 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   FocusNode emailFocus;
   FocusNode cpfFocus;
   FocusNode celularFocus;
-  FocusNode mesFocus;
+  FocusNode dataFocus;
   FocusNode ruaFocus;
   FocusNode numeroFocus;
-  FocusNode cEPFocus;
-  FocusNode cNPJFocus;
+  FocusNode cepFocus;
+  FocusNode cnpjFocus;
+  FocusNode focusNodeNome;
+  FocusNode inputPadraoFocus;
+  var focusNodeNomeB = new FocusNode();
 
   bool value = false;
   ZBaseLine valideNome;
@@ -76,6 +93,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var _keyCargo = new GlobalKey<ZCargoState>();
 
   String vp;
+  String nomeeee;
+  String cpf;
+
   var _keyStatus = new GlobalKey<ZCollectionState>();
 
   double valuess = 0.1;
@@ -136,16 +156,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   void initState() {
     super.initState();
-
+    focusNodeNome = new FocusNode();
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
     cpfFocus = new FocusNode();
     celularFocus = new FocusNode();
-    mesFocus = new FocusNode();
+    dataFocus = new FocusNode();
     ruaFocus = new FocusNode();
     numeroFocus = new FocusNode();
-    cEPFocus = new FocusNode();
-    cNPJFocus = new FocusNode();
+    cepFocus = new FocusNode();
+    cnpjFocus = new FocusNode();
+    inputPadraoFocus = new FocusNode();
 
     super.initState();
 
@@ -176,10 +197,59 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return new ZConta(
-        contas: [],
-        token:
-            "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmZTY4YmI3YTIwNWYzZWJkNmEzYjcxZWU2N2NjYmRjIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODQxMTI0OTAsImV4cCI6MTU4NjcwNDQ5MCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IkFwcFNvbGljaXRhY29lcyIsInN1YiI6IjMyYmQ5MGNkLTk4ZWQtNGM2Mi1iZmZiLTNmZTY0OWI3YmM3YiIsImF1dGhfdGltZSI6MTU4NDExMjQ4OSwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IllKTU5MWVNRSFUzN0tXRUJYNzc1T0syU0lYU1M0SUJUIiwiaWRBY2NvdW50IjoiZjhkOTA0MDUtZDY5NS00OGY0LTk0YTAtZjJlMGFiODk1ZTUwIiwiYWNjb3VudCI6IlplbGxhcjIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIzMTQuMTU5LjI2NS05MCIsImVtYWlsIjoiY29udGF0b0B6ZWxsYXIuY29tLmJyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTVJTIFVzZXIiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.hDxQpjnnyrxMuXTY-ROjnlADBb7m73ZNRQRUADHp5V-hn4RTRyMUI5DMBjxYyq5Q_Z0atvevrD-WHJKcDqg947h6tvw7i0388oQ4c1QK1IIRSpV2WS1zK8z-uvVOYpNZwIrV0XSD9FZJO50oeJzvl3CBeifXJyB7ai36xgF67Fw7VAmuO0NxVg9PJNdcr4UkjVSsYWbHjZhivr8FquV3wkq6lakLhrpKz2IxLdUMHW02R60URfqcHKDXSxl_P_EuGj0_QAP9MLqtJlkh3arH8oq5OkM1TwTJqmOROQbvwj3rlmqTX8EfR5d5_RYMRSJ3h0Qj_8k_Mfk5PVCG6Z3qKA");
+    return Scaffold(
+        backgroundColor: const Color(0xffEFEFF4),
+        appBar: CupertinoNavigationBar(
+          middle: new Text("TESTE DE INPUTS"),
+        ),
+        body: new Column(
+          children: <Widget>[
+            new ZInputName(
+              nomeFocus: focusNodeNome,
+              controllerNome: textEditingControllerNome,
+              proximoFocus: cpfFocus,
+            ),
+            new ZInputCPF(
+              cpfFocus: cpfFocus,
+              controllerCpf: controllerCPF,
+              proximoFocus: celularFocus,
+            ),
+            new ZInputCelular(
+                celularFocus: celularFocus,
+                controllerCelular: controllerCelular),
+            new ZInputCEP(cepFocus: cepFocus, controllerCep: controllerCEP),
+            new ZInputCNPJ(
+                cnpjFocus: cnpjFocus, controllerCNPJ: controllerCNPJ),
+            new ZInputDataNascimento(
+              controllerData: controllerData,
+              dataFocus: dataFocus,
+            ),
+            new ZInputEmail(
+                emailFocus: emailFocus, controllerEmail: controllerEmail),
+            new ZInputSemNumero(
+              titulo: "sem titulo num",
+              hintText: "xx-xx-xx",
+              textMask: "xx-xx-xx",
+              inputPadraoFocus: inputPadraoFocus,
+              controllerInputPadrao: controlerPadrao,
+              metodo: () {},
+            ),
+    new ZInputSemTitulo( titulo: "sem titulo text",
+      hintText: "xx-xx-xx",
+      textMask: "xx-xx-xx",
+      inputPadraoFocus: inputPadraoFocus,
+      controllerInputPadrao: controlerPadrao,
+      metodo: () {},),
+
+
+
+
+
+
+
+
+          ],
+        ));
   }
 
   void showAlertDialogNew() async {

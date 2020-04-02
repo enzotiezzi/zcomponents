@@ -2,38 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/api/arquivo/arquivo-service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/api/arquivo/i-arquivo-service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/api/endereco/endereco-service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/api/endereco/i-endereco-service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/api/user-info/i-user-info-service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/api/user-info/user-info-service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-news.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-user-info/z-user-info-view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-user-info/z-user-info.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/view-model/arquivo-viewmodel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/view-model/buscarinfo-viewmodel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/view-model/endereco-viewmodel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/view-model/foto-detalhe-viewmodel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-celular.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-cep.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-cnpj.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-email.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-name.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-sem-numero.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/components/z-input-sem-titulo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/example/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/api/identity-server/i-identity-server.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/identity-server/i-identity-server.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/api/identity-server/identity-server.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/identity-server/identity-server.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/api/service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-conta/z-conta-view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-conta/z-conta-view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-cuppertino-tabbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-cuppertino-tabbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-identity-server/token-info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-identity-server/token-info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-new-treeview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-new-treeview.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-news/genthumbnail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-videos/genthumbnail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-news/video.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-videos/video.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-news/z-news.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-videos/z-videos.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-progress-dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-progress-dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-baseline.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-baseline.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/styles/main-style.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/styles/main-style.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +24,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_28" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -49,7 +38,7 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ZColaboradorLite" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">
@@ -95,5 +84,21 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/components/z-baseline.dart</url>
+          <line>122</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/components/z-baseline.dart</url>
+          <line>624</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
