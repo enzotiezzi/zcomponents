@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/lib/components/z-dynamic-form/z-dynamic-form-view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-dynamic-form/z-dynamic-form-view.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" afterDir="false" />
@@ -16,6 +15,9 @@
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-name.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-name.dart" afterDir="false" />
 >>>>>>> 82a33daf7580160dbfbb5db081a4195511db8600
+=======
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" afterDir="false" />
+>>>>>>> 0fabab0a074d5612e743c220af2754f1ed96e9ef
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
