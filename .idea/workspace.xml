@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-input-generic.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-generic.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cpf.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

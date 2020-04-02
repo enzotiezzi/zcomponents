@@ -9,12 +9,14 @@ class ZInputCPF extends StatefulWidget {
   FocusNode cpfFocus;
   var controllerCpf = new TextEditingController();
   FocusNode proximoFocus;
+  ValueChanged<String> onChange;
 
   ZInputCPF(
       {this.key,
         this.cpfFocus,
         this.controllerCpf,
-        this.proximoFocus,})
+        this.proximoFocus,
+        this.onChange})
       : super(key: key);
 
   @override
@@ -48,6 +50,7 @@ class ZInputCPFState extends State<ZInputCPF> {
         widget.controllerCpf,
         widget.proximoFocus,
             (text) {
+          if(widget.onChange != null) widget.onChange(text);
               cpf = text;
               countcpf = 0;
               if (cpf.length == 14) {
