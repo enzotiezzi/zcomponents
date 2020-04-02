@@ -10,8 +10,6 @@ import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 
 class ZDynamicFormView extends IView<ZDyanmicForm> {
   Map json;
-  TextEditingController _controllerCPF = new TextEditingController();
-  FocusNode _focusNodeCPF = new FocusNode();
 
   ZDynamicFormView(State<ZDyanmicForm> state) : super(state);
 
@@ -27,8 +25,8 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
   }
 
   Widget buildDynamicForm() {
-    var widgets = state.widget.fields.map<Widget>((x){
-      switch(x.tipo){
+    var widgets = state.widget.fields.map<Widget>((x) {
+      switch (x.tipo) {
         case ZDynamicFormType.SELECT:
           return _buildSelect(x);
           break;
@@ -51,15 +49,21 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
   Widget _buildSelect(ZDynamicFormViewModel item) {
     return new ZCollection(
       titulo: item.label,
-      lista: item.opcoes.split('|').map((x) => new ZCollectionItem(chave: item.nomeCampo, titulo: x, valor: x)).toList(),
+      lista: item.opcoes
+          .split('|')
+          .map((x) =>
+              new ZCollectionItem(chave: item.nomeCampo, titulo: x, valor: x))
+          .toList(),
       onChange: (value) => json[item.nomeCampo] = value,
     );
   }
 
-  Widget _buildCPF(ZDynamicFormViewModel item){
+  Widget _buildCPF(ZDynamicFormViewModel item) {
+    TextEditingController _textEditingController = new TextEditingController();
+    FocusNode _focusNode = new FocusNode();
     return new ZInputCPF(
-      controllerCpf: _controllerCPF,
-      cpfFocus: _focusNodeCPF,
+      controllerCpf: _textEditingController,
+      cpfFocus: _focusNode,
       onChange: (value) => json[item.nomeCampo] = value,
     );
   }
