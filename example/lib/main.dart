@@ -12,7 +12,7 @@ import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-input-name.dart';
 import 'package:z_components/components/z-input-cpf.dart';
 
-import 'package:z_components/components/z-input-sem-titulo.dart';
+import 'package:z_components/components/z-input-generic.dart';
 import 'package:z_components/components/z-input-data-de-nascimento.dart';
 import 'package:z_components/components/z-input-celular.dart';
 import 'package:z_components/components/z-input-email.dart';
