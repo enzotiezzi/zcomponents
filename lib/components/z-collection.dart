@@ -13,8 +13,8 @@ class ZCollection extends StatefulWidget {
 
   ZCollection(
       {Key key,
-      this.titulo: "Z Collection",
-      this.lista,
+      @required this.titulo,
+      @required this.lista,
       this.onChange,
       this.valorPadrao})
       : super(key: key);
