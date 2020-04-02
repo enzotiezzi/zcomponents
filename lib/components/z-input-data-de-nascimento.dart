@@ -120,7 +120,7 @@ class ZInputDataNascimentoState extends State<ZInputDataNascimento> {
         if (widget.intDias == 00 ||
             widget.intMes == 00 ||
             widget.intAno == 00) {
-          showAlertDialogNew("Data Inválida!",
+          _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
               "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
         } else if (widget.intMes == 01 ||
             widget.intMes == 03 ||
@@ -130,7 +130,7 @@ class ZInputDataNascimentoState extends State<ZInputDataNascimento> {
             widget.intMes == 10 ||
             widget.intMes == 12) {
           if (widget.intDias > 31) {
-            showAlertDialogNew(
+            _dialogUtils.showAlertDialogNewAviso(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
           } else {
             widget.valideMes = true;
@@ -140,7 +140,7 @@ class ZInputDataNascimentoState extends State<ZInputDataNascimento> {
             widget.intMes == 09 ||
             widget.intMes == 11) {
           if (widget.intDias > 30) {
-            showAlertDialogNew(
+            _dialogUtils.showAlertDialogNewAviso(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
           } else {
             widget.valideMes = true;
@@ -148,14 +148,14 @@ class ZInputDataNascimentoState extends State<ZInputDataNascimento> {
         } else {
           if (widget.bisexto == true) {
             if (widget.intDias > 29) {
-              showAlertDialogNew(
+              _dialogUtils.showAlertDialogNewAviso(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 29.");
             } else {
               widget.valideMes = true;
             }
           } else {
             if (widget.intDias > 28) {
-              showAlertDialogNew(
+              _dialogUtils.showAlertDialogNewAviso(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
             } else {
               widget.valideMes = true;
@@ -165,112 +165,49 @@ class ZInputDataNascimentoState extends State<ZInputDataNascimento> {
       } else if (widget.intMes > 12 &&
           widget.intDias < 32 &&
           widget.intAno < 2004) {
-        showAlertDialogNew(
+        _dialogUtils.showAlertDialogNewAviso(
             "Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
       } else if (widget.intMes < 13 &&
           widget.intDias > 32 &&
           widget.intAno < 2004) {
-        showAlertDialogNew(
+        _dialogUtils.showAlertDialogNewAviso(
             "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
       } else if (widget.intMes < 13 &&
           widget.intDias < 32 &&
           widget.intAno > 2004) {
-        showAlertDialogNew(
+        _dialogUtils.showAlertDialogNewAviso(
             "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
       } else if (widget.intAno < 1901) {
-        showAlertDialogNew(
+        _dialogUtils.showAlertDialogNewAviso(
             "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
       } else if (widget.intMes > 12 &&
           widget.intDias < 32 &&
           widget.intAno > 2004) {
-        showAlertDialogNew("Mês e Ano Inválido!",
+        _dialogUtils.showAlertDialogNewAviso("Mês e Ano Inválido!",
             "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
       } else if (widget.intMes > 12 &&
           widget.intDias > 32 &&
           widget.intAno < 2004) {
-        showAlertDialogNew("Mês e Dia Inválido!",
+        _dialogUtils.showAlertDialogNewAviso("Mês e Dia Inválido!",
             "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
       } else if (widget.intMes < 13 &&
           widget.intDias > 32 &&
           widget.intAno > 2004) {
-        showAlertDialogNew("Dia e Ano Inválido!",
+        _dialogUtils.showAlertDialogNewAviso("Dia e Ano Inválido!",
             "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
       } else {
-        showAlertDialogNew("Data Inválida!",
+        _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
             "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
       }
     }
   }
-  void showAlertDialogNew(String title, String message) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => ZAlertDialog(
-        zDialog: ZDialog.erro,
-        child: new Column(
-          children: <Widget>[
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Container(
-                  margin: const EdgeInsets.all(8),
-                  child: new Text(title,
-                      style: MainStyle.get(context).styleTittleDialog),
-                )
-              ],
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  margin:
-                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                  child: new Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        color: const Color(0xff707070),
-                        fontSize: MainStyle.get(context).fontSizeEntradaSaida),
-                  ),
-                )
-              ],
-            ),
-            new Divider(
-              color: const Color(0xffdbdbdb),
-            ),
-            new Container(
-              child: new InkWell(
-                borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
-                splashColor: const Color(0xffe6e6e6),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: new Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  child: new Text(
-                    "ENTENDI",
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize:
-                        MainStyle.get(context).fontSizeLeadinCancelar),
-                  ),
-                ),
-              ),
-              margin: const EdgeInsets.only(bottom: 8),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+
   void mesHasFocus() {
     if (widget.total == null) {
-      showAlertDialogNew(
+      _dialogUtils.showAlertDialogNewAviso(
           "Data Inválida!", "Por Favor, digite sua data de nascimento.");
     } else if (widget.total.length < 10) {
-      showAlertDialogNew("Data Inválida!",
+      _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
     }
   }
