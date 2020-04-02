@@ -12,8 +12,20 @@ class MainStyle {
   static Color hexToColor(String code) {
     return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
   }
-  static Widget styleTextInput(BuildContext context, String title,TextInputType typeKeyboard, Function onTap,FocusNode currentFocus, TextEditingController controller,FocusNode nextFocus,Function(String) onChange,bool mask,{String textMask,String hintText}){
-   return new Container(
+
+  static Widget styleTextInput(
+      BuildContext context,
+      String title,
+      TextInputType typeKeyboard,
+      Function onTap,
+      FocusNode currentFocus,
+      TextEditingController controller,
+      FocusNode nextFocus,
+      Function(String) onChange,
+      bool mask,
+      {String textMask,
+      String hintText}) {
+    return new Container(
       color: Colors.white,
       child: GestureDetector(
         onTap: onTap,
@@ -27,65 +39,62 @@ class MainStyle {
                     padding: const EdgeInsets.only(
                         top: 12.0, bottom: 12.0, left: 16.0),
                     child: new Text(title,
-                        style:
-                        MainStyle.get(context).mainStyleTextBaseLine),
+                        style: MainStyle.get(context).mainStyleTextBaseLine),
                   ),
                 ),
                 new Expanded(
                   flex: 7,
                   child: new Container(
                     margin: const EdgeInsets.only(left: 8.0, right: 16.0),
-                    child: (mask == true)?new TextField(
-                      keyboardAppearance: Brightness.light,
-                      keyboardType: typeKeyboard,
-                      textCapitalization: TextCapitalization.words,
-                      focusNode: currentFocus,
-                      controller: controller,
-                      cursorColor: Color(0xFF2BBAB4),
-                      style:
-                      MainStyle.get(context).mainStyleTextBaseLineInput,
-                      inputFormatters: [
-                        MaskedTextInputFormatterShifter(
-                            maskONE: textMask,
-                            maskTWO: textMask)
-                      ],
-                      onSubmitted: (text) {
-                        currentFocus.unfocus();
-                        if (nextFocus != null) {
-                          FocusScope.of(context).requestFocus(nextFocus);
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: hintText,
-                        hintStyle: MainStyle.get(context)
-                            .mainStyleTextBaseLineHint,
-                      ),
-                      onChanged: onChange,
-                    ):new TextField(
-                      keyboardAppearance: Brightness.light,
-                      keyboardType: typeKeyboard,
-                      textCapitalization: TextCapitalization.words,
-                      focusNode: currentFocus,
-                      controller: controller,
-                      cursorColor: Color(0xFF2BBAB4),
-                      style:
-                      MainStyle.get(context).mainStyleTextBaseLineInput,
-                      inputFormatters: [
-                        BlacklistingTextInputFormatter(RegExp("[\\\\/,.]")),
-                      ],
-                      onSubmitted: (text) {
-                        currentFocus.unfocus();
-                        if (nextFocus != null) {
-                          FocusScope.of(context).requestFocus(nextFocus);
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: hintText,
-                        hintStyle: MainStyle.get(context)
-                            .mainStyleTextBaseLineHint,
-                      ),
-                      onChanged: onChange,
-                    ),
+                    child: (mask == true)
+                        ? new TextField(
+                            keyboardAppearance: Brightness.light,
+                            keyboardType: typeKeyboard,
+                            textCapitalization: TextCapitalization.words,
+                            focusNode: currentFocus,
+                            controller: controller,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: MainStyle.get(context)
+                                .mainStyleTextBaseLineInput,
+                            inputFormatters: [
+                              MaskedTextInputFormatterShifter(
+                                  maskONE: textMask, maskTWO: textMask)
+                            ],
+                            onSubmitted: (text) {
+                              currentFocus.unfocus();
+                              if (nextFocus != null) {
+                                FocusScope.of(context).requestFocus(nextFocus);
+                              }
+                            },
+                            decoration: InputDecoration(
+                              hintText: hintText,
+                              hintStyle: MainStyle.get(context)
+                                  .mainStyleTextBaseLineHint,
+                            ),
+                            onChanged: onChange,
+                          )
+                        : new TextField(
+                            keyboardAppearance: Brightness.light,
+                            keyboardType: typeKeyboard,
+                            textCapitalization: TextCapitalization.words,
+                            focusNode: currentFocus,
+                            controller: controller,
+                            cursorColor: Color(0xFF2BBAB4),
+                            style: MainStyle.get(context)
+                                .mainStyleTextBaseLineInput,
+                                                    onSubmitted: (text) {
+                              currentFocus.unfocus();
+                              if (nextFocus != null) {
+                                FocusScope.of(context).requestFocus(nextFocus);
+                              }
+                            },
+                            decoration: InputDecoration(
+                              hintText: hintText,
+                              hintStyle: MainStyle.get(context)
+                                  .mainStyleTextBaseLineHint,
+                            ),
+                            onChanged: onChange,
+                          ),
                   ),
                 ),
               ],
@@ -95,7 +104,6 @@ class MainStyle {
       ),
     );
   }
-
 }
 
 class _MainStyle {
@@ -107,9 +115,11 @@ class _MainStyle {
   _MainStyle({this.context});
 
   Color get primaryColor => _primaryColor;
+
   set primaryColor(Color primaryColor) => _primaryColor = primaryColor;
 
   Color get secondaryColor => _secondaryColor;
+
   set secondaryColor(Color secondaryColor) => _secondaryColor = secondaryColor;
 
   Scaffold getDefaultScaffold(String title, Widget body) => new Scaffold(

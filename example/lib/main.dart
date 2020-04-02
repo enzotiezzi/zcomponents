@@ -9,14 +9,13 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-import 'package:z_components/components/z-input-name.dart';
-import 'package:z_components/components/z-input-cpf.dart';
 import 'package:z_components/components/z-checkbox/z-checkbox.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
 
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
+
 
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
@@ -34,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
+    //ZUserInfo(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImVhNGU1YWY5OGQ2ZTZmZjNhMmNmOTc1MGNlMGQ0YzE3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODUyNTM3MjcsImV4cCI6MTU4NTI1NzMyNywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpQb250byIsInN1YiI6ImJiYzA3ZGRhLWEzNDQtNDdlZC05NGQ0LWZkODQ1MjZjYTc4OCIsImF1dGhfdGltZSI6MTU4NTI1MzcyMiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ik9aNFlEQVRFUVhFQzdGU0dONEc0WENOQjI3RzVQWEFSIiwiaWRDb2xhYm9yYWRvciI6IjU0OEQ1MjRELUE2REUtNEQ4QS05NDVFLUE3MDZBRDJGODdGMiIsImlkQWNjb3VudCI6IjQ4NmE0OWIzLTQ3ZDEtNGQ3Ni04MGRmLTA3OWViODJkNmQ4ZiIsImFjY291bnQiOiJaZWxsYXIyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDM4LjE5Ny43MTgtMTYiLCJlbWFpbCI6ImJsYWJsYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiI0MzguMTk3LjcxOC0xNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.ZsSxc59voVlTcjizRGBVuCfE0FwWnz_uUucsnzypLQKI-yf-pFgPT6VLCCQ-WF4BGgxgAEKovR2YbFCApD80XbkyXVLzqNbZSq34Tkqh54G_lFwUsg_st2GzL7oQ9aMaM-XV0cktHPSobpzqNyZkln1MkLveln67Hg7ZxB2w5rO4ECL3VBe0JPs8lmqmOijWCjUfgrmTHpeU2TVgVHnXuxZej3bAskVCRP_YWA_ayFtZz7vibTdFoBYVCQFX_AEX8hunuTmt98PXZs5aL3KngRhVyLhnYoMWv5wI_vfJx3bl0UimCN_h5wnvzJpGh5NwFmpDk_5KSfPlRiwkZQTu0g"));
   }
 }
 
@@ -45,6 +45,7 @@ class ComponentExemploClasse extends StatefulWidget {
 class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     with AfterLayoutMixin<ComponentExemploClasse> {
   var controllerEmail = new TextEditingController();
+  var controlerPadrao = new TextEditingController();
   var controllerNome = new TextEditingController();
   var controllerCPF = new TextEditingController();
   var controllerCelular = new TextEditingController();
@@ -59,16 +60,16 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var textEditingControllerNomeB = new TextEditingController();
 
   final key = GlobalKey<ZProgressDialogState>();
-
+  FocusNode inputPadraoFocus;
   FocusNode nomeFocus;
   FocusNode emailFocus;
   FocusNode cpfFocus;
   FocusNode celularFocus;
-  FocusNode mesFocus;
+  FocusNode dataFocus;
   FocusNode ruaFocus;
   FocusNode numeroFocus;
-  FocusNode cEPFocus;
-  FocusNode cNPJFocus;
+  FocusNode cepFocus;
+  FocusNode cnpjFocus;
   FocusNode focusNodeNome;
   var focusNodeNomeB = new FocusNode();
 
@@ -157,11 +158,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     emailFocus = new FocusNode();
     cpfFocus = new FocusNode();
     celularFocus = new FocusNode();
-    mesFocus = new FocusNode();
+    dataFocus = new FocusNode();
     ruaFocus = new FocusNode();
     numeroFocus = new FocusNode();
-    cEPFocus = new FocusNode();
-    cNPJFocus = new FocusNode();
+    cepFocus = new FocusNode();
+    cnpjFocus = new FocusNode();
+    inputPadraoFocus = new FocusNode();
 
     super.initState();
 
@@ -225,6 +227,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
         ],
       ),
     );
+
   }
 
   void showAlertDialogNew() async {

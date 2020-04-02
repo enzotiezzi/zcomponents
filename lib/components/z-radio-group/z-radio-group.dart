@@ -9,12 +9,14 @@ class ZRadioGroup extends StatefulWidget {
   String title;
   List<ZRadioItem> itens;
   Function(String) onChange;
+  Color selectColor;
   int groupValue;
 
   ZRadioGroup(
       {@required this.title,
       @required this.itens,
       @required this.groupValue,
+        this.selectColor:const  Color(0xff2bbab4),
       this.onChange});
 
   @override
@@ -59,6 +61,7 @@ class _ZRadioGroupState extends State<ZRadioGroup>
                 new Radio(
                     value: item.checked ? 0 : 1,
                     groupValue: widget.groupValue,
+                    activeColor: widget.selectColor,
                     onChanged: (value) => _view.onChange(value, item)),
                 new Text("${item.description}",style: new TextStyle(fontSize: MainStyle.get(context).fontSizePadrao),)
               ],
