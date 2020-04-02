@@ -8,13 +8,11 @@
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-email.dart" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_28" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -26,23 +24,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZLBYZSc9bQWKqRbj9Ghoc9V0eJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ZColaboradorLite" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
@@ -75,6 +68,36 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state x="779" y="231" key="RollbackChangesDialog" timestamp="1585771237855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="779" y="231" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585771237855" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1585835145489">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585835145489" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585764254512">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585764254512" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

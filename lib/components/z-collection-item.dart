@@ -1,7 +1,13 @@
+import 'package:meta/meta.dart';
+
 class ZCollectionItem {
   final String chave;
   String valor;
-  String titulo;
+  final String titulo;
 
-  ZCollectionItem({this.chave, this.titulo, this.valor});
+  ZCollectionItem({
+    @required this.chave,
+    @required this.titulo,
+    @required this.valor
+  });
 }

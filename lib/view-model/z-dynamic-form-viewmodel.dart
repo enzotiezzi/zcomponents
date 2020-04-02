@@ -1,4 +1,4 @@
-class FormularioViewModel {
+class ZDynamicFormViewModel {
   String idModelo;
   String idAtributo;
   String idTipo;
@@ -14,7 +14,7 @@ class FormularioViewModel {
   String opcoes;
   String nomeCampo;
 
-  FormularioViewModel({
+  ZDynamicFormViewModel({
     this.idModelo,
     this.idAtributo,
     this.idTipo,
@@ -31,8 +31,8 @@ class FormularioViewModel {
     this.nomeCampo,
   });
 
-  factory FormularioViewModel.fromJson(Map<String, dynamic> json) {
-    return new FormularioViewModel(
+  factory ZDynamicFormViewModel.fromJson(Map<String, dynamic> json) {
+    return new ZDynamicFormViewModel(
       idModelo: json['idModelo'],
       idAtributo: json['idAtributo'],
       idTipo: json['idTipo'],
