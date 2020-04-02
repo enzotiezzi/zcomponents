@@ -216,6 +216,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
       appBar: new AppBar(),
       body: ZInputGeneric(
         titulo: "Generico",
+        obscureText: true,
         controllerInputPadrao: controllerNome,
         inputPadraoFocus: focusNodeNome,
         tipoTeclado: TextInputType.number,)
