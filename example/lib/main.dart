@@ -9,24 +9,24 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-
-import 'package:z_components/components/z-input-celular.dart';
-import 'package:z_components/components/z-input-cep.dart';
-import 'package:z_components/components/z-input-cnpj.dart';
-import 'package:z_components/components/z-input-cpf.dart';
-import 'package:z_components/components/z-input-data-de-nascimento.dart';
-import 'package:z_components/components/z-input-email.dart';
 import 'package:z_components/components/z-input-name.dart';
+import 'package:z_components/components/z-input-cpf.dart';
 import 'package:z_components/components/z-input-sem-numero.dart';
 import 'package:z_components/components/z-input-sem-titulo.dart';
-
-import 'package:z_components/config/z-tipos-baseline.dart';
+import 'package:z_components/components/z-input-data-de-nascimento.dart';
+import 'package:z_components/components/z-input-celular.dart';
+import 'package:z_components/components/z-input-email.dart';
+import 'package:z_components/components/z-input-cep.dart';
+import 'package:z_components/components/z-input-cnpj.dart';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
+import 'package:z_components/components/z-radio-group/z-radio-group.dart';
+import 'package:z_components/components/z-radio-group/z-radio-item.dart';
+import 'package:z_components/styles/main-style.dart';
 
 void main() => runApp(MyApp());
 
@@ -62,7 +62,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   var textEditingControllerNomeB = new TextEditingController();
 
   final key = GlobalKey<ZProgressDialogState>();
-
+  FocusNode inputPadraoFocus;
   FocusNode nomeFocus;
   FocusNode emailFocus;
   FocusNode cpfFocus;
@@ -73,7 +73,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   FocusNode cepFocus;
   FocusNode cnpjFocus;
   FocusNode focusNodeNome;
-  FocusNode inputPadraoFocus;
   var focusNodeNomeB = new FocusNode();
 
   bool value = false;
@@ -166,7 +165,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     numeroFocus = new FocusNode();
     cepFocus = new FocusNode();
     cnpjFocus = new FocusNode();
-    inputPadraoFocus = new FocusNode();
 
     super.initState();
 
@@ -234,20 +232,14 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
               controllerInputPadrao: controlerPadrao,
               metodo: () {},
             ),
-    new ZInputSemTitulo( titulo: "sem titulo text",
-      hintText: "xx-xx-xx",
-      textMask: "xx-xx-xx",
-      inputPadraoFocus: inputPadraoFocus,
-      controllerInputPadrao: controlerPadrao,
-      metodo: () {},),
-
-
-
-
-
-
-
-
+            new ZInputSemTitulo(
+              titulo: "sem titulo text",
+              hintText: "xx-xx-xx",
+              textMask: "xx-xx-xx",
+              inputPadraoFocus: inputPadraoFocus,
+              controllerInputPadrao: controlerPadrao,
+              metodo: () {},
+            ),
           ],
         ));
   }
