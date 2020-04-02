@@ -9,7 +9,6 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-import 'package:z_components/components/z-input-name.dart';
 import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
@@ -203,11 +202,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
         ),
         body: new Column(
           children: <Widget>[
-            new ZInputName(
-              nomeFocus: focusNodeNome,
-              controllerNome: textEditingControllerNome,
-              proximoFocus: cpfFocus,
-            ),
+
             new ZInputCPF(
               cpfFocus: cpfFocus,
               controllerCpf: controllerCPF,
