@@ -23,6 +23,7 @@
 =======
 >>>>>>> d412fd8d30d4f641b0a886ce76d6a102439d255a
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
 <<<<<<< HEAD
@@ -31,6 +32,12 @@
 =======
       <change beforePath="$PROJECT_DIR$/lib/components/z-input-generic.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-generic.dart" afterDir="false" />
 >>>>>>> d412fd8d30d4f641b0a886ce76d6a102439d255a
+=======
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-celular.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-celular.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-cep.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-cep.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-data-de-nascimento.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-email.dart" afterDir="false" />
+>>>>>>> 6789105bd17f3922b41d6ccaed998cd549fa19b8
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +113,7 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="461" y="162" key="SettingsEditor" timestamp="1585836710162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -114,6 +122,36 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="343" key="com.intellij.ide.util.TipDialog/1920.1.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1585831501146" />
+=======
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1585761224090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585761224090" />
+    <state x="779" y="231" key="RollbackChangesDialog" timestamp="1585771237855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="779" y="231" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585771237855" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1585835145489">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585835145489" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585764254512">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585764254512" />
+>>>>>>> 6789105bd17f3922b41d6ccaed998cd549fa19b8
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -144,11 +144,11 @@ class ZInputCelularState extends State<ZInputCelular> {
   void _validarCelular() {
     if (celular == null) {
       valideCelular = false;
-      showAlertDialogNew(
+      _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, digitar o seu celular.");
     } else if (celular.length < 15) {
       valideCelular = false;
-      showAlertDialogNew(
+      _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
     }
   }

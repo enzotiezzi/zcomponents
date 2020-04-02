@@ -64,7 +64,7 @@ class ZInputCEPState extends State<ZInputCEP> {
       if (!widget.cepFocus.hasFocus &&
           countcpf == 0 &&
           cpf != "") {
-        _validarCPF();
+        _validarCEP();
       }
     });
   }
@@ -75,12 +75,7 @@ class ZInputCEPState extends State<ZInputCEP> {
       FocusScope.of(context).requestFocus(nextFocus);
     }
   }
-  void _validarCPF() {
-    if (!CPFValidator.isValid(cpf)) {
-      valideCpf = false;
-      _dialogUtils.showAlertDialogNewAviso("CPF Inválido!", "Por Favor insira um CPF válido.");
-    } else {
-      valideCpf = true;
-    }
+  void _validarCEP() {
+
   }
 }
