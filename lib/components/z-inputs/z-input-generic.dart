@@ -9,17 +9,18 @@ class ZInputGeneric extends StatefulWidget {
   String titulo;
   bool comMascara;
   FocusNode inputPadraoFocus;
+  ValueChanged<String> onChange;
+
   var controllerInputPadrao = new TextEditingController();
   FocusNode proximoFocus;
-  Function metodo;
 
   ZInputGeneric({
     this.key,
-    @required this.hintText,
-    @required this.comMascara,
+    this.hintText,
+    this.onChange,
+    this.comMascara:false,
     @required this.titulo,
-    @required this.textMask,
-    @required this.metodo,
+    this.textMask,
     @required this.inputPadraoFocus,
     @required this.controllerInputPadrao,
     this.proximoFocus,
@@ -30,15 +31,9 @@ class ZInputGeneric extends StatefulWidget {
 }
 
 class ZInputGenericState extends State<ZInputGeneric> {
-  int countcpf = 1;
-  DialogUtils _dialogUtils;
-  String cpf;
-  bool valideCpf;
 
   @override
   void initState() {
-    _dialogUtils = new DialogUtils(context);
-    initNome();
     super.initState();
   }
 
@@ -55,31 +50,11 @@ class ZInputGenericState extends State<ZInputGeneric> {
         widget.controllerInputPadrao,
         widget.proximoFocus,
         (text) {
-          cpf = text;
-          countcpf = 0;
-          if (cpf.length == 14) {
-            _fieldFocusChange(
-                context, widget.inputPadraoFocus, widget.proximoFocus);
-          }
+          if (widget.onChange != null) widget.onChange(text);
         },
         widget.comMascara,
         textMask: "${widget.textMask}",
         hintText: "${widget.hintText}");
   }
 
-  void initNome() {
-    widget.inputPadraoFocus.addListener(() {
-      if (!widget.inputPadraoFocus.hasFocus && countcpf == 0 && cpf != "") {
-        widget.metodo();
-      }
-    });
-  }
-
-  void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    if (nextFocus != null) {
-      FocusScope.of(context).requestFocus(nextFocus);
-    }
-  }
 }

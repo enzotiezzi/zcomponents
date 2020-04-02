@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
-import 'package:z_components/components/z-input-cpf.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-radio-group/z-dynamic-form-type.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';

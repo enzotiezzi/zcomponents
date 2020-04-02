@@ -52,7 +52,6 @@ class ZInputNameState extends State<ZInputName> {
   }
 
   void initNome() {
-    widget.nomeFocus = FocusNode();
     widget.nomeFocus.addListener(() {
       if (!widget.nomeFocus.hasFocus && countNome == 0 && nome != "") {
         _valideNome();
@@ -70,7 +69,14 @@ class ZInputNameState extends State<ZInputName> {
       _dialogUtils.showAlertDialogNewAviso(
           "Nome Inválido!", "Por Favor insira o nome completo.");
     } else {
-      valideNome = true;
+      if (nome.split(' ')[1].length < 2) {
+        valideNome = false;
+        _dialogUtils.showAlertDialogNewAviso(
+            "Nome Inválido!", "Por Favor insira o nome completo.");
+      }else{
+        valideNome = true;
+
+      }
     }
   }
 }

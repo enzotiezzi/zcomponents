@@ -49,6 +49,7 @@ class ZInputCPFState extends State<ZInputCPF> {
         widget.proximoFocus,
         (text) {
           if (widget.onChange != null) widget.onChange(text);
+
           cpf = text;
           countcpf = 0;
           if (cpf.length == 14) {
