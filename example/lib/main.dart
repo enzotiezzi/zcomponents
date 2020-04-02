@@ -13,8 +13,10 @@ import 'package:z_components/components/z-input-name.dart';
 import 'package:z_components/components/z-input-cpf.dart';
 import 'package:z_components/components/z-checkbox/z-checkbox.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
+import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
 
 import 'package:z_components/config/z-tipos-baseline.dart';
+import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
@@ -191,6 +193,27 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ConfirmarPrevisto(
+                        dadosViewModel: AtualizarDadosViewModel(
+                            statusColaborador: "Ativo",
+                            horaInicio: "09:00",
+                            escala: "5x2",
+                            centroCusto: "Zellar",
+                            cargo: "Programador",
+                            horaTermino: "17:30",
+                            nomeColaborador: "Giuliano Ortiz Goria",
+                            tempoIntervalo: "00:30"),
+                        finalizarAtualizacao: (dados) {
+                          print(dados);
+                        },
+                      )));
+        },
+      ),
       appBar: new AppBar(),
       body: new ZCheckBox(
         title: "Gênero",
