@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d23a27a-c78d-478a-8ef0-c95a605b13c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/components/z-checkbox/z-checkbox-view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-checkbox/z-checkbox.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-radio-group/z-radio-group-view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-radio-group/z-radio-group.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/components/z-radio-group/z-radio-item.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/view-model/z-checkbox-viewmodel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/z-take-photo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-take-photo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-email.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-sem-numero.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/z-input-sem-titulo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/z-input-generic.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
