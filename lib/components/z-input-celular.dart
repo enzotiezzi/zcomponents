@@ -1,4 +1,3 @@
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
@@ -46,7 +45,7 @@ class ZInputCelularState extends State<ZInputCelular> {
             () {
           FocusScope.of(context).requestFocus(widget.celularFocus);
         },
-           widget.celularFocus,
+        widget.celularFocus,
         widget.controllerCelular,
         widget.proximoFocus,
             (text) {

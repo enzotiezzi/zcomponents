@@ -57,8 +57,8 @@ class ZInputDataNascimentoState extends State<ZInputEmail> {
             _fieldFocusChange(context, widget.emailFocus, widget.proximoFocus);
           }
         },
-        true,
-        textMask: "email@email.com.br",
+        false,
+
         hintText: "email@exemplo.com");
   }
 
