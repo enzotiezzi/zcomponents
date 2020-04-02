@@ -3,13 +3,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
-import 'package:z_components/components/z-input-email.dart';
+import 'package:z_components/components/z-input-cpf.dart';
 import 'package:z_components/components/z-radio-group/z-dynamic-form-type.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 
 class ZDynamicFormView extends IView<ZDyanmicForm> {
   Map json;
+  TextEditingController _controllerCPF = new TextEditingController();
+  FocusNode _focusNodeCPF = new FocusNode();
 
   ZDynamicFormView(State<ZDyanmicForm> state) : super(state);
 
@@ -30,6 +32,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
         case ZDynamicFormType.SELECT:
           return _buildSelect(x);
           break;
+        case ZDynamicFormType.CPF:
+          return _buildCPF(x);
+          break;
       }
 
       return new Container();
@@ -48,6 +53,14 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
       titulo: item.label,
       lista: item.opcoes.split('|').map((x) => new ZCollectionItem(chave: item.nomeCampo, titulo: x, valor: x)).toList(),
       onChange: (value) => json[item.nomeCampo] = value,
+    );
+  }
+
+  Widget _buildCPF(ZDynamicFormViewModel item){
+    return new ZInputCPF(
+      controllerCpf: _controllerCPF,
+      cpfFocus: _focusNodeCPF,
+
     );
   }
 }
