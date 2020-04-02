@@ -8,6 +8,7 @@ class ZInputGeneric extends StatefulWidget {
   String textMask;
   String titulo;
   bool comMascara;
+  TextInputType tipoTeclado;
   FocusNode inputPadraoFocus;
   ValueChanged<String> onChange;
 
@@ -16,8 +17,9 @@ class ZInputGeneric extends StatefulWidget {
 
   ZInputGeneric({
     this.key,
-    this.hintText,
+    this.hintText: "",
     this.onChange,
+    this.tipoTeclado: TextInputType.text,
     this.comMascara:false,
     @required this.titulo,
     this.textMask,
@@ -42,7 +44,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
     return MainStyle.styleTextInput(
         context,
         "${widget.titulo}:",
-        TextInputType.text,
+        widget.tipoTeclado,
         () {
           FocusScope.of(context).requestFocus(widget.inputPadraoFocus);
         },
