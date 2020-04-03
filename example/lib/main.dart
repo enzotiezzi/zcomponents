@@ -9,16 +9,11 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-import 'package:z_components/components/z-input-name.dart';
-import 'package:z_components/components/z-input-cpf.dart';
-
-import 'package:z_components/components/z-input-generic.dart';
-import 'package:z_components/components/z-input-data-de-nascimento.dart';
-import 'package:z_components/components/z-input-celular.dart';
-import 'package:z_components/components/z-input-email.dart';
-import 'package:z_components/components/z-input-cep.dart';
-import 'package:z_components/components/z-input-cnpj.dart';
-
+import 'package:z_components/components/z-checkbox/z-checkbox.dart';
+import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/config/z-tipos-baseline.dart';
+import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
@@ -27,6 +22,7 @@ import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/components/z-radio-group/z-radio-group.dart';
 import 'package:z_components/components/z-radio-group/z-radio-item.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
 
 void main() => runApp(MyApp());
 
@@ -196,47 +192,37 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color(0xffEFEFF4),
-        appBar: CupertinoNavigationBar(
-          middle: new Text("TESTE DE INPUTS"),
-        ),
-        body: new Column(
-          children: <Widget>[
-            new ZInputName(
-              nomeFocus: focusNodeNome,
-              controllerNome: textEditingControllerNome,
-              proximoFocus: cpfFocus,
-            ),
-            new ZInputCPF(
-              cpfFocus: cpfFocus,
-              controllerCpf: controllerCPF,
-              proximoFocus: celularFocus,
-            ),
-            new ZInputCelular(
-                celularFocus: celularFocus,
-                controllerCelular: controllerCelular),
-            new ZInputCEP(cepFocus: cepFocus, controllerCep: controllerCEP),
-            new ZInputCNPJ(
-                cnpjFocus: cnpjFocus, controllerCNPJ: controllerCNPJ),
-            new ZInputDataNascimento(
-              controllerData: controllerData,
-              dataFocus: dataFocus,
-            ),
-            new ZInputEmail(
-                emailFocus: emailFocus, controllerEmail: controllerEmail),
+    return new Scaffold(
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ConfirmarPrevisto(
+                      dadosViewModel: AtualizarDadosViewModel(
+                          statusColaborador: "Ativo",
+                          horaInicio: "09:00",
+                          escala: "5x2",
+                          centroCusto: "Zellar",
+                          cargo: "Programador",
+                          horaTermino: "17:30",
+                          nomeColaborador: "Giuliano Ortiz Goria",
+                          tempoIntervalo: "00:30"),
+                      finalizarAtualizacao: (dados) {
+                        print(dados);
+                      },
+                    )));
+      },
+    ),
+      appBar: new AppBar(),
+      body: ZInputGeneric(
+        titulo: "Generico",
+        obscureText: true,
+        controllerInputPadrao: controllerNome,
+        inputPadraoFocus: focusNodeNome,
+        tipoTeclado: TextInputType.number,)
+    );
 
-            new ZInputGeneric(
-              titulo: "sem titulo text",
-              hintText: "xx-xx-xx",
-              textMask: "xx-xx-xx",
-              comMascara: true,
-              inputPadraoFocus: inputPadraoFocus,
-              controllerInputPadrao: controlerPadrao,
-              metodo: () {},
-            ),
-          ],
-        ));
   }
 
   void showAlertDialogNew() async {

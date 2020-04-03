@@ -10,23 +10,25 @@ class ZInputCelular extends StatefulWidget {
   FocusNode celularFocus;
   var controllerCelular = new TextEditingController();
   FocusNode proximoFocus;
+  ValueChanged<String> onChange;
 
   ZInputCelular(
       {this.key,
+        this.onChange,
         @required this.celularFocus,
         @required this.controllerCelular,
         this.proximoFocus,})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZInputCelularState();
+  State<StatefulWidget> createState() => _ZInputCelularState();
 }
 
-class ZInputCelularState extends State<ZInputCelular> {
+class _ZInputCelularState extends State<ZInputCelular> {
 
   int countCelular = 0;
   DialogUtils _dialogUtils;
-  String celular;
+  String celular = "";
   bool valideCelular;
 
   @override
@@ -49,6 +51,9 @@ class ZInputCelularState extends State<ZInputCelular> {
         widget.controllerCelular,
         widget.proximoFocus,
             (text) {
+              if (widget.onChange != null) widget.onChange(text);
+
+
               celular = text;
               countCelular = 0;
               if (celular.length == 15) {
@@ -57,7 +62,7 @@ class ZInputCelularState extends State<ZInputCelular> {
           }
         },true,
 
-        textMask: "(XX) X XXXXX-XXXX",
+        textMask: "(XX)X XXXX-XXXX",
         hintText: "( ** ) 9 **** - ****");
   }
 
@@ -142,24 +147,10 @@ class ZInputCelularState extends State<ZInputCelular> {
     );
   }
   void _validarCelular() {
-    if (celular == null) {
-      valideCelular = false;
-      _dialogUtils.showAlertDialogNewAviso(
-          "Celular Inválido!", "Por Favor, digitar o seu celular.");
-    } else if (celular.length < 16) {
+    if (celular.length < 15 && celular != "") {
       valideCelular = false;
       _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
-    } else if (celular.length == 16) {
-      var splitCelular = celular.split(" ");
-
-      if (splitCelular[1] == "9") {
-        valideCelular = true;
-      } else {
-        valideCelular = false;
-        _dialogUtils.showAlertDialogNewAviso("Celular Inválido!",
-            "Os celulares no Brasil devem começar com 9. Por Favor digite novamente o seu celular.");
-      }
     }
   }
 }

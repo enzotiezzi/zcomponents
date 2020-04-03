@@ -274,6 +274,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
           telefone: textEditingControllerTelefone.text,
           email: textEditingControllerEmail.text,
           numero: textEditingControllerNumero.text,
+          fotoBase64:( state.widget.userInfo.fotoBase64 == "")?null: state.widget.userInfo.fotoBase64,
           idFoto:(state.widget.userInfo.idFoto == "")?null:state.widget.userInfo.idFoto,
         );
 
