@@ -1,3 +1,7 @@
+## 0.9.17+8
+
+* new ZCachedNetworkImage 
+
 ## 0.9.17+7
 
 * new ZUserInfo 
