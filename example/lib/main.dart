@@ -22,6 +22,7 @@ import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/components/z-radio-group/z-radio-group.dart';
 import 'package:z_components/components/z-radio-group/z-radio-item.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
 
 void main() => runApp(MyApp());
 
@@ -192,27 +193,27 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: () {
-//          Navigator.push(
-//              context,
-//              MaterialPageRoute(
-//                  builder: (context) => ConfirmarPrevisto(
-//                        dadosViewModel: AtualizarDadosViewModel(
-//                            statusColaborador: "Ativo",
-//                            horaInicio: "09:00",
-//                            escala: "5x2",
-//                            centroCusto: "Zellar",
-//                            cargo: "Programador",
-//                            horaTermino: "17:30",
-//                            nomeColaborador: "Giuliano Ortiz Goria",
-//                            tempoIntervalo: "00:30"),
-//                        finalizarAtualizacao: (dados) {
-//                          print(dados);
-//                        },
-//                      )));
-//        },
-//      ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ConfirmarPrevisto(
+                      dadosViewModel: AtualizarDadosViewModel(
+                          statusColaborador: "Ativo",
+                          horaInicio: "09:00",
+                          escala: "5x2",
+                          centroCusto: "Zellar",
+                          cargo: "Programador",
+                          horaTermino: "17:30",
+                          nomeColaborador: "Giuliano Ortiz Goria",
+                          tempoIntervalo: "00:30"),
+                      finalizarAtualizacao: (dados) {
+                        print(dados);
+                      },
+                    )));
+      },
+    ),
       appBar: new AppBar(),
       body: ZInputGeneric(
         titulo: "Generico",

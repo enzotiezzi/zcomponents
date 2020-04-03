@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 
@@ -19,15 +20,13 @@ class AtualizarDadosPrevisto extends StatefulWidget {
 class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
   int _page = 0;
   double _percent = 0.1;
-  List _titulos = ["Centro de Custo", "Cargo", "Escala", "Horário"];
+  List _titulos = ["Centro de Custo", "Escala", "Horário"];
   List _textHeader = [
     "Este é o seu centro de custo?",
-    "Este é o seu cargo?",
     "Está é sua escala de trabalho?",
     "Este é o seu horário de trabalho?",
   ];
   TextEditingController _controller2;
-  TextEditingController _controller3;
   TextEditingController _controller4;
   TextEditingController _controller5;
   TextEditingController _controller6;
@@ -40,7 +39,6 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
   void initState() {
     _controller2 =
         new TextEditingController(text: widget.dadosViewModel.centroCusto);
-    _controller3 = new TextEditingController(text: widget.dadosViewModel.cargo);
     _controller4 =
         new TextEditingController(text: widget.dadosViewModel.escala);
     _controller5 =
@@ -50,7 +48,7 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
     _controller7 = new TextEditingController(
         text: "${widget.dadosViewModel.tempoIntervalo}");
 
-    _listController = [_controller2, _controller3, _controller4, _controller5];
+    _listController = [_controller2, _controller4, _controller5];
     super.initState();
   }
 
@@ -97,19 +95,19 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
               onPressed: () {
                 _focusNode.unfocus();
                 setState(() {
-                  if (_page >= 2) {
+                  if (_page >= 1) {
                     _percent = 1.0;
                   } else {
-                    _percent = _percent + 0.24;
+                    _percent = _percent + 0.36;
                   }
-                  if (_page == 3) {
+                  if (_page == 2) {
                     AtualizarDadosViewModel dadosAtualizados =
                         new AtualizarDadosViewModel(
                             statusColaborador:
                                 widget.dadosViewModel.statusColaborador,
                             nomeColaborador:
                                 widget.dadosViewModel.nomeColaborador,
-                            cargo: _controller3.text,
+                            cargo: widget.dadosViewModel.cargo,
                             centroCusto: _controller2.text,
                             escala: _controller4.text,
                             horaInicio: _controller5.text,
@@ -117,7 +115,7 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
                             tempoIntervalo: _controller7.text);
                     widget.finalizarAtualizacao(dadosAtualizados);
                   }
-                  if (_page < 3) {
+                  if (_page < 2) {
                     _page++;
                   }
                 });
@@ -183,26 +181,32 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
   }
 
   Widget _text() {
-    if (_page >= 3) {
+    if (_page >= 2) {
       return new Container(
         child: new Column(
           children: <Widget>[
-            new ZBaseLine(
-              padraoFocus: _focusNode,
-              zTipos: ZTipoBaseline.semTituloText,
-              text: "Hora de Entrada",
-              controllerPadrao: _controller5,
+            new ZInputGeneric(
+              inputPadraoFocus: _focusNode,
+              tipoTeclado: TextInputType.number,
+              titulo: "Hora de Entrada",
+              controllerInputPadrao: _controller5,
+              comMascara: true,
+              textMask: "XX:XX",
             ),
-            new ZBaseLine(
-              zTipos: ZTipoBaseline.semTituloText,
-              text: "Hora de Saída",
-              controllerPadrao: _controller6,
+            new ZInputGeneric(
+              tipoTeclado: TextInputType.number,
+              titulo: "Hora de Saída",
+              controllerInputPadrao: _controller6,
+              comMascara: true,
+              textMask: "XX:XX",
             ),
-            new ZBaseLine(
-              zTipos: ZTipoBaseline.semTituloText,
-              text: "Tempo de Intervalo",
-              controllerPadrao: _controller7,
-            )
+            new ZInputGeneric(
+              tipoTeclado: TextInputType.number,
+              titulo: "tempo de Intervalo",
+              controllerInputPadrao: _controller7,
+              comMascara: true,
+              textMask: "XX:XX",
+            ),
           ],
         ),
       );
