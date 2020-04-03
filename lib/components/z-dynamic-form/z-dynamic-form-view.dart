@@ -70,9 +70,6 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
         case ZDynamicFormType.TELEPHONE:
           return _buildTelephone(x);
           break;
-        case ZDynamicFormType.TELEPHONE:
-          return _buildTelephone(x);
-          break;
         case ZDynamicFormType.CNPJ:
           return _buildCNPJ(x);
           break;
@@ -218,11 +215,13 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     );
   }
 
-  Widget _buildName(ZDynamicFormViewModel item){
+  Widget _buildName(ZDynamicFormViewModel item) {
     TextEditingController textEditingController = new TextEditingController();
     FocusNode focusNode = new FocusNode();
-    return new ZInputName(nomeFocus: focusNode, controllerNome: textEditingController,
-
+    return new ZInputName(
+      nomeFocus: focusNode,
+      controllerNome: textEditingController,
+      onChange: (value) => json[item.nomeCampo] = value,
     );
   }
 }
