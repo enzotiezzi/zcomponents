@@ -1,3 +1,7 @@
+## 0.9.17+9
+
+* new ZDynamicForm
+
 ## 0.9.17+8
 
 * new ZCachedNetworkImage 
