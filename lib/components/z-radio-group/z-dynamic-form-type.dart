@@ -21,4 +21,7 @@ class ZDynamicFormType{
   static const String MONTH = "month";
   static const String SUBMIT = "submit";
   static const String CPF = "cpf";
+  static const String CEP = "cep";
+  static const String CNPJ = "cnpj";
+  static const String NAME = "name";
 }
