@@ -84,6 +84,7 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: new ListView(
+        shrinkWrap: true,
         children: widgets,
       ),
     );
