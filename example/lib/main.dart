@@ -26,8 +26,8 @@ import 'package:z_components/components/confirmacao-de-previsto/confirmar-previs
 import 'dart:convert' show json;
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
-import 'package:z_components/api/foumulario/i-formulario-service.dart';
-import 'package:z_components/api/foumulario/formulario-service.dart';
+import 'package:z_components/api/formulario/i-formulario-service.dart';
+import 'package:z_components/api/formulario/formulario-service.dart';
 
 
 void main() => runApp(MyApp());
