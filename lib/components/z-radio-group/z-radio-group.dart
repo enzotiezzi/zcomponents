@@ -52,18 +52,18 @@ class _ZRadioGroupState extends State<ZRadioGroup>
             )
           ],
         ),
-        new Expanded(
-            child: new GridView.count(
+        new GridView.count(
           crossAxisCount: 2,
           childAspectRatio: 4.0,
           padding: const EdgeInsets.all(0),
+          shrinkWrap: true,
           children: List.generate(widget.itens.length, (index) {
             var item = widget.itens[index];
 
             return new Row(
               children: <Widget>[
                 new Radio(
-                    value: item.checked ? 0 : 1,
+                    value: item.checked ? 1 : 0,
                     groupValue: widget.groupValue,
                     activeColor: widget.selectColor,
                     onChanged: (value) => _view.onChange(value, item)),
@@ -75,7 +75,7 @@ class _ZRadioGroupState extends State<ZRadioGroup>
               ],
             );
           }),
-        ))
+        )
       ],
     );
   }

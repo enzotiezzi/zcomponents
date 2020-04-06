@@ -55,25 +55,24 @@ class _ZCheckBoxState extends State<ZCheckBox>
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
           ),
-          new Expanded(
-            child: new GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: _crossAxisCount,
-                    childAspectRatio: _aspectRatio),
-                itemCount: widget.listaDescricao.length,
-                itemBuilder: (context, index) {
-                  var item = widget.listaDescricao[index];
+          new GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: _crossAxisCount,
+                  childAspectRatio: _aspectRatio),
+              itemCount: widget.listaDescricao.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                var item = widget.listaDescricao[index];
 
-                  return new Row(
-                    children: <Widget>[
-                      new Checkbox(
-                          value: item.foiMarcado,
-                          onChanged: (value) => _view.onChange(value, item)),
-                      new Text("${item.descricao}")
-                    ],
-                  );
-                }),
-          )
+                return new Row(
+                  children: <Widget>[
+                    new Checkbox(
+                        value: item.foiMarcado,
+                        onChanged: (value) => _view.onChange(value, item)),
+                    new Text("${item.descricao}")
+                  ],
+                );
+              })
         ]);
   }
 
