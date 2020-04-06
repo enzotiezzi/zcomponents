@@ -12,7 +12,7 @@ class FormularioService extends Service implements IFormularioService {
   @override
   Future<List<ZDynamicFormViewModel>> buscarFormularios() async {
     try {
-      var url = "$_URL/formulario/modelo";
+      var url = "$_URL/formulario/Modelo";
 
       var response = await request(url, Service.HTTP_GET);
 
