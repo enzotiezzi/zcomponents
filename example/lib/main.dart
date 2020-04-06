@@ -172,8 +172,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     cnpjFocus = new FocusNode();
     inputPadraoFocus = new FocusNode();
 
-    montarFormulario();
-    //montarLista();
+    //montarFormulario();
+    montarLista();
     super.initState();
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
