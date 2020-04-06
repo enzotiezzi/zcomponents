@@ -76,6 +76,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
         case ZDynamicFormType.NAME:
           return _buildName(x);
           break;
+        case ZDynamicFormType.TEXT:
+          return _buildText(x);
+          break;
       }
 
       return new Container();
@@ -223,6 +226,19 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
       nomeFocus: focusNode,
       controllerNome: textEditingController,
       onChange: (value) => json[item.nomeCampo] = value,
+    );
+  }
+
+  Widget _buildText(ZDynamicFormViewModel item){
+    TextEditingController textEditingController = new TextEditingController();
+    FocusNode focusNode = new FocusNode();
+    return new ZInputGeneric(
+      titulo: item.label,
+      inputPadraoFocus: focusNode,
+      controllerInputPadrao: textEditingController,
+      onChange: (value) => json[item.nomeCampo] = value,
+      tipoTeclado: TextInputType.visiblePassword,
+      obscureText: false,
     );
   }
 }
