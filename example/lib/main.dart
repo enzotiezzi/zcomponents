@@ -23,6 +23,9 @@ import 'package:z_components/components/z-radio-group/z-radio-group.dart';
 import 'package:z_components/components/z-radio-group/z-radio-item.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
+import 'dart:convert' show json;
+import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
+import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
 
 void main() => runApp(MyApp());
 
@@ -148,6 +151,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     },
   ];
 
+  List<ZDynamicFormViewModel> lista = new List();
+
+
   @override
   void initState() {
     super.initState();
@@ -163,6 +169,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     cnpjFocus = new FocusNode();
     inputPadraoFocus = new FocusNode();
 
+    montarLista();
     super.initState();
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
@@ -192,37 +199,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ConfirmarPrevisto(
-                      dadosViewModel: AtualizarDadosViewModel(
-                          statusColaborador: "Ativo",
-                          horaInicio: "09:00",
-                          escala: "5x2",
-                          centroCusto: "Zellar",
-                          cargo: "Programador",
-                          horaTermino: "17:30",
-                          nomeColaborador: "Giuliano Ortiz Goria",
-                          tempoIntervalo: "00:30"),
-                      finalizarAtualizacao: (dados) {
-                        print(dados);
-                      },
-                    )));
-      },
-    ),
-      appBar: new AppBar(),
-      body: ZInputGeneric(
-        titulo: "Generico",
-        obscureText: true,
-        controllerInputPadrao: controllerNome,
-        inputPadraoFocus: focusNodeNome,
-        tipoTeclado: TextInputType.number,)
-    );
-
+    return ZDyanmicForm(title: "teste",fields: lista,);
   }
 
   void showAlertDialogNew() async {
@@ -572,6 +549,18 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     });
     Future.delayed(Duration(seconds: 15), () {
       Navigator.pop(context);
+    });
+  }
+
+  void montarLista() async {
+    String data = await DefaultAssetBundle.of(context).loadString("assets/carlos.json");
+    var responseBody = json.decode(data);
+
+    lista =
+        (responseBody as List).map((x) => ZDynamicFormViewModel.fromJson(x)).toList();
+
+    setState(() {
+      print(lista);
     });
   }
 
