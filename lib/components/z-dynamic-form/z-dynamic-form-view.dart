@@ -79,18 +79,19 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
         case ZDynamicFormType.TEXT:
           return _buildText(x);
           break;
+
       }
 
       return new Container();
-    }).toList();
+    },).toList();
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return new Container(
+      margin: const EdgeInsets.only(left: 16,right: 16,top: 16),
+      height: MediaQuery.of(state.context).size.height*0.76,
       child: new ListView(
-        shrinkWrap: true,
-        children: widgets,
-      ),
-    );
+      shrinkWrap: true,
+      children: widgets,
+    ),);
   }
 
   Widget _buildSelect(ZDynamicFormViewModel item) {

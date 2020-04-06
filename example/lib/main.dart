@@ -172,8 +172,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     cnpjFocus = new FocusNode();
     inputPadraoFocus = new FocusNode();
 
-    montarFormulario();
-    //montarLista();
+    //montarFormulario();
+    montarLista();
     super.initState();
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
@@ -203,7 +203,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return ZDyanmicForm(title: "teste",fields: lista,);
+    return ZDyanmicForm(title: "teste",fields: lista,clickButtonEnviar: (){
+      print("VOCE ACABOU DE CLICAR NO BOTAO ENVIAR, AMIGO");
+    },);
   }
 
   void showAlertDialogNew() async {
@@ -573,7 +575,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
     var formulario = await iFormularioService.buscarFormularios();
 
-    var formularioSellecionado = formulario.last;
+    var formularioSellecionado = formulario.first;
 
     lista = await iFormularioService.montarFormulario(formularioSellecionado.idModelo);
 
