@@ -16,7 +16,7 @@ class ZRadioGroup extends StatefulWidget {
       {@required this.title,
       @required this.itens,
       @required this.groupValue,
-        this.selectColor:const  Color(0xff2bbab4),
+      this.selectColor: const Color(0xff2bbab4),
       this.onChange});
 
   @override
@@ -40,19 +40,23 @@ class _ZRadioGroupState extends State<ZRadioGroup>
     return new Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-       new Row(
-         mainAxisAlignment: MainAxisAlignment.start,
-         children: <Widget>[
-         new Container(
-           margin: const EdgeInsets.all(16),
-           child: new Text("${widget.title}",style: MainStyle.get(context).mainStyleTextTitle,),
-         )
-       ],),
-        new Expanded(child: new GridView.count(
+        new Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            new Container(
+              width: 130,
+              child: new Text(
+                widget.title,
+                style: MainStyle.get(context).mainStyleTextTitle,
+              ),
+            )
+          ],
+        ),
+        new Expanded(
+            child: new GridView.count(
           crossAxisCount: 2,
           childAspectRatio: 4.0,
           padding: const EdgeInsets.all(0),
-
           children: List.generate(widget.itens.length, (index) {
             var item = widget.itens[index];
 
@@ -63,7 +67,11 @@ class _ZRadioGroupState extends State<ZRadioGroup>
                     groupValue: widget.groupValue,
                     activeColor: widget.selectColor,
                     onChanged: (value) => _view.onChange(value, item)),
-                new Text("${item.description}",style: new TextStyle(fontSize: MainStyle.get(context).fontSizePadrao),)
+                new Text(
+                  "${item.description}",
+                  style: new TextStyle(
+                      fontSize: MainStyle.get(context).fontSizePadrao),
+                )
               ],
             );
           }),

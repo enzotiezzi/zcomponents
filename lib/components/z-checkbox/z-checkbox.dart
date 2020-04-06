@@ -47,8 +47,13 @@ class _ZCheckBoxState extends State<ZCheckBox>
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Container(padding: EdgeInsets.only(left: 14.0, top: 14.0),
-            child: new Text("${widget.title}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
+          new Container(
+            width: 130,
+            padding: EdgeInsets.only(left: 14.0, top: 14.0),
+            child: new Text(
+              "${widget.title}",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            ),
           ),
           new Expanded(
             child: new GridView.builder(
