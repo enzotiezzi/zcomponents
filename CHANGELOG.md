@@ -1,3 +1,7 @@
+## 0.9.18+2
+
+* new ZDynamicForm ajust
+
 ## 0.9.18+1
 
 * new ZDynamicForm ajust
