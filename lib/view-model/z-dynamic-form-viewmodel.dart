@@ -13,6 +13,7 @@ class ZDynamicFormViewModel {
   bool multiplaEscolha;
   String opcoes;
   String nomeCampo;
+  String sistema;
 
   ZDynamicFormViewModel({
     this.idModelo,
@@ -29,6 +30,7 @@ class ZDynamicFormViewModel {
     this.multiplaEscolha,
     this.opcoes,
     this.nomeCampo,
+    this.sistema,
   });
 
   factory ZDynamicFormViewModel.fromJson(Map<String, dynamic> json) {
@@ -47,6 +49,7 @@ class ZDynamicFormViewModel {
       multiplaEscolha: json['multiplaEscolha'],
       opcoes: json['opcoes'],
       nomeCampo: json['nomeCampo'],
+      sistema: json['sistema'],
     );
   }
 
@@ -66,6 +69,7 @@ class ZDynamicFormViewModel {
       "multiplaEscolha": this.multiplaEscolha,
       "opcoes": this.opcoes,
       "nomeCampo": this.nomeCampo,
+      "sistema": this.sistema,
     };
   }
 }

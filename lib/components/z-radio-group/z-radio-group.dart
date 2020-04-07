@@ -16,7 +16,7 @@ class ZRadioGroup extends StatefulWidget {
       {@required this.title,
       @required this.itens,
       @required this.groupValue,
-        this.selectColor:const  Color(0xff2bbab4),
+      this.selectColor: const Color(0xff2bbab4),
       this.onChange});
 
   @override
@@ -37,38 +37,63 @@ class _ZRadioGroupState extends State<ZRadioGroup>
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-       new Row(
-         mainAxisAlignment: MainAxisAlignment.start,
-         children: <Widget>[
-         new Container(
-           margin: const EdgeInsets.all(16),
-           child: new Text("${widget.title}",style: MainStyle.get(context).mainStyleTextTitle,),
-         )
-       ],),
-        new Expanded(child: new GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: 4.0,
-          padding: const EdgeInsets.all(0),
+    return new Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide( //                   <--- left side
+            color: Colors.black,
+            width: 0.5,
+          ),
+          top: BorderSide( //                    <--- top side
+            color: Colors.black,
+            width: 0.5,
+          ),
+        ),
+      ),
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                width: MediaQuery.of(context).size.width*0.82,
+                margin: const EdgeInsets.only(left: 16,top: 16,bottom: 6),
+                child: new Text(
+                  widget.title,
+                  style: MainStyle.get(context).mainStyleTextTitle,
+                ),
+              )
+            ],
+          ),
+          new GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 4.0,
+            padding: const EdgeInsets.all(0),
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: List.generate(widget.itens.length, (index) {
+              var item = widget.itens[index];
 
-          children: List.generate(widget.itens.length, (index) {
-            var item = widget.itens[index];
-
-            return new Row(
-              children: <Widget>[
-                new Radio(
-                    value: item.checked ? 0 : 1,
-                    groupValue: widget.groupValue,
-                    activeColor: widget.selectColor,
-                    onChanged: (value) => _view.onChange(value, item)),
-                new Text("${item.description}",style: new TextStyle(fontSize: MainStyle.get(context).fontSizePadrao),)
-              ],
-            );
-          }),
-        ))
-      ],
+              return new Row(
+                children: <Widget>[
+                  new Radio(
+                      value: item.checked ? 1 : 0,
+                      groupValue: widget.groupValue,
+                      activeColor: widget.selectColor,
+                      onChanged: (value) => _view.onChange(value, item)),
+                  new Text(
+                    "${item.description}",
+                    style: new TextStyle(
+                        fontSize: MainStyle.get(context).fontSizePadrao),
+                  )
+                ],
+              );
+            }),
+          )
+        ],
+      ),
     );
   }
 

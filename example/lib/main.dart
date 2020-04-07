@@ -23,6 +23,12 @@ import 'package:z_components/components/z-radio-group/z-radio-group.dart';
 import 'package:z_components/components/z-radio-group/z-radio-item.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
+import 'dart:convert' show json;
+import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
+import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
+import 'package:z_components/api/formulario/i-formulario-service.dart';
+import 'package:z_components/api/formulario/formulario-service.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -148,6 +154,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     },
   ];
 
+  List<ZDynamicFormViewModel> lista = new List();
+
+
   @override
   void initState() {
     super.initState();
@@ -163,6 +172,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     cnpjFocus = new FocusNode();
     inputPadraoFocus = new FocusNode();
 
+    //montarFormulario();
+    montarLista();
     super.initState();
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
@@ -192,37 +203,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ConfirmarPrevisto(
-                      dadosViewModel: AtualizarDadosViewModel(
-                          statusColaborador: "Ativo",
-                          horaInicio: "09:00",
-                          escala: "5x2",
-                          centroCusto: "Zellar",
-                          cargo: "Programador",
-                          horaTermino: "17:30",
-                          nomeColaborador: "Giuliano Ortiz Goria",
-                          tempoIntervalo: "00:30"),
-                      finalizarAtualizacao: (dados) {
-                        print(dados);
-                      },
-                    )));
-      },
-    ),
-      appBar: new AppBar(),
-      body: ZInputGeneric(
-        titulo: "Generico",
-        obscureText: true,
-        controllerInputPadrao: controllerNome,
-        inputPadraoFocus: focusNodeNome,
-        tipoTeclado: TextInputType.number,)
-    );
-
+    return ZDyanmicForm(title: "teste",fields: lista,clickButtonEnviar: (){
+      print("VOCE ACABOU DE CLICAR NO BOTAO ENVIAR, AMIGO");
+    },);
   }
 
   void showAlertDialogNew() async {
@@ -572,6 +555,32 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     });
     Future.delayed(Duration(seconds: 15), () {
       Navigator.pop(context);
+    });
+  }
+
+  void montarLista() async {
+    String data = await DefaultAssetBundle.of(context).loadString("assets/carlos.json");
+    var responseBody = json.decode(data);
+
+    lista =
+        (responseBody as List).map((x) => ZDynamicFormViewModel.fromJson(x)).toList();
+
+    setState(() {
+      print(lista);
+    });
+  }
+
+  void montarFormulario()async{
+    IFormularioService iFormularioService = new FormularioService("eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4ZDE1YmExNGJkNWQ1OGFiODRlNGI5YTMzZjg1NjIwIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODYyMDQzOTUsImV4cCI6MTU4NjIwNzk5NSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjU0NTMyNDM1LTY0ZTAtNDczMS05NmQwLTcxOTY5YjJkY2QwNyIsImF1dGhfdGltZSI6MTU4NjE4NDExNiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ijc1NzMxNGU3LTM0NDYtNGY5Ny04M2IwLWNhOWY4NmI2OGM3MCIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZBNDlCMy00N0QxLTRENzYtODBERi0wNzlFQjgyRDZEOEYiLCJpZENvbGFib3JhZG9yIjoiNEUzMkRGMjktOTNFMC00RDU1LTk1REQtQzI2MjIyNTdDQ0Q2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDQ3LjkzMC42MzgtMjkiLCJlbWFpbCI6InZpY3RvcnRtYXJxdWVzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpbZmFsc2UsIkZhbHNlIl0sIm5hbWUiOiJWaWN0b3IgVGF2YXJlcyBNYXJxdWVzIiwicGhvbmVfbnVtYmVyIjoiKDExKSA5IDgyMzctMjYyMiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.pwwxzqA5DqWyWMxN_Z5KTjDY3ZICbxbTahBO0zhcDIIj3WrXEQszzLYxACmXUlYaK8cc3_5Ee82n7FofPIoOUKRMk7hfPBSJNCCqiNlgWF1_csd8T5cRwTPhxnOC6t_pzi09gTik21VrIq860WZ-hu8ho2dktlpKGNbCo-ZItqjqTUJ1PkN2J8KPLAYgH2uP0WhIM_WFtwQRXEfIsOhZmnpOYoqpek2a288rM3pCny22hIuPcFp24oadaY4BBuGSEEOrPtad6KSY_HmDgAj9rMx_nlo1DkxuVelDVraiKwgLJX_m2-8Q2EdmanQt-rEkPt6mq_45s3dYSzHkxYeSow");
+
+    var formulario = await iFormularioService.buscarFormularios();
+
+    var formularioSellecionado = formulario.first;
+
+    lista = await iFormularioService.montarFormulario(formularioSellecionado.idModelo);
+
+    setState(() {
+      print(lista);
     });
   }
 
