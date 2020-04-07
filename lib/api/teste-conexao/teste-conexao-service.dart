@@ -17,7 +17,7 @@ class TesteConexaoService extends Service implements ITesteConexaoService {
     try {
       var url = "${ApiSettings.ENDPOINT_API}/zponto/isAlive";
 
-      var response = await request(url, Service.HTTP_GET, timeout: 2);
+      var response = await request(url, Service.HTTP_GET, timeout: 5);
 
       return response.statusCode == 200;
     } catch (e) {
