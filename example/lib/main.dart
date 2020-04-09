@@ -605,10 +605,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
       tipo: item.tipo,
       versao: item.versao,
     );
-
     await listaEnvio.add(zDynamicFormViewModel);
-
     });
+
+
     print(listaEnvio);
   }
 
