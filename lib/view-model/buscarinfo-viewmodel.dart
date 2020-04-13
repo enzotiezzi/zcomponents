@@ -18,28 +18,29 @@ class BuscarInfo {
   String cep;
   String idFoto;
   String fotoBase64;
+  bool atualizado;
 
-  BuscarInfo({
-    this.idUsuario,
-    this.username,
-    this.cpf,
-    this.email,
-    this.nome,
-    this.idPessoa,
-    this.nomeSocial,
-    this.telefone,
-    this.celular,
-    this.dataNascimento,
-    this.logradouro,
-    this.numero,
-    this.complemento,
-    this.bairro,
-    this.cidade,
-    this.estado,
-    this.cep,
-    this.idFoto,
-    this.fotoBase64,
-  });
+  BuscarInfo(
+      {this.idUsuario,
+      this.username,
+      this.cpf,
+      this.email,
+      this.nome,
+      this.idPessoa,
+      this.nomeSocial,
+      this.telefone,
+      this.celular,
+      this.dataNascimento,
+      this.logradouro,
+      this.numero,
+      this.complemento,
+      this.bairro,
+      this.cidade,
+      this.estado,
+      this.cep,
+      this.idFoto,
+      this.fotoBase64,
+      this.atualizado});
 
   factory BuscarInfo.fromJson(Map<String, dynamic> json) {
     return new BuscarInfo(
