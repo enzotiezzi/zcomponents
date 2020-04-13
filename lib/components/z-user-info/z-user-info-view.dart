@@ -280,9 +280,65 @@ class ZUserInfoView extends IView<ZUserInfo> {
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
       numero: textEditingControllerNumero.text,
+      fotoBase64: (state.widget.userInfo.fotoBase64 == "")
+          ? null
+          : state.widget.userInfo.fotoBase64,
       idFoto: (state.widget.userInfo.idFoto == "")
           ? null
           : state.widget.userInfo.idFoto,
+      anexoCartaoAlimentacaoStatus:
+          state.widget.userInfo.anexoCartaoAlimentacaoStatus,
+      anexoCartaoContaBancariaStatus:
+          state.widget.userInfo.anexoCartaoContaBancariaStatus,
+      anexoCartaoValeTransporteStatus:
+          state.widget.userInfo.anexoCartaoValeTransporteStatus,
+      anexoCarteiraVacinacaoStatus:
+          state.widget.userInfo.anexoCarteiraVacinacaoStatus,
+      anexoCertidaoNascimentoCasamentoStatus:
+          state.widget.userInfo.anexoCertidaoNascimentoCasamentoStatus,
+      anexoComprovanteEnderecoStatus:
+          state.widget.userInfo.anexoComprovanteEnderecoStatus,
+      anexoCPFStatus: state.widget.userInfo.anexoCPFStatus,
+      anexoCTPSStatus: state.widget.userInfo.anexoCTPSStatus,
+      anexoEscolaridadeStatus: state.widget.userInfo.anexoEscolaridadeStatus,
+      anexoPISStatus: state.widget.userInfo.anexoPISStatus,
+      anexoRGStatus: state.widget.userInfo.anexoRGStatus,
+      anexoTituloEleitorStatus: state.widget.userInfo.anexoTituloEleitorStatus,
+      idAnexoCartaoAlimentacao: state.widget.userInfo.idAnexoCartaoAlimentacao,
+      idAnexoCartaoAlimentacaoVerso:
+          state.widget.userInfo.idAnexoCartaoAlimentacaoVerso,
+      idAnexoCartaoContaBancaria:
+          state.widget.userInfo.idAnexoCartaoContaBancaria,
+      idAnexoCartaoContaBancariaVerso:
+          state.widget.userInfo.idAnexoCartaoContaBancariaVerso,
+      idAnexoCartaoValeTransporte:
+          state.widget.userInfo.idAnexoCartaoValeTransporte,
+      idAnexoCartaoValeTransporteVerso:
+          state.widget.userInfo.idAnexoCartaoValeTransporteVerso,
+      idAnexoCarteiraVacinacao: state.widget.userInfo.idAnexoCarteiraVacinacao,
+      idAnexoCarteiraVacinacaoVerso:
+          state.widget.userInfo.idAnexoCarteiraVacinacaoVerso,
+      idAnexoCertidaoNascimentoCasamento:
+          state.widget.userInfo.idAnexoCertidaoNascimentoCasamento,
+      idAnexoCertidaoNascimentoCasamentoVerso:
+          state.widget.userInfo.idAnexoCertidaoNascimentoCasamentoVerso,
+      idAnexoComprovanteEndereco:
+          state.widget.userInfo.idAnexoComprovanteEndereco,
+      idAnexoComprovanteEnderecoVerso:
+          state.widget.userInfo.idAnexoComprovanteEnderecoVerso,
+      idAnexoCPF: state.widget.userInfo.idAnexoCPF,
+      idAnexoCPFVerso: state.widget.userInfo.idAnexoCPFVerso,
+      idAnexoCTPS: state.widget.userInfo.idAnexoCTPS,
+      idAnexoCTPSVerso: state.widget.userInfo.idAnexoCTPSVerso,
+      idAnexoEscolaridade: state.widget.userInfo.idAnexoEscolaridade,
+      idAnexoEscolaridadeVerso: state.widget.userInfo.idAnexoEscolaridadeVerso,
+      idAnexoPIS: state.widget.userInfo.idAnexoPIS,
+      idAnexoPISVerso: state.widget.userInfo.idAnexoPISVerso,
+      idAnexoRG: state.widget.userInfo.idAnexoRG,
+      idAnexoRGVerso: state.widget.userInfo.idAnexoRGVerso,
+      idAnexoTituloEleitor: state.widget.userInfo.idAnexoTituloEleitor,
+      idAnexoTituloEleitorVerso:
+          state.widget.userInfo.idAnexoTituloEleitorVerso,
     );
 
     _dialogUtils.showZProgressDialog(

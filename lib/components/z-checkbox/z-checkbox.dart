@@ -43,19 +43,41 @@ class _ZCheckBoxState extends State<ZCheckBox>
     var cellHeight = 60;
     var _aspectRatio = _width / cellHeight;
 
-    return new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          new Container(padding: EdgeInsets.only(left: 14.0, top: 14.0),
-            child: new Text("${widget.title}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
+    return new Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide( //                   <--- left side
+            color: Colors.black,
+            width: 0.5,
           ),
-          new Expanded(
-            child: new GridView.builder(
+          top: BorderSide( //                    <--- top side
+            color: Colors.black,
+            width: 0.5,
+          ),
+        ),
+      ),
+      child:
+      new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            new Container(
+              width: 130,
+              padding: EdgeInsets.only(left: 14.0, top: 14.0),
+              child: new Text(
+                "${widget.title}",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+            ),
+            new GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: _crossAxisCount,
                     childAspectRatio: _aspectRatio),
                 itemCount: widget.listaDescricao.length,
+                physics: const NeverScrollableScrollPhysics(),
+
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
                   var item = widget.listaDescricao[index];
 
@@ -67,9 +89,9 @@ class _ZCheckBoxState extends State<ZCheckBox>
                       new Text("${item.descricao}")
                     ],
                   );
-                }),
-          )
-        ]);
+                })
+          ]),
+    );
   }
 
   @override

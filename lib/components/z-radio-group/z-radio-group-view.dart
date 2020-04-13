@@ -23,7 +23,7 @@ class ZRadioGroupView extends IView<ZRadioGroup>{
       state.widget.itens.forEach((x) => x.checked = false);
 
       state.setState((){
-        item.checked = isChecked == 1 ? true : false;
+        item.checked = isChecked == 1 ? false : true;
       });
     }
 

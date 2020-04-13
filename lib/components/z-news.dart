@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/view-model/noticia-viewmodel.dart';
 
 class ZNews extends StatefulWidget {
@@ -58,11 +61,22 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                             new Container(
                               height: 60,
                               width: 100,
-                              decoration: new BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(widget.noticiaViewMode[index].urlImagem),
-                                  fit: BoxFit.cover,
+                              child: CachedNetworkImage(
+                                imageUrl: widget.noticiaViewMode[index].urlImagem,
+                                placeholder: (context, url) => SizedBox(
+                                  child: Shimmer.fromColors(
+                                    baseColor: Color(0xffe6e6e6),
+                                    highlightColor: Colors.white,
+                                    child: new Container(
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffe6e6e6),
+                                      ),
+                                    ),
+                                  ),
                                 ),
+                                errorWidget: (context, url, error) => const Icon(Icons.error),
+                                fadeOutDuration: const Duration(seconds: 1),
+                                fadeInDuration: const Duration(milliseconds: 1300),
                               ),
                             )
                           ],
