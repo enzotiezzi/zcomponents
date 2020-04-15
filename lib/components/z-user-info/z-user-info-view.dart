@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:z_components/api/arquivo/arquivo-service.dart';
 import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/endereco/endereco-service.dart';
@@ -297,40 +296,40 @@ class ZUserInfoView extends IView<ZUserInfo> {
       anexoRGStatus: state.widget.userInfo.anexoRGStatus,
       anexoTituloEleitorStatus: state.widget.userInfo.anexoTituloEleitorStatus,
       idAnexoCartaoAlimentacao: state.widget.userInfo.idAnexoCartaoAlimentacao,
-      idAnexoCartaoAlimentacaoVerso:
-          state.widget.userInfo.idAnexoCartaoAlimentacaoVerso,
+      idAnexoCartaoAlimentacao_Verso:
+          state.widget.userInfo.idAnexoCartaoAlimentacao_Verso,
       idAnexoCartaoContaBancaria:
           state.widget.userInfo.idAnexoCartaoContaBancaria,
-      idAnexoCartaoContaBancariaVerso:
-          state.widget.userInfo.idAnexoCartaoContaBancariaVerso,
+      idAnexoCartaoContaBancaria_Verso:
+          state.widget.userInfo.idAnexoCartaoContaBancaria_Verso,
       idAnexoCartaoValeTransporte:
           state.widget.userInfo.idAnexoCartaoValeTransporte,
-      idAnexoCartaoValeTransporteVerso:
-          state.widget.userInfo.idAnexoCartaoValeTransporteVerso,
+      idAnexoCartaoValeTransporte_Verso:
+          state.widget.userInfo.idAnexoCartaoValeTransporte_Verso,
       idAnexoCarteiraVacinacao: state.widget.userInfo.idAnexoCarteiraVacinacao,
-      idAnexoCarteiraVacinacaoVerso:
-          state.widget.userInfo.idAnexoCarteiraVacinacaoVerso,
+      idAnexoCarteiraVacinacao_Verso:
+          state.widget.userInfo.idAnexoCarteiraVacinacao_Verso,
       idAnexoCertidaoNascimentoCasamento:
           state.widget.userInfo.idAnexoCertidaoNascimentoCasamento,
-      idAnexoCertidaoNascimentoCasamentoVerso:
-          state.widget.userInfo.idAnexoCertidaoNascimentoCasamentoVerso,
+      idAnexoCertidaoNascimentoCasamento_Verso:
+          state.widget.userInfo.idAnexoCertidaoNascimentoCasamento_Verso,
       idAnexoComprovanteEndereco:
           state.widget.userInfo.idAnexoComprovanteEndereco,
-      idAnexoComprovanteEnderecoVerso:
-          state.widget.userInfo.idAnexoComprovanteEnderecoVerso,
+      idAnexoComprovanteEndereco_Verso:
+          state.widget.userInfo.idAnexoComprovanteEndereco_Verso,
       idAnexoCPF: state.widget.userInfo.idAnexoCPF,
-      idAnexoCPFVerso: state.widget.userInfo.idAnexoCPFVerso,
+      idAnexoCPF_Verso: state.widget.userInfo.idAnexoCPF_Verso,
       idAnexoCTPS: state.widget.userInfo.idAnexoCTPS,
-      idAnexoCTPSVerso: state.widget.userInfo.idAnexoCTPSVerso,
+      idAnexoCTPS_Verso: state.widget.userInfo.idAnexoCTPS_Verso,
       idAnexoEscolaridade: state.widget.userInfo.idAnexoEscolaridade,
-      idAnexoEscolaridadeVerso: state.widget.userInfo.idAnexoEscolaridadeVerso,
+      idAnexoEscolaridade_Verso: state.widget.userInfo.idAnexoEscolaridade_Verso,
       idAnexoPIS: state.widget.userInfo.idAnexoPIS,
-      idAnexoPISVerso: state.widget.userInfo.idAnexoPISVerso,
+      idAnexoPIS_Verso: state.widget.userInfo.idAnexoPIS_Verso,
       idAnexoRG: state.widget.userInfo.idAnexoRG,
-      idAnexoRGVerso: state.widget.userInfo.idAnexoRGVerso,
+      idAnexoRG_Verso: state.widget.userInfo.idAnexoRG_Verso,
       idAnexoTituloEleitor: state.widget.userInfo.idAnexoTituloEleitor,
-      idAnexoTituloEleitorVerso:
-          state.widget.userInfo.idAnexoTituloEleitorVerso,
+      idAnexoTituloEleitor_Verso:
+          state.widget.userInfo.idAnexoTituloEleitor_Verso,
     );
 
     _dialogUtils.showZProgressDialog(
