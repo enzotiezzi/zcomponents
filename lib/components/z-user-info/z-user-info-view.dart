@@ -76,23 +76,22 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerBairro.text = state.widget.userInfo?.bairro;
     textEditingControllerRua.text = state.widget.userInfo?.logradouro;
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
-    if(state.widget.userInfo.dataNascimento != null)
-      {
-        if(state.widget.userInfo.dataNascimento.length > 10)
-        {
-          textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("T")[0].substring(8, 10)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(5, 7)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(0, 4)}";
-        }
-        else{
-          textEditingControllerDataNascimento.text = "${state.widget.userInfo.dataNascimento.split("-")[2]}/${state.widget.userInfo.dataNascimento.split("-")[1]}/${state.widget.userInfo.dataNascimento.split("-")[0]}";
-        }
+    if (state.widget.userInfo.dataNascimento != null) {
+      if (state.widget.userInfo.dataNascimento.length > 10) {
+        textEditingControllerDataNascimento.text =
+            "${state.widget.userInfo.dataNascimento.split("T")[0].substring(8, 10)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(5, 7)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(0, 4)}";
+      } else {
+        textEditingControllerDataNascimento.text =
+            "${state.widget.userInfo.dataNascimento.split("-")[2]}/${state.widget.userInfo.dataNascimento.split("-")[1]}/${state.widget.userInfo.dataNascimento.split("-")[0]}";
       }
+    }
   }
 
   @override
   Future<void> afterBuild() async {
-    if(state.widget.userInfo.fotoBase64.length > 0){
-      if(state.mounted) {
-        state.setState((){
+    if (state.widget.userInfo.fotoBase64.length > 0) {
+      if (state.mounted) {
+        state.setState(() {
           imagemPerfil = base64Decode(state.widget.userInfo.fotoBase64);
         });
       }
@@ -177,7 +176,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
                                     padding: const EdgeInsets.only(top: 8),
                                     child: new Icon(
                                       Icons.camera_alt,
-                                      color: MainStyle.get(state.context).primaryColor,
+                                      color: MainStyle.get(state.context)
+                                          .primaryColor,
                                     ),
                                   ),
                                   new Container(
@@ -206,7 +206,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
                                       padding: const EdgeInsets.only(top: 8),
                                       child: new Icon(
                                         Icons.add_photo_alternate,
-                                        color: MainStyle.get(state.context).primaryColor,
+                                        color: MainStyle.get(state.context)
+                                            .primaryColor,
                                       ),
                                     ),
                                     new Container(
@@ -240,16 +241,19 @@ class ZUserInfoView extends IView<ZUserInfo> {
           imagemPerfil = bytes;
         });
 
-        _arquivoService.enviarImagem(new ArquivoViewModel(
+        _arquivoService
+            .enviarImagem(new ArquivoViewModel(
           nome: "perfil.jpg",
           contentType: "image/jpg",
           descricao: "Imagem de perfil do usuário",
           conteudo: base64,
           tamanho: base64.length.toDouble(),
           container: "teste",
-        )).then((idAnexo){
+        ))
+            .then((idAnexo) {
           state.widget.userInfo.idFoto = idAnexo;
-          if(state.widget.onChangeProfileImage != null) state.widget.onChangeProfileImage(base64);
+          if (state.widget.onChangeProfileImage != null)
+            state.widget.onChangeProfileImage(base64);
         });
       }
     }
@@ -257,41 +261,105 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   Future<void> submit() async {
     var userInfo = new BuscarInfo(
-          idUsuario:  state.widget.userInfo?.idUsuario,
-          username: state.widget.userInfo?.username,
-          cpf:state.widget.userInfo?.cpf,
-          nomeSocial: state.widget.userInfo?.nomeSocial,
-          idPessoa: state.widget.userInfo?.idPessoa,
-          complemento:state.widget.userInfo?.complemento,
-          celular: state.widget.userInfo?.celular,
-          nome: textEditingControllerNome.text,
-          bairro: textEditingControllerBairro.text,
-          logradouro: textEditingControllerRua.text,
-          cep: textEditingControllerCEP.text,
-          estado: textEditingControllerEstado.text,
-          dataNascimento:(textEditingControllerDataNascimento.text == "")?null:"${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}",
-          cidade: textEditingControllerCidade.text,
-          telefone: textEditingControllerTelefone.text,
-          email: textEditingControllerEmail.text,
-          numero: textEditingControllerNumero.text,
-          fotoBase64:( state.widget.userInfo.fotoBase64 == "")?null: state.widget.userInfo.fotoBase64,
-          idFoto:(state.widget.userInfo.idFoto == "")?null:state.widget.userInfo.idFoto,
-        );
+      idUsuario: state.widget.userInfo?.idUsuario,
+      username: state.widget.userInfo?.username,
+      cpf: state.widget.userInfo?.cpf,
+      nomeSocial: state.widget.userInfo?.nomeSocial,
+      idPessoa: state.widget.userInfo?.idPessoa,
+      complemento: state.widget.userInfo?.complemento,
+      celular: state.widget.userInfo?.celular,
+      nome: textEditingControllerNome.text,
+      bairro: textEditingControllerBairro.text,
+      logradouro: textEditingControllerRua.text,
+      cep: textEditingControllerCEP.text,
+      estado: textEditingControllerEstado.text,
+      dataNascimento: (textEditingControllerDataNascimento.text == "")
+          ? null
+          : "${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}",
+      cidade: textEditingControllerCidade.text,
+      telefone: textEditingControllerTelefone.text,
+      email: textEditingControllerEmail.text,
+      numero: textEditingControllerNumero.text,
+      fotoBase64: (state.widget.userInfo.fotoBase64 == "")
+          ? null
+          : state.widget.userInfo.fotoBase64,
+      idFoto: (state.widget.userInfo.idFoto == "")
+          ? null
+          : state.widget.userInfo.idFoto,
+      anexoCartaoAlimentacaoStatus:
+          state.widget.userInfo.anexoCartaoAlimentacaoStatus,
+      anexoCartaoContaBancariaStatus:
+          state.widget.userInfo.anexoCartaoContaBancariaStatus,
+      anexoCartaoValeTransporteStatus:
+          state.widget.userInfo.anexoCartaoValeTransporteStatus,
+      anexoCarteiraVacinacaoStatus:
+          state.widget.userInfo.anexoCarteiraVacinacaoStatus,
+      anexoCertidaoNascimentoCasamentoStatus:
+          state.widget.userInfo.anexoCertidaoNascimentoCasamentoStatus,
+      anexoComprovanteEnderecoStatus:
+          state.widget.userInfo.anexoComprovanteEnderecoStatus,
+      anexoCPFStatus: state.widget.userInfo.anexoCPFStatus,
+      anexoCTPSStatus: state.widget.userInfo.anexoCTPSStatus,
+      anexoEscolaridadeStatus: state.widget.userInfo.anexoEscolaridadeStatus,
+      anexoPISStatus: state.widget.userInfo.anexoPISStatus,
+      anexoRGStatus: state.widget.userInfo.anexoRGStatus,
+      anexoTituloEleitorStatus: state.widget.userInfo.anexoTituloEleitorStatus,
+      idAnexoCartaoAlimentacao: state.widget.userInfo.idAnexoCartaoAlimentacao,
+      idAnexoCartaoAlimentacaoVerso:
+          state.widget.userInfo.idAnexoCartaoAlimentacaoVerso,
+      idAnexoCartaoContaBancaria:
+          state.widget.userInfo.idAnexoCartaoContaBancaria,
+      idAnexoCartaoContaBancariaVerso:
+          state.widget.userInfo.idAnexoCartaoContaBancariaVerso,
+      idAnexoCartaoValeTransporte:
+          state.widget.userInfo.idAnexoCartaoValeTransporte,
+      idAnexoCartaoValeTransporteVerso:
+          state.widget.userInfo.idAnexoCartaoValeTransporteVerso,
+      idAnexoCarteiraVacinacao: state.widget.userInfo.idAnexoCarteiraVacinacao,
+      idAnexoCarteiraVacinacaoVerso:
+          state.widget.userInfo.idAnexoCarteiraVacinacaoVerso,
+      idAnexoCertidaoNascimentoCasamento:
+          state.widget.userInfo.idAnexoCertidaoNascimentoCasamento,
+      idAnexoCertidaoNascimentoCasamentoVerso:
+          state.widget.userInfo.idAnexoCertidaoNascimentoCasamentoVerso,
+      idAnexoComprovanteEndereco:
+          state.widget.userInfo.idAnexoComprovanteEndereco,
+      idAnexoComprovanteEnderecoVerso:
+          state.widget.userInfo.idAnexoComprovanteEnderecoVerso,
+      idAnexoCPF: state.widget.userInfo.idAnexoCPF,
+      idAnexoCPFVerso: state.widget.userInfo.idAnexoCPFVerso,
+      idAnexoCTPS: state.widget.userInfo.idAnexoCTPS,
+      idAnexoCTPSVerso: state.widget.userInfo.idAnexoCTPSVerso,
+      idAnexoEscolaridade: state.widget.userInfo.idAnexoEscolaridade,
+      idAnexoEscolaridadeVerso: state.widget.userInfo.idAnexoEscolaridadeVerso,
+      idAnexoPIS: state.widget.userInfo.idAnexoPIS,
+      idAnexoPISVerso: state.widget.userInfo.idAnexoPISVerso,
+      idAnexoRG: state.widget.userInfo.idAnexoRG,
+      idAnexoRGVerso: state.widget.userInfo.idAnexoRGVerso,
+      idAnexoTituloEleitor: state.widget.userInfo.idAnexoTituloEleitor,
+      idAnexoTituloEleitorVerso:
+          state.widget.userInfo.idAnexoTituloEleitorVerso,
+    );
 
-        _dialogUtils.showZProgressDialog("Salvando informações...", 0.7, _globalKey);
+    _dialogUtils.showZProgressDialog(
+        "Salvando informações...", 0.7, _globalKey);
 
-        var res = await _userInfoService.editarInformacoes(userInfo);
+    var res = await _userInfoService.editarInformacoes(userInfo);
 
-        if(res)
-          _globalKey.currentState.refresh(1.0, "Pronto", success: true);
-        else
-          _globalKey.currentState.refresh(1.0, "Não foi possível editar as informações", success: false);
+    if (res) {
+      userInfo.atualizado = true;
+    } else {
+      userInfo.atualizado = false;
+    }
 
-        Future.delayed(new Duration(seconds: 1), (){
-          _dialogUtils.dismiss();
+    _globalKey.currentState.refresh(1.0, "Pronto", success: true);
 
-          if(state.widget.onEditFinish != null) state.widget.onEditFinish(userInfo);
-        });
+    Future.delayed(new Duration(seconds: 1), () {
+      _dialogUtils.dismiss();
+
+      if (state.widget.onEditFinish != null)
+        state.widget.onEditFinish(userInfo);
+    });
   }
 
   void showAlertDialogNew(String title, String message) async {
@@ -317,7 +385,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                 new Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   margin:
-                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                   child: new Text(
                     message,
                     textAlign: TextAlign.center,
@@ -347,7 +415,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                     style: new TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize:
-                        MainStyle.get(context).fontSizeLeadinCancelar),
+                            MainStyle.get(context).fontSizeLeadinCancelar),
                   ),
                 ),
               ),

@@ -1,3 +1,23 @@
+## 0.9.18+5
+
+* new BuscarInfo ajuste
+
+## 0.9.18+4
+
+* new BuscarInfo ajust
+
+## 0.9.18+3
+
+* new ZDynamicForm ajust
+
+## 0.9.18+2
+
+* new ZDynamicForm ajust
+
+## 0.9.18+1
+
+* new ZDynamicForm ajust
+
 ## 0.9.18
 
 * new ZDynamicForm ajust
