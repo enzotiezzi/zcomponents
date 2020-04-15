@@ -10,6 +10,7 @@ class ZInputDataNascimento extends StatefulWidget {
   FocusNode dataFocus;
   var controllerData = new TextEditingController();
   FocusNode proximoFocus;
+  bool validacaoAno;
   ValueChanged<String> onChange;
 
   String dia;
@@ -30,6 +31,7 @@ class ZInputDataNascimento extends StatefulWidget {
         this.onChange,
       @required this.dataFocus,
       @required this.controllerData,
+        this.validacaoAno: true,
        this.proximoFocus})
       : super(key: key);
 
@@ -174,7 +176,11 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
               widget.intAno < 2004) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-          } else if (widget.intMes < 13 &&
+          }
+
+          else if (widget.validacaoAno == true){
+
+           if (widget.intMes < 13 &&
               widget.intDias < 32 &&
               widget.intAno > 2004) {
             _dialogUtils.showAlertDialogNewAviso(
@@ -201,6 +207,25 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
             _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
                 "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano entre 1901 e 2004.");
           }
+          }else{
+           if (widget.intAno < 1901) {
+              _dialogUtils.showAlertDialogNewAviso(
+                  "Ano Inválido!", "Insira um valor de ano maior que 1901.");
+            } else if (widget.intMes > 12 &&
+                widget.intDias < 32) {
+              _dialogUtils.showAlertDialogNewAviso("Mês Inválido!",
+                  "Insira um valor de mês entre 01 e 12.");
+            } else if (widget.intMes > 12 &&
+                widget.intDias > 32) {
+              _dialogUtils.showAlertDialogNewAviso("Mês e Dia Inválido!",
+                  "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
+            } else if (widget.intMes < 13 &&
+                widget.intDias > 32) {
+              _dialogUtils.showAlertDialogNewAviso("Dia!",
+                  "Insira um valor de dia entre 01 e 31");
+            }
+          }
+
         }
       }else{
       _dialogUtils.showAlertDialogNewAviso(

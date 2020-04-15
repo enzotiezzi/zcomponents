@@ -15,7 +15,7 @@ import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:z_components/components/z-user-info/z-user-info.dart';
+import "package:z_components/components/z-inputs/z-input-data-de-nascimento.dart";
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
@@ -160,7 +160,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
 
   @override
-  void initState()async {
+  void initState() {
     super.initState();
     focusNodeNome = new FocusNode();
     nomeFocus = new FocusNode();
@@ -175,9 +175,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     inputPadraoFocus = new FocusNode();
 
     //montarFormulario();
-    await montarLista();
-    await enviarFormulario();
-    super.initState();
+//    await montarLista();
+//    await enviarFormulario();
+   // super.initState();
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
@@ -206,9 +206,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return ZDyanmicForm(title: "teste",fields: lista,clickButtonEnviar: (){
-      print("VOCE ACABOU DE CLICAR NO BOTAO ENVIAR, AMIGO");
-    },);
+    return new Scaffold( 
+      appBar: new AppBar(title: new Text("TESTESS"),),
+      body: new ZInputDataNascimento(
+        dataFocus: focusNodeNome,
+        controllerData: controllerData,
+        validacaoAno: false,),
+    );
   }
 
   void showAlertDialogNew() async {

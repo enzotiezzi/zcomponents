@@ -1,3 +1,7 @@
+## 0.9.18+6
+
+* Ajuste Validacao de Ano em ZInputDataNascimento(Pode agora ser ou nao obrigatória)
+
 ## 0.9.18+5
 
 * new BuscarInfo ajuste
