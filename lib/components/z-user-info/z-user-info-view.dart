@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:z_components/api/arquivo/arquivo-service.dart';
 import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/endereco/endereco-service.dart';
@@ -12,14 +12,12 @@ import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/api/user-info/i-user-info-service.dart';
 import 'package:z_components/api/user-info/user-info-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
-
 import '../../i-view.dart';
 import '../z-alert-dialog.dart';
 
@@ -77,13 +75,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerRua.text = state.widget.userInfo?.logradouro;
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
     if (state.widget.userInfo.dataNascimento != null) {
-      if (state.widget.userInfo.dataNascimento.length > 10) {
-        textEditingControllerDataNascimento.text =
-            "${state.widget.userInfo.dataNascimento.split("T")[0].substring(8, 10)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(5, 7)}/${state.widget.userInfo.dataNascimento.split("T")[0].substring(0, 4)}";
-      } else {
-        textEditingControllerDataNascimento.text =
-            "${state.widget.userInfo.dataNascimento.split("-")[2]}/${state.widget.userInfo.dataNascimento.split("-")[1]}/${state.widget.userInfo.dataNascimento.split("-")[0]}";
-      }
+      textEditingControllerDataNascimento.text = _montarData(state.widget.userInfo.dataNascimento);
     }
   }
 
@@ -425,5 +417,14 @@ class ZUserInfoView extends IView<ZUserInfo> {
         ),
       ),
     );
+  }
+
+  String _montarData(String data) {
+    if (data != null) {
+      DateTime date = DateTime.parse(data);
+      return "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";
+    } else {
+      return "";
+    }
   }
 }
