@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:airplane_mode_detection/airplane_mode_detection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -102,7 +103,11 @@ class ZUserInfoView extends IView<ZUserInfo> {
     if (cep.length == 9) {
       _dialogUtils.showZProgressDialog("Buscando endereço...", 0.5, _globalKey);
 
-      var endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
+      var endereco;
+      String modoAviao = await AirplaneModeDetection.detectAirplaneMode();
+      if (modoAviao == "OFF") {
+        endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
+      }
 
       if (endereco != null) {
         _globalKey.currentState
@@ -344,7 +349,12 @@ class ZUserInfoView extends IView<ZUserInfo> {
     _dialogUtils.showZProgressDialog(
         "Salvando informações...", 0.7, _globalKey);
 
-    var res = await _userInfoService.editarInformacoes(userInfo);
+    var res;
+    String modoAviao = await AirplaneModeDetection.detectAirplaneMode();
+
+    if (modoAviao == "OFF") {
+      res = await _userInfoService.editarInformacoes(userInfo);
+    }
 
     if (res) {
       userInfo.atualizado = true;
