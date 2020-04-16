@@ -344,7 +344,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     _dialogUtils.showZProgressDialog(
         "Salvando informações...", 0.7, _globalKey);
 
-    var res;
+    var res = false;
     String modoAviao = await AirplaneModeDetection.detectAirplaneMode();
 
     if (modoAviao == "OFF") {
