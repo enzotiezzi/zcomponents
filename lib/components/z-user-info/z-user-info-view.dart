@@ -85,7 +85,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     if (state.widget.userInfo.fotoBase64.length > 0) {
       if (state.mounted) {
         state.setState(() {
-          imagemPerfil = base64Decode(state.widget.userInfo.fotoBase64);
+          imagemPerfil =state.widget.userInfo.fotoBase64;
         });
       }
     }
