@@ -208,10 +208,15 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   Widget build(BuildContext context) {
     return new Scaffold( 
       appBar: new AppBar(title: new Text("TESTESS"),),
-      body: new ZInputDataNascimento(
-        dataFocus: focusNodeNome,
-        controllerData: controllerData
-      ),
+      body: new Column(
+        children: <Widget>[
+          new ZInputDataNascimento(
+              dataFocus: focusNodeNome,
+              controllerData: controllerData
+          ),
+
+        ],
+      )
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
+import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
 import 'package:z_components/components/z-user-info/z-user-info-view.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/config/z-button-type.dart';
@@ -85,10 +86,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
           controllerNome: _view.textEditingControllerNome,
           nomeFocus: _view.focusNodeNome,
         ),
-        new ZBaseLine(
-          zTipos: ZTipoBaseline.isDataNascimento,
-          controllerData: _view.textEditingControllerDataNascimento,
-          mesFocus: _view.focusNodeDataNascimento,
+        new ZInputDataNascimento(
+            dataFocus: _view.focusNodeDataNascimento,
+            controllerData: _view.textEditingControllerDataNascimento
         ),
         new ZBaseLine(
           zTipos: ZTipoBaseline.isCelular,

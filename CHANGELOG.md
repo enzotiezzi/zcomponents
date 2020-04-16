@@ -1,3 +1,7 @@
+## 0.9.18+8
+
+* Ajuste DataNascUSerInfo
+
 ## 0.9.18+7
 
 * Ajuste buscarinfoviewmodel
