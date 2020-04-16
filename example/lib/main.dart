@@ -210,8 +210,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
       appBar: new AppBar(title: new Text("TESTESS"),),
       body: new ZInputDataNascimento(
         dataFocus: focusNodeNome,
-        controllerData: controllerData,
-        validacaoAno: false,),
+        controllerData: controllerData
+      ),
     );
   }
 
