@@ -1,10 +1,14 @@
+## 0.9.18+9
+
+* Ajuste DataNascUSerInfo
+
 ## 0.9.18+8
+
+* Ajuste 
+
+## 0.9.18+7
 
 * Ajuste modo aviao
-
-## 0.9.18+8
-
-* Ajuste buscarinfoviewmodel
 
 ## 0.9.18+6
 
