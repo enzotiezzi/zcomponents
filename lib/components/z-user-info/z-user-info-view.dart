@@ -357,8 +357,9 @@ class ZUserInfoView extends IView<ZUserInfo> {
       userInfo.atualizado = false;
     }
 
-    _globalKey.currentState.refresh(1.0, "Pronto", success: true);
-
+    Future.delayed(Duration(milliseconds: 1000), () {
+      _globalKey.currentState.refresh(1.0, "Pronto", success: true);
+    });
     Future.delayed(new Duration(seconds: 1), () {
       _dialogUtils.dismiss();
 

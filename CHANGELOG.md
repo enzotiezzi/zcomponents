@@ -1,3 +1,7 @@
+## 0.9.18+10
+
+* Ajuste ZUserInfo
+
 ## 0.9.18+9
 
 * Ajuste DataNascUSerInfo
