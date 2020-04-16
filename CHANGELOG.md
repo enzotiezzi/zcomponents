@@ -1,4 +1,8 @@
-## 0.9.18+7
+## 0.9.18+8
+
+* Ajuste modo aviao
+
+## 0.9.18+8
 
 * Ajuste buscarinfoviewmodel
 
