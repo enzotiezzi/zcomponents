@@ -75,7 +75,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerRua.text = state.widget.userInfo?.logradouro;
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
     if (state.widget.userInfo.dataNascimento != null) {
-      textEditingControllerDataNascimento.text = _montarData(state.widget.userInfo.dataNascimento);
+      textEditingControllerDataNascimento.text =
+          _montarData(state.widget.userInfo.dataNascimento);
     }
   }
 
@@ -115,9 +116,11 @@ class ZUserInfoView extends IView<ZUserInfo> {
           });
         }
       } else {
-        _globalKey.currentState.refresh(
-            1.0, "Não foi possível encontrar o endereço, tenta novamente",
-            success: false);
+        Future.delayed(Duration(milliseconds: 1000), () {
+          _globalKey.currentState.refresh(
+              1.0, "Não foi possível encontrar o endereço, tenta novamente",
+              success: false);
+        });
       }
 
       Future.delayed(new Duration(seconds: 1), () {
@@ -327,7 +330,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
       idAnexoCTPS: state.widget.userInfo.idAnexoCTPS,
       idAnexoCTPS_Verso: state.widget.userInfo.idAnexoCTPS_Verso,
       idAnexoEscolaridade: state.widget.userInfo.idAnexoEscolaridade,
-      idAnexoEscolaridade_Verso: state.widget.userInfo.idAnexoEscolaridade_Verso,
+      idAnexoEscolaridade_Verso:
+          state.widget.userInfo.idAnexoEscolaridade_Verso,
       idAnexoPIS: state.widget.userInfo.idAnexoPIS,
       idAnexoPIS_Verso: state.widget.userInfo.idAnexoPIS_Verso,
       idAnexoRG: state.widget.userInfo.idAnexoRG,
