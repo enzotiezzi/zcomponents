@@ -28,6 +28,7 @@ import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
 import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
+import 'package:z_components/i-view.dart';
 
 import 'main-testing.dart';
 
@@ -209,15 +210,35 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   Widget build(BuildContext context) {
     return new Scaffold( 
-      appBar: new AppBar(title: new Text("TESTESS"),),
-      body: new Column(
-        children: <Widget>[
-          new ZInputDataNascimento(
-              dataFocus: focusNodeNome,
-              controllerData: controllerData
-          ),
+      appBar: new AppBar(title: new Text("ROUTES"),),
+      body:new Center(
+        child:  new Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new RaisedButton(onPressed: (){
+              Navigator.push(context, SlideRightRoute(page: SecondClass()));
+              //navigate(new DadosColaborador());
+            },child: new Text("Slide Right"),),
+            new RaisedButton(onPressed: (){
+              Navigator.push(context, ScaleRoute(page: SecondClass()));
+              //navigate(new DadosColaborador());
+            },child: new Text("Scale"),),
+            new RaisedButton(onPressed: (){
+              Navigator.push(context, SizeRoute(page: SecondClass()));
+              //navigate(new DadosColaborador());
+            },child: new Text("Size"),),
+            new RaisedButton(onPressed: (){
+              Navigator.push(context, FadeRoute(page: SecondClass()));
+              //navigate(new DadosColaborador());
+            },child: new Text("Fade"),),
+            new RaisedButton(onPressed: (){
+              Navigator.push(context, ScaleRotateRoute(page: SecondClass()));
+              //navigate(new DadosColaborador());
+            },child: new Text("ScaleRotate"),)
 
-        ],
+          ],
+        ),
       )
     );
   }
@@ -638,7 +659,32 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   void afterFirstLayout(BuildContext context) {}
 }
+class SecondClass extends StatefulWidget {
+  @override
+  _SecondClassState createState() => _SecondClassState();
+}
 
+class _SecondClassState extends State<SecondClass>{
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      backgroundColor: Colors.teal,
+        appBar: new AppBar(title: new Text("TESTESS"),backgroundColor: Colors.amber,),
+        body: new Center(
+          child: new RaisedButton(onPressed: (){
+            Navigator.pop(context);
+            //navigate(new DadosColaborador());
+          },child: new Text("back"),),
+        )
+    );
+  }
+}
 class AppSwitch with ChangeNotifier {
   AppSwitch();
 
@@ -658,4 +704,153 @@ class AppSwitch with ChangeNotifier {
   }
 
   String get text => _text;
+}
+class SlideRightRoute extends PageRouteBuilder {
+  final Widget page;
+  SlideRightRoute({this.page})
+      : super(
+    pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        ) =>
+    page,
+    transitionsBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+        ) =>
+        SlideTransition(
+          position: new Tween<Offset>(
+            begin: const Offset(1.0, 0.0),
+            end: Offset.zero,
+          ).animate(animation),
+          child: new SlideTransition(
+            position: new Tween<Offset>(
+              begin: Offset.zero,
+              end: const Offset(1.0, 0.0),
+            ).animate(secondaryAnimation),
+            child: child,
+          ),
+        )
+  );
+}
+class ScaleRoute extends PageRouteBuilder {
+  final Widget page;
+  ScaleRoute({this.page})
+      : super(
+    pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        ) =>
+    page,
+    transitionsBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+        ) =>
+        ScaleTransition(
+          scale: Tween<double>(
+            begin: 0.0,
+            end: 1.0,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.fastOutSlowIn,
+            ),
+          ),
+          child: child,
+        ),
+  );
+}
+class SizeRoute extends PageRouteBuilder {
+  final Widget page;
+  SizeRoute({this.page})
+      : super(
+    pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        ) =>
+    page,
+    transitionsBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+        ) =>
+        Align(
+          child: SizeTransition(
+            sizeFactor: animation,
+            child: child,
+          ),
+        ),
+  );
+}
+class FadeRoute extends PageRouteBuilder {
+  final Widget page;
+  FadeRoute({this.page})
+      : super(
+    pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        ) =>
+    page,
+    transitionsBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+        ) =>
+        FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
+  );
+}
+class ScaleRotateRoute extends PageRouteBuilder {
+  final Widget page;
+  ScaleRotateRoute({this.page})
+      : super(
+    pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        ) =>
+    page,
+    transitionDuration: Duration(seconds: 1),
+    transitionsBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+        ) =>
+        ScaleTransition(
+          scale: Tween<double>(
+            begin: 0.0,
+            end: 1.0,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.fastOutSlowIn,
+            ),
+          ),
+          child: RotationTransition(
+            turns: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.linear,
+              ),
+            ),
+            child: child,
+          ),
+        ),
+  );
 }
