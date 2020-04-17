@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:z_components/api/service.dart';
 import 'package:z_components/api/user-info/i-user-info-service.dart';
-import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 class UserInfoService extends Service implements IUserInfoService {

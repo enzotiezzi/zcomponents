@@ -1,3 +1,23 @@
+## 0.9.18+11
+
+* Ajuste ZUserInfo
+
+## 0.9.18+10
+
+* Ajuste ZUserInfo
+
+## 0.9.18+9
+
+* Ajuste DataNascUSerInfo
+
+## 0.9.18+8
+
+* Ajuste 
+
+## 0.9.18+7
+
+* Ajuste modo aviao
+
 ## 0.9.18+6
 
 * Ajuste Validacao de Ano em ZInputDataNascimento(Pode agora ser ou nao obrigatória)
