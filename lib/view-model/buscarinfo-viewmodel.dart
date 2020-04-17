@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 class BuscarInfo {
   String idUsuario;
   String username;
@@ -17,7 +19,7 @@ class BuscarInfo {
   String estado;
   String cep;
   String idFoto;
-  String fotoBase64;
+  Uint8List fotoBase64;
   bool atualizado;
   String idAnexoCartaoValeTransporte;
   String idAnexoCartaoValeTransporte_Verso;
