@@ -1,3 +1,7 @@
+## 0.9.18+12
+
+* Ajuste no IView
+
 ## 0.9.18+11
 
 * Ajuste ZUserInfo
