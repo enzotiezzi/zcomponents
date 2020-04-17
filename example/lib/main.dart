@@ -30,6 +30,8 @@ import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/i-view.dart';
 
+import 'main-testing.dart';
+
 
 void main() => runApp(MyApp());
 
