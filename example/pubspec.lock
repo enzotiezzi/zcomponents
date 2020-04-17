@@ -151,6 +151,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_native_image:
+    dependency: "direct main"
+    description:
+      name: flutter_native_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5+2"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -203,13 +210,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  image_feature_detector:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "3c5e7e7fef4deca97ffc4baf81a2d62ef965714a"
+      url: "https://github.com/Blaxou/image_feature_detector.git"
+    source: git
+    version: "0.2.1+1"
   image_picker:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.3+4"
+    version: "0.6.5"
   injector:
     dependency: transitive
     description:
