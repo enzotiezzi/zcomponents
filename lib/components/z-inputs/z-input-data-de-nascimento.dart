@@ -96,6 +96,8 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
   void validaMes(String data) {
     if(data.length == 10)
       {
+
+
         widget.dia = data.substring(0, 2);
         widget.intDias = int.parse(widget.dia);
 
@@ -115,6 +117,9 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
         print(widget.dia);
         print(widget.mes);
         print(widget.ano);
+
+        final dataDigitada = DateTime(widget.intAno, widget.intMes, widget.intDias);
+        final diferenca = now.difference(dataDigitada).inDays;
 
           if (widget.intMes < 13 &&
               widget.intDias < 32 &&
@@ -230,9 +235,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                 "Insira um valor de dia entre 01 e 31 e um ano entre 1950 e $ano.");
             widget.validacao(false);
 
-          }else if (widget.intMes > DateTime.now().month ||
-              widget.intDias > DateTime.now().day ||
-              widget.intAno > ano) {
+          }else if (diferenca < 0) {
             _dialogUtils.showAlertDialogNewAviso("Data Futura!",
                 "Insira uma data válida.");
             widget.validacao(false);
