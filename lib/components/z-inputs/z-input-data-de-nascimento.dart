@@ -1,8 +1,5 @@
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputDataNascimento extends StatefulWidget {
@@ -11,6 +8,7 @@ class ZInputDataNascimento extends StatefulWidget {
   var controllerData = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
+  void Function(bool) validacao;
 
   String dia;
   String ano;
@@ -30,7 +28,9 @@ class ZInputDataNascimento extends StatefulWidget {
         this.onChange,
       @required this.dataFocus,
       @required this.controllerData,
-       this.proximoFocus})
+       this.proximoFocus,
+       this.validacao,
+      })
       : super(key: key);
 
   @override
@@ -214,9 +214,14 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
     if (widget.total == null) {
       _dialogUtils.showAlertDialogNewAviso(
           "Data Inválida!", "Por Favor, digite sua data de nascimento.");
+      widget.validacao(false);
     } else if (widget.total.length < 10) {
       _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
+      widget.validacao(false);
+
+    }else{
+      widget.validacao(true);
     }
   }
 

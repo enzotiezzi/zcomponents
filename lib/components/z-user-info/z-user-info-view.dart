@@ -45,7 +45,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IEnderecoService _enderecoService;
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
-  ITesteConexaoService _iTesteConexaoService;
+  ITesteConexaoService _testeConexaoService;
 
   BuscarInfo _userInfo;
 
@@ -67,7 +67,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     _enderecoService = new EnderecoService();
     _arquivoService = new ArquivoService(state.widget.token);
     _userInfoService = new UserInfoService(state.widget.token);
-    _iTesteConexaoService = new TesteConexaoService();
+    _testeConexaoService = new TesteConexaoService();
 
     textEditingControllerNome.text = state.widget.userInfo?.nome;
     textEditingControllerTelefone.text = state.widget.userInfo?.telefone;
@@ -109,7 +109,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
               success: false);
         });
       } else {
-        var conexao = _iTesteConexaoService.testarConexao();
+        var conexao = await _testeConexaoService.testarConexao();
 
         if(conexao == true) {
           endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
