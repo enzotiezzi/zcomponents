@@ -1,9 +1,6 @@
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputEmail extends StatefulWidget {
@@ -14,13 +11,16 @@ class ZInputEmail extends StatefulWidget {
   String email;
   bool valideEmail;
   ValueChanged<String> onChange;
+  void Function(bool) validacao;
 
   ZInputEmail(
       {this.key,
         this.onChange,
       @required this.emailFocus,
       @required this.controllerEmail,
-      this.proximoFocus})
+      this.proximoFocus,
+      this.validacao,
+      })
       : super(key: key);
 
   @override
@@ -76,12 +76,15 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
     if (widget.email == null) {
       widget.valideEmail = false;
       _dialogUtils.showAlertDialogNewAviso("E-mail Inválido!", "Por Favor insira um E-mail.");
+      widget.validacao(false);
     } else if (!EmailValidator.validate(widget.email)) {
       widget.valideEmail = false;
       _dialogUtils.showAlertDialogNewAviso(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");
+      widget.validacao(false);
     } else {
       widget.valideEmail = true;
+      widget.validacao(true);
     }
   }
 
