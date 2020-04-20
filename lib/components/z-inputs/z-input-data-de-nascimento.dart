@@ -116,7 +116,6 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
         print(widget.mes);
         print(widget.ano);
 
-        if (data.length == 10) {
           if (widget.intMes < 13 &&
               widget.intDias < 32 &&
               widget.intAno < 2004 &&
@@ -126,6 +125,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                 widget.intAno == 00) {
               _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
                   "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
+              widget.validacao(false);
             } else if (widget.intMes == 01 ||
                 widget.intMes == 03 ||
                 widget.intMes == 05 ||
@@ -136,8 +136,12 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
               if (widget.intDias > 31) {
                 _dialogUtils.showAlertDialogNewAviso(
                     "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+                widget.validacao(false);
+
               } else {
                 widget.valideMes = true;
+                widget.validacao(true);
+
               }
             } else if (widget.intMes == 04 ||
                 widget.intMes == 06 ||
@@ -146,23 +150,33 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
               if (widget.intDias > 30) {
                 _dialogUtils.showAlertDialogNewAviso(
                     "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+                widget.validacao(false);
               } else {
                 widget.valideMes = true;
+                widget.validacao(true);
+
               }
             } else {
               if (widget.bisexto == true) {
                 if (widget.intDias > 29) {
                   _dialogUtils.showAlertDialogNewAviso(
                       "Dia Inválido!", "Insira um valor de dia entre 01 e 29.");
+                  widget.validacao(false);
+
                 } else {
                   widget.valideMes = true;
+                  widget.validacao(true);
+
                 }
               } else {
                 if (widget.intDias > 28) {
                   _dialogUtils.showAlertDialogNewAviso(
                       "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+                  widget.validacao(false);
                 } else {
                   widget.valideMes = true;
+                  widget.validacao(true);
+
                 }
               }
             }
@@ -171,11 +185,15 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
               widget.intAno < ano) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
+            widget.validacao(false);
+
           } else if (widget.intMes < 13 &&
               widget.intDias > 32 &&
               widget.intAno < ano) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+            widget.validacao(false);
+
           }
 
          else if (widget.intMes < 13 &&
@@ -183,45 +201,45 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
               widget.intAno > ano) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Ano Inválido!", "Insira um valor de ano entre 1950 e $ano.");
+            widget.validacao(false);
+
+
           } else if (widget.intAno < 1950) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Ano Inválido!", "Insira um valor de ano entre 1950 e $ano.");
+            widget.validacao(false);
+
           } else if (widget.intMes > 12 &&
               widget.intDias < 32 &&
               widget.intAno > ano) {
             _dialogUtils.showAlertDialogNewAviso("Mês e Ano Inválido!",
                 "Insira um valor de mês entre 01 e 12 e um ano entre 1950 e $ano.");
+            widget.validacao(false);
+
           } else if (widget.intMes > 12 &&
               widget.intDias > 32 &&
               widget.intAno < ano) {
             _dialogUtils.showAlertDialogNewAviso("Mês e Dia Inválido!",
                 "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
+            widget.validacao(false);
+
           } else if (widget.intMes < 13 &&
               widget.intDias > 32 &&
               widget.intAno > ano) {
             _dialogUtils.showAlertDialogNewAviso("Dia e Ano Inválido!",
                 "Insira um valor de dia entre 01 e 31 e um ano entre 1950 e $ano.");
+            widget.validacao(false);
+
+          }else{
+            widget.validacao(true);
           }
-        }
+
       }else{
       _dialogUtils.showAlertDialogNewAviso(
           "Data Incompleta!", "Por favor, termine de digitar sua data de nascimento.");
+      widget.validacao(false);
     }
 
-  }
-
-  void mesHasFocus() {
-    if (widget.total == null) {
-      _dialogUtils.showAlertDialogNewAviso(
-          "Data Inválida!", "Por Favor, digite sua data de nascimento.");
-      widget.validacao(false);
-    } else if (widget.total.length < 10) {
-      _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
-          "Por Favor, termine de digitar sua data de nascimento");
-      widget.validacao(false);
-    }else{
-      widget.validacao(true);
-    }
   }
 
 }
