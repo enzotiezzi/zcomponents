@@ -1,5 +1,4 @@
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -11,13 +10,16 @@ class ZInputCNPJ extends StatefulWidget {
   var controllerCNPJ = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
+  void Function(bool) validacao;
 
   ZInputCNPJ(
       {this.key,
        @required this.cnpjFocus,
        @required this.controllerCNPJ,
         this.onChange,
-        this.proximoFocus,})
+        this.proximoFocus,
+        this.validacao
+      })
       : super(key: key);
 
   @override
@@ -86,8 +88,10 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
       valideCnpj = false;
       _dialogUtils.showAlertDialogNewAviso(
           "CNPJ Inválido!", "Por Favor insira um CNPJ válido.");
+      widget.validacao(false);
     } else {
       valideCnpj = true;
+      widget.validacao(true);
     }
   }
 
