@@ -219,7 +219,6 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
       _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
       widget.validacao(false);
-
     }else{
       widget.validacao(true);
     }
