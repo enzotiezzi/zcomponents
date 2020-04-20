@@ -118,7 +118,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
       } else {
         Future.delayed(Duration(milliseconds: 1000), () {
           _globalKey.currentState.refresh(
-              1.0, "Não foi possível encontrar o endereço, tenta novamente",
+              1.0, "Sem conexão, Não foi possível encontrar o endereço.",
               success: false);
         });
       }
