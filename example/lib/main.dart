@@ -28,6 +28,9 @@ import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
 import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
+import 'package:z_components/i-view.dart';
+
+import 'main-testing.dart';
 
 
 void main() => runApp(MyApp());
@@ -207,15 +210,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   @override
   Widget build(BuildContext context) {
     return new Scaffold( 
-      appBar: new AppBar(title: new Text("TESTESS"),),
-      body: new Column(
-        children: <Widget>[
-          new ZInputDataNascimento(
-              dataFocus: focusNodeNome,
-              controllerData: controllerData
-          ),
-
-        ],
+      appBar: new AppBar(title: new Text("ROUTES"),),
+      body:new Center(
       )
     );
   }

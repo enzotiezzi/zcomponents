@@ -97,30 +97,37 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
       var endereco;
       String modoAviao = await AirplaneModeDetection.detectAirplaneMode();
-      if (modoAviao == "OFF") {
-        endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
-      }
 
-      if (endereco != null) {
-        _globalKey.currentState
-            .refresh(1.0, "Endereço encontrado", success: true);
-
-        if (state.mounted) {
-          state.setState(() {
-            textEditingControllerEstado.text = endereco.uf;
-            textEditingControllerCidade.text = endereco.localidade;
-            textEditingControllerBairro.text = endereco.bairro;
-            textEditingControllerRua.text = endereco.logradouro;
-
-            focusNodeNumero.requestFocus();
-          });
-        }
-      } else {
+      if (modoAviao == "ON"){
         Future.delayed(Duration(milliseconds: 1000), () {
           _globalKey.currentState.refresh(
-              1.0, "Não foi possível encontrar o endereço, tenta novamente",
+              1.0, "Você está com modo avião ativo, Não foi possível encontrar o endereço.",
               success: false);
         });
+      } else {
+        endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
+
+        if (endereco != null) {
+          _globalKey.currentState
+              .refresh(1.0, "Endereço encontrado", success: true);
+
+          if (state.mounted) {
+            state.setState(() {
+              textEditingControllerEstado.text = endereco.uf;
+              textEditingControllerCidade.text = endereco.localidade;
+              textEditingControllerBairro.text = endereco.bairro;
+              textEditingControllerRua.text = endereco.logradouro;
+
+              focusNodeNumero.requestFocus();
+            });
+          }
+        } else {
+          Future.delayed(Duration(milliseconds: 1000), () {
+            _globalKey.currentState.refresh(
+                1.0, "Sem conexão, Não foi possível encontrar o endereço.",
+                success: false);
+          });
+        }
       }
 
       Future.delayed(new Duration(seconds: 1), () {
