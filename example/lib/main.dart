@@ -11,11 +11,11 @@ import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-checkbox/z-checkbox.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
-import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 import 'package:after_layout/after_layout.dart';
 import "package:z_components/components/z-inputs/z-input-data-de-nascimento.dart";
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
@@ -212,6 +212,22 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     return new Scaffold( 
       appBar: new AppBar(title: new Text("ROUTES"),),
       body:new Center(
+        child: new Column(
+          children: <Widget>[
+            new Container(
+              child: new ZInputDataNascimento(
+                controllerData: controllerData,
+                dataFocus: dataFocus,
+              ),
+            ),
+            new Container(
+              child: new ZInputCelular(
+                celularFocus: celularFocus,
+                controllerCelular: controllerCelular,
+              ),
+            ),
+          ],
+        )
       )
     );
   }
