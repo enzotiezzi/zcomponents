@@ -11,13 +11,16 @@ class ZInputCelular extends StatefulWidget {
   var controllerCelular = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
+  void Function(bool) validacao;
 
   ZInputCelular(
       {this.key,
         this.onChange,
         @required this.celularFocus,
         @required this.controllerCelular,
-        this.proximoFocus,})
+        this.proximoFocus,
+        this.validacao
+      })
       : super(key: key);
 
   @override
@@ -29,7 +32,6 @@ class _ZInputCelularState extends State<ZInputCelular> {
   int countCelular = 0;
   DialogUtils _dialogUtils;
   String celular = "";
-  bool valideCelular;
 
   @override
   void initState() {
@@ -148,9 +150,11 @@ class _ZInputCelularState extends State<ZInputCelular> {
   }
   void _validarCelular() {
     if (celular.length < 15 && celular != "") {
-      valideCelular = false;
       _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
+      widget.validacao(false);
+    } else{
+      widget.validacao(true);
     }
   }
 }

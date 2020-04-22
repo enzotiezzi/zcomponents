@@ -9,6 +9,8 @@ import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/endereco/endereco-service.dart';
 import 'package:z_components/api/endereco/i-endereco-service.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
+import 'package:z_components/api/teste-conexao/i-teste-conexao-service.dart';
+import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/api/user-info/i-user-info-service.dart';
 import 'package:z_components/api/user-info/user-info-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
@@ -43,6 +45,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IEnderecoService _enderecoService;
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
+  ITesteConexaoService _testeConexaoService;
 
   BuscarInfo _userInfo;
 
@@ -64,6 +67,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     _enderecoService = new EnderecoService();
     _arquivoService = new ArquivoService(state.widget.token);
     _userInfoService = new UserInfoService(state.widget.token);
+    _testeConexaoService = new TesteConexaoService();
 
     textEditingControllerNome.text = state.widget.userInfo?.nome;
     textEditingControllerTelefone.text = state.widget.userInfo?.telefone;
@@ -105,29 +109,41 @@ class ZUserInfoView extends IView<ZUserInfo> {
               success: false);
         });
       } else {
-        endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
+        var conexao = await _testeConexaoService.testarConexao();
 
-        if (endereco != null) {
-          _globalKey.currentState
-              .refresh(1.0, "Endereço encontrado", success: true);
+        if(conexao == true) {
+          endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
+          if (endereco != null) {
+            _globalKey.currentState
+                .refresh(1.0, "Endereço encontrado", success: true);
 
-          if (state.mounted) {
-            state.setState(() {
-              textEditingControllerEstado.text = endereco.uf;
-              textEditingControllerCidade.text = endereco.localidade;
-              textEditingControllerBairro.text = endereco.bairro;
-              textEditingControllerRua.text = endereco.logradouro;
+            if (state.mounted) {
+              state.setState(() {
+                textEditingControllerEstado.text = endereco.uf;
+                textEditingControllerCidade.text = endereco.localidade;
+                textEditingControllerBairro.text = endereco.bairro;
+                textEditingControllerRua.text = endereco.logradouro;
 
-              focusNodeNumero.requestFocus();
+                focusNodeNumero.requestFocus();
+              });
+            }
+          }
+          else {
+            Future.delayed(Duration(milliseconds: 1000), () {
+              _globalKey.currentState.refresh(
+                  1.0, "Não foi possível encontrar o endereço.",
+                  success: false);
             });
           }
-        } else {
+        }
+        else{
           Future.delayed(Duration(milliseconds: 1000), () {
             _globalKey.currentState.refresh(
-                1.0, "Sem conexão, Não foi possível encontrar o endereço.",
+                1.0, "Você está sem conexão, Não foi possível encontrar o endereço.",
                 success: false);
           });
         }
+
       }
 
       Future.delayed(new Duration(seconds: 1), () {

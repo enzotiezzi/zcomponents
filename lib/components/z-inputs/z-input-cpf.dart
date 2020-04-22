@@ -9,13 +9,16 @@ class ZInputCPF extends StatefulWidget {
   var controllerCpf = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
+  void Function(bool) validacao;
+
 
   ZInputCPF(
       {this.key,
       @required this.cpfFocus,
       @required this.controllerCpf,
       this.proximoFocus,
-      this.onChange})
+      this.onChange,
+      this.validacao})
       : super(key: key);
 
   @override
@@ -82,8 +85,10 @@ class _ZInputCPFState extends State<ZInputCPF> {
       valideCpf = false;
       _dialogUtils.showAlertDialogNewAviso(
           "CPF Inválido!", "Por Favor insira um CPF válido.");
+      widget.validacao(false);
     } else {
       valideCpf = true;
+      widget.validacao(true);
     }
   }
 }
