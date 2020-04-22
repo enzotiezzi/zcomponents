@@ -1,3 +1,7 @@
+## 0.9.18+15
+
+* Ajuste na viewModel
+
 ## 0.9.18+14
 
 * Ajuste no ZPerfil
