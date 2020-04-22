@@ -10,13 +10,16 @@ class ZInputCEP extends StatefulWidget {
   var controllerCep = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
+  void Function(bool) validacao;
 
   ZInputCEP(
       {this.key,
         @required this.cepFocus,
         @required this.controllerCep,
         this.onChange,
-        this.proximoFocus,})
+        this.proximoFocus,
+        this.validacao
+      })
       : super(key: key);
 
   @override
@@ -79,6 +82,9 @@ class _ZInputCEPState extends State<ZInputCEP> {
     if (cep.length < 9 && cep != "") {
       _dialogUtils.showAlertDialogNewAviso(
           "CEP Inválido!", "Por Favor, Termine de digitar o seu cep.");
+      widget.validacao(false);
+    }else{
+      widget.validacao(true);
     }
   }
 }
