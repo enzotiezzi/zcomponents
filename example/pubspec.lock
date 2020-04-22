@@ -594,11 +594,7 @@ packages:
       path: ".."
       relative: true
     source: path
-<<<<<<< HEAD
-    version: "0.9.18+11"
-=======
     version: "0.9.18+12"
->>>>>>> c277a034a13fea0d3311bffddf3e88a1d6075008
 sdks:
   dart: ">=2.5.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.5 <2.0.0"
