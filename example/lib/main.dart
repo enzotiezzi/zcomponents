@@ -218,12 +218,14 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
               child: new ZInputDataNascimento(
                 controllerData: controllerData,
                 dataFocus: dataFocus,
+                validacao: (bool){},
               ),
             ),
             new Container(
               child: new ZInputCelular(
                 celularFocus: celularFocus,
                 controllerCelular: controllerCelular,
+                validacao: (bool){},
               ),
             ),
           ],

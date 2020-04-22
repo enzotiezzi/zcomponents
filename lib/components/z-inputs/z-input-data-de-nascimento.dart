@@ -118,8 +118,8 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
         print(widget.mes);
         print(widget.ano);
 
-        final dataDigitada = DateTime(widget.intAno, widget.intMes, widget.intDias);
-        final diferenca = now.difference(dataDigitada).inDays;
+         var dataDigitada = DateTime(widget.intAno, widget.intMes, widget.intDias);
+         var dataAtual = DateTime.now();
 
           if (widget.intMes < 13 &&
               widget.intDias < 32 &&
@@ -143,6 +143,10 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                     "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
                 widget.validacao(false);
 
+              } else if (dataDigitada.isAfter(dataAtual) == true) {
+                _dialogUtils.showAlertDialogNewAviso("Data Futura!",
+                    "Insira uma data válida.");
+                widget.validacao(false);
               } else {
                 widget.valideMes = true;
                 widget.validacao(true);
@@ -154,7 +158,11 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                 widget.intMes == 11) {
               if (widget.intDias > 30) {
                 _dialogUtils.showAlertDialogNewAviso(
-                    "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
+                    "Dia Inválido!", "Insira um valor de dia entre 01 e 30.");
+                widget.validacao(false);
+              } else if (dataDigitada.isAfter(dataAtual) == true) {
+                _dialogUtils.showAlertDialogNewAviso("Data Futura!",
+                    "Insira uma data válida.");
                 widget.validacao(false);
               } else {
                 widget.valideMes = true;
@@ -168,6 +176,10 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                       "Dia Inválido!", "Insira um valor de dia entre 01 e 29.");
                   widget.validacao(false);
 
+                } else if (dataDigitada.isAfter(dataAtual) == true) {
+                  _dialogUtils.showAlertDialogNewAviso("Data Futura!",
+                      "Insira uma data válida.");
+                  widget.validacao(false);
                 } else {
                   widget.valideMes = true;
                   widget.validacao(true);
@@ -177,6 +189,10 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                 if (widget.intDias > 28) {
                   _dialogUtils.showAlertDialogNewAviso(
                       "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
+                  widget.validacao(false);
+                } else if (dataDigitada.isAfter(dataAtual) == true) {
+                  _dialogUtils.showAlertDialogNewAviso("Data Futura!",
+                      "Insira uma data válida.");
                   widget.validacao(false);
                 } else {
                   widget.valideMes = true;
@@ -193,7 +209,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
             widget.validacao(false);
 
           } else if (widget.intMes < 13 &&
-              widget.intDias > 32 &&
+              widget.intDias > 31 &&
               widget.intAno < ano) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
@@ -235,7 +251,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                 "Insira um valor de dia entre 01 e 31 e um ano entre 1950 e $ano.");
             widget.validacao(false);
 
-          }else if (diferenca < 0) {
+          }else if (dataDigitada.isAfter(dataAtual) == true) {
             _dialogUtils.showAlertDialogNewAviso("Data Futura!",
                 "Insira uma data válida.");
             widget.validacao(false);
