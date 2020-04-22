@@ -1,3 +1,7 @@
+## 0.9.18+14
+
+* Ajuste no ZPerfil
+
 ## 0.9.18+13
 
 * Ajuste nos Inputs

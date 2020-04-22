@@ -197,7 +197,6 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
                 } else {
                   widget.valideMes = true;
                   widget.validacao(true);
-
                 }
               }
             }
