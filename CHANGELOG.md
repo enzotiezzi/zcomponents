@@ -1,3 +1,7 @@
+## 0.9.18+17
+
+* Ajuste na viewModel
+
 ## 0.9.18+16
 
 * Ajuste na viewModel
