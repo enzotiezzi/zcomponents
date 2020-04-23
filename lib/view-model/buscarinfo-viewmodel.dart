@@ -278,7 +278,7 @@ class BuscarInfo {
       "numeroCartaoAlimentacao": numeroCartaoAlimentacao,
       "nomeBanco": nomeBanco,
       "numeroBancoAgencia": numeroBancoAgencia,
-      "numerContaBancaria": numeroContaBancaria,
+      "numeroContaBancaria": numeroContaBancaria,
       "numeroInscricaoTituloEleitor": numeroInscricaoTituloEleitor,
       "numeroZonaTituloEleitor": numeroZonaTituloEleitor,
       "numeroSessaoTituloEleitor": numeroSessaoTituloEleitor,
