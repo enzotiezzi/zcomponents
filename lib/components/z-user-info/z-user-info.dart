@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
 import 'package:z_components/components/z-user-info/z-user-info-view.dart';
 import 'package:z_components/components/z_button.dart';
@@ -20,13 +21,17 @@ class ZUserInfo extends StatefulWidget {
   Function(BuscarInfo) onEditFinish;
   Function(String) onChangeProfileImage;
 
-  ZUserInfo({@required this.token, @required this.userInfo, this.onEditFinish, this.onChangeProfileImage});
+  ZUserInfo(
+      {@required this.token,
+      @required this.userInfo,
+      this.onEditFinish,
+      this.onChangeProfileImage});
 
   @override
   State<StatefulWidget> createState() => ZUserInfoState();
 }
 
-class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
+class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
   ZUserInfoView _view;
 
   @override
@@ -88,13 +93,10 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
         ),
         new ZInputDataNascimento(
             dataFocus: _view.focusNodeDataNascimento,
-            controllerData: _view.textEditingControllerDataNascimento
-        ),
-        new ZBaseLine(
-          zTipos: ZTipoBaseline.isCelular,
-          controllerCelular: _view.textEditingControllerTelefone,
-          celularFocus: _view.focusNodeTelefone,
-        ),
+            controllerData: _view.textEditingControllerDataNascimento),
+        new ZInputCelular(
+            celularFocus: _view.focusNodeTelefone,
+            controllerCelular: _view.textEditingControllerTelefone),
         new ZBaseLine(
           zTipos: ZTipoBaseline.isEmail,
           controllerEmail: _view.textEditingControllerEmail,
@@ -155,7 +157,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo>{
     if (_view.imagemPerfil != null) return MemoryImage(_view.imagemPerfil);
 
     return NetworkImage(
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
   }
 
   @override
