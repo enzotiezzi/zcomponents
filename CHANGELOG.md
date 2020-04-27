@@ -1,3 +1,7 @@
+## 0.9.18+18
+
+* Ajuste na UserInfo: campo celular e validacao Data Nascimento
+
 ## 0.9.18+17
 
 * Ajuste na viewModel

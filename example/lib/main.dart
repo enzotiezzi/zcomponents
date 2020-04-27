@@ -29,6 +29,8 @@ import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
 import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/i-view.dart';
+import 'package:z_components/components/z-user-info/z-user-info.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 import 'main-testing.dart';
 
@@ -209,28 +211,11 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold( 
-      appBar: new AppBar(title: new Text("ROUTES"),),
-      body:new Center(
-        child: new Column(
-          children: <Widget>[
-            new Container(
-              child: new ZInputDataNascimento(
-                controllerData: controllerData,
-                dataFocus: dataFocus,
-                validacao: (bool){},
-              ),
-            ),
-            new Container(
-              child: new ZInputCelular(
-                celularFocus: celularFocus,
-                controllerCelular: controllerCelular,
-                validacao: (bool){},
-              ),
-            ),
-          ],
-        )
-      )
+    return new ZUserInfo(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY3YWZjNzk5ZjM2NTBiMDU0ZjFhYWE5YzVjYjY0MjMzIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODc5OTM5NjgsImV4cCI6MTU4Nzk5NzU2OCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjU0NTMyNDM1LTY0ZTAtNDczMS05NmQwLTcxOTY5YjJkY2QwNyIsImF1dGhfdGltZSI6MTU4Nzc0NjA4OSwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ijc1NzMxNGU3LTM0NDYtNGY5Ny04M2IwLWNhOWY4NmI2OGM3MCIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZBNDlCMy00N0QxLTRENzYtODBERi0wNzlFQjgyRDZEOEYiLCJpZENvbGFib3JhZG9yIjoiNEUzMkRGMjktOTNFMC00RDU1LTk1REQtQzI2MjIyNTdDQ0Q2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDQ3LjkzMC42MzgtMjkiLCJlbWFpbCI6InZpY3RvcnRtYXJxdWVzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpbZmFsc2UsIkZhbHNlIl0sIm5hbWUiOiJWaWN0b3IgVGF2YXJlcyBNYXJxdWVzIiwicGhvbmVfbnVtYmVyIjoiKDExKSA5IDgyMzctMjYyMiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.VceN16lXIl26YKQBrmIAft-Y4iILBXd5EJw1gJaVd6AmeJr0TGt4FB-TIa2j4ag0x7whwrtKM39fw4SHCsXRLsBdHu5m7A2urIrX5Vh7mLAC2IMMYKUy21mgQfe3rD43tVBUiUwNUlm_il2GrWfV5iyZVX6YB925ZNRhWC3ujgkF1AIEb_SrH-9gwZu-jKZd6hSHNHuNB3D2j5qhZngC73EWdSLWRFvpcnqXQoF1WI1cRS1UBlx8EU5RexU__B6LkLSRePyf1ozxN-T_-DWHFRRcReFr-9Yi-HvsFCw42Aqe6_Xy19DoVW1HC2_Z_R6cOm4N0PgMls1pqAty31uSRA",
+    userInfo: new BuscarInfo(
+     // dataNascimento: "12/12/2000",
+      telefone: "(11)9 2424-2424"
+    ),
     );
   }
 

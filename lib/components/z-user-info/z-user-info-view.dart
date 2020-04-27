@@ -295,9 +295,9 @@ class ZUserInfoView extends IView<ZUserInfo> {
       logradouro: textEditingControllerRua.text,
       cep: textEditingControllerCEP.text,
       estado: textEditingControllerEstado.text,
-      dataNascimento: (textEditingControllerDataNascimento.text == "")
-          ? null
-          : "${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}",
+      dataNascimento: (textEditingControllerDataNascimento.text != "" && textEditingControllerDataNascimento.text != null)
+          ? "${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}"
+          : null,
       cidade: textEditingControllerCidade.text,
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
