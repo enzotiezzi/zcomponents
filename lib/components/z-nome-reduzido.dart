@@ -62,7 +62,11 @@ class _ZNomeReduzidoState extends State<ZNomeReduzido> {
         ultimoReduzido =
             text.substring(text.lastIndexOf(" "), text.length).trim();
         String nomeTotal = primeiroReduzido + " " + ultimoReduzido;
-        texto = nomeTotal;
+
+        if (mounted)
+          setState(() {
+            texto = nomeTotal;
+          });
       }
     }
   }
