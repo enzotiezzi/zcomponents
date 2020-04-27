@@ -302,9 +302,9 @@ class ZUserInfoView extends IView<ZUserInfo> {
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
       numero: textEditingControllerNumero.text,
-      fotoBase64: (state.widget.userInfo.fotoBase64 != null)
-          ? state.widget.userInfo.fotoBase64
-          : null,
+      fotoBase64: (state.widget.userInfo.fotoBase64 == null)
+          ? null
+          : state.widget.userInfo.fotoBase64,
       idFoto: (state.widget.userInfo.idFoto == "")
           ? null
           : state.widget.userInfo.idFoto,
@@ -457,7 +457,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   String _montarData(String data) {
-    if (data != null) {
+    if (data.isNotEmpty) {
       DateTime date = DateTime.parse(data);
       return "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";
     } else {

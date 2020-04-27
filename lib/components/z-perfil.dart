@@ -93,18 +93,6 @@ class _ZPerfilState extends State<ZPerfil> {
             style: TextStyle(color: Colors.black),
           ),
         ),
-        leading: new GestureDetector(
-          onTap: widget.onTapVoltar,
-          child: new Container(
-            padding: EdgeInsets.only(right: 20.0),
-            color: Colors.transparent,
-            child: new Icon(
-              Icons.arrow_back_ios,
-              size: 20.0,
-              color: widget.color,
-            ),
-          ),
-        ),
       ),
       body: _body(),
     );

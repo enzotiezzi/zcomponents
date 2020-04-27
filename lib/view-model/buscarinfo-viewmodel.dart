@@ -57,6 +57,17 @@ class BuscarInfo {
   String idAnexoCarteiraVacinacao;
   String idAnexoCarteiraVacinacao_Verso;
   String anexoCarteiraVacinacaoStatus;
+  String numeroCartaoValeTransporte;
+  String numeroCartaoAlimentacao;
+  String nomeBanco;
+  String numeroBancoAgencia;
+  String numeroContaBancaria;
+  String numeroInscricaoTituloEleitor;
+  String numeroZonaTituloEleitor;
+  String numeroSessaoTituloEleitor;
+  String numeroPIS;
+  String numeroCTPS;
+  String rg;
 
   BuscarInfo(
       {this.idUsuario,
@@ -114,72 +125,94 @@ class BuscarInfo {
       this.idAnexoCarteiraVacinacao,
       this.idAnexoCarteiraVacinacao_Verso,
       this.anexoCarteiraVacinacaoStatus,
-      this.atualizado});
+      this.atualizado,
+      this.numeroCartaoValeTransporte,
+      this.numeroCartaoAlimentacao,
+      this.nomeBanco,
+      this.numeroBancoAgencia,
+      this.numeroContaBancaria,
+      this.numeroInscricaoTituloEleitor,
+      this.numeroZonaTituloEleitor,
+      this.numeroSessaoTituloEleitor,
+      this.numeroPIS,
+      this.numeroCTPS,
+      this.rg});
 
   factory BuscarInfo.fromJson(Map<String, dynamic> json) {
     return new BuscarInfo(
-      idUsuario: json["idUsuario"],
-      username: json["username"],
-      cpf: json["cpf"],
-      email: json["email"],
-      nome: json["nome"],
-      idPessoa: json["idPessoa"],
-      nomeSocial: json["nomeSocial"],
-      telefone: json["telefone"],
-      celular: json["celular"],
-      dataNascimento: json["dataNascimento"],
-      logradouro: json["logradouro"],
-      numero: json["numero"],
-      complemento: json["complemento"],
-      bairro: json["bairro"],
-      cidade: json["cidade"],
-      estado: json["estado"],
-      cep: json["cep"],
-      idFoto: json["idFoto"],
-      fotoBase64: json["fotoBase64"],
-      idAnexoCartaoValeTransporte: json["idAnexoCartaoValeTransporte"],
-      idAnexoCartaoValeTransporte_Verso:
-          json["idAnexoCartaoValeTransporte_Verso"],
-      anexoCartaoValeTransporteStatus: json["anexoCartaoValeTransporteStatus"],
-      idAnexoCartaoAlimentacao: json["idAnexoCartaoAlimentacao"],
-      idAnexoCartaoAlimentacao_Verso: json["idAnexoCartaoAlimentacao_Verso"],
-      anexoCartaoAlimentacaoStatus: json["anexoCartaoAlimentacaoStatus"],
-      idAnexoCartaoContaBancaria: json["idAnexoCartaoContaBancaria"],
-      idAnexoCartaoContaBancaria_Verso:
-          json["idAnexoCartaoContaBancaria_Verso"],
-      anexoCartaoContaBancariaStatus: json["anexoCartaoContaBancariaStatus"],
-      idAnexoComprovanteEndereco: json["idAnexoComprovanteEndereco"],
-      idAnexoComprovanteEndereco_Verso:
-          json["idAnexoComprovanteEndereco_Verso"],
-      anexoComprovanteEnderecoStatus: json["anexoComprovanteEnderecoStatus"],
-      idAnexoRG: json["idAnexoRG"],
-      idAnexoRG_Verso: json["idAnexoRG_Verso"],
-      anexoRGStatus: json["anexoRGStatus"],
-      idAnexoCPF: json["idAnexoCPF"],
-      idAnexoCPF_Verso: json["idAnexoCPF_Verso"],
-      anexoCPFStatus: json["anexoCPFStatus"],
-      idAnexoCertidaoNascimentoCasamento:
-          json["idAnexoCertidaoNascimentoCasamento"],
-      idAnexoCertidaoNascimentoCasamento_Verso:
-          json["idAnexoCertidaoNascimentoCasamento_Verso"],
-      anexoCertidaoNascimentoCasamentoStatus:
-          json["anexoCertidaoNascimentoCasamentoStatus"],
-      idAnexoTituloEleitor: json["idAnexoTituloEleitor"],
-      idAnexoTituloEleitor_Verso: json["idAnexoTituloEleitor_Verso"],
-      anexoTituloEleitorStatus: json["anexoTituloEleitorStatus"],
-      idAnexoPIS: json["idAnexoPIS"],
-      idAnexoPIS_Verso: json["idAnexoPIS_Verso"],
-      anexoPISStatus: json["anexoPISStatus"],
-      idAnexoCTPS: json["idAnexoCTPS"],
-      idAnexoCTPS_Verso: json["idAnexoCTPS_Verso"],
-      anexoCTPSStatus: json["anexoCTPSStatus"],
-      idAnexoEscolaridade: json["idAnexoEscolaridade"],
-      idAnexoEscolaridade_Verso: json["idAnexoEscolaridade_Verso"],
-      anexoEscolaridadeStatus: json["anexoEscolaridadeStatus"],
-      idAnexoCarteiraVacinacao: json["idAnexoCarteiraVacinacao"],
-      idAnexoCarteiraVacinacao_Verso: json["idAnexoCarteiraVacinacao_Verso"],
-      anexoCarteiraVacinacaoStatus: json["anexoCarteiraVacinacaoStatus"],
-    );
+        idUsuario: json["idUsuario"],
+        username: json["username"],
+        cpf: json["cpf"],
+        email: json["email"],
+        nome: json["nome"],
+        idPessoa: json["idPessoa"],
+        nomeSocial: json["nomeSocial"],
+        telefone: json["telefone"],
+        celular: json["celular"],
+        dataNascimento: json["dataNascimento"],
+        logradouro: json["logradouro"],
+        numero: json["numero"],
+        complemento: json["complemento"],
+        bairro: json["bairro"],
+        cidade: json["cidade"],
+        estado: json["estado"],
+        cep: json["cep"],
+        idFoto: json["idFoto"],
+        fotoBase64: json["fotoBase64"],
+        idAnexoCartaoValeTransporte: json["idAnexoCartaoValeTransporte"],
+        idAnexoCartaoValeTransporte_Verso:
+            json["idAnexoCartaoValeTransporte_Verso"],
+        anexoCartaoValeTransporteStatus:
+            json["anexoCartaoValeTransporteStatus"],
+        idAnexoCartaoAlimentacao: json["idAnexoCartaoAlimentacao"],
+        idAnexoCartaoAlimentacao_Verso: json["idAnexoCartaoAlimentacao_Verso"],
+        anexoCartaoAlimentacaoStatus: json["anexoCartaoAlimentacaoStatus"],
+        idAnexoCartaoContaBancaria: json["idAnexoCartaoContaBancaria"],
+        idAnexoCartaoContaBancaria_Verso:
+            json["idAnexoCartaoContaBancaria_Verso"],
+        anexoCartaoContaBancariaStatus: json["anexoCartaoContaBancariaStatus"],
+        idAnexoComprovanteEndereco: json["idAnexoComprovanteEndereco"],
+        idAnexoComprovanteEndereco_Verso:
+            json["idAnexoComprovanteEndereco_Verso"],
+        anexoComprovanteEnderecoStatus: json["anexoComprovanteEnderecoStatus"],
+        idAnexoRG: json["idAnexoRG"],
+        idAnexoRG_Verso: json["idAnexoRG_Verso"],
+        anexoRGStatus: json["anexoRGStatus"],
+        idAnexoCPF: json["idAnexoCPF"],
+        idAnexoCPF_Verso: json["idAnexoCPF_Verso"],
+        anexoCPFStatus: json["anexoCPFStatus"],
+        idAnexoCertidaoNascimentoCasamento:
+            json["idAnexoCertidaoNascimentoCasamento"],
+        idAnexoCertidaoNascimentoCasamento_Verso:
+            json["idAnexoCertidaoNascimentoCasamento_Verso"],
+        anexoCertidaoNascimentoCasamentoStatus:
+            json["anexoCertidaoNascimentoCasamentoStatus"],
+        idAnexoTituloEleitor: json["idAnexoTituloEleitor"],
+        idAnexoTituloEleitor_Verso: json["idAnexoTituloEleitor_Verso"],
+        anexoTituloEleitorStatus: json["anexoTituloEleitorStatus"],
+        idAnexoPIS: json["idAnexoPIS"],
+        idAnexoPIS_Verso: json["idAnexoPIS_Verso"],
+        anexoPISStatus: json["anexoPISStatus"],
+        idAnexoCTPS: json["idAnexoCTPS"],
+        idAnexoCTPS_Verso: json["idAnexoCTPS_Verso"],
+        anexoCTPSStatus: json["anexoCTPSStatus"],
+        idAnexoEscolaridade: json["idAnexoEscolaridade"],
+        idAnexoEscolaridade_Verso: json["idAnexoEscolaridade_Verso"],
+        anexoEscolaridadeStatus: json["anexoEscolaridadeStatus"],
+        idAnexoCarteiraVacinacao: json["idAnexoCarteiraVacinacao"],
+        idAnexoCarteiraVacinacao_Verso: json["idAnexoCarteiraVacinacao_Verso"],
+        anexoCarteiraVacinacaoStatus: json["anexoCarteiraVacinacaoStatus"],
+        numeroCartaoValeTransporte: json["numeroCartaoValeTransporte"],
+        numeroCartaoAlimentacao: json["numeroCartaoAlimentacao"],
+        nomeBanco: json["nomeBanco"],
+        numeroBancoAgencia: json["numeroBancoAgencia"],
+        numeroContaBancaria: json["numeroContaBancaria"],
+        numeroInscricaoTituloEleitor: json["numeroInscricaoTituloEleitor"],
+        numeroZonaTituloEleitor: json["numeroZonaTituloEleitor"],
+        numeroSessaoTituloEleitor: json["numeroSessaoTituloEleitor"],
+        numeroPIS: json["numeroPis"],
+        numeroCTPS: json["numeroCtps"],
+        rg: json["rg"]);
   }
 
   Map toMap() {
@@ -241,6 +274,17 @@ class BuscarInfo {
       "idAnexoCarteiraVacinacao": idAnexoCarteiraVacinacao,
       "idAnexoCarteiraVacinacao_Verso": idAnexoCarteiraVacinacao_Verso,
       "anexoCarteiraVacinacaoStatus": anexoCarteiraVacinacaoStatus,
+      "numeroCartaoValeTransporte": numeroCartaoValeTransporte,
+      "numeroCartaoAlimentacao": numeroCartaoAlimentacao,
+      "nomeBanco": nomeBanco,
+      "numeroBancoAgencia": numeroBancoAgencia,
+      "numeroContaBancaria": numeroContaBancaria,
+      "numeroInscricaoTituloEleitor": numeroInscricaoTituloEleitor,
+      "numeroZonaTituloEleitor": numeroZonaTituloEleitor,
+      "numeroSessaoTituloEleitor": numeroSessaoTituloEleitor,
+      "numeroPis": numeroPIS,
+      "numeroCtps": numeroCTPS,
+      "rg": rg
     };
   }
 }

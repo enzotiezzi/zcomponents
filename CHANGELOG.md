@@ -1,3 +1,27 @@
+## 0.9.18+18
+
+* Ajuste na UserInfo: campo celular e validacao Data Nascimento
+
+## 0.9.18+17
+
+* Ajuste na viewModel
+
+## 0.9.18+16
+
+* Ajuste na viewModel
+
+## 0.9.18+15
+
+* Ajuste na viewModel
+
+## 0.9.18+14
+
+* Ajuste no ZPerfil
+
+## 0.9.18+13
+
+* Ajuste nos Inputs
+
 ## 0.9.18+12
 
 * Ajuste no IView
