@@ -89,7 +89,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     if (state.widget.userInfo.fotoBase64.length > 0) {
       if (state.mounted) {
         state.setState(() {
-          imagemPerfil =state.widget.userInfo.fotoBase64;
+          imagemPerfil = state.widget.userInfo.fotoBase64;
         });
       }
     }
@@ -102,16 +102,16 @@ class ZUserInfoView extends IView<ZUserInfo> {
       var endereco;
       String modoAviao = await AirplaneModeDetection.detectAirplaneMode();
 
-      if (modoAviao == "ON"){
+      if (modoAviao == "ON") {
         Future.delayed(Duration(milliseconds: 1000), () {
-          _globalKey.currentState.refresh(
-              1.0, "Você está com modo avião ativo, Não foi possível encontrar o endereço.",
+          _globalKey.currentState.refresh(1.0,
+              "Você está com modo avião ativo, Não foi possível encontrar o endereço.",
               success: false);
         });
       } else {
         var conexao = await _testeConexaoService.testarConexao();
 
-        if(conexao == true) {
+        if (conexao == true) {
           endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
           if (endereco != null) {
             _globalKey.currentState
@@ -127,26 +127,23 @@ class ZUserInfoView extends IView<ZUserInfo> {
                 focusNodeNumero.requestFocus();
               });
             }
-          }
-          else {
+          } else {
             Future.delayed(Duration(milliseconds: 1000), () {
               _globalKey.currentState.refresh(
                   1.0, "Não foi possível encontrar o endereço.",
                   success: false);
             });
           }
-        }
-        else{
+        } else {
           Future.delayed(Duration(milliseconds: 1000), () {
-            _globalKey.currentState.refresh(
-                1.0, "Você está sem conexão, Não foi possível encontrar o endereço.",
+            _globalKey.currentState.refresh(1.0,
+                "Você está sem conexão, Não foi possível encontrar o endereço.",
                 success: false);
           });
         }
-
       }
 
-      Future.delayed(new Duration(seconds: 1), () {
+      Future.delayed(new Duration(milliseconds: 1000), () {
         _dialogUtils.dismiss();
       });
     }
@@ -295,7 +292,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
       logradouro: textEditingControllerRua.text,
       cep: textEditingControllerCEP.text,
       estado: textEditingControllerEstado.text,
-      dataNascimento: (textEditingControllerDataNascimento.text != "" && textEditingControllerDataNascimento.text != null)
+      dataNascimento: (textEditingControllerDataNascimento.text != "" &&
+              textEditingControllerDataNascimento.text != null)
           ? "${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}"
           : null,
       cidade: textEditingControllerCidade.text,
