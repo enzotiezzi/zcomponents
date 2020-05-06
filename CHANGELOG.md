@@ -1,3 +1,7 @@
+## 0.9.18+20
+
+* Ajuste Zsequencia
+
 ## 0.9.18+19
 
 * Ajuste nome reduzido
