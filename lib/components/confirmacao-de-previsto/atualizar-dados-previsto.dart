@@ -49,14 +49,12 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
         text: "${widget.dadosViewModel.tempoIntervalo}");
 
     _listController = [_controller2, _controller4, _controller5];
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_page == 0) {
-      FocusScope.of(context).requestFocus(_focusNode);
-    }
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: new Container(
@@ -124,7 +122,7 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height / 21.3,
                 width: MediaQuery.of(context).size.width / 3,
-                child: new Row(
+                child: new Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     new Text(
                       "CONFIRMAR",
@@ -171,7 +169,7 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
 
   Widget _linear() {
     return new Container(
-      child: new LinearPercentIndicator(
+      child: new LinearPercentIndicator(animateFromLastPercent: true,animation: true,
         lineHeight: 8.0,
         percent: _percent,
         backgroundColor: Colors.white,
@@ -212,6 +210,7 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
       );
     } else {
       return new ZBaseLine(
+        padraoFocus: _focusNode,
         zTipos: ZTipoBaseline.semTituloText,
         text: _titulos[_page],
         hintText: "",

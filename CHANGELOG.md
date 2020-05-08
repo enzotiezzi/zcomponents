@@ -1,3 +1,7 @@
+## 0.9.18+18
+
+* Ajuste no confirmar previsto
+
 ## 0.9.18+17
 
 * Ajuste na viewModel

@@ -29,6 +29,8 @@ import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
 import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/i-view.dart';
+import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-previsto.dart';
+
 
 import 'main-testing.dart';
 
@@ -207,31 +209,35 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     print("");
   }*/
 
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold( 
-      appBar: new AppBar(title: new Text("ROUTES"),),
-      body:new Center(
-        child: new Column(
-          children: <Widget>[
-            new Container(
-              child: new ZInputDataNascimento(
-                controllerData: controllerData,
-                dataFocus: dataFocus,
-                validacao: (bool){},
-              ),
-            ),
-            new Container(
-              child: new ZInputCelular(
-                celularFocus: celularFocus,
-                controllerCelular: controllerCelular,
-                validacao: (bool){},
-              ),
-            ),
-          ],
-        )
-      )
+    return new Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AtualizarDadosPrevisto(
+                      dadosViewModel: AtualizarDadosViewModel(
+                          statusColaborador: "Ativo",
+                          horaInicio: "09:00",
+                          escala: "5x2",
+                          centroCusto: "Zellar",
+                          cargo: "Programador",
+                          horaTermino: "17:30",
+                          nomeColaborador: "Giuliano Ortiz Goria",
+                          tempoIntervalo: "00:30"),
+                      finalizarAtualizacao: (dados) {
+                        print(dados);
+                      },
+                    )));
+          },
+        ),
+        appBar: new AppBar(),
+        body: new Container()
     );
+
   }
 
   void showAlertDialogNew() async {
