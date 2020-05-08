@@ -1,3 +1,7 @@
+## 0.9.18+21
+
+* Ajuste no confirmar previsto
+
 ## 0.9.18+20
 
 * Ajuste Zsequencia
