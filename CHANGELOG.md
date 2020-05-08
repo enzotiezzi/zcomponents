@@ -1,6 +1,18 @@
-## 0.9.18+18
+## 0.9.18+21
 
 * Ajuste no confirmar previsto
+
+## 0.9.18+20
+
+* Ajuste Zsequencia
+
+## 0.9.18+19
+
+* Ajuste nome reduzido
+
+## 0.9.18+18
+
+* Ajuste na UserInfo: campo celular e validacao Data Nascimento
 
 ## 0.9.18+17
 

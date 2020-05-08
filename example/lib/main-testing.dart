@@ -3,8 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/styles/main-style.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_feature_detector/image_feature_detector.dart';
+import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -12,13 +11,9 @@ class MainTesting extends StatefulWidget {
 }
 
 class _MainTestingState extends State<MainTesting> {
-  Uint8List _imagem;
-
   @override
   void initState() {
     super.initState();
-
-    _buscarDocumentoImagem();
   }
 
   @override
@@ -28,29 +23,12 @@ class _MainTestingState extends State<MainTesting> {
   }
 
   Widget _buildBody() {
-    if (_imagem != null)
-      return new Container(
-        padding: const EdgeInsets.all(16.0),
-        child: new Image(image: new MemoryImage(_imagem)),
-      );
-    else
-      return new Container();
-  }
-
-  Future<void> _buscarDocumentoImagem() async {
-    var imagem = await ImagePicker.pickImage(source: ImageSource.camera);
-
-    if (imagem != null) {
-      var documento =
-          await ImageFeatureDetector.detectAndTransformRectangle(imagem.path);
-
-      if (documento != null) {
-        var arquivoDocumento = new File(documento.filePath);
-
-        setState(() {
-          _imagem = arquivoDocumento.readAsBytesSync();
-        });
-      }
-    }
+    return new Container(
+      padding: const EdgeInsets.all(16.0),
+      child: new ZSequencia(
+        escala: "5x2",
+        primeiroDiaEscala: new DateTime(2020, 4, 6).toIso8601String(),
+      ),
+    );
   }
 }

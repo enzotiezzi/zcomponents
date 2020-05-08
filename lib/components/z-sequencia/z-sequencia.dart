@@ -6,14 +6,10 @@ import 'package:z_components/api/quadro-pessoal-service.dart';
 import 'package:z_components/components/z_loading.dart';
 
 class ZSequencia extends StatefulWidget {
-  final String idColaborador;
-  final String idConta;
-  final String token;
+  final String primeiroDiaEscala;
+  final String escala;
 
-  ZSequencia(
-      {@required this.idColaborador,
-      @required this.token,
-      @required this.idConta});
+  ZSequencia({@required this.primeiroDiaEscala, @required this.escala});
 
   @override
   State<StatefulWidget> createState() => new ZSequenciaState();
@@ -34,18 +30,13 @@ class ZSequenciaState extends State<ZSequencia> {
 
   var _sequencia = new List<String>();
 
-  QuadroPessoalService _quadroPessoalService;
-
   @override
   void initState() {
     super.initState();
 
     indexDia = -3;
 
-    _quadroPessoalService =
-        new QuadroPessoalService(widget.token, widget.idConta);
-
-    _buscarSequencia();
+    _montarSequencia();
   }
 
   @override
@@ -140,14 +131,91 @@ class ZSequenciaState extends State<ZSequencia> {
     );
   }
 
-  Future _buscarSequencia() async {
-    var sequencia =
-        await _quadroPessoalService.listarTouFColaborador(widget.idColaborador);
+  List<String> _montarSequencia() {
+    var sequencia = new List<String>();
 
-    if (sequencia != null) {
-      setState(() {
-        _sequencia = sequencia;
-      });
+    var indexDias = -3;
+
+    while (indexDias <= 3) {
+      var touf =
+          _calcularSeDiaTouF(DateTime.now().add(new Duration(days: indexDias)));
+
+      sequencia.add(touf);
+
+      indexDias++;
     }
+
+    if(sequencia.length != 0){
+      if(mounted)
+        setState(() {
+          _sequencia = sequencia;
+        });
+    }
+  }
+
+  String _calcularSeDiaTouF(DateTime date) {
+    var escalaNormalizada = _normalizarEscala(widget.escala);
+
+    var quantidadeDeDiasNaEmpresa =
+        _calcularDiasNaEmpresa(widget.primeiroDiaEscala, date);
+
+    var quantidadeDeDiasNaEscala = _calcularDiasNaEscala(widget.escala);
+
+    var diaAtualNaEscala =
+        _mod(quantidadeDeDiasNaEmpresa, quantidadeDeDiasNaEscala);
+
+    var vetorTouF = _montarVetorTouF(escalaNormalizada);
+
+    return vetorTouF[diaAtualNaEscala];
+  }
+
+  String _normalizarEscala(String escala) {
+    var escalaNormalizada = escala;
+
+    if (escalaNormalizada.toLowerCase() == "12x36") escalaNormalizada = "1x1";
+
+    return escalaNormalizada;
+  }
+
+  int _calcularDiasNaEmpresa(String primeiroDiaEscala, DateTime date) {
+    var dataPrimeiroDiaEscala = DateTime.parse(primeiroDiaEscala);
+
+    return date.difference(dataPrimeiroDiaEscala).inDays;
+  }
+
+  int _calcularDiasNaEscala(String escala) {
+    if (escala.contains('x')) {
+      var diasNaEscala = 0;
+
+      escala.split('x').forEach((x) => diasNaEscala += int.parse(x));
+
+      return diasNaEscala;
+    }
+
+    return -1;
+  }
+
+  int _mod(int a, int b) {
+    return (a - (a / b).floor() * b);
+  }
+
+  List<String> _montarVetorTouF(String escala) {
+    var vetorTouF = new List<String>();
+
+    var escalaFracionada = escala.split('x');
+
+    for (var i = 0; i < escalaFracionada.length; i++) {
+      var quantidadeDias = int.parse(escalaFracionada[i]);
+
+      for (var y = 0; y < quantidadeDias; y++) {
+        if (i % 2 == 0) {
+          vetorTouF.add("T");
+        } else {
+          vetorTouF.add("F");
+        }
+      }
+    }
+
+    return vetorTouF;
   }
 }

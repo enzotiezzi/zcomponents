@@ -72,18 +72,11 @@ class ZItemTile extends StatefulWidget {
 }
 
 class _ZItemTileState extends State<ZItemTile> {
-  ColaboradorViewModel colaboradorViewModel;
-
-  IZColaboradorService _colaboradorService;
   double _largura;
 
   @override
   void initState() {
     super.initState();
-    _colaboradorService =
-        ZColaboradorService(widget.token, widget.idConta, widget.cpf);
-
-    _buscarInformacaoColaborador();
   }
 
   @override
@@ -1074,13 +1067,5 @@ class _ZItemTileState extends State<ZItemTile> {
         break;
     }
     return build(context);
-  }
-
-  Future _buscarInformacaoColaborador() async {
-    var colaborador = await _colaboradorService.buscarPerfilColaborador();
-
-    setState(() {
-      colaboradorViewModel = colaborador;
-    });
   }
 }
