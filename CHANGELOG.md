@@ -1,6 +1,6 @@
 ## 0.9.18+22
 
-* Ajuste no confirmar previsto
+* Ajuste no dialog
 
 ## 0.9.18+21
 
