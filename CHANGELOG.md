@@ -1,3 +1,7 @@
+## 0.9.18+24
+
+* Ajuste zInput celular
+
 ## 0.9.18+23
 
 * Ajuste ZItemTile
