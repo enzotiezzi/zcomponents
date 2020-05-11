@@ -1,3 +1,7 @@
+## 0.9.18+23
+
+* Ajuste ZItemTile
+
 ## 0.9.18+22
 
 * Ajuste no dialog

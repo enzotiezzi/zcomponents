@@ -267,55 +267,56 @@ class _ZItemTileState extends State<ZItemTile> {
                                       ),
                                       new Row(
                                         children: <Widget>[
-                                          new Expanded(
-                                            flex: 5,
-                                            child: new Container(
-                                              width: _largura / 2.3,
-                                              child: new Row(
-                                                children: <Widget>[
-                                                  new Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 6.0,
-                                                        right: 0.0,
-                                                        bottom: 2.0,
-                                                        top: 0.0),
-                                                    child: new Icon(
-                                                      Icons.work,
-                                                      size: 16,
-                                                      color: Color(0xFFA3A3A3),
-                                                    ),
-                                                  ),
-                                                  new Container(
-                                                    width: (_largura < 450)
-                                                        ? _largura / 3.5
-                                                        : _largura / 3,
-                                                    margin: EdgeInsets.only(
-                                                        left: 6.0,
-                                                        right: 0.0,
-                                                        bottom: 2.0,
-                                                        top: 0.0),
-                                                    child: new Text(
-                                                      widget.cargo ?? "",
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF808080),
-                                                          fontSize: 10.0,
-                                                          fontWeight:
-                                                              FontWeight.w700),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
+//                                          new Expanded(
+//                                            flex: 5,
+//                                            child: new Container(
+//                                              width: _largura / 2.3,
+//                                              child: new Row(
+//                                                children: <Widget>[
+//                                                  new Container(
+//                                                    margin: EdgeInsets.only(
+//                                                        left: 6.0,
+//                                                        right: 0.0,
+//                                                        bottom: 2.0,
+//                                                        top: 0.0),
+//                                                    child: new Icon(
+//                                                      Icons.work,
+//                                                      size: 16,
+//                                                      color: Color(0xFFA3A3A3),
+//                                                    ),
+//                                                  ),
+//                                                  new Container(
+//                                                    width: (_largura < 450)
+//                                                        ? _largura / 3.5
+//                                                        : _largura / 3,
+//                                                    margin: EdgeInsets.only(
+//                                                        left: 6.0,
+//                                                        right: 0.0,
+//                                                        bottom: 2.0,
+//                                                        top: 0.0),
+//                                                    child: new Text(
+//                                                      widget.cargo ?? "",
+//                                                      overflow:
+//                                                          TextOverflow.ellipsis,
+//                                                      style: TextStyle(
+//                                                          color:
+//                                                              Color(0xFF808080),
+//                                                          fontSize: 10.0,
+//                                                          fontWeight:
+//                                                              FontWeight.w700),
+//                                                    ),
+//                                                  ),
+//                                                ],
+//                                              ),
+//                                            ),
+//                                          ),
                                           new Expanded(
                                             flex: 5,
                                             child: new Row(
                                               children: <Widget>[
                                                 new Container(
                                                   margin: EdgeInsets.only(
+                                                    left: 6,
                                                       right: 0.0,
                                                       bottom: 4.0,
                                                       top: 0.0),
