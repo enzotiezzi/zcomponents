@@ -32,6 +32,7 @@ import 'package:z_components/i-view.dart';
 import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-previsto.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 
 import 'main-testing.dart';
 
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: MainTesting());
+        debugShowCheckedModeBanner: false, home: ComponentExemploClasse());
     //ZUserInfo(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImVhNGU1YWY5OGQ2ZTZmZjNhMmNmOTc1MGNlMGQ0YzE3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODUyNTM3MjcsImV4cCI6MTU4NTI1NzMyNywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpQb250byIsInN1YiI6ImJiYzA3ZGRhLWEzNDQtNDdlZC05NGQ0LWZkODQ1MjZjYTc4OCIsImF1dGhfdGltZSI6MTU4NTI1MzcyMiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ik9aNFlEQVRFUVhFQzdGU0dONEc0WENOQjI3RzVQWEFSIiwiaWRDb2xhYm9yYWRvciI6IjU0OEQ1MjRELUE2REUtNEQ4QS05NDVFLUE3MDZBRDJGODdGMiIsImlkQWNjb3VudCI6IjQ4NmE0OWIzLTQ3ZDEtNGQ3Ni04MGRmLTA3OWViODJkNmQ4ZiIsImFjY291bnQiOiJaZWxsYXIyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDM4LjE5Ny43MTgtMTYiLCJlbWFpbCI6ImJsYWJsYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiI0MzguMTk3LjcxOC0xNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.ZsSxc59voVlTcjizRGBVuCfE0FwWnz_uUucsnzypLQKI-yf-pFgPT6VLCCQ-WF4BGgxgAEKovR2YbFCApD80XbkyXVLzqNbZSq34Tkqh54G_lFwUsg_st2GzL7oQ9aMaM-XV0cktHPSobpzqNyZkln1MkLveln67Hg7ZxB2w5rO4ECL3VBe0JPs8lmqmOijWCjUfgrmTHpeU2TVgVHnXuxZej3bAskVCRP_YWA_ayFtZz7vibTdFoBYVCQFX_AEX8hunuTmt98PXZs5aL3KngRhVyLhnYoMWv5wI_vfJx3bl0UimCN_h5wnvzJpGh5NwFmpDk_5KSfPlRiwkZQTu0g"));
   }
 }
@@ -163,11 +164,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
   List<ZDynamicFormViewModel> lista = new List();
   List<ZDynamicFormViewModel> listaEnvio = new List();
   IFormularioService iFormularioService = new FormularioService("eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4ZDE1YmExNGJkNWQ1OGFiODRlNGI5YTMzZjg1NjIwIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODYyMDQzOTUsImV4cCI6MTU4NjIwNzk5NSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjU0NTMyNDM1LTY0ZTAtNDczMS05NmQwLTcxOTY5YjJkY2QwNyIsImF1dGhfdGltZSI6MTU4NjE4NDExNiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ijc1NzMxNGU3LTM0NDYtNGY5Ny04M2IwLWNhOWY4NmI2OGM3MCIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZBNDlCMy00N0QxLTRENzYtODBERi0wNzlFQjgyRDZEOEYiLCJpZENvbGFib3JhZG9yIjoiNEUzMkRGMjktOTNFMC00RDU1LTk1REQtQzI2MjIyNTdDQ0Q2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDQ3LjkzMC42MzgtMjkiLCJlbWFpbCI6InZpY3RvcnRtYXJxdWVzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpbZmFsc2UsIkZhbHNlIl0sIm5hbWUiOiJWaWN0b3IgVGF2YXJlcyBNYXJxdWVzIiwicGhvbmVfbnVtYmVyIjoiKDExKSA5IDgyMzctMjYyMiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.pwwxzqA5DqWyWMxN_Z5KTjDY3ZICbxbTahBO0zhcDIIj3WrXEQszzLYxACmXUlYaK8cc3_5Ee82n7FofPIoOUKRMk7hfPBSJNCCqiNlgWF1_csd8T5cRwTPhxnOC6t_pzi09gTik21VrIq860WZ-hu8ho2dktlpKGNbCo-ZItqjqTUJ1PkN2J8KPLAYgH2uP0WhIM_WFtwQRXEfIsOhZmnpOYoqpek2a288rM3pCny22hIuPcFp24oadaY4BBuGSEEOrPtad6KSY_HmDgAj9rMx_nlo1DkxuVelDVraiKwgLJX_m2-8Q2EdmanQt-rEkPt6mq_45s3dYSzHkxYeSow");
-
+DialogUtils _dialogUtils;
 
   @override
   void initState() {
     super.initState();
+    _dialogUtils = new DialogUtils(context);
     focusNodeNome = new FocusNode();
     nomeFocus = new FocusNode();
     emailFocus = new FocusNode();
@@ -216,23 +218,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse>
     return new Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AtualizarDadosPrevisto(
-                      dadosViewModel: AtualizarDadosViewModel(
-                          statusColaborador: "Ativo",
-                          horaInicio: "09:00",
-                          escala: "5x2",
-                          centroCusto: "Zellar",
-                          cargo: "Programador",
-                          horaTermino: "17:30",
-                          nomeColaborador: "Giuliano Ortiz Goria",
-                          tempoIntervalo: "00:30"),
-                      finalizarAtualizacao: (dados) {
-                        print(dados);
-                      },
-                    )));
+            _dialogUtils.showAlertDialogErro("Sem conexão com a internet",
+                "Não é possivel esta funcionalidade sem acesso à internet");
           },
         ),
         appBar: new AppBar(),
