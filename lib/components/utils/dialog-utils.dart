@@ -61,23 +61,25 @@ class DialogUtils {
                   ),
                   new Container(
                     child: new InkWell(
-                      borderRadius:
-                          new BorderRadius.all(const Radius.circular(20.0)),
-                      splashColor: const Color(0xffe6e6e6),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: new Container(
-                        padding: const EdgeInsets.all(12),
-                        child: new Text(
-                          "ENTENDI",
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: MainStyle.get(context)
-                                  .fontSizeLeadinCancelar),
-                        ),
-                      ),
-                    ),
+                        splashColor: const Color(0xffe6e6e6),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: new Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            new Container(padding: EdgeInsets.all(12),
+                              child: new Text(
+                                "ENTENDI",
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: MainStyle.get(context)
+                                        .fontSizeLeadinCancelar),
+                              ),
+                            ),
+                          ],
+                        )),
                     margin: const EdgeInsets.only(bottom: 8),
                   )
                 ],
