@@ -1,3 +1,7 @@
+## 0.9.18+25
+
+* Ajuste confirmar senha
+
 ## 0.9.18+24
 
 * Ajuste zInput celular
