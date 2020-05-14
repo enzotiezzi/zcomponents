@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:z_components/api/confirmar-senha/confirmar-senha-service.dart';
+import 'package:z_components/api/confirmar-senha/i-confirmar-senha-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/confirmar-senha-viewmodel.dart';
 import '../z-pin-senha.dart';
 import '../z-progress-dialog.dart';
 
@@ -87,8 +90,15 @@ class ConfirmarSenha {
   }
 
   Future<void> _verificarPin(String text) {
-    var service;
-    if (service != null) {
+    IConfirmarSenhaService iConfirmarSenhaService = new ConfirmarSenhaService(token);
+
+    ConfirmarSenhaViewModel confimarSenhaViewModel = ConfirmarSenhaViewModel(
+      pin: text,
+      cpf: cpf,
+    );
+
+    var service = iConfirmarSenhaService.validarSenha(confimarSenhaViewModel);
+    if (service != null && service == true) {
       Navigator.of(context).pop(true);
     } else {
       Navigator.of(context).pop(false);
