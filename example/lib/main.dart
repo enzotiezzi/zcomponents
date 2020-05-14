@@ -33,6 +33,7 @@ import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
+import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
 
 import 'main-testing.dart';
 
@@ -217,9 +218,10 @@ DialogUtils _dialogUtils;
   Widget build(BuildContext context) {
     return new Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _dialogUtils.showAlertDialogErro("Sem conexão com a internet",
-                "Não é possivel esta funcionalidade sem acesso à internet");
+          onPressed: () async {
+         ConfirmarSenha confirmar = new ConfirmarSenha(cpf: "447.207.368-40", context: context);
+        bool teste = await  confirmar.dialogConfirmarSenha();
+        print(teste);
           },
         ),
         appBar: new AppBar(),
