@@ -51,7 +51,7 @@ class ConfirmarSenha {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new Container(color: Colors.transparent,height: 1,width: 50.0,),
+                    new Container(color: Colors.transparent,height: 1,width: MediaQuery.of(context).size.width * 0.115,),
                     new Expanded(
                         child: new Container(alignment: Alignment.center,
                             margin: EdgeInsets.only(right: 20.0, top: 8),
