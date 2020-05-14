@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-
 import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/service.dart';
 import 'package:z_components/settings/api-settings.dart';

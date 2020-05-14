@@ -5,15 +5,15 @@ import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/styles/main-style.dart';
-
 import '../z-pin-senha.dart';
 import '../z-progress-dialog.dart';
 
 class ConfirmarSenha {
+  String token;
   String cpf;
   BuildContext context;
 
-  ConfirmarSenha({@required this.cpf, @required this.context});
+  ConfirmarSenha({@required this.token,@required this.cpf, @required this.context});
 
   Future<bool> dialogConfirmarSenha() {
     return showDialog(
