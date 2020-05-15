@@ -216,7 +216,6 @@ class ZUserInfoView extends IView<ZUserInfo> {
                           child: new GestureDetector(
                               onTap: () {
                                  escolherImagem(ImageSource.gallery);
-                                _dialogUtils.dismiss();
                               },
                               child: new Container(
                                 color: Colors.transparent,
@@ -275,8 +274,9 @@ class ZUserInfoView extends IView<ZUserInfo> {
         state.widget.userInfo.idFoto = idAnexo;
 
         if (state.widget.onChangeProfileImage != null)
+          _dialogUtils.dismiss();
 
-          state.widget.onChangeProfileImage(base64);
+        state.widget.onChangeProfileImage(base64);
       }
     }
   }
