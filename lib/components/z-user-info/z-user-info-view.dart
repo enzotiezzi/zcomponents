@@ -248,6 +248,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> escolherImagem(ImageSource source) async {
+    _dialogUtils.showProgressDialog();
     var imagem = await ImagePicker.pickImage(source: source, imageQuality: 70);
 
     if (imagem != null) {
@@ -275,6 +276,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
         if (state.widget.onChangeProfileImage != null)
 
           state.widget.onChangeProfileImage(base64);
+
+        _dialogUtils.dismiss();
       }
     }
   }

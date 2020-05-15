@@ -1,3 +1,7 @@
+## 0.9.18+31
+
+* Ajuste ZUserInfo
+
 ## 0.9.18+30
 
 * Ajuste ZUserInfo
