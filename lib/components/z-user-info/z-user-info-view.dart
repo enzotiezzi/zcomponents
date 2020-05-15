@@ -214,8 +214,10 @@ class ZUserInfoView extends IView<ZUserInfo> {
                       new Expanded(
                           flex: 5,
                           child: new GestureDetector(
-                              onTap: () => escolherImagem(ImageSource.gallery)
-                                  .then((_) => _dialogUtils.dismiss()),
+                              onTap: () async {
+                                await escolherImagem(ImageSource.gallery);
+                                _dialogUtils.dismiss();
+                              },
                               child: new Container(
                                 color: Colors.transparent,
                                 child: new Column(
