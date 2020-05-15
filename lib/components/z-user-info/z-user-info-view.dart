@@ -214,9 +214,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
                       new Expanded(
                           flex: 5,
                           child: new GestureDetector(
-                              onTap: () {
-                                 escolherImagem(ImageSource.gallery);
-                              },
+                              onTap: () => escolherImagem(ImageSource.gallery)
+                                  .then((_) => _dialogUtils.dismiss()),
                               child: new Container(
                                 color: Colors.transparent,
                                 child: new Column(
@@ -274,9 +273,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
         state.widget.userInfo.idFoto = idAnexo;
 
         if (state.widget.onChangeProfileImage != null)
-          _dialogUtils.dismiss();
 
-        state.widget.onChangeProfileImage(base64);
+          state.widget.onChangeProfileImage(base64);
       }
     }
   }
