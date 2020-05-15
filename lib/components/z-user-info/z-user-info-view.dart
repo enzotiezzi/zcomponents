@@ -260,7 +260,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
           imagemPerfil = bytes;
         });
 
-        _arquivoService
+        var idAnexo = await _arquivoService
             .enviarImagem(new ArquivoViewModel(
           nome: "perfil.jpg",
           contentType: "image/jpg",
@@ -268,12 +268,13 @@ class ZUserInfoView extends IView<ZUserInfo> {
           conteudo: base64,
           tamanho: base64.length.toDouble(),
           container: "teste",
-        ))
-            .then((idAnexo) {
-          state.widget.userInfo.idFoto = idAnexo;
-          if (state.widget.onChangeProfileImage != null)
-            state.widget.onChangeProfileImage(base64);
-        });
+        ));
+
+        state.widget.userInfo.idFoto = idAnexo;
+
+        if (state.widget.onChangeProfileImage != null)
+
+          state.widget.onChangeProfileImage(base64);
       }
     }
   }
