@@ -83,10 +83,10 @@ class ConfirmarSenha {
     );
   }
 
-  Future<void> _verificarPin(String text) {
+  Future<void> _verificarPin(String text) async {
     IConfirmarSenhaService iConfirmarSenhaService = new ConfirmarSenhaService(token);
 
-    var service = iConfirmarSenhaService.validarSenha(text);
+    var service = await iConfirmarSenhaService.validarSenha(text);
 
     if (service != null && service == true) {
       Navigator.of(context).pop(true);

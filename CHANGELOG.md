@@ -1,5 +1,9 @@
 ## 0.9.18+32
 
+* Ajuste ConfirmarSenha
+
+## 0.9.18+32
+
 * Ajuste ZUserInfo
 
 ## 0.9.18+31
