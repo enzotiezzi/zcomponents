@@ -10,12 +10,7 @@ class ConfirmarSenha {
   String token;
   BuildContext context;
 
-<<<<<<< HEAD
-  ConfirmarSenha(
-      {@required this.token, @required this.cpf, @required this.context});
-=======
   ConfirmarSenha({@required this.token, @required this.context});
->>>>>>> 280fe78f041f34f8cb7b06e3054bbf718311c04f
 
   Future<bool> dialogConfirmarSenha() {
     return showDialog(
@@ -46,40 +41,34 @@ class ConfirmarSenha {
               ],
             ),
             new PinCodeTextField(
-               highlightColor: const Color(0xff2BBAB4),
-               highlight: true,
-               defaultBorderColor: const Color(0xffC7C7CC),
-               hasTextBorderColor: const Color(0xffC7C7CC),
-               maxLength: 4,
-               pinBoxHeight: MainStyle.get(context).sizePin,
-               pinBoxWidth: MainStyle.get(context).sizePin,
-               maskCharacter: "*",
-               pinBoxRadius: 6,
-               onDone: (text) async {
-                 await _verificarPin(text);
-               },
-               pinTextAnimatedSwitcherTransition:
-               ProvidedPinBoxTextAnimation.scalingTransition,
-               pinTextAnimatedSwitcherDuration:
-               Duration(milliseconds: 150),
-               pinTextStyle: new TextStyle(fontSize: 22),
-               hideCharacter: true,wrapAlignment: WrapAlignment.center,
-             )
-
+              highlightColor: const Color(0xff2BBAB4),
+              highlight: true,
+              defaultBorderColor: const Color(0xffC7C7CC),
+              hasTextBorderColor: const Color(0xffC7C7CC),
+              maxLength: 4,
+              pinBoxHeight: MainStyle.get(context).sizePin,
+              pinBoxWidth: MainStyle.get(context).sizePin,
+              maskCharacter: "*",
+              pinBoxRadius: 6,
+              onDone: (text) async {
+                await _verificarPin(text);
+              },
+              pinTextAnimatedSwitcherTransition:
+                  ProvidedPinBoxTextAnimation.scalingTransition,
+              pinTextAnimatedSwitcherDuration: Duration(milliseconds: 150),
+              pinTextStyle: new TextStyle(fontSize: 22),
+              hideCharacter: true,
+              wrapAlignment: WrapAlignment.center,
+            )
           ],
         ),
       ),
     );
   }
 
-<<<<<<< HEAD
-  Future<void> _verificarPin(String text) {
+  Future<void> _verificarPin(String text) async {
     IConfirmarSenhaService iConfirmarSenhaService =
         new ConfirmarSenhaService(token);
-=======
-  Future<void> _verificarPin(String text) async {
-    IConfirmarSenhaService iConfirmarSenhaService = new ConfirmarSenhaService(token);
->>>>>>> 280fe78f041f34f8cb7b06e3054bbf718311c04f
 
     var service = await iConfirmarSenhaService.validarSenha(text);
 

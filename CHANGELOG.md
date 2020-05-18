@@ -1,3 +1,7 @@
+## 0.9.18+34
+
+* Ajuste ConfirmarSenha alteracao
+
 ## 0.9.18+33
 
 * Ajuste ConfirmarSenha
