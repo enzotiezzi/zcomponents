@@ -90,7 +90,6 @@ class ConfirmarSenha {
 
     ConfirmarSenhaViewModel confimarSenhaViewModel = ConfirmarSenhaViewModel(
       pin: text,
-      cpf: cpf,
     );
 
     var service = iConfirmarSenhaService.validarSenha(confimarSenhaViewModel);
