@@ -5,14 +5,12 @@ import 'package:z_components/api/confirmar-senha/i-confirmar-senha-service.dart'
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
-import 'package:z_components/view-model/confirmar-senha-viewmodel.dart';
 
 class ConfirmarSenha {
   String token;
-  String cpf;
   BuildContext context;
 
-  ConfirmarSenha({@required this.token,@required this.cpf, @required this.context});
+  ConfirmarSenha({@required this.token, @required this.context});
 
   Future<bool> dialogConfirmarSenha() {
     return showDialog(
@@ -88,11 +86,8 @@ class ConfirmarSenha {
   Future<void> _verificarPin(String text) {
     IConfirmarSenhaService iConfirmarSenhaService = new ConfirmarSenhaService(token);
 
-    ConfirmarSenhaViewModel confimarSenhaViewModel = ConfirmarSenhaViewModel(
-      pin: text,
-    );
+    var service = iConfirmarSenhaService.validarSenha(text);
 
-    var service = iConfirmarSenhaService.validarSenha(confimarSenhaViewModel);
     if (service != null && service == true) {
       Navigator.of(context).pop(true);
     } else {
