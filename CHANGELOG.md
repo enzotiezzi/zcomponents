@@ -1,3 +1,35 @@
+## 0.9.18+33
+
+* Ajuste ConfirmarSenha
+
+## 0.9.18+32
+
+* Ajuste ZUserInfo
+
+## 0.9.18+31
+
+* Ajuste ZUserInfo
+
+## 0.9.18+30
+
+* Ajuste ZUserInfo
+
+## 0.9.18+29
+
+* Ajuste ZUserInfo
+
+## 0.9.18+28
+
+* Ajuste ZUserInfo
+
+## 0.9.18+27
+
+* Ajuste ZUserInfo
+
+## 0.9.18+26
+
+* Ajuste ZUserInfo
+
 ## 0.9.18+25
 
 * Ajuste confirmar senha
