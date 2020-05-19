@@ -1,3 +1,7 @@
+## 0.9.18+35
+
+* Ajuste ConfirmarSenha alteracao focus
+
 ## 0.9.18+34
 
 * Ajuste ConfirmarSenha alteracao

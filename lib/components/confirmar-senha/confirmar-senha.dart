@@ -49,7 +49,7 @@ class ConfirmarSenha {
               pinBoxHeight: MainStyle.get(context).sizePin,
               pinBoxWidth: MainStyle.get(context).sizePin,
               maskCharacter: "*",
-              pinBoxRadius: 6,
+              pinBoxRadius: 6,autofocus: true,
               onDone: (text) async {
                 await _verificarPin(text);
               },
