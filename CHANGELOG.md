@@ -1,6 +1,6 @@
 ## 0.9.18+36
 
-* Ajuste ConfirmarSenha alteracao focus
+* Ajuste airplane mode
 
 ## 0.9.18+35
 
