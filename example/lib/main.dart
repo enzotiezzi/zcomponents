@@ -13,7 +13,6 @@ import 'package:z_components/components/z-checkbox/z-checkbox.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
-import 'package:after_layout/after_layout.dart';
 import "package:z_components/components/z-inputs/z-input-data-de-nascimento.dart";
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
@@ -54,8 +53,7 @@ class ComponentExemploClasse extends StatefulWidget {
   _ComponentExemploClasseState createState() => _ComponentExemploClasseState();
 }
 
-class _ComponentExemploClasseState extends State<ComponentExemploClasse>
-    with AfterLayoutMixin<ComponentExemploClasse> {
+class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var controllerEmail = new TextEditingController();
   var controlerPadrao = new TextEditingController();
   var controllerNome = new TextEditingController();
