@@ -1,3 +1,7 @@
+## 0.9.18+37
+
+* novo ZPerfil
+
 ## 0.9.18+36
 
 * Ajuste airplane mode
