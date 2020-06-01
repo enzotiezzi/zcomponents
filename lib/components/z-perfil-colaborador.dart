@@ -102,6 +102,7 @@ class _ZPerfilColaboradorState extends State<ZPerfilColaborador> {
     return new Column(
       children: <Widget>[
         ZHeader(
+          initiallyExpanded: true,
           titulosAppBar: true,
           child: new Container(
             margin: const EdgeInsets.only(top: 8, bottom: 8, left: 20),

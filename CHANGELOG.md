@@ -1,3 +1,7 @@
+## 0.9.18+38
+
+* Tile sempre vir aberto
+
 ## 0.9.18+37
 
 * novo ZPerfil
