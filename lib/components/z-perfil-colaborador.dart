@@ -35,7 +35,7 @@ class ZPerfilColaborador extends StatefulWidget {
   final Function onTapImage;
   final String isExpand;
   final Function funcaoIconBatida;
-
+  final String status;
   final Function funcao;
   final Color color;
   final String endereco;
@@ -75,7 +75,8 @@ class ZPerfilColaborador extends StatefulWidget {
       this.telefone,
       this.email,
       this.endereco,
-      this.isExpand});
+      this.isExpand,
+      this.status});
 
   @override
   _ZPerfilColaboradorState createState() => _ZPerfilColaboradorState();
@@ -136,6 +137,7 @@ class _ZPerfilColaboradorState extends State<ZPerfilColaborador> {
                 re: widget.re,
                 tempoPausa: widget.textoHoraIntervaloInfo,
                 voltaIntervalo: widget.voltaIntervalo,
+                status: widget.status,
               ),
             )
           ],

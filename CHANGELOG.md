@@ -1,3 +1,7 @@
+## 0.9.18+39
+
+* zperfil ter status
+
 ## 0.9.18+38
 
 * Tile sempre vir aberto
