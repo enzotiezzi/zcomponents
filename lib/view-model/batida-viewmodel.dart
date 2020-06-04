@@ -23,6 +23,7 @@ class ZBatidaViewModel {
   String ordemTroca;
   String horarioBatidaCelular;
   String dataJornada;
+  String horarioBatidaRealizada;
 
   String horarioBatidaServidor;
   bool atualizada;
@@ -30,6 +31,7 @@ class ZBatidaViewModel {
   ZBatidaViewModel(
       {this.idColaborador,
       this.cpf,
+        this.horarioBatidaRealizada,
       this.idCentroCusto,
       this.horarioBatida,
       this.latitude,
