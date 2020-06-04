@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:airplane_mode_detection/airplane_mode_detection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -100,47 +99,38 @@ class ZUserInfoView extends IView<ZUserInfo> {
       _dialogUtils.showZProgressDialog("Buscando endereço...", 0.5, _globalKey);
 
       var endereco;
-      String modoAviao = await AirplaneModeDetection.detectAirplaneMode();
 
-      if (modoAviao == "ON") {
-        Future.delayed(Duration(milliseconds: 1000), () {
-          _globalKey.currentState.refresh(1.0,
-              "Você está com modo avião ativo, Não foi possível encontrar o endereço.",
-              success: false);
-        });
-      } else {
-        var conexao = await _testeConexaoService.testarConexao();
+      var conexao = await _testeConexaoService.testarConexao();
 
-        if (conexao == true) {
-          endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
-          if (endereco != null) {
-            _globalKey.currentState
-                .refresh(1.0, "Endereço encontrado", success: true);
+      if (conexao == true) {
+        endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
+        if (endereco != null) {
+          _globalKey.currentState
+              .refresh(1.0, "Endereço encontrado", success: true);
 
-            if (state.mounted) {
-              state.setState(() {
-                textEditingControllerEstado.text = endereco.uf;
-                textEditingControllerCidade.text = endereco.localidade;
-                textEditingControllerBairro.text = endereco.bairro;
-                textEditingControllerRua.text = endereco.logradouro;
+          if (state.mounted) {
+            state.setState(() {
+              textEditingControllerEstado.text = endereco.uf;
+              textEditingControllerCidade.text = endereco.localidade;
+              textEditingControllerBairro.text = endereco.bairro;
+              textEditingControllerRua.text = endereco.logradouro;
 
-                focusNodeNumero.requestFocus();
-              });
-            }
-          } else {
-            Future.delayed(Duration(milliseconds: 1000), () {
-              _globalKey.currentState.refresh(
-                  1.0, "Não foi possível encontrar o endereço.",
-                  success: false);
+              focusNodeNumero.requestFocus();
             });
           }
         } else {
           Future.delayed(Duration(milliseconds: 1000), () {
-            _globalKey.currentState.refresh(1.0,
-                "Você está sem conexão, Não foi possível encontrar o endereço.",
+            _globalKey.currentState.refresh(
+                1.0, "Não foi possível encontrar o endereço.",
                 success: false);
           });
         }
+      } else {
+        Future.delayed(Duration(milliseconds: 1000), () {
+          _globalKey.currentState.refresh(1.0,
+              "Você está sem conexão, Não foi possível encontrar o endereço.",
+              success: false);
+        });
       }
 
       Future.delayed(new Duration(milliseconds: 1000), () {
@@ -248,6 +238,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> escolherImagem(ImageSource source) async {
+    _dialogUtils.showProgressDialog();
     var imagem = await ImagePicker.pickImage(source: source, imageQuality: 70);
 
     if (imagem != null) {
@@ -260,20 +251,21 @@ class ZUserInfoView extends IView<ZUserInfo> {
           imagemPerfil = bytes;
         });
 
-        _arquivoService
-            .enviarImagem(new ArquivoViewModel(
+        var idAnexo = await _arquivoService.enviarImagem(new ArquivoViewModel(
           nome: "perfil.jpg",
           contentType: "image/jpg",
           descricao: "Imagem de perfil do usuário",
           conteudo: base64,
           tamanho: base64.length.toDouble(),
           container: "teste",
-        ))
-            .then((idAnexo) {
-          state.widget.userInfo.idFoto = idAnexo;
-          if (state.widget.onChangeProfileImage != null)
-            state.widget.onChangeProfileImage(base64);
-        });
+        ));
+
+        state.widget.userInfo.idFoto = idAnexo;
+
+        if (state.widget.onChangeProfileImage != null)
+          state.widget.onChangeProfileImage(base64);
+
+        _dialogUtils.dismiss();
       }
     }
   }
@@ -366,9 +358,10 @@ class ZUserInfoView extends IView<ZUserInfo> {
         "Salvando informações...", 0.7, _globalKey);
 
     var res = false;
-    String modoAviao = await AirplaneModeDetection.detectAirplaneMode();
 
-    if (modoAviao == "OFF") {
+    var conexao = await _testeConexaoService.testarConexao();
+
+    if (conexao) {
       res = await _userInfoService.editarInformacoes(userInfo);
     }
 

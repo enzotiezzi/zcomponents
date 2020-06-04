@@ -64,7 +64,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
           }
         },true,
 
-        textMask: "(XX)X XXXX-XXXX",
+        textMask: "(XX) XXXXX-XXXX",
         hintText: "( ** ) 9 **** - ****");
   }
 

@@ -1,3 +1,67 @@
+## 0.9.18+39
+
+* zperfil ter status
+
+## 0.9.18+38
+
+* Tile sempre vir aberto
+
+## 0.9.18+37
+
+* novo ZPerfil
+
+## 0.9.18+36
+
+* Ajuste airplane mode
+
+## 0.9.18+35
+
+* Ajuste ConfirmarSenha alteracao focus
+
+## 0.9.18+34
+
+* Ajuste ConfirmarSenha alteracao
+
+## 0.9.18+33
+
+* Ajuste ConfirmarSenha
+
+## 0.9.18+32
+
+* Ajuste ZUserInfo
+
+## 0.9.18+31
+
+* Ajuste ZUserInfo
+
+## 0.9.18+30
+
+* Ajuste ZUserInfo
+
+## 0.9.18+29
+
+* Ajuste ZUserInfo
+
+## 0.9.18+28
+
+* Ajuste ZUserInfo
+
+## 0.9.18+27
+
+* Ajuste ZUserInfo
+
+## 0.9.18+26
+
+* Ajuste ZUserInfo
+
+## 0.9.18+25
+
+* Ajuste confirmar senha
+
+## 0.9.18+24
+
+* Ajuste zInput celular
+
 ## 0.9.18+23
 
 * Ajuste ZItemTile
