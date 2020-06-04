@@ -1,3 +1,7 @@
+## 0.9.18+41
+
+* ajuste ZExpandedItemTile
+
 ## 0.9.18+40
 
 * ajuste ZExpandedItemTile
