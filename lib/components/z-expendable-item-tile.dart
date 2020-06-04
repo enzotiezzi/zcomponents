@@ -108,20 +108,9 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
   double _largura;
   double height = 1;
   Color color = Colors.black;
-  ScrollController _scrollController = new ScrollController();
-  ScrollController _scrollController2 = new ScrollController();
-
-
+  
   @override
   void initState() {
-    _scrollController.addListener(() async {
-      double maxScroll = _scrollController.position.maxScrollExtent;
-      double currentScroll = _scrollController.position.pixels;
-
-      if (currentScroll == maxScroll) {
-        print("loadMore");
-      }
-    });    super.initState();
   }
 
   @override
@@ -535,21 +524,32 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
 
   Widget _buildListaBatidas(){
     if(widget.exibeBatidas && widget.listBatida != null){
-      return new Container(
-          margin: EdgeInsets.only(top:(widget.listBatida.length > 4)? 6:0,),
-          height: 30,
-          child: new SingleChildScrollView(
-            controller: _scrollController,
-            child: new Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _buildBatidas(),
-               // _buildTextBatidas(),
-              ],
-            ),
-          )
-      );
+      if(widget.listBatida.length > 0) {
+        return new Container(
+            margin: EdgeInsets.only(top:(widget.listBatida.length > 4)? 6:0,),
+            height: 30,
+            child: new SingleChildScrollView(
+              child: new Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  _buildBatidas(),
+                  // _buildTextBatidas(),
+                ],
+              ),
+            )
+        );
+      }else{
+        return new Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Container(
+              margin: const EdgeInsets.only(top: 6,bottom: 6),
+              child: new Text("SEM BATIDAS",style: new TextStyle(color: Color(0xff808080),fontSize: 12),),
+            )
+          ],
+        );
+      }
     }else{
       return new Container();
     }
