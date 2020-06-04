@@ -239,7 +239,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.0"
+    version: "0.16.1"
   mask_shifter:
     dependency: transitive
     description:
@@ -580,11 +580,7 @@ packages:
       path: ".."
       relative: true
     source: path
-<<<<<<< HEAD
-    version: "0.9.18+36"
-=======
-    version: "0.9.18+35"
->>>>>>> 01ca016231ad368fe86162ffd27bae2b624bee79
+    version: "0.9.18+39"
 sdks:
   dart: ">=2.5.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.5 <2.0.0"

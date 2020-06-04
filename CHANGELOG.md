@@ -1,3 +1,7 @@
+## 0.9.18+40
+
+* ajuste ZExpandedItemTile
+
 ## 0.9.18+39
 
 * zperfil ter status

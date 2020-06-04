@@ -13,7 +13,8 @@ import 'package:z_components/components/z-checkbox/z-checkbox.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
-import "package:z_components/components/z-inputs/z-input-data-de-nascimento.dart";
+import 'package:after_layout/after_layout.dart';
+import "package:z_components/view-model/batida-viewmodel.dart";
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
@@ -29,10 +30,11 @@ import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-previsto.dart';
-import 'package:z_components/components/z-user-info/z-user-info.dart';
+import 'package:z_components/components/z-expendable-item-tile.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
+
 
 import 'main-testing.dart';
 
@@ -160,14 +162,32 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     },
   ];
 
+  List<ZBatidaViewModel> listBatidas = new List();
   List<ZDynamicFormViewModel> lista = new List();
   List<ZDynamicFormViewModel> listaEnvio = new List();
   IFormularioService iFormularioService = new FormularioService("eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4ZDE1YmExNGJkNWQ1OGFiODRlNGI5YTMzZjg1NjIwIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODYyMDQzOTUsImV4cCI6MTU4NjIwNzk5NSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjU0NTMyNDM1LTY0ZTAtNDczMS05NmQwLTcxOTY5YjJkY2QwNyIsImF1dGhfdGltZSI6MTU4NjE4NDExNiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ijc1NzMxNGU3LTM0NDYtNGY5Ny04M2IwLWNhOWY4NmI2OGM3MCIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZBNDlCMy00N0QxLTRENzYtODBERi0wNzlFQjgyRDZEOEYiLCJpZENvbGFib3JhZG9yIjoiNEUzMkRGMjktOTNFMC00RDU1LTk1REQtQzI2MjIyNTdDQ0Q2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDQ3LjkzMC42MzgtMjkiLCJlbWFpbCI6InZpY3RvcnRtYXJxdWVzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpbZmFsc2UsIkZhbHNlIl0sIm5hbWUiOiJWaWN0b3IgVGF2YXJlcyBNYXJxdWVzIiwicGhvbmVfbnVtYmVyIjoiKDExKSA5IDgyMzctMjYyMiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.pwwxzqA5DqWyWMxN_Z5KTjDY3ZICbxbTahBO0zhcDIIj3WrXEQszzLYxACmXUlYaK8cc3_5Ee82n7FofPIoOUKRMk7hfPBSJNCCqiNlgWF1_csd8T5cRwTPhxnOC6t_pzi09gTik21VrIq860WZ-hu8ho2dktlpKGNbCo-ZItqjqTUJ1PkN2J8KPLAYgH2uP0WhIM_WFtwQRXEfIsOhZmnpOYoqpek2a288rM3pCny22hIuPcFp24oadaY4BBuGSEEOrPtad6KSY_HmDgAj9rMx_nlo1DkxuVelDVraiKwgLJX_m2-8Q2EdmanQt-rEkPt6mq_45s3dYSzHkxYeSow");
 DialogUtils _dialogUtils;
+List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
 
   @override
   void initState() {
     super.initState();
+    listBatidas = [
+       ZBatidaViewModel(ordem: "ENTRADA",
+       horarioBatidaRealizada: "07:30"),
+
+      ZBatidaViewModel(ordem: "INÍCIO INTERVALO",
+          horarioBatidaRealizada: "12:30"),
+
+      ZBatidaViewModel(ordem: "FIM INTERVALO",
+          horarioBatidaRealizada: "13:30"),
+
+      ZBatidaViewModel(ordem: "SAÍDA",
+          horarioBatidaRealizada: "14:30"),
+
+      ZBatidaViewModel(ordem: "ENTRADA",
+          horarioBatidaRealizada: "18:00"),
+    ];
     _dialogUtils = new DialogUtils(context);
     focusNodeNome = new FocusNode();
     nomeFocus = new FocusNode();
@@ -215,6 +235,7 @@ DialogUtils _dialogUtils;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Colors.black,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
          ConfirmarSenha confirmar = new ConfirmarSenha(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4NzJlODA0NjVjMzk1NGY2MTE5YWNmZTRiYzc1NDQ4IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODk4MjcxODMsImV4cCI6MTU4OTgzMDc4MywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjJiZmFhY2I2LWVkMjYtNDFiNC1iZTM4LWUyMzI5Yjk0MmM1YSIsImF1dGhfdGltZSI6MTU4OTgyNzE4MywiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IkFJUExGNkxBSUU2Q01ON01ONjRFUE1HS0xWRlpIWkFRIiwiYWNjb3VudCI6IlplbGxhcjIiLCJpZEFjY291bnQiOiI4RTZFQjYzMi1CNzA3LTQxM0YtQTE1Mi0zQ0ZGRDFGOTgyQjUiLCJpZENvbGFib3JhZG9yIjoiMjZBQTMxMkYtQ0Q3OS00N0M5LUE0RjItQkI0RkVCNzM3MjkyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiMzk5LjEwOC44NDgtNzkiLCJlbWFpbCI6InZpY3RvcnNvdXp6QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlZpY3RvciBEZSBTb3V6YSBBbHZlcyIsInBob25lX251bWJlciI6IigxMSkgOTg0NzAtMzMzNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.R9hxcChbo3PgX8KFQ8Ml0F2FeTE6r83vnBUFRNMPhHFCU0k0AasUmhoL9pDSErSWk32YVi9RXJ9PLAql8-Q4ON1YYfKvzBUvhQEotpDS1OUwLmwoD46PdU80FQ3niTnQEz5--RTYJ0-C6UZyC26nXuTHp12vMm60C3McAVcCbvlxAHlI6aXllgvxD3rMkvj9Xm8C8d5IeavdxxtJvN67sVsefj2o7aNsvDB_kb0D-7exufW5pphO1SOHL1DpnaSY309nu1mEbHeqJeX8ardC54vs2qJRDbe1d0Cx5g6XFKIQjtaJ_WzVR6O4gALkasbxelsdfyyya6P66qFVUbxGMA", context: context);
@@ -223,7 +244,36 @@ DialogUtils _dialogUtils;
           },
         ),
         appBar: new AppBar(),
-        body: new Container()
+        body: new ZExpendableItemTile(nome: "ORninto",escala: "5x5",
+          cincoItensExpanded: true,
+          fontSizeTextExpand: 8,
+          exibeBatidas: true,
+          listBatida: listBatidas,
+          token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
+          idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
+          colorBatida: Color(0xff1AC15D),
+          iconeUm: new Icon(Icons.phone, color: const Color(0xff520A5E)),
+          textoIconeUm: "(11) 948442525",
+          funcaoIconeUm: (){},
+          iconeDois: new Icon(Icons.event_busy, color: const Color(0xff520A5E)),
+          textoIconeDois: "Lançar Falta",
+          funcaoIconeDois:(){},
+          colorTextExpandItens: Color(0xff9C46AB),
+          iconeTres: new Icon(Icons.description, color: const Color(0xff520A5E)),
+          textoIconeTres: "Espelho de Ponto",
+          funcaoIconeTres: () {
+
+          },
+          iconeQuatro: new Icon(Icons.warning, color: const Color(0xff520A5E)),
+          textoIconeQuatro: "Ocorrencia",
+          textoIconeCinco: "APONT. RAPIDO",iconeCinco: new Icon(Icons.access_time),
+          funcaoIconeCinco: (){
+          print("icone 5");
+          },
+          funcaoIconeQuatro: () {
+
+          },)
 
     );
 
