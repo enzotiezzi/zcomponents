@@ -88,7 +88,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
       return new GestureDetector(
         onTap: () {
           if (widget.onTap != null) {
-            var res = widget.onTap(item.idNivel);
+            var res = widget.onTap(item);
           }
         },
         child: new Container(
@@ -157,7 +157,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                           new GestureDetector(
                             onTap: () {
                               if (widget.onTap != null) {
-                                var res = widget.onTap(item.idNivel);
+                                var res = widget.onTap(item);
                               }
                             },
                             child: new Container(
@@ -216,7 +216,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
 
               if (item.filhos.length == 0) {
                 if (widget.onTap != null) {
-                  var res = widget.onTap(item.idNivel);
+                  var res = widget.onTap(item);
                 }
               }
             },
@@ -340,7 +340,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
       return new GestureDetector(
         onTap: () {
           if (widget.onTap != null) {
-            var res = widget.onTap(item.idNivel);
+            var res = widget.onTap(item);
           }
         },
         child: new Container(
@@ -393,7 +393,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                       new GestureDetector(
                         onTap: () {
                           if (widget.onTap != null) {
-                            var res = widget.onTap(item.idNivel);
+                            var res = widget.onTap(item);
                           }
                         },
                         child: new Container(
