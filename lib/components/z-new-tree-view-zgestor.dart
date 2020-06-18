@@ -6,7 +6,7 @@ import 'package:z_components/view-model/z-tree-view-viewmodel.dart';
 
 class ZNewTreeViewGestor extends StatefulWidget {
   List<ZTreeViewViewModel> lisTree;
-  void Function(String) onTap;
+  void Function(ZTreeViewViewModel) onTap;
   Color colorArrow;
 
   ZNewTreeViewGestor({this.lisTree, this.onTap,this.colorArrow: const Color(0xff801F92)});

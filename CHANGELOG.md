@@ -1,3 +1,7 @@
+## 0.9.18+43
+
+* ajuste TreeView
+
 ## 0.9.18+42
 
 * new TreeView Style
