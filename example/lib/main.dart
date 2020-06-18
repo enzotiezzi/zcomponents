@@ -7,14 +7,16 @@ import 'package:z_components/components/z-baseline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
-import 'package:z_components/components/z-conta/z-conta.dart';
+import 'package:z_components/components/z-new-tree-view-zgestor.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-import 'package:z_components/components/z-checkbox/z-checkbox.dart';
+import 'package:z_components/components/z-tree-view.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 import 'package:after_layout/after_layout.dart';
 import "package:z_components/view-model/batida-viewmodel.dart";
+import "package:z_components/view-model/z-tree-view-viewmodel.dart";
+
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
@@ -162,6 +164,18 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     },
   ];
 
+  List<ZTreeViewViewModel> zTreeViewViewModel;
+
+  List<ZTreeViewViewModel> zTreeViewViewModel2;
+
+  List<ZTreeViewViewModel> zTreeViewViewModel2Filho;
+  List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilho;
+
+
+
+  List<ZTreeViewViewModel> zTreeViewViewModel3;
+
+
   List<ZBatidaViewModel> listBatidas = new List();
   List<ZDynamicFormViewModel> lista = new List();
   List<ZDynamicFormViewModel> listaEnvio = new List();
@@ -171,7 +185,70 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
 
   @override
   void initState() {
+    zTreeViewViewModel2FilhoFilho = new List();
+    zTreeViewViewModel2 = new List();
+    zTreeViewViewModel = new List();
+    zTreeViewViewModel3 = new List();
+    zTreeViewViewModel2Filho = new List();
     super.initState();
+    zTreeViewViewModel2FilhoFilho = [
+      new ZTreeViewViewModel(
+          nome: "FILHOF FO FLHIFO",
+          idNivelPai: "11",
+          idNivel: "11s",
+          filhos: zTreeViewViewModel3
+      ),
+    ];
+    zTreeViewViewModel2 = [
+      new ZTreeViewViewModel(
+          nome: "sdfsdf",
+          idNivelPai: "1",
+          idNivel: "11",
+          filhos: zTreeViewViewModel2FilhoFilho
+      ),
+      new ZTreeViewViewModel(
+          nome: "ert ",
+          idNivelPai: "1",
+          idNivel: "12",
+          filhos: zTreeViewViewModel3
+      ),
+      new ZTreeViewViewModel(
+          nome: "ert ert",
+          idNivelPai: "1",
+          idNivel: "32",
+          filhos: zTreeViewViewModel3
+      ),
+      new ZTreeViewViewModel(
+          nome: "Huilf",
+          idNivelPai: "1",
+          idNivel: "52",
+          filhos: zTreeViewViewModel3
+      )
+    ];
+    zTreeViewViewModel = [
+    new ZTreeViewViewModel(
+    nome: "POSICAP",
+    idNivel: "1",
+    filhos: zTreeViewViewModel2
+    ),
+    new ZTreeViewViewModel(
+    nome: "sdf",
+    idNivel: "2",
+    filhos: zTreeViewViewModel2Filho
+    ),
+    ];
+
+    zTreeViewViewModel2Filho = [
+      new ZTreeViewViewModel(
+          nome: "Huilf",
+          idNivelPai: "2",
+          idNivel: "52",
+          filhos: zTreeViewViewModel3
+      )
+    ];
+
+
+
     listBatidas = [
        ZBatidaViewModel(ordem: "ENTRADA",
        horarioBatidaRealizada: "07:30"),
@@ -244,36 +321,9 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
           },
         ),
         appBar: new AppBar(),
-        body: new ZExpendableItemTile(nome: "ORninto",escala: "5x5",
-          cincoItensExpanded: true,
-          fontSizeTextExpand: 8,
-          exibeBatidas: true,
-          listBatida: listBatidas,
-          token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjhhYWQ0YzIzLTExYmQtNDM1MS1hNzE0LWZmNTk5OGZlYWEzYiIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZhNDliMy00N2QxLTRkNzYtODBkZi0wNzllYjgyZDZkOGYiLCJuYmYiOjE1NjUzODQ0NzEsImV4cCI6MTU2NTk4OTI3MSwiaWF0IjoxNTY1Mzg0NDcxfQ.CzkpWqttVPTXymEHnPBmKlE5L-Du-ZNzktdV6qCBzFQ',
-          idConta: '486A49B3-47D1-4D76-80DF-079EB82D6D8F',
-          colorBatida: Color(0xff1AC15D),
-          iconeUm: new Icon(Icons.phone, color: const Color(0xff520A5E)),
-          textoIconeUm: "(11) 948442525",
-          funcaoIconeUm: (){},
-          iconeDois: new Icon(Icons.event_busy, color: const Color(0xff520A5E)),
-          textoIconeDois: "Lançar Falta",
-          funcaoIconeDois:(){},
-          colorTextExpandItens: Color(0xff9C46AB),
-          iconeTres: new Icon(Icons.description, color: const Color(0xff520A5E)),
-          textoIconeTres: "Espelho de Ponto",
-          funcaoIconeTres: () {
-
-          },
-          iconeQuatro: new Icon(Icons.warning, color: const Color(0xff520A5E)),
-          textoIconeQuatro: "Ocorrencia",
-          textoIconeCinco: "APONT. RAPIDO",iconeCinco: new Icon(Icons.access_time),
-          funcaoIconeCinco: (){
-          print("icone 5");
-          },
-          funcaoIconeQuatro: () {
-
-          },)
+        body:  new ZNewTreeViewGestor(
+          lisTree: zTreeViewViewModel,
+        )
 
     );
 

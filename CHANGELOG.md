@@ -1,3 +1,7 @@
+## 0.9.18+42
+
+* new TreeView Style
+
 ## 0.9.18+41
 
 * ajuste ZExpandedItemTile
