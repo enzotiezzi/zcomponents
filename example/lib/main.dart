@@ -170,6 +170,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   List<ZTreeViewViewModel> zTreeViewViewModel2Filho;
   List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilho;
+  List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilhoFilho;
+
 
 
 
@@ -190,15 +192,25 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
     zTreeViewViewModel = new List();
     zTreeViewViewModel3 = new List();
     zTreeViewViewModel2Filho = new List();
+    zTreeViewViewModel2FilhoFilhoFilho = new List();
+    zTreeViewViewModel2FilhoFilhoFilho = [
+      new ZTreeViewViewModel(
+          nome: "FILHOF FO FLHIFO",
+          idNivelPai: "118",
+          idNivel: "hghgh",
+          filhos: zTreeViewViewModel3
+      ),
+    ];
     super.initState();
     zTreeViewViewModel2FilhoFilho = [
       new ZTreeViewViewModel(
           nome: "FILHOF FO FLHIFO",
           idNivelPai: "11",
-          idNivel: "11s",
-          filhos: zTreeViewViewModel3
+          idNivel: "118",
+          filhos: zTreeViewViewModel2FilhoFilhoFilho
       ),
     ];
+
     zTreeViewViewModel2 = [
       new ZTreeViewViewModel(
           nome: "sdfsdf",

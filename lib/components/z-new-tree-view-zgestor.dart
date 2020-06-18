@@ -96,10 +96,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
             child: new ConfigurableExpansionTile(
               animatedWidgetFollowingHeader: (item.filhos.length != 0)
                   ? new Icon(Icons.arrow_drop_down)
-                  : new Icon(
-                Icons.arrow_drop_down,
-                color: Colors.transparent,
-              ),
+                  : new Container(),
               borderColorStart: Colors.grey.withOpacity(0.3),
               borderColorEnd: Colors.grey.withOpacity(0.3),
               bottomBorderOn: true,
@@ -155,31 +152,27 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                         ),
                       ),
                       new Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          _contadorResultadosBusca(item),
-                          AnimatedSize(
-                              vsync: this,
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.fastOutSlowIn,
-                              reverseDuration: Duration(milliseconds: 500),
-                              child: new GestureDetector(
-                                onTap: () {
-                                  if (widget.onTap != null) {
-                                    var res = widget.onTap(item.idNivel);
-                                  }
-                                },
-                                child: new Container(
-                                  color: Colors.transparent,
-                                  padding: const EdgeInsets.only(
-                                      bottom: 10.0,
-                                      top: 10.0),
-                                  child: new Icon(
-                                    Icons.keyboard_arrow_right,
-                                    color: widget.colorArrow,
-                                    size: 16,
-                                  ),
-                                ),
-                              ))
+                          new GestureDetector(
+                            onTap: () {
+                              if (widget.onTap != null) {
+                                var res = widget.onTap(item.idNivel);
+                              }
+                            },
+                            child: new Container(
+                              color: Colors.transparent,
+                              margin: const EdgeInsets.only(right: 16),
+                              padding: const EdgeInsets.only(
+                                  bottom: 10.0,
+                                  top: 10.0),
+                              child: new Icon(
+                                Icons.keyboard_arrow_right,
+                                color: widget.colorArrow,
+                                size: 24,
+                              ),
+                            ),
+                          )
                         ],
                       )
                     ],
@@ -201,12 +194,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
               margin: const EdgeInsets.symmetric(horizontal: 14),
               child: new Icon(Icons.arrow_drop_down),
             )
-                : new Container(
-              child: new Icon(
-                Icons.arrow_drop_down,
-                color: Colors.transparent,
-              ),
-            ),
+                : new Container(),
             borderColorStart: Colors.grey.withOpacity(0.3),
             borderColorEnd: Colors.grey.withOpacity(0.3),
             bottomBorderOn: true,
@@ -365,12 +353,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                 margin: const EdgeInsets.symmetric(horizontal: 14),
                 child: new Icon(Icons.arrow_drop_down),
               )
-                  : new Container(
-                child: new Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.transparent,
-                ),
-              ),
+                  : new Container(),
               bottomBorderOn: true,
               header: new Expanded(
                 child: new Container(
@@ -407,30 +390,24 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                           ],
                         ),
                       ),
-                      AnimatedSize(
-                          vsync: this,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.fastOutSlowIn,
-                          reverseDuration: Duration(milliseconds: 500),
-                          child: new GestureDetector(
-                            onTap: () {
-                              if (widget.onTap != null) {
-                                var res = widget.onTap(item.idNivel);
-                              }
-                            },
-                            child: new Container(
-                              color: Colors.transparent,
-                              padding: const EdgeInsets.only(
-                                  left: 40.0,
-                                  bottom: 10.0,
-                                  top: 10.0),
-                              child: new Icon(
-                                Icons.keyboard_arrow_right,
-                                color: widget.colorArrow,
-                                size: 16,
-                              ),
-                            ),
-                          ))
+                      new GestureDetector(
+                        onTap: () {
+                          if (widget.onTap != null) {
+                            var res = widget.onTap(item.idNivel);
+                          }
+                        },
+                        child: new Container(
+                          margin: const EdgeInsets.only(right: 16),
+                          padding: const EdgeInsets.only(
+                              bottom: 10.0,
+                              top: 10.0),
+                          child: new Icon(
+                            Icons.keyboard_arrow_right,
+                            color: widget.colorArrow,
+                            size: 24,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -450,12 +427,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
               margin: const EdgeInsets.symmetric(horizontal: 14),
               child: new Icon(Icons.arrow_drop_down),
             )
-                : new Container(
-              child: new Icon(
-                Icons.arrow_drop_down,
-                color: Colors.transparent,
-              ),
-            ),
+                : new Container(),
             borderColorStart: Colors.grey.withOpacity(0.3),
             borderColorEnd: definirCorExpansionTile(item),
             bottomBorderOn: true,
