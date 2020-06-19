@@ -13,7 +13,6 @@ import 'package:z_components/components/z-tree-view.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
-import 'package:after_layout/after_layout.dart';
 import "package:z_components/view-model/batida-viewmodel.dart";
 import "package:z_components/view-model/z-tree-view-viewmodel.dart";
 
@@ -334,7 +333,9 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
         ),
         appBar: new AppBar(),
         body:  new ZNewTreeViewGestor(
-          lisTree: zTreeViewViewModel,
+          lisTree: zTreeViewViewModel,onTap: (d){
+            print("CLICKADO");
+        },
         )
 
     );

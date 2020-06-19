@@ -37,7 +37,6 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
   void initState() {
     super.initState();
     treeViewList = widget.lisTree;
-    preencherListaDeBusca();
   }
 
   @override
@@ -117,22 +116,28 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                 });
               },
               header: new Expanded(
-                child: new Container(
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Container(
-                        child: new Row(
-                          children: <Widget>[
-                            new Container(
-                              // margin: EdgeInsets.only(left: _margin),
-                              color: Color(0xff707070),
-                              width: 1.5,
-                              height: 45,
-                            ),
-                            new GestureDetector(
-                              child: new Container(
+                child: new InkWell(
+                  onTap: () {
+                    if (widget.onTap != null) {
+                      var res = widget.onTap(item);
+                    }
+                  },
+                  child:
+                  new Container(
+                    child: new Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        new Container(
+                          child: new Row(
+                            children: <Widget>[
+                              new Container(
+                                // margin: EdgeInsets.only(left: _margin),
+                                color: Color(0xff707070),
+                                width: 1.5,
+                                height: 45,
+                              ),
+                              new Container(
                                 width: 145,
                                 color: Colors.transparent,
                                 padding: EdgeInsets.only(
@@ -147,20 +152,13 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                                   ),
                                 ),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      new Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          new GestureDetector(
-                            onTap: () {
-                              if (widget.onTap != null) {
-                                var res = widget.onTap(item);
-                              }
-                            },
-                            child: new Container(
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            new Container(
                               color: Colors.transparent,
                               margin: const EdgeInsets.only(right: 16),
                               padding: const EdgeInsets.only(
@@ -172,12 +170,12 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                                 size: 24,
                               ),
                             ),
-                          )
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                )
               ),
               children: <Widget>[
                 _definirFilho(item, 1.0, 0),
@@ -356,22 +354,27 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                   : new Container(),
               bottomBorderOn: true,
               header: new Expanded(
-                child: new Container(
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Container(
-                        child: new Row(
-                          children: <Widget>[
-                            new Container(
-                              margin: EdgeInsets.only(left: margin * 16),
-                              color: Color(0xff707070),
-                              width: 1.5,
-                              height: 45,
-                            ),
-                            new GestureDetector(
-                              child: new Container(
+                child: new InkWell(
+                  onTap: () {
+                    if (widget.onTap != null) {
+                      var res = widget.onTap(item);
+                    }
+                  },
+                  child: new Container(
+                    child: new Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        new Container(
+                          child: new Row(
+                            children: <Widget>[
+                              new Container(
+                                margin: EdgeInsets.only(left: margin * 16),
+                                color: Color(0xff707070),
+                                width: 1.5,
+                                height: 45,
+                              ),
+                              new Container(
                                 width: 145,
                                 color: Colors.transparent,
                                 padding: EdgeInsets.only(
@@ -386,17 +389,10 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                                   ),
                                 ),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      new GestureDetector(
-                        onTap: () {
-                          if (widget.onTap != null) {
-                            var res = widget.onTap(item);
-                          }
-                        },
-                        child: new Container(
+                        new Container(
                           margin: const EdgeInsets.only(right: 16),
                           padding: const EdgeInsets.only(
                               bottom: 10.0,
@@ -407,10 +403,10 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                             size: 24,
                           ),
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                )
               ),
               children: <Widget>[
                 _definirFilho(item, j, item.index),
@@ -490,79 +486,6 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
           ));
   }
 
-  void preencherListaDeBusca() {
-    var lista = widget.lisTree
-        .map((item) => new ZTreeViewViewModel.clone(item))
-        .toList();
-    for (int i = 0; i < lista.length; i++) {
-      buscaProfundidade(lista[i]);
-    }
-    print(profArvore);
-  }
-
-  void preencherListaDeBuscaFiltrada(lista, String id) {
-    lista = widget.lisTree
-        .map((item) => new ZTreeViewViewModel.clone(item))
-        .toList();
-    for (int i = 0; i < lista.length; i++) {
-      buscaProfundidadeFiltrada(lista[i], id);
-    }
-  }
-
-  void buscaProfundidade(ZTreeViewViewModel base) {
-    if (base.filhos.isEmpty) {
-      auxProfArvore++;
-      if (auxProfArvore > profArvore) {
-        profArvore = auxProfArvore;
-      }
-      auxProfArvore = 0;
-      if (base.jaPassou == null || base.jaPassou == false) {
-        auxProfArvore++;
-        listaBusca.add(new ItemBuscaViewModel(
-            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
-      }
-      base.jaPassou = true;
-    }
-    base.filhos.forEach((filho) {
-      if (base.jaPassou == null || base.jaPassou == false) {
-        listaBusca.add(new ItemBuscaViewModel(
-            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
-      }
-      base.jaPassou = true;
-      buscaProfundidade(filho);
-    });
-    listaBuscaFiltrada = listaBusca;
-  }
-
-  void buscaProfundidadeFiltrada(ZTreeViewViewModel base, String id) {
-    if (base.filhos.isEmpty) {
-      if ((base.jaPassou == null || base.jaPassou == false) &&
-          base.nome == id) {
-        listaId.add(base.idNivel);
-        var lista = widget.lisTree
-            .map((item) => new ZTreeViewViewModel.clone(item))
-            .toList();
-        preencherListaDeBuscaFiltrada(lista, base.idNivelPai);
-      }
-      base.jaPassou = true;
-    }
-    base.filhos.forEach((filho) {
-      if (base.jaPassou == null || base.jaPassou == false) {
-        base.jaPassou = true;
-      }
-      if (base.idNivel == id && !listaId.contains(base.idNivel)) {
-        var lista = widget.lisTree
-            .map((item) => new ZTreeViewViewModel.clone(item))
-            .toList();
-        listaId.add(base.idNivel);
-        preencherListaDeBuscaFiltrada(lista, base.idNivelPai);
-      } else {
-        buscaProfundidadeFiltrada(filho, id);
-      }
-    });
-    listaBuscaFiltrada = listaBusca;
-  }
-
   void montarListaPossiveisItens(String text) {
     listaPossiveisId.clear();
     listaId.clear();
@@ -573,9 +496,6 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
       if (listaBusca[i].nome.toLowerCase().contains(text.toLowerCase())) {
         listaPossiveisId.add(listaBusca[i].idAmbiente);
       }
-    }
-    for (int i = 0; i < listaPossiveisId.length; i++) {
-      preencherListaDeBuscaFiltrada(new List(), listaPossiveisId[i]);
     }
     containerKey = new GlobalKey<_ZNewTreeViewGestorState>();
     setState(() {});
@@ -602,64 +522,5 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
       limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos[i]);
     }
     setState(() {});
-  }
-
-  Widget _contadorResultadosBusca(item) {
-    if (comecouBusca == false) {
-      return new Container();
-    } else {
-      return new Container(
-        margin: EdgeInsets.only(right: 24.0),
-        padding: EdgeInsets.only(left: 8.0, right: 8.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Color(0xffcccccc)),
-            borderRadius: BorderRadius.circular(12.0)),
-        child: new Container(
-          child: new Text(
-            "${item.possiveisBuscas}",
-            style: TextStyle(color: Color(0xff000000)),
-          ),
-        ),
-      );
-    }
-  }
-
-  void preencherContadorListaDeBusca(text) {
-    var lista = widget.lisTree
-        .map((item) => new ZTreeViewViewModel.clone(item))
-        .toList();
-    for (int i = 0; i < lista.length; i++) {
-      buscaProfundidadeContador(lista[i], text);
-      if (treeViewList[i].possiveisBuscas == null) {
-        treeViewList[i].possiveisBuscas = 0;
-      }
-      treeViewList[i].possiveisBuscas = contadorBuscas;
-      contadorBuscas = 0;
-    }
-  }
-
-  void buscaProfundidadeContador(ZTreeViewViewModel base, text) {
-    if (base.filhos.isEmpty) {
-      if (base.jaPassou == null || base.jaPassou == false) {
-        if (base.nome.toLowerCase().contains(text)) {
-          contadorBuscas++;
-        }
-        listaBusca.add(new ItemBuscaViewModel(
-            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
-      }
-      base.jaPassou = true;
-    }
-    base.filhos.forEach((filho) {
-      if (base.jaPassou == null || base.jaPassou == false) {
-        if (base.nome.toLowerCase().contains(text)) {
-          contadorBuscas++;
-        }
-        listaBusca.add(new ItemBuscaViewModel(
-            nome: base.nome, idPai: base.idNivelPai, idAmbiente: base.idNivel));
-      }
-      base.jaPassou = true;
-      buscaProfundidadeContador(filho, text);
-    });
-    listaBuscaFiltrada = listaBusca;
   }
 }
