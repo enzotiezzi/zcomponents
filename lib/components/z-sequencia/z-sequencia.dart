@@ -159,7 +159,7 @@ class ZSequenciaState extends State<ZSequencia> {
     var quantidadeDeDiasNaEmpresa =
         _calcularDiasNaEmpresa(widget.primeiroDiaEscala, date);
 
-    var quantidadeDeDiasNaEscala = _calcularDiasNaEscala(widget.escala);
+    var quantidadeDeDiasNaEscala = _calcularDiasNaEscala(escalaNormalizada);
 
     var diaAtualNaEscala =
         _mod(quantidadeDeDiasNaEmpresa, quantidadeDeDiasNaEscala);
