@@ -107,48 +107,6 @@ class _ZCollectionListState extends State<ZCollectionList> {
                     onPressed: () {}))
           ],
         ));
-    return new Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          border:
-              Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.2)))),
-      child: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          new Container(
-              padding: EdgeInsets.all(7.0),
-              margin: EdgeInsets.only(left: 8.0),
-              decoration: BoxDecoration(
-                  color: const Color(0xff8E8E93).withOpacity(0.2),
-                  borderRadius: BorderRadius.all(Radius.circular(9.0))),
-              child: new Container(
-                width: MediaQuery.of(context).size.width / 1.25,
-                child: new TextField(
-                  keyboardAppearance: Brightness.light,
-                  decoration: InputDecoration.collapsed(hintText: "Busca"),
-                  style: TextStyle(fontSize: 19.0, color: Colors.black),
-                  onChanged: (text) {
-                    text = text.toLowerCase();
-                    setState(() {
-                      if (text.length > 0)
-                        _listaFiltro = widget.lista
-                            .where((x) => x.valor.toLowerCase().contains(text))
-                            .toList();
-                      else
-                        _listaFiltro = widget.lista;
-                    });
-                  },
-                ),
-              )),
-          new IconButton(
-              icon: Icon(
-                Icons.filter_list,
-                color: const Color(0xff2FA9A2),
-              ),
-              onPressed: null)
-        ],
-      ),
-    );
   }
 
   Widget _buildLista() {
