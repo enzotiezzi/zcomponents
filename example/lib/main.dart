@@ -333,7 +333,9 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
         ),
         appBar: new AppBar(),
         body:  new ZNewTreeViewGestor(
-          lisTree: zTreeViewViewModel,
+          lisTree: zTreeViewViewModel,onTap: (d){
+            print("CLICKADO");
+        },
         )
 
     );

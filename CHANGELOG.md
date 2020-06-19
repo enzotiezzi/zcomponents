@@ -1,3 +1,8 @@
+## 0.9.18+45
+
+* ajuste ZSequencia e TreeView
+
+
 ## 0.9.18+44
 
 * ajuste TreeView
