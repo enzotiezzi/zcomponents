@@ -1,3 +1,7 @@
+## 0.9.18+46
+
+* add styleColor and ajust SearchBar Zcollection!
+
 ## 0.9.18+45
 
 * ajuste ZSequencia e TreeView

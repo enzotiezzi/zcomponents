@@ -5,6 +5,9 @@ import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:z_components/components/z-item-tile.dart';
+import 'package:z_components/config/z-type-tile.dart';
+
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-new-tree-view-zgestor.dart';
@@ -15,7 +18,7 @@ import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 import "package:z_components/view-model/batida-viewmodel.dart";
 import "package:z_components/view-model/z-tree-view-viewmodel.dart";
-
+import 'package:z_components/config/z-type-tile.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
@@ -31,10 +34,11 @@ import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-previsto.dart';
-import 'package:z_components/components/z-expendable-item-tile.dart';
+import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
+import 'package:z_components/components/z-collection.dart';
 
 
 import 'main-testing.dart';
@@ -332,12 +336,18 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
           },
         ),
         appBar: new AppBar(),
-        body:  new ZNewTreeViewGestor(
-          lisTree: zTreeViewViewModel,onTap: (d){
-            print("CLICKADO");
-        },
-        )
+        body:  new ZCollection(
+          titulo: "Justificativas",
+          lista: zTreeViewViewModel
+              .map((x) => ZCollectionItem(
+              titulo: x.idNivelPai,
+              chave: x.idNivel,
+              valor: x.nome))
+              .toList(),
+          onChange: (justificativa) {
 
+          },
+        )
     );
 
   }

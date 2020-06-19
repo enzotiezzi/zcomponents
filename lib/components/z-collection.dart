@@ -10,13 +10,15 @@ class ZCollection extends StatefulWidget {
   final List<ZCollectionItem> lista;
   final ValueChanged<ZCollectionItem> onChange;
   final String valorPadrao;
+  final Color colorStyle;
 
   ZCollection(
       {Key key,
       @required this.titulo,
       @required this.lista,
       this.onChange,
-      this.valorPadrao})
+      this.valorPadrao,
+      this.colorStyle: const Color(0xff2bbab4)})
       : super(key: key);
 
   @override
@@ -125,6 +127,7 @@ class ZCollectionState extends State<ZCollection> {
               lista: widget.lista,
               titulo: widget.titulo,
               ultimoValor: _itemSelecionado,
+              color: widget.colorStyle,
             );
           },
           transitionsBuilder: (BuildContext context,
