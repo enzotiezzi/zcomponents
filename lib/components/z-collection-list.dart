@@ -7,8 +7,9 @@ class ZCollectionList extends StatefulWidget {
   final List<ZCollectionItem> lista;
   final String titulo;
   final ZCollectionItem ultimoValor;
+  final color;
 
-  ZCollectionList({this.lista, this.titulo: "", this.ultimoValor});
+  ZCollectionList({this.lista, this.titulo: "", this.ultimoValor,this.color});
 
   @override
   State<StatefulWidget> createState() => _ZCollectionListState();
@@ -27,6 +28,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new CupertinoNavigationBar(
+        backgroundColor: widget.color,
           leading: new GestureDetector(
             onTap: () => _selecionarItem(widget.ultimoValor),
             child: new Container(
@@ -35,12 +37,12 @@ class _ZCollectionListState extends State<ZCollectionList> {
               child: new Icon(
                 Icons.arrow_back_ios,
                 size: 20.0,
-                color: const Color(0xff2BB9B4),
+                color: Colors.white,
               ),
             ),
           ),
           middle: new Container(
-            child: new Text(widget.titulo),
+            child: new Text(widget.titulo,style: new TextStyle(color: Colors.white),),
           )),
       body: new Column(
         children: <Widget>[_buildFiltro(), new Expanded(child: _buildLista())],
@@ -49,6 +51,62 @@ class _ZCollectionListState extends State<ZCollectionList> {
   }
 
   Widget _buildFiltro() {
+    return new Material(
+        elevation: 5,
+        child: new Row(
+          children: <Widget>[
+            new Expanded(
+              flex: 85,
+              child: new Container(
+                margin: const EdgeInsets.only(bottom: 6, top: 6.0),
+                child: new Container(
+                  height: 36,
+                  margin: EdgeInsets.only(left: 16, right: 2),
+                  decoration: BoxDecoration(
+                      color: Color(0xfff0f0f0),
+                      borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                  child: new Row(
+                    children: <Widget>[
+                      new Container(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: new Icon(
+                            Icons.search,
+                            color: Color(0xff999999),
+                          )),
+                      new Expanded(
+                          child: new CupertinoTextField(
+                            placeholderStyle: new TextStyle(
+                                color: Color(0xff999999), fontSize: 17),
+                            placeholder: "Busca",
+                            decoration:
+                            new BoxDecoration(color: Colors.transparent),
+                            onChanged: (text) {
+                              text = text.toLowerCase();
+                              setState(() {
+                                if (text.length > 0)
+                                  _listaFiltro = widget.lista
+                                      .where((x) => x.valor.toLowerCase().contains(text))
+                                      .toList();
+                                else
+                                  _listaFiltro = widget.lista;
+                              });
+                            },
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            new Expanded(
+                flex: 15,
+                child: new IconButton(
+                    icon: new Icon(
+                      Icons.filter_list,
+                      color: widget.color,
+                    ),
+                    onPressed: () {}))
+          ],
+        ));
     return new Container(
       decoration: BoxDecoration(
           color: Colors.white,
