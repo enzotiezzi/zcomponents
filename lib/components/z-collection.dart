@@ -43,44 +43,48 @@ class ZCollectionState extends State<ZCollection> {
   Widget build(BuildContext context) {
     return new GestureDetector(
       child: new Container(
+        height: 42,
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border(top: BorderSide(color: Colors.grey))),
-        padding: EdgeInsets.only(left: 16.0),
+        padding: EdgeInsets.only(left: 16.0,right: 14),
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            new Container(
-              width: 130,
-              child: new Text(widget.titulo,
-                  style: MainStyle.get(context).mainStyleTextBaseLine),
+            Flexible(
+              flex: 45,
+              fit: FlexFit.tight,
+              child: new RichText(
+                textAlign: TextAlign.start,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                text: TextSpan(
+                  style: MainStyle.get(context).mainStyleTextBaseLine,
+                  text: widget.titulo,
+                ),
+              ),
             ),
-            new Expanded(
-                child: ZTile(
-              leading: new Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  (_itemSelecionado?.valor == null && _anterior == "Selecione")
-                      ? new Text(
-                          _anterior,
-                          style:
-                              MainStyle.get(context).mainStyleTextBaseLineHint,
-                        )
-                      : new Text(
-                          (_itemSelecionado?.valor.length > 14)
-                              ? "${_itemSelecionado?.valor.substring(0, 14) ?? ""}..."
-                              : _itemSelecionado?.valor,
-                          style: new TextStyle(
-                            color: Colors.grey,
-                          ),
-                        )
-                ],
+            Flexible(
+              flex: 55,
+              fit: FlexFit.tight,
+              child: new RichText(
+                textAlign: TextAlign.start,
+                overflow: TextOverflow.clip,
+                maxLines: 1,
+                softWrap: false,
+                text: TextSpan(
+                  style: new TextStyle(
+                    color: Colors.grey,
+                  ),
+                  text: (_itemSelecionado?.valor == null && _anterior == "Selecione")?_anterior:_itemSelecionado?.valor
+                ),
               ),
-              trailing: new Icon(
-                Icons.chevron_right,
-                color: Colors.grey,
-              ),
-            ))
+            ),
+            Flexible(
+              flex: 10,
+              fit: FlexFit.tight,
+              child: new Icon(Icons.keyboard_arrow_right),
+            ),
           ],
         ),
       ),

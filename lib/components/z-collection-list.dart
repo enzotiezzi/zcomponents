@@ -115,10 +115,6 @@ class _ZCollectionListState extends State<ZCollectionList> {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         var item = _listaFiltro[index];
-        if (_listaFiltro[index].valor.length > 16) {
-          _listaFiltro[index].valor =
-              "${_listaFiltro[index].valor.substring(0, 16)}...";
-        }
         return new ListTile(
           onTap: () {
             _selecionarItem(item);
