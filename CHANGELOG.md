@@ -1,3 +1,7 @@
+## 0.9.18+47
+
+* add styleColor in ZSequencia!!! and ajust Zcollection!
+
 ## 0.9.18+46
 
 * add styleColor and ajust SearchBar Zcollection!
