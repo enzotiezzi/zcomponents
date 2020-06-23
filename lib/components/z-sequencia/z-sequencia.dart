@@ -8,8 +8,9 @@ import 'package:z_components/components/z_loading.dart';
 class ZSequencia extends StatefulWidget {
   final String primeiroDiaEscala;
   final String escala;
+  final Color color;
 
-  ZSequencia({@required this.primeiroDiaEscala, @required this.escala});
+  ZSequencia({@required this.primeiroDiaEscala, @required this.escala,this.color: const Color(0xff2bbab4)});
 
   @override
   State<StatefulWidget> createState() => new ZSequenciaState();
@@ -79,8 +80,8 @@ class ZSequenciaState extends State<ZSequencia> {
 
   Widget _buildItemSequencia(index) {
     var backGroundColor = const Color(0xFFFFFFFF);
-    var fontColor = const Color(0xFF2BBAB4);
-    var borderColor = const Color(0xFF2BBAB4);
+    var fontColor = widget.color;
+    var borderColor = widget.color;
 
     var data = new DateTime.now().add(new Duration(days: indexDia));
     var diaSemana = new DateFormat.EEEE().format(data);
@@ -94,7 +95,7 @@ class ZSequenciaState extends State<ZSequencia> {
 
     if (dataFormatada == hojeFormatado) {
       dia = "HOJE";
-      backGroundColor = const Color(0xFF2BBAB4);
+      backGroundColor = widget.color;
       fontColor = const Color(0xFFFFFFFF);
     }
 

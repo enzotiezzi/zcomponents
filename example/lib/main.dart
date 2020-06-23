@@ -242,12 +242,12 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
     ];
     zTreeViewViewModel = [
     new ZTreeViewViewModel(
-    nome: "POSICAP",
+    nome: "posicao alocao alocaocalocaro alocao alocaocalocaro alocaocalocaro ",
     idNivel: "1",
     filhos: zTreeViewViewModel2
     ),
     new ZTreeViewViewModel(
-    nome: "sdf",
+    nome: "JUsytificativadss vAMOS VEWR QUE MEH MAIS",
     idNivel: "2",
     filhos: zTreeViewViewModel2Filho
     ),
@@ -337,7 +337,7 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
         ),
         appBar: new AppBar(),
         body:  new ZCollection(
-          titulo: "Justificativas",
+          titulo: "jhg jhg jhg jhg hhhhhhg g g g g g ",
           lista: zTreeViewViewModel
               .map((x) => ZCollectionItem(
               titulo: x.idNivelPai,
