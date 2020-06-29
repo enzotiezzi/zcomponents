@@ -36,6 +36,13 @@ class _ZCollectionListState extends State<ZCollectionList> {
   }
 
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new CupertinoNavigationBar(
@@ -154,26 +161,29 @@ class _ZCollectionListState extends State<ZCollectionList> {
 
   Future<void> _initList() {
     if (widget.take == 0) {
-      _listaFiltro = widget.lista;
-
+      setState(() {
+        _listaFiltro = widget.lista;
+      });
     } else {
       var listaSkipTake =
           widget.lista.skip(widget.skip).take(widget.take).toList();
 
-      _listaFiltro.addAll(listaSkipTake);
+      setState(() {
+        _listaFiltro.addAll(listaSkipTake);
+        widget.skip += widget.take;
+      });
     }
   }
 
   Future<void> _scrollListener() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      widget.skip += widget.take;
-
       var listaSkipTake =
           widget.lista.skip(widget.skip).take(widget.take).toList();
 
       setState(() {
         _listaFiltro.addAll(listaSkipTake);
+        widget.skip += widget.take;
       });
     }
   }
