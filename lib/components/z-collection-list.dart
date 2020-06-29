@@ -16,8 +16,8 @@ class ZCollectionList extends StatefulWidget {
       this.titulo: "",
       this.ultimoValor,
       this.color,
-      this.skip,
-      this.take});
+      this.skip: 0,
+      this.take: 0});
 
   @override
   State<StatefulWidget> createState() => _ZCollectionListState();
@@ -29,6 +29,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
 
   @override
   void initState() {
+    _listaFiltro = new List<ZCollectionItem>();
     scrollController = new ScrollController();
     scrollController.addListener(_scrollListener);
     _initList();
@@ -168,25 +169,28 @@ class _ZCollectionListState extends State<ZCollectionList> {
       var listaSkipTake =
           widget.lista.skip(widget.skip).take(widget.take).toList();
 
-      setState(() {
-        _listaFiltro.addAll(listaSkipTake);
-        widget.skip += widget.take;
-      });
+      if (listaSkipTake != null && listaSkipTake.length > 0) {
+        setState(() {
+          _listaFiltro.addAll(listaSkipTake);
+          widget.skip += widget.take;
+        });
+      }
     }
   }
 
   Future<void> _scrollListener() async {
-    if(widget.take > 0){
-    if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
-      var listaSkipTake =
-      widget.lista.skip(widget.skip).take(widget.take).toList();
-
-      setState(() {
-        _listaFiltro.addAll(listaSkipTake);
-        widget.skip += widget.take;
-      });
+    if (widget.take > 0) {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        var listaSkipTake =
+            widget.lista.skip(widget.skip).take(widget.take).toList();
+        if (listaSkipTake != null && listaSkipTake.length > 0) {
+          setState(() {
+            _listaFiltro.addAll(listaSkipTake);
+            widget.skip += widget.take;
+          });
+        }
+      }
     }
-  }
   }
 }

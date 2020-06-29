@@ -138,6 +138,8 @@ class ZCollectionState extends State<ZCollection> {
               titulo: widget.titulo,
               ultimoValor: _itemSelecionado,
               color: widget.colorStyle,
+              skip: widget.skip,
+              take: widget.take,
             );
           },
           transitionsBuilder: (BuildContext context,
