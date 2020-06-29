@@ -127,6 +127,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
   Widget _buildLista() {
     return ListView.builder(
       itemCount: _listaFiltro.length,
+      controller: scrollController,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         var item = _listaFiltro[index];
