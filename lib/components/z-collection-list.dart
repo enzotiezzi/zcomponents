@@ -176,15 +176,17 @@ class _ZCollectionListState extends State<ZCollectionList> {
   }
 
   Future<void> _scrollListener() async {
+    if(widget.take > 0){
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       var listaSkipTake =
-          widget.lista.skip(widget.skip).take(widget.take).toList();
+      widget.lista.skip(widget.skip).take(widget.take).toList();
 
       setState(() {
         _listaFiltro.addAll(listaSkipTake);
         widget.skip += widget.take;
       });
     }
+  }
   }
 }

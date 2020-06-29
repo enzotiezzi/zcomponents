@@ -337,7 +337,7 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
         ),
         appBar: new AppBar(),
         body:  new ZCollection(
-          titulo: "jhg jhg jhg jhg hhhhhhg g g g g g ",
+          titulo: "Teste",
           lista: zTreeViewViewModel
               .map((x) => ZCollectionItem(
               titulo: x.idNivelPai,
