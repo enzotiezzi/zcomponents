@@ -8,8 +8,16 @@ class ZCollectionList extends StatefulWidget {
   final String titulo;
   final ZCollectionItem ultimoValor;
   final color;
+  int skip;
+  int take;
 
-  ZCollectionList({this.lista, this.titulo: "", this.ultimoValor,this.color});
+  ZCollectionList(
+      {this.lista,
+      this.titulo: "",
+      this.ultimoValor,
+      this.color,
+      this.skip,
+      this.take});
 
   @override
   State<StatefulWidget> createState() => _ZCollectionListState();
@@ -17,10 +25,13 @@ class ZCollectionList extends StatefulWidget {
 
 class _ZCollectionListState extends State<ZCollectionList> {
   List<ZCollectionItem> _listaFiltro;
+  ScrollController scrollController;
 
   @override
   void initState() {
-    _listaFiltro = widget.lista;
+    scrollController = new ScrollController();
+    scrollController.addListener(_scrollListener);
+    _initList();
     super.initState();
   }
 
@@ -28,7 +39,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new CupertinoNavigationBar(
-        backgroundColor: widget.color,
+          backgroundColor: widget.color,
           leading: new GestureDetector(
             onTap: () => _selecionarItem(widget.ultimoValor),
             child: new Container(
@@ -42,7 +53,10 @@ class _ZCollectionListState extends State<ZCollectionList> {
             ),
           ),
           middle: new Container(
-            child: new Text(widget.titulo,style: new TextStyle(color: Colors.white),),
+            child: new Text(
+              widget.titulo,
+              style: new TextStyle(color: Colors.white),
+            ),
           )),
       body: new Column(
         children: <Widget>[_buildFiltro(), new Expanded(child: _buildLista())],
@@ -75,23 +89,24 @@ class _ZCollectionListState extends State<ZCollectionList> {
                           )),
                       new Expanded(
                           child: new CupertinoTextField(
-                            placeholderStyle: new TextStyle(
-                                color: Color(0xff999999), fontSize: 17),
-                            placeholder: "Busca",
-                            decoration:
+                        placeholderStyle: new TextStyle(
+                            color: Color(0xff999999), fontSize: 17),
+                        placeholder: "Busca",
+                        decoration:
                             new BoxDecoration(color: Colors.transparent),
-                            onChanged: (text) {
-                              text = text.toLowerCase();
-                              setState(() {
-                                if (text.length > 0)
-                                  _listaFiltro = widget.lista
-                                      .where((x) => x.valor.toLowerCase().contains(text))
-                                      .toList();
-                                else
-                                  _listaFiltro = widget.lista;
-                              });
-                            },
-                          )),
+                        onChanged: (text) {
+                          text = text.toLowerCase();
+                          setState(() {
+                            if (text.length > 0)
+                              _listaFiltro = widget.lista
+                                  .where((x) =>
+                                      x.valor.toLowerCase().contains(text))
+                                  .toList();
+                            else
+                              _listaFiltro = widget.lista;
+                          });
+                        },
+                      )),
                     ],
                   ),
                 ),
@@ -134,5 +149,31 @@ class _ZCollectionListState extends State<ZCollectionList> {
 
   void _selecionarItem(ZCollectionItem item) {
     Navigator.of(context).pop(item);
+  }
+
+  Future<void> _initList() {
+    if (widget.take == 0) {
+      _listaFiltro = widget.lista;
+
+    } else {
+      var listaSkipTake =
+          widget.lista.skip(widget.skip).take(widget.take).toList();
+
+      _listaFiltro.addAll(listaSkipTake);
+    }
+  }
+
+  Future<void> _scrollListener() async {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      widget.skip += widget.take;
+
+      var listaSkipTake =
+          widget.lista.skip(widget.skip).take(widget.take).toList();
+
+      setState(() {
+        _listaFiltro.addAll(listaSkipTake);
+      });
+    }
   }
 }
