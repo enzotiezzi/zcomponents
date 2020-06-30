@@ -40,9 +40,7 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
 import 'package:z_components/components/z-collection.dart';
 
-
 import 'main-testing.dart';
-
 
 void main() => runApp(MyApp());
 
@@ -175,18 +173,25 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilho;
   List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilhoFilho;
 
-
-
-
   List<ZTreeViewViewModel> zTreeViewViewModel3;
+
+  List<ZCollectionItem> listaTesteSkipTake;
 
 
   List<ZBatidaViewModel> listBatidas = new List();
   List<ZDynamicFormViewModel> lista = new List();
   List<ZDynamicFormViewModel> listaEnvio = new List();
-  IFormularioService iFormularioService = new FormularioService("eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4ZDE1YmExNGJkNWQ1OGFiODRlNGI5YTMzZjg1NjIwIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODYyMDQzOTUsImV4cCI6MTU4NjIwNzk5NSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjU0NTMyNDM1LTY0ZTAtNDczMS05NmQwLTcxOTY5YjJkY2QwNyIsImF1dGhfdGltZSI6MTU4NjE4NDExNiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ijc1NzMxNGU3LTM0NDYtNGY5Ny04M2IwLWNhOWY4NmI2OGM3MCIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZBNDlCMy00N0QxLTRENzYtODBERi0wNzlFQjgyRDZEOEYiLCJpZENvbGFib3JhZG9yIjoiNEUzMkRGMjktOTNFMC00RDU1LTk1REQtQzI2MjIyNTdDQ0Q2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDQ3LjkzMC42MzgtMjkiLCJlbWFpbCI6InZpY3RvcnRtYXJxdWVzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpbZmFsc2UsIkZhbHNlIl0sIm5hbWUiOiJWaWN0b3IgVGF2YXJlcyBNYXJxdWVzIiwicGhvbmVfbnVtYmVyIjoiKDExKSA5IDgyMzctMjYyMiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.pwwxzqA5DqWyWMxN_Z5KTjDY3ZICbxbTahBO0zhcDIIj3WrXEQszzLYxACmXUlYaK8cc3_5Ee82n7FofPIoOUKRMk7hfPBSJNCCqiNlgWF1_csd8T5cRwTPhxnOC6t_pzi09gTik21VrIq860WZ-hu8ho2dktlpKGNbCo-ZItqjqTUJ1PkN2J8KPLAYgH2uP0WhIM_WFtwQRXEfIsOhZmnpOYoqpek2a288rM3pCny22hIuPcFp24oadaY4BBuGSEEOrPtad6KSY_HmDgAj9rMx_nlo1DkxuVelDVraiKwgLJX_m2-8Q2EdmanQt-rEkPt6mq_45s3dYSzHkxYeSow");
-DialogUtils _dialogUtils;
-List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
+  IFormularioService iFormularioService = new FormularioService(
+      "eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4ZDE1YmExNGJkNWQ1OGFiODRlNGI5YTMzZjg1NjIwIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODYyMDQzOTUsImV4cCI6MTU4NjIwNzk5NSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjU0NTMyNDM1LTY0ZTAtNDczMS05NmQwLTcxOTY5YjJkY2QwNyIsImF1dGhfdGltZSI6MTU4NjE4NDExNiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ijc1NzMxNGU3LTM0NDYtNGY5Ny04M2IwLWNhOWY4NmI2OGM3MCIsImFjY291bnQiOiJaZWxsYXJUZW5hbnQiLCJpZEFjY291bnQiOiI0ODZBNDlCMy00N0QxLTRENzYtODBERi0wNzlFQjgyRDZEOEYiLCJpZENvbGFib3JhZG9yIjoiNEUzMkRGMjktOTNFMC00RDU1LTk1REQtQzI2MjIyNTdDQ0Q2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDQ3LjkzMC42MzgtMjkiLCJlbWFpbCI6InZpY3RvcnRtYXJxdWVzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpbZmFsc2UsIkZhbHNlIl0sIm5hbWUiOiJWaWN0b3IgVGF2YXJlcyBNYXJxdWVzIiwicGhvbmVfbnVtYmVyIjoiKDExKSA5IDgyMzctMjYyMiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.pwwxzqA5DqWyWMxN_Z5KTjDY3ZICbxbTahBO0zhcDIIj3WrXEQszzLYxACmXUlYaK8cc3_5Ee82n7FofPIoOUKRMk7hfPBSJNCCqiNlgWF1_csd8T5cRwTPhxnOC6t_pzi09gTik21VrIq860WZ-hu8ho2dktlpKGNbCo-ZItqjqTUJ1PkN2J8KPLAYgH2uP0WhIM_WFtwQRXEfIsOhZmnpOYoqpek2a288rM3pCny22hIuPcFp24oadaY4BBuGSEEOrPtad6KSY_HmDgAj9rMx_nlo1DkxuVelDVraiKwgLJX_m2-8Q2EdmanQt-rEkPt6mq_45s3dYSzHkxYeSow");
+  DialogUtils _dialogUtils;
+  List<String> orem = [
+    "ENTRADA",
+    "SAÍDA",
+    "ENTRADA",
+    "SAÍDA",
+    "ENTRADA",
+    "SAÍDA"
+  ];
 
   @override
   void initState() {
@@ -196,13 +201,37 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
     zTreeViewViewModel3 = new List();
     zTreeViewViewModel2Filho = new List();
     zTreeViewViewModel2FilhoFilhoFilho = new List();
+    listaTesteSkipTake = new List();
+
+    listaTesteSkipTake = [
+      ZCollectionItem(chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
+      ZCollectionItem(chave: "1", titulo: "1", valor: "1"),
+      ZCollectionItem(chave: "2", titulo: "2", valor: "2"),
+      ZCollectionItem(chave: "3", titulo: "3", valor: "3"),
+      ZCollectionItem(chave: "4", titulo: "4", valor: "4"),
+      ZCollectionItem(chave: "5", titulo: "5", valor: "5"),
+      ZCollectionItem(chave: "6", titulo: "6", valor: "6"),
+      ZCollectionItem(chave: "7", titulo: "7", valor: "7"),
+      ZCollectionItem(chave: "8", titulo: "8", valor: "8"),
+      ZCollectionItem(chave: "9", titulo: "9", valor: "9"),
+      ZCollectionItem(chave: "10", titulo: "10", valor: "10"),
+      ZCollectionItem(chave: "11", titulo: "11", valor: "11"),
+      ZCollectionItem(chave: "12", titulo: "12", valor: "12"),
+      ZCollectionItem(chave: "13", titulo: "13", valor: "13"),
+      ZCollectionItem(chave: "14", titulo: "14", valor: "14"),
+      ZCollectionItem(chave: "15", titulo: "15", valor: "15"),
+      ZCollectionItem(chave: "16", titulo: "16", valor: "16"),
+      ZCollectionItem(chave: "17", titulo: "17", valor: "17"),
+      ZCollectionItem(chave: "18", titulo: "18", valor: "18"),
+      ZCollectionItem(chave: "19", titulo: "19", valor: "19"),
+      ZCollectionItem(chave: "20", titulo: "20", valor: "20"),
+    ];
     zTreeViewViewModel2FilhoFilhoFilho = [
       new ZTreeViewViewModel(
           nome: "FILHOF FO FLHIFO",
           idNivelPai: "118",
           idNivel: "hghgh",
-          filhos: zTreeViewViewModel3
-      ),
+          filhos: zTreeViewViewModel3),
     ];
     super.initState();
     zTreeViewViewModel2FilhoFilho = [
@@ -210,8 +239,7 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
           nome: "FILHOF FO FLHIFO",
           idNivelPai: "11",
           idNivel: "118",
-          filhos: zTreeViewViewModel2FilhoFilhoFilho
-      ),
+          filhos: zTreeViewViewModel2FilhoFilhoFilho),
     ];
 
     zTreeViewViewModel2 = [
@@ -219,38 +247,34 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
           nome: "sdfsdf",
           idNivelPai: "1",
           idNivel: "11",
-          filhos: zTreeViewViewModel2FilhoFilho
-      ),
+          filhos: zTreeViewViewModel2FilhoFilho),
       new ZTreeViewViewModel(
           nome: "ert ",
           idNivelPai: "1",
           idNivel: "12",
-          filhos: zTreeViewViewModel3
-      ),
+          filhos: zTreeViewViewModel3),
       new ZTreeViewViewModel(
           nome: "ert ert",
           idNivelPai: "1",
           idNivel: "32",
-          filhos: zTreeViewViewModel3
-      ),
+          filhos: zTreeViewViewModel3),
       new ZTreeViewViewModel(
           nome: "Huilf",
           idNivelPai: "1",
           idNivel: "52",
-          filhos: zTreeViewViewModel3
-      )
+          filhos: zTreeViewViewModel3)
     ];
+
     zTreeViewViewModel = [
-    new ZTreeViewViewModel(
-    nome: "posicao alocao alocaocalocaro alocao alocaocalocaro alocaocalocaro ",
-    idNivel: "1",
-    filhos: zTreeViewViewModel2
-    ),
-    new ZTreeViewViewModel(
-    nome: "JUsytificativadss vAMOS VEWR QUE MEH MAIS",
-    idNivel: "2",
-    filhos: zTreeViewViewModel2Filho
-    ),
+      new ZTreeViewViewModel(
+          nome:
+              "posicao alocao alocaocalocaro alocao alocaocalocaro alocaocalocaro ",
+          idNivel: "1",
+          filhos: zTreeViewViewModel2),
+      new ZTreeViewViewModel(
+          nome: "JUsytificativadss vAMOS VEWR QUE MEH MAIS",
+          idNivel: "2",
+          filhos: zTreeViewViewModel2Filho),
     ];
 
     zTreeViewViewModel2Filho = [
@@ -258,27 +282,18 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
           nome: "Huilf",
           idNivelPai: "2",
           idNivel: "52",
-          filhos: zTreeViewViewModel3
-      )
+          filhos: zTreeViewViewModel3)
     ];
 
 
 
     listBatidas = [
-       ZBatidaViewModel(ordem: "ENTRADA",
-       horarioBatidaRealizada: "07:30"),
-
-      ZBatidaViewModel(ordem: "INÍCIO INTERVALO",
-          horarioBatidaRealizada: "12:30"),
-
-      ZBatidaViewModel(ordem: "FIM INTERVALO",
-          horarioBatidaRealizada: "13:30"),
-
-      ZBatidaViewModel(ordem: "SAÍDA",
-          horarioBatidaRealizada: "14:30"),
-
-      ZBatidaViewModel(ordem: "ENTRADA",
-          horarioBatidaRealizada: "18:00"),
+      ZBatidaViewModel(ordem: "ENTRADA", horarioBatidaRealizada: "07:30"),
+      ZBatidaViewModel(
+          ordem: "INÍCIO INTERVALO", horarioBatidaRealizada: "12:30"),
+      ZBatidaViewModel(ordem: "FIM INTERVALO", horarioBatidaRealizada: "13:30"),
+      ZBatidaViewModel(ordem: "SAÍDA", horarioBatidaRealizada: "14:30"),
+      ZBatidaViewModel(ordem: "ENTRADA", horarioBatidaRealizada: "18:00"),
     ];
     _dialogUtils = new DialogUtils(context);
     focusNodeNome = new FocusNode();
@@ -296,7 +311,7 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
     //montarFormulario();
 //    await montarLista();
 //    await enviarFormulario();
-   // super.initState();
+    // super.initState();
 
     // _db = new ZDatabase(version: 2, dbName: "teste", entities: [new Pessoa(), new Monstro()]);
 
@@ -323,33 +338,29 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
     print("");
   }*/
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.black,
+        backgroundColor: Colors.black,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-         ConfirmarSenha confirmar = new ConfirmarSenha(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4NzJlODA0NjVjMzk1NGY2MTE5YWNmZTRiYzc1NDQ4IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODk4MjcxODMsImV4cCI6MTU4OTgzMDc4MywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjJiZmFhY2I2LWVkMjYtNDFiNC1iZTM4LWUyMzI5Yjk0MmM1YSIsImF1dGhfdGltZSI6MTU4OTgyNzE4MywiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IkFJUExGNkxBSUU2Q01ON01ONjRFUE1HS0xWRlpIWkFRIiwiYWNjb3VudCI6IlplbGxhcjIiLCJpZEFjY291bnQiOiI4RTZFQjYzMi1CNzA3LTQxM0YtQTE1Mi0zQ0ZGRDFGOTgyQjUiLCJpZENvbGFib3JhZG9yIjoiMjZBQTMxMkYtQ0Q3OS00N0M5LUE0RjItQkI0RkVCNzM3MjkyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiMzk5LjEwOC44NDgtNzkiLCJlbWFpbCI6InZpY3RvcnNvdXp6QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlZpY3RvciBEZSBTb3V6YSBBbHZlcyIsInBob25lX251bWJlciI6IigxMSkgOTg0NzAtMzMzNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.R9hxcChbo3PgX8KFQ8Ml0F2FeTE6r83vnBUFRNMPhHFCU0k0AasUmhoL9pDSErSWk32YVi9RXJ9PLAql8-Q4ON1YYfKvzBUvhQEotpDS1OUwLmwoD46PdU80FQ3niTnQEz5--RTYJ0-C6UZyC26nXuTHp12vMm60C3McAVcCbvlxAHlI6aXllgvxD3rMkvj9Xm8C8d5IeavdxxtJvN67sVsefj2o7aNsvDB_kb0D-7exufW5pphO1SOHL1DpnaSY309nu1mEbHeqJeX8ardC54vs2qJRDbe1d0Cx5g6XFKIQjtaJ_WzVR6O4gALkasbxelsdfyyya6P66qFVUbxGMA", context: context);
-        bool teste = await  confirmar.dialogConfirmarSenha();
-        print(teste);
+            ConfirmarSenha confirmar = new ConfirmarSenha(
+                token:
+                    "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4NzJlODA0NjVjMzk1NGY2MTE5YWNmZTRiYzc1NDQ4IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODk4MjcxODMsImV4cCI6MTU4OTgzMDc4MywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjJiZmFhY2I2LWVkMjYtNDFiNC1iZTM4LWUyMzI5Yjk0MmM1YSIsImF1dGhfdGltZSI6MTU4OTgyNzE4MywiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IkFJUExGNkxBSUU2Q01ON01ONjRFUE1HS0xWRlpIWkFRIiwiYWNjb3VudCI6IlplbGxhcjIiLCJpZEFjY291bnQiOiI4RTZFQjYzMi1CNzA3LTQxM0YtQTE1Mi0zQ0ZGRDFGOTgyQjUiLCJpZENvbGFib3JhZG9yIjoiMjZBQTMxMkYtQ0Q3OS00N0M5LUE0RjItQkI0RkVCNzM3MjkyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiMzk5LjEwOC44NDgtNzkiLCJlbWFpbCI6InZpY3RvcnNvdXp6QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlZpY3RvciBEZSBTb3V6YSBBbHZlcyIsInBob25lX251bWJlciI6IigxMSkgOTg0NzAtMzMzNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.R9hxcChbo3PgX8KFQ8Ml0F2FeTE6r83vnBUFRNMPhHFCU0k0AasUmhoL9pDSErSWk32YVi9RXJ9PLAql8-Q4ON1YYfKvzBUvhQEotpDS1OUwLmwoD46PdU80FQ3niTnQEz5--RTYJ0-C6UZyC26nXuTHp12vMm60C3McAVcCbvlxAHlI6aXllgvxD3rMkvj9Xm8C8d5IeavdxxtJvN67sVsefj2o7aNsvDB_kb0D-7exufW5pphO1SOHL1DpnaSY309nu1mEbHeqJeX8ardC54vs2qJRDbe1d0Cx5g6XFKIQjtaJ_WzVR6O4gALkasbxelsdfyyya6P66qFVUbxGMA",
+                context: context);
+            bool teste = await confirmar.dialogConfirmarSenha();
+            print(teste);
           },
         ),
         appBar: new AppBar(),
-        body:  new ZCollection(
-          titulo: "Sabesp",
-          lista: zTreeViewViewModel
-              .map((x) => ZCollectionItem(
-              titulo: x.idNivelPai,
-              chave: x.idNivel,
-              valor: x.nome))
-              .toList(),
-          onChange: (justificativa) {
-
-          },
-        )
-    );
-
+        body: new ZCollection(
+          titulo: "Teste",
+          valorPadrao: "Universidade",
+          skip: 0,
+          take: 10,
+          lista: listaTesteSkipTake,
+          onChange: (justificativa) {},
+        ));
   }
 
   void showAlertDialogNew() async {
@@ -703,52 +714,53 @@ List<String> orem = ["ENTRADA","SAÍDA","ENTRADA","SAÍDA","ENTRADA","SAÍDA"];
   }
 
   void montarLista() async {
-    String data = await DefaultAssetBundle.of(context).loadString("assets/carlos.json");
+    String data =
+        await DefaultAssetBundle.of(context).loadString("assets/carlos.json");
     var responseBody = json.decode(data);
 
-    lista =
-        (responseBody as List).map((x) => ZDynamicFormViewModel.fromJson(x)).toList();
+    lista = (responseBody as List)
+        .map((x) => ZDynamicFormViewModel.fromJson(x))
+        .toList();
 
     setState(() {
       print(lista);
     });
   }
 
-  void montarFormulario()async{
-
+  void montarFormulario() async {
     var formulario = await iFormularioService.buscarFormularios();
 
     var formularioSellecionado = formulario.first;
 
-    lista = await iFormularioService.montarFormulario(formularioSellecionado.idModelo);
+    lista = await iFormularioService
+        .montarFormulario(formularioSellecionado.idModelo);
 
     setState(() {
       print(lista);
     });
   }
 
-  void enviarFormulario()async{
-    lista.forEach((item) async{
+  void enviarFormulario() async {
+    lista.forEach((item) async {
       ZDynamicFormViewModel zDynamicFormViewModel = new ZDynamicFormViewModel(
-      sistema: "teste",
-      descricao: item.descricao,
-      idAtributo: item.idAtributo,
-      idModelo: item.idModelo,
-      idTipo: item.idTipo,
-      label: item.label,
-      modelo: item.modelo,
-      multiplaEscolha: item.multiplaEscolha,
-      nomeCampo: item.nomeCampo,
-      obrigatorio: item.obrigatorio,
-      opcoes: item.opcoes,
-      ordem: item.ordem,
-      tamanhoMaximo: item.tamanhoMaximo,
-      tipo: item.tipo,
-      versao: item.versao,
-    );
-    await listaEnvio.add(zDynamicFormViewModel);
+        sistema: "teste",
+        descricao: item.descricao,
+        idAtributo: item.idAtributo,
+        idModelo: item.idModelo,
+        idTipo: item.idTipo,
+        label: item.label,
+        modelo: item.modelo,
+        multiplaEscolha: item.multiplaEscolha,
+        nomeCampo: item.nomeCampo,
+        obrigatorio: item.obrigatorio,
+        opcoes: item.opcoes,
+        ordem: item.ordem,
+        tamanhoMaximo: item.tamanhoMaximo,
+        tipo: item.tipo,
+        versao: item.versao,
+      );
+      await listaEnvio.add(zDynamicFormViewModel);
     });
-
 
     print(listaEnvio);
   }

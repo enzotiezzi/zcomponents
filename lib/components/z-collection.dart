@@ -11,22 +11,26 @@ class ZCollection extends StatefulWidget {
   final ValueChanged<ZCollectionItem> onChange;
   final String valorPadrao;
   final Color colorStyle;
+  final int skip;
+  final int take;
 
-  ZCollection(
-      {Key key,
-      @required this.titulo,
-      @required this.lista,
-      this.onChange,
-      this.valorPadrao,
-      this.colorStyle: const Color(0xff2bbab4)})
-      : super(key: key);
+  ZCollection({
+    Key key,
+    @required this.titulo,
+    @required this.lista,
+    this.onChange,
+    this.valorPadrao,
+    this.colorStyle: const Color(0xff2bbab4),
+    this.skip: 0,
+    this.take: 0,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZCollectionState();
 }
 
 class ZCollectionState extends State<ZCollection> {
-  ZCollectionItem _itemSelecionado;
+  ZCollectionItem _itemSelecionado  = new ZCollectionItem();
   String _anterior = "Selecione";
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
@@ -34,7 +38,6 @@ class ZCollectionState extends State<ZCollection> {
   @override
   void initState() {
     buscarValorPadrao(widget.lista);
-    _itemSelecionado = new ZCollectionItem();
     //setarvalor();
     super.initState();
   }
@@ -47,7 +50,7 @@ class ZCollectionState extends State<ZCollection> {
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border(top: BorderSide(color: Colors.grey))),
-        padding: EdgeInsets.only(left: 16.0,right: 14),
+        padding: EdgeInsets.only(left: 16.0, right: 14),
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -73,11 +76,13 @@ class ZCollectionState extends State<ZCollection> {
                 maxLines: 1,
                 softWrap: false,
                 text: TextSpan(
-                  style: new TextStyle(
-                    color: Colors.grey,
-                  ),
-                  text: (_itemSelecionado?.valor == null && _anterior == "Selecione")?_anterior:_itemSelecionado?.valor
-                ),
+                    style: new TextStyle(
+                      color: Colors.grey,
+                    ),
+                    text: (_itemSelecionado?.valor == null &&
+                            _anterior == "Selecione")
+                        ? _anterior
+                        : _itemSelecionado?.valor),
               ),
             ),
             Flexible(
@@ -132,6 +137,8 @@ class ZCollectionState extends State<ZCollection> {
               titulo: widget.titulo,
               ultimoValor: _itemSelecionado,
               color: widget.colorStyle,
+              skip: widget.skip,
+              take: widget.take,
             );
           },
           transitionsBuilder: (BuildContext context,
