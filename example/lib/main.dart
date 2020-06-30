@@ -204,6 +204,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     listaTesteSkipTake = new List();
 
     listaTesteSkipTake = [
+      ZCollectionItem(chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
       ZCollectionItem(chave: "1", titulo: "1", valor: "1"),
       ZCollectionItem(chave: "2", titulo: "2", valor: "2"),
       ZCollectionItem(chave: "3", titulo: "3", valor: "3"),
@@ -354,6 +355,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         appBar: new AppBar(),
         body: new ZCollection(
           titulo: "Teste",
+          valorPadrao: "Universidade",
           skip: 0,
           take: 10,
           lista: listaTesteSkipTake,

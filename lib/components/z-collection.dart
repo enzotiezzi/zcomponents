@@ -30,7 +30,7 @@ class ZCollection extends StatefulWidget {
 }
 
 class ZCollectionState extends State<ZCollection> {
-  ZCollectionItem _itemSelecionado;
+  ZCollectionItem _itemSelecionado  = new ZCollectionItem();
   String _anterior = "Selecione";
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
@@ -38,7 +38,6 @@ class ZCollectionState extends State<ZCollection> {
   @override
   void initState() {
     buscarValorPadrao(widget.lista);
-    _itemSelecionado = new ZCollectionItem();
     //setarvalor();
     super.initState();
   }

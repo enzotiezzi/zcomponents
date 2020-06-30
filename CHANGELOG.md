@@ -1,3 +1,7 @@
+## 0.9.18+50
+
+* ZCollection valorPadrao Ajuste!
+
 ## 0.9.18+49
 
 * add Skip Take Zcollection!
