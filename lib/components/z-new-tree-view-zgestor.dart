@@ -8,8 +8,9 @@ class ZNewTreeViewGestor extends StatefulWidget {
   List<ZTreeViewViewModel> lisTree;
   void Function(ZTreeViewViewModel) onTap;
   Color colorArrow;
+  bool todosInicialmenteAbertos;
 
-  ZNewTreeViewGestor({this.lisTree, this.onTap,this.colorArrow: const Color(0xff801F92)});
+  ZNewTreeViewGestor({this.lisTree, this.onTap,this.colorArrow: const Color(0xff801F92),this.todosInicialmenteAbertos: false});
 
   @override
   _ZNewTreeViewGestorState createState() => _ZNewTreeViewGestorState();
@@ -96,6 +97,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
               animatedWidgetFollowingHeader: (item.filhos.length != 0)
                   ? new Icon(Icons.arrow_drop_down)
                   : new Container(),
+              initiallyExpanded: widget.todosInicialmenteAbertos,
               borderColorStart: Colors.grey.withOpacity(0.3),
               borderColorEnd: Colors.grey.withOpacity(0.3),
               bottomBorderOn: true,
@@ -187,6 +189,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
           color: Colors.white,
           child: new ConfigurableExpansionTile(
             key: listaKey[0][j],
+            initiallyExpanded: widget.todosInicialmenteAbertos,
             animatedWidgetFollowingHeader: (item.filhos.length != 0)
                 ? new Container(
               margin: const EdgeInsets.symmetric(horizontal: 14),
@@ -346,6 +349,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
             child: new ConfigurableExpansionTile(
               borderColorStart: Colors.grey.withOpacity(0.3),
               borderColorEnd: definirCorExpansionTile(item),
+              initiallyExpanded: widget.todosInicialmenteAbertos,
               animatedWidgetFollowingHeader: (item.filhos.length != 0)
                   ? new Container(
                 margin: const EdgeInsets.symmetric(horizontal: 14),
@@ -418,6 +422,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
           color: Colors.white,
           child: new ConfigurableExpansionTile(
             key: listaKey[item.index][p],
+            initiallyExpanded: widget.todosInicialmenteAbertos,
             animatedWidgetFollowingHeader: (item.filhos.length != 0)
                 ? new Container(
               margin: const EdgeInsets.symmetric(horizontal: 14),

@@ -1,3 +1,7 @@
+## 0.9.18+51
+
+* ZtrreeViewGestor add InitialExpanded!
+
 ## 0.9.18+50
 
 * ZCollection valorPadrao Ajuste!
