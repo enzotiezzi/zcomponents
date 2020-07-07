@@ -11,10 +11,12 @@ class ZProgressDialog extends StatefulWidget {
   bool complete;
   bool sucess;
   int animationDuration;
+  Color colorBar;
   Key key;
 
   ZProgressDialog(
       {this.message: "",
+        this.colorBar: const Color(0xff2bbab4),
       this.barrierDismissible: true,
       this.progressBarValue: 0.0,
       this.key,
@@ -88,7 +90,7 @@ class ZProgressDialogState extends State<ZProgressDialog>
                                             LinearStrokeCap.roundAll,
                                         progressColor: (widget.sucess == true &&
                                                 widget.progressBarValue < 1.0)
-                                            ? Color(0xff2bbab4)
+                                            ? widget.colorBar
                                             : (widget.sucess == true)
                                                 ? Color(0xff1AC15D)
                                                 : Colors.red,
