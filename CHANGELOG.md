@@ -1,3 +1,7 @@
+## 0.9.18+52
+
+* add Color in Bar ZprogressDialog!
+
 ## 0.9.18+51
 
 * ZtrreeViewGestor add InitialExpanded!
