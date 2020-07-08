@@ -107,6 +107,8 @@ class IdentityServer implements IIdentityServer {
             ApiSettings.REFRESH_TOKEN, newRefreshToken);
         await _sharedPreferences.setString(
             ApiSettings.TOKEN_EXPIRATION_DATE, expirationToken);
+      }else{
+        await login();
       }
     } catch (e) {
       await login();
