@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="Dart SDK">
     <CLASSES>
+<<<<<<< HEAD
       <root url="file://$USER_HOME$/Desktop/flutter/bin/cache/dart-sdk/lib/async" />
       <root url="file://$USER_HOME$/Desktop/flutter/bin/cache/dart-sdk/lib/cli" />
       <root url="file://$USER_HOME$/Desktop/flutter/bin/cache/dart-sdk/lib/collection" />
@@ -22,6 +23,29 @@
       <root url="file://$USER_HOME$/Desktop/flutter/bin/cache/dart-sdk/lib/web_audio" />
       <root url="file://$USER_HOME$/Desktop/flutter/bin/cache/dart-sdk/lib/web_gl" />
       <root url="file://$USER_HOME$/Desktop/flutter/bin/cache/dart-sdk/lib/web_sql" />
+=======
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/async" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/cli" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/collection" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/convert" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/core" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/developer" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/ffi" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/html" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/indexed_db" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/io" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/isolate" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/js" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/js_util" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/math" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/mirrors" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/svg" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/typed_data" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/wasm" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/web_audio" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/web_gl" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/web_sql" />
+>>>>>>> 1ed92be497c6371936576c271008752acc719132
     </CLASSES>
     <JAVADOC />
     <SOURCES />

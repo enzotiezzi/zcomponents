@@ -9,8 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker: ^0.6.5
-  image_feature_detector:
-    git: https://github.com/Blaxou/image_feature_detector.git
   flutter_native_image: ^0.0.5+2
 
 

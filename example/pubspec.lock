@@ -210,15 +210,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
-  image_feature_detector:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "3c5e7e7fef4deca97ffc4baf81a2d62ef965714a"
-      url: "https://github.com/Blaxou/image_feature_detector.git"
-    source: git
-    version: "0.2.1+1"
   image_picker:
     dependency: "direct main"
     description:
@@ -580,7 +571,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.9.18+47"
+    version: "0.9.18+52"
 sdks:
   dart: ">=2.5.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.5 <2.0.0"
