@@ -150,7 +150,6 @@ class _MainStyle {
     return new TextStyle(
         color: Color(0xFF999999),
         letterSpacing: -0.24,
-        fontWeight: FontWeight.w500,
         fontSize: MediaQuerySize.get(context).fontSize);
   }
 
