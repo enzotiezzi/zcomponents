@@ -1,3 +1,7 @@
+## 0.9.19
+
+* Update ZCollection
+
 ## 0.9.18+53
 
 * Update IdentityServer
