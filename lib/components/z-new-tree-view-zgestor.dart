@@ -248,7 +248,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                               child: new Text(
                                 "${item.nome}",
                                 style: new TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 14,
                                 ),
                               ),
                             ),
