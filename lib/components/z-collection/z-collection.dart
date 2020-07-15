@@ -75,10 +75,10 @@ class ZCollectionState extends State<ZCollection> {
                 overflow: TextOverflow.clip,
                 maxLines: 1,
                 softWrap: false,
-                strutStyle: StrutStyle(fontWeight: FontWeight.bold),
                 text: TextSpan(
                     style: new TextStyle(
                       color: Colors.grey,
+                      fontWeight: FontWeight.bold
                     ),
                     text: (_itemSelecionado?.valor == null &&
                             _anterior == "Selecione")
