@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/components/z-checkbox/z-checkbox.dart';
-import 'package:z_components/components/z-collection-item.dart';
-import 'package:z_components/components/z-collection.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';

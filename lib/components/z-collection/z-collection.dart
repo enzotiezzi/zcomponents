@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/components/z-collection-item.dart';
-import 'package:z_components/components/z-collection-list.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/styles/main-style.dart';
 
@@ -75,6 +75,7 @@ class ZCollectionState extends State<ZCollection> {
                 overflow: TextOverflow.clip,
                 maxLines: 1,
                 softWrap: false,
+                strutStyle: StrutStyle(fontWeight: FontWeight.bold),
                 text: TextSpan(
                     style: new TextStyle(
                       color: Colors.grey,
