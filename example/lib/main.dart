@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:z_components/components/z-collection.dart';
 import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-baseline.dart';
@@ -34,12 +33,12 @@ import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-previsto.dart';
-import 'package:z_components/components/z-collection-item.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
-import 'package:z_components/components/z-collection.dart';
 
+import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'main-testing.dart';
 
 void main() => runApp(MyApp());

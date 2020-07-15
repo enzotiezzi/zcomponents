@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/api/zempresa-service.dart';
-import 'package:z_components/components/z-collection-item.dart';
-import 'package:z_components/components/z-collection.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/interface/i-zempresa-service.dart';
 import 'package:z_components/view-model/company-components-viewmodel.dart';
 
