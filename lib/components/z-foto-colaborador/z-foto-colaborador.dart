@@ -34,6 +34,11 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.token == null || widget.token.length == 0)
+      return new ZLoading(
+        color: Color(0XFF801F92),
+      );
+
     return CachedNetworkImage(
       cacheManager: DefaultCacheManager(),
       httpHeaders: _header,
