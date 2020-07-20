@@ -11,6 +11,7 @@ class ZCollection extends StatefulWidget {
   final ValueChanged<ZCollectionItem> onChange;
   final String valorPadrao;
   final Color colorStyle;
+  final Color corPadrao;
   final int skip;
   final int take;
 
@@ -21,6 +22,7 @@ class ZCollection extends StatefulWidget {
     this.onChange,
     this.valorPadrao,
     this.colorStyle: const Color(0xff2bbab4),
+    this.corPadrao: const Color(0xff2bbab4),
     this.skip: 0,
     this.take: 0,
   }) : super(key: key);
@@ -45,54 +47,62 @@ class ZCollectionState extends State<ZCollection> {
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      child: new Container(
-        height: 42,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border(top: BorderSide(color: Colors.grey))),
-        padding: EdgeInsets.only(left: 16.0, right: 14),
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Flexible(
-              flex: 45,
-              fit: FlexFit.tight,
-              child: new RichText(
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                text: TextSpan(
-                  style: MainStyle.get(context).mainStyleTextBaseLine,
-                  text: widget.titulo,
-                ),
-              ),
-            ),
-            Flexible(
-              flex: 55,
-              fit: FlexFit.tight,
-              child: new RichText(
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.clip,
-                maxLines: 1,
-                softWrap: false,
-                text: TextSpan(
-                    style: new TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold
+      child: new Column(
+        children: <Widget>[
+          new Container(
+            height: 42,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border(top: BorderSide(color: Colors.grey))),
+            padding: EdgeInsets.only(left: 16.0, right: 14),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Flexible(
+                  flex: 45,
+                  fit: FlexFit.tight,
+                  child: new RichText(
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    text: TextSpan(
+                      style: MainStyle.get(context).mainStyleTextBaseLine,
+                      text: widget.titulo,
                     ),
-                    text: (_itemSelecionado?.valor == null &&
+                  ),
+                ),
+                Flexible(
+                  flex: 55,
+                  fit: FlexFit.tight,
+                  child: new RichText(
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.clip,
+                    maxLines: 1,
+                    softWrap: false,
+                    text: TextSpan(
+                        style: new TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold
+                        ),
+                        text: (_itemSelecionado?.valor == null &&
                             _anterior == "Selecione")
-                        ? _anterior
-                        : _itemSelecionado?.valor),
-              ),
+                            ? _anterior
+                            : _itemSelecionado?.valor),
+                  ),
+                ),
+                Flexible(
+                  flex: 10,
+                  fit: FlexFit.tight,
+                  child: new Icon(Icons.keyboard_arrow_right),
+                ),
+              ],
             ),
-            Flexible(
-              flex: 10,
-              fit: FlexFit.tight,
-              child: new Icon(Icons.keyboard_arrow_right),
-            ),
-          ],
-        ),
+          ),
+          new Container(
+            height: 2,
+            color: widget.corPadrao,
+          ),
+        ],
       ),
       onTap: _irParaSelecaoDeItemHorizontal,
     );

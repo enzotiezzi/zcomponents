@@ -1,3 +1,7 @@
+## 0.9.20+6
+
+* ZCollection
+
 ## 0.9.20+5
 
 * ZFotoColaborador
