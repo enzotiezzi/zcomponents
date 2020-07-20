@@ -1,3 +1,11 @@
+## 0.9.20
+
+* ZFotoColaborador
+
+## 0.9.19+2
+
+* Update ZCollection
+
 ## 0.9.19+1
 
 * Update ZCollection
