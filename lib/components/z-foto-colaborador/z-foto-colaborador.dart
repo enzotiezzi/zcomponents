@@ -21,7 +21,7 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
   String _url =
       "${ApiSettings.ENDPOINT_API}/colaboradores/v2/m-buscar-foto-perfil-colaborador";
 
-  Map _header;
+  Map _header = new Map();
 
   @override
   void initState() {
