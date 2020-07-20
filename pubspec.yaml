@@ -46,6 +46,7 @@ dependencies:
   path_provider: ^1.6.5
   chewie: ^0.9.10
   url_launcher: ^5.4.2
+  flutter_cache_manager: ^1.4.1
 
 dev_dependencies:
   flutter_test:
