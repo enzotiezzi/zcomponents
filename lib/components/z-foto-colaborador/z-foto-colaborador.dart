@@ -25,10 +25,6 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
 
   @override
   void initState() {
-    _url = "$_url/${widget.idColaborador}";
-
-    _header = {HttpHeaders.authorizationHeader: "Bearer ${widget.token}"};
-
     super.initState();
   }
 
@@ -39,6 +35,10 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
         color: Color(0XFF801F92),
       );
     else {
+      _url = "$_url/${widget.idColaborador}";
+
+      _header = {HttpHeaders.authorizationHeader: "Bearer ${widget.token}"};
+
       return CachedNetworkImage(
         cacheManager: DefaultCacheManager(),
         httpHeaders: _header,
