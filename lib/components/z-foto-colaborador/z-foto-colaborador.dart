@@ -38,25 +38,27 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
       return new ZLoading(
         color: Color(0XFF801F92),
       );
-
-    return CachedNetworkImage(
-      cacheManager: DefaultCacheManager(),
-      httpHeaders: _header,
-      imageUrl: _url,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
+    else {
+      return CachedNetworkImage(
+        cacheManager: DefaultCacheManager(),
+        httpHeaders: _header,
+        imageUrl: _url,
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(5.0),
+                bottomLeft: Radius.circular(5.0)),
           ),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(5.0), bottomLeft: Radius.circular(5.0)),
         ),
-      ),
-      placeholder: (context, url) => ZLoading(
-        color: Color(0XFF801F92),
-      ),
-      errorWidget: (context, url, error) => Icon(Icons.error),
-    );
+        placeholder: (context, url) => ZLoading(
+          color: Color(0XFF801F92),
+        ),
+        errorWidget: (context, url, error) => Icon(Icons.error),
+      );
+    }
   }
 }
