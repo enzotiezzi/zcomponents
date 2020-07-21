@@ -78,6 +78,9 @@ class IdentityServer implements IIdentityServer {
             }
           }
         }
+        else{
+          await _refreshToken();
+        }
       }
     } on Exception catch (e) {
       return;
