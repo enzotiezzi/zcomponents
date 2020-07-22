@@ -57,29 +57,36 @@ class IdentityServer implements IIdentityServer {
   @override
   Future refreshToken() async {
     try {
+      _sharedPreferences = await SharedPreferences.getInstance();
+
       var online = await _testeConexaoService.testarConexao();
 
       if (online) {
-        var tokenExpirationDate =
-            _sharedPreferences.getString(ApiSettings.TOKEN_EXPIRATION_DATE);
+        var token = _sharedPreferences.getString(ApiSettings.API_TOKEN);
 
-        if (tokenExpirationDate != null) {
-          var expirationDate = DateTime.parse(tokenExpirationDate);
-
-          var deltaTempo =
-              new DateTime.now().difference(expirationDate).inMilliseconds;
-
-          if (deltaTempo > 0) {
-            var refreshToken =
-                _sharedPreferences.getString(ApiSettings.REFRESH_TOKEN);
-
-            if (refreshToken != null) {
-              await _refreshToken();
-            }
-          }
-        }
-        else{
+        if (token == null)
           await _refreshToken();
+        else {
+          var tokenExpirationDate =
+              _sharedPreferences.getString(ApiSettings.TOKEN_EXPIRATION_DATE);
+
+          if (tokenExpirationDate != null) {
+            var expirationDate = DateTime.parse(tokenExpirationDate);
+
+            var deltaTempo =
+                new DateTime.now().difference(expirationDate).inMilliseconds;
+
+            if (deltaTempo > 0) {
+              var refreshToken =
+                  _sharedPreferences.getString(ApiSettings.REFRESH_TOKEN);
+
+              if (refreshToken != null) {
+                await _refreshToken();
+              }
+            }
+          } else {
+            await _refreshToken();
+          }
         }
       }
     } on Exception catch (e) {
@@ -110,7 +117,7 @@ class IdentityServer implements IIdentityServer {
             ApiSettings.REFRESH_TOKEN, newRefreshToken);
         await _sharedPreferences.setString(
             ApiSettings.TOKEN_EXPIRATION_DATE, expirationToken);
-      }else{
+      } else {
         await login();
       }
     } catch (e) {
