@@ -40,7 +40,6 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
       _header = {HttpHeaders.authorizationHeader: "Bearer ${widget.token}"};
 
       return CachedNetworkImage(
-        cacheManager: DefaultCacheManager(),
         httpHeaders: _header,
         imageUrl: _url,
         imageBuilder: (context, imageProvider) => Container(
