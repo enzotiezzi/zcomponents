@@ -1,3 +1,7 @@
+## 0.9.20+9
+
+* ZFotoColaborador
+
 ## 0.9.20+8
 
 * ZIdentity
