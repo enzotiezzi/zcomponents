@@ -1,3 +1,7 @@
+## 0.9.20+7
+
+* ZIdentity
+
 ## 0.9.20+6
 
 * ZCollection
