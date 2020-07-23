@@ -81,8 +81,8 @@ class ZCollectionState extends State<ZCollection> {
                     softWrap: false,
                     text: TextSpan(
                         style: new TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold
+                            color: Color(0xff000000),
+                            fontWeight: FontWeight.normal
                         ),
                         text: (_itemSelecionado?.valor == null &&
                             _anterior == "Selecione")
@@ -97,10 +97,6 @@ class ZCollectionState extends State<ZCollection> {
                 ),
               ],
             ),
-          ),
-          new Container(
-            height: 2,
-            color: widget.corPadrao,
           ),
         ],
       ),
