@@ -39,15 +39,13 @@ class ZSequenciaState extends State<ZSequencia> {
   @override
   void initState() {
     super.initState();
-
-    indexDia = -3;
-
-    _montarSequencia();
   }
 
   @override
   Widget build(BuildContext context) {
     indexDia = -3;
+
+    _montarSequencia();
 
     return _sequencia.length == 0 ? _buildLoad() : _buildSequencia();
   }
@@ -101,7 +99,7 @@ class ZSequenciaState extends State<ZSequencia> {
     var formato = new DateFormat("yyyy-MM-dd");
 
     var dataFormatada = formato.format(data);
-    var hojeFormatado = formato.format(DateTime.now());
+    var hojeFormatado = formato.format(new DateTime.now());
 
     if (dataFormatada == hojeFormatado) {
       dia = "HOJE";
