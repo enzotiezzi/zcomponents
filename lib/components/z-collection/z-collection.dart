@@ -11,7 +11,6 @@ class ZCollection extends StatefulWidget {
   final ValueChanged<ZCollectionItem> onChange;
   final String valorPadrao;
   final Color colorStyle;
-  final Color corPadrao;
   final int skip;
   final int take;
 
@@ -22,7 +21,6 @@ class ZCollection extends StatefulWidget {
     this.onChange,
     this.valorPadrao,
     this.colorStyle: const Color(0xff2bbab4),
-    this.corPadrao: const Color(0xff2bbab4),
     this.skip: 0,
     this.take: 0,
   }) : super(key: key);
@@ -81,8 +79,8 @@ class ZCollectionState extends State<ZCollection> {
                     softWrap: false,
                     text: TextSpan(
                         style: new TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold
+                            color: Color(0xff000000),
+                            fontWeight: FontWeight.normal
                         ),
                         text: (_itemSelecionado?.valor == null &&
                             _anterior == "Selecione")
@@ -97,10 +95,6 @@ class ZCollectionState extends State<ZCollection> {
                 ),
               ],
             ),
-          ),
-          new Container(
-            height: 2,
-            color: widget.corPadrao,
           ),
         ],
       ),
