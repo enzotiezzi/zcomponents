@@ -14,7 +14,7 @@ class ZSequencia extends StatefulWidget {
   ZSequencia(
       {@required this.primeiroDiaEscala,
       @required this.escala,
-      this.data: null,
+      this.data,
       this.color: const Color(0xff2bbab4)});
 
   @override
@@ -143,13 +143,18 @@ class ZSequenciaState extends State<ZSequencia> {
   }
 
   List<String> _montarSequencia() {
+    var date = new DateTime.now();
+
+    if(widget.data != null)
+      date = widget.data;
+
     var sequencia = new List<String>();
 
     var indexDias = -3;
 
     while (indexDias <= 3) {
       var touf =
-          _calcularSeDiaTouF(DateTime.now().add(new Duration(days: indexDias)));
+          _calcularSeDiaTouF(date.add(new Duration(days: indexDias)));
 
       sequencia.add(touf);
 
