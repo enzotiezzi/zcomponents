@@ -87,14 +87,34 @@ class _ZPerfilColaboradorState extends State<ZPerfilColaborador> {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: const Color(0xffEFEFF4),
-      appBar: CupertinoNavigationBar(
-        middle: new Container(
-          child: new Text(
-            widget.tituloAppBar,
-            style: TextStyle(color: Colors.black),
+      appBar: new CupertinoNavigationBar(
+          backgroundColor: Color(0xff801F92),
+          leading: new GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: new Container(
+              padding: EdgeInsets.only(right: 20.0),
+              color: Colors.transparent,
+              child: new Icon(
+                Icons.arrow_back_ios,
+                size: 20.0,
+                color: Colors.white,
+              ),
+            ),
           ),
-        ),
-      ),
+          middle: new Container(
+              margin: EdgeInsets.only(
+                top: 5.0,
+                bottom: 5.0,
+              ),
+              padding: EdgeInsets.only(right: 20),
+              height: 79,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  widget.tituloAppBar,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ))),
       body: _body(),
     );
   }
@@ -149,6 +169,7 @@ class _ZPerfilColaboradorState extends State<ZPerfilColaborador> {
       ],
     );
   }
+
 
   Widget _buildBody() {
     return new ListView(

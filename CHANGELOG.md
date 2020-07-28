@@ -1,3 +1,7 @@
+## 0.9.20+15
+
+* Update ZPerfilColaborador
+
 ## 0.9.20+14
 
 * Update ZSequencia

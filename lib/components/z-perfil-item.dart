@@ -54,19 +54,14 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                               color: widget.color,
                             ),
                           ),
-                          new Container(
+                          new Container(alignment: Alignment.center,
                             margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                            child: (widget.listaTextos[index] != null)
-                                ? new Text(
-                                    widget.listaTextos[index],
+                            child: new Text(
+                                    widget.listaTextos[index],textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: const Color(0xff707070)),
+                                        color: const Color(0xff707070),fontWeight: FontWeight.bold),
                                   )
-                                : new Text(
-                                    widget.listaTextos[index],
-                                    style: TextStyle(
-                                        color: const Color(0xff707070)),
-                                  ),
+
                           )
                         ],
                       ),
