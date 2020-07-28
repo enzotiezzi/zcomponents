@@ -1,3 +1,7 @@
+## 0.9.20+18
+
+* Update ZExpendableItemTile
+
 ## 0.9.20+17
 
 * Update ZPerfilColaborador
