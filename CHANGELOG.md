@@ -1,3 +1,7 @@
+## 0.9.20+16
+
+* Update ZPerfilColaborador2
+
 ## 0.9.20+15
 
 * Update ZPerfilColaborador

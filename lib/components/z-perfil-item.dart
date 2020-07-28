@@ -54,15 +54,16 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                               color: widget.color,
                             ),
                           ),
-                          new Container(alignment: Alignment.center,
-                            margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                            child: new Text(
-                                    widget.listaTextos[index],textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: const Color(0xff707070),fontWeight: FontWeight.bold),
-                                  )
-
-                          )
+                          new Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                              child: new Text(
+                                widget.listaTextos[index],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: const Color(0xff707070),
+                                    fontWeight: FontWeight.bold),
+                              ))
                         ],
                       ),
                     ),
@@ -90,19 +91,15 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                           ),
                         ),
                         new Container(
-                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                          child: (widget.listaTextos[index] != null)
-                              ? new Text(
-                                  widget.listaTextos[index],
-                                  style:
-                                      TextStyle(color: const Color(0xff707070)),
-                                )
-                              : new Text(
-                                  widget.listaTextos[index],
-                                  style:
-                                      TextStyle(color: const Color(0xff707070)),
-                                ),
-                        )
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                            child: new Text(
+                              widget.listaTextos[index],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: const Color(0xff707070),
+                                  fontWeight: FontWeight.bold),
+                            ))
                       ],
                     ),
                   ),
