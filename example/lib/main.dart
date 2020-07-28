@@ -40,6 +40,7 @@ import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'main-testing.dart';
+import 'package:z_components/components/z-perfil-colaborador.dart';
 
 void main() => runApp(MyApp());
 
@@ -176,7 +177,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   List<ZCollectionItem> listaTesteSkipTake;
 
-
   List<ZBatidaViewModel> listBatidas = new List();
   List<ZDynamicFormViewModel> lista = new List();
   List<ZDynamicFormViewModel> listaEnvio = new List();
@@ -203,7 +203,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     listaTesteSkipTake = new List();
 
     listaTesteSkipTake = [
-      ZCollectionItem(chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
+      ZCollectionItem(
+          chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
       ZCollectionItem(chave: "1", titulo: "1", valor: "1"),
       ZCollectionItem(chave: "2", titulo: "2", valor: "2"),
       ZCollectionItem(chave: "3", titulo: "3", valor: "3"),
@@ -284,8 +285,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
           filhos: zTreeViewViewModel3)
     ];
 
-
-
     listBatidas = [
       ZBatidaViewModel(ordem: "ENTRADA", horarioBatidaRealizada: "07:30"),
       ZBatidaViewModel(
@@ -340,25 +339,72 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.black,
-        floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            ConfirmarSenha confirmar = new ConfirmarSenha(
-                token:
-                    "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4NzJlODA0NjVjMzk1NGY2MTE5YWNmZTRiYzc1NDQ4IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODk4MjcxODMsImV4cCI6MTU4OTgzMDc4MywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpDb2xhYm9yYWRvciIsInN1YiI6IjJiZmFhY2I2LWVkMjYtNDFiNC1iZTM4LWUyMzI5Yjk0MmM1YSIsImF1dGhfdGltZSI6MTU4OTgyNzE4MywiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IkFJUExGNkxBSUU2Q01ON01ONjRFUE1HS0xWRlpIWkFRIiwiYWNjb3VudCI6IlplbGxhcjIiLCJpZEFjY291bnQiOiI4RTZFQjYzMi1CNzA3LTQxM0YtQTE1Mi0zQ0ZGRDFGOTgyQjUiLCJpZENvbGFib3JhZG9yIjoiMjZBQTMxMkYtQ0Q3OS00N0M5LUE0RjItQkI0RkVCNzM3MjkyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiMzk5LjEwOC44NDgtNzkiLCJlbWFpbCI6InZpY3RvcnNvdXp6QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlZpY3RvciBEZSBTb3V6YSBBbHZlcyIsInBob25lX251bWJlciI6IigxMSkgOTg0NzAtMzMzNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.R9hxcChbo3PgX8KFQ8Ml0F2FeTE6r83vnBUFRNMPhHFCU0k0AasUmhoL9pDSErSWk32YVi9RXJ9PLAql8-Q4ON1YYfKvzBUvhQEotpDS1OUwLmwoD46PdU80FQ3niTnQEz5--RTYJ0-C6UZyC26nXuTHp12vMm60C3McAVcCbvlxAHlI6aXllgvxD3rMkvj9Xm8C8d5IeavdxxtJvN67sVsefj2o7aNsvDB_kb0D-7exufW5pphO1SOHL1DpnaSY309nu1mEbHeqJeX8ardC54vs2qJRDbe1d0Cx5g6XFKIQjtaJ_WzVR6O4gALkasbxelsdfyyya6P66qFVUbxGMA",
-                context: context);
-            bool teste = await confirmar.dialogConfirmarSenha();
-            print(teste);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ZPerfilColaborador(
+                          tituloAppBar: "PERFIL DE COLABORADOR",
+                          imagemPerfil: new Container(),
+                          status: "",
+                          re: "",
+                          voltaIntervalo: "",
+                          inicioIntervalo: "",
+                          jornada: "",
+                          cpf: "",
+                          token: "",
+                          endereco: "",
+                          email: "",
+                          funcao: () {},
+                          funcaoIconBatida: () {},
+                          idConta: "",
+                          listaIcones: [Icons.add, Icons.add, Icons.add],
+                          listaOnTap: [() {}, () {}, () {}],
+                          listaTextos: [
+                            "Histórico de Ocorrências",
+                            "Histórico de Ocorrências",
+                            "Histórico de Ocorrências"
+                          ],
+                          onTapImage: () {},
+                          onTapVoltar: () {},
+                          statusInfo: true,
+                          telefone: "",
+                          textoCargoInfo: "",
+                          textoCodigoInfo: "",
+                          textoEscalaInfo: "",numeroQuadrados: 3,
+                        )));
           },
         ),
-        appBar: new AppBar(),
-        body: new ZCollection(
-          titulo: "Teste",
-          valorPadrao: "Universidade",
-          skip: 0,
-          take: 10,
-          lista: listaTesteSkipTake,
-          onChange: (justificativa) {},
+        body: ZPerfilColaborador(
+          tituloAppBar: "PERFIL DE COLABORADOR",
+          imagemPerfil: new Container(),
+          status: "",
+          re: "",
+          voltaIntervalo: "",
+          inicioIntervalo: "",
+          jornada: "",
+          cpf: "",
+          token: "",
+          endereco: "",
+          email: "",
+          funcao: () {},
+          funcaoIconBatida: () {},
+          idConta: "",
+          listaIcones: [Icons.add, Icons.add, Icons.add],
+          listaOnTap: [() {}, () {}, () {}],
+          listaTextos: [
+            "Histórico de Ocorrências",
+            "Histórico de Ocorrências",
+            "Chamados"
+          ],
+          onTapImage: () {},
+          onTapVoltar: () {},
+          statusInfo: true,
+          telefone: "",
+          textoCargoInfo: "",
+          textoCodigoInfo: "",
+          textoEscalaInfo: "",numeroQuadrados: 3,
         ));
   }
 
