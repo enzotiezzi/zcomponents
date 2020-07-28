@@ -55,14 +55,12 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                             ),
                           ),
                           new Container(
-                              alignment: Alignment.center,
                               margin: EdgeInsets.only(left: 10.0, right: 10.0),
                               child: new Text(
                                 widget.listaTextos[index],
-                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: const Color(0xff707070),
-                                    fontWeight: FontWeight.bold),
+                                    ),
                               ))
                         ],
                       ),
@@ -91,15 +89,14 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                           ),
                         ),
                         new Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                            child: new Text(
-                              widget.listaTextos[index],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: const Color(0xff707070),
-                                  fontWeight: FontWeight.bold),
-                            ))
+                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: new Text(
+                                  widget.listaTextos[index],
+                                  style:
+                                      TextStyle(color: const Color(0xff707070)),
+                                )
+
+                        )
                       ],
                     ),
                   ),
