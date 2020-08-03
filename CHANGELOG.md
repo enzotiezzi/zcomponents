@@ -1,3 +1,7 @@
+## 0.9.21
+
+* new ZTabBar
+
 ## 0.9.20+18
 
 * Update ZExpendableItemTile
