@@ -134,7 +134,7 @@ class _ZTabBarState extends State<ZTabBar> {
     if (selecionado != null && selecionado) {
       return AnimatedContainer(
         height: 4,
-        color: Color(0xff2bbab4),
+        color: widget.color,
         duration: Duration(seconds: 2),
         curve: Curves.fastOutSlowIn,
       );

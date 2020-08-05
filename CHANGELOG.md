@@ -1,3 +1,7 @@
+## 0.9.21+1
+
+* Update ZTabBar
+
 ## 0.9.21
 
 * new ZTabBar
