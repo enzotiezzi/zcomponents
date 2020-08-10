@@ -21,8 +21,6 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
   String _url =
       "${ApiSettings.ENDPOINT_API}/colaboradores/v2/m-buscar-foto-perfil-colaborador";
 
-  Map<String, String> _header = new Map<String, String>();
-
   @override
   void initState() {
     super.initState();
@@ -37,11 +35,11 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
     else {
       var url = "$_url/${widget.idColaborador}";
 
-      _header = {HttpHeaders.authorizationHeader: "Bearer ${widget.token}"};
+      var header = {HttpHeaders.authorizationHeader: "Bearer ${widget.token}"};
 
       return CachedNetworkImage(
         cacheManager: DefaultCacheManager(),
-        httpHeaders: _header,
+        httpHeaders: header,
         imageUrl: url,
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
