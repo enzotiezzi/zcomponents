@@ -1,3 +1,31 @@
+## 0.9.21+1
+
+* Update ZTabBar
+
+## 0.9.21
+
+* new ZTabBar
+
+## 0.9.20+18
+
+* Update ZExpendableItemTile
+
+## 0.9.20+17
+
+* Update ZPerfilColaborador
+
+## 0.9.20+16
+
+* Update ZPerfilColaborador2
+
+## 0.9.20+15
+
+* Update ZPerfilColaborador
+
+## 0.9.20+14
+
+* Update ZSequencia
+
 ## 0.9.20+13
 
 * Update ZSequencia

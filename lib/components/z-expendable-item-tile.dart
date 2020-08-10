@@ -727,12 +727,14 @@ class _ZExpendableItemTileState extends State<ZExpendableItemTile> {
                 child: new Column(
                   children: <Widget>[
                     new Container(child: widget.iconeQuatro),
-                    new Text(
-                      widget.textoIconeQuatro,
+                    new Container(
+                      alignment: Alignment.center,
+                      child: new Text(
+                      widget.textoIconeQuatro,textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: widget.fontSizeTextExpand,
                           color: widget.colorTextExpandItens),
-                    )
+                    ),)
                   ],
                 ),
               ),
