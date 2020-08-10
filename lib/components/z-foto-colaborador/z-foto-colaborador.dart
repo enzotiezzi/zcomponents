@@ -35,14 +35,14 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
         color: Color(0XFF801F92),
       );
     else {
-      _url = "$_url/${widget.idColaborador}";
+      var url = "$_url/${widget.idColaborador}";
 
       _header = {HttpHeaders.authorizationHeader: "Bearer ${widget.token}"};
 
       return CachedNetworkImage(
         cacheManager: DefaultCacheManager(),
         httpHeaders: _header,
-        imageUrl: _url,
+        imageUrl: url,
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -58,6 +58,7 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
           color: Color(0XFF801F92),
         ),
         errorWidget: (context, url, error) => Icon(Icons.error),
+
       );
     }
   }
