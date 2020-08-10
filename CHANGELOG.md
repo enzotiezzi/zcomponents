@@ -1,3 +1,7 @@
+## 0.9.22
+
+* Update ZFotoColaborador
+
 ## 0.9.21+1
 
 * Update ZTabBar
