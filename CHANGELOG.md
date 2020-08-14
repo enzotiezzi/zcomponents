@@ -1,3 +1,7 @@
+## 0.9.23
+
+* Update ZButton
+
 ## 0.9.22
 
 * Update ZFotoColaborador
