@@ -53,7 +53,7 @@ class MainStyle {
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: Color(0xFF2BBAB4),
+                            cursorColor: Color(0xFF801F92),
                             style: MainStyle.get(context)
                                 .mainStyleTextBaseLineInput,
                             inputFormatters: [
@@ -70,6 +70,12 @@ class MainStyle {
                               hintText: hintText,
                               hintStyle: MainStyle.get(context)
                                   .mainStyleTextBaseLineHint,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFFf0f0f0)),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF801F92)),
+                              ),
                             ),
                             onChanged: onChange,
                           )
@@ -79,10 +85,10 @@ class MainStyle {
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: Color(0xFF2BBAB4),
+                            cursorColor: Color(0xFF801F92),
                             style: MainStyle.get(context)
                                 .mainStyleTextBaseLineInput,
-                                                    onSubmitted: (text) {
+                            onSubmitted: (text) {
                               currentFocus.unfocus();
                               if (nextFocus != null) {
                                 FocusScope.of(context).requestFocus(nextFocus);
@@ -92,6 +98,12 @@ class MainStyle {
                               hintText: hintText,
                               hintStyle: MainStyle.get(context)
                                   .mainStyleTextBaseLineHint,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFFf0f0f0)),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF801F92)),
+                              ),
                             ),
                             onChanged: onChange,
                           ),
@@ -149,9 +161,9 @@ class _MainStyle {
   TextStyle get mainStyleTextBaseLine {
     return new TextStyle(
         color: Color(0xFF999999),
-        letterSpacing: -0.24,
+        fontSize: 14.0,
         fontWeight: FontWeight.normal,
-        fontSize: MediaQuerySize.get(context).fontSize);
+        letterSpacing: 0.1);
   }
 
   TextStyle get mainStyleTextBaseLineHint {

@@ -41,6 +41,8 @@ import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'main-testing.dart';
 import 'package:z_components/components/z-perfil-colaborador.dart';
+import 'package:z_components/components/z-inputs/z-input-name.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
 
 void main() => runApp(MyApp());
 
@@ -339,7 +341,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () async {
             Navigator.push(
                 context,
@@ -372,39 +374,26 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           telefone: "",
                           textoCargoInfo: "",
                           textoCodigoInfo: "",
-                          textoEscalaInfo: "",numeroQuadrados: 3,
+                          textoEscalaInfo: "",
+                          numeroQuadrados: 3,
                         )));
           },
         ),
-        body: ZPerfilColaborador(
-          tituloAppBar: "PERFIL DE COLABORADOR",
-          imagemPerfil: new Container(),
-          status: "",
-          re: "",
-          voltaIntervalo: "",
-          inicioIntervalo: "",
-          jornada: "",
-          cpf: "",
-          token: "",
-          endereco: "",
-          email: "",
-          funcao: () {},
-          funcaoIconBatida: () {},
-          idConta: "",
-          listaIcones: [Icons.add, Icons.add, Icons.add],
-          listaOnTap: [() {}, () {}, () {}],
-          listaTextos: [
-            "Histórico de Ocorrências",
-            "Histórico de Ocorrências",
-            "Chamados"
+        body: new Column(
+          children: <Widget>[
+            new Container(
+              padding: EdgeInsets.only(top: 16.0),
+              child: new ZInputName(
+                  nomeFocus: nomeFocus, controllerNome: controllerNome),
+            ),
+            new Divider(height: 1.0,),
+            new Container(
+              padding: EdgeInsets.only(top: 16.0),
+              child: new ZInputCEP(
+                cepFocus: cepFocus, controllerCep: controllerCEP,
+              ),
+            ),
           ],
-          onTapImage: () {},
-          onTapVoltar: () {},
-          statusInfo: true,
-          telefone: "",
-          textoCargoInfo: "",
-          textoCodigoInfo: "",
-          textoEscalaInfo: "",numeroQuadrados: 3,
         ));
   }
 

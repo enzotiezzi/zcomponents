@@ -1,3 +1,7 @@
+## 0.9.23+1
+
+* Update ZInput
+
 ## 0.9.23
 
 * Update ZButton
