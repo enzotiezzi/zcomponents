@@ -42,6 +42,7 @@ import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'main-testing.dart';
 import 'package:z_components/components/z-perfil-colaborador.dart';
 import 'package:z_components/components/z-inputs/z-input-name.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';
 
 void main() => runApp(MyApp());
@@ -389,8 +390,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Divider(height: 1.0,),
             new Container(
               padding: EdgeInsets.only(top: 16.0),
-              child: new ZInputCEP(
-                cepFocus: cepFocus, controllerCep: controllerCEP,
+              child: new ZInputGeneric(
+                  titulo: "CEP",
+                  inputPadraoFocus: cepFocus,
+                  controllerInputPadrao: controllerCEP
               ),
             ),
           ],

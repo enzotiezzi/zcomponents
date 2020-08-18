@@ -1,3 +1,7 @@
+## 0.9.23+2
+
+* Update ZInput
+
 ## 0.9.23+1
 
 * Update ZInput

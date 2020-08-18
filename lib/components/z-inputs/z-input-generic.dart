@@ -75,7 +75,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                       focusNode: widget.inputPadraoFocus,
                       obscureText: widget.obscureText,
                       controller: widget.controllerInputPadrao,
-                      cursorColor: Color(0xFF2BBAB4),
+                      cursorColor: Color(0xFF801F92),
                       style: MainStyle.get(context)
                           .mainStyleTextBaseLineInput,
                       inputFormatters: [
@@ -92,6 +92,12 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                         hintText: widget.hintText,
                         hintStyle: MainStyle.get(context)
                             .mainStyleTextBaseLineHint,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFf0f0f0)),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF801F92)),
+                        ),
                       ),
                       onChanged: (text){
                         if (widget.onChange != null) widget.onChange(text);
@@ -105,7 +111,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                       focusNode: widget.inputPadraoFocus,
                       obscureText: widget.obscureText,
                       controller: widget.controllerInputPadrao,
-                      cursorColor: Color(0xFF2BBAB4),
+                      cursorColor: Color(0xFF801F92),
                       style: MainStyle.get(context)
                           .mainStyleTextBaseLineInput,
                       onSubmitted: (text) {
@@ -118,6 +124,12 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                         hintText: widget.hintText,
                         hintStyle: MainStyle.get(context)
                             .mainStyleTextBaseLineHint,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFf0f0f0)),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF801F92)),
+                        ),
                       ),
                       onChanged: (text){
                         if (widget.onChange != null) widget.onChange(text);
