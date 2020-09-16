@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/styles/media-query.dart';
 
 class MainStyle {
@@ -57,8 +58,7 @@ class MainStyle {
                             style: MainStyle.get(context)
                                 .mainStyleTextBaseLineInput,
                             inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: textMask, maskTWO: textMask)
+                              new MaskTextInputFormatter(mask: textMask)
                             ],
                             onSubmitted: (text) {
                               currentFocus.unfocus();
