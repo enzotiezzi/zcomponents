@@ -384,8 +384,8 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
           children: <Widget>[
             new Container(
               padding: EdgeInsets.only(top: 16.0),
-              child: new ZInputName(
-                  nomeFocus: nomeFocus, controllerNome: controllerNome),
+              child: new ZInputCelular(
+                  celularFocus: celularFocus, controllerCelular: controllerCelular),
             ),
             new Divider(height: 1.0,),
             new Container(
