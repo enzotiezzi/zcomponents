@@ -1,3 +1,7 @@
+## 0.9.25
+
+* ZCollection sem a borda superior
+
 ## 0.9.24
 
 * Funcao de desabilitar ZInput
