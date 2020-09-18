@@ -5,22 +5,22 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputCelular extends StatefulWidget {
-
   final Key key;
   FocusNode celularFocus;
   var controllerCelular = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
   void Function(bool) validacao;
+  bool enabled;
 
   ZInputCelular(
       {this.key,
-        this.onChange,
-        @required this.celularFocus,
-        @required this.controllerCelular,
-        this.proximoFocus,
-        this.validacao
-      })
+      this.onChange,
+      @required this.celularFocus,
+      @required this.controllerCelular,
+      this.proximoFocus,
+      this.validacao,
+      this.enabled})
       : super(key: key);
 
   @override
@@ -28,7 +28,6 @@ class ZInputCelular extends StatefulWidget {
 }
 
 class _ZInputCelularState extends State<ZInputCelular> {
-
   int countCelular = 0;
   DialogUtils _dialogUtils;
   String celular = "";
@@ -46,37 +45,35 @@ class _ZInputCelularState extends State<ZInputCelular> {
         context,
         "Celular:",
         TextInputType.number,
-            () {
+        () {
           FocusScope.of(context).requestFocus(widget.celularFocus);
         },
         widget.celularFocus,
         widget.controllerCelular,
         widget.proximoFocus,
-            (text) {
-              if (widget.onChange != null) widget.onChange(text);
+        (text) {
+          if (widget.onChange != null) widget.onChange(text);
 
-
-              celular = text;
-              countCelular = 0;
-              if (celular.length == 15) {
-                _fieldFocusChange(context, widget.celularFocus,
-                    widget.proximoFocus);
+          celular = text;
+          countCelular = 0;
+          if (celular.length == 15) {
+            _fieldFocusChange(
+                context, widget.celularFocus, widget.proximoFocus);
           }
-        },true,
-
-        textMask: "(XX) XXXXX-XXXX",
-        hintText: "( ** ) 9 **** - ****");
+        },
+        true,
+        textMask: "(##) #####-####",
+        hintText: "( ** ) 9 **** - ****",enabled: widget.enabled);
   }
 
   void initCelular() {
     widget.celularFocus.addListener(() {
-      if (!widget.celularFocus.hasFocus &&
-          countCelular == 0 &&
-          celular != "") {
+      if (!widget.celularFocus.hasFocus && countCelular == 0 && celular != "") {
         _validarCelular();
       }
     });
   }
+
   void _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
@@ -84,6 +81,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
       FocusScope.of(context).requestFocus(nextFocus);
     }
   }
+
   void showAlertDialogNew(String title, String message) async {
     showDialog(
       context: context,
@@ -107,7 +105,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
                 new Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   margin:
-                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                   child: new Text(
                     message,
                     textAlign: TextAlign.center,
@@ -137,7 +135,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
                     style: new TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize:
-                        MainStyle.get(context).fontSizeLeadinCancelar),
+                            MainStyle.get(context).fontSizeLeadinCancelar),
                   ),
                 ),
               ),
@@ -148,13 +146,14 @@ class _ZInputCelularState extends State<ZInputCelular> {
       ),
     );
   }
+
   void _validarCelular() {
     if (celular.length < 15 && celular != "") {
       _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
-      widget.validacao(false);
-    } else{
-      widget.validacao(true);
+      if (widget.validacao != null) widget.validacao(false);
+    } else {
+      if (widget.validacao != null) widget.validacao(true);
     }
   }
 }

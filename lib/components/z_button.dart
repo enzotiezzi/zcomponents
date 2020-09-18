@@ -10,6 +10,8 @@ class ZButton extends StatelessWidget {
   final Icon iconLeft;
   final Icon iconRight;
   final ZButtonType zButtonType;
+  final Color color;
+  final Color textColor;
 
   ZButton({
     this.key,
@@ -18,6 +20,8 @@ class ZButton extends StatelessWidget {
     this.iconLeft,
     this.iconRight,
     this.zButtonType = ZButtonType.isContained,
+    this.color: const Color(0xff2BBAB4),
+    this.textColor: const Color(0xff2BBAB4)
   }) : super(key: key) {
     switch (zButtonType) {
       case ZButtonType.isContained:
@@ -34,7 +38,7 @@ class ZButton extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 6, left: 6),
                   child: new Text(
                     this.text,
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                    style: TextStyle(color: textColor, fontSize: 20.0),
                   ),
                 ),
                 (this.iconRight != null)
@@ -44,7 +48,7 @@ class ZButton extends StatelessWidget {
               ],
             ),
           ),
-          color: const Color(0xff2BBAB4),
+          color: color,
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0)),
           padding: const EdgeInsets.only(left: 10, right: 10),
@@ -69,7 +73,7 @@ class ZButton extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 6, left: 6),
                   child: new Text(
                     this.text,
-                    style: TextStyle(color: Color(0xff2bbab4), fontSize: 20.0),
+                    style: TextStyle(color: textColor, fontSize: 20.0),
                   ),
                 ),
                 (this.iconRight != null)
@@ -79,7 +83,7 @@ class ZButton extends StatelessWidget {
             ),
             decoration: BoxDecoration(
                 borderRadius: new BorderRadius.circular(30.0),
-                border: Border.all(color: const Color(0xff2BBAB4))),
+                border: Border.all(color: textColor)),
           ),
           color: Colors.transparent,
           shape: new RoundedRectangleBorder(
@@ -110,7 +114,7 @@ class ZButton extends StatelessWidget {
                     child: new Text(
                       this.text,
                       style: TextStyle(
-                          color: Color(0xff2bbab4),
+                          color: textColor,
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500),
                     ),

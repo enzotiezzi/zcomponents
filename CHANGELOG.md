@@ -1,3 +1,27 @@
+## 0.9.24
+
+* Funcao de desabilitar ZInput
+
+## 0.9.23+3
+
+* Update ZInput Celular
+
+## 0.9.23+2
+
+* Update ZInput
+
+## 0.9.23+1
+
+* Update ZInput
+
+## 0.9.23
+
+* Update ZButton
+
+## 0.9.22
+
+* Update ZFotoColaborador
+
 ## 0.9.21+1
 
 * Update ZTabBar

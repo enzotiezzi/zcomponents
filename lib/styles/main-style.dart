@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/styles/media-query.dart';
 
 class MainStyle {
@@ -24,7 +25,11 @@ class MainStyle {
       Function(String) onChange,
       bool mask,
       {String textMask,
-      String hintText}) {
+      String hintText,
+      bool enabled}) {
+    if (enabled == null) {
+      enabled = true;
+    }
     return new Container(
       color: Colors.white,
       child: GestureDetector(
@@ -48,17 +53,17 @@ class MainStyle {
                     margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                     child: (mask == true)
                         ? new TextField(
+                            enabled: enabled,
                             keyboardAppearance: Brightness.light,
                             keyboardType: typeKeyboard,
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: Color(0xFF2BBAB4),
+                            cursorColor: Color(0xFF801F92),
                             style: MainStyle.get(context)
                                 .mainStyleTextBaseLineInput,
                             inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: textMask, maskTWO: textMask)
+                              new MaskTextInputFormatter(mask: textMask)
                             ],
                             onSubmitted: (text) {
                               currentFocus.unfocus();
@@ -70,19 +75,28 @@ class MainStyle {
                               hintText: hintText,
                               hintStyle: MainStyle.get(context)
                                   .mainStyleTextBaseLineHint,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFf0f0f0)),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF801F92)),
+                              ),
                             ),
                             onChanged: onChange,
                           )
                         : new TextField(
+                            enabled: enabled,
                             keyboardAppearance: Brightness.light,
                             keyboardType: typeKeyboard,
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: Color(0xFF2BBAB4),
+                            cursorColor: Color(0xFF801F92),
                             style: MainStyle.get(context)
                                 .mainStyleTextBaseLineInput,
-                                                    onSubmitted: (text) {
+                            onSubmitted: (text) {
                               currentFocus.unfocus();
                               if (nextFocus != null) {
                                 FocusScope.of(context).requestFocus(nextFocus);
@@ -92,6 +106,14 @@ class MainStyle {
                               hintText: hintText,
                               hintStyle: MainStyle.get(context)
                                   .mainStyleTextBaseLineHint,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFf0f0f0)),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF801F92)),
+                              ),
                             ),
                             onChanged: onChange,
                           ),
@@ -149,9 +171,9 @@ class _MainStyle {
   TextStyle get mainStyleTextBaseLine {
     return new TextStyle(
         color: Color(0xFF999999),
-        letterSpacing: -0.24,
+        fontSize: 14.0,
         fontWeight: FontWeight.normal,
-        fontSize: MediaQuerySize.get(context).fontSize);
+        letterSpacing: 0.1);
   }
 
   TextStyle get mainStyleTextBaseLineHint {

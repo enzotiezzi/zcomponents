@@ -10,7 +10,7 @@ class ZInputCPF extends StatefulWidget {
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
   void Function(bool) validacao;
-
+  bool enabled;
 
   ZInputCPF(
       {this.key,
@@ -18,7 +18,8 @@ class ZInputCPF extends StatefulWidget {
       @required this.controllerCpf,
       this.proximoFocus,
       this.onChange,
-      this.validacao})
+      this.validacao,
+      this.enabled})
       : super(key: key);
 
   @override
@@ -61,7 +62,7 @@ class _ZInputCPFState extends State<ZInputCPF> {
         },
         true,
         textMask: "XXX.XXX.XXX-XX",
-        hintText: "XXX.XXX.XXX-XX");
+        hintText: "XXX.XXX.XXX-XX",enabled: widget.enabled);
   }
 
   void initNome() {

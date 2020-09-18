@@ -8,6 +8,7 @@ class ZInputName extends StatefulWidget {
   var controllerNome = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
+  bool enabled;
 
 
   ZInputName({
@@ -15,7 +16,7 @@ class ZInputName extends StatefulWidget {
     this.onChange,
     @required this.nomeFocus,
     @required this.controllerNome,
-    this.proximoFocus,
+    this.proximoFocus,this.enabled
   }) : super(key: key);
 
   @override
@@ -38,6 +39,7 @@ class _ZInputNameState extends State<ZInputName> {
   @override
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
+
         context,
         "Nome:",
         TextInputType.text,
@@ -53,7 +55,7 @@ class _ZInputNameState extends State<ZInputName> {
           nome = text;
           countNome = 0;
         },
-        false);
+        false,enabled: widget.enabled);
   }
 
   void initNome() {

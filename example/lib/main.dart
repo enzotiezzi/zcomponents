@@ -4,36 +4,17 @@ import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/components/z-item-tile.dart';
-import 'package:z_components/config/z-type-tile.dart';
 
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
-import 'package:z_components/components/z-new-tree-view-zgestor.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
-import 'package:z_components/components/z-tree-view.dart';
-import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
-import 'package:z_components/config/z-tipos-baseline.dart';
-import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 import "package:z_components/view-model/batida-viewmodel.dart";
 import "package:z_components/view-model/z-tree-view-viewmodel.dart";
-import 'package:z_components/config/z-type-tile.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
-import 'package:z_components/components/z-injector/z-injector.dart';
-import 'package:z_components/api/identity-server/i-identity-server.dart';
-import 'package:z_components/api/identity-server/identity-server.dart';
-import 'package:z_components/components/z-radio-group/z-radio-group.dart';
-import 'package:z_components/components/z-radio-group/z-radio-item.dart';
-import 'package:z_components/styles/main-style.dart';
-import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
 import 'dart:convert' show json;
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
-import 'package:z_components/components/z-dynamic-form/z-dynamic-form.dart';
 import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
-import 'package:z_components/i-view.dart';
-import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-previsto.dart';
-import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
 
@@ -41,6 +22,9 @@ import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'main-testing.dart';
 import 'package:z_components/components/z-perfil-colaborador.dart';
+import 'package:z_components/components/z-inputs/z-input-name.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
 
 void main() => runApp(MyApp());
 
@@ -339,7 +323,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () async {
             Navigator.push(
                 context,
@@ -372,39 +356,28 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                           telefone: "",
                           textoCargoInfo: "",
                           textoCodigoInfo: "",
-                          textoEscalaInfo: "",numeroQuadrados: 3,
+                          textoEscalaInfo: "",
+                          numeroQuadrados: 3,
                         )));
           },
         ),
-        body: ZPerfilColaborador(
-          tituloAppBar: "PERFIL DE COLABORADOR",
-          imagemPerfil: new Container(),
-          status: "",
-          re: "",
-          voltaIntervalo: "",
-          inicioIntervalo: "",
-          jornada: "",
-          cpf: "",
-          token: "",
-          endereco: "",
-          email: "",
-          funcao: () {},
-          funcaoIconBatida: () {},
-          idConta: "",
-          listaIcones: [Icons.add, Icons.add, Icons.add],
-          listaOnTap: [() {}, () {}, () {}],
-          listaTextos: [
-            "Histórico de Ocorrências",
-            "Histórico de Ocorrências",
-            "Chamados"
+        body: new Column(
+          children: <Widget>[
+            new Container(
+              padding: EdgeInsets.only(top: 16.0),
+              child: new ZInputCelular(
+                  celularFocus: celularFocus, controllerCelular: controllerCelular),
+            ),
+            new Divider(height: 1.0,),
+            new Container(
+              padding: EdgeInsets.only(top: 16.0),
+              child: new ZInputGeneric(
+                  titulo: "CEP",
+                  inputPadraoFocus: cepFocus,
+                  controllerInputPadrao: controllerCEP
+              ),
+            ),
           ],
-          onTapImage: () {},
-          onTapVoltar: () {},
-          statusInfo: true,
-          telefone: "",
-          textoCargoInfo: "",
-          textoCodigoInfo: "",
-          textoEscalaInfo: "",numeroQuadrados: 3,
         ));
   }
 
