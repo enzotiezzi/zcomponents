@@ -377,6 +377,12 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
                   controllerInputPadrao: controllerCEP
               ),
             ),
+            new Divider(height: 1.0,),
+            ZCollection(
+    lista: listaTesteSkipTake,
+    titulo: "Escala",
+    onChange: (item) {},
+    ),
           ],
         ));
   }
