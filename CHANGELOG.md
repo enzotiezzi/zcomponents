@@ -1,3 +1,7 @@
+## 0.9.24+1
+
+* Update funcao de desabilitar ZInput
+
 ## 0.9.24
 
 * Funcao de desabilitar ZInput

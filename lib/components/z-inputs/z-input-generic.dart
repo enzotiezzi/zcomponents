@@ -18,19 +18,20 @@ class ZInputGeneric extends StatefulWidget {
   var controllerInputPadrao = new TextEditingController();
   FocusNode proximoFocus;
 
-  ZInputGeneric({
-    this.key,
-    this.hintText: "",
-    this.onChange,
-    this.obscureText: false,
-    this.tipoTeclado: TextInputType.text,
-    this.comMascara: false,
-    @required this.titulo,
-    this.textMask,
-    @required this.inputPadraoFocus,
-    @required this.controllerInputPadrao,
-    this.proximoFocus,this.enabled
-  }) : super(key: key);
+  ZInputGeneric(
+      {this.key,
+      this.hintText: "",
+      this.onChange,
+      this.obscureText: false,
+      this.tipoTeclado: TextInputType.text,
+      this.comMascara: false,
+      @required this.titulo,
+      this.textMask,
+      @required this.inputPadraoFocus,
+      @required this.controllerInputPadrao,
+      this.proximoFocus,
+      this.enabled})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ZInputGenericState();
@@ -68,7 +69,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                   child: new Container(
                     margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                     child: (widget.comMascara == true)
-                        ? new TextField(enabled: widget.enabled,
+                        ? new TextField(
+                            enabled: widget.enabled,
                             keyboardAppearance: Brightness.light,
                             keyboardType: widget.tipoTeclado,
                             textCapitalization: TextCapitalization.words,
@@ -109,6 +111,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             },
                           )
                         : new TextField(
+                            enabled: widget.enabled,
                             keyboardAppearance: Brightness.light,
                             keyboardType: widget.tipoTeclado,
                             textCapitalization: TextCapitalization.words,
