@@ -1,6 +1,10 @@
-## 0.9.24+1
+## 0.9.25+1
 
 * Update funcao de desabilitar ZInput
+
+## 0.9.25
+
+* ZCollection sem a borda superior
 
 ## 0.9.24
 
