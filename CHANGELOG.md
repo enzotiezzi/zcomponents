@@ -1,3 +1,7 @@
+## 0.9.25+2
+
+* Update na mascara ZInputDataNascimento
+
 ## 0.9.25+1
 
 * Update funcao de desabilitar ZInput
