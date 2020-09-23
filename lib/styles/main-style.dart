@@ -25,7 +25,11 @@ class MainStyle {
       Function(String) onChange,
       bool mask,
       {String textMask,
-      String hintText}) {
+      String hintText,
+      bool enabled}) {
+    if (enabled == null) {
+      enabled = true;
+    }
     return new Container(
       color: Colors.white,
       child: GestureDetector(
@@ -49,6 +53,7 @@ class MainStyle {
                     margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                     child: (mask == true)
                         ? new TextField(
+                            enabled: enabled,
                             keyboardAppearance: Brightness.light,
                             keyboardType: typeKeyboard,
                             textCapitalization: TextCapitalization.words,
@@ -71,15 +76,18 @@ class MainStyle {
                               hintStyle: MainStyle.get(context)
                                   .mainStyleTextBaseLineHint,
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color(0xFFf0f0f0)),
+                                borderSide:
+                                    BorderSide(color: Color(0xFFf0f0f0)),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color(0xFF801F92)),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF801F92)),
                               ),
                             ),
                             onChanged: onChange,
                           )
                         : new TextField(
+                            enabled: enabled,
                             keyboardAppearance: Brightness.light,
                             keyboardType: typeKeyboard,
                             textCapitalization: TextCapitalization.words,
@@ -99,10 +107,12 @@ class MainStyle {
                               hintStyle: MainStyle.get(context)
                                   .mainStyleTextBaseLineHint,
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color(0xFFf0f0f0)),
+                                borderSide:
+                                    BorderSide(color: Color(0xFFf0f0f0)),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color(0xFF801F92)),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF801F92)),
                               ),
                             ),
                             onChanged: onChange,

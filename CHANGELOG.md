@@ -1,3 +1,23 @@
+## 0.9.25+2
+
+* Update na mascara ZInputDataNascimento
+
+## 0.9.25+1
+
+* Update funcao de desabilitar ZInput
+
+## 0.9.25
+
+* ZCollection sem a borda superior
+
+## 0.9.24
+
+* Funcao de desabilitar ZInput
+
+## 0.9.23+3
+
+* Update ZInput Celular
+
 ## 0.9.23+2
 
 * Update ZInput

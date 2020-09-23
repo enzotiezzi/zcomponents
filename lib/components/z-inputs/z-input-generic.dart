@@ -13,30 +13,31 @@ class ZInputGeneric extends StatefulWidget {
   FocusNode inputPadraoFocus;
   ValueChanged<String> onChange;
   bool obscureText;
+  bool enabled;
 
   var controllerInputPadrao = new TextEditingController();
   FocusNode proximoFocus;
 
-  ZInputGeneric({
-    this.key,
-    this.hintText: "",
-    this.onChange,
-    this.obscureText: false,
-    this.tipoTeclado: TextInputType.text,
-    this.comMascara:false,
-    @required this.titulo,
-    this.textMask,
-    @required this.inputPadraoFocus,
-    @required this.controllerInputPadrao,
-    this.proximoFocus,
-  }) : super(key: key);
+  ZInputGeneric(
+      {this.key,
+      this.hintText: "",
+      this.onChange,
+      this.obscureText: false,
+      this.tipoTeclado: TextInputType.text,
+      this.comMascara: false,
+      @required this.titulo,
+      this.textMask,
+      @required this.inputPadraoFocus,
+      @required this.controllerInputPadrao,
+      this.proximoFocus,
+      this.enabled})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ZInputGenericState();
 }
 
 class _ZInputGenericState extends State<ZInputGeneric> {
-
   @override
   void initState() {
     super.initState();
@@ -44,10 +45,10 @@ class _ZInputGenericState extends State<ZInputGeneric> {
 
   @override
   Widget build(BuildContext context) {
-    return new  Container(
+    return new Container(
       color: Colors.white,
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).requestFocus(widget.inputPadraoFocus);
         },
         child: new Column(
@@ -59,7 +60,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                   child: new Container(
                     padding: const EdgeInsets.only(
                         top: 12.0, bottom: 12.0, left: 16.0),
-                    child: new Text( "${widget.titulo}:",
+                    child: new Text("${widget.titulo}:",
                         style: MainStyle.get(context).mainStyleTextBaseLine),
                   ),
                 ),
@@ -69,73 +70,82 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                     margin: const EdgeInsets.only(left: 8.0, right: 16.0),
                     child: (widget.comMascara == true)
                         ? new TextField(
-                      keyboardAppearance: Brightness.light,
-                      keyboardType: widget.tipoTeclado,
-                      textCapitalization: TextCapitalization.words,
-                      focusNode: widget.inputPadraoFocus,
-                      obscureText: widget.obscureText,
-                      controller: widget.controllerInputPadrao,
-                      cursorColor: Color(0xFF801F92),
-                      style: MainStyle.get(context)
-                          .mainStyleTextBaseLineInput,
-                      inputFormatters: [
-                        MaskedTextInputFormatterShifter(
-                            maskONE: widget.textMask, maskTWO: widget.textMask)
-                      ],
-                      onSubmitted: (text) {
-                        widget.inputPadraoFocus.unfocus();
-                        if (widget.proximoFocus != null) {
-                          FocusScope.of(context).requestFocus(widget.proximoFocus);
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: widget.hintText,
-                        hintStyle: MainStyle.get(context)
-                            .mainStyleTextBaseLineHint,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFf0f0f0)),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF801F92)),
-                        ),
-                      ),
-                      onChanged: (text){
-                        if (widget.onChange != null) widget.onChange(text);
-
-                      },
-                    )
+                            enabled: widget.enabled,
+                            keyboardAppearance: Brightness.light,
+                            keyboardType: widget.tipoTeclado,
+                            textCapitalization: TextCapitalization.words,
+                            focusNode: widget.inputPadraoFocus,
+                            obscureText: widget.obscureText,
+                            controller: widget.controllerInputPadrao,
+                            cursorColor: Color(0xFF801F92),
+                            style: MainStyle.get(context)
+                                .mainStyleTextBaseLineInput,
+                            inputFormatters: [
+                              MaskedTextInputFormatterShifter(
+                                  maskONE: widget.textMask,
+                                  maskTWO: widget.textMask)
+                            ],
+                            onSubmitted: (text) {
+                              widget.inputPadraoFocus.unfocus();
+                              if (widget.proximoFocus != null) {
+                                FocusScope.of(context)
+                                    .requestFocus(widget.proximoFocus);
+                              }
+                            },
+                            decoration: InputDecoration(
+                              hintText: widget.hintText,
+                              hintStyle: MainStyle.get(context)
+                                  .mainStyleTextBaseLineHint,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFf0f0f0)),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF801F92)),
+                              ),
+                            ),
+                            onChanged: (text) {
+                              if (widget.onChange != null)
+                                widget.onChange(text);
+                            },
+                          )
                         : new TextField(
-                      keyboardAppearance: Brightness.light,
-                      keyboardType: widget.tipoTeclado,
-                      textCapitalization: TextCapitalization.words,
-                      focusNode: widget.inputPadraoFocus,
-                      obscureText: widget.obscureText,
-                      controller: widget.controllerInputPadrao,
-                      cursorColor: Color(0xFF801F92),
-                      style: MainStyle.get(context)
-                          .mainStyleTextBaseLineInput,
-                      onSubmitted: (text) {
-                        widget.inputPadraoFocus.unfocus();
-                        if (widget.proximoFocus != null) {
-                          FocusScope.of(context).requestFocus(widget.proximoFocus);
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: widget.hintText,
-                        hintStyle: MainStyle.get(context)
-                            .mainStyleTextBaseLineHint,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFf0f0f0)),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF801F92)),
-                        ),
-                      ),
-                      onChanged: (text){
-                        if (widget.onChange != null) widget.onChange(text);
-
-                      },
-                    ),
+                            enabled: widget.enabled,
+                            keyboardAppearance: Brightness.light,
+                            keyboardType: widget.tipoTeclado,
+                            textCapitalization: TextCapitalization.words,
+                            focusNode: widget.inputPadraoFocus,
+                            obscureText: widget.obscureText,
+                            controller: widget.controllerInputPadrao,
+                            cursorColor: Color(0xFF801F92),
+                            style: MainStyle.get(context)
+                                .mainStyleTextBaseLineInput,
+                            onSubmitted: (text) {
+                              widget.inputPadraoFocus.unfocus();
+                              if (widget.proximoFocus != null) {
+                                FocusScope.of(context)
+                                    .requestFocus(widget.proximoFocus);
+                              }
+                            },
+                            decoration: InputDecoration(
+                              hintText: widget.hintText,
+                              hintStyle: MainStyle.get(context)
+                                  .mainStyleTextBaseLineHint,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFf0f0f0)),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF801F92)),
+                              ),
+                            ),
+                            onChanged: (text) {
+                              if (widget.onChange != null)
+                                widget.onChange(text);
+                            },
+                          ),
                   ),
                 ),
               ],
@@ -145,5 +155,4 @@ class _ZInputGenericState extends State<ZInputGeneric> {
       ),
     );
   }
-
 }

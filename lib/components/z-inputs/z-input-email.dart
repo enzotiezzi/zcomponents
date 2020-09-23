@@ -12,15 +12,16 @@ class ZInputEmail extends StatefulWidget {
   bool valideEmail;
   ValueChanged<String> onChange;
   void Function(bool) validacao;
+  bool enabled;
 
   ZInputEmail(
       {this.key,
-        this.onChange,
+      this.onChange,
       @required this.emailFocus,
       @required this.controllerEmail,
       this.proximoFocus,
       this.validacao,
-      })
+      this.enabled})
       : super(key: key);
 
   @override
@@ -54,14 +55,12 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
         (text) {
           if (widget.onChange != null) widget.onChange(text);
 
-
           data = text;
           emailCount = 0;
-
         },
         false,
-
-        hintText: "email@exemplo.com");
+        hintText: "email@exemplo.com",
+        enabled: widget.enabled);
   }
 
   void initNome() {
@@ -75,7 +74,8 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
   void _validarEmail() {
     if (widget.email == null) {
       widget.valideEmail = false;
-      _dialogUtils.showAlertDialogNewAviso("E-mail Inválido!", "Por Favor insira um E-mail.");
+      _dialogUtils.showAlertDialogNewAviso(
+          "E-mail Inválido!", "Por Favor insira um E-mail.");
       widget.validacao(false);
     } else if (!EmailValidator.validate(widget.email)) {
       widget.valideEmail = false;
@@ -87,5 +87,4 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
       widget.validacao(true);
     }
   }
-
 }

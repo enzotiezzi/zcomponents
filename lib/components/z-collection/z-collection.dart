@@ -51,7 +51,7 @@ class ZCollectionState extends State<ZCollection> {
             height: 42,
             decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border(top: BorderSide(color: Colors.grey))),
+               ),
             padding: EdgeInsets.only(left: 16.0, right: 14),
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.start,

@@ -11,6 +11,7 @@ class ZInputCelular extends StatefulWidget {
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
   void Function(bool) validacao;
+  bool enabled;
 
   ZInputCelular(
       {this.key,
@@ -18,7 +19,8 @@ class ZInputCelular extends StatefulWidget {
       @required this.celularFocus,
       @required this.controllerCelular,
       this.proximoFocus,
-      this.validacao})
+      this.validacao,
+      this.enabled})
       : super(key: key);
 
   @override
@@ -61,7 +63,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
         },
         true,
         textMask: "(##) #####-####",
-        hintText: "( ** ) 9 **** - ****");
+        hintText: "( ** ) 9 **** - ****",enabled: widget.enabled);
   }
 
   void initCelular() {

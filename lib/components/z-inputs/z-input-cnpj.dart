@@ -11,6 +11,7 @@ class ZInputCNPJ extends StatefulWidget {
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
   void Function(bool) validacao;
+  bool enabled;
 
   ZInputCNPJ(
       {this.key,
@@ -18,7 +19,7 @@ class ZInputCNPJ extends StatefulWidget {
        @required this.controllerCNPJ,
         this.onChange,
         this.proximoFocus,
-        this.validacao
+        this.validacao, this.enabled
       })
       : super(key: key);
 
@@ -63,7 +64,7 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
           }
         },true,
         textMask: "XX.XXX.XXX/XXXX-XX",
-        hintText: "XX.XXX.XXX/XXXX-XX");
+        hintText: "XX.XXX.XXX/XXXX-XX",enabled: widget.enabled);
   }
 
   void initNome() {

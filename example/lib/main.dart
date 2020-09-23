@@ -25,6 +25,7 @@ import 'package:z_components/components/z-perfil-colaborador.dart';
 import 'package:z_components/components/z-inputs/z-input-name.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';
+import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
 
 void main() => runApp(MyApp());
 
@@ -371,12 +372,20 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             new Divider(height: 1.0,),
             new Container(
               padding: EdgeInsets.only(top: 16.0),
-              child: new ZInputGeneric(
-                  titulo: "CEP",
-                  inputPadraoFocus: cepFocus,
-                  controllerInputPadrao: controllerCEP
-              ),
+              child: new ZInputDataNascimento(
+                enabled: true,
+                dataFocus: dataFocus,
+                controllerData: controllerData,
+                onChange: (text) {
+                },
+              )
             ),
+            new Divider(height: 1.0,),
+            ZCollection(
+    lista: listaTesteSkipTake,
+    titulo: "Escala",
+    onChange: (item) {},
+    ),
           ],
         ));
   }
