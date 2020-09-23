@@ -1,3 +1,7 @@
+## 0.9.26
+
+* Update no ZIdentity
+
 ## 0.9.25+2
 
 * Update na mascara ZInputDataNascimento
