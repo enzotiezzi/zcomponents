@@ -35,9 +35,6 @@ class ZIdentityServer {
     try {
       _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
-      await _flutterWebviewPlugin.cleanCookies();
-      await _flutterWebviewPlugin.clearCache();
-
       _flutterWebviewPlugin.onUrlChanged.listen((url) {
         if (url.contains("code=") && url.contains(redirectURI))
           _flutterWebviewPlugin.reload();
