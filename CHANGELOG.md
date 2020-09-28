@@ -1,3 +1,7 @@
+## 0.9.26+2
+
+* Update ZInput Email
+
 ## 0.9.26+1
 
 * Update no ZIdentity

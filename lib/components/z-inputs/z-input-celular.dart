@@ -63,7 +63,8 @@ class _ZInputCelularState extends State<ZInputCelular> {
         },
         true,
         textMask: "(##) #####-####",
-        hintText: "( ** ) 9 **** - ****",enabled: widget.enabled);
+        hintText: "( ** ) 9 **** - ****",
+        enabled: widget.enabled);
   }
 
   void initCelular() {
