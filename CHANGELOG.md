@@ -1,6 +1,18 @@
-## 0.9.25+2
+## 0.9.26+2
 
 * Update ZInput Email
+
+## 0.9.26+1
+
+* Update no ZIdentity
+
+## 0.9.26
+
+* Update no ZIdentity
+
+## 0.9.25+2
+
+* Update na mascara ZInputDataNascimento
 
 ## 0.9.25+1
 
