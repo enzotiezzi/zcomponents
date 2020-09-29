@@ -4,6 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia.dart';
+import 'package:z_components/api/identity-server/identity-server.dart';
+import 'package:z_components/api/identity-server/i-identity-server.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -11,8 +13,21 @@ class MainTesting extends StatefulWidget {
 }
 
 class _MainTestingState extends State<MainTesting> {
+  IIdentityServer identityServer;
+
   @override
   void initState() {
+    identityServer = new IdentityServer(
+        clientId: "ZTotem",
+        redirectUrl: "net.openid.appauthztotem:/oauth2redirect",
+        scopes: [
+          'openid',
+          'profile',
+          'email',
+          'offline_access',
+          'moltres.acesso.api.full'
+        ]);
+
     super.initState();
   }
 
@@ -23,11 +38,16 @@ class _MainTestingState extends State<MainTesting> {
   }
 
   Widget _buildBody() {
-    return new Container(
-      padding: const EdgeInsets.all(16.0),
-      child: new ZSequencia(
-        escala: "5x2",
-        primeiroDiaEscala: new DateTime(2020, 4, 6).toIso8601String(),
+    return new GestureDetector(
+      onTap: () async {
+        var res = await identityServer.login();
+      },
+      child: new Container(
+        padding: const EdgeInsets.all(16.0),
+        child: new ZSequencia(
+          escala: "5x2",
+          primeiroDiaEscala: new DateTime(2020, 4, 6).toIso8601String(),
+        ),
       ),
     );
   }
