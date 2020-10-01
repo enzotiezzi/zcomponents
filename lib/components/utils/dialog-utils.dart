@@ -419,7 +419,7 @@ class DialogUtils {
                           message,
                           textAlign: TextAlign.center,
                           style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 8.0),
+                              fontWeight: FontWeight.bold, fontSize: 12.0),
                         ),
                       )
                     ],
