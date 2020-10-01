@@ -1,6 +1,6 @@
 ## 0.9.27
 
-* Update ZCollection recebendo thema
+* Update ZCollection recebendo theme
 
 ## 0.9.26+3
 
