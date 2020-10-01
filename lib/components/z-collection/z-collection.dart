@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
-import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZCollection extends StatefulWidget {
   final String titulo;
   final List<ZCollectionItem> lista;
+  final ThemeData themeData;
   final ValueChanged<ZCollectionItem> onChange;
   final String valorPadrao;
   final Color colorStyle;
@@ -18,6 +18,7 @@ class ZCollection extends StatefulWidget {
     Key key,
     @required this.titulo,
     @required this.lista,
+    @required this.themeData,
     this.onChange,
     this.valorPadrao,
     this.colorStyle: const Color(0xff2bbab4),
@@ -64,7 +65,7 @@ class ZCollectionState extends State<ZCollection> {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     text: TextSpan(
-                      style: MainStyle.get(context).mainStyleTextBaseLine,
+                      style: widget.themeData.textTheme.bodyText1.copyWith(color: Color(0xff999999)),
                       text: widget.titulo,
                     ),
                   ),
@@ -78,10 +79,7 @@ class ZCollectionState extends State<ZCollection> {
                     maxLines: 1,
                     softWrap: false,
                     text: TextSpan(
-                        style: new TextStyle(
-                            color: Color(0xff000000),
-                            fontWeight: FontWeight.normal
-                        ),
+                        style: widget.themeData.textTheme.bodyText1,
                         text: (_itemSelecionado?.valor == null &&
                             _anterior == "Selecione")
                             ? _anterior

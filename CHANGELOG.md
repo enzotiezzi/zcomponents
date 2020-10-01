@@ -1,3 +1,7 @@
+## 0.9.27
+
+* Update ZCollection recebendo theme
+
 ## 0.9.26+3
 
 * Update tamanho fonte dialog
