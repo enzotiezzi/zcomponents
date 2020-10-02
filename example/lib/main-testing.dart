@@ -42,7 +42,7 @@ class _MainTestingState extends State<MainTesting> {
       children: [
         new ZSequenciaCalendario(
           escala: "5x2",
-          primeiroDiaEscala: new DateTime(2020, 4, 6).toIso8601String(),
+          primeiroDiaEscala: new DateTime(2020, 10, 1).toIso8601String(),
         )
       ],
     );
