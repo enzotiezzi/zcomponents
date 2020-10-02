@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTheme {
-  static Color primaryColor = Color(0xFFFF2800);
+  static Color primaryColor = Color(0xFF2BBAB4);
   static Color accentColor  = Color(0xFF801F92);
 
   static ThemeData appTheme = new ThemeData(
