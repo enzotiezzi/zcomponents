@@ -9,12 +9,14 @@ import 'package:z_components/components/z_loading.dart';
 class ZSequencia extends StatefulWidget {
   final String primeiroDiaEscala;
   final String escala;
+  final ThemeData themeData;
   final Color color;
   final DateTime data;
 
   ZSequencia(
       {@required this.primeiroDiaEscala,
       @required this.escala,
+      @required this.themeData,
       this.data,
       this.color: const Color(0xff2bbab4)});
 

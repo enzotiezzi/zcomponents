@@ -7,9 +7,12 @@ import 'package:z_components/styles/main-style.dart';
 class ZSequenciaCalendario extends StatefulWidget {
   final String primeiroDiaEscala;
   final String escala;
+  final ThemeData themeData;
 
   ZSequenciaCalendario(
-      {@required this.primeiroDiaEscala, @required this.escala});
+      {@required this.primeiroDiaEscala,
+      @required this.escala,
+      @required this.themeData});
 
   @override
   State<StatefulWidget> createState() => _ZSequenciaCalendarioState();
@@ -62,31 +65,30 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
                 decoration: new BoxDecoration(
                   color: Colors.white,
                   border: Border.all(
-                      color: MainStyle.get(context).primaryColor, width: 2.0),
+                      color: widget.themeData.primaryColor, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
               ),
               new Text(
                 "DIA ATUAL",
-                style: new TextStyle(fontSize: 10),
+                style: widget.themeData.textTheme.overline,
               ),
               new Container(
                 width: 10,
                 height: 10,
                 decoration: new BoxDecoration(
-                    color: MainStyle.get(context).primaryColor,
+                    color: widget.themeData.primaryColor,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
               ),
-              new Text("DIAS T (TRABALHO)",
-                  style: new TextStyle(fontSize: 10)),
+              new Text("DIAS T (TRABALHO)", style: widget.themeData.textTheme.overline),
               new Container(
                 width: 10,
                 height: 10,
                 decoration: new BoxDecoration(
-                    color: const Color(0xFFE6E6E6),
+                    color: widget.themeData.disabledColor,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
               ),
-              new Text("DIAS F (FOLGA)", style: new TextStyle(fontSize: 10))
+              new Text("DIAS F (FOLGA)", style: widget.themeData.textTheme.overline),
             ],
           ),
         )
@@ -106,12 +108,12 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
     bool diaDesseMes = _checarSeDiaDesseMes(date);
 
     if (diaIgualAHoje) {
-      corDoDia = MainStyle.get(context).primaryColor;
+      corDoDia = widget.themeData.primaryColor;
       corPreenchimento = Colors.white;
       boxDecoration = new BoxDecoration(
           color: corPreenchimento,
           border: new Border.all(
-              color: MainStyle.get(context).primaryColor, width: 4));
+              color: widget.themeData.primaryColor, width: 4));
     } else {
       if (diaDesseMes) {
         corDoDia = _definirCorDoDia(touf);
@@ -120,7 +122,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
           color: corPreenchimento,
         );
       } else {
-        corDoDia = const Color(0xFFCCCCCC);
+        corDoDia = widget.themeData.disabledColor;
         corPreenchimento = Colors.transparent;
         boxDecoration = new BoxDecoration(
           color: corPreenchimento,
@@ -152,7 +154,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
       child: new Text(
         weekDay.toUpperCase(),
         textAlign: TextAlign.center,
-        style: new TextStyle(color: const Color(0xFF707070), fontSize: 14.0),
+        style: widget.themeData.textTheme.bodyText2.copyWith(color: Color(0xFF707070)),
       ),
     );
   }
