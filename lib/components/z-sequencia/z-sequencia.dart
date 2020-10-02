@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:z_components/api/quadro-pessoal-service.dart';
+import 'package:z_components/components/z-sequencia/sequencia.dart';
 import 'package:z_components/components/z_loading.dart';
 
 class ZSequencia extends StatefulWidget {
@@ -84,8 +85,7 @@ class ZSequenciaState extends State<ZSequencia> {
   Widget _buildItemSequencia(index) {
     var date = new DateTime.now();
 
-    if(widget.data != null)
-      date = widget.data;
+    if (widget.data != null) date = widget.data;
 
     var backGroundColor = const Color(0xFFFFFFFF);
     var fontColor = widget.color;
@@ -141,95 +141,31 @@ class ZSequenciaState extends State<ZSequencia> {
   }
 
   List<String> _montarSequencia() {
+    var sequencia = new Sequencia(
+        escala: widget.escala, primeiroDiaEscala: widget.primeiroDiaEscala);
+
     var date = new DateTime.now();
 
-    if(widget.data != null)
-      date = widget.data;
+    if (widget.data != null) date = widget.data;
 
-    var sequencia = new List<String>();
+    var sequencias = new List<String>();
 
     var indexDias = -3;
 
     while (indexDias <= 3) {
       var touf =
-          _calcularSeDiaTouF(date.add(new Duration(days: indexDias)));
+          sequencia.calcularSeDiaTouF(date.add(new Duration(days: indexDias)));
 
-      sequencia.add(touf);
+      sequencias.add(touf);
 
       indexDias++;
     }
 
-    if (sequencia.length != 0) {
+    if (sequencias.length != 0) {
       if (mounted)
         setState(() {
-          _sequencia = sequencia;
+          _sequencia = sequencias;
         });
     }
-  }
-
-  String _calcularSeDiaTouF(DateTime date) {
-    var escalaNormalizada = _normalizarEscala(widget.escala);
-
-    var quantidadeDeDiasNaEmpresa =
-        _calcularDiasNaEmpresa(widget.primeiroDiaEscala, date);
-
-    var quantidadeDeDiasNaEscala = _calcularDiasNaEscala(escalaNormalizada);
-
-    var diaAtualNaEscala =
-        _mod(quantidadeDeDiasNaEmpresa, quantidadeDeDiasNaEscala);
-
-    var vetorTouF = _montarVetorTouF(escalaNormalizada);
-
-    return vetorTouF[diaAtualNaEscala];
-  }
-
-  String _normalizarEscala(String escala) {
-    var escalaNormalizada = escala;
-
-    if (escalaNormalizada.toLowerCase() == "12x36") escalaNormalizada = "1x1";
-
-    return escalaNormalizada;
-  }
-
-  int _calcularDiasNaEmpresa(String primeiroDiaEscala, DateTime date) {
-    var dataPrimeiroDiaEscala = DateTime.parse(primeiroDiaEscala);
-
-    return date.difference(dataPrimeiroDiaEscala).inDays;
-  }
-
-  int _calcularDiasNaEscala(String escala) {
-    if (escala.contains('x')) {
-      var diasNaEscala = 0;
-
-      escala.split('x').forEach((x) => diasNaEscala += int.parse(x));
-
-      return diasNaEscala;
-    }
-
-    return -1;
-  }
-
-  int _mod(int a, int b) {
-    return (a - (a / b).floor() * b);
-  }
-
-  List<String> _montarVetorTouF(String escala) {
-    var vetorTouF = new List<String>();
-
-    var escalaFracionada = escala.split('x');
-
-    for (var i = 0; i < escalaFracionada.length; i++) {
-      var quantidadeDias = int.parse(escalaFracionada[i]);
-
-      for (var y = 0; y < quantidadeDias; y++) {
-        if (i % 2 == 0) {
-          vetorTouF.add("T");
-        } else {
-          vetorTouF.add("F");
-        }
-      }
-    }
-
-    return vetorTouF;
   }
 }
