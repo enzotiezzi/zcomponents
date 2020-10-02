@@ -42,9 +42,10 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new ZSequencia(
+        new ZSequenciaCalendario(
           escala: "5x2",
           primeiroDiaEscala: new DateTime(2020, 10, 1).toIso8601String(),
+          themeData: CustomTheme.appTheme,
         )
       ],
     );
