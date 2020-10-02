@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
-import 'package:z_components/styles/main-style.dart';
 
 class ZCollection extends StatefulWidget {
   final String titulo;

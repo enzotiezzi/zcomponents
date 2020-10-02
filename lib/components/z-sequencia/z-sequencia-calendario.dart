@@ -7,9 +7,12 @@ import 'package:z_components/styles/main-style.dart';
 class ZSequenciaCalendario extends StatefulWidget {
   final String primeiroDiaEscala;
   final String escala;
+  final ThemeData themeData;
 
   ZSequenciaCalendario(
-      {@required this.primeiroDiaEscala, @required this.escala});
+      {@required this.primeiroDiaEscala,
+      @required this.escala,
+      @required this.themeData});
 
   @override
   State<StatefulWidget> createState() => _ZSequenciaCalendarioState();
@@ -161,19 +164,11 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
             border: new Border.all(
                 color: MainStyle.get(context).primaryColor, width: 2));
       } else {
-        if (diaDesseMes) {
-          corDoDia = _definirCorDoDia(touf);
-          corPreenchimento = _definirCorDePreenchimento(touf);
-          boxDecoration = new BoxDecoration(
-            color: corPreenchimento,
-          );
-        } else {
-          corDoDia = const Color(0xFFCCCCCC);
-          corPreenchimento = Colors.transparent;
-          boxDecoration = new BoxDecoration(
-            color: corPreenchimento,
-          );
-        }
+        corDoDia = widget.themeData.disabledColor;
+        corPreenchimento = Colors.transparent;
+        boxDecoration = new BoxDecoration(
+          color: corPreenchimento,
+        );
       }
     }
 
@@ -201,7 +196,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
       child: new Text(
         weekDay.toUpperCase(),
         textAlign: TextAlign.center,
-        style: new TextStyle(color: const Color(0xFF707070), fontSize: 14.0),
+        style: widget.themeData.textTheme.bodyText2.copyWith(color: Color(0xFF707070)),
       ),
     );
   }
