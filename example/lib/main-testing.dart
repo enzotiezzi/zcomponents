@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia-calendario.dart';
+import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/components/utils/theme.dart';
@@ -41,7 +42,7 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new ZSequenciaCalendario(
+        new ZSequencia(
           escala: "5x2",
           primeiroDiaEscala: new DateTime(2020, 4, 6).toIso8601String(),
           themeData: CustomTheme.appTheme,

@@ -10,7 +10,6 @@ class ZSequencia extends StatefulWidget {
   final String primeiroDiaEscala;
   final String escala;
   final ThemeData themeData;
-  final Color color;
   final DateTime data;
 
   ZSequencia(
@@ -18,7 +17,7 @@ class ZSequencia extends StatefulWidget {
       @required this.escala,
       @required this.themeData,
       this.data,
-      this.color: const Color(0xff2bbab4)});
+      });
 
   @override
   State<StatefulWidget> createState() => new ZSequenciaState();
@@ -90,8 +89,8 @@ class ZSequenciaState extends State<ZSequencia> {
     if (widget.data != null) date = widget.data;
 
     var backGroundColor = const Color(0xFFFFFFFF);
-    var fontColor = widget.color;
-    var borderColor = widget.color;
+    var fontColor = widget.themeData.primaryColor;
+    var borderColor = widget.themeData.primaryColor;
 
     var data = date.add(new Duration(days: indexDia));
     var diaSemana = new DateFormat.EEEE().format(data);
@@ -105,7 +104,7 @@ class ZSequenciaState extends State<ZSequencia> {
 
     if (dataFormatada == hojeFormatado) {
       dia = "HOJE";
-      backGroundColor = widget.color;
+      backGroundColor = widget.themeData.primaryColor;
       fontColor = const Color(0xFFFFFFFF);
     }
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomTheme {
-  static Color primaryColor = Color(0xFF2BBAB4);
+  static Color primaryColor = Color(0xFFFF2800);
   static Color accentColor  = Color(0xFF801F92);
 
   static ThemeData appTheme = new ThemeData(
-    primaryColor: Color(0xFF2BBAB4),
-    accentColor:  Color(0xFF801F92),
+    primaryColor: primaryColor,
+    accentColor:  accentColor,
     brightness: Brightness.light,
     primaryColorBrightness: Brightness.light,
     accentColorBrightness: Brightness.light,
@@ -41,7 +41,7 @@ class CustomTheme {
           fontSize: 10.0, fontWeight: FontWeight.w400, letterSpacing: 1.5),
     ),
     buttonTheme:  ButtonThemeData(
-      buttonColor: Color(0xFF801F92),
+      buttonColor: accentColor,
       disabledColor: Color(0xFFCCCCCC),
       textTheme: ButtonTextTheme.primary,
     ),
@@ -50,17 +50,17 @@ class CustomTheme {
       thickness: 1.0,
     ),
     iconTheme:  IconThemeData(
-      color: Color(0xFF801F92),
+      color: accentColor,
       size: 24,
     ),
     appBarTheme:  AppBarTheme(
-      color: Color(0xFF2BBAB4),
+      color: primaryColor,
       iconTheme: IconThemeData(
           color: Color(0xFFFFFFFF),
           size: 24
       ),
       textTheme: new TextTheme(
-        title: new TextStyle(
+         headline6: new TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
             letterSpacing: 0.15,
@@ -72,10 +72,10 @@ class CustomTheme {
     ),
     disabledColor:  Color(0xFFCCCCCC),
     bottomAppBarTheme:  BottomAppBarTheme(
-      color:  Color(0xFF2BBAB4),
+      color:  primaryColor,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFF801F92),
+      backgroundColor: accentColor,
       foregroundColor: Color(0xFFFFFFFF),
     ),
 
