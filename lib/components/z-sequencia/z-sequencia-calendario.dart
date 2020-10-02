@@ -58,40 +58,81 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
           padding: const EdgeInsets.all(16.0),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              new Container(
-                width: 10,
-                height: 10,
-                decoration: new BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                      color: widget.themeData.primaryColor, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
+              new Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  new Row(
+                    children: [
+                      new Container(
+                        width: 10,
+                        height: 10,
+                        decoration: new BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              color: widget.themeData.primaryColor, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                      ),
+                      new Text(
+                        "DIA ATUAL",
+                        style: new TextStyle(fontSize: 10),
+                      ),
+                    ],
+                  ),
+                  new Row(
+                    children: [
+                      new Container(
+                        width: 10,
+                        height: 10,
+                        decoration: new BoxDecoration(
+                            color: widget.themeData.primaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                      ),
+                      new Text("DIAS T (TRABALHO)", style: new TextStyle(fontSize: 10)),
+                    ],
+                  )
+                ],
               ),
-              new Text(
-                "DIA ATUAL",
-                style: widget.themeData.textTheme.overline,
-              ),
-              new Container(
-                width: 10,
-                height: 10,
-                decoration: new BoxDecoration(
-                    color: widget.themeData.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-              ),
-              new Text("DIAS T (TRABALHO)", style: widget.themeData.textTheme.overline),
-              new Container(
-                width: 10,
-                height: 10,
-                decoration: new BoxDecoration(
-                    color: widget.themeData.disabledColor,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-              ),
-              new Text("DIAS F (FOLGA)", style: widget.themeData.textTheme.overline),
+              new Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  new Row(
+                    children: [
+                      new Container(
+                        width: 10,
+                        height: 10,
+                        decoration: new BoxDecoration(
+                          color: widget.themeData.primaryColor,
+                          border: Border.all(
+                              color: widget.themeData.accentColor, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                      ),
+                      new Text(
+                        "PRIMEIRO DIA DA ESCALA",
+                        style: new TextStyle(fontSize: 10),
+                      ),
+                    ],
+                  ),
+                  new Row(
+                    children: [
+                      new Container(
+                        width: 10,
+                        height: 10,
+                        decoration: new BoxDecoration(
+                            color: const Color(0xFFE6E6E6),
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                      ),
+                      new Text("DIAS F (FOLGA)", style: new TextStyle(fontSize: 10))
+                    ],
+                  )
+                ],
+              )
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -106,21 +147,22 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
 
     bool diaIgualAHoje = _checarSeDiaIgualAHoje(date);
     bool diaDesseMes = _checarSeDiaDesseMes(date);
+    bool primeiroDia = _checarSeHojeEPrimeiroDia(date);
 
-    if (diaIgualAHoje) {
-      corDoDia = widget.themeData.primaryColor;
-      corPreenchimento = Colors.white;
+    if (primeiroDia) {
+      corDoDia = Colors.white;
+      corPreenchimento = widget.themeData.primaryColor;
       boxDecoration = new BoxDecoration(
           color: corPreenchimento,
-          border: new Border.all(
-              color: widget.themeData.primaryColor, width: 4));
+          border: new Border.all(color: widget.themeData.accentColor, width: 4));
     } else {
-      if (diaDesseMes) {
-        corDoDia = _definirCorDoDia(touf);
-        corPreenchimento = _definirCorDePreenchimento(touf);
+      if (diaIgualAHoje) {
+        corDoDia = widget.themeData.primaryColor;
+        corPreenchimento = Colors.white;
         boxDecoration = new BoxDecoration(
-          color: corPreenchimento,
-        );
+            color: corPreenchimento,
+            border: new Border.all(
+                color: widget.themeData.primaryColor, width: 2));
       } else {
         corDoDia = widget.themeData.disabledColor;
         corPreenchimento = Colors.transparent;
@@ -173,7 +215,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
   Color _definirCorDePreenchimento(String touf) {
     switch (touf) {
       case "T":
-        return MainStyle.get(context).primaryColor;
+        return widget.themeData.primaryColor;
       case "F":
         return const Color(0xFFE6E6E6);
       default:
@@ -190,5 +232,13 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
   bool _checarSeDiaDesseMes(DateTime date) {
     return date.year == DateTime.now().year &&
         date.month == DateTime.now().month;
+  }
+
+  bool _checarSeHojeEPrimeiroDia(DateTime date) {
+    var primeiroDia = DateTime.parse(widget.primeiroDiaEscala);
+
+    return primeiroDia.year == date.year &&
+        primeiroDia.month == date.month &&
+        primeiroDia.day == date.day;
   }
 }
