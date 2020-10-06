@@ -141,6 +141,7 @@ class ZCollectionState extends State<ZCollection> {
               color: widget.colorStyle,
               skip: widget.skip,
               take: widget.take,
+              theme: widget.themeData,
             );
           },
           transitionsBuilder: (BuildContext context,
