@@ -165,7 +165,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
       boxDecoration = new BoxDecoration(
           color: corPreenchimento,
           border:
-              new Border.all(color: widget.themeData.accentColor, width: 4));
+              new Border.all(color: widget.themeData.accentColor, width: 2));
     } else {
       if (diaIgualAHoje) {
         corDoDia = widget.themeData.primaryColor;
