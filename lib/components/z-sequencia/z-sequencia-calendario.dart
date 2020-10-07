@@ -8,11 +8,13 @@ class ZSequenciaCalendario extends StatefulWidget {
   final String primeiroDiaEscala;
   final String escala;
   final ThemeData themeData;
+  final Function(DateTime) aoSelecionarData;
 
   ZSequenciaCalendario(
       {@required this.primeiroDiaEscala,
       @required this.escala,
-      @required this.themeData});
+      @required this.themeData,
+      this.aoSelecionarData});
 
   @override
   State<StatefulWidget> createState() => _ZSequenciaCalendarioState();
@@ -20,19 +22,22 @@ class ZSequenciaCalendario extends StatefulWidget {
 
 class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
   Sequencia _sequencia;
+  String primeiroDia;
 
   var _calendarController = new CalendarController();
 
   @override
   void initState() {
-    _sequencia = new Sequencia(
-        primeiroDiaEscala: widget.primeiroDiaEscala, escala: widget.escala);
+    primeiroDia = widget.primeiroDiaEscala;
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    _sequencia =
+        new Sequencia(primeiroDiaEscala: primeiroDia, escala: widget.escala);
+
     return new Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -46,6 +51,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
             dayBuilder: _buildDay,
             dowWeekdayBuilder: _buildWeekDay,
           ),
+          onDaySelected: selecionarDia,
         ),
         new Container(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -88,9 +94,11 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
                         height: 10,
                         decoration: new BoxDecoration(
                             color: widget.themeData.primaryColor,
-                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                       ),
-                      new Text("DIAS T (TRABALHO)", style: new TextStyle(fontSize: 10)),
+                      new Text("DIAS T (TRABALHO)",
+                          style: new TextStyle(fontSize: 10)),
                     ],
                   )
                 ],
@@ -123,9 +131,11 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
                         height: 10,
                         decoration: new BoxDecoration(
                             color: const Color(0xFFE6E6E6),
-                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                       ),
-                      new Text("DIAS F (FOLGA)", style: new TextStyle(fontSize: 10))
+                      new Text("DIAS F (FOLGA)",
+                          style: new TextStyle(fontSize: 10))
                     ],
                   )
                 ],
@@ -154,17 +164,18 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
       corPreenchimento = widget.themeData.primaryColor;
       boxDecoration = new BoxDecoration(
           color: corPreenchimento,
-          border: new Border.all(color: widget.themeData.accentColor, width: 4));
+          border:
+              new Border.all(color: widget.themeData.accentColor, width: 4));
     } else {
       if (diaIgualAHoje) {
         corDoDia = widget.themeData.primaryColor;
         corPreenchimento = Colors.white;
         boxDecoration = new BoxDecoration(
             color: corPreenchimento,
-            border: new Border.all(
-                color: widget.themeData.primaryColor, width: 2));
+            border:
+                new Border.all(color: widget.themeData.primaryColor, width: 2));
       } else {
-        if(diaDesseMes) {
+        if (diaDesseMes) {
           corDoDia = _definirCorDoDia(touf);
           corPreenchimento = _definirCorDePreenchimento(touf);
           boxDecoration = new BoxDecoration(
@@ -204,7 +215,8 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
       child: new Text(
         weekDay.toUpperCase(),
         textAlign: TextAlign.center,
-        style: widget.themeData.textTheme.bodyText2.copyWith(color: Color(0xFF707070)),
+        style: widget.themeData.textTheme.bodyText2
+            .copyWith(color: Color(0xFF707070)),
       ),
     );
   }
@@ -243,10 +255,18 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
   }
 
   bool _checarSeHojeEPrimeiroDia(DateTime date) {
-    var primeiroDia = DateTime.parse(widget.primeiroDiaEscala);
+    var dia = DateTime.parse(primeiroDia);
 
-    return primeiroDia.year == date.year &&
-        primeiroDia.month == date.month &&
-        primeiroDia.day == date.day;
+    return dia.year == date.year &&
+        dia.month == date.month &&
+        dia.day == date.day;
+  }
+
+  void selecionarDia(DateTime date, List<dynamic> list) {
+    if (mounted) {
+      setState(() {
+        primeiroDia = date.toIso8601String();
+      });
+    }
   }
 }
