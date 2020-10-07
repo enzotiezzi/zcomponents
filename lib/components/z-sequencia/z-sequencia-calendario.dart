@@ -263,6 +263,8 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
   }
 
   void selecionarDia(DateTime date, List<dynamic> list) {
+    if(widget.aoSelecionarData != null) widget.aoSelecionarData(date);
+
     if (mounted) {
       setState(() {
         primeiroDia = date.toIso8601String();
