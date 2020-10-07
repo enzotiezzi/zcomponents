@@ -1,3 +1,7 @@
+## 0.9.27+1
+
+* Update ZCollectionList recebendo theme
+
 ## 0.9.27
 
 * Update ZCollection recebendo theme

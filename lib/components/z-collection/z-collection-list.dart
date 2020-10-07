@@ -5,6 +5,7 @@ import 'package:z_components/styles/main-style.dart';
 
 class ZCollectionList extends StatefulWidget {
   final List<ZCollectionItem> lista;
+  final ThemeData theme;
   final String titulo;
   final ZCollectionItem ultimoValor;
   final color;
@@ -13,6 +14,7 @@ class ZCollectionList extends StatefulWidget {
 
   ZCollectionList(
       {this.lista,
+      this.theme,
       this.titulo: "",
       this.ultimoValor,
       this.color,
@@ -46,6 +48,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: widget.theme.backgroundColor,
       appBar: new CupertinoNavigationBar(
           backgroundColor: widget.color,
           leading: new GestureDetector(
@@ -67,7 +70,14 @@ class _ZCollectionListState extends State<ZCollectionList> {
             ),
           )),
       body: new Column(
-        children: <Widget>[_buildFiltro(), new Expanded(child: _buildLista())],
+        children: <Widget>[
+          _buildFiltro(),
+          new Expanded(
+              child: new Container(
+            margin: EdgeInsets.only(top: 16.0),
+            child: _buildLista(),
+          ))
+        ],
       ),
     );
   }
@@ -139,14 +149,26 @@ class _ZCollectionListState extends State<ZCollectionList> {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         var item = _listaFiltro[index];
-        return new ListTile(
-          onTap: () {
-            _selecionarItem(item);
-          },
-          title: new Text(
-            "${item.titulo ?? item.valor}",
-            style: MainStyle.get(context).mainStyleTextBaseLineInput,
-          ),
+        return new Column(
+          children: [
+            new Container(
+              height: 42,
+              color: Colors.white,
+              child: new ListTile(
+                onTap: () {
+                  _selecionarItem(item);
+                },
+                title: new Text(
+                  "${item.titulo ?? item.valor}",
+                  style: widget.theme.textTheme.bodyText1,
+                ),
+              ),
+            ),
+            new Divider(
+              height: 2,
+              color: widget.theme.backgroundColor,
+            ),
+          ],
         );
       },
     );
