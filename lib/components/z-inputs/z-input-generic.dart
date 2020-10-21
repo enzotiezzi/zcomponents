@@ -63,7 +63,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                     padding: const EdgeInsets.only(
                         top: 12.0, bottom: 12.0, left: 16.0),
                     child: new Text("${widget.titulo}",
-                        style: MainStyle.get(context).mainStyleTextBaseLine),
+                        style: widget.themeData.textTheme.bodyText1
+                            .copyWith(color: Color(0XFF999999))),
                   ),
                 ),
                 new Expanded(
@@ -80,8 +81,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             obscureText: widget.obscureText,
                             controller: widget.controllerInputPadrao,
                             cursorColor: Color(0xFF801F92),
-                            style: MainStyle.get(context)
-                                .mainStyleTextBaseLineInput,
+                            style: widget.themeData.textTheme.bodyText1,
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
                                   maskONE: widget.textMask,
@@ -96,8 +96,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             },
                             decoration: InputDecoration(
                               hintText: widget.hintText,
-                              hintStyle: MainStyle.get(context)
-                                  .mainStyleTextBaseLineHint,
+                              hintStyle: widget.themeData.textTheme.bodyText1
+                                  .copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),
@@ -121,8 +121,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             obscureText: widget.obscureText,
                             controller: widget.controllerInputPadrao,
                             cursorColor: Color(0xFF801F92),
-                            style: MainStyle.get(context)
-                                .mainStyleTextBaseLineInput,
+                            style: widget.themeData.textTheme.bodyText1,
                             onSubmitted: (text) {
                               widget.inputPadraoFocus.unfocus();
                               if (widget.proximoFocus != null) {
@@ -132,8 +131,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             },
                             decoration: InputDecoration(
                               hintText: widget.hintText,
-                              hintStyle: MainStyle.get(context)
-                                  .mainStyleTextBaseLineHint,
+                              hintStyle: widget.themeData.textTheme.bodyText1
+                                  .copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),

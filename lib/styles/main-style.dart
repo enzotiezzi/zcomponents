@@ -26,7 +26,9 @@ class MainStyle {
       bool mask,
       {String textMask,
       String hintText,
-      bool enabled}) {
+      bool enabled,
+      ThemeData themeData,
+      }) {
     if (enabled == null) {
       enabled = true;
     }
@@ -44,7 +46,7 @@ class MainStyle {
                     padding: const EdgeInsets.only(
                         top: 12.0, bottom: 12.0, left: 16.0),
                     child: new Text(title,
-                        style: MainStyle.get(context).mainStyleTextBaseLine),
+                        style: themeData.textTheme.bodyText1.copyWith(color: Color(0XFF999999))),
                   ),
                 ),
                 new Expanded(
@@ -60,8 +62,7 @@ class MainStyle {
                             focusNode: currentFocus,
                             controller: controller,
                             cursorColor: Color(0xFF801F92),
-                            style: MainStyle.get(context)
-                                .mainStyleTextBaseLineInput,
+                            style: themeData.textTheme.bodyText1,
                             inputFormatters: [
                               new MaskTextInputFormatter(mask: textMask)
                             ],
@@ -73,8 +74,7 @@ class MainStyle {
                             },
                             decoration: InputDecoration(
                               hintText: hintText,
-                              hintStyle: MainStyle.get(context)
-                                  .mainStyleTextBaseLineHint,
+                              hintStyle: themeData.textTheme.bodyText1.copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),
@@ -94,8 +94,7 @@ class MainStyle {
                             focusNode: currentFocus,
                             controller: controller,
                             cursorColor: Color(0xFF801F92),
-                            style: MainStyle.get(context)
-                                .mainStyleTextBaseLineInput,
+                            style: themeData.textTheme.bodyText1,
                             onSubmitted: (text) {
                               currentFocus.unfocus();
                               if (nextFocus != null) {
@@ -104,8 +103,7 @@ class MainStyle {
                             },
                             decoration: InputDecoration(
                               hintText: hintText,
-                              hintStyle: MainStyle.get(context)
-                                  .mainStyleTextBaseLineHint,
+                              hintStyle: themeData.textTheme.bodyText1.copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),

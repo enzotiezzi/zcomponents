@@ -64,6 +64,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
           }
         },
         true,
+        themeData: widget.themeData,
         textMask: "(##) #####-####",
         hintText: "( ** ) 9 **** - ****",
         enabled: widget.enabled);

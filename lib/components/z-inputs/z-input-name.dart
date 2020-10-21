@@ -57,7 +57,9 @@ class _ZInputNameState extends State<ZInputName> {
           nome = text;
           countNome = 0;
         },
-        false,enabled: widget.enabled);
+        false,
+        themeData: widget.themeData,
+        enabled: widget.enabled);
   }
 
   void initNome() {

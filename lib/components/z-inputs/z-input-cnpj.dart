@@ -65,6 +65,7 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
                 widget.proximoFocus);
           }
         },true,
+        themeData: widget.themeData,
         textMask: "XX.XXX.XXX/XXXX-XX",
         hintText: "XX.XXX.XXX/XXXX-XX",enabled: widget.enabled);
   }

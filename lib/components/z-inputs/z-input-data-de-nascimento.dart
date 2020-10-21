@@ -76,6 +76,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
           }
         },
         true,
+        themeData: widget.themeData,
         textMask: "##/##/####",
         hintText: "DD / MM / AAAA",enabled: widget.enabled);
   }

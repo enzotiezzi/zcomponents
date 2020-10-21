@@ -61,6 +61,7 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
           emailCount = 0;
         },
         false,
+        themeData: widget.themeData,
         hintText: "email@exemplo.com",
         enabled: widget.enabled);
   }

@@ -63,6 +63,7 @@ class _ZInputCPFState extends State<ZInputCPF> {
           }
         },
         true,
+        themeData: widget.themeData,
         textMask: "XXX.XXX.XXX-XX",
         hintText: "XXX.XXX.XXX-XX",enabled: widget.enabled);
   }
