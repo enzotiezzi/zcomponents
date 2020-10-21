@@ -1,3 +1,7 @@
+## 0.9.29+2
+
+* Update ZInput com theme
+
 ## 0.9.29+1
 
 * Update ZInput com theme
