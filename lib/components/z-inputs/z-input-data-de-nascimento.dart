@@ -10,6 +10,7 @@ class ZInputDataNascimento extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final ThemeData themeData;
 
   String dia;
   String ano;
@@ -27,6 +28,7 @@ class ZInputDataNascimento extends StatefulWidget {
   ZInputDataNascimento({
     this.key,
     this.onChange,
+    @required this.themeData,
     @required this.dataFocus,
     @required this.controllerData,
     this.proximoFocus,
@@ -56,7 +58,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "Data de Nascimento:",
+        "Data de Nascimento",
         TextInputType.number,
         () {
           FocusScope.of(context).requestFocus(widget.dataFocus);

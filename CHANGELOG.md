@@ -1,3 +1,7 @@
+## 0.9.29
+
+* Update ZInput recebendo theme
+
 ## 0.9.28+2
 
 * Update Z Sequencia Calendario 

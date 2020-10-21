@@ -12,9 +12,11 @@ class ZInputCNPJ extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final ThemeData themeData;
 
   ZInputCNPJ(
       {this.key,
+       @required this.themeData,
        @required this.cnpjFocus,
        @required this.controllerCNPJ,
         this.onChange,
@@ -45,7 +47,7 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "CNPJ:",
+        "CNPJ",
         TextInputType.number,
             () {
           FocusScope.of(context).requestFocus(widget.cnpjFocus);

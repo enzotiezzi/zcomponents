@@ -5,6 +5,7 @@ import 'package:z_components/styles/main-style.dart';
 
 class ZInputGeneric extends StatefulWidget {
   final Key key;
+  final ThemeData themeData;
   String hintText;
   String textMask;
   String titulo;
@@ -25,6 +26,7 @@ class ZInputGeneric extends StatefulWidget {
       this.obscureText: false,
       this.tipoTeclado: TextInputType.text,
       this.comMascara: false,
+      @required this.themeData,
       @required this.titulo,
       this.textMask,
       @required this.inputPadraoFocus,
@@ -60,7 +62,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                   child: new Container(
                     padding: const EdgeInsets.only(
                         top: 12.0, bottom: 12.0, left: 16.0),
-                    child: new Text("${widget.titulo}:",
+                    child: new Text("${widget.titulo}",
                         style: MainStyle.get(context).mainStyleTextBaseLine),
                   ),
                 ),

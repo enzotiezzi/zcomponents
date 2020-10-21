@@ -4,6 +4,7 @@ import 'package:z_components/styles/main-style.dart';
 
 class ZInputName extends StatefulWidget {
   final Key key;
+  final ThemeData themeData;
   FocusNode nomeFocus;
   var controllerNome = new TextEditingController();
   FocusNode proximoFocus;
@@ -14,6 +15,7 @@ class ZInputName extends StatefulWidget {
   ZInputName({
     this.key,
     this.onChange,
+    @required this.themeData,
     @required this.nomeFocus,
     @required this.controllerNome,
     this.proximoFocus,this.enabled
@@ -41,7 +43,7 @@ class _ZInputNameState extends State<ZInputName> {
     return MainStyle.styleTextInput(
 
         context,
-        "Nome:",
+        "Nome",
         TextInputType.text,
         () {
           FocusScope.of(context).requestFocus(widget.nomeFocus);

@@ -13,10 +13,12 @@ class ZInputEmail extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final ThemeData themeData;
 
   ZInputEmail(
       {this.key,
       this.onChange,
+      @required this.themeData,
       @required this.emailFocus,
       @required this.controllerEmail,
       this.proximoFocus,
@@ -44,7 +46,7 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "E-mail:",
+        "E-mail",
         TextInputType.emailAddress,
         () {
           FocusScope.of(context).requestFocus(widget.emailFocus);

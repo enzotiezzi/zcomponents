@@ -12,10 +12,12 @@ class ZInputCelular extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final ThemeData themeData;
 
   ZInputCelular(
       {this.key,
       this.onChange,
+      @required this.themeData,
       @required this.celularFocus,
       @required this.controllerCelular,
       this.proximoFocus,
@@ -43,7 +45,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "Celular:",
+        "Celular",
         TextInputType.number,
         () {
           FocusScope.of(context).requestFocus(widget.celularFocus);
