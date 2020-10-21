@@ -59,14 +59,12 @@ class ZCollectionState extends State<ZCollection> {
                 Flexible(
                   flex: 45,
                   fit: FlexFit.tight,
-                  child: new RichText(
+                  child: new Text(
+                    "${widget.titulo}",
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    text: TextSpan(
-                      style: widget.themeData.textTheme.bodyText1.copyWith(color: Color(0xff999999)),
-                      text: widget.titulo,
-                    ),
+                    style: widget.themeData.textTheme.bodyText1.copyWith(color: Color(0xff999999)),
                   ),
                 ),
                 Flexible(
