@@ -11,9 +11,11 @@ class ZInputCPF extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final ThemeData themeData;
 
   ZInputCPF(
       {this.key,
+      @required this.themeData,
       @required this.cpfFocus,
       @required this.controllerCpf,
       this.proximoFocus,
@@ -43,7 +45,7 @@ class _ZInputCPFState extends State<ZInputCPF> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "CPF:",
+        "CPF",
         TextInputType.number,
         () {
           FocusScope.of(context).requestFocus(widget.cpfFocus);
@@ -61,6 +63,7 @@ class _ZInputCPFState extends State<ZInputCPF> {
           }
         },
         true,
+        themeData: widget.themeData,
         textMask: "XXX.XXX.XXX-XX",
         hintText: "XXX.XXX.XXX-XX",enabled: widget.enabled);
   }

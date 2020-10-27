@@ -59,32 +59,24 @@ class ZCollectionState extends State<ZCollection> {
                 Flexible(
                   flex: 45,
                   fit: FlexFit.tight,
-                  child: new RichText(
+                  child: new Text(
+                    "${widget.titulo}",
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    text: TextSpan(
-                      style: widget.themeData.textTheme.bodyText1.copyWith(color: Color(0xff999999)),
-                      text: widget.titulo,
-                    ),
+                    style: widget.themeData.textTheme.bodyText1.copyWith(color: Color(0xff999999)),
                   ),
                 ),
                 Flexible(
                   flex: 55,
                   fit: FlexFit.tight,
-                  child: new RichText(
+                  child: new Text(
+                    (_itemSelecionado?.valor == null && _anterior == "Selecione") ? _anterior : _itemSelecionado?.valor,
+                    style: widget.themeData.textTheme.bodyText1,
                     textAlign: TextAlign.start,
-                    overflow: TextOverflow.clip,
+                    overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    softWrap: false,
-                    text: TextSpan(
-                        style: widget.themeData.textTheme.bodyText1,
-                        text: (_itemSelecionado?.valor == null &&
-                            _anterior == "Selecione")
-                            ? _anterior
-                            : _itemSelecionado?.valor),
-                  ),
-                ),
+                )),
                 Flexible(
                   flex: 10,
                   fit: FlexFit.tight,

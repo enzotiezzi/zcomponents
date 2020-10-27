@@ -43,10 +43,10 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
       children: [
         new TableCalendar(
           headerStyle: new HeaderStyle(
-              formatButtonVisible: false, centerHeaderTitle: true),
+              formatButtonVisible: false, centerHeaderTitle: true, ),
           locale: "pt-BR",
           calendarController: _calendarController,
-          headerVisible: false,
+          headerVisible: true,
           builders: new CalendarBuilders(
             dayBuilder: _buildDay,
             dowWeekdayBuilder: _buildWeekDay,

@@ -11,9 +11,11 @@ class ZInputCEP extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final ThemeData themeData;
 
   ZInputCEP(
       {this.key,
+      @required this.themeData,
       @required this.cepFocus,
       @required this.controllerCep,
       this.onChange,
@@ -41,7 +43,7 @@ class _ZInputCEPState extends State<ZInputCEP> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "CEP:",
+        "CEP",
         TextInputType.number,
         () {
           FocusScope.of(context).requestFocus(widget.cepFocus);
@@ -58,6 +60,7 @@ class _ZInputCEPState extends State<ZInputCEP> {
           }
         },
         true,
+        themeData: widget.themeData,
         textMask: "XXXXX-XXX",
         hintText: "XXXXX-XXX",
         enabled: widget.enabled);
