@@ -175,19 +175,11 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
             border:
                 new Border.all(color: widget.themeData.primaryColor, width: 2));
       } else {
-        if (diaDesseMes) {
-          corDoDia = _definirCorDoDia(touf);
-          corPreenchimento = _definirCorDePreenchimento(touf);
-          boxDecoration = new BoxDecoration(
-            color: corPreenchimento,
-          );
-        } else {
-          corDoDia = widget.themeData.disabledColor;
-          corPreenchimento = Colors.transparent;
-          boxDecoration = new BoxDecoration(
-            color: corPreenchimento,
-          );
-        }
+        corDoDia = _definirCorDoDia(touf);
+        corPreenchimento = _definirCorDePreenchimento(touf);
+        boxDecoration = new BoxDecoration(
+          color: corPreenchimento,
+        );
       }
     }
 
