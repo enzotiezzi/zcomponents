@@ -8,6 +8,8 @@ import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/components/utils/theme.dart';
+import 'package:table_calendar/table_calendar.dart';
+
 
 class MainTesting extends StatefulWidget {
   @override
@@ -46,6 +48,7 @@ class _MainTestingState extends State<MainTesting> {
           escala: "5x2",
           primeiroDiaEscala: new DateTime(2020, 9, 28).toIso8601String(),
           themeData: CustomTheme.appTheme,
+          startingDayOfWeek: StartingDayOfWeek.monday,
         )
       ],
     );

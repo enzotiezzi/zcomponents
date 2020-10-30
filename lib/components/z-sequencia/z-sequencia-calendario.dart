@@ -9,11 +9,13 @@ class ZSequenciaCalendario extends StatefulWidget {
   final String escala;
   final ThemeData themeData;
   final Function(DateTime) aoSelecionarData;
+  final StartingDayOfWeek startingDayOfWeek;
 
   ZSequenciaCalendario(
       {@required this.primeiroDiaEscala,
       @required this.escala,
       @required this.themeData,
+      this.startingDayOfWeek,
       this.aoSelecionarData});
 
   @override
@@ -42,6 +44,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
       mainAxisSize: MainAxisSize.min,
       children: [
         new TableCalendar(
+          startingDayOfWeek: widget.startingDayOfWeek,
           headerStyle: new HeaderStyle(
               formatButtonVisible: false, centerHeaderTitle: true, ),
           locale: "pt-BR",
