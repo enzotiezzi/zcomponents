@@ -1,3 +1,7 @@
+## 0.9.31
+
+* Create EventManager
+
 ## 0.9.30+2
 
 * Update ZSequenciaCalendario
