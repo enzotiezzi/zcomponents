@@ -9,7 +9,7 @@ class EventManager {
     if (events != null) {
       var event = events.firstWhere((element) => element.name == eventName);
 
-      event.run();
+      if (event != null) event.run();
     }
   }
 }
