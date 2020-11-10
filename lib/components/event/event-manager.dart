@@ -8,11 +8,11 @@ class EventManager implements IEventManager{
   EventManager({this.events});
 
   @override
-  void runEvent(String eventName) {
+  void runEvent(String eventName, {Map<String, dynamic> payload}) {
     if (events != null) {
       var event = events.firstWhere((element) => element.name == eventName);
 
-      if (event != null) event.run();
+      if (event != null) event.run(payload: payload);
     }
   }
 }

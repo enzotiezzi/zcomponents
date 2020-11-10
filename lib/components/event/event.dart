@@ -3,5 +3,5 @@ abstract class Event {
 
   Event(this.name);
 
-  Future<void> run();
+  Future<void> run({Map<String, dynamic> payload});
 }
