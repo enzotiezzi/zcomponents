@@ -1,3 +1,7 @@
+## 0.9.31+1
+
+* Update EventManager
+
 ## 0.9.31
 
 * Create EventManager
