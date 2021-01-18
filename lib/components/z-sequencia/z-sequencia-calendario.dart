@@ -257,7 +257,7 @@ class _ZSequenciaCalendarioState extends State<ZSequenciaCalendario> {
         dia.day == date.day;
   }
 
-  void selecionarDia(DateTime date, List<dynamic> list) {
+  void selecionarDia(DateTime date, _, __) {
     if(widget.aoSelecionarData != null) widget.aoSelecionarData(date);
 
     if (mounted) {
