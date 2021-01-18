@@ -4,7 +4,7 @@ import 'package:z_components/components/z-cargo.dart';
 import 'package:z_components/components/z-escala.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:z_components/components/utils/theme.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
@@ -12,12 +12,15 @@ import "package:z_components/view-model/batida-viewmodel.dart";
 import "package:z_components/view-model/z-tree-view-viewmodel.dart";
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'dart:convert' show json;
+import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
+
+import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
-
+import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'main-testing.dart';
@@ -37,7 +40,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: MainTesting(), theme: CustomTheme.appTheme,);
+      debugShowCheckedModeBanner: false,
+      home: ComponentExemploClasse(),
+      theme: CustomTheme.appTheme,
+    );
     //ZUserInfo(token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImVhNGU1YWY5OGQ2ZTZmZjNhMmNmOTc1MGNlMGQ0YzE3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1ODUyNTM3MjcsImV4cCI6MTU4NTI1NzMyNywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpQb250byIsInN1YiI6ImJiYzA3ZGRhLWEzNDQtNDdlZC05NGQ0LWZkODQ1MjZjYTc4OCIsImF1dGhfdGltZSI6MTU4NTI1MzcyMiwiaWRwIjoibG9jYWwiLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6Ik9aNFlEQVRFUVhFQzdGU0dONEc0WENOQjI3RzVQWEFSIiwiaWRDb2xhYm9yYWRvciI6IjU0OEQ1MjRELUE2REUtNEQ4QS05NDVFLUE3MDZBRDJGODdGMiIsImlkQWNjb3VudCI6IjQ4NmE0OWIzLTQ3ZDEtNGQ3Ni04MGRmLTA3OWViODJkNmQ4ZiIsImFjY291bnQiOiJaZWxsYXIyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNDM4LjE5Ny43MTgtMTYiLCJlbWFpbCI6ImJsYWJsYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiI0MzguMTk3LjcxOC0xNiIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.ZsSxc59voVlTcjizRGBVuCfE0FwWnz_uUucsnzypLQKI-yf-pFgPT6VLCCQ-WF4BGgxgAEKovR2YbFCApD80XbkyXVLzqNbZSq34Tkqh54G_lFwUsg_st2GzL7oQ9aMaM-XV0cktHPSobpzqNyZkln1MkLveln67Hg7ZxB2w5rO4ECL3VBe0JPs8lmqmOijWCjUfgrmTHpeU2TVgVHnXuxZej3bAskVCRP_YWA_ayFtZz7vibTdFoBYVCQFX_AEX8hunuTmt98PXZs5aL3KngRhVyLhnYoMWv5wI_vfJx3bl0UimCN_h5wnvzJpGh5NwFmpDk_5KSfPlRiwkZQTu0g"));
   }
 }
@@ -183,7 +189,6 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   @override
   void initState() {
-
     zTreeViewViewModel2FilhoFilho = new List();
     zTreeViewViewModel2 = new List();
     zTreeViewViewModel = new List();
@@ -334,65 +339,59 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ZPerfilColaborador(
-                          tituloAppBar: "PERFIL DE COLABORADOR",
-                          imagemPerfil: new Container(),
-                          status: "",
-                          re: "",
-                          voltaIntervalo: "",
-                          inicioIntervalo: "",
-                          jornada: "",
-                          cpf: "",
-                          token: "",
-                          endereco: "",
-                          email: "",
-                          funcao: () {},
-                          funcaoIconBatida: () {},
-                          idConta: "",
-                          listaIcones: [Icons.add, Icons.add, Icons.add],
-                          listaOnTap: [() {}, () {}, () {}],
-                          listaTextos: [
-                            "Histórico de Ocorrências",
-                            "Histórico de Ocorrências",
-                            "Histórico de Ocorrências"
-                          ],
-                          onTapImage: () {},
-                          onTapVoltar: () {},
-                          statusInfo: true,
-                          telefone: "",
-                          textoCargoInfo: "",
-                          textoCodigoInfo: "",
-                          textoEscalaInfo: "",
-                          numeroQuadrados: 3,
+                    builder: (context) => ConfirmarPrevisto(
+                          dadosViewModel: AtualizarDadosViewModel(
+                              cargo: "Dev",
+                              centroCusto: "Zellar",
+                              escala: "5x2",
+                              horaInicio: "08:00",
+                              horaTermino: "17:00",
+                              nomeColaborador: "Giuliano Ortiz Goria",
+                              statusColaborador: "Ativo",
+                              tempoIntervalo: "01:00"),
                         )));
           },
         ),
-        body: new Column(
-          children: <Widget>[
-            new Container(
+        body: new Container(
+          padding: EdgeInsets.only(top: 50.0),
+          child: new Column(
+            children: <Widget>[
+              /*   new Container(
               padding: EdgeInsets.only(top: 16.0),
               child: new ZInputCelular(
-                  celularFocus: celularFocus, controllerCelular: controllerCelular),
+                themeData: CustomTheme.appTheme,
+                  celularFocus: celularFocus,
+                  controllerCelular: controllerCelular),
             ),
-            new Divider(height: 1.0,),
+            new Divider(
+              height: 1.0,
+            ),
             new Container(
-              padding: EdgeInsets.only(top: 16.0),
-              child: new ZInputDataNascimento(
-                enabled: true,
-                dataFocus: dataFocus,
-                controllerData: controllerData,
-                onChange: (text) {
-                },
-              )
+                padding: EdgeInsets.only(top: 16.0),
+                child: new ZInputDataNascimento(themeData: CustomTheme.appTheme,
+                  enabled: true,
+                  dataFocus: dataFocus,
+                  controllerData: controllerData,
+                  onChange: (text) {},
+                )),
+            new Divider(
+              height: 1.0,
             ),
-            new Divider(height: 1.0,),
             ZCollection(
-    lista: listaTesteSkipTake,
-    titulo: "Escala",
-    themeData: Theme.of(context),
-    onChange: (item) {},
-    ),
-          ],
+              lista: listaTesteSkipTake,
+              titulo: "Escala",
+              themeData: Theme.of(context),
+              onChange: (item) {},
+            ),*/
+
+              new ZSequencia(
+                escala: "5x2",
+                primeiroDiaEscala: "2020-12-25 00:00:00",
+                themeData: CustomTheme.appTheme,
+                data: DateTime.now(),
+              ),
+            ],
+          ),
         ));
   }
 

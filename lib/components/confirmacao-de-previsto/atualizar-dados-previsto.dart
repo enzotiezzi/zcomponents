@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/utils/theme.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -183,7 +184,7 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
       return new Container(
         child: new Column(
           children: <Widget>[
-            new ZInputGeneric(
+            new ZInputGeneric(themeData: CustomTheme.appTheme,
               inputPadraoFocus: _focusNode,
               tipoTeclado: TextInputType.number,
               titulo: "Hora de Entrada",
@@ -191,14 +192,14 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
               comMascara: true,
               textMask: "XX:XX",
             ),
-            new ZInputGeneric(
+            new ZInputGeneric(themeData: CustomTheme.appTheme,
               tipoTeclado: TextInputType.number,
               titulo: "Hora de Saída",
               controllerInputPadrao: _controller6,
               comMascara: true,
               textMask: "XX:XX",
             ),
-            new ZInputGeneric(
+            new ZInputGeneric(themeData: CustomTheme.appTheme,
               tipoTeclado: TextInputType.number,
               titulo: "tempo de Intervalo",
               controllerInputPadrao: _controller7,
