@@ -1,3 +1,7 @@
+## 0.9.31+3
+
+* Update EventManager
+
 ## 0.9.31+2
 
 * Update EventManager
