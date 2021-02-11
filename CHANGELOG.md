@@ -1,4 +1,8 @@
-## 0.9.31+3
+## 0.9.32
+
+* Add Z Documentos
+
+## 0.9.32
 
 * Update EventManager
 

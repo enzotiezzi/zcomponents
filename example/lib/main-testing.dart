@@ -1,15 +1,8 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:z_components/styles/main-style.dart';
-import 'package:z_components/components/z-sequencia/z-sequencia-calendario.dart';
-import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
-import 'package:z_components/components/utils/theme.dart';
-import 'package:table_calendar/table_calendar.dart';
-
+import 'package:z_components/components/z-processo-seletivo/z-card-processo-seletivo.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -44,12 +37,7 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new ZSequenciaCalendario(
-          escala: "5x2",
-          primeiroDiaEscala: new DateTime(2020, 9, 28).toIso8601String(),
-          themeData: CustomTheme.appTheme,
-          startingDayOfWeek: StartingDayOfWeek.monday,
-        )
+        new ZCardProcessoSeletivo()
       ],
     );
   }
