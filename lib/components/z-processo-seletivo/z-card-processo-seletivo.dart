@@ -101,6 +101,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                     ],
                   ),
                   new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       new Row(
                         children: [
