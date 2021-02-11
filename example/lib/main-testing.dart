@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
@@ -37,7 +38,7 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new ZCardProcessoSeletivo()
+        new ZCardProcessoSeletivo(themeData: Theme.of(context),)
       ],
     );
   }
