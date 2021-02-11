@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZCardProcessoSeletivo extends StatefulWidget {
+  final ThemeData themeData;
+
+  ZCardProcessoSeletivo({@required this.themeData,});
+
   @override
   State<StatefulWidget> createState() => _ZCardProcessoSeletivoState();
 }
@@ -25,8 +29,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                     children: [
                       new Text(
                         "Aux. Manutenção - São Paulo",
-                        style: new TextStyle(
-                            fontSize: 14.0, fontWeight: FontWeight.bold),
+                        style: widget.themeData.textTheme.bodyText2.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -41,7 +44,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
               ),
             ),
             new Container(
-              color: const Color(0xFFF0F0F0),
+              color: widget.themeData.backgroundColor,
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.all(1.0),
               child: new Row(
@@ -52,13 +55,13 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                     children: [
                       new Row(
                         children: [
-                          new Icon(Icons.work_outline),
+                          new Icon(Icons.work_outline,color: widget.themeData.accentColor,),
                           new Text("Auxiliar de Limpeza")
                         ],
                       ),
                       new Row(
                         children: [
-                          new Icon(Icons.attach_money),
+                          new Icon(Icons.attach_money,color: widget.themeData.accentColor,),
                           new Text("1.299/Mês, CLT (Integral)")
                         ],
                       )
@@ -69,13 +72,13 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                     children: [
                       new Row(
                         children: [
-                          new Icon(Icons.location_on),
+                          new Icon(Icons.location_on,color: widget.themeData.accentColor,),
                           new Text("SP-Morumbi")
                         ],
                       ),
                       new Row(
                         children: [
-                          new Icon(Icons.money),
+                          new Icon(Icons.money,color: widget.themeData.accentColor,),
                           new Text("VT, VR, VA, CB, PLR")
                         ],
                       )
@@ -94,7 +97,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                     children: [
                       new Row(
                         children: [
-                          new Icon(Icons.wysiwyg),
+                          new Icon(Icons.wysiwyg,color: widget.themeData.accentColor,),
                           new Text("Etapa 1/1")
                         ],
                       ),
@@ -105,9 +108,9 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                     children: [
                       new Row(
                         children: [
-                          new Icon(Icons.work_outline),
+                          new Icon(Icons.work_outline,color: widget.themeData.accentColor,),
                           new Text("12"),
-                          new Icon(Icons.people),
+                          new Icon(Icons.people,color: widget.themeData.accentColor,),
                           new Text("                       "),
                         ],
                       )
