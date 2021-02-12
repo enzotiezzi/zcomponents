@@ -1,3 +1,7 @@
+## 0.9.33
+
+* Fixing ZCollection box decoration
+
 ## 0.9.32
 
 * Add Z Documentos

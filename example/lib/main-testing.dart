@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
-import 'package:z_components/components/z-processo-seletivo/z-card-processo-seletivo.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -38,7 +38,16 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new ZCardProcessoSeletivo(themeData: Theme.of(context),)
+        new ZCollection(
+          titulo: "Teste",
+          lista: [],
+          themeData: Theme.of(context),
+        ),
+        new ZCollection(
+          titulo: "Teste",
+          lista: [],
+          themeData: Theme.of(context),
+        )
       ],
     );
   }
