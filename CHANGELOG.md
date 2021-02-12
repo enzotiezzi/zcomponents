@@ -1,3 +1,7 @@
+## 0.9.33+2
+
+* Fixing ZInjector
+
 ## 0.9.33
 
 * Fixing ZCollection box decoration
