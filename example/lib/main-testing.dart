@@ -38,7 +38,8 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new ZCardProcessoSeletivo(themeData: Theme.of(context),)
+        new ZCardProcessoSeletivo(themeData: Theme.of(context),),
+
       ],
     );
   }
