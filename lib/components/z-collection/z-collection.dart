@@ -30,7 +30,7 @@ class ZCollection extends StatefulWidget {
 }
 
 class ZCollectionState extends State<ZCollection> {
-  ZCollectionItem _itemSelecionado  = new ZCollectionItem();
+  ZCollectionItem _itemSelecionado = new ZCollectionItem();
   String _anterior = "Selecione";
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
@@ -49,9 +49,7 @@ class ZCollectionState extends State<ZCollection> {
         children: <Widget>[
           new Container(
             height: 42,
-            decoration: BoxDecoration(
-                color: Colors.white,
-               ),
+            color: Colors.white,
             padding: EdgeInsets.only(left: 16.0, right: 14),
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -64,19 +62,23 @@ class ZCollectionState extends State<ZCollection> {
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: widget.themeData.textTheme.bodyText1.copyWith(color: Color(0xff999999)),
+                    style: widget.themeData.textTheme.bodyText1
+                        .copyWith(color: Color(0xff999999)),
                   ),
                 ),
                 Flexible(
-                  flex: 55,
-                  fit: FlexFit.tight,
-                  child: new Text(
-                    (_itemSelecionado?.valor == null && _anterior == "Selecione") ? _anterior : _itemSelecionado?.valor,
-                    style: widget.themeData.textTheme.bodyText1,
-                    textAlign: TextAlign.start,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                )),
+                    flex: 55,
+                    fit: FlexFit.tight,
+                    child: new Text(
+                      (_itemSelecionado?.valor == null &&
+                              _anterior == "Selecione")
+                          ? _anterior
+                          : _itemSelecionado?.valor,
+                      style: widget.themeData.textTheme.bodyText1,
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    )),
                 Flexible(
                   flex: 10,
                   fit: FlexFit.tight,

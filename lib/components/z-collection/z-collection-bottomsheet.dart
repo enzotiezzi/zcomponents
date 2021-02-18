@@ -1,0 +1,140 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+
+class ZCollectionBottomSheet extends StatefulWidget {
+  final String title;
+  final ThemeData themeData;
+  final List<ZCollectionItem> lista;
+  final ValueChanged<ZCollectionItem> onChange;
+
+  ZCollectionBottomSheet(
+      {@required this.title,
+      @required this.themeData,
+      @required this.lista,
+      this.onChange});
+
+  @override
+  _ZCollectionBottomSheetState createState() => _ZCollectionBottomSheetState();
+}
+
+class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
+  ZCollectionItem _itemSelecionado = new ZCollectionItem();
+  String _anterior = "Selecione";
+
+  ZCollectionItem get itemSelecionado => _itemSelecionado;
+
+  @override
+  Widget build(BuildContext context) {
+    return new GestureDetector(
+      child: new Column(
+        children: <Widget>[
+          new Container(
+            height: 42,
+            color: Colors.white,
+            padding: EdgeInsets.only(left: 16.0, right: 14),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Flexible(
+                  flex: 45,
+                  fit: FlexFit.tight,
+                  child: new Text(
+                    "${widget.title}",
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: widget.themeData.textTheme.bodyText2
+                        .copyWith(color: Color(0xff999999)),
+                  ),
+                ),
+                Flexible(
+                    flex: 55,
+                    fit: FlexFit.tight,
+                    child: new Text(
+                      (_itemSelecionado?.valor == null &&
+                              _anterior == "Selecione")
+                          ? _anterior
+                          : _itemSelecionado?.valor,
+                      style: widget.themeData.textTheme.bodyText2
+                          .copyWith(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    )),
+                Flexible(
+                  flex: 4,
+                  fit: FlexFit.tight,
+                  child: new Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      onTap: () {
+        showDialogBottom(context);
+      },
+    );
+  }
+
+  Future showDialogBottom(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        builder: (builder) {
+          return new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      padding: const EdgeInsets.only(top: 18, bottom: 8),
+                      child: new Text(
+                        "${widget.title}",
+                        style: widget.themeData.textTheme.subtitle1
+                            .copyWith(color: Color(0xff999999)),
+                      ),
+                    ),
+                  ],
+                ),
+                new Divider(color: Color(0xffCECECE)),
+                new Expanded(
+                  child: new ListView.builder(
+                    itemCount: widget.lista.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      var item = widget.lista[index];
+                      return new GestureDetector(
+                        child: new Container(
+                          padding: const EdgeInsets.only(
+                              left: 16.0, top: 8.0, bottom: 8.0),
+                          child: Text(
+                            "${item.titulo}",
+                            style: widget.themeData.textTheme.bodyText2
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        onTap: () {
+                          if (mounted)
+                            setState(() {
+                              _itemSelecionado = item;
+                              if (widget.onChange != null) widget.onChange(_itemSelecionado);
+                              Navigator.pop(context);
+                            });
+                        },
+                      );
+                    },
+                  ),
+                )
+              ],
+            );
+        });
+  }
+}
