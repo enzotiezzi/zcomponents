@@ -88,8 +88,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
           borderRadius: BorderRadius.circular(10.0),
         ),
         builder: (builder) {
-          return new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          return new Wrap(
               children: <Widget>[
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -105,33 +104,31 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                   ],
                 ),
                 new Divider(color: Color(0xffCECECE)),
-                new Expanded(
-                  child: new ListView.builder(
-                    itemCount: widget.lista.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      var item = widget.lista[index];
-                      return new GestureDetector(
-                        child: new Container(
-                          padding: const EdgeInsets.only(
-                              left: 16.0, top: 8.0, bottom: 8.0),
-                          child: Text(
-                            "${item.titulo}",
-                            style: widget.themeData.textTheme.bodyText2
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
+                new ListView.builder(
+                  itemCount: widget.lista.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    var item = widget.lista[index];
+                    return new GestureDetector(
+                      child: new Container(
+                        padding: const EdgeInsets.only(
+                            left: 16.0, top: 8.0, bottom: 8.0),
+                        child: Text(
+                          "${item.titulo}",
+                          style: widget.themeData.textTheme.bodyText2
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
-                        onTap: () {
-                          if (mounted)
-                            setState(() {
-                              _itemSelecionado = item;
-                              if (widget.onChange != null) widget.onChange(_itemSelecionado);
-                              Navigator.pop(context);
-                            });
-                        },
-                      );
-                    },
-                  ),
+                      ),
+                      onTap: () {
+                        if (mounted)
+                          setState(() {
+                            _itemSelecionado = item;
+                            if (widget.onChange != null) widget.onChange(_itemSelecionado);
+                            Navigator.pop(context);
+                          });
+                      },
+                    );
+                  },
                 )
               ],
             );
