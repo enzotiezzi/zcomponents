@@ -20,10 +20,11 @@ class _MainTestingState extends State<MainTesting> {
   IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
-    ZCollectionItem(
-        chave: "MASCULINO", titulo: "MASCULINO", valor: "MASCULINO"),
+    ZCollectionItem(chave: "MASCULINO", titulo: "MASCULINO", valor: "MASCULINO"),
     ZCollectionItem(chave: "FEMININO", titulo: "FEMININO", valor: "FEMININO"),
     ZCollectionItem(chave: "OUTRO", titulo: "OUTRO", valor: "OUTRO"),
+    ZCollectionItem(chave: "OUTRO2", titulo: "OUTRO2", valor: "OUTRO2"),
+    ZCollectionItem(chave: "OUTRO3", titulo: "OUTRO3", valor: "OUTRO3"),
   ];
 
   @override
