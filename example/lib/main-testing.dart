@@ -10,6 +10,7 @@ import 'package:z_components/components/z-collection/z-collection-bottomsheet.da
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:http/http.dart' as http;
 import 'package:z_components/components/filtro/paginated-list.dart';
+import 'package:z_components/components/filtro/z-searchbar.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -39,8 +40,6 @@ class _MainTestingState extends State<MainTesting> {
           'moltres.acesso.api.full'
         ]);
 
-    teste();
-
     super.initState();
   }
 
@@ -65,6 +64,9 @@ class _MainTestingState extends State<MainTesting> {
               var valor = teste.valor;
               print(valor);
             }),
+        new ZSearchBar(
+          key: new GlobalKey(),
+        )
       ],
     );
   }
