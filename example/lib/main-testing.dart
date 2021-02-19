@@ -9,6 +9,7 @@ import 'package:z_components/components/z-collection/z-collection-bottomsheet.da
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:http/http.dart' as http;
 import 'package:z_components/components/filtro/paginated-list.dart';
+import 'package:z_components/components/filtro/z-searchbar.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -19,10 +20,11 @@ class _MainTestingState extends State<MainTesting> {
   IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
-    ZCollectionItem(
-        chave: "MASCULINO", titulo: "MASCULINO", valor: "MASCULINO"),
+    ZCollectionItem(chave: "MASCULINO", titulo: "MASCULINO", valor: "MASCULINO"),
     ZCollectionItem(chave: "FEMININO", titulo: "FEMININO", valor: "FEMININO"),
     ZCollectionItem(chave: "OUTRO", titulo: "OUTRO", valor: "OUTRO"),
+    ZCollectionItem(chave: "OUTRO2", titulo: "OUTRO2", valor: "OUTRO2"),
+    ZCollectionItem(chave: "OUTRO3", titulo: "OUTRO3", valor: "OUTRO3"),
   ];
 
   @override
@@ -37,8 +39,6 @@ class _MainTestingState extends State<MainTesting> {
           'offline_access',
           'moltres.acesso.api.full'
         ]);
-
-    teste();
 
     super.initState();
   }
@@ -64,6 +64,9 @@ class _MainTestingState extends State<MainTesting> {
               var valor = teste.valor;
               print(valor);
             }),
+        new ZSearchBar(
+          key: new GlobalKey(),
+        )
       ],
     );
   }
