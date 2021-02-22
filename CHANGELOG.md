@@ -1,3 +1,7 @@
+## 0.9.33+3
+
+* New ZCollectionBottomSheet
+
 ## 0.9.33+2
 
 * Fixing ZInjector
