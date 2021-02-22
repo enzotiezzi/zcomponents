@@ -11,6 +11,9 @@ import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:http/http.dart' as http;
 import 'package:z_components/components/filtro/paginated-list.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
+import 'package:z_components/components/filtro/filtro-campo.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
+import 'package:z_components/components/filtro/z-response.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -27,6 +30,11 @@ class _MainTestingState extends State<MainTesting> {
     ZCollectionItem(chave: "OUTRO", titulo: "OUTRO", valor: "OUTRO"),
   ];
 
+  SearchOptions searchOptions = new SearchOptions();
+  PaginationMetaData paginationMetaData = new PaginationMetaData();
+
+  List<GrupoResumo> grupos = [];
+
   @override
   void initState() {
     identityServer = new IdentityServer(
@@ -39,6 +47,15 @@ class _MainTestingState extends State<MainTesting> {
           'offline_access',
           'moltres.acesso.api.full'
         ]);
+
+    teste(searchOptions).then((value) => {
+          this.setState(() {
+            grupos = value.body;
+
+            this.paginationMetaData = value.paginationMetaData;
+            this.searchOptions.pagination.pageNumber++;
+          })
+        });
 
     super.initState();
   }
@@ -64,29 +81,70 @@ class _MainTestingState extends State<MainTesting> {
               var valor = teste.valor;
               print(valor);
             }),
+        new Divider(
+          height: 10.0,
+        ),
         new ZSearchBar(
           key: new GlobalKey(),
-        )
+          filtroPrincipal:
+              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+          onFilter: (filters) async {
+            SearchOptions searchOptions = new SearchOptions();
+            searchOptions.filters = filters;
+
+            var response = await teste(searchOptions);
+
+            searchOptions.pagination.pageNumber++;
+
+            this.searchOptions = searchOptions;
+            this.paginationMetaData = response.paginationMetaData;
+
+            setState(() {
+              grupos = response.body;
+            });
+          },
+          camposFiltro: [
+            new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+          ],
+        ),
+        new Expanded(
+            child: new ListView.builder(
+          itemCount: grupos.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) => new Text(grupos[index].nomeNivel),
+        ))
       ],
     );
   }
 
-  teste() async {
+  Future<ZResponse<GrupoResumo>> teste(SearchOptions searchOptions) async {
+    var params = searchOptions.toHttpParams();
+
     var headers = {
       "Content-type": "application/json",
       "Authorization":
-          "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjFhZDEzYjE5ZTA2ODEwYjU0MzY0YmE5ZjRmYWFlNDU2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MTM2NTE3NjUsImV4cCI6MTYxNjI0Mzc2NSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IldlYiBaZWxsYXIiLCJzdWIiOiJiYmMwN2RkYS1hMzQ0LTQ3ZWQtOTRkNC1mZDg0NTI2Y2E3ODgiLCJhdXRoX3RpbWUiOjE2MTM2NTE3NjQsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiJPWjRZREFURVFYRUM3RlNHTjRHNFhDTkIyN0c1UFhBUiIsImFjY291bnQiOiJaZWxsYXIyIiwiaWRBY2NvdW50IjoiOGU2ZWI2MzItYjcwNy00MTNmLWExNTItM2NmZmQxZjk4MmI1IiwiaWRDb2xhYm9yYWRvciI6IjE2QTgwNDE1LUQyODItNEFDQS04NDMxLThDN0YwNjkzQjE3QiIsInByZWZlcnJlZF91c2VybmFtZSI6IjQzOC4xOTcuNzE4LTE2IiwiZW1haWwiOiJibGFibGFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiRW56byBUaWV6emkiLCJwaG9uZV9udW1iZXIiOiIoMTEpOSA5NzE3LTI1NDQiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwicm9sZXMiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCJdLCJhbXIiOlsicHdkIl19.1Zdyi5bGQnO9nPideKfhPXiPVWqUupKfT6n5wc-BMEo78ZOft_0fgOEt7dq1-W-N9Ph1_HiLye-F7N-5kYD4Q_dsyasv4oqYCv-1r3pI1MhqJJe35ssPPjssKRY61dA06iP5YBR13st1bJWM363nLVt9z4GJRSL53Kz5zkqX19xGkX1K78R_J40Xlsp7EwhKf5i2g9sDnLpkilZvjhmnz5hjWQ0ADR62E0IMTUU3VSszw2DRNM9v7lMIZmakatMJ7EWhu7luiev-jQwanXjU59V3coqLT_ix73UH15fE8oUOOp2yea81gwTe4OrYqXirdLR2ZYWftPIEtgglJLUHOg"
+          "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwYzNkZjhkOGMwZjVhMmI0MmQ1ZDE0MTc2NGU2Y2U3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MTM5OTg2MTAsImV4cCI6MTYxNjU5MDYxMCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IldlYiBaZWxsYXIiLCJzdWIiOiJiYmMwN2RkYS1hMzQ0LTQ3ZWQtOTRkNC1mZDg0NTI2Y2E3ODgiLCJhdXRoX3RpbWUiOjE2MTM5OTg2MTAsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiJPWjRZREFURVFYRUM3RlNHTjRHNFhDTkIyN0c1UFhBUiIsImFjY291bnQiOiJaZWxsYXIyIiwiaWRBY2NvdW50IjoiOGU2ZWI2MzItYjcwNy00MTNmLWExNTItM2NmZmQxZjk4MmI1IiwiaWRDb2xhYm9yYWRvciI6IjE2QTgwNDE1LUQyODItNEFDQS04NDMxLThDN0YwNjkzQjE3QiIsInByZWZlcnJlZF91c2VybmFtZSI6IjQzOC4xOTcuNzE4LTE2IiwiZW1haWwiOiJibGFibGFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiRW56byBUaWV6emkiLCJwaG9uZV9udW1iZXIiOiIoMTEpOSA5NzE3LTI1NDQiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwicm9sZXMiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCJdLCJhbXIiOlsicHdkIl19.trr71n6htf2cJnMvfSkZDt1kn21HKMt8LLkwUdJwUrDKF3jawDcbigeVzoXiHmIAc78WRd89BXQr-GETIxQzfMAPILSb9HiPTV4xt4dk-WftYicJ-NjcBnAWopS2g39KOMZVrtY6t4AUxYURAUe3ev8Mzq5SI9NHxujhufMllVJRMe-TTt6gqGpFXNncjjMv6yGA1Q5MOT_SoCoSWtIwQj2ItiuULgmGeJHW-aOY9yoqZNDZ1RJozE4Ef6qn2OutWknTeGntiEAqsUhuLDHBxCcgWtURkwdQ8OMnm4FjoXISGuCVi8YnstY4_NVs1CkqQoZlOS_kDGNac_CbbeTv_A"
     };
 
-    var res = await http.get(
-        "https://gateway-dev.zellar.com.br/api/v1/seguranca/grupo-acesso/niveis?Pagination.PageNumber=1&Pagination.PageSize=20",
-        headers: headers);
+    var url =
+        "https://gateway-dev.zellar.com.br/api/v1/seguranca/grupo-acesso/niveis$params";
+
+    var res = await http.get(url, headers: headers);
 
     var a = new PaginatedList<GrupoResumo>(
             response: res, deserializer: GrupoResumo.fromJson)
         .mapToPaginatedList();
 
-    print(a);
+    return a;
+  }
+
+  Future<void> onScroll() async {
+    if (this.paginationMetaData.hasNext) {
+      var response = await teste(this.searchOptions);
+
+      this.searchOptions.pagination.pageNumber++;
+      this.paginationMetaData = response.paginationMetaData;
+    }
   }
 }
 

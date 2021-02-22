@@ -20,11 +20,14 @@ class PaginatedList<T> {
     if (pagination != null)
       paginationMetaData = PaginationMetaData.fromJson(jsonDecode(pagination));
 
-    var lista = (jsonDecode(response.body) as List)
-        .map<T>((e) => deserializer(e))
-        .toList();
+    List<T> list = [];
+
+    if (response.body.length > 0)
+      list = (jsonDecode(response.body) as List)
+          .map<T>((e) => deserializer(e))
+          .toList();
 
     return new ZResponse<T>(
-        paginationMetaData: paginationMetaData, body: lista);
+        paginationMetaData: paginationMetaData, body: list);
   }
 }
