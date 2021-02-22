@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:z_components/components/z-inputs/z-input-name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -10,6 +10,7 @@ import 'package:z_components/components/z-collection/z-collection-bottomsheet.da
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:http/http.dart' as http;
 import 'package:z_components/components/filtro/paginated-list.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ class MainTesting extends StatefulWidget {
 }
 
 class _MainTestingState extends State<MainTesting> {
+  FocusNode nomeFocusNode = new FocusNode();
+  TextEditingController nomeController = new TextEditingController();
   IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
@@ -52,21 +55,39 @@ class _MainTestingState extends State<MainTesting> {
   }
 
   Widget _buildBody() {
-    return new Column(
-      children: [
-        new ZCardProcessoSeletivo(
-          themeData: Theme.of(context),
-        ),
-        new Divider(),
-        new ZCollectionBottomSheet(
-            title: "SEXO",
+    return SingleChildScrollView(
+      child: new Column(
+        children: [
+          new ZCardProcessoSeletivo(
             themeData: Theme.of(context),
-            lista: lista,
-            onChange: (teste) {
-              var valor = teste.valor;
-              print(valor);
-            }),
-      ],
+          ),
+          ZInputName(
+            themeData: Theme.of(context),
+            controllerNome: nomeController,
+            nomeFocus: nomeFocusNode,
+          ),
+          new Divider(),
+          ZCollection(
+              titulo: "Collection",
+              themeData: Theme.of(context),
+              lista: lista,
+              onChange: (teste) {
+                var valor = teste.valor;
+                print(valor);
+              }
+          ),
+          new Divider(),
+          new ZCollectionBottomSheet(
+            campoObrigatorio: true,
+              title: "Data de Nascimento",
+              themeData: Theme.of(context),
+              lista: lista,
+              onChange: (teste) {
+                var valor = teste.valor;
+                print(valor);
+              }),
+        ],
+      ),
     );
   }
 

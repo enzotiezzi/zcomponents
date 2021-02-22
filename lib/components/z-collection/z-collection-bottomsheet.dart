@@ -7,12 +7,14 @@ class ZCollectionBottomSheet extends StatefulWidget {
   final ThemeData themeData;
   final List<ZCollectionItem> lista;
   final ValueChanged<ZCollectionItem> onChange;
+  final bool campoObrigatorio;
 
   ZCollectionBottomSheet(
       {@required this.title,
       @required this.themeData,
       @required this.lista,
-      this.onChange});
+      this.onChange,
+      this.campoObrigatorio = false});
 
   @override
   _ZCollectionBottomSheetState createState() => _ZCollectionBottomSheetState();
@@ -23,6 +25,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
   String _anterior = "Selecione";
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +42,38 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                 Flexible(
                   flex: 45,
                   fit: FlexFit.tight,
-                  child: new Text(
-                    "${widget.title}",
-                    textAlign: TextAlign.start,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: widget.themeData.textTheme.bodyText2
-                        .copyWith(color: Color(0xff999999)),
-                  ),
+                  child:
+                  widget.campoObrigatorio ?
+                  new RichText(
+                    maxLines: 2,
+                    text: TextSpan(
+                        children: <TextSpan>[
+                          new TextSpan(
+                            text: "${widget.title}",
+                            style: widget.themeData.textTheme.bodyText1
+                                .copyWith(color: Color(0xff999999)),
+                          ),
+                          TextSpan(
+                            text: "*",
+                            style: TextStyle(color: Colors.redAccent)
+                          )
+                        ],
+                      ),
+                  ):
+                  RichText(
+                    maxLines: 2,
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        new TextSpan(
+                          text: "${widget.title}",
+                          style: widget.themeData.textTheme.bodyText1
+                              .copyWith(color: Color(0xff999999)),
+                        ),
+                      ],
+                    ),
+                  )
                 ),
+
                 Flexible(
                     flex: 55,
                     fit: FlexFit.tight,
@@ -56,14 +82,13 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                               _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
-                      style: widget.themeData.textTheme.bodyText2
-                          .copyWith(fontWeight: FontWeight.bold),
+                      style: widget.themeData.textTheme.bodyText1,
                       textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.clip,
                       maxLines: 1,
                     )),
                 Flexible(
-                  flex: 4,
+                  flex: 10,
                   fit: FlexFit.tight,
                   child: new Icon(
                     Icons.arrow_drop_down,
