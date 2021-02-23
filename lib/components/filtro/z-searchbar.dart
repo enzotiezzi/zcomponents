@@ -22,7 +22,7 @@ class ZSearchBar extends StatefulWidget {
 }
 
 class ZSearchBarState extends State<ZSearchBar> {
-  var searchTextController = new TextEditingController();
+  TextEditingController searchTextController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class ZSearchBarState extends State<ZSearchBar> {
                         keyboardType: TextInputType.text,
                         controller: searchTextController,
                         onChanged: (value) {
-                          if (value.length >= 3)
+                          if (value.length >= 3 || value.length == 0)
                             widget.onFilter([
                               new FilterExpression(
                                   propertyName: widget.filtroPrincipal.key,
@@ -66,6 +66,7 @@ class ZSearchBarState extends State<ZSearchBar> {
                                   operator: "Contains",
                                   value: value)
                             ]);
+                          print(value);
                         },
                         placeholder: "Buscar",
                         decoration:

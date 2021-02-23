@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -13,6 +12,7 @@ import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -21,14 +21,18 @@ class MainTesting extends StatefulWidget {
 
 class _MainTestingState extends State<MainTesting> {
   IIdentityServer identityServer;
+  FocusNode cpfFocusNode = new FocusNode();
+  TextEditingController cpfController = new TextEditingController();
 
   List<ZCollectionItem> lista = [
-    ZCollectionItem(chave: "MASCULINO", titulo: "MASCULINO", valor: "MASCULINO"),
+    ZCollectionItem(
+        chave: "MASCULINO", titulo: "MASCULINO", valor: "MASCULINO"),
     ZCollectionItem(chave: "FEMININO", titulo: "FEMININO", valor: "FEMININO"),
     ZCollectionItem(chave: "OUTRO", titulo: "OUTRO", valor: "OUTRO"),
     ZCollectionItem(chave: "OUTRO2", titulo: "OUTRO2", valor: "OUTRO2"),
     ZCollectionItem(chave: "OUTRO3", titulo: "OUTRO3", valor: "OUTRO3"),
   ];
+  GlobalKey key = new GlobalKey();
 
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
@@ -84,13 +88,26 @@ class _MainTestingState extends State<MainTesting> {
         new Divider(
           height: 10.0,
         ),
+        new Container(
+          child: new ZInputCPF(
+            themeData: Theme.of(context),
+            cpfFocus: cpfFocusNode,
+            controllerCpf: cpfController,
+          ),
+        ),
+        new Divider(
+          height: 10.0,
+        ),
         new ZSearchBar(
-          key: new GlobalKey(),
+          key: key,
           filtroPrincipal:
               new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
           onFilter: (filters) async {
             SearchOptions searchOptions = new SearchOptions();
-            searchOptions.filters = filters;
+
+            if (filters[0].value.toString().isNotEmpty) {
+              searchOptions.filters = filters;
+            }
 
             var response = await teste(searchOptions);
 
