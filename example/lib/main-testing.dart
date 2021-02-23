@@ -15,6 +15,8 @@ import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
+import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -24,6 +26,8 @@ class MainTesting extends StatefulWidget {
 class _MainTestingState extends State<MainTesting> {
   FocusNode nomeFocusNode = new FocusNode();
   TextEditingController nomeController = new TextEditingController();
+  FocusNode cpfFocusNode = new FocusNode();
+  TextEditingController cpfController = new TextEditingController();
   IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
@@ -77,31 +81,11 @@ class _MainTestingState extends State<MainTesting> {
           new ZCardProcessoSeletivo(
             themeData: Theme.of(context),
           ),
-          ZInputName(
+          ZInputDataNascimento(
             themeData: Theme.of(context),
-            controllerNome: nomeController,
-            nomeFocus: nomeFocusNode,
+            controllerData: nomeController,
+            dataFocus: nomeFocusNode,
           ),
-          new Divider(),
-          ZCollection(
-              titulo: "Collection",
-              themeData: Theme.of(context),
-              lista: lista,
-              onChange: (teste) {
-                var valor = teste.valor;
-                print(valor);
-              }
-          ),
-          new Divider(),
-          new ZCollectionBottomSheet(
-            campoObrigatorio: true,
-              title: "Data de Nascimento",
-              themeData: Theme.of(context),
-              lista: lista,
-              onChange: (teste) {
-                var valor = teste.valor;
-                print(valor);
-              }),
         ],
       ),
     );
