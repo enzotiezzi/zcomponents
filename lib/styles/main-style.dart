@@ -39,6 +39,7 @@ class MainStyle {
         child: new Column(
           children: <Widget>[
             new Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 new Expanded(
                   flex: 3,
