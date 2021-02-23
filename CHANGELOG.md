@@ -1,3 +1,11 @@
+## 0.9.33+7
+
+* ZCollection Required Field
+
+## 0.9.33+6
+
+* ZInput Correcao mascara
+
 ## 0.9.33+5
 
 * ZInputDataNascimento alignment correction

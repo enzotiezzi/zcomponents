@@ -12,6 +12,7 @@ class ZCollection extends StatefulWidget {
   final Color colorStyle;
   final int skip;
   final int take;
+  final bool campoObrigatorio;
 
   ZCollection({
     Key key,
@@ -23,6 +24,7 @@ class ZCollection extends StatefulWidget {
     this.colorStyle: const Color(0xff2bbab4),
     this.skip: 0,
     this.take: 0,
+    this.campoObrigatorio=false
   }) : super(key: key);
 
   @override
@@ -55,16 +57,38 @@ class ZCollectionState extends State<ZCollection> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Flexible(
-                  flex: 45,
-                  fit: FlexFit.tight,
-                  child: new Text(
-                    "${widget.titulo}",
-                    textAlign: TextAlign.start,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: widget.themeData.textTheme.bodyText1
-                        .copyWith(color: Color(0xff999999)),
-                  ),
+                    flex: 45,
+                    fit: FlexFit.tight,
+                    child:
+                    widget.campoObrigatorio ?
+                    new RichText(
+                      maxLines: 2,
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          new TextSpan(
+                            text: "${widget.titulo}",
+                            style: widget.themeData.textTheme.bodyText1
+                                .copyWith(color: Color(0xff999999)),
+                          ),
+                          TextSpan(
+                              text: "*",
+                              style: TextStyle(color: Colors.redAccent)
+                          )
+                        ],
+                      ),
+                    ):
+                    RichText(
+                      maxLines: 2,
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          new TextSpan(
+                            text: "${widget.titulo}",
+                            style: widget.themeData.textTheme.bodyText1
+                                .copyWith(color: Color(0xff999999)),
+                          ),
+                        ],
+                      ),
+                    )
                 ),
                 Flexible(
                     flex: 55,

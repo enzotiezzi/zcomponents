@@ -81,10 +81,11 @@ class _MainTestingState extends State<MainTesting> {
           new ZCardProcessoSeletivo(
             themeData: Theme.of(context),
           ),
-          ZInputDataNascimento(
+          ZCollection(
             themeData: Theme.of(context),
-            controllerData: nomeController,
-            dataFocus: nomeFocusNode,
+            titulo: "Teste",
+            lista: lista,
+            campoObrigatorio: true,
           ),
         ],
       ),
