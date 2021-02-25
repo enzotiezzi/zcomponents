@@ -15,10 +15,8 @@ import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
-
-import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
-
-import 'package:z_components/components/z-inputs/z-input-cpf.dart';
+import 'package:z_components/components/z-inputs/z-input-email.dart';
+import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -28,8 +26,10 @@ class MainTesting extends StatefulWidget {
 class _MainTestingState extends State<MainTesting> {
   FocusNode nomeFocusNode = new FocusNode();
   TextEditingController nomeController = new TextEditingController();
-  FocusNode cpfFocusNode = new FocusNode();
-  TextEditingController cpfController = new TextEditingController();
+  FocusNode dataFocusNode = new FocusNode();
+  TextEditingController dataController = new TextEditingController();
+  FocusNode cnpjFocusNode = new FocusNode();
+  TextEditingController cnpjController = new TextEditingController();
   IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
@@ -41,6 +41,7 @@ class _MainTestingState extends State<MainTesting> {
     ZCollectionItem(chave: "OUTRO3", titulo: "OUTRO3", valor: "OUTRO3"),
   ];
   GlobalKey key = new GlobalKey();
+  GlobalKey keyCnpj = new GlobalKey();
 
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
@@ -85,51 +86,24 @@ class _MainTestingState extends State<MainTesting> {
           new ZCardProcessoSeletivo(
             themeData: Theme.of(context),
           ),
-        new Divider(
-          height: 10.0,
-        ),
-        new Container(
-          child: new ZInputCPF(
+          ZInputCNPJ(
             themeData: Theme.of(context),
-            cpfFocus: cpfFocusNode,
-            controllerCpf: cpfController,
+            cnpjFocus: nomeFocusNode,
+            controllerCNPJ: nomeController,
+            campoObrigatorio: true,
           ),
-        ),
-        new Divider(
-          height: 10.0,
-        ),
-        new ZSearchBar(
-          key: key,
-          filtroPrincipal:
-              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          onFilter: (filters) async {
-            SearchOptions searchOptions = new SearchOptions();
-
-            if (filters[0].value.toString().isNotEmpty) {
-              searchOptions.filters = filters;
-            }
-
-            var response = await teste(searchOptions);
-
-            searchOptions.pagination.pageNumber++;
-
-            this.searchOptions = searchOptions;
-            this.paginationMetaData = response.paginationMetaData;
-
-            setState(() {
-              grupos = response.body;
-            });
-          },
-          camposFiltro: [
-            new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          ],
-        ),
-        new Expanded(
-            child: new ListView.builder(
-          itemCount: grupos.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) => new Text(grupos[index].nomeNivel),
-        ))
+          ZCollection(
+            lista: lista,
+            themeData: Theme.of(context),
+            titulo: "Teste",
+            campoObrigatorio: true,
+          ),
+          ZCollectionBottomSheet(
+            themeData: Theme.of(context),
+            title: "Teste",
+            lista: lista,
+            campoObrigatorio: true,
+          )
       ],
     ));
   }

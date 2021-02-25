@@ -12,6 +12,7 @@ class ZInputCPF extends StatefulWidget {
   void Function(bool) validacao;
   bool enabled;
   final ThemeData themeData;
+  final bool campoObrigatorio;
 
   ZInputCPF(
       {this.key,
@@ -21,7 +22,8 @@ class ZInputCPF extends StatefulWidget {
       this.proximoFocus,
       this.onChange,
       this.validacao,
-      this.enabled})
+      this.enabled,
+      this.campoObrigatorio=false})
       : super(key: key);
 
   @override
@@ -64,6 +66,7 @@ class _ZInputCPFState extends State<ZInputCPF> {
         },
         true,
         themeData: widget.themeData,
+        campoObrigatorio: widget.campoObrigatorio,
         textMask: "###.###.###-##",
         hintText: "XXX.XXX.XXX-XX",enabled: widget.enabled);
   }

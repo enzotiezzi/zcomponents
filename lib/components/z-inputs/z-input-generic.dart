@@ -15,6 +15,7 @@ class ZInputGeneric extends StatefulWidget {
   ValueChanged<String> onChange;
   bool obscureText;
   bool enabled;
+  final bool campoObrigatorio;
 
   var controllerInputPadrao = new TextEditingController();
   FocusNode proximoFocus;
@@ -32,7 +33,8 @@ class ZInputGeneric extends StatefulWidget {
       @required this.inputPadraoFocus,
       @required this.controllerInputPadrao,
       this.proximoFocus,
-      this.enabled})
+      this.enabled,
+      this.campoObrigatorio = false})
       : super(key: key);
 
   @override
@@ -58,13 +60,11 @@ class _ZInputGenericState extends State<ZInputGeneric> {
             new Row(
               children: <Widget>[
                 new Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: new Container(
                     padding: const EdgeInsets.only(
                         top: 12.0, bottom: 12.0, left: 16.0),
-                    child: new Text("${widget.titulo}",
-                        style: widget.themeData.textTheme.bodyText1
-                            .copyWith(color: Color(0XFF999999))),
+                    child: _returnRequiredField(),
                   ),
                 ),
                 new Expanded(
@@ -155,5 +155,40 @@ class _ZInputGenericState extends State<ZInputGeneric> {
         ),
       ),
     );
+  }
+
+  Widget _returnRequiredField(){
+    if(widget.campoObrigatorio){
+      return new RichText(
+        maxLines: 2,
+        text: TextSpan(
+          children: <TextSpan>[
+            new TextSpan(
+              text: "${widget.titulo}",
+              style: widget.themeData.textTheme.bodyText1
+                  .copyWith(color: Color(0xff999999)),
+            ),
+            TextSpan(
+                text: "*",
+                style: TextStyle(color: Colors.redAccent)
+            )
+          ],
+        ),
+      );
+    }else{
+      return RichText(
+        maxLines: 2,
+          text: TextSpan(
+              children: <TextSpan>[
+                new TextSpan(
+                  text: "${widget.titulo}",
+                  style: widget.themeData.textTheme.bodyText1
+                      .copyWith(color: Color(0xff999999)),
+                )
+              ]
+          )
+      );
+
+    }
   }
 }

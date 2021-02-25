@@ -28,6 +28,7 @@ class MainStyle {
       String hintText,
       bool enabled,
       ThemeData themeData,
+      bool campoObrigatorio
       }) {
     if (enabled == null) {
       enabled = true;
@@ -42,12 +43,11 @@ class MainStyle {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 new Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: new Container(
                     padding: const EdgeInsets.only(
                         top: 12.0, bottom: 12.0, left: 16.0),
-                    child: new Text(title,
-                        style: themeData.textTheme.bodyText1.copyWith(color: Color(0XFF999999))),
+                    child: returnRequiredField(title, themeData,campoObrigatorio)
                   ),
                 ),
                 new Expanded(
@@ -124,6 +124,30 @@ class MainStyle {
         ),
       ),
     );
+  }
+}
+
+  Widget returnRequiredField(String title, ThemeData themeData, bool campoObrigatorio){
+  if(campoObrigatorio){
+    return new RichText(
+      maxLines: 2,
+      text: TextSpan(
+        children: <TextSpan>[
+          new TextSpan(
+            text: title,
+            style: themeData.textTheme.bodyText1
+                .copyWith(color: Color(0xff999999)),
+          ),
+          TextSpan(
+              text: "*",
+              style: TextStyle(color: Colors.redAccent)
+          )
+        ],
+      ),
+    );
+  }else {
+    return new Text(title,
+        style: themeData.textTheme.bodyText1.copyWith(color: Color(0XFF999999)));
   }
 }
 

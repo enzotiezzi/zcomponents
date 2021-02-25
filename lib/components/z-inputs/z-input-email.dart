@@ -13,6 +13,7 @@ class ZInputEmail extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final bool campoObrigatorio;
   final ThemeData themeData;
 
   ZInputEmail(
@@ -23,7 +24,8 @@ class ZInputEmail extends StatefulWidget {
       @required this.controllerEmail,
       this.proximoFocus,
       this.validacao,
-      this.enabled})
+      this.enabled,
+      this.campoObrigatorio = false})
       : super(key: key);
 
   @override
@@ -62,6 +64,7 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
         },
         false,
         themeData: widget.themeData,
+        campoObrigatorio: widget.campoObrigatorio,
         hintText: "email@exemplo.com",
         enabled: widget.enabled);
   }
