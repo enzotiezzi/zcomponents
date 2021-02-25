@@ -1,3 +1,7 @@
+## 0.9.33+7
+
+* ZInputs and ZCollections Adição da opção de campo obrigatorio
+
 ## 0.9.33+6
 
 * ZInput Correcao mascara

@@ -10,6 +10,7 @@ class ZInputName extends StatefulWidget {
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
   bool enabled;
+  final bool campoObrigatorio;
 
 
   ZInputName({
@@ -18,7 +19,8 @@ class ZInputName extends StatefulWidget {
     @required this.themeData,
     @required this.nomeFocus,
     @required this.controllerNome,
-    this.proximoFocus,this.enabled
+    this.proximoFocus,this.enabled,
+    this.campoObrigatorio = false
   }) : super(key: key);
 
   @override
@@ -59,6 +61,7 @@ class _ZInputNameState extends State<ZInputName> {
         },
         false,
         themeData: widget.themeData,
+        campoObrigatorio: widget.campoObrigatorio,
         enabled: widget.enabled);
   }
 
