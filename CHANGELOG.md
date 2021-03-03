@@ -1,3 +1,7 @@
+## 0.9.33+8
+
+* ZInput CEP Ajuste na mascara e ZInputEmail ajuste na validação
+
 ## 0.9.33+7
 
 * ZInputs and ZCollections Adição da opção de campo obrigatorio

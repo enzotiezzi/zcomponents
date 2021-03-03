@@ -68,7 +68,7 @@ class _ZInputCPFState extends State<ZInputCPF> {
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
         textMask: "###.###.###-##",
-        hintText: "XXX.XXX.XXX-XX",enabled: widget.enabled);
+        hintText: "000.000.000-00",enabled: widget.enabled);
   }
 
   void initNome() {

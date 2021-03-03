@@ -78,7 +78,7 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
   }
 
   void _validarEmail() {
-   if (!EmailValidator.validate(widget.email)) {
+   if (!EmailValidator.validate(widget.controllerEmail.text)) {
       widget.valideEmail = false;
       _dialogUtils.showAlertDialogNewAviso(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");

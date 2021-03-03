@@ -6,17 +6,15 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/components/z-processo-seletivo/z-card-processo-seletivo.dart';
-import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:http/http.dart' as http;
 import 'package:z_components/components/filtro/paginated-list.dart';
-import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-email.dart';
-import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -26,10 +24,10 @@ class MainTesting extends StatefulWidget {
 class _MainTestingState extends State<MainTesting> {
   FocusNode nomeFocusNode = new FocusNode();
   TextEditingController nomeController = new TextEditingController();
-  FocusNode dataFocusNode = new FocusNode();
-  TextEditingController dataController = new TextEditingController();
-  FocusNode cnpjFocusNode = new FocusNode();
-  TextEditingController cnpjController = new TextEditingController();
+  FocusNode cpfFocusNode = new FocusNode();
+  TextEditingController cpfController = new TextEditingController();
+  FocusNode emailFocusNode = new FocusNode();
+  TextEditingController emailController = new TextEditingController();
   IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
@@ -41,7 +39,6 @@ class _MainTestingState extends State<MainTesting> {
     ZCollectionItem(chave: "OUTRO3", titulo: "OUTRO3", valor: "OUTRO3"),
   ];
   GlobalKey key = new GlobalKey();
-  GlobalKey keyCnpj = new GlobalKey();
 
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
@@ -86,24 +83,24 @@ class _MainTestingState extends State<MainTesting> {
           new ZCardProcessoSeletivo(
             themeData: Theme.of(context),
           ),
-          ZInputCNPJ(
+        new Divider(
+          height: 10.0,
+        ),
+        new Container(
+          child: new ZInputCEP(
             themeData: Theme.of(context),
-            cnpjFocus: nomeFocusNode,
-            controllerCNPJ: nomeController,
-            campoObrigatorio: true,
+            cepFocus: cpfFocusNode,
+            controllerCep: cpfController,
           ),
-          ZCollection(
-            lista: lista,
+        ),
+        new Divider(
+          height: 10.0,
+        ),
+          new ZInputEmail(
             themeData: Theme.of(context),
-            titulo: "Teste",
-            campoObrigatorio: true,
+            emailFocus: emailFocusNode,
+            controllerEmail: emailController,
           ),
-          ZCollectionBottomSheet(
-            themeData: Theme.of(context),
-            title: "Teste",
-            lista: lista,
-            campoObrigatorio: true,
-          )
       ],
     ));
   }

@@ -65,7 +65,7 @@ class _ZInputCEPState extends State<ZInputCEP> {
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
         textMask: "#####-###",
-        hintText: "XXXXX-XXX",
+        hintText: "00000-000",
         enabled: widget.enabled);
   }
 

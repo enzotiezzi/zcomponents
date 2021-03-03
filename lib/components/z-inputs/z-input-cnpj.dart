@@ -70,7 +70,7 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
         textMask: "XX.XXX.XXX/XXXX-XX",
-        hintText: "XX.XXX.XXX/XXXX-XX",enabled: widget.enabled);
+        hintText: "00.000.000/0000-00",enabled: widget.enabled);
   }
 
   void initNome() {

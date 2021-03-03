@@ -24,7 +24,7 @@ class ZCollection extends StatefulWidget {
     this.colorStyle: const Color(0xff2bbab4),
     this.skip: 0,
     this.take: 0,
-    this.campoObrigatorio
+    this.campoObrigatorio=false
   }) : super(key: key);
 
   @override
