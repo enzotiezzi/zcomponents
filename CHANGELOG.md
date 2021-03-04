@@ -1,3 +1,7 @@
+## 0.9.33+11
+
+* Correcao tema zcollection
+
 ## 0.9.33+10
 
 * Correcao card processo seletivo
