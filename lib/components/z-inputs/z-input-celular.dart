@@ -12,6 +12,7 @@ class ZInputCelular extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final bool campoObrigatorio;
   final ThemeData themeData;
 
   ZInputCelular(
@@ -22,7 +23,8 @@ class ZInputCelular extends StatefulWidget {
       @required this.controllerCelular,
       this.proximoFocus,
       this.validacao,
-      this.enabled})
+      this.enabled,
+      this.campoObrigatorio = false})
       : super(key: key);
 
   @override
@@ -65,6 +67,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
         },
         true,
         themeData: widget.themeData,
+        campoObrigatorio: widget.campoObrigatorio,
         textMask: "(##) #####-####",
         hintText: "( ** ) 9 **** - ****",
         enabled: widget.enabled);

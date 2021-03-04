@@ -39,41 +39,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Flexible(
-                  flex: 45,
-                  fit: FlexFit.tight,
-                  child:
-                  widget.campoObrigatorio ?
-                  new RichText(
-                    maxLines: 2,
-                    text: TextSpan(
-                        children: <TextSpan>[
-                          new TextSpan(
-                            text: "${widget.title}",
-                            style: widget.themeData.textTheme.bodyText1
-                                .copyWith(color: Color(0xff999999)),
-                          ),
-                          TextSpan(
-                            text: "*",
-                            style: TextStyle(color: Colors.redAccent)
-                          )
-                        ],
-                      ),
-                  ):
-                  RichText(
-                    maxLines: 2,
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        new TextSpan(
-                          text: "${widget.title}",
-                          style: widget.themeData.textTheme.bodyText1
-                              .copyWith(color: Color(0xff999999)),
-                        ),
-                      ],
-                    ),
-                  )
-                ),
-
+                _returnRequiredField(),
                 Flexible(
                     flex: 55,
                     fit: FlexFit.tight,
@@ -158,5 +124,47 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
               ],
             );
         });
+  }
+
+  Widget _returnRequiredField(){
+    if(widget.campoObrigatorio){
+      return Flexible(
+        flex: 45,
+        fit: FlexFit.tight,
+        child:  new RichText(
+          maxLines: 2,
+          text: TextSpan(
+            children: <TextSpan>[
+              new TextSpan(
+                text: "${widget.title}",
+                style: widget.themeData.textTheme.bodyText1
+                    .copyWith(color: Color(0xff999999)),
+              ),
+              TextSpan(
+                  text: "*",
+                  style: TextStyle(color: Colors.redAccent)
+              )
+            ],
+          ),
+        ),
+      );
+    }else{
+      return Flexible(
+        flex: 45,
+        fit: FlexFit.tight,
+        child: RichText(
+          maxLines: 2,
+          text: TextSpan(
+            children: <TextSpan>[
+              new TextSpan(
+                text: "${widget.title}",
+                style: widget.themeData.textTheme.bodyText1
+                    .copyWith(color: Color(0xff999999)),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

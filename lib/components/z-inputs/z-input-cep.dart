@@ -11,6 +11,7 @@ class ZInputCEP extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final bool campoObrigatorio;
   final ThemeData themeData;
 
   ZInputCEP(
@@ -21,7 +22,8 @@ class ZInputCEP extends StatefulWidget {
       this.onChange,
       this.proximoFocus,
       this.validacao,
-      this.enabled})
+      this.enabled,
+      this.campoObrigatorio=false})
       : super(key: key);
 
   @override
@@ -61,8 +63,9 @@ class _ZInputCEPState extends State<ZInputCEP> {
         },
         true,
         themeData: widget.themeData,
+        campoObrigatorio: widget.campoObrigatorio,
         textMask: "#####-###",
-        hintText: "XXXXX-XXX",
+        hintText: "00000-000",
         enabled: widget.enabled);
   }
 

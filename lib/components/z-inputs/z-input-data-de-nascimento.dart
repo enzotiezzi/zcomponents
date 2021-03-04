@@ -11,6 +11,7 @@ class ZInputDataNascimento extends StatefulWidget {
   void Function(bool) validacao;
   bool enabled;
   final ThemeData themeData;
+  final bool campoObrigatorio;
 
   String dia;
   String ano;
@@ -25,6 +26,7 @@ class ZInputDataNascimento extends StatefulWidget {
   bool bisexto;
   bool valideMes;
 
+
   ZInputDataNascimento({
     this.key,
     this.onChange,
@@ -32,7 +34,8 @@ class ZInputDataNascimento extends StatefulWidget {
     @required this.dataFocus,
     @required this.controllerData,
     this.proximoFocus,
-    this.validacao,this.enabled
+    this.validacao,this.enabled,
+    this.campoObrigatorio = false
   }) : super(key: key);
 
   @override
@@ -77,6 +80,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
         },
         true,
         themeData: widget.themeData,
+        campoObrigatorio: widget.campoObrigatorio,
         textMask: "##/##/####",
         hintText: "DD / MM / AAAA",enabled: widget.enabled);
   }

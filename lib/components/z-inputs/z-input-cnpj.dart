@@ -12,6 +12,7 @@ class ZInputCNPJ extends StatefulWidget {
   ValueChanged<String> onChange;
   void Function(bool) validacao;
   bool enabled;
+  final bool campoObrigatorio;
   final ThemeData themeData;
 
   ZInputCNPJ(
@@ -21,7 +22,8 @@ class ZInputCNPJ extends StatefulWidget {
        @required this.controllerCNPJ,
         this.onChange,
         this.proximoFocus,
-        this.validacao, this.enabled
+        this.validacao, this.enabled,
+        this.campoObrigatorio = false
       })
       : super(key: key);
 
@@ -66,8 +68,9 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
           }
         },true,
         themeData: widget.themeData,
+        campoObrigatorio: widget.campoObrigatorio,
         textMask: "XX.XXX.XXX/XXXX-XX",
-        hintText: "XX.XXX.XXX/XXXX-XX",enabled: widget.enabled);
+        hintText: "00.000.000/0000-00",enabled: widget.enabled);
   }
 
   void initNome() {

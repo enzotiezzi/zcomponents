@@ -6,19 +6,15 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
 import 'package:z_components/components/z-processo-seletivo/z-card-processo-seletivo.dart';
-import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:http/http.dart' as http;
 import 'package:z_components/components/filtro/paginated-list.dart';
-import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
-
-import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
-
-import 'package:z_components/components/z-inputs/z-input-cpf.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
+import 'package:z_components/components/z-inputs/z-input-email.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -30,6 +26,8 @@ class _MainTestingState extends State<MainTesting> {
   TextEditingController nomeController = new TextEditingController();
   FocusNode cpfFocusNode = new FocusNode();
   TextEditingController cpfController = new TextEditingController();
+  FocusNode emailFocusNode = new FocusNode();
+  TextEditingController emailController = new TextEditingController();
   IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
@@ -89,47 +87,20 @@ class _MainTestingState extends State<MainTesting> {
           height: 10.0,
         ),
         new Container(
-          child: new ZInputCPF(
+          child: new ZInputCEP(
             themeData: Theme.of(context),
-            cpfFocus: cpfFocusNode,
-            controllerCpf: cpfController,
+            cepFocus: cpfFocusNode,
+            controllerCep: cpfController,
           ),
         ),
         new Divider(
           height: 10.0,
         ),
-        new ZSearchBar(
-          key: key,
-          filtroPrincipal:
-              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          onFilter: (filters) async {
-            SearchOptions searchOptions = new SearchOptions();
-
-            if (filters[0].value.toString().isNotEmpty) {
-              searchOptions.filters = filters;
-            }
-
-            var response = await teste(searchOptions);
-
-            searchOptions.pagination.pageNumber++;
-
-            this.searchOptions = searchOptions;
-            this.paginationMetaData = response.paginationMetaData;
-
-            setState(() {
-              grupos = response.body;
-            });
-          },
-          camposFiltro: [
-            new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          ],
-        ),
-        new Expanded(
-            child: new ListView.builder(
-          itemCount: grupos.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) => new Text(grupos[index].nomeNivel),
-        ))
+          new ZInputEmail(
+            themeData: Theme.of(context),
+            emailFocus: emailFocusNode,
+            controllerEmail: emailController,
+          ),
       ],
     ));
   }
