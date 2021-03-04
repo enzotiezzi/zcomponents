@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
+import 'models/processo-seletivo.dart';
 
 class ZCardProcessoSeletivo extends StatefulWidget {
   final ThemeData themeData;
-  final ProcessoSeletivo processoSeletivo;
+  final ProcessoSeletivoViewModel processoSeletivo;
 
   ZCardProcessoSeletivo(
       {@required this.themeData, @required this.processoSeletivo});
@@ -34,7 +34,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                   new Column(
                     children: [
                       new Text(
-                        "Aux. Manutenção - São Paulo",
+                        widget.processoSeletivo.descricao,
                         style: widget.themeData.textTheme.bodyText2.copyWith(
                             fontWeight: FontWeight.bold, fontSize: 16.0),
                       ),
@@ -45,10 +45,11 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                       new Row(
                         children: [
                           new Text(
-                            "1234506...",
+                            widget.processoSeletivo.codigo,
                             style: new TextStyle(fontSize: size, color: color),
                           ),
-                          new Text("10d",
+                          new Text(
+                              widget.processoSeletivo.diasEmAberto.toString(),
                               style:
                                   new TextStyle(fontSize: size, color: color))
                         ],
@@ -63,7 +64,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.all(1.0),
               child: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   new Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,14 +72,18 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                       new Container(
                         margin: const EdgeInsets.all(2.0),
                         child: new Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            new Icon(
-                              Icons.work_outline,
-                              size: size,
-                              color: color,
+                            new Container(
+                              padding: EdgeInsets.only(right: 4.0),
+                              child: new Icon(
+                                Icons.work_outline,
+                                size: size,
+                                color: color,
+                              ),
                             ),
                             new Text(
-                              "Auxiliar de Limpeza",
+                              widget.processoSeletivo.nomeCargo,
                               style:
                                   new TextStyle(fontSize: size, color: color),
                             )
@@ -86,49 +91,64 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                         ),
                       ),
                       new Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           new Icon(
                             Icons.attach_money,
                             color: color,
                             size: size,
                           ),
-                          new Text(
-                            "1.299/Mês, CLT (Integral)",
-                            style: new TextStyle(fontSize: size, color: color),
+                          new Container(
+                            width: MediaQuery.of(context).size.width / 2.3,
+                            child: new Text(
+                              "${tipoSalario()}/${widget.processoSeletivo.periodicidadePagamento},${widget.processoSeletivo.tipoContrato}",
+                              style:
+                                  new TextStyle(fontSize: size, color: color),
+                            ),
                           )
                         ],
                       )
                     ],
                   ),
-                  new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      new Row(
-                        children: [
-                          new Icon(
-                            Icons.location_on,
-                            color: color,
-                            size: size,
-                          ),
-                          new Text("SP-Morumbi",
-                              style:
-                                  new TextStyle(fontSize: size, color: color))
-                        ],
-                      ),
-                      new Row(
-                        children: [
-                          new Icon(
-                            Icons.money,
-                            color: color,
-                            size: size,
-                          ),
-                          new Text("VT, VR, VA, CB, PLR",
-                              style:
-                                  new TextStyle(fontSize: size, color: color))
-                        ],
-                      )
-                    ],
-                  ),
+                  new Container(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        new Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            new Container(
+                              padding: EdgeInsets.only(right: 4.0),
+                              child: new Icon(
+                                Icons.location_on,
+                                color: color,
+                                size: size,
+                              ),
+                            ),
+                            new Text(widget.processoSeletivo.localidade,
+                                style:
+                                    new TextStyle(fontSize: size, color: color))
+                          ],
+                        ),
+                        new Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            new Container(
+                                padding: EdgeInsets.only(right: 4.0),
+                                child: new Icon(
+                                  Icons.money,
+                                  color: color,
+                                  size: size,
+                                )),
+                            new Text(widget.processoSeletivo.beneficios,
+                                style:
+                                    new TextStyle(fontSize: size, color: color))
+                          ],
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
@@ -147,7 +167,8 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                             color: color,
                             size: size,
                           ),
-                          new Text("Etapa 1/1",
+                          new Text(
+                              "ETAPA ${widget.processoSeletivo.progressoEtapa}",
                               style: new TextStyle(
                                   fontSize: size,
                                   color: color,
@@ -166,7 +187,8 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                             color: color,
                             size: size,
                           ),
-                          new Text("12",
+                          new Text(
+                              "${widget.processoSeletivo.qtdeParticipantesAtual}",
                               style: new TextStyle(
                                   fontSize: size,
                                   fontWeight: FontWeight.bold,
@@ -188,5 +210,13 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
         ),
       ),
     );
+  }
+
+  String tipoSalario() {
+    if (widget.processoSeletivo.salarioFixoOuFaixa.toUpperCase() == "FIXO") {
+      return widget.processoSeletivo.salarioValorFixo.toStringAsFixed(2);
+    } else {
+      return "${widget.processoSeletivo.salarioValorFaixaInicial.toStringAsFixed(2)} até ${widget.processoSeletivo.salarioValorFaixaFinal.toStringAsFixed(2)}";
+    }
   }
 }

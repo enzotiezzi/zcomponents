@@ -1,3 +1,11 @@
+## 0.9.33+10
+
+* Correcao card processo seletivo
+
+## 0.9.33+9
+
+* Correcao bugs versao 2 do flutter
+
 ## 0.9.33+8
 
 * ZInput CEP Ajuste na mascara e ZInputEmail ajuste na validação

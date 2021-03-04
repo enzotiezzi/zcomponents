@@ -15,6 +15,10 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-email.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-collection/z-collection-list.dart';
+import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -43,7 +47,7 @@ class _MainTestingState extends State<MainTesting> {
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
 
-  List<GrupoResumo> grupos = [];
+  List<ZCollectionItem> grupos = [];
 
   @override
   void initState() {
@@ -60,7 +64,7 @@ class _MainTestingState extends State<MainTesting> {
 
     teste(searchOptions).then((value) => {
           this.setState(() {
-            grupos = value.body;
+            grupos = converterParaZCollection(value.body);
 
             this.paginationMetaData = value.paginationMetaData;
             this.searchOptions.pagination.pageNumber++;
@@ -77,32 +81,122 @@ class _MainTestingState extends State<MainTesting> {
   }
 
   Widget _buildBody() {
-    return SingleChildScrollView(
-      child: new Column(
-        children: [
-          new ZCardProcessoSeletivo(
-            themeData: Theme.of(context),
-          ),
-        new Divider(
-          height: 10.0,
-        ),
+    return new Column(
+      children: [
         new Container(
-          child: new ZInputCEP(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: new ZCardProcessoSeletivo(
             themeData: Theme.of(context),
-            cepFocus: cpfFocusNode,
-            controllerCep: cpfController,
+            processoSeletivo: new ProcessoSeletivoViewModel(
+                descricao: "Aux. Manutenção - São Paulo",
+                codigo: "1234506..",
+                beneficios: "VT, VR, VA, CB, PLR",
+                diasEmAberto: 10,
+                tipoContrato: "CLT (Integral)",
+                periodicidadePagamento: "Mês",
+                localidade: "SP-Morumbi",
+                nomeCargo: "Auxiliar de Limpeza",
+                salarioValorFixo: 1200.00,
+                salarioFixoOuFaixa: "Fixo",
+                qtdeParticipantesAtual: 12,
+                progressoEtapa: "1/1"),
           ),
         ),
         new Divider(
           height: 10.0,
         ),
-          new ZInputEmail(
-            themeData: Theme.of(context),
-            emailFocus: emailFocusNode,
-            controllerEmail: emailController,
-          ),
+        RaisedButton(onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => new Container(
+                        key: key,
+                        child: ZCollectionList(
+                          titulo: "Teste",
+                          lista: grupos,
+                          theme: Theme.of(context),
+                          filtroPrincipal: new FiltroCampo(
+                              key: "NomeNivel", value: "Nome nivel"),
+                          onChange: (filter) async {
+                            print(filter);
+                            SearchOptions searchOptions = new SearchOptions();
+                            if (filter[0].value.isNotEmpty) {
+                              searchOptions.filters = filter;
+                            }
+
+                            var response = await teste(searchOptions);
+
+                            searchOptions.pagination.pageNumber++;
+
+                            this.searchOptions = searchOptions;
+                            this.paginationMetaData =
+                                response.paginationMetaData;
+                            key = new GlobalKey();
+                            setState(() {
+                              grupos = converterParaZCollection(response.body);
+                            });
+                          },
+                        ),
+                      )));
+        }),
+        ZCollection(
+          titulo: "Teste",
+          lista: grupos,
+          themeData: Theme.of(context),
+          filtroPrincipal:
+              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+          onFilter: (filter) async {
+            print(filter);
+            SearchOptions searchOptions = new SearchOptions();
+            if (filter[0].value.isNotEmpty) {
+              searchOptions.filters = filter;
+            }
+
+            var response = await teste(searchOptions);
+
+            searchOptions.pagination.pageNumber++;
+
+            this.searchOptions = searchOptions;
+            this.paginationMetaData = response.paginationMetaData;
+
+            setState(() {
+              grupos = converterParaZCollection(response.body);
+            });
+          },
+        ),
+/*        new ZSearchBar(
+          key: key,
+          filtroPrincipal:
+              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+          onFilter: (filters) async {
+            SearchOptions searchOptions = new SearchOptions();
+            if (filters[0].value.toString().isNotEmpty) {
+              searchOptions.filters = filters;
+            }
+
+            var response = await teste(searchOptions);
+
+            searchOptions.pagination.pageNumber++;
+
+            this.searchOptions = searchOptions;
+            this.paginationMetaData = response.paginationMetaData;
+
+            setState(() {
+              grupos = response.body;
+            });
+          },
+          camposFiltro: [
+            new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+          ],
+        ),
+        new Expanded(
+            child: new ListView.builder(
+          itemCount: grupos.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) => new Text(grupos[index].nomeNivel),
+        ))*/
       ],
-    ));
+    );
   }
 
   Future<ZResponse<GrupoResumo>> teste(SearchOptions searchOptions) async {
@@ -133,6 +227,17 @@ class _MainTestingState extends State<MainTesting> {
       this.searchOptions.pagination.pageNumber++;
       this.paginationMetaData = response.paginationMetaData;
     }
+  }
+
+  List<ZCollectionItem> converterParaZCollection(List<GrupoResumo> lista) {
+    List<ZCollectionItem> listaConvertida = [];
+    for (int i = 0; i < lista.length; i++) {
+      listaConvertida.add(new ZCollectionItem(
+          chave: lista[i].nomeNivel,
+          titulo: lista[i].nomeNivel,
+          valor: lista[i].nomeNivel));
+    }
+    return listaConvertida;
   }
 }
 

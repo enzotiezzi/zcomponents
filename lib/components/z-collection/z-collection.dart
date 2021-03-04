@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
+import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
 
@@ -13,19 +15,23 @@ class ZCollection extends StatefulWidget {
   final int skip;
   final int take;
   final bool campoObrigatorio;
+  final FiltroCampo filtroPrincipal;
+  final Function(List<FilterExpression>) onFilter;
 
-  ZCollection({
-    Key key,
-    @required this.titulo,
-    @required this.lista,
-    @required this.themeData,
-    this.onChange,
-    this.valorPadrao,
-    this.colorStyle: const Color(0xff2bbab4),
-    this.skip: 0,
-    this.take: 0,
-    this.campoObrigatorio=false
-  }) : super(key: key);
+  ZCollection(
+      {Key key,
+      @required this.titulo,
+      @required this.lista,
+      @required this.themeData,
+      this.onChange,
+      this.valorPadrao,
+      this.colorStyle: const Color(0xff2bbab4),
+      this.skip: 0,
+      this.take: 0,
+      this.campoObrigatorio = false,
+      this.filtroPrincipal,
+      this.onFilter})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ZCollectionState();
@@ -127,6 +133,8 @@ class ZCollectionState extends State<ZCollection> {
               skip: widget.skip,
               take: widget.take,
               theme: widget.themeData,
+              onChange: widget.onFilter,
+              filtroPrincipal: widget.filtroPrincipal,
             );
           },
           transitionsBuilder: (BuildContext context,
@@ -153,12 +161,12 @@ class ZCollectionState extends State<ZCollection> {
     setState(() {});
   }
 
-  Widget _returnRequiredField(){
-    if(widget.campoObrigatorio){
+  Widget _returnRequiredField() {
+    if (widget.campoObrigatorio) {
       return Flexible(
         flex: 45,
         fit: FlexFit.tight,
-        child:  new RichText(
+        child: new RichText(
           maxLines: 2,
           text: TextSpan(
             children: <TextSpan>[
@@ -167,15 +175,12 @@ class ZCollectionState extends State<ZCollection> {
                 style: widget.themeData.textTheme.bodyText1
                     .copyWith(color: Color(0xff999999)),
               ),
-              TextSpan(
-                  text: "*",
-                  style: TextStyle(color: Colors.redAccent)
-              )
+              TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
             ],
           ),
         ),
       );
-    }else{
+    } else {
       return Flexible(
         flex: 45,
         fit: FlexFit.tight,
@@ -194,6 +199,4 @@ class ZCollectionState extends State<ZCollection> {
       );
     }
   }
-
-
 }

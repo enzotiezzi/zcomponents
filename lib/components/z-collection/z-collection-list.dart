@@ -1,25 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
+import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZCollectionList extends StatefulWidget {
+  GlobalKey key;
   final List<ZCollectionItem> lista;
   final ThemeData theme;
   final String titulo;
   final ZCollectionItem ultimoValor;
   final color;
+  final FiltroCampo filtroPrincipal;
   int skip;
   int take;
+  Function(List<FilterExpression>) onChange;
 
   ZCollectionList(
       {this.lista,
+      this.key,
       this.theme,
       this.titulo: "",
       this.ultimoValor,
       this.color,
       this.skip: 0,
-      this.take: 0});
+      this.take: 0,
+      this.onChange,
+      this.filtroPrincipal})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ZCollectionListState();
@@ -31,7 +40,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
 
   @override
   void initState() {
-    _listaFiltro = new List<ZCollectionItem>();
+    _listaFiltro = <ZCollectionItem>[];
     scrollController = new ScrollController();
     scrollController.addListener(_scrollListener);
     _initList();
@@ -113,16 +122,28 @@ class _ZCollectionListState extends State<ZCollectionList> {
                         decoration:
                             new BoxDecoration(color: Colors.transparent),
                         onChanged: (text) {
-                          text = text.toLowerCase();
-                          setState(() {
-                            if (text.length > 0)
-                              _listaFiltro = widget.lista
-                                  .where((x) =>
-                                      x.valor.toLowerCase().contains(text))
-                                  .toList();
-                            else
-                              _listaFiltro = widget.lista;
-                          });
+                          if (text.length > 3) {
+                            if (widget.onChange != null) {
+                              widget.onChange([
+                                new FilterExpression(
+                                    propertyName: widget.filtroPrincipal.key,
+                                    operatorBetween: "OrElse",
+                                    operator: "Contains",
+                                    value: text)
+                              ]);
+                            } else {
+                              text = text.toLowerCase();
+                              setState(() {
+                                if (text.length > 0)
+                                  _listaFiltro = widget.lista
+                                      .where((x) =>
+                                          x.valor.toLowerCase().contains(text))
+                                      .toList();
+                                else
+                                  _listaFiltro = widget.lista;
+                              });
+                            }
+                          }
                         },
                       )),
                     ],
