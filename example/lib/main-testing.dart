@@ -15,6 +15,8 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-email.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -96,11 +98,17 @@ class _MainTestingState extends State<MainTesting> {
         new Divider(
           height: 10.0,
         ),
-          new ZInputEmail(
+          new ZCollection(
+            titulo: "Test",
             themeData: Theme.of(context),
-            emailFocus: emailFocusNode,
-            controllerEmail: emailController,
+            lista: lista,
           ),
+          Divider(),
+          new ZCollectionBottomSheet(
+            themeData: Theme.of(context),
+            title: "BottomSheet",
+            lista: lista,
+          )
       ],
     ));
   }

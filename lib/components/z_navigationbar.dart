@@ -68,7 +68,6 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
   }) : super(key: key) {
     _zNavigationBar = new CupertinoNavigationBar(
       automaticallyImplyLeading: this.automaticallyImplyLeading,
-      actionsForegroundColor: this.actionsForegroundColor,
       automaticallyImplyMiddle: this.automaticallyImplyMiddle,
       previousPageTitle: this.previousPageTitle,
       transitionBetweenRoutes: this.transitionBetweenRoutes,

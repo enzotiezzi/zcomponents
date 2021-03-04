@@ -65,7 +65,7 @@ class ZCollectionState extends State<ZCollection> {
                               _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
-                      style: widget.themeData.textTheme.bodyText1,
+                      style: widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -73,7 +73,7 @@ class ZCollectionState extends State<ZCollection> {
                 Flexible(
                   flex: 10,
                   fit: FlexFit.tight,
-                  child: new Icon(Icons.keyboard_arrow_right),
+                  child: new Icon(Icons.keyboard_arrow_right,color: widget.themeData.accentColor,),
                 ),
               ],
             ),
