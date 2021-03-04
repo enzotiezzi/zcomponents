@@ -48,7 +48,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                               _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
-                      style: widget.themeData.textTheme.bodyText1,
+                      style: widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -58,7 +58,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                   fit: FlexFit.tight,
                   child: new Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black,
+                    color: widget.themeData.accentColor,
                   ),
                 ),
               ],

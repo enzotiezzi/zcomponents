@@ -16,6 +16,7 @@ import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-email.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
@@ -105,96 +106,17 @@ class _MainTestingState extends State<MainTesting> {
         new Divider(
           height: 10.0,
         ),
-        RaisedButton(onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => new Container(
-                        key: key,
-                        child: ZCollectionList(
-                          titulo: "Teste",
-                          lista: grupos,
-                          theme: Theme.of(context),
-                          filtroPrincipal: new FiltroCampo(
-                              key: "NomeNivel", value: "Nome nivel"),
-                          onChange: (filter) async {
-                            print(filter);
-                            SearchOptions searchOptions = new SearchOptions();
-                            if (filter[0].value.isNotEmpty) {
-                              searchOptions.filters = filter;
-                            }
-
-                            var response = await teste(searchOptions);
-
-                            searchOptions.pagination.pageNumber++;
-
-                            this.searchOptions = searchOptions;
-                            this.paginationMetaData =
-                                response.paginationMetaData;
-                            key = new GlobalKey();
-                            setState(() {
-                              grupos = converterParaZCollection(response.body);
-                            });
-                          },
-                        ),
-                      )));
-        }),
-        ZCollection(
-          titulo: "Teste",
-          lista: grupos,
-          themeData: Theme.of(context),
-          filtroPrincipal:
-              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          onFilter: (filter) async {
-            print(filter);
-            SearchOptions searchOptions = new SearchOptions();
-            if (filter[0].value.isNotEmpty) {
-              searchOptions.filters = filter;
-            }
-
-            var response = await teste(searchOptions);
-
-            searchOptions.pagination.pageNumber++;
-
-            this.searchOptions = searchOptions;
-            this.paginationMetaData = response.paginationMetaData;
-
-            setState(() {
-              grupos = converterParaZCollection(response.body);
-            });
-          },
-        ),
-/*        new ZSearchBar(
-          key: key,
-          filtroPrincipal:
-              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          onFilter: (filters) async {
-            SearchOptions searchOptions = new SearchOptions();
-            if (filters[0].value.toString().isNotEmpty) {
-              searchOptions.filters = filters;
-            }
-
-            var response = await teste(searchOptions);
-
-            searchOptions.pagination.pageNumber++;
-
-            this.searchOptions = searchOptions;
-            this.paginationMetaData = response.paginationMetaData;
-
-            setState(() {
-              grupos = response.body;
-            });
-          },
-          camposFiltro: [
-            new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          ],
-        ),
-        new Expanded(
-            child: new ListView.builder(
-          itemCount: grupos.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) => new Text(grupos[index].nomeNivel),
-        ))*/
+          new ZCollection(
+            titulo: "Test",
+            themeData: Theme.of(context),
+            lista: lista,
+          ),
+          Divider(),
+          new ZCollectionBottomSheet(
+            themeData: Theme.of(context),
+            title: "BottomSheet",
+            lista: lista,
+          )
       ],
     );
   }
