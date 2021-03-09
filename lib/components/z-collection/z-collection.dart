@@ -71,7 +71,7 @@ class ZCollectionState extends State<ZCollection> {
                               _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
-                      style: widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor),
+                      style: _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -79,7 +79,7 @@ class ZCollectionState extends State<ZCollection> {
                 Flexible(
                   flex: 10,
                   fit: FlexFit.tight,
-                  child: new Icon(Icons.keyboard_arrow_right,color: widget.themeData.accentColor,),
+                  child: new Icon(Icons.keyboard_arrow_right,color: _retornaCorIcon(),),
                 ),
               ],
             ),
@@ -88,6 +88,24 @@ class ZCollectionState extends State<ZCollection> {
       ),
       onTap: _irParaSelecaoDeItemHorizontal,
     );
+  }
+
+  Color _retornaCorIcon(){
+    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+      return widget.themeData.accentColor;
+    }
+    else{
+      return Colors.black;
+    }
+  }
+
+  TextStyle _retornaCorTexto(){
+    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor);
+    }
+    else{
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
+    }
   }
 
   void buscarValorPadrao(List<ZCollectionItem> lista) {
@@ -112,12 +130,6 @@ class ZCollectionState extends State<ZCollection> {
     }
   }
 
-/*
-  return ZCollectionList(
-  lista: widget.lista,
-  titulo: widget.titulo,
-  );
-*/
 
   void _irParaSelecaoDeItemHorizontal() async {
     _itemSelecionado = await Navigator.push<ZCollectionItem>(

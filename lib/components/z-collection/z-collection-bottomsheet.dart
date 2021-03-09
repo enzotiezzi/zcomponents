@@ -48,7 +48,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                               _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
-                      style: widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor),
+                      style: _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -58,7 +58,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                   fit: FlexFit.tight,
                   child: new Icon(
                     Icons.arrow_drop_down,
-                    color: widget.themeData.accentColor,
+                    color: _retornaCorIcon(),
                   ),
                 ),
               ],
@@ -70,6 +70,24 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
         showDialogBottom(context);
       },
     );
+  }
+
+  Color _retornaCorIcon(){
+    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+      return widget.themeData.accentColor;
+    }
+    else{
+     return Colors.black;
+    }
+  }
+
+  TextStyle _retornaCorTexto(){
+    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor);
+    }
+    else{
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
+    }
   }
 
   Future showDialogBottom(BuildContext context) {
