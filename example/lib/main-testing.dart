@@ -20,6 +20,8 @@ import 'package:z_components/components/z-collection/z-collection-bottomsheet.da
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -84,25 +86,7 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new Container(
-          padding: EdgeInsets.only(left: 16, right: 16),
-          child: new ZCardProcessoSeletivo(
-            themeData: Theme.of(context),
-            processoSeletivo: new ProcessoSeletivoViewModel(
-                descricao: "Aux. Manutenção - São Paulo",
-                codigo: "1234506..",
-                beneficios: "VT, VR, VA, CB, PLR",
-                diasEmAberto: 10,
-                tipoContrato: "CLT (Integral)",
-                periodicidadePagamento: "Mês",
-                localidade: "SP-Morumbi",
-                nomeCargo: "Auxiliar de Limpeza",
-                salarioValorFixo: 1200.00,
-                salarioFixoOuFaixa: "Fixo",
-                qtdeParticipantesAtual: 12,
-                progressoEtapa: "1/1"),
-          ),
-        ),
+
         new Divider(
           height: 10.0,
         ),
@@ -112,10 +96,20 @@ class _MainTestingState extends State<MainTesting> {
             lista: lista,
           ),
           Divider(),
-          new ZCollectionBottomSheet(
+          ZCollectionBottomSheet(
             themeData: Theme.of(context),
-            title: "BottomSheet",
+            title: "Teste Cor",
             lista: lista,
+          ),
+          Divider(),
+          new ZInputGeneric(
+            themeData: Theme.of(context),
+            comMascara: true,
+            titulo: "Telefone",
+            campoObrigatorio: true,
+            textMask: "(##) ####-####",
+            tipoTeclado: TextInputType.number,
+            hintText: "( ** ) **** - ****",
           )
       ],
     );

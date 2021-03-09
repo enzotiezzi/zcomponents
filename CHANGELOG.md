@@ -1,3 +1,7 @@
+## 0.9.33+12
+
+* ZInputGeneric ajuste na mascara e de cores no ZCollection e ZCollectionBottomSheet
+
 ## 0.9.33+11
 
 * Correcao tema zcollection

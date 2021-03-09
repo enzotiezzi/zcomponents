@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
 
@@ -84,9 +85,9 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             cursorColor: Color(0xFF801F92),
                             style: widget.themeData.textTheme.bodyText1,
                             inputFormatters: [
-                              MaskedTextInputFormatterShifter(
-                                  maskONE: widget.textMask,
-                                  maskTWO: widget.textMask)
+                            MaskTextInputFormatter(
+                             mask: widget.textMask,
+                              )
                             ],
                             onSubmitted: (text) {
                               widget.inputPadraoFocus.unfocus();
