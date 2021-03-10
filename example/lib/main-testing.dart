@@ -20,8 +20,6 @@ import 'package:z_components/components/z-collection/z-collection-bottomsheet.da
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
-import 'package:z_components/components/z-inputs/z-input-generic.dart';
-import 'package:z_components/components/z-inputs/z-input-celular.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -45,7 +43,7 @@ class _MainTestingState extends State<MainTesting> {
     ZCollectionItem(chave: "OUTRO2", titulo: "OUTRO2", valor: "OUTRO2"),
     ZCollectionItem(chave: "OUTRO3", titulo: "OUTRO3", valor: "OUTRO3"),
   ];
-  GlobalKey key = new GlobalKey();
+  GlobalKey<ZCollectionState> key = new GlobalKey<ZCollectionState>();
 
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
@@ -67,8 +65,8 @@ class _MainTestingState extends State<MainTesting> {
 
     teste(searchOptions).then((value) => {
           this.setState(() {
-            grupos = converterParaZCollection(value.body);
-
+            grupos = converterParaZCollection(value.body)+converterParaZCollection(value.body);
+            key = new GlobalKey();
             this.paginationMetaData = value.paginationMetaData;
             this.searchOptions.pagination.pageNumber++;
           })
@@ -86,31 +84,64 @@ class _MainTestingState extends State<MainTesting> {
   Widget _buildBody() {
     return new Column(
       children: [
-
+        new Container(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: new ZCardProcessoSeletivo(
+            themeData: Theme.of(context),
+            processoSeletivo: new ProcessoSeletivoViewModel(
+                descricao: "Aux. Manutenção - São Paulo",
+                codigo: "1234506..",
+                beneficios: "VT, VR, VA, CB, PLR",
+                diasEmAberto: 10,
+                tipoContrato: "CLT (Integral)",
+                periodicidadePagamento: "Mês",
+                localidade: "SP-Morumbi",
+                nomeCargo: "Auxiliar de Limpeza",
+                salarioValorFixo: 1200.00,
+                salarioFixoOuFaixa: "Fixo",
+                qtdeParticipantesAtual: 12,
+                progressoEtapa: "1/1"),
+          ),
+        ),
         new Divider(
           height: 10.0,
         ),
-          new ZCollection(
-            titulo: "Test",
-            themeData: Theme.of(context),
-            lista: lista,
-          ),
-          Divider(),
-          ZCollectionBottomSheet(
-            themeData: Theme.of(context),
-            title: "Teste Cor",
-            lista: lista,
-          ),
-          Divider(),
-          new ZInputGeneric(
-            themeData: Theme.of(context),
-            comMascara: true,
-            titulo: "Telefone",
-            campoObrigatorio: true,
-            textMask: "(##) ####-####",
-            tipoTeclado: TextInputType.number,
-            hintText: "( ** ) **** - ****",
-          )
+        new ZCollection(
+          key: key,
+          lista: grupos,
+          filtroPrincipal:
+              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+          titulo: "Teste",
+          themeData: Theme.of(context),
+          onFilter: (filter) async {
+            print(filter);
+            SearchOptions searchOptions = new SearchOptions();
+            if (filter[0].value.isNotEmpty) {
+              searchOptions.filters = filter;
+            }
+
+            var response = await teste(searchOptions);
+
+            searchOptions.pagination.pageNumber++;
+
+            this.searchOptions = searchOptions;
+            this.paginationMetaData = response.paginationMetaData;
+            setState(() {
+              grupos = converterParaZCollection(response.body);
+              key.currentState
+                  .atualizarLista(converterParaZCollection(response.body));
+            });
+          },
+          onScroll: (filter) {
+            onScroll();
+          },
+        ),
+        Divider(),
+        new ZCollectionBottomSheet(
+          themeData: Theme.of(context),
+          title: "BottomSheet",
+          lista: lista,
+        )
       ],
     );
   }
@@ -121,7 +152,7 @@ class _MainTestingState extends State<MainTesting> {
     var headers = {
       "Content-type": "application/json",
       "Authorization":
-          "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwYzNkZjhkOGMwZjVhMmI0MmQ1ZDE0MTc2NGU2Y2U3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MTM5OTg2MTAsImV4cCI6MTYxNjU5MDYxMCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IldlYiBaZWxsYXIiLCJzdWIiOiJiYmMwN2RkYS1hMzQ0LTQ3ZWQtOTRkNC1mZDg0NTI2Y2E3ODgiLCJhdXRoX3RpbWUiOjE2MTM5OTg2MTAsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiJPWjRZREFURVFYRUM3RlNHTjRHNFhDTkIyN0c1UFhBUiIsImFjY291bnQiOiJaZWxsYXIyIiwiaWRBY2NvdW50IjoiOGU2ZWI2MzItYjcwNy00MTNmLWExNTItM2NmZmQxZjk4MmI1IiwiaWRDb2xhYm9yYWRvciI6IjE2QTgwNDE1LUQyODItNEFDQS04NDMxLThDN0YwNjkzQjE3QiIsInByZWZlcnJlZF91c2VybmFtZSI6IjQzOC4xOTcuNzE4LTE2IiwiZW1haWwiOiJibGFibGFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiRW56byBUaWV6emkiLCJwaG9uZV9udW1iZXIiOiIoMTEpOSA5NzE3LTI1NDQiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwicm9sZXMiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCJdLCJhbXIiOlsicHdkIl19.trr71n6htf2cJnMvfSkZDt1kn21HKMt8LLkwUdJwUrDKF3jawDcbigeVzoXiHmIAc78WRd89BXQr-GETIxQzfMAPILSb9HiPTV4xt4dk-WftYicJ-NjcBnAWopS2g39KOMZVrtY6t4AUxYURAUe3ev8Mzq5SI9NHxujhufMllVJRMe-TTt6gqGpFXNncjjMv6yGA1Q5MOT_SoCoSWtIwQj2ItiuULgmGeJHW-aOY9yoqZNDZ1RJozE4Ef6qn2OutWknTeGntiEAqsUhuLDHBxCcgWtURkwdQ8OMnm4FjoXISGuCVi8YnstY4_NVs1CkqQoZlOS_kDGNac_CbbeTv_A"
+          "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk0MmU4NmQ3NjZkOWM0NTk5ZjI1M2RmZmQ1YjUwNTM2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MTUzMTI1ODMsImV4cCI6MTYxNzkwNDU4MywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IldlYiBaZWxsYXIiLCJzdWIiOiJiYmMwN2RkYS1hMzQ0LTQ3ZWQtOTRkNC1mZDg0NTI2Y2E3ODgiLCJhdXRoX3RpbWUiOjE2MTUzMTI1ODIsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiJPWjRZREFURVFYRUM3RlNHTjRHNFhDTkIyN0c1UFhBUiIsImFjY291bnQiOiJaZWxsYXIyIiwiaWRBY2NvdW50IjoiOGU2ZWI2MzItYjcwNy00MTNmLWExNTItM2NmZmQxZjk4MmI1IiwiaWRDb2xhYm9yYWRvciI6IjE2QTgwNDE1LUQyODItNEFDQS04NDMxLThDN0YwNjkzQjE3QiIsInByZWZlcnJlZF91c2VybmFtZSI6IjQzOC4xOTcuNzE4LTE2IiwiZW1haWwiOiJibGFibGFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiRW56byBUaWV6emkiLCJwaG9uZV9udW1iZXIiOiIoMTEpOSA5NzE3LTI1NDQiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwicm9sZXMiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCJdLCJhbXIiOlsicHdkIl19.j8Q5HHdcp7gvJ9uJwzmHSArUr9Nt6PVG5SBg2bNkqeIhmEscppCODXO_7yINwMKcr9k_MVbMb8En067a-pyyiugcp9mDwSs7dSaWPHP4MA63eTCqcVmxjEO-QXI40-g6Y-J8ySpwxpAlwj3TKXHwsc_wP5YeTCo2x1bCVcOg27TX2JsS8rjC2qjxgyTJJUF1YFDbjQObALFmraAZXBNd0G6c6NSw7ytffbE7Jm2mtbiFpeTngu9hXQF6qxyns68OnFaRcC8W-RxrqySlCTbDFcdO_XU9XNijNddckePIjF9O5MaUF2vgZRxw2yF7WHtLI1Jp1jwoUj8H5X0byOfMsg"
     };
 
     var url =

@@ -1,3 +1,11 @@
+## 0.9.34+1
+
+* Ajuste paginacao no ZCollection
+
+## 0.9.34
+
+* Paginação no ZCollection
+
 ## 0.9.33+12
 
 * ZInputGeneric ajuste na mascara e de cores no ZCollection e ZCollectionBottomSheet
