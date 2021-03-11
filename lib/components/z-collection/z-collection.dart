@@ -17,6 +17,7 @@ class ZCollection extends StatefulWidget {
   final bool campoObrigatorio;
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
+  Function(List<FilterExpression>) onScroll;
 
   ZCollection(
       {Key key,
@@ -30,7 +31,8 @@ class ZCollection extends StatefulWidget {
       this.take: 0,
       this.campoObrigatorio = false,
       this.filtroPrincipal,
-      this.onFilter})
+      this.onFilter,
+      this.onScroll})
       : super(key: key);
 
   @override
@@ -40,6 +42,8 @@ class ZCollection extends StatefulWidget {
 class ZCollectionState extends State<ZCollection> {
   ZCollectionItem _itemSelecionado = new ZCollectionItem();
   String _anterior = "Selecione";
+  GlobalKey<ZCollectionListState> keyLista =
+      new GlobalKey<ZCollectionListState>();
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
@@ -71,7 +75,8 @@ class ZCollectionState extends State<ZCollection> {
                               _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
-                      style: widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor),
+                      style: widget.themeData.textTheme.bodyText1
+                          .copyWith(color: widget.themeData.accentColor),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -79,7 +84,10 @@ class ZCollectionState extends State<ZCollection> {
                 Flexible(
                   flex: 10,
                   fit: FlexFit.tight,
-                  child: new Icon(Icons.keyboard_arrow_right,color: widget.themeData.accentColor,),
+                  child: new Icon(
+                    Icons.keyboard_arrow_right,
+                    color: widget.themeData.accentColor,
+                  ),
                 ),
               ],
             ),
@@ -88,6 +96,10 @@ class ZCollectionState extends State<ZCollection> {
       ),
       onTap: _irParaSelecaoDeItemHorizontal,
     );
+  }
+
+  void atualizarLista(List<ZCollectionItem> lista) {
+    keyLista.currentState.atualizarLista(lista);
   }
 
   void buscarValorPadrao(List<ZCollectionItem> lista) {
@@ -126,6 +138,7 @@ class ZCollectionState extends State<ZCollection> {
           pageBuilder: (BuildContext context, Animation animation,
               Animation secondaryAnimation) {
             return ZCollectionList(
+              key: keyLista,
               lista: widget.lista,
               titulo: widget.titulo,
               ultimoValor: _itemSelecionado,
@@ -135,6 +148,7 @@ class ZCollectionState extends State<ZCollection> {
               theme: widget.themeData,
               onChange: widget.onFilter,
               filtroPrincipal: widget.filtroPrincipal,
+              onScroll: widget.onScroll,
             );
           },
           transitionsBuilder: (BuildContext context,

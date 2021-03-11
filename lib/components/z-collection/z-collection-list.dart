@@ -7,7 +7,7 @@ import 'package:z_components/styles/main-style.dart';
 
 class ZCollectionList extends StatefulWidget {
   GlobalKey key;
-  final List<ZCollectionItem> lista;
+  List<ZCollectionItem> lista;
   final ThemeData theme;
   final String titulo;
   final ZCollectionItem ultimoValor;
@@ -16,6 +16,7 @@ class ZCollectionList extends StatefulWidget {
   int skip;
   int take;
   Function(List<FilterExpression>) onChange;
+  Function(List<FilterExpression>) onScroll;
 
   ZCollectionList(
       {this.lista,
@@ -27,16 +28,19 @@ class ZCollectionList extends StatefulWidget {
       this.skip: 0,
       this.take: 0,
       this.onChange,
-      this.filtroPrincipal})
+      this.filtroPrincipal,
+      this.onScroll})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ZCollectionListState();
+  State<StatefulWidget> createState() => ZCollectionListState();
 }
 
-class _ZCollectionListState extends State<ZCollectionList> {
+class ZCollectionListState extends State<ZCollectionList> {
   List<ZCollectionItem> _listaFiltro;
   ScrollController scrollController;
+  GlobalKey keyLista = new GlobalKey();
+  String textoBusca = "";
 
   @override
   void initState() {
@@ -122,8 +126,9 @@ class _ZCollectionListState extends State<ZCollectionList> {
                         decoration:
                             new BoxDecoration(color: Colors.transparent),
                         onChanged: (text) {
-                          if (text.length > 3) {
+                          if (text.length > 3 || text.length == 0) {
                             if (widget.onChange != null) {
+                              textoBusca = text;
                               widget.onChange([
                                 new FilterExpression(
                                     propertyName: widget.filtroPrincipal.key,
@@ -133,6 +138,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
                               ]);
                             } else {
                               text = text.toLowerCase();
+                              keyLista = new GlobalKey();
                               setState(() {
                                 if (text.length > 0)
                                   _listaFiltro = widget.lista
@@ -165,6 +171,7 @@ class _ZCollectionListState extends State<ZCollectionList> {
 
   Widget _buildLista() {
     return ListView.builder(
+      key: keyLista,
       itemCount: _listaFiltro.length,
       controller: scrollController,
       shrinkWrap: true,
@@ -230,6 +237,26 @@ class _ZCollectionListState extends State<ZCollectionList> {
           });
         }
       }
+    }
+    if (widget.onScroll != null) {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.offset) {
+        widget.onScroll([
+          new FilterExpression(
+              propertyName: widget.filtroPrincipal.key,
+              operatorBetween: "OrElse",
+              operator: "Contains",
+              value: textoBusca)
+        ]);
+      }
+    }
+  }
+
+  void atualizarLista(List<ZCollectionItem> lista) {
+    if (mounted) {
+      setState(() {
+        _listaFiltro = lista;
+      });
     }
   }
 }
