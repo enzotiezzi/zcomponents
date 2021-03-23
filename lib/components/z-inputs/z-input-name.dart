@@ -11,6 +11,7 @@ class ZInputName extends StatefulWidget {
   ValueChanged<String> onChange;
   bool enabled;
   final bool campoObrigatorio;
+  void Function(bool) validacao;
 
 
   ZInputName({
@@ -20,7 +21,8 @@ class ZInputName extends StatefulWidget {
     @required this.nomeFocus,
     @required this.controllerNome,
     this.proximoFocus,this.enabled,
-    this.campoObrigatorio = false
+    this.campoObrigatorio = false,
+    this.validacao
   }) : super(key: key);
 
   @override
@@ -78,18 +80,21 @@ class _ZInputNameState extends State<ZInputName> {
       valideNome = false;
       _dialogUtils.showAlertDialogNewAviso(
           "Nome Inválido!", "Por Favor insira o nome completo.");
+      widget.validacao(false);
     } else if (nome.split(' ').length < 2) {
       valideNome = false;
       _dialogUtils.showAlertDialogNewAviso(
           "Nome Inválido!", "Por Favor insira o nome completo.");
+      widget.validacao(false);
     } else {
       if (nome.split(' ')[1].length < 2) {
         valideNome = false;
         _dialogUtils.showAlertDialogNewAviso(
             "Nome Inválido!", "Por Favor insira o nome completo.");
+        widget.validacao(false);
       }else{
         valideNome = true;
-
+        widget.validacao(true);
       }
     }
   }
