@@ -1,3 +1,7 @@
+## 0.9.34+2
+
+* Funcao de validacao no ZInputName
+
 ## 0.9.34+1
 
 * Ajuste paginacao no ZCollection
