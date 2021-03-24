@@ -20,6 +20,8 @@ import 'package:z_components/components/z-collection/z-collection-bottomsheet.da
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-inputs/z-input-name.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -80,69 +82,72 @@ class _MainTestingState extends State<MainTesting> {
     return MainStyle.get(context)
         .getDefaultScaffold("Componente de teste", _buildBody());
   }
+  bool preencheuNome=false;
+  bool validar(){
+    if(preencheuNome){
+        print("okay");
+        return true;
+    }else{
+       print("não okay");
+       return false;
+    }
+  }
+  Function habilitarBotao(){
+
+      if( validar()){
+        return(){
+        };
+      }else{
+        return null;
+      }
+
+  }
 
   Widget _buildBody() {
-    return new Column(
-      children: [
-        new Container(
-          padding: EdgeInsets.only(left: 16, right: 16),
-          child: new ZCardProcessoSeletivo(
+    return SingleChildScrollView(
+      child: new Column(
+        children: [
+
+          Divider(),
+          new ZCollectionBottomSheet(
             themeData: Theme.of(context),
-            processoSeletivo: new ProcessoSeletivoViewModel(
-                descricao: "Aux. Manutenção - São Paulo",
-                codigo: "1234506..",
-                beneficios: "VT, VR, VA, CB, PLR",
-                diasEmAberto: 10,
-                tipoContrato: "CLT (Integral)",
-                periodicidadePagamento: "Mês",
-                localidade: "SP-Morumbi",
-                nomeCargo: "Auxiliar de Limpeza",
-                salarioValorFixo: 1200.00,
-                salarioFixoOuFaixa: "Fixo",
-                qtdeParticipantesAtual: 12,
-                progressoEtapa: "1/1"),
+            title: "BottomSheet",
+            lista: lista,
           ),
-        ),
-        new Divider(
-          height: 10.0,
-        ),
-        new ZCollection(
-          key: key,
-          lista: grupos,
-          filtroPrincipal:
-              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
-          titulo: "Teste",
-          themeData: Theme.of(context),
-          onFilter: (filter) async {
-            print(filter);
-            SearchOptions searchOptions = new SearchOptions();
-            if (filter[0].value.isNotEmpty) {
-              searchOptions.filters = filter;
-            }
+          ZInputGeneric(
+            titulo: "Teste",
+            themeData: Theme.of(context),
+          ),
+          ZInputName(
+            themeData: Theme.of(context),
+            nomeFocus: nomeFocusNode,
+            controllerNome: nomeController,
+            validacao: (bool){
+              if(bool){
+               setState(() {
+                 preencheuNome = true;
 
-            var response = await teste(searchOptions);
+               });
+              }else{
+                setState(() {
+                  preencheuNome=false;
+                });
+              }
+            },
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 32),
+            child: RaisedButton(
+              onPressed: habilitarBotao(),
+              color: Theme.of(context).accentColor,
+              child: Text(
+                "SALVAR"
+              ),
 
-            searchOptions.pagination.pageNumber++;
-
-            this.searchOptions = searchOptions;
-            this.paginationMetaData = response.paginationMetaData;
-            setState(() {
-              grupos = converterParaZCollection(response.body);
-              key.currentState
-                  .atualizarLista(converterParaZCollection(response.body));
-            });
-          },
-          onScroll: (filter) {
-            onScroll();
-          },
-        ),
-        Divider(),
-        new ZCollectionBottomSheet(
-          themeData: Theme.of(context),
-          title: "BottomSheet",
-          lista: lista,
-        )
-      ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
