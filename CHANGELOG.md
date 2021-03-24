@@ -1,4 +1,4 @@
-## 0.9.34+2
+## 0.9.34+8
 
 * Funcao de validacao no ZInputName
 
