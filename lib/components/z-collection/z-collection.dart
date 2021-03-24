@@ -17,22 +17,22 @@ class ZCollection extends StatefulWidget {
   final bool campoObrigatorio;
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
-  Function(List<FilterExpression>) onScroll;
+  Function(List<FilterExpression>, List<ZCollectionItem>) onScroll;
 
   ZCollection(
       {Key key,
-      @required this.titulo,
-      @required this.lista,
-      @required this.themeData,
-      this.onChange,
-      this.valorPadrao,
-      this.colorStyle: const Color(0xff2bbab4),
-      this.skip: 0,
-      this.take: 0,
-      this.campoObrigatorio = false,
-      this.filtroPrincipal,
-      this.onFilter,
-      this.onScroll})
+        @required this.titulo,
+        @required this.lista,
+        @required this.themeData,
+        this.onChange,
+        this.valorPadrao,
+        this.colorStyle: const Color(0xff2bbab4),
+        this.skip: 0,
+        this.take: 0,
+        this.campoObrigatorio = false,
+        this.filtroPrincipal,
+        this.onFilter,
+        this.onScroll})
       : super(key: key);
 
   @override
@@ -43,7 +43,7 @@ class ZCollectionState extends State<ZCollection> {
   ZCollectionItem _itemSelecionado = new ZCollectionItem();
   String _anterior = "Selecione";
   GlobalKey<ZCollectionListState> keyLista =
-      new GlobalKey<ZCollectionListState>();
+  new GlobalKey<ZCollectionListState>();
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
@@ -60,7 +60,7 @@ class ZCollectionState extends State<ZCollection> {
       child: new Column(
         children: <Widget>[
           new Container(
-            height: 42,
+            height: 39,
             color: Colors.white,
             padding: EdgeInsets.only(left: 16.0, right: 14),
             child: new Row(
@@ -68,15 +68,14 @@ class ZCollectionState extends State<ZCollection> {
               children: <Widget>[
                 _returnRequiredField(),
                 Flexible(
-                    flex: 55,
+                    flex: 65,
                     fit: FlexFit.tight,
                     child: new Text(
                       (_itemSelecionado?.valor == null &&
-                              _anterior == "Selecione")
+                          _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
-                      style: widget.themeData.textTheme.bodyText1
-                          .copyWith(color: widget.themeData.accentColor),
+                      style:  _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -86,7 +85,7 @@ class ZCollectionState extends State<ZCollection> {
                   fit: FlexFit.tight,
                   child: new Icon(
                     Icons.keyboard_arrow_right,
-                    color: widget.themeData.accentColor,
+                    color: _retornaCorIcon(),
                   ),
                 ),
               ],
@@ -97,6 +96,24 @@ class ZCollectionState extends State<ZCollection> {
       onTap: _irParaSelecaoDeItemHorizontal,
     );
   }
+  Color _retornaCorIcon(){
+    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+      return widget.themeData.accentColor;
+    }
+    else{
+      return Colors.black;
+    }
+  }
+
+  TextStyle _retornaCorTexto(){
+    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor);
+    }
+    else{
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
+    }
+  }
+
 
   void atualizarLista(List<ZCollectionItem> lista) {
     keyLista.currentState.atualizarLista(lista);

@@ -8,13 +8,15 @@ class ZCollectionBottomSheet extends StatefulWidget {
   final List<ZCollectionItem> lista;
   final ValueChanged<ZCollectionItem> onChange;
   final bool campoObrigatorio;
+  String valorPadrao;
 
   ZCollectionBottomSheet(
       {@required this.title,
-      @required this.themeData,
-      @required this.lista,
-      this.onChange,
-      this.campoObrigatorio = false});
+        @required this.themeData,
+        @required this.lista,
+        this.onChange,
+        this.campoObrigatorio = false,
+        this.valorPadrao});
 
   @override
   _ZCollectionBottomSheetState createState() => _ZCollectionBottomSheetState();
@@ -26,6 +28,16 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
+  @override
+  void initState() {
+    if (widget.valorPadrao != null && widget.valorPadrao.isNotEmpty) {
+      _itemSelecionado = new ZCollectionItem(
+          chave: widget.valorPadrao,
+          titulo: widget.valorPadrao,
+          valor: widget.valorPadrao);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +45,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
       child: new Column(
         children: <Widget>[
           new Container(
-            height: 42,
+            height: 39,
             color: Colors.white,
             padding: EdgeInsets.only(left: 16.0, right: 14),
             child: new Row(
@@ -41,11 +53,11 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
               children: <Widget>[
                 _returnRequiredField(),
                 Flexible(
-                    flex: 55,
+                    flex: 65,
                     fit: FlexFit.tight,
                     child: new Text(
                       (_itemSelecionado?.valor == null &&
-                              _anterior == "Selecione")
+                          _anterior == "Selecione")
                           ? _anterior
                           : _itemSelecionado?.valor,
                       style: _retornaCorTexto(),
@@ -72,20 +84,19 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
     );
   }
 
-  Color _retornaCorIcon(){
-    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+  Color _retornaCorIcon() {
+    if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
       return widget.themeData.accentColor;
-    }
-    else{
-     return Colors.black;
+    } else {
+      return Colors.black;
     }
   }
 
-  TextStyle _retornaCorTexto(){
-    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
-      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor);
-    }
-    else{
+  TextStyle _retornaCorTexto() {
+    if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
+      return widget.themeData.textTheme.bodyText1
+          .copyWith(color: widget.themeData.accentColor);
+    } else {
       return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     }
   }
@@ -98,58 +109,60 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
         ),
         builder: (builder) {
           return new Wrap(
-              children: <Widget>[
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                      padding: const EdgeInsets.only(top: 18, bottom: 8),
-                      child: new Text(
-                        "${widget.title}",
-                        style: widget.themeData.textTheme.subtitle1
-                            .copyWith(color: Color(0xff999999)),
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    padding: const EdgeInsets.only(top: 18, bottom: 8),
+                    child: new Text(
+                      "${widget.title}",
+                      style: widget.themeData.textTheme.subtitle1
+                          .copyWith(color: Color(0xff999999)),
+                    ),
+                  ),
+                ],
+              ),
+              new Divider(color: Color(0xffCECECE)),
+              new ListView.builder(
+                itemCount: widget.lista.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  var item = widget.lista[index];
+                  return new GestureDetector(
+                    child: new Container(
+                      padding: const EdgeInsets.only(
+                          left: 16.0, top: 8.0, bottom: 8.0),
+                      child: Text(
+                        "${item.titulo}",
+                        style: widget.themeData.textTheme.bodyText2
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ],
-                ),
-                new Divider(color: Color(0xffCECECE)),
-                new ListView.builder(
-                  itemCount: widget.lista.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    var item = widget.lista[index];
-                    return new GestureDetector(
-                      child: new Container(
-                        padding: const EdgeInsets.only(
-                            left: 16.0, top: 8.0, bottom: 8.0),
-                        child: Text(
-                          "${item.titulo}",
-                          style: widget.themeData.textTheme.bodyText2
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      onTap: () {
-                        if (mounted)
-                          setState(() {
-                            _itemSelecionado = item;
-                            if (widget.onChange != null) widget.onChange(_itemSelecionado);
-                            Navigator.pop(context);
-                          });
-                      },
-                    );
-                  },
-                )
-              ],
-            );
+                    onTap: () {
+                      if (mounted)
+                        setState(() {
+                          _itemSelecionado = item;
+                          widget.valorPadrao = item.titulo;
+                          if (widget.onChange != null)
+                            widget.onChange(_itemSelecionado);
+                          Navigator.pop(context);
+                        });
+                    },
+                  );
+                },
+              )
+            ],
+          );
         });
   }
 
-  Widget _returnRequiredField(){
-    if(widget.campoObrigatorio){
+  Widget _returnRequiredField() {
+    if (widget.campoObrigatorio) {
       return Flexible(
         flex: 45,
         fit: FlexFit.tight,
-        child:  new RichText(
+        child: new RichText(
           maxLines: 2,
           text: TextSpan(
             children: <TextSpan>[
@@ -158,15 +171,12 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                 style: widget.themeData.textTheme.bodyText1
                     .copyWith(color: Color(0xff999999)),
               ),
-              TextSpan(
-                  text: "*",
-                  style: TextStyle(color: Colors.redAccent)
-              )
+              TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
             ],
           ),
         ),
       );
-    }else{
+    } else {
       return Flexible(
         flex: 45,
         fit: FlexFit.tight,

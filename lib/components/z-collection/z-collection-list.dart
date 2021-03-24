@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZCollectionList extends StatefulWidget {
@@ -16,20 +17,20 @@ class ZCollectionList extends StatefulWidget {
   int skip;
   int take;
   Function(List<FilterExpression>) onChange;
-  Function(List<FilterExpression>) onScroll;
+  Function(List<FilterExpression>, List<ZCollectionItem>) onScroll;
 
   ZCollectionList(
       {this.lista,
-      this.key,
-      this.theme,
-      this.titulo: "",
-      this.ultimoValor,
-      this.color,
-      this.skip: 0,
-      this.take: 0,
-      this.onChange,
-      this.filtroPrincipal,
-      this.onScroll})
+        this.key,
+        this.theme,
+        this.titulo: "",
+        this.ultimoValor,
+        this.color,
+        this.skip: 0,
+        this.take: 0,
+        this.onChange,
+        this.filtroPrincipal,
+        this.onScroll})
       : super(key: key);
 
   @override
@@ -87,9 +88,9 @@ class ZCollectionListState extends State<ZCollectionList> {
           _buildFiltro(),
           new Expanded(
               child: new Container(
-            margin: EdgeInsets.only(top: 16.0),
-            child: _buildLista(),
-          ))
+                margin: EdgeInsets.only(top: 16.0),
+                child: _buildLista(),
+              ))
         ],
       ),
     );
@@ -120,38 +121,38 @@ class ZCollectionListState extends State<ZCollectionList> {
                           )),
                       new Expanded(
                           child: new CupertinoTextField(
-                        placeholderStyle: new TextStyle(
-                            color: Color(0xff999999), fontSize: 17),
-                        placeholder: "Busca",
-                        decoration:
+                            placeholderStyle: new TextStyle(
+                                color: Color(0xff999999), fontSize: 17),
+                            placeholder: "Busca",
+                            decoration:
                             new BoxDecoration(color: Colors.transparent),
-                        onChanged: (text) {
-                          if (text.length > 3 || text.length == 0) {
-                            if (widget.onChange != null) {
-                              textoBusca = text;
-                              widget.onChange([
-                                new FilterExpression(
-                                    propertyName: widget.filtroPrincipal.key,
-                                    operatorBetween: "OrElse",
-                                    operator: "Contains",
-                                    value: text)
-                              ]);
-                            } else {
-                              text = text.toLowerCase();
-                              keyLista = new GlobalKey();
-                              setState(() {
-                                if (text.length > 0)
-                                  _listaFiltro = widget.lista
-                                      .where((x) =>
+                            onChanged: (text) {
+                              if (text.length >= 3 || text.length == 0) {
+                                if (widget.onChange != null) {
+                                  textoBusca = text;
+                                  widget.onChange([
+                                    new FilterExpression(
+                                        propertyName: widget.filtroPrincipal.key,
+                                        operatorBetween: "OrElse",
+                                        operator: "Contains",
+                                        value: text)
+                                  ]);
+                                } else {
+                                  text = text.toLowerCase();
+                                  keyLista = new GlobalKey();
+                                  setState(() {
+                                    if (text.length > 0)
+                                      _listaFiltro = widget.lista
+                                          .where((x) =>
                                           x.valor.toLowerCase().contains(text))
-                                      .toList();
-                                else
-                                  _listaFiltro = widget.lista;
-                              });
-                            }
-                          }
-                        },
-                      )),
+                                          .toList();
+                                    else
+                                      _listaFiltro = widget.lista;
+                                  });
+                                }
+                              }
+                            },
+                          )),
                     ],
                   ),
                 ),
@@ -180,17 +181,21 @@ class ZCollectionListState extends State<ZCollectionList> {
         return new Column(
           children: [
             new Container(
+              alignment: Alignment.topCenter,
               height: 42,
               color: Colors.white,
-              child: new ListTile(
-                onTap: () {
-                  _selecionarItem(item);
-                },
-                title: new Text(
-                  "${item.titulo ?? item.valor}",
-                  style: widget.theme.textTheme.bodyText1,
-                ),
-              ),
+              child: new ZTile(
+                  onTap: () {
+                    _selecionarItem(item);
+                  },
+                  leading: new Container(
+                    width: MediaQuery.of(context).size.width / 1.1,
+                    child: new Text(
+                      "${item.titulo ?? item.valor}",
+                      style: widget.theme.textTheme.bodyText1,
+                      maxLines: 2,
+                    ),
+                  )),
             ),
             new Divider(
               height: 2,
@@ -213,7 +218,7 @@ class ZCollectionListState extends State<ZCollectionList> {
       });
     } else {
       var listaSkipTake =
-          widget.lista.skip(widget.skip).take(widget.take).toList();
+      widget.lista.skip(widget.skip).take(widget.take).toList();
 
       if (listaSkipTake != null && listaSkipTake.length > 0) {
         setState(() {
@@ -229,7 +234,7 @@ class ZCollectionListState extends State<ZCollectionList> {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         var listaSkipTake =
-            widget.lista.skip(widget.skip).take(widget.take).toList();
+        widget.lista.skip(widget.skip).take(widget.take).toList();
         if (listaSkipTake != null && listaSkipTake.length > 0) {
           setState(() {
             _listaFiltro.addAll(listaSkipTake);
@@ -247,7 +252,7 @@ class ZCollectionListState extends State<ZCollectionList> {
               operatorBetween: "OrElse",
               operator: "Contains",
               value: textoBusca)
-        ]);
+        ], _listaFiltro);
       }
     }
   }
