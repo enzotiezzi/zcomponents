@@ -1,3 +1,11 @@
+## 0.9.34+10
+
+* Correcao bugs
+
+## 0.9.34+9
+
+* Funcao de validacao no ZInputName
+
 ## 0.9.34+8
 
 * Funcao de validacao no ZInputName

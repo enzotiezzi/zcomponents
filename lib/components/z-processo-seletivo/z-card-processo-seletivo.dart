@@ -51,7 +51,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                           new Text(
                               widget.processoSeletivo.diasEmAberto.toString(),
                               style:
-                                  new TextStyle(fontSize: size, color: color))
+                              new TextStyle(fontSize: size, color: color))
                         ],
                       )
                     ],
@@ -85,7 +85,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                             new Text(
                               widget.processoSeletivo.nomeCargo,
                               style:
-                                  new TextStyle(fontSize: size, color: color),
+                              new TextStyle(fontSize: size, color: color),
                             )
                           ],
                         ),
@@ -103,7 +103,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                             child: new Text(
                               "${tipoSalario()}/${widget.processoSeletivo.periodicidadePagamento},${widget.processoSeletivo.tipoContrato}",
                               style:
-                                  new TextStyle(fontSize: size, color: color),
+                              new TextStyle(fontSize: size, color: color),
                             ),
                           )
                         ],
@@ -126,25 +126,42 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                                 size: size,
                               ),
                             ),
-                            new Text(widget.processoSeletivo.localidade,
-                                style:
-                                    new TextStyle(fontSize: size, color: color))
+                            new Container(
+                              width: MediaQuery.of(context).size.width / 3.2,
+                              child:
+                              new Text(widget.processoSeletivo.localidade,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                  style: new TextStyle(
+                                    fontSize: size,
+                                    color: color,
+                                  )),
+                            )
                           ],
                         ),
-                        new Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            new Container(
-                                padding: EdgeInsets.only(right: 4.0),
-                                child: new Icon(
-                                  Icons.money,
-                                  color: color,
-                                  size: size,
-                                )),
-                            new Text(widget.processoSeletivo.beneficios,
-                                style:
-                                    new TextStyle(fontSize: size, color: color))
-                          ],
+                        new Container(
+                          padding: EdgeInsets.only(top: 4),
+                          child: new Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              new Container(
+                                  padding: EdgeInsets.only(right: 4.0),
+                                  child: new Icon(
+                                    Icons.money,
+                                    color: color,
+                                    size: size,
+                                  )),
+                              new Container(
+                                width: MediaQuery.of(context).size.width / 3.2,
+                                child: new Text(
+                                    widget.processoSeletivo.beneficios,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                    style: new TextStyle(
+                                        fontSize: size, color: color)),
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
