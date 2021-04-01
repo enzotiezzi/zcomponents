@@ -19,11 +19,11 @@ class ScanDocumentos extends StatefulWidget {
 }
 
 class _ScanDocumentosState extends State<ScanDocumentos> {
-  ScanDocumentosView _view;
+  ZScanDocumentoView _view;
 
   @override
   void initState() {
-    _view = ScanDocumentosView(this);
+    _view = ZScanDocumentoView(this);
     _view.initView();
     super.initState();
   }

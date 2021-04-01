@@ -20,7 +20,7 @@ import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
 
-class ScanDocumentosView extends IView<ScanDocumentos> {
+class ZScanDocumentoView extends IView<ScanDocumentos> {
   IArquivoService _arquivoService;
   IColaboradorDocumentoService _colaboradorDocumentoService;
 
@@ -105,7 +105,7 @@ class ScanDocumentosView extends IView<ScanDocumentos> {
     0xAE,
   ]);
 
-  ScanDocumentosView(State state) : super(state);
+  ZScanDocumentoView(State state) : super(state);
 
   @override
   Future<void> afterBuild() {
@@ -194,7 +194,7 @@ class ScanDocumentosView extends IView<ScanDocumentos> {
             j < state.widget.colaboradorDocumentoViewModel.campos.length;
             j++) {
           if (state.widget.colaboradorDocumentoViewModel.campos[i]
-                  .idDocumentoCampo ==
+                  .idCampo ==
               lista[j].idDocumentoCampo) {
             if (state.widget.colaboradorDocumentoViewModel.campos[i]
                     .tipoValorCampo !=
@@ -236,7 +236,7 @@ class ScanDocumentosView extends IView<ScanDocumentos> {
             if (validarData) {
               camposMapeados.addAll({
                 state.widget.colaboradorDocumentoViewModel.campos[i]
-                    .idDocumentoCampo: listaRespostasUsuario[i]
+                    .idCampo: listaRespostasUsuario[i]
               });
             } else {
               return false;
@@ -247,7 +247,7 @@ class ScanDocumentosView extends IView<ScanDocumentos> {
         } else {
           camposMapeados.addAll({
             state.widget.colaboradorDocumentoViewModel.campos[i]
-                .idDocumentoCampo: listaRespostasUsuario[i]
+                .idCampo: listaRespostasUsuario[i]
           });
         }
       }

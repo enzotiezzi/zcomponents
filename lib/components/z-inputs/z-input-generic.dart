@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_shifter/mask_shifter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
@@ -17,6 +18,7 @@ class ZInputGeneric extends StatefulWidget {
   bool obscureText;
   bool enabled;
   final bool campoObrigatorio;
+  int maxLength;
 
   var controllerInputPadrao = new TextEditingController();
   FocusNode proximoFocus;
@@ -34,6 +36,7 @@ class ZInputGeneric extends StatefulWidget {
       @required this.inputPadraoFocus,
       @required this.controllerInputPadrao,
       this.proximoFocus,
+      this.maxLength,
       this.enabled,
       this.campoObrigatorio = false})
       : super(key: key);
@@ -46,7 +49,6 @@ class _ZInputGenericState extends State<ZInputGeneric> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -85,9 +87,10 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             cursorColor: Color(0xFF801F92),
                             style: widget.themeData.textTheme.bodyText1,
                             inputFormatters: [
-                            MaskTextInputFormatter(
-                             mask: widget.textMask,
-                              )
+                              MaskTextInputFormatter(
+                                mask: widget.textMask,
+                              ),
+                              LengthLimitingTextInputFormatter(widget.maxLength??1000),
                             ],
                             onSubmitted: (text) {
                               widget.inputPadraoFocus.unfocus();
@@ -124,13 +127,16 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             controller: widget.controllerInputPadrao,
                             cursorColor: Color(0xFF801F92),
                             style: widget.themeData.textTheme.bodyText1,
+                            maxLengthEnforcement: MaxLengthEnforcement.none,
                             onSubmitted: (text) {
                               widget.inputPadraoFocus.unfocus();
                               if (widget.proximoFocus != null) {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
                               }
-                            },
+                            },  inputFormatters: [
+                      LengthLimitingTextInputFormatter(widget.maxLength??1000),
+                    ],
                             decoration: InputDecoration(
                               hintText: widget.hintText,
                               hintStyle: widget.themeData.textTheme.bodyText1
@@ -159,8 +165,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
     );
   }
 
-  Widget _returnRequiredField(){
-    if(widget.campoObrigatorio){
+  Widget _returnRequiredField() {
+    if (widget.campoObrigatorio) {
       return new RichText(
         maxLines: 2,
         text: TextSpan(
@@ -170,27 +176,20 @@ class _ZInputGenericState extends State<ZInputGeneric> {
               style: widget.themeData.textTheme.bodyText1
                   .copyWith(color: Color(0xff999999)),
             ),
-            TextSpan(
-                text: "*",
-                style: TextStyle(color: Colors.redAccent)
-            )
+            TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
           ],
         ),
       );
-    }else{
+    } else {
       return RichText(
-        maxLines: 2,
-          text: TextSpan(
-              children: <TextSpan>[
-                new TextSpan(
-                  text: "${widget.titulo}",
-                  style: widget.themeData.textTheme.bodyText1
-                      .copyWith(color: Color(0xff999999)),
-                )
-              ]
-          )
-      );
-
+          maxLines: 2,
+          text: TextSpan(children: <TextSpan>[
+            new TextSpan(
+              text: "${widget.titulo}",
+              style: widget.themeData.textTheme.bodyText1
+                  .copyWith(color: Color(0xff999999)),
+            )
+          ]));
     }
   }
 }
