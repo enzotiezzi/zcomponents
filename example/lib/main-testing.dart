@@ -22,6 +22,8 @@ import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-inputs/z-input-name.dart';
+import 'package:z_components/components/z-form/presenter/z-form.dart';
+import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -67,7 +69,8 @@ class _MainTestingState extends State<MainTesting> {
 
     teste(searchOptions).then((value) => {
           this.setState(() {
-            grupos = converterParaZCollection(value.body)+converterParaZCollection(value.body);
+            grupos = converterParaZCollection(value.body) +
+                converterParaZCollection(value.body);
             key = new GlobalKey();
             this.paginationMetaData = value.paginationMetaData;
             this.searchOptions.pagination.pageNumber++;
@@ -82,32 +85,31 @@ class _MainTestingState extends State<MainTesting> {
     return MainStyle.get(context)
         .getDefaultScaffold("Componente de teste", _buildBody());
   }
-  bool preencheuNome=false;
-  bool validar(){
-    if(preencheuNome){
-        print("okay");
-        return true;
-    }else{
-       print("não okay");
-       return false;
+
+  bool preencheuNome = false;
+
+  bool validar() {
+    if (preencheuNome) {
+      print("okay");
+      return true;
+    } else {
+      print("não okay");
+      return false;
     }
   }
-  Function habilitarBotao(){
 
-      if( validar()){
-        return(){
-        };
-      }else{
-        return null;
-      }
-
+  Function habilitarBotao() {
+    if (validar()) {
+      return () {};
+    } else {
+      return null;
+    }
   }
 
   Widget _buildBody() {
     return SingleChildScrollView(
       child: new Column(
         children: [
-
           Divider(),
           new ZCollectionBottomSheet(
             themeData: Theme.of(context),
@@ -122,28 +124,42 @@ class _MainTestingState extends State<MainTesting> {
             themeData: Theme.of(context),
             nomeFocus: nomeFocusNode,
             controllerNome: nomeController,
-            validacao: (bool){
-              if(bool){
-               setState(() {
-                 preencheuNome = true;
-
-               });
-              }else{
+            validacao: (bool) {
+              if (bool) {
                 setState(() {
-                  preencheuNome=false;
+                  preencheuNome = true;
+                });
+              } else {
+                setState(() {
+                  preencheuNome = false;
                 });
               }
             },
+          ),
+          ZForm(
+            onChange: (lista) {
+              print(lista);
+            },
+            viewmodel: [
+              ZFormViewModel(
+                  nomeCampo: "teste",
+                  obrigatorio: true,
+                  tipoValorCampo: "",
+                  maxLength: 20),
+              ZFormViewModel(
+                  nomeCampo: "teste2", obrigatorio: false, tipoValorCampo: ""),
+              ZFormViewModel(
+                  nomeCampo: "teste3", obrigatorio: false, tipoValorCampo: ""),
+              ZFormViewModel(
+                  nomeCampo: "teste4", obrigatorio: false, tipoValorCampo: "")
+            ],
           ),
           Container(
             margin: EdgeInsets.only(top: 32),
             child: RaisedButton(
               onPressed: habilitarBotao(),
               color: Theme.of(context).accentColor,
-              child: Text(
-                "SALVAR"
-              ),
-
+              child: Text("SALVAR"),
             ),
           )
         ],

@@ -1,3 +1,23 @@
+## 0.9.35+4
+
+* ZForm correcao tamanho maximo
+
+## 0.9.35+3
+
+* ZForm correcao tamanho maximo
+
+## 0.9.35+2
+
+* ZForm correcao
+
+## 0.9.35+1
+
+* ZForm correcao
+
+## 0.9.35
+
+* ZForm
+
 ## 0.9.34+10
 
 * Correcao bugs
