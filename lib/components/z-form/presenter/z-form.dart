@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-form/view/z-form-view.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 
 class ZForm extends StatefulWidget {
@@ -50,7 +52,8 @@ class _ZFormState extends State<ZForm> {
                 maxLength: item.maxLength,
                 comMascara: true,
                 inputPadraoFocus: FocusNode(),
-                textMask: "XX/XX/XXXX",
+                textMask: "##/##/####",
+                hintText: "DD / MM / AAAA",
                 controllerInputPadrao:
                     TextEditingController(text: _view.listaRespostasUsuario[i], ),
                 onChange: (text) {
@@ -68,7 +71,130 @@ class _ZFormState extends State<ZForm> {
             )
           ],
         ));
-      } else {
+      }else if(item.tipoValorCampo == "number"){
+        lista.add(new Column(
+          children: [
+            new Container(
+              child: new ZInputGeneric(
+                campoObrigatorio: item.obrigatorio,
+                themeData: Theme.of(context),
+                titulo: item.nomeCampo,
+                tipoTeclado: TextInputType.number,
+                maxLength: item.maxLength,
+                inputPadraoFocus: FocusNode(),
+                controllerInputPadrao:
+                TextEditingController(text: _view.listaRespostasUsuario[i], ),
+                onChange: (text) {
+                  item.resposta = text.trim();
+                  widget.onChange(widget.viewmodel);
+                },
+              ),
+            ),
+            new Divider(
+              height: 1,
+            )
+          ],
+        ));
+      } else if(item.tipoValorCampo == "celular"){
+        lista.add(new Column(
+          children: [
+            new Container(
+              child: new ZInputGeneric(
+                campoObrigatorio: item.obrigatorio,
+                titulo: item.nomeCampo,
+                themeData: Theme.of(context),
+                comMascara: true,
+                tipoTeclado: TextInputType.phone,
+                textMask: "(##) #####-####",
+                hintText: "( ** ) 9 **** - ****",
+                inputPadraoFocus: FocusNode(),
+                controllerInputPadrao:
+                TextEditingController(text: _view.listaRespostasUsuario[i], ),
+                onChange: (text) {
+                  item.resposta = text.trim();
+                  widget.onChange(widget.viewmodel);
+                },
+              ),
+            ),
+            new Divider(
+              height: 1,
+            )
+          ],
+        ));
+      } else if(item.tipoValorCampo == "cpf"){
+        lista.add(new Column(
+          children: [
+            new Container(
+              child: new ZInputGeneric(
+                campoObrigatorio: item.obrigatorio,
+                themeData: Theme.of(context),
+                inputPadraoFocus: FocusNode(),
+                tipoTeclado: TextInputType.number,
+                titulo: item.nomeCampo,
+                comMascara: true,
+                textMask: "###.###.###-##",
+                hintText: "000.000.000-00",
+                controllerInputPadrao:
+                TextEditingController(text: _view.listaRespostasUsuario[i], ),
+                onChange: (text) {
+                  item.resposta = text.trim();
+                  widget.onChange(widget.viewmodel);
+                },
+              ),
+            ),
+            new Divider(
+              height: 1,
+            )
+          ],
+        ));
+      } else if(item.tipoValorCampo == "text"){
+        lista.add(new Column(
+          children: [
+            new Container(
+              child: new ZInputGeneric(
+                campoObrigatorio: item.obrigatorio,
+                titulo: item.nomeCampo,
+                tipoTeclado: TextInputType.text,
+                themeData: Theme.of(context),
+                inputPadraoFocus: FocusNode(),
+                controllerInputPadrao:
+                TextEditingController(text: _view.listaRespostasUsuario[i], ),
+                onChange: (text) {
+                  item.resposta = text.trim();
+                  widget.onChange(widget.viewmodel);
+                },
+              ),
+            ),
+            new Divider(
+              height: 1,
+            )
+          ],
+        ));
+      } else if(item.tipoValorCampo == "textarea"){
+        lista.add(new Column(
+          children: [
+            new Container(
+              child: new ZInputGeneric(
+                campoObrigatorio: item.obrigatorio,
+                titulo: item.nomeCampo,
+                tipoTeclado: TextInputType.text,
+                themeData: Theme.of(context),
+                inputPadraoFocus: FocusNode(),
+                maxLength: item.maxLength,
+                controllerInputPadrao:
+                TextEditingController(text: _view.listaRespostasUsuario[i], ),
+                onChange: (text) {
+                  item.resposta = text.trim();
+                  widget.onChange(widget.viewmodel);
+                },
+              ),
+            ),
+            new Divider(
+              height: 1,
+            )
+          ],
+        ));
+      }else {
         lista.add(new Column(
           children: [
             new Container(

@@ -142,16 +142,20 @@ class _MainTestingState extends State<MainTesting> {
             },
             viewmodel: [
               ZFormViewModel(
-                  nomeCampo: "teste",
+                  nomeCampo: "CPF",
                   obrigatorio: true,
-                  tipoValorCampo: "",
+                  tipoValorCampo: "cpf",
                   maxLength: 20),
               ZFormViewModel(
-                  nomeCampo: "teste2", obrigatorio: false, tipoValorCampo: ""),
+                  nomeCampo: "texto", obrigatorio: false, tipoValorCampo: "text"),
               ZFormViewModel(
-                  nomeCampo: "teste3", obrigatorio: false, tipoValorCampo: ""),
+                  nomeCampo: "Cel", obrigatorio: true, tipoValorCampo: "celular"),
               ZFormViewModel(
-                  nomeCampo: "teste4", obrigatorio: false, tipoValorCampo: "")
+                  nomeCampo: "numero", obrigatorio: false, tipoValorCampo: "number"),
+              ZFormViewModel(
+                  nomeCampo: "Data", obrigatorio: true, tipoValorCampo: "date",),
+              ZFormViewModel(
+                  nomeCampo: "Area", obrigatorio: false, tipoValorCampo: "textarea",maxLength: 30),
             ],
           ),
           Container(
