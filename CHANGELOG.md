@@ -1,3 +1,7 @@
+## 0.9.35+5
+
+* ZForm inclusao de mais campos
+
 ## 0.9.35+4
 
 * ZForm correcao tamanho maximo
