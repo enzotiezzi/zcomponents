@@ -62,10 +62,12 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                         margin: EdgeInsets.only(left: 16.0),
                         height: 34,
                         width: 51,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    Image.memory(item.imagemDocumento).image)),
+                        decoration: (item.imagemDocumento == null)
+                            ? BoxDecoration()
+                            : BoxDecoration(
+                                image: DecorationImage(
+                                    image: Image.memory(item.imagemDocumento)
+                                        .image)),
                       ),
                       new Container(
                         margin: const EdgeInsets.only(left: 10),
@@ -92,7 +94,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
   }
 
   Widget _buildIconeStatus(String status) {
-    switch (status) {
+    switch (status.toUpperCase()) {
       case DocumentoStatusUtils.APROVADO:
         return SvgPicture.asset(
           SvgUtils.STATUSAPROVADO,

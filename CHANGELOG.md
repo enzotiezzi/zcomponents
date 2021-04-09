@@ -1,3 +1,48 @@
+## 0.9.35+16
+
+* ZDocumetos Ajuste data
+
+## 0.9.35+15
+
+* ZDocumetos Ajuste data
+
+## 0.9.35+14
+
+* ZDocumetos Ajuste viewmodel
+
+## 0.9.35+13
+
+* ZDocumetos Ajuste viewmodel
+
+## 0.9.35+12
+
+* ZDocumetos Ajuste service
+
+## 0.9.35+11
+
+* ZDocumetos Ajuste service
+
+
+## 0.9.35+10
+
+* ZDocumetos Ajuste service
+
+## 0.9.35+9
+
+* ZDocumetos Ajuste service
+
+## 0.9.35+8
+
+* ZDocumetos Ajuste service
+
+## 0.9.35+7
+
+* ZDocumetos Ajuste service
+
+## 0.9.35+6
+
+* ZForm ajuste tamanho maximo
+
 ## 0.9.35+5
 
 * ZForm inclusao de mais campos

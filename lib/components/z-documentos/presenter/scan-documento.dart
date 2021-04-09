@@ -72,14 +72,12 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
             titulo: item.nomeCampo,
             tipoTeclado: TextInputType.number,
             comMascara: true,
-            textMask: "XX/XX/XXXX",
+            textMask: "##/##/####",
             controllerInputPadrao:
                 TextEditingController(text: _view.listaRespostasUsuario[i]),
             onChange: (text) {
               if (text.length == 10) {
-                var textoSeparado = text.split("/");
-                _view.listaRespostasUsuario[i] =
-                    "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
+                _view.listaRespostasUsuario[i] = text.trim();
               }
             },
           ),
