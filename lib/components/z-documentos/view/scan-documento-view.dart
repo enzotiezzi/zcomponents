@@ -186,7 +186,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
       listaRespostasUsuario.add("");
     }
 
-    if (lista != null) {
+    if (lista != null && lista.length > 0) {
       for (int i = 0;
           i < state.widget.colaboradorDocumentoViewModel.campos.length;
           i++) {
@@ -194,7 +194,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
             j < state.widget.colaboradorDocumentoViewModel.campos.length;
             j++) {
           if (state.widget.colaboradorDocumentoViewModel.campos[i]
-                  .idCampo ==
+                  .idDocumentoCampo ==
               lista[j].idDocumentoCampo) {
             if (state.widget.colaboradorDocumentoViewModel.campos[i]
                     .tipoValorCampo !=
@@ -231,12 +231,15 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
                 .tipoValorCampo ==
             "date") {
           try {
+            var textoSeparado = listaRespostasUsuario[i].split("/");
+            listaRespostasUsuario[i] =
+                "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
             var validarData = isValidDate(listaRespostasUsuario[i]);
 
             if (validarData) {
               camposMapeados.addAll({
                 state.widget.colaboradorDocumentoViewModel.campos[i]
-                    .idCampo: listaRespostasUsuario[i]
+                    .idDocumentoCampo: listaRespostasUsuario[i]
               });
             } else {
               return false;
@@ -247,7 +250,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
         } else {
           camposMapeados.addAll({
             state.widget.colaboradorDocumentoViewModel.campos[i]
-                .idCampo: listaRespostasUsuario[i]
+                .idDocumentoCampo: listaRespostasUsuario[i]
           });
         }
       }
@@ -317,7 +320,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
       tamanho: tamanhoFotoDouble,
       descricao: "Arquivo do app cadastro documentos",
       contentType: "image/jpg",
-      container: "teste",
+      container: "imagens-documentos",
       conteudo: base64Image,
     );
 

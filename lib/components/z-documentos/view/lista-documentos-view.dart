@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/api/arquivo/arquivo-service.dart';
 import 'package:z_components/api/arquivo/i-arquivo-service.dart';
+import 'package:z_components/api/colaborador-documento/colaborador-documento.dart';
 import 'package:z_components/api/colaborador-documento/i-colaborador-documento-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-documentos/presenter/lista-documentos.dart';
@@ -32,6 +33,8 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
   @override
   Future<void> initView() async {
     _dialogUtils = new DialogUtils(state.context);
+    _colaboradorDocumentoService =
+        new ColaboradorDocumentoService(state.widget.token);
     _arquivoService = new ArquivoService(state.widget.token);
     await _buscarListaDocumentos();
   }
@@ -44,7 +47,9 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
       for (int i = 0; i < lista.length; i++) {
         var doc = await _arquivoService.buscarAnexo(lista[i].idImagemDocumento);
 
-        lista[i].imagemDocumento = base64Decode(doc.conteudo);
+        if (doc != null) {
+          lista[i].imagemDocumento = base64Decode(doc.conteudo);
+        }
       }
 
       if (state.mounted) {
