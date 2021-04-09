@@ -1,3 +1,7 @@
+## 0.9.35+17
+
+* ZPinSenha Ajuste no espaçamento
+
 ## 0.9.35+16
 
 * ZDocumetos Ajuste data

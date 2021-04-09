@@ -24,6 +24,9 @@ import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-inputs/z-input-name.dart';
 import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
+import 'package:z_components/components/z-pin-senha.dart';
+import 'package:z_components/config/z-tipo-senha.dart';
+import 'package:z_components/pin-senha-teste.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -100,7 +103,9 @@ class _MainTestingState extends State<MainTesting> {
 
   Function habilitarBotao() {
     if (validar()) {
-      return () {};
+      return () {
+
+      };
     } else {
       return null;
     }
@@ -158,6 +163,15 @@ class _MainTestingState extends State<MainTesting> {
                   nomeCampo: "Area", obrigatorio: false, tipoValorCampo: "textarea",maxLength: 30),
             ],
           ),
+          ZPinSenha(
+            titulo: "Senha atual",
+            onChange: (text) {
+            },
+            context: context,
+            numeroQuadrados: 4,
+            zTipos: ZTipoSenha.isSenha,
+          ),
+
           Container(
             margin: EdgeInsets.only(top: 32),
             child: RaisedButton(
@@ -165,7 +179,8 @@ class _MainTestingState extends State<MainTesting> {
               color: Theme.of(context).accentColor,
               child: Text("SALVAR"),
             ),
-          )
+          ),
+
         ],
       ),
     );
