@@ -26,7 +26,7 @@ class ZPinSenha extends StatelessWidget {
         _zPinSenha = new Container(
           margin: const EdgeInsets.only(bottom: 8),
           color: Colors.white,
-          padding: EdgeInsets.only(left: 15.0, top: 8.0),
+          padding: EdgeInsets.only(left: 15.0, top: 8.0,bottom: 8),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -39,7 +39,7 @@ class ZPinSenha extends StatelessWidget {
               ),
               new Expanded(
                   child: new Container(
-                      margin: EdgeInsets.only(right: 20.0, top: 8),
+                      margin: EdgeInsets.only(right: 20.0, top: 8,bottom: 8),
                       child: new PinCodeTextField(
                         highlightColor: const Color(0xff2BBAB4),
                         highlight: true,
