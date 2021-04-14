@@ -13,20 +13,16 @@ import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-response.dart';
-import 'package:z_components/components/z-inputs/z-input-cep.dart';
-import 'package:z_components/components/z-inputs/z-input-email.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
-import 'package:z_components/components/z-collection/z-collection-item.dart';
-import 'package:z_components/components/z-collection/z-collection-list.dart';
-import 'package:z_components/components/z-processo-seletivo/models/processo-seletivo.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
-import 'package:z_components/components/z-inputs/z-input-name.dart';
 import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
-import 'package:z_components/pin-senha-teste.dart';
+import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
+import 'package:z_components/components/z-conta/z-conta.dart';
+import 'package:z_components/view-model/conta-view-model.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -58,7 +54,7 @@ class _MainTestingState extends State<MainTesting> {
   List<ZCollectionItem> grupos = [];
 
   @override
-  void initState() {
+  Future<void> initState() {
     identityServer = new IdentityServer(
         clientId: "ZTotem",
         redirectUrl: "net.openid.appauthztotem:/oauth2redirect",
@@ -85,8 +81,10 @@ class _MainTestingState extends State<MainTesting> {
 
   @override
   Widget build(BuildContext context) {
-    return MainStyle.get(context)
-        .getDefaultScaffold("Componente de teste", _buildBody());
+    return MainStyle.get(context).getDefaultScaffold(
+      "Componente de teste",
+      _buildBody(),
+    );
   }
 
   bool preencheuNome = false;
@@ -103,9 +101,7 @@ class _MainTestingState extends State<MainTesting> {
 
   Function habilitarBotao() {
     if (validar()) {
-      return () {
-
-      };
+      return () {};
     } else {
       return null;
     }
@@ -152,35 +148,128 @@ class _MainTestingState extends State<MainTesting> {
                   tipoValorCampo: "cpf",
                   maxLength: 20),
               ZFormViewModel(
-                  nomeCampo: "texto", obrigatorio: false, tipoValorCampo: "text"),
+                  nomeCampo: "texto",
+                  obrigatorio: false,
+                  tipoValorCampo: "text"),
               ZFormViewModel(
-                  nomeCampo: "Cel", obrigatorio: true, tipoValorCampo: "celular"),
+                  nomeCampo: "Cel",
+                  obrigatorio: true,
+                  tipoValorCampo: "celular"),
               ZFormViewModel(
-                  nomeCampo: "numero", obrigatorio: false, tipoValorCampo: "number"),
+                  nomeCampo: "numero",
+                  obrigatorio: false,
+                  tipoValorCampo: "number"),
               ZFormViewModel(
-                  nomeCampo: "Data", obrigatorio: true, tipoValorCampo: "date",),
+                nomeCampo: "Data",
+                obrigatorio: true,
+                tipoValorCampo: "date",
+              ),
               ZFormViewModel(
-                  nomeCampo: "Area", obrigatorio: false, tipoValorCampo: "textarea",maxLength: 30),
+                  nomeCampo: "Area",
+                  obrigatorio: false,
+                  tipoValorCampo: "textarea",
+                  maxLength: 30),
             ],
           ),
           ZPinSenha(
             titulo: "Senha atual",
-            onChange: (text) {
-            },
+            onChange: (text) {},
             context: context,
             numeroQuadrados: 4,
             zTipos: ZTipoSenha.isSenha,
           ),
-
           Container(
             margin: EdgeInsets.only(top: 32),
             child: RaisedButton(
-              onPressed: habilitarBotao(),
+              onPressed: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ZConta(
+                              token: "",
+                              contas: [
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                                new ContaViewModel(
+                                    ativo: true,
+                                    corPrimaria: Colors.black,
+                                    corSecundaria: Colors.green,
+                                    nomeFantasia: "teste"),
+                              ],
+                            )));
+              },
               color: Theme.of(context).accentColor,
               child: Text("SALVAR"),
             ),
           ),
-
         ],
       ),
     );

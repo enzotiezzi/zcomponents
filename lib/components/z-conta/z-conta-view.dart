@@ -278,15 +278,18 @@ class ZContaView extends IView<ZConta> {
   }
 
   bool verificarContaAtiva(String idConta) {
-    var tokenInfo =
-        UserInfo.fromJson(TokenParser.parseJwt(state.widget.token));
+    if (state.widget.token != "") {
+      var tokenInfo =
+          UserInfo.fromJson(TokenParser.parseJwt(state.widget.token));
 
-    if (tokenInfo != null) {
-      if (tokenInfo.idConta != null)
-        return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
-    }
+      if (tokenInfo != null) {
+        if (tokenInfo.idConta != null)
+          return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
+      }
 
-    return false;
+      return false;
+    } else
+      return false;
   }
 
   Future<bool> _pesquisarConta(String codigoAtivacao) async {
