@@ -46,6 +46,7 @@ class _ZFormState extends State<ZForm> {
             new Container(
               child: new ZInputGeneric(
                 campoObrigatorio: item.obrigatorio,
+                enabled: item.enabled,
                 themeData: Theme.of(context),
                 titulo: item.nomeCampo,
                 tipoTeclado: TextInputType.number,
@@ -78,6 +79,7 @@ class _ZFormState extends State<ZForm> {
             new Container(
               child: new ZInputGeneric(
                 campoObrigatorio: item.obrigatorio,
+                enabled: item.enabled,
                 themeData: Theme.of(context),
                 titulo: item.nomeCampo,
                 tipoTeclado: TextInputType.number,
@@ -103,6 +105,7 @@ class _ZFormState extends State<ZForm> {
             new Container(
               child: new ZInputGeneric(
                 campoObrigatorio: item.obrigatorio,
+                enabled: item.enabled,
                 titulo: item.nomeCampo,
                 themeData: Theme.of(context),
                 comMascara: true,
@@ -131,6 +134,7 @@ class _ZFormState extends State<ZForm> {
             new Container(
               child: new ZInputGeneric(
                 campoObrigatorio: item.obrigatorio,
+                enabled: item.enabled,
                 themeData: Theme.of(context),
                 inputPadraoFocus: FocusNode(),
                 tipoTeclado: TextInputType.number,
@@ -159,6 +163,7 @@ class _ZFormState extends State<ZForm> {
             new Container(
               child: new ZInputGeneric(
                 campoObrigatorio: item.obrigatorio,
+                enabled: item.enabled,
                 titulo: item.nomeCampo,
                 tipoTeclado: TextInputType.text,
                 themeData: Theme.of(context),
@@ -184,6 +189,7 @@ class _ZFormState extends State<ZForm> {
             new Container(
               child: new ZInputGeneric(
                 campoObrigatorio: item.obrigatorio,
+                enabled: item.enabled,
                 titulo: item.nomeCampo,
                 tipoTeclado: TextInputType.text,
                 themeData: Theme.of(context),
@@ -209,6 +215,7 @@ class _ZFormState extends State<ZForm> {
             new Container(
               child: new ZInputGeneric(
                 campoObrigatorio: item.obrigatorio,
+                enabled: item.enabled,
                 themeData: Theme.of(context),
                 titulo: item.nomeCampo,
                 inputPadraoFocus: FocusNode(),

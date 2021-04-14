@@ -16,6 +16,8 @@ class ZFormViewModel {
 
   int maxLength;
 
+  bool enabled;
+
   ZFormViewModel(
       {this.idModelo,
       this.idCampo,
@@ -25,5 +27,6 @@ class ZFormViewModel {
       this.tamanhoValorCampo,
       this.tipoValorCampo,
       this.resposta,
-      this.maxLength});
+      this.maxLength,
+      this.enabled=true});
 }
