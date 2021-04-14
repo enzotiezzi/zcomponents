@@ -49,7 +49,8 @@ class ConfirmarSenha {
               pinBoxHeight: MainStyle.get(context).sizePin,
               pinBoxWidth: MainStyle.get(context).sizePin,
               maskCharacter: "*",
-              pinBoxRadius: 6,autofocus: true,
+              pinBoxRadius: 6,
+              autofocus: true,
               onDone: (text) async {
                 await _verificarPin(text);
               },
@@ -59,6 +60,10 @@ class ConfirmarSenha {
               pinTextStyle: new TextStyle(fontSize: 22),
               hideCharacter: true,
               wrapAlignment: WrapAlignment.center,
+            ),
+            new Container(
+              height: 10,
+              color: Colors.transparent,
             )
           ],
         ),

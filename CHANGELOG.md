@@ -1,3 +1,11 @@
+## 0.9.35+19
+
+* Scroll ZConta
+
+## 0.9.35+18
+
+* ZPinSenha Ajuste no espaçamento
+
 ## 0.9.35+17
 
 * ZPinSenha Ajuste no espaçamento
