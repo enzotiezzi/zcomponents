@@ -23,6 +23,7 @@ import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/view-model/conta-view-model.dart';
+import 'package:z_components/components/z-user-info/z-user-info.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -190,86 +191,9 @@ class _MainTestingState extends State<MainTesting> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ZConta(
-                              token: "",
-                              contas: [
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                                new ContaViewModel(
-                                    ativo: true,
-                                    corPrimaria: Colors.black,
-                                    corSecundaria: Colors.green,
-                                    nomeFantasia: "teste"),
-                              ],
-                            )));
+                        builder: (context) => ZUserInfo(
+
+                        )));
               },
               color: Theme.of(context).accentColor,
               child: Text("SALVAR"),

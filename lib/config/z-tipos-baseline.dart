@@ -7,5 +7,5 @@ enum ZTipoBaseline {
   semTituloText,
   semTituloNumero,
   isCEP,
-  isCNPJ
+  isCNPJ,
 }

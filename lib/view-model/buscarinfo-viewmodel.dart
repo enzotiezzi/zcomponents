@@ -5,10 +5,13 @@ class BuscarInfo {
   String username;
   String cpf;
   String email;
+  String emailSec;
   String nome;
+  String nomeReduzido;
   String idPessoa;
   String nomeSocial;
   String telefone;
+  String telefoneSec;
   String celular;
   String dataNascimento;
   String logradouro;
@@ -73,11 +76,14 @@ class BuscarInfo {
       {this.idUsuario,
       this.username,
       this.cpf,
+      this.emailSec,
       this.email,
       this.nome,
+      this.nomeReduzido,
       this.idPessoa,
       this.nomeSocial,
       this.telefone,
+      this.telefoneSec,
       this.celular,
       this.dataNascimento,
       this.logradouro,
@@ -144,7 +150,10 @@ class BuscarInfo {
         username: json["username"],
         cpf: json["cpf"],
         email: json["email"],
+        emailSec: json["emailSec"],
+        telefoneSec: json["telefoneSec"],
         nome: json["nome"],
+        nomeReduzido: json["nomeReduzido"],
         idPessoa: json["idPessoa"],
         nomeSocial: json["nomeSocial"],
         telefone: json["telefone"],
@@ -221,7 +230,10 @@ class BuscarInfo {
       "username": username,
       "cpf": cpf,
       "email": email,
+      "emailSec":emailSec,
+      "telefoneSec":telefoneSec,
       "nome": nome,
+      "nomeReduzido": nomeReduzido,
       "idPessoa": idPessoa,
       "nomeSocial": nomeSocial,
       "telefone": telefone,
