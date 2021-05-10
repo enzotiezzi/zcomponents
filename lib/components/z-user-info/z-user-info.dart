@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
@@ -135,6 +135,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             themeData: Theme.of(context),
             inputPadraoFocus: _view.focusNodeNomeReduzido,
             controllerInputPadrao: _view.textEditingControllerNomeReduzido,
+            enabled: false,
           ),
         ),
         new Divider(height: 1.0,),
@@ -148,13 +149,12 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           ),
         ),
         new Divider(height: 1.0,),
-        new Container(
-          child: new ZInputDataNascimento(
-              dataFocus: _view.focusNodeDataNascimento,
-              themeData: Theme.of(context),
-              controllerData: _view.textEditingControllerDataNascimento,
-          ),
+        new ZInputDataNascimento(
+          dataFocus: _view.focusNodeDataNascimento,
+          themeData: Theme.of(context),
+          controllerData: _view.textEditingControllerDataNascimento,
         ),
+
 
         //tel
         Divider(height: 1,),
@@ -210,20 +210,8 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           ),
         ),
         new Divider(height: 1,),
-        new ZInputGeneric(
-          themeData: Theme.of(context),
-          titulo: "Número",
-          tipoTeclado: TextInputType.number,
-          controllerInputPadrao: _view.textEditingControllerTelefone,
-          inputPadraoFocus: _view.focusNodeTelefone,
-          comMascara: true,
-          campoObrigatorio: _view.flagTel,
-          textMask: _view.mascara,
-          hintText: _view.hint,
-          onChange: (telefone){
-            _view.onChangedTelefone(telefone);
-          },
-        ),
+
+        _view.inputTel(_view.tipoTelSelecionado),
 
         _view.telefoneSecundario(),
 
@@ -411,6 +399,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           child: new ZButton(
             zButtonType: ZButtonType.isContained,
             text: "SALVAR",
+            color: Colors.white,
             onPressed: () {
               _view.submit();
             },
