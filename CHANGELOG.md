@@ -1,3 +1,11 @@
+## 0.9.35+22
+
+* ZUserInfo correcao bug
+
+## 0.9.35+21
+
+* ZUserInfo ajustes
+
 ## 0.9.35+20
 
 * ZForm e ZFormViewModel ajuste para receber o parametro de enabled
