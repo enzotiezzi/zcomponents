@@ -15,8 +15,10 @@ import 'package:z_components/api/user-info/user-info-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-inputs/z-input-email.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-inputs/z-input-telefone-fixo.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
@@ -46,6 +48,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   var focusNodeNome = new FocusNode();
   var focusNodeDataNascimento = new FocusNode();
   var focusNodeTelefone = new FocusNode();
+  var focusNodeTelefoneSec = new FocusNode();
   var focusNodeEmail = new FocusNode();
   var focusNodeCEP = new FocusNode();
   var focusNodeNumero = new FocusNode();
@@ -191,6 +194,81 @@ class ZUserInfoView extends IView<ZUserInfo> {
    }
   }
 
+  Widget inputTel(String tipoSelecionado){
+    if(tipoTelSelecionado.contains("Fixo")){
+      return ZInputTelefoneFixo(
+        themeData: Theme.of(state.context),
+        telefoneFixoFocus: focusNodeTelefone,
+        controllerTelefoneFixo: textEditingControllerTelefone,
+        campoObrigatorio: flagTel,
+        validacao: (validacao){
+          state.setState(() {
+            if(validacao){
+              preencheuTelefone = true;
+            }else{
+              preencheuTelefone = false;
+            }
+          });
+        },
+      );
+    }else if(tipoTelSelecionado.contains("Celular")){
+      return ZInputCelular(
+          themeData: Theme.of(state.context),
+          celularFocus: focusNodeTelefone,
+          controllerCelular: textEditingControllerTelefone,
+          campoObrigatorio: flagTel,
+          validacao: (validacao){
+            state.setState(() {
+              if(validacao){
+                preencheuTelefone = true;
+              }else{
+                preencheuTelefone = false;
+              }
+            });
+          },
+      );
+    }else{
+      return ZInputGeneric(
+          themeData: Theme.of(state.context),
+          titulo: "Telefone",
+          inputPadraoFocus: focusNodeTelefone,
+          tipoTeclado: TextInputType.number,
+          campoObrigatorio: flagTel,
+          controllerInputPadrao: textEditingControllerTelefone
+      );
+
+    }
+  }
+
+  Widget inputTelSec(String tipoSelecionado){
+    if(tipoTelSecSelecionado.contains("Fixo")){
+      return ZInputTelefoneFixo(
+        themeData: Theme.of(state.context),
+        telefoneFixoFocus: focusNodeTelefoneSec,
+        controllerTelefoneFixo: textEditingControllerTelefoneSec,
+        campoObrigatorio: flagTelSec,
+      );
+    }else if(tipoTelSecSelecionado.contains("Celular")){
+      return ZInputCelular(
+        themeData: Theme.of(state.context),
+        celularFocus: focusNodeTelefoneSec,
+        controllerCelular: textEditingControllerTelefoneSec,
+        campoObrigatorio: flagTelSec,
+      );
+    }else{
+      return ZInputGeneric(
+          themeData: Theme.of(state.context),
+          titulo: "Telefone",
+          inputPadraoFocus: focusNodeTelefone,
+          tipoTeclado: TextInputType.number,
+          campoObrigatorio: flagTel,
+          controllerInputPadrao: textEditingControllerTelefoneSec
+      );
+
+    }
+  }
+
+
   Function flagHabilitarEmailSecundario(){
     if(preencheuEmail){
       return (){
@@ -212,6 +290,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Function flagHabilitarTelefone(){
+    if(preencheuTelefone){
       return (){
         state.setState(() {
           flagPressionada();
@@ -223,7 +302,11 @@ class ZUserInfoView extends IView<ZUserInfo> {
             icon = Icon(Icons.add);
           }
         });
-    };
+      };
+    }else{
+      return null;
+    }
+
   }
 
   bool onChangedTelefone (String telefone){
@@ -237,22 +320,24 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Function tileHabilitarTelefone(){
-
-     return (){
-       state.setState(() {
-         segundoTel = ! segundoTel;
-         if(segundoTel){
-           textoTelefone = "REMOVER TELEFONE";
-           icon = Icon(Icons.remove);
-           //_view.resetTelSec();
-         }else{
-           textoTelefone = "ADICIONAR TELEFONE";
-           icon = Icon(Icons.add);
-           resetTelSec();
-         }
-       });
-     };
-
+    if(preencheuTelefone){
+      return (){
+        state.setState(() {
+          segundoTel = ! segundoTel;
+          if(segundoTel){
+            textoTelefone = "REMOVER TELEFONE";
+            icon = Icon(Icons.remove);
+            //_view.resetTelSec();
+          }else{
+            textoTelefone = "ADICIONAR TELEFONE";
+            icon = Icon(Icons.add);
+            resetTelSec();
+          }
+        });
+      };
+    }else{
+      return null;
+    }
   }
 
   bool validarCamposObrigatorios() {
@@ -510,17 +595,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
             new Divider(
               height: 1.0,
             ),
-            new ZInputGeneric(
-              themeData: Theme.of(state.context),
-              titulo: "Número",
-              tipoTeclado: TextInputType.number,
-              inputPadraoFocus: focusTelefoneSec,
-              controllerInputPadrao: textEditingControllerTelefoneSec,
-              comMascara: true,
-              campoObrigatorio: flagTelSec,
-              textMask: mascaraSec,
-              hintText: hintSec,
-            ),
+            inputTelSec(tipoTelSecSelecionado)
           ],
         ),
       );
@@ -745,7 +820,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> escolherImagem(ImageSource source) async {
-    _dialogUtils.showProgressDialog();
+
     var imagem = await ImagePicker.pickImage(source: source, imageQuality: 70);
 
     if (imagem != null) {
@@ -774,6 +849,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
         _dialogUtils.dismiss();
       }
+
     }
   }
 
