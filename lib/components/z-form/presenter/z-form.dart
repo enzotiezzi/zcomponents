@@ -62,7 +62,7 @@ class _ZFormState extends State<ZForm> {
                   if (text.length == 10) {
                     var textoSeparado = text.split("/");
                     item.resposta =
-                        "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
+                    "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
                     widget.onChange(widget.viewmodel);
                   }
                 },
@@ -85,9 +85,8 @@ class _ZFormState extends State<ZForm> {
                 tipoTeclado: TextInputType.number,
                 maxLength: item.maxLength,
                 inputPadraoFocus: FocusNode(),
-                controllerInputPadrao: TextEditingController(
-                  text: _view.listaRespostasUsuario[i],
-                ),
+                controllerInputPadrao:
+                TextEditingController(text: widget.viewmodel[i].resposta),
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -114,9 +113,8 @@ class _ZFormState extends State<ZForm> {
                 maxLength: item.maxLength,
                 hintText: "( ** ) 9 **** - ****",
                 inputPadraoFocus: FocusNode(),
-                controllerInputPadrao: TextEditingController(
-                  text: _view.listaRespostasUsuario[i],
-                ),
+                controllerInputPadrao:
+                TextEditingController(text: widget.viewmodel[i].resposta),
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -143,9 +141,8 @@ class _ZFormState extends State<ZForm> {
                 comMascara: true,
                 textMask: "###.###.###-##",
                 hintText: "000.000.000-00",
-                controllerInputPadrao: TextEditingController(
-                  text: _view.listaRespostasUsuario[i],
-                ),
+                controllerInputPadrao:
+                TextEditingController(text: widget.viewmodel[i].resposta),
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -165,13 +162,11 @@ class _ZFormState extends State<ZForm> {
                 campoObrigatorio: item.obrigatorio,
                 enabled: item.enabled,
                 titulo: item.nomeCampo,
-                tipoTeclado: TextInputType.text,
                 themeData: Theme.of(context),
                 inputPadraoFocus: FocusNode(),
                 maxLength: item.maxLength,
-                controllerInputPadrao: TextEditingController(
-                  text: _view.listaRespostasUsuario[i],
-                ),
+                controllerInputPadrao:
+                TextEditingController(text: widget.viewmodel[i].resposta),
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -195,9 +190,8 @@ class _ZFormState extends State<ZForm> {
                 themeData: Theme.of(context),
                 inputPadraoFocus: FocusNode(),
                 maxLength: item.maxLength,
-                controllerInputPadrao: TextEditingController(
-                  text: _view.listaRespostasUsuario[i],
-                ),
+                controllerInputPadrao:
+                TextEditingController(text: widget.viewmodel[i].resposta),
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -221,7 +215,7 @@ class _ZFormState extends State<ZForm> {
                 inputPadraoFocus: FocusNode(),
                 maxLength: item.maxLength,
                 controllerInputPadrao:
-                    TextEditingController(text: widget.viewmodel[i].resposta),
+                TextEditingController(text: widget.viewmodel[i].resposta),
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);

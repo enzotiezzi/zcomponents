@@ -115,6 +115,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             onChanged: (text) {
                               if (widget.onChange != null)
                                 widget.onChange(text);
+
                             },
                           )
                         : new TextField(
