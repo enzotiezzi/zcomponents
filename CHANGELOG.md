@@ -1,3 +1,7 @@
+## 0.9.35+25
+
+* criacao ZItemTileCandidato
+
 ## 0.9.35+24
 
 * correcao editar perfil
