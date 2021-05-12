@@ -1,3 +1,15 @@
+## 0.9.35+24
+
+* correcao editar perfil
+
+## 0.9.35+23
+
+* correcao ZForms
+
+## 0.9.35+22
+
+* ZUserInfo correcao bug
+
 ## 0.9.35+21
 
 * ZUserInfo ajustes

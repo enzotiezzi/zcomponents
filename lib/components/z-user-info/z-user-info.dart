@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:z_components/components/z-baseline.dart';
 import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
@@ -133,6 +134,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             themeData: Theme.of(context),
             inputPadraoFocus: _view.focusNodeNomeReduzido,
             controllerInputPadrao: _view.textEditingControllerNomeReduzido,
+            enabled: false,
           ),
         ),
         new Divider(
@@ -146,16 +148,13 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             cpfFocus: _view.focusNodeCPF,
           ),
         ),
-        new Divider(
-          height: 1.0,
+        new Divider(height: 1.0,),
+        new ZInputDataNascimento(
+          dataFocus: _view.focusNodeDataNascimento,
+          themeData: Theme.of(context),
+          controllerData: _view.textEditingControllerDataNascimento,
         ),
-        new Container(
-          child: new ZInputDataNascimento(
-            dataFocus: _view.focusNodeDataNascimento,
-            themeData: Theme.of(context),
-            controllerData: _view.textEditingControllerDataNascimento,
-          ),
-        ),
+
 
         //tel
         Divider(
@@ -211,21 +210,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             },
           ),
         ),
-        new Divider(
-          height: 1,
-        ),
-        new ZInputCelular(
-          themeData: Theme.of(context),
-          controllerCelular: _view.textEditingControllerTelefone,
-          celularFocus: _view.focusNodeTelefone,
-          campoObrigatorio: _view.flagTel,
-          onChange: (telefone) {},
-          validacao: (bool) {
-            setState(() {
-              _view.preencheuTelefone = bool;
-            });
-          },
-        ),
+        new Divider(height: 1,),
+
+        _view.inputTel(_view.tipoTelSelecionado),
 
         _view.telefoneSecundario(),
         zTileAdcTel(),
@@ -405,6 +392,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           child: new ZButton(
             zButtonType: ZButtonType.isContained,
             text: "SALVAR",
+            color: Colors.white,
             onPressed: () {
               _view.submit();
             },
