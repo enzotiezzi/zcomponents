@@ -24,6 +24,8 @@ import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
 import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/view-model/conta-view-model.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
+
 
 class MainTesting extends StatefulWidget {
   @override
@@ -192,7 +194,7 @@ class _MainTestingState extends State<MainTesting> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ZUserInfo(
-
+userInfo: BuscarInfo(),
                         )));
               },
               color: Theme.of(context).accentColor,

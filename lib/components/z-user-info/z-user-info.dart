@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -95,20 +94,20 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
         ),
         Container(
           child: new ZInputName(
-            themeData: Theme.of(context),
-            nomeFocus: _view.focusNodeNome,
-            controllerNome: _view.textEditingControllerNome,
-            campoObrigatorio: true,
-            validacao: (bool){
-              setState(() {
-                if(bool){
-                  _view.preencheuNome = true;
-                  _view.validarCamposObrigatorios();
-                }else{
-                  _view.preencheuNome = false;
-                }
-              });
-            },
+              themeData: Theme.of(context),
+              nomeFocus: _view.focusNodeNome,
+              controllerNome: _view.textEditingControllerNome,
+              campoObrigatorio: true,
+              validacao: (bool) {
+                setState(() {
+                  if (bool) {
+                    _view.preencheuNome = true;
+                    _view.validarCamposObrigatorios();
+                  } else {
+                    _view.preencheuNome = false;
+                  }
+                });
+              },
               onChange: (text) {
                 String primeiroNome = "";
                 String ultimoNome = "";
@@ -123,8 +122,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
                     primeiroNome.trim() + " " + ultimoNome.trim();
                 _view.camposObrigatoriosValidados =
                     _view.validarCamposObrigatorios();
-              }
-          ),
+              }),
         ),
         new Divider(
           height: 1.0,
@@ -137,31 +135,36 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             controllerInputPadrao: _view.textEditingControllerNomeReduzido,
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputCPF(
             enabled: false,
             themeData: Theme.of(context),
             controllerCpf: _view.textEditingControllerCPF,
             cpfFocus: _view.focusNodeCPF,
-
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputDataNascimento(
-              dataFocus: _view.focusNodeDataNascimento,
-              themeData: Theme.of(context),
-              controllerData: _view.textEditingControllerDataNascimento,
+            dataFocus: _view.focusNodeDataNascimento,
+            themeData: Theme.of(context),
+            controllerData: _view.textEditingControllerDataNascimento,
           ),
         ),
 
         //tel
-        Divider(height: 1,),
+        Divider(
+          height: 1,
+        ),
         Container(
           color: Colors.white,
           child: new Padding(
-              padding: const EdgeInsets.only(left: 15.0,right: 6),
+            padding: const EdgeInsets.only(left: 15.0, right: 6),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -170,8 +173,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
                   style: TextStyle(
                       fontSize: 14,
                       color: Color(0xF0000000),
-                      fontWeight: FontWeight.w500
-                  ),
+                      fontWeight: FontWeight.w500),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -190,7 +192,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           ),
         ),
         new Divider(
-            height: 1,
+          height: 1,
         ),
         new Container(
           child: new ZCollectionBottomSheet(
@@ -199,9 +201,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             valorPadrao: _view.tipoTelSelecionado,
             title: "Tipo de Telefone",
             lista: _view.listaTipoTelefone,
-            onChange: (value){
+            onChange: (value) {
               setState(() {
-                _view.textEditingControllerTelefone.text="";
+                _view.textEditingControllerTelefone.text = "";
                 _view.definirMascaraTelefone(value);
                 _view.focusNodeTelefone.requestFocus();
                 _view.tipoTelSelecionado = value.titulo;
@@ -209,56 +211,34 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             },
           ),
         ),
-        new Divider(height: 1,),
-        new ZInputGeneric(
+        new Divider(
+          height: 1,
+        ),
+        new ZInputCelular(
           themeData: Theme.of(context),
-          titulo: "Número",
-          tipoTeclado: TextInputType.number,
-          controllerInputPadrao: _view.textEditingControllerTelefone,
-          inputPadraoFocus: _view.focusNodeTelefone,
-          comMascara: true,
+          controllerCelular: _view.textEditingControllerTelefone,
+          celularFocus: _view.focusNodeTelefone,
           campoObrigatorio: _view.flagTel,
-          textMask: _view.mascara,
-          hintText: _view.hint,
-          onChange: (telefone){
-            _view.onChangedTelefone(telefone);
+          onChange: (telefone) {},
+          validacao: (bool) {
+            setState(() {
+              _view.preencheuTelefone = bool;
+            });
           },
         ),
 
         _view.telefoneSecundario(),
-
-        new Divider(height: 1,),
-        new Container(
-          margin: EdgeInsets.only(top: 5),
-          child: new ZTile(
-            onTap: (){},
-            leading: Text(
-                _view.textoTelefone,
-                style: TextStyle(
-                    color: Color(0xFF801F92),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500
-                )
-            ),
-            trailing: SizedBox(
-              width: 35,
-              child: IconButton(
-                onPressed: _view.tileHabilitarTelefone(),
-                color: Color(0xFF801F92),
-                icon: _view.icon,
-              ),
-            ),
-          ),
-        ),
-
+        zTileAdcTel(),
         //email
-        new Divider(height: 1,),
+        new Divider(
+          height: 1,
+        ),
 
         Container(
           margin: EdgeInsets.only(top: 8),
           color: Colors.white,
           child: new Padding(
-            padding: const EdgeInsets.only(left: 15.0,right: 6),
+            padding: const EdgeInsets.only(left: 15.0, right: 6),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -267,8 +247,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
                   style: TextStyle(
                       fontSize: 14,
                       color: Color(0xF0000000),
-                      fontWeight: FontWeight.w500
-                  ),
+                      fontWeight: FontWeight.w500),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -296,26 +275,28 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             valorPadrao: _view.tipoEmailSelecionado,
             title: "Tipo de Email",
             lista: _view.listaTipoEmail,
-            onChange: (value){
+            onChange: (value) {
               setState(() {
-                _view.textEditingControllerEmail.text="";
+                _view.textEditingControllerEmail.text = "";
                 _view.tipoEmailSelecionado = value.titulo;
               });
             },
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputEmail(
             campoObrigatorio: _view.flagEmail,
             themeData: Theme.of(context),
             controllerEmail: _view.textEditingControllerEmail,
             emailFocus: _view.focusNodeEmail,
-            validacao: (validacao){
+            validacao: (validacao) {
               setState(() {
-                if(validacao){
+                if (validacao) {
                   _view.preencheuEmail = true;
-                }else{
+                } else {
                   _view.preencheuEmail = false;
                 }
               });
@@ -325,19 +306,18 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
 
         _view.emailSecundario(),
 
-        new Divider(height: 1,),
+        new Divider(
+          height: 1,
+        ),
         new Container(
-          margin: EdgeInsets.only(top: 5,bottom: 5),
+          margin: EdgeInsets.only(top: 5, bottom: 5),
           child: new ZTile(
-            onTap: (){},
-            leading: Text(
-                _view.textoEmail,
+            onTap: () {},
+            leading: Text(_view.textoEmail,
                 style: TextStyle(
                     color: Color(0xFF801F92),
                     fontSize: 14,
-                    fontWeight: FontWeight.w500
-                )
-            ),
+                    fontWeight: FontWeight.w500)),
             trailing: SizedBox(
               width: 35,
               child: IconButton(
@@ -349,7 +329,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           ),
         ),
 
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
 
         new Container(
           child: new ZInputCEP(
@@ -359,7 +341,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             onChange: _view.onCEPChange,
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
@@ -368,7 +352,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             hintText: "Estado",
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
@@ -377,7 +363,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             hintText: "Cidade",
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
@@ -386,7 +374,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             hintText: "Bairro",
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
@@ -395,7 +385,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             hintText: "Rua",
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
@@ -405,7 +397,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             hintText: "Número",
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new Container(
           padding: const EdgeInsets.all(16.0),
           child: new ZButton(
@@ -425,6 +419,46 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
 
     return NetworkImage(
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+  }
+
+  Widget zTileAdcTel() {
+    if (_view.preencheuTelefone) {
+      return new Container(
+        margin: EdgeInsets.only(top: 16),
+        child: new ZTile(
+          onTap: () {},
+          leading: Text(_view.textoTelefone,
+              style: TextStyle(
+                  color: Color(0xFF801F92),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500)),
+          trailing: SizedBox(
+            width: 35,
+            child: IconButton(
+              onPressed: _view.textEditingControllerNumero.text != null
+                  ? () {
+                      setState(() {
+                        _view.segundoTel = !_view.segundoTel;
+                        if (_view.segundoTel) {
+                          _view.textoTelefone = "REMOVER TELEFONE";
+                          _view.icon = Icon(Icons.remove);
+                          //_view.resetTelSec();
+                        } else {
+                          _view.textoTelefone = "ADICIONAR TELEFONE";
+                          _view.icon = Icon(Icons.add);
+                          _view.resetTelSec();
+                        }
+                      });
+                    }
+                  : () {},
+              color: Color(0xFF801F92),
+              icon: _view.icon,
+            ),
+          ),
+        ),
+      );
+    } else
+      return new Container();
   }
 
   @override
