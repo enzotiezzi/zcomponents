@@ -25,6 +25,7 @@ import 'package:z_components/components/z-conta/z-conta.dart';
 import 'package:z_components/view-model/conta-view-model.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
+import 'package:z_components/components/z-item-tile-candidato.dart';
 
 
 class MainTesting extends StatefulWidget {
@@ -185,6 +186,12 @@ class _MainTestingState extends State<MainTesting> {
             context: context,
             numeroQuadrados: 4,
             zTipos: ZTipoSenha.isSenha,
+          ),
+          ZItemTileCandidato(
+            funcao: "Desenvolvedor Flutter",
+            email: "luiz.sousa@zellar.com.br",
+            telefone: "(11)96147-9207",
+            nome: "Luiz Fernando",
           ),
           Container(
             margin: EdgeInsets.only(top: 32),
