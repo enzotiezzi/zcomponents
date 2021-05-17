@@ -1,3 +1,8 @@
+## 0.9.35+26
+
+* criacao ZItemTileListaCandidato
+
+
 ## 0.9.35+25
 
 * criacao ZItemTileCandidato
