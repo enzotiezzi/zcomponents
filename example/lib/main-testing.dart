@@ -26,6 +26,7 @@ import 'package:z_components/view-model/conta-view-model.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-candidato.dart';
+import 'package:z_components/components/z-item-tile-lista-candidato.dart';
 
 
 class MainTesting extends StatefulWidget {
@@ -192,6 +193,15 @@ class _MainTestingState extends State<MainTesting> {
             email: "luiz.sousa@zellar.com.br",
             telefone: "(11)96147-9207",
             nome: "Luiz Fernando",
+          ),
+          ZItemTileListaCandidato(
+            documentos: "RG, CPF",
+            idade: "20",
+            nomeDependente: "Teste Teste",
+            grauParentesco: "Filho",
+            imagemPerfil: Container(
+              child: Icon(Icons.error),
+            ),
           ),
           Container(
             margin: EdgeInsets.only(top: 32),
