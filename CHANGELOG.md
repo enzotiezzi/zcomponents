@@ -1,3 +1,7 @@
+## 0.9.35+28
+
+* correcao z-user-info
+
 ## 0.9.35+27
 
 * novo icone dependente

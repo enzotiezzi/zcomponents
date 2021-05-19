@@ -215,7 +215,31 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
         _view.inputTel(_view.tipoTelSelecionado),
 
         _view.telefoneSecundario(),
-        zTileAdcTel(),
+
+        new Divider(height: 1,),
+
+        new Container(
+          margin: EdgeInsets.only(top: 5),
+          child: new ZTile(
+            onTap: (){},
+            leading: Text(
+                _view.textoTelefone,
+                style: TextStyle(
+                    color: Color(0xFF801F92),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500
+                )
+            ),
+            trailing: SizedBox(
+              width: 35,
+              child: IconButton(
+                onPressed: _view.tileHabilitarTelefone(),
+                color: Color(0xFF801F92),
+                icon: _view.icon,
+              ),
+            ),
+          ),
+        ),
         //email
         new Divider(
           height: 1,
@@ -407,46 +431,6 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
 
     return NetworkImage(
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
-  }
-
-  Widget zTileAdcTel() {
-    if (_view.preencheuTelefone) {
-      return new Container(
-        margin: EdgeInsets.only(top: 16),
-        child: new ZTile(
-          onTap: () {},
-          leading: Text(_view.textoTelefone,
-              style: TextStyle(
-                  color: Color(0xFF801F92),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500)),
-          trailing: SizedBox(
-            width: 35,
-            child: IconButton(
-              onPressed: _view.textEditingControllerNumero.text != null
-                  ? () {
-                      setState(() {
-                        _view.segundoTel = !_view.segundoTel;
-                        if (_view.segundoTel) {
-                          _view.textoTelefone = "REMOVER TELEFONE";
-                          _view.icon = Icon(Icons.remove);
-                          //_view.resetTelSec();
-                        } else {
-                          _view.textoTelefone = "ADICIONAR TELEFONE";
-                          _view.icon = Icon(Icons.add);
-                          _view.resetTelSec();
-                        }
-                      });
-                    }
-                  : () {},
-              color: Color(0xFF801F92),
-              icon: _view.icon,
-            ),
-          ),
-        ),
-      );
-    } else
-      return new Container();
   }
 
   @override
