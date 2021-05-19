@@ -60,7 +60,7 @@ class _ZInputTelefoneFixoState extends State<ZInputTelefoneFixo> {
 
           telefoneFixo = text;
           countTelefoneFixo = 0;
-          if (telefoneFixo.length == 15) {
+          if (telefoneFixo.length == 14) {
             _fieldFocusChange(
                 context, widget.telefoneFixoFocus, widget.proximoFocus);
           }
@@ -69,7 +69,7 @@ class _ZInputTelefoneFixoState extends State<ZInputTelefoneFixo> {
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
         textMask: "(##) ####-####",
-        hintText: "( ** ) **** - ****",
+        hintText: "(**) **** - ****",
         enabled: widget.enabled);
   }
 
@@ -155,7 +155,7 @@ class _ZInputTelefoneFixoState extends State<ZInputTelefoneFixo> {
   }
 
   void _validarTelefone() {
-    if (telefoneFixo.length < 15 && telefoneFixo != "") {
+    if (telefoneFixo.length < 14 && telefoneFixo != "") {
       _dialogUtils.showAlertDialogNewAviso(
           "Telefone Inválido!", "Por Favor, Termine de digitar o seu Telefone.");
       if (widget.validacao != null) widget.validacao(false);
