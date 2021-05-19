@@ -1,7 +1,7 @@
 name: z_components
 description: Z_Components is a package that contains a set of standardized components to facilitate, optimize, and accelerate the development of Zellar company's Android / IOS applications.
 
-version: 0.9.35+26
+version: 0.9.35+27
 
 homepage: https://github.com/victortmarques/zcomponents
 
@@ -90,6 +90,7 @@ flutter:
     - assets/status-parcialmente-enviado.svg
     - assets/status-aguardando-validacao.svg
     - assets/Z_Documentos.svg
+    - assets/arvore.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
