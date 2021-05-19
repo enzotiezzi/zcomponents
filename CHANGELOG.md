@@ -1,3 +1,7 @@
+## 0.9.35+27
+
+* novo icone dependente
+
 ## 0.9.35+26
 
 * criacao ZItemTileListaCandidato
