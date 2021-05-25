@@ -52,10 +52,11 @@ class _ZTextState extends State<ZText> {
               ],
             ))
         : new Container(
-            padding: EdgeInsets.only(left: 15.0, bottom: 8.0, top: 16.0),
+            color: Colors.white,
+            padding: EdgeInsets.only(left: 20.0, bottom: 16.0, top: 20.0),
             alignment: Alignment.centerLeft,
             child: new Text(widget.tituloText,
-                style: MainStyle.get(context).mainStyleTextBaseLine),
+                style: TextStyle(fontWeight: FontWeight.bold)),
           );
   }
 }
