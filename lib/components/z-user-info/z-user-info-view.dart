@@ -63,60 +63,35 @@ class ZUserInfoView extends IView<ZUserInfo> {
   ITesteConexaoService _testeConexaoService;
 
   List<ZCollectionItem> listaTipoTelefone = [
-    ZCollectionItem(
-        chave: "Celular Pessoal",
-        titulo: "Celular Pessoal",
-        valor: "Celular Pessoal"),
-    ZCollectionItem(
-        chave: "Celular Corporativo",
-        titulo: "Celular Corporativo",
-        valor: "Celular Corporativo"),
-    ZCollectionItem(
-        chave: "Fixo Residência",
-        titulo: "Fixo Residência",
-        valor: "Fixo Residência"),
-    ZCollectionItem(
-        chave: "Fixo Comercial",
-        titulo: "Fixo Comercial",
-        valor: "Fixo Comercial"),
+    ZCollectionItem(chave: "Celular Pessoal", titulo: "Celular Pessoal", valor: "Celular Pessoal"),
+    ZCollectionItem(chave: "Celular Corporativo", titulo: "Celular Corporativo", valor: "Celular Corporativo"),
+    ZCollectionItem(chave: "Fixo Residência", titulo: "Fixo Residência", valor: "Fixo Residência"),
+    ZCollectionItem(chave: "Fixo Comercial", titulo: "Fixo Comercial", valor: "Fixo Comercial"),
   ];
 
   List<ZCollectionItem> listaTipoTelefoneSecundario = [
-    ZCollectionItem(
-        chave: "Celular Pessoal",
-        titulo: "Celular Pessoal",
-        valor: "Celular Pessoal"),
-    ZCollectionItem(
-        chave: "Celular Corporativo",
-        titulo: "Celular Corporativo",
-        valor: "Celular Corporativo"),
-    ZCollectionItem(
-        chave: "Fixo Residência",
-        titulo: "Fixo Residência",
-        valor: "Fixo Residência"),
-    ZCollectionItem(
-        chave: "Fixo Comercial",
-        titulo: "Fixo Comercial",
-        valor: "Fixo Comercial"),
+    ZCollectionItem(chave: "Celular Pessoal", titulo: "Celular Pessoal", valor: "Celular Pessoal"),
+    ZCollectionItem(chave: "Celular Corporativo", titulo: "Celular Corporativo", valor: "Celular Corporativo"),
+    ZCollectionItem(chave: "Fixo Residência", titulo: "Fixo Residência", valor: "Fixo Residência"),
+    ZCollectionItem(chave: "Fixo Comercial", titulo: "Fixo Comercial", valor: "Fixo Comercial"),
   ];
 
   List<ZCollectionItem> listaTipoEmail = [
     ZCollectionItem(chave: "Pessoal", titulo: "Pessoal", valor: "Pessoal"),
-    ZCollectionItem(
-        chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
+    ZCollectionItem(chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
   ];
 
   List<ZCollectionItem> listaTipoEmailSec = [
     ZCollectionItem(chave: "Pessoal", titulo: "Pessoal", valor: "Pessoal"),
-    ZCollectionItem(
-        chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
+    ZCollectionItem(chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
   ];
 
+
+
   String textoTelefone = "ADICIONAR TELEFONE";
-  String telefoneNumero = "";
   String textoEmail = "ADICIONAR EMAIL";
   String tipoTelSelecionado = "";
-  String tipoTelSecSelecionado = "";
+  String tipoTelSecSelecionado="";
   String tipoEmailSelecionado = "";
   String tipoEmailSecSelecionado = "";
   bool flagTel = true;
@@ -127,10 +102,10 @@ class ZUserInfoView extends IView<ZUserInfo> {
   Color flagColorSec = Color(0xFFE6E6E6);
   Color flagEmailColor = Color(0xFF2BBAB4);
   Color flagEmailColorSec = Color(0xFFE6E6E6);
-  bool segundoTel = false;
-  bool segundoEmail = false;
-  Icon icon = Icon(Icons.add);
-  Icon iconEmail = Icon(Icons.add);
+  bool segundoTel=false;
+  bool segundoEmail=false;
+  Icon icon=Icon(Icons.add);
+  Icon iconEmail=Icon(Icons.add);
   String mascara = "";
   String hint = "";
   String mascaraSec = "";
@@ -145,7 +120,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IIdentityServer _identityServer;
 
   GlobalKey<ZProgressDialogState> _globalKey =
-      new GlobalKey<ZProgressDialogState>();
+  new GlobalKey<ZProgressDialogState>();
 
   DialogUtils _dialogUtils;
 
@@ -172,8 +147,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerRua.text = state.widget.userInfo?.logradouro;
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
     textEditingControllerCPF.text = state.widget.userInfo?.cpf;
-    textEditingControllerNomeReduzido.text =
-        state.widget.userInfo?.nomeReduzido;
+    textEditingControllerNomeReduzido.text = state.widget.userInfo?.nomeReduzido;
     textEditingControllerEmailSec.text = state.widget.userInfo?.emailSec;
     textEditingControllerTelefoneSec.text = state.widget.userInfo?.telefoneSec;
 /*
@@ -181,8 +155,10 @@ class ZUserInfoView extends IView<ZUserInfo> {
       textEditingControllerDataNascimento.text =
           _montarData(state.widget.userInfo.dataNascimento);
     }
-
  */
+
+
+
   }
 
   @override
@@ -196,27 +172,26 @@ class ZUserInfoView extends IView<ZUserInfo> {
     }
   }
 
-  Function tileHabilitarEmailSecundario() {
-    if (preencheuEmail) {
-      return () {
+  Function tileHabilitarEmailSecundario(){
+    if(preencheuEmail){
+      return(){
         state.setState(() {
-          segundoEmail = !segundoEmail;
-          if (segundoEmail) {
+          segundoEmail = ! segundoEmail;
+          if(segundoEmail){
             textoEmail = "REMOVER EMAIL";
             iconEmail = Icon(Icons.remove);
             //_view.resetTelSec();
-          } else {
+          }else{
             textoEmail = "ADICIONAR EMAIL";
             iconEmail = Icon(Icons.add);
             resetEmailSec();
           }
         });
       };
-    } else {
+    }else{
       return null;
     }
   }
-
 
   Widget inputTel(String tipoSelecionado){
     if(tipoTelSelecionado.contains("Fixo")){
@@ -237,19 +212,19 @@ class ZUserInfoView extends IView<ZUserInfo> {
       );
     }else if(tipoTelSelecionado.contains("Celular")){
       return ZInputCelular(
-          themeData: Theme.of(state.context),
-          celularFocus: focusNodeTelefone,
-          controllerCelular: textEditingControllerTelefone,
-          campoObrigatorio: flagTel,
-          validacao: (validacao){
-            state.setState(() {
-              if(validacao){
-                preencheuTelefone = true;
-              }else{
-                preencheuTelefone = false;
-              }
-            });
-          },
+        themeData: Theme.of(state.context),
+        celularFocus: focusNodeTelefone,
+        controllerCelular: textEditingControllerTelefone,
+        campoObrigatorio: flagTel,
+        validacao: (validacao){
+          state.setState(() {
+            if(validacao){
+              preencheuTelefone = true;
+            }else{
+              preencheuTelefone = false;
+            }
+          });
+        },
       );
     }else{
       return ZInputGeneric(
@@ -285,7 +260,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
           titulo: "Telefone",
           inputPadraoFocus: focusNodeTelefone,
           tipoTeclado: TextInputType.number,
-          campoObrigatorio: flagTel,
+          campoObrigatorio: flagTelSec,
           controllerInputPadrao: textEditingControllerTelefoneSec
       );
 
@@ -299,16 +274,16 @@ class ZUserInfoView extends IView<ZUserInfo> {
         state.setState(() {
           flagEmailPressionada();
           segundoEmail = true;
-          if (segundoEmail) {
+          if(segundoEmail){
             textoEmail = "REMOVER EMAIL";
             iconEmail = Icon(Icons.remove);
-          } else {
+          }else{
             textoEmail = "ADICIONAR EMAIL";
             iconEmail = Icon(Icons.add);
           }
         });
       };
-    } else {
+    }else{
       return null;
     }
   }
@@ -333,14 +308,15 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   }
 
-  bool onChangedTelefone(String telefone) {
-    if (telefone.length > 8 && tipoTelSelecionado != "") {
-      preencheuTelefone = true;
-    } else {
-      preencheuTelefone = false;
-    }
+  bool onChangedTelefone (String telefone){
+    state.setState(() {
+      if(telefone.length > 8 && tipoTelSelecionado != ""){
+        return preencheuTelefone = true;
+      }else{
+        return preencheuTelefone = false;
+      }
+    });
   }
-
 
   Function tileHabilitarTelefone(){
     if(preencheuTelefone){
@@ -354,7 +330,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
           }else{
             textoTelefone = "ADICIONAR TELEFONE";
             icon = Icon(Icons.add);
-            resetTelSec();
+            //resetTelSec();
           }
         });
       };
@@ -364,38 +340,76 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   bool validarCamposObrigatorios() {
-    if (preencheuNome) {
+    if (preencheuNome ) {
       return true;
     } else {
       return false;
     }
   }
 
+  Widget zTileAdcTel() {
+    new Container(
+      margin: EdgeInsets.only(top: 16),
+      child: new ZTile(
+        onTap: (){},
+        leading: Text(
+            textoTelefone,
+            style: TextStyle(
+                color: Color(0xFF801F92),
+                fontSize: 14,
+                fontWeight: FontWeight.w500
+            )
+        ),
+        trailing: SizedBox(
+          width: 35,
+          child: IconButton(
+            onPressed: textEditingControllerNumero.text != null ? (){
+              state.setState(() {
+                segundoTel = ! segundoTel;
+                if(segundoTel){
+                  textoTelefone = "REMOVER TELEFONE";
+                  icon = Icon(Icons.remove);
+                  //_view.resetTelSec();
+                }else{
+                  textoTelefone = "ADICIONAR TELEFONE";
+                  icon = Icon(Icons.add);
+                  resetTelSec();
+                }
+              });
+            } : (){},
+            color: Color(0xFF801F92),
+            icon: icon,
+          ),
+        ),
+      ),
+    );
+  }
 
-
-  resetTelSec() {
+  resetTelSec(){
     state.setState(() {
-      hintSec = "";
-      mascaraSec = "";
+      hintSec="";
+      mascaraSec="";
       flagTel = true;
       flagTelSec = false;
-      textEditingControllerTelefoneSec.text = "";
-      tipoTelSecSelecionado = "";
+      textEditingControllerTelefoneSec.text="";
+      tipoTelSecSelecionado="";
     });
   }
 
-  resetEmailSec() {
+
+
+  resetEmailSec(){
     state.setState(() {
       flagEmail = true;
       flagEmailSec = false;
-      textEditingControllerEmailSec.text = "";
-      tipoEmailSecSelecionado = "";
+      textEditingControllerEmailSec.text="";
+      tipoEmailSecSelecionado="";
     });
   }
 
-  Widget emailSecundario() {
-    if (segundoEmail) {
-      return new Container(
+  Widget emailSecundario(){
+    if(segundoEmail){
+      return  new Container(
         margin: EdgeInsets.only(top: 4),
         color: Colors.white,
         child: new Column(
@@ -406,7 +420,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
               height: 1.0,
             ),
             new Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 6),
+              padding: const EdgeInsets.only(left: 15.0,right: 6),
               child: new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -415,7 +429,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
                     style: TextStyle(
                         fontSize: 14,
                         color: Color(0xF0000000),
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w500
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -425,7 +440,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                           Icons.flag,
                           color: definirCorEmailFlagSec(),
                         ),
-                        onPressed: () {
+                        onPressed: (){
                           state.setState(() {
                             flagEmailPressionada();
                           });
@@ -436,13 +451,14 @@ class ZUserInfoView extends IView<ZUserInfo> {
                           Icons.delete_forever,
                           color: Color(0xFFE53629),
                         ),
-                        onPressed: () {
+                        onPressed: (){
                           state.setState(() {
-                            segundoEmail = !segundoEmail;
-                            if (segundoEmail) {
+                            segundoEmail = ! segundoEmail;
+                            if(segundoEmail){
                               textoEmail = "REMOVER EMAIL";
                               iconEmail = Icon(Icons.remove);
-                            } else {
+
+                            }else{
                               textoEmail = "ADICIONAR EMAIL";
                               iconEmail = Icon(Icons.add);
                               resetEmailSec();
@@ -465,11 +481,11 @@ class ZUserInfoView extends IView<ZUserInfo> {
                 themeData: Theme.of(state.context),
                 title: "Tipo de Email",
                 lista: listaTipoEmailSec,
-                onChange: (value) {
+                onChange: (value){
                   state.setState(() {
                     focusEmailSec.requestFocus();
                     tipoEmailSecSelecionado = value.titulo;
-                    textEditingControllerEmailSec.text = "";
+                    textEditingControllerEmailSec.text="";
                   });
                 },
               ),
@@ -486,14 +502,14 @@ class ZUserInfoView extends IView<ZUserInfo> {
           ],
         ),
       );
-    } else {
+    }else{
       return Container();
     }
   }
 
-  Widget telefoneSecundario() {
-    if (segundoTel) {
-      return new Container(
+  Widget telefoneSecundario(){
+    if(segundoTel){
+      return  new Container(
         margin: EdgeInsets.only(top: 4),
         color: Colors.white,
         child: new Column(
@@ -504,7 +520,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
               height: 1.0,
             ),
             new Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 6),
+              padding: const EdgeInsets.only(left: 15.0,right: 6),
               child: new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -513,7 +529,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
                     style: TextStyle(
                         fontSize: 14,
                         color: Color(0xF0000000),
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w500
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -523,7 +540,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                           Icons.flag,
                           color: definirCorFlagSec(),
                         ),
-                        onPressed: () {
+                        onPressed: (){
                           state.setState(() {
                             flagPressionada();
                           });
@@ -534,13 +551,14 @@ class ZUserInfoView extends IView<ZUserInfo> {
                           Icons.delete_forever,
                           color: Color(0xFFE53629),
                         ),
-                        onPressed: () {
+                        onPressed: (){
                           state.setState(() {
-                            segundoTel = !segundoTel;
-                            if (segundoTel) {
+                            segundoTel = ! segundoTel;
+                            if(segundoTel){
                               textoTelefone = "REMOVER TELEFONE";
                               icon = Icon(Icons.remove);
-                            } else {
+
+                            }else{
                               textoTelefone = "ADICIONAR TELEFONE";
                               icon = Icon(Icons.add);
                               resetTelSec();
@@ -563,12 +581,12 @@ class ZUserInfoView extends IView<ZUserInfo> {
                 themeData: Theme.of(state.context),
                 title: "Tipo de Telefone",
                 lista: listaTipoTelefoneSecundario,
-                onChange: (value) {
+                onChange: (value){
                   state.setState(() {
                     definirMascaraTelefoneSecundario(value);
                     focusTelefoneSec.requestFocus();
                     tipoTelSecSelecionado = value.titulo;
-                    textEditingControllerTelefoneSec.text = "";
+                    textEditingControllerTelefoneSec.text="";
                   });
                 },
               ),
@@ -580,79 +598,76 @@ class ZUserInfoView extends IView<ZUserInfo> {
           ],
         ),
       );
-    } else {
+    }else{
       return Container();
     }
+
   }
 
-  flagPressionada() {
+
+  flagPressionada(){
     flagTel = !flagTel;
     flagTelSec = !flagTelSec;
     definirCorFlag();
     definirCorFlagSec();
-    if (segundoTel == false && flagTel == false) {
-      state.setState(() {
-        segundoTel = true;
-      });
-    }
-  }
 
-  flagEmailPressionada() {
+
+  }
+  flagEmailPressionada(){
     flagEmail = !flagEmail;
     flagEmailSec = !flagEmailSec;
     definirCorEmailFlag();
     definirCorEmailFlagSec();
   }
 
-  definirMascaraTelefone(ZCollectionItem texto) {
-    if (texto.chave.contains("Fixo")) {
+  definirMascaraTelefone(ZCollectionItem texto){
+    if(texto.chave.contains("Fixo")){
       mascara = "(##) ####-####";
       hint = "( ** ) **** - ****";
-    } else if (texto.chave.contains("Celular")) {
+    }else if(texto.chave.contains("Celular")){
       mascara = "(##) #####-####";
       hint = "( ** ) 9 **** - ****";
     }
-  }
 
-  definirMascaraTelefoneSecundario(ZCollectionItem texto) {
-    if (texto.chave.contains("Fixo")) {
+  }
+  definirMascaraTelefoneSecundario(ZCollectionItem texto){
+    if(texto.chave.contains("Fixo")){
       mascaraSec = "(##) ####-####";
       hintSec = "( ** ) **** - ****";
-    } else if (texto.chave.contains("Celular")) {
+    }else if(texto.chave.contains("Celular")){
       mascaraSec = "(##) #####-####";
       hintSec = "( ** ) 9 **** - ****";
     }
   }
 
-  Color definirCorFlagSec() {
-    if (flagTelSec) {
+  Color definirCorFlagSec(){
+    if(flagTelSec){
       return Color(0xFF2BBAB4);
-    } else {
-      return Color(0xFFE6E6E6);
+    }else{
+      return  Color(0xFFE6E6E6);
     }
   }
 
-  Color definirCorFlag() {
-    if (flagTel) {
+  Color definirCorFlag(){
+    if(flagTel){
       return Color(0xFF2BBAB4);
-    } else {
-      return Color(0xFFE6E6E6);
+    }else{
+      return  Color(0xFFE6E6E6);
     }
   }
 
-  Color definirCorEmailFlag() {
-    if (flagEmail) {
+  Color definirCorEmailFlag(){
+    if(flagEmail){
       return Color(0xFF2BBAB4);
-    } else {
-      return Color(0xFFE6E6E6);
+    }else{
+      return  Color(0xFFE6E6E6);
     }
   }
-
-  Color definirCorEmailFlagSec() {
-    if (flagEmailSec) {
+  Color definirCorEmailFlagSec(){
+    if(flagEmailSec){
       return Color(0xFF2BBAB4);
-    } else {
-      return Color(0xFFE6E6E6);
+    }else{
+      return  Color(0xFFE6E6E6);
     }
   }
 
@@ -827,7 +842,6 @@ class ZUserInfoView extends IView<ZUserInfo> {
         if (state.widget.onChangeProfileImage != null)
           state.widget.onChangeProfileImage(base64);
 
-        _dialogUtils.dismiss();
       }
 
     }
@@ -850,7 +864,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
       cep: textEditingControllerCEP.text,
       estado: textEditingControllerEstado.text,
       dataNascimento: (textEditingControllerDataNascimento.text != "" &&
-              textEditingControllerDataNascimento.text != null)
+          textEditingControllerDataNascimento.text != null)
           ? "${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}"
           : null,
       cidade: textEditingControllerCidade.text,
@@ -865,17 +879,17 @@ class ZUserInfoView extends IView<ZUserInfo> {
           ? null
           : state.widget.userInfo.idFoto,
       anexoCartaoAlimentacaoStatus:
-          state.widget.userInfo.anexoCartaoAlimentacaoStatus,
+      state.widget.userInfo.anexoCartaoAlimentacaoStatus,
       anexoCartaoContaBancariaStatus:
-          state.widget.userInfo.anexoCartaoContaBancariaStatus,
+      state.widget.userInfo.anexoCartaoContaBancariaStatus,
       anexoCartaoValeTransporteStatus:
-          state.widget.userInfo.anexoCartaoValeTransporteStatus,
+      state.widget.userInfo.anexoCartaoValeTransporteStatus,
       anexoCarteiraVacinacaoStatus:
-          state.widget.userInfo.anexoCarteiraVacinacaoStatus,
+      state.widget.userInfo.anexoCarteiraVacinacaoStatus,
       anexoCertidaoNascimentoCasamentoStatus:
-          state.widget.userInfo.anexoCertidaoNascimentoCasamentoStatus,
+      state.widget.userInfo.anexoCertidaoNascimentoCasamentoStatus,
       anexoComprovanteEnderecoStatus:
-          state.widget.userInfo.anexoComprovanteEnderecoStatus,
+      state.widget.userInfo.anexoComprovanteEnderecoStatus,
       anexoCPFStatus: state.widget.userInfo.anexoCPFStatus,
       anexoCTPSStatus: state.widget.userInfo.anexoCTPSStatus,
       anexoEscolaridadeStatus: state.widget.userInfo.anexoEscolaridadeStatus,
@@ -884,40 +898,40 @@ class ZUserInfoView extends IView<ZUserInfo> {
       anexoTituloEleitorStatus: state.widget.userInfo.anexoTituloEleitorStatus,
       idAnexoCartaoAlimentacao: state.widget.userInfo.idAnexoCartaoAlimentacao,
       idAnexoCartaoAlimentacao_Verso:
-          state.widget.userInfo.idAnexoCartaoAlimentacao_Verso,
+      state.widget.userInfo.idAnexoCartaoAlimentacao_Verso,
       idAnexoCartaoContaBancaria:
-          state.widget.userInfo.idAnexoCartaoContaBancaria,
+      state.widget.userInfo.idAnexoCartaoContaBancaria,
       idAnexoCartaoContaBancaria_Verso:
-          state.widget.userInfo.idAnexoCartaoContaBancaria_Verso,
+      state.widget.userInfo.idAnexoCartaoContaBancaria_Verso,
       idAnexoCartaoValeTransporte:
-          state.widget.userInfo.idAnexoCartaoValeTransporte,
+      state.widget.userInfo.idAnexoCartaoValeTransporte,
       idAnexoCartaoValeTransporte_Verso:
-          state.widget.userInfo.idAnexoCartaoValeTransporte_Verso,
+      state.widget.userInfo.idAnexoCartaoValeTransporte_Verso,
       idAnexoCarteiraVacinacao: state.widget.userInfo.idAnexoCarteiraVacinacao,
       idAnexoCarteiraVacinacao_Verso:
-          state.widget.userInfo.idAnexoCarteiraVacinacao_Verso,
+      state.widget.userInfo.idAnexoCarteiraVacinacao_Verso,
       idAnexoCertidaoNascimentoCasamento:
-          state.widget.userInfo.idAnexoCertidaoNascimentoCasamento,
+      state.widget.userInfo.idAnexoCertidaoNascimentoCasamento,
       idAnexoCertidaoNascimentoCasamento_Verso:
-          state.widget.userInfo.idAnexoCertidaoNascimentoCasamento_Verso,
+      state.widget.userInfo.idAnexoCertidaoNascimentoCasamento_Verso,
       idAnexoComprovanteEndereco:
-          state.widget.userInfo.idAnexoComprovanteEndereco,
+      state.widget.userInfo.idAnexoComprovanteEndereco,
       idAnexoComprovanteEndereco_Verso:
-          state.widget.userInfo.idAnexoComprovanteEndereco_Verso,
+      state.widget.userInfo.idAnexoComprovanteEndereco_Verso,
       idAnexoCPF: state.widget.userInfo.idAnexoCPF,
       idAnexoCPF_Verso: state.widget.userInfo.idAnexoCPF_Verso,
       idAnexoCTPS: state.widget.userInfo.idAnexoCTPS,
       idAnexoCTPS_Verso: state.widget.userInfo.idAnexoCTPS_Verso,
       idAnexoEscolaridade: state.widget.userInfo.idAnexoEscolaridade,
       idAnexoEscolaridade_Verso:
-          state.widget.userInfo.idAnexoEscolaridade_Verso,
+      state.widget.userInfo.idAnexoEscolaridade_Verso,
       idAnexoPIS: state.widget.userInfo.idAnexoPIS,
       idAnexoPIS_Verso: state.widget.userInfo.idAnexoPIS_Verso,
       idAnexoRG: state.widget.userInfo.idAnexoRG,
       idAnexoRG_Verso: state.widget.userInfo.idAnexoRG_Verso,
       idAnexoTituloEleitor: state.widget.userInfo.idAnexoTituloEleitor,
       idAnexoTituloEleitor_Verso:
-          state.widget.userInfo.idAnexoTituloEleitor_Verso,
+      state.widget.userInfo.idAnexoTituloEleitor_Verso,
     );
 
     _dialogUtils.showZProgressDialog(
@@ -971,7 +985,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                 new Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   margin:
-                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                   child: new Text(
                     message,
                     textAlign: TextAlign.center,
@@ -1001,7 +1015,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                     style: new TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize:
-                            MainStyle.get(context).fontSizeLeadinCancelar),
+                        MainStyle.get(context).fontSizeLeadinCancelar),
                   ),
                 ),
               ),
