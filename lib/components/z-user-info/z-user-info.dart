@@ -1,23 +1,17 @@
-import 'dart:io';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:z_components/components/z-baseline.dart';
-import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
-import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
-import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
 import 'package:z_components/components/z-inputs/z-input-email.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-inputs/z-input-name.dart';
-import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/components/z-text.dart';
 import 'package:z_components/components/z-user-info/z-user-info-view.dart';
 import 'package:z_components/components/z_button.dart';
 import 'package:z_components/config/z-button-type.dart';
-import 'package:z_components/config/z-tipos-baseline.dart';
+import 'package:z_components/config/z-tipo-textos.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
@@ -51,8 +45,45 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return MainStyle.get(context)
-        .getDefaultScaffold("Editar informações de usuário", _buildBody());
+    return new Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: new Text(
+          "Editar Perfil",
+        ),
+        actions: [
+          new GestureDetector(
+            child: new Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              margin: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(4.0),
+              child: Icon(
+                Icons.edit,
+                size: 26,
+                color: Theme.of(context).accentColor,
+              ),
+            ),
+            onTap: () {
+              _view.editarAtivo = !_view.editarAtivo;
+
+              if (mounted) {
+                setState(() {
+                  if (_view.editarAtivo) {
+                    FocusScope.of(context).requestFocus(_view.focusNodeNome);
+                    _view.textoFoto = "Editar foto";
+                  } else {
+                    _view.textoFoto = "";
+                  }
+                });
+              }
+            },
+          )
+        ],
+      ),
+      body: _buildBody(),
+    );
   }
 
   Widget _buildBody() {
@@ -87,18 +118,26 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
                   ),
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[new Text("Editar foto")],
+                    children: <Widget>[new Text(_view.textoFoto)],
                   )
                 ],
               )),
           onTap: _view.escolherMetodoSelecionarFoto,
         ),
+        ZText(
+          tituloText: "DADOS GERAIS",
+          zTipos: ZTipoTextos.isTitulo,
+        ),
+        new Divider(
+          height: 1.0,
+        ),
         Container(
           child: new ZInputName(
+              enabled: _view.editarAtivo,
               themeData: Theme.of(context),
               nomeFocus: _view.focusNodeNome,
               controllerNome: _view.textEditingControllerNome,
-              campoObrigatorio: true,
+              proximoFocus: _view.focusNodeDataNascimento,
               validacao: (bool) {
                 setState(() {
                   if (bool) {
@@ -134,6 +173,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             themeData: Theme.of(context),
             inputPadraoFocus: _view.focusNodeNomeReduzido,
             controllerInputPadrao: _view.textEditingControllerNomeReduzido,
+            proximoFocus: _view.focusNodeDataNascimento,
             enabled: false,
           ),
         ),
@@ -148,282 +188,66 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
             cpfFocus: _view.focusNodeCPF,
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new ZInputDataNascimento(
+          enabled: _view.editarAtivo,
           dataFocus: _view.focusNodeDataNascimento,
           themeData: Theme.of(context),
           controllerData: _view.textEditingControllerDataNascimento,
-        ),
-
-
-        //tel
-        Divider(
-          height: 1,
-        ),
-        Container(
-          color: Colors.white,
-          child: new Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "TELEFONE",
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xF0000000),
-                      fontWeight: FontWeight.w500),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.flag,
-                        color: _view.definirCorFlag(),
-                      ),
-                      onPressed: _view.flagHabilitarTelefone(),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
+          proximoFocus: _view.focusNodeTelefone,
+          validacao: (bool) {},
         ),
         new Divider(
-          height: 1,
+          height: 1.0,
         ),
         new Container(
-          child: new ZCollectionBottomSheet(
-            campoObrigatorio: false,
-            themeData: Theme.of(context),
-            valorPadrao: _view.tipoTelSelecionado,
-            title: "Tipo de Telefone",
-            lista: _view.listaTipoTelefone,
-            onChange: (value) {
-              setState(() {
-                _view.textEditingControllerTelefone.text = "";
-                _view.definirMascaraTelefone(value);
-                _view.focusNodeTelefone.requestFocus();
-                _view.tipoTelSelecionado = value.titulo;
-              });
-            },
-          ),
-        ),
-        new Divider(height: 1,),
-
-        _view.inputTel(_view.tipoTelSelecionado),
-
-        _view.telefoneSecundario(),
-
-        new Divider(height: 1,),
-
-        new Container(
-          margin: EdgeInsets.only(top: 5),
-          child: new ZTile(
-            onTap: (){},
-            leading: Text(
-                _view.textoTelefone,
-                style: TextStyle(
-                    color: Color(0xFF801F92),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500
-                )
-            ),
-            trailing: SizedBox(
-              width: 35,
-              child: IconButton(
-                onPressed: _view.tileHabilitarTelefone(),
-                color: Color(0xFF801F92),
-                icon: _view.icon,
-              ),
-            ),
-          ),
-        ),
-        //email
-        new Divider(
-          height: 1,
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 8),
-          color: Colors.white,
-          child: new Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "EMAIL",
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xF0000000),
-                      fontWeight: FontWeight.w500),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.flag,
-                        color: _view.definirCorEmailFlag(),
-                      ),
-                      onPressed: _view.flagHabilitarEmailSecundario(),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-        new Divider(
-          height: 1,
-        ),
-        new Container(
-          child: new ZCollectionBottomSheet(
-            campoObrigatorio: false,
-            themeData: Theme.of(context),
-            valorPadrao: _view.tipoEmailSelecionado,
-            title: "Tipo de Email",
-            lista: _view.listaTipoEmail,
-            onChange: (value) {
-              setState(() {
-                _view.textEditingControllerEmail.text = "";
-                _view.tipoEmailSelecionado = value.titulo;
-              });
-            },
+          margin: EdgeInsets.only(top: 10.0),
+          child: ZText(
+            tituloText: "DADOS DE CONTATO",
+            zTipos: ZTipoTextos.isTitulo,
           ),
         ),
         new Divider(
           height: 1.0,
+        ),
+        new Container(
+          child: new ZInputCelular(
+            enabled: _view.editarAtivo,
+            themeData: Theme.of(context),
+            celularFocus: _view.focusNodeTelefone,
+            controllerCelular: _view.textEditingControllerTelefone,
+            proximoFocus: _view.focusNodeEmail,
+          ),
         ),
         new Container(
           child: new ZInputEmail(
-            campoObrigatorio: _view.flagEmail,
-            themeData: Theme.of(context),
-            controllerEmail: _view.textEditingControllerEmail,
-            emailFocus: _view.focusNodeEmail,
-            validacao: (validacao) {
-              setState(() {
-                if (validacao) {
-                  _view.preencheuEmail = true;
-                } else {
-                  _view.preencheuEmail = false;
-                }
-              });
-            },
-          ),
+              enabled: _view.editarAtivo,
+              themeData: Theme.of(context),
+              emailFocus: _view.focusNodeEmail,
+              controllerEmail: _view.textEditingControllerEmail),
         ),
-
-        _view.emailSecundario(),
-
-        new Divider(
-          height: 1,
-        ),
-        new Container(
-          margin: EdgeInsets.only(top: 5, bottom: 5),
-          child: new ZTile(
-            onTap: () {},
-            leading: Text(_view.textoEmail,
-                style: TextStyle(
-                    color: Color(0xFF801F92),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500)),
-            trailing: SizedBox(
-              width: 35,
-              child: IconButton(
-                onPressed: _view.tileHabilitarEmailSecundario(),
-                color: Color(0xFF801F92),
-                icon: _view.iconEmail,
-              ),
-            ),
-          ),
-        ),
-
-        new Divider(
-          height: 1.0,
-        ),
-
-        new Container(
-          child: new ZInputCEP(
-            themeData: Theme.of(context),
-            controllerCep: _view.textEditingControllerCEP,
-            cepFocus: _view.focusNodeCEP,
-            onChange: _view.onCEPChange,
-          ),
-        ),
-        new Divider(
-          height: 1.0,
-        ),
-        new Container(
-          child: new ZInputGeneric(
-            themeData: Theme.of(context),
-            titulo: "Estado",
-            controllerInputPadrao: _view.textEditingControllerEstado,
-            hintText: "Estado",
-          ),
-        ),
-        new Divider(
-          height: 1.0,
-        ),
-        new Container(
-          child: new ZInputGeneric(
-            themeData: Theme.of(context),
-            titulo: "Cidade",
-            controllerInputPadrao: _view.textEditingControllerCidade,
-            hintText: "Cidade",
-          ),
-        ),
-        new Divider(
-          height: 1.0,
-        ),
-        new Container(
-          child: new ZInputGeneric(
-            themeData: Theme.of(context),
-            titulo: "Bairro",
-            controllerInputPadrao: _view.textEditingControllerBairro,
-            hintText: "Bairro",
-          ),
-        ),
-        new Divider(
-          height: 1.0,
-        ),
-        new Container(
-          child: new ZInputGeneric(
-            themeData: Theme.of(context),
-            titulo: "Rua",
-            controllerInputPadrao: _view.textEditingControllerRua,
-            hintText: "Rua",
-          ),
-        ),
-        new Divider(
-          height: 1.0,
-        ),
-        new Container(
-          child: new ZInputGeneric(
-            themeData: Theme.of(context),
-            titulo: "Número",
-            controllerInputPadrao: _view.textEditingControllerNumero,
-            inputPadraoFocus: _view.focusNodeNumero,
-            hintText: "Número",
-          ),
-        ),
-        new Divider(
-          height: 1.0,
-        ),
-        new Container(
-          padding: const EdgeInsets.all(16.0),
-          child: new ZButton(
-            zButtonType: ZButtonType.isContained,
-            text: "SALVAR",
-            color: Colors.white,
-            onPressed: () {
-              _view.submit();
-            },
-          ),
-        )
+        _montarBotaoSalvar()
       ],
     );
+  }
+
+  Widget _montarBotaoSalvar() {
+    if (_view.editarAtivo) {
+      return new Container(
+        padding: const EdgeInsets.all(16.0),
+        child: new ZButton(
+          zButtonType: ZButtonType.isContained,
+          text: "SALVAR",
+          color: Colors.white,
+          onPressed: () {
+            _view.submit();
+          },
+        ),
+      );
+    } else
+      return new Container();
   }
 
   ImageProvider _buildImagemPerfil() {

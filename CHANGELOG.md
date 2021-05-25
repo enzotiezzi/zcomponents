@@ -1,3 +1,7 @@
+## 0.9.35+29
+
+* Meu Perfil
+
 ## 0.9.35+28
 
 * correcao z-user-info

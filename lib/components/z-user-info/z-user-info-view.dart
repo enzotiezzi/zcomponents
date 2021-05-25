@@ -61,37 +61,63 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
   ITesteConexaoService _testeConexaoService;
+  bool editarAtivo = false;
+  String textoFoto = "";
 
   List<ZCollectionItem> listaTipoTelefone = [
-    ZCollectionItem(chave: "Celular Pessoal", titulo: "Celular Pessoal", valor: "Celular Pessoal"),
-    ZCollectionItem(chave: "Celular Corporativo", titulo: "Celular Corporativo", valor: "Celular Corporativo"),
-    ZCollectionItem(chave: "Fixo Residência", titulo: "Fixo Residência", valor: "Fixo Residência"),
-    ZCollectionItem(chave: "Fixo Comercial", titulo: "Fixo Comercial", valor: "Fixo Comercial"),
+    ZCollectionItem(
+        chave: "Celular Pessoal",
+        titulo: "Celular Pessoal",
+        valor: "Celular Pessoal"),
+    ZCollectionItem(
+        chave: "Celular Corporativo",
+        titulo: "Celular Corporativo",
+        valor: "Celular Corporativo"),
+    ZCollectionItem(
+        chave: "Fixo Residência",
+        titulo: "Fixo Residência",
+        valor: "Fixo Residência"),
+    ZCollectionItem(
+        chave: "Fixo Comercial",
+        titulo: "Fixo Comercial",
+        valor: "Fixo Comercial"),
   ];
 
   List<ZCollectionItem> listaTipoTelefoneSecundario = [
-    ZCollectionItem(chave: "Celular Pessoal", titulo: "Celular Pessoal", valor: "Celular Pessoal"),
-    ZCollectionItem(chave: "Celular Corporativo", titulo: "Celular Corporativo", valor: "Celular Corporativo"),
-    ZCollectionItem(chave: "Fixo Residência", titulo: "Fixo Residência", valor: "Fixo Residência"),
-    ZCollectionItem(chave: "Fixo Comercial", titulo: "Fixo Comercial", valor: "Fixo Comercial"),
+    ZCollectionItem(
+        chave: "Celular Pessoal",
+        titulo: "Celular Pessoal",
+        valor: "Celular Pessoal"),
+    ZCollectionItem(
+        chave: "Celular Corporativo",
+        titulo: "Celular Corporativo",
+        valor: "Celular Corporativo"),
+    ZCollectionItem(
+        chave: "Fixo Residência",
+        titulo: "Fixo Residência",
+        valor: "Fixo Residência"),
+    ZCollectionItem(
+        chave: "Fixo Comercial",
+        titulo: "Fixo Comercial",
+        valor: "Fixo Comercial"),
   ];
 
   List<ZCollectionItem> listaTipoEmail = [
     ZCollectionItem(chave: "Pessoal", titulo: "Pessoal", valor: "Pessoal"),
-    ZCollectionItem(chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
+    ZCollectionItem(
+        chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
   ];
 
   List<ZCollectionItem> listaTipoEmailSec = [
     ZCollectionItem(chave: "Pessoal", titulo: "Pessoal", valor: "Pessoal"),
-    ZCollectionItem(chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
+    ZCollectionItem(
+        chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
   ];
-
-
 
   String textoTelefone = "ADICIONAR TELEFONE";
   String textoEmail = "ADICIONAR EMAIL";
   String tipoTelSelecionado = "";
-  String tipoTelSecSelecionado="";
+  String tipoTelSecSelecionado = "";
   String tipoEmailSelecionado = "";
   String tipoEmailSecSelecionado = "";
   bool flagTel = true;
@@ -102,10 +128,10 @@ class ZUserInfoView extends IView<ZUserInfo> {
   Color flagColorSec = Color(0xFFE6E6E6);
   Color flagEmailColor = Color(0xFF2BBAB4);
   Color flagEmailColorSec = Color(0xFFE6E6E6);
-  bool segundoTel=false;
-  bool segundoEmail=false;
-  Icon icon=Icon(Icons.add);
-  Icon iconEmail=Icon(Icons.add);
+  bool segundoTel = false;
+  bool segundoEmail = false;
+  Icon icon = Icon(Icons.add);
+  Icon iconEmail = Icon(Icons.add);
   String mascara = "";
   String hint = "";
   String mascaraSec = "";
@@ -147,7 +173,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
     textEditingControllerRua.text = state.widget.userInfo?.logradouro;
     textEditingControllerNumero.text = state.widget.userInfo?.numero;
     textEditingControllerCPF.text = state.widget.userInfo?.cpf;
-    textEditingControllerNomeReduzido.text = state.widget.userInfo?.nomeReduzido;
+    textEditingControllerNomeReduzido.text =
+        state.widget.userInfo?.nomeReduzido;
     textEditingControllerEmailSec.text = state.widget.userInfo?.emailSec;
     textEditingControllerTelefoneSec.text = state.widget.userInfo?.telefoneSec;
 /*
@@ -156,9 +183,6 @@ class ZUserInfoView extends IView<ZUserInfo> {
           _montarData(state.widget.userInfo.dataNascimento);
     }
  */
-
-
-
   }
 
   @override
@@ -172,616 +196,51 @@ class ZUserInfoView extends IView<ZUserInfo> {
     }
   }
 
-  Function tileHabilitarEmailSecundario(){
-    if(preencheuEmail){
-      return(){
-        state.setState(() {
-          segundoEmail = ! segundoEmail;
-          if(segundoEmail){
-            textoEmail = "REMOVER EMAIL";
-            iconEmail = Icon(Icons.remove);
-            //_view.resetTelSec();
-          }else{
-            textoEmail = "ADICIONAR EMAIL";
-            iconEmail = Icon(Icons.add);
-            resetEmailSec();
-          }
-        });
-      };
-    }else{
-      return null;
-    }
-  }
-
-  Widget inputTel(String tipoSelecionado){
-    if(tipoTelSelecionado.contains("Fixo")){
-      return ZInputTelefoneFixo(
-        themeData: Theme.of(state.context),
-        telefoneFixoFocus: focusNodeTelefone,
-        controllerTelefoneFixo: textEditingControllerTelefone,
-        campoObrigatorio: flagTel,
-        validacao: (validacao){
-          state.setState(() {
-            if(validacao){
-              preencheuTelefone = true;
-            }else{
-              preencheuTelefone = false;
-            }
-          });
-        },
-      );
-    }else if(tipoTelSelecionado.contains("Celular")){
-      return ZInputCelular(
-        themeData: Theme.of(state.context),
-        celularFocus: focusNodeTelefone,
-        controllerCelular: textEditingControllerTelefone,
-        campoObrigatorio: flagTel,
-        validacao: (validacao){
-          state.setState(() {
-            if(validacao){
-              preencheuTelefone = true;
-            }else{
-              preencheuTelefone = false;
-            }
-          });
-        },
-      );
-    }else{
-      return ZInputGeneric(
-          themeData: Theme.of(state.context),
-          titulo: "Telefone",
-          inputPadraoFocus: focusNodeTelefone,
-          tipoTeclado: TextInputType.number,
-          campoObrigatorio: flagTel,
-          controllerInputPadrao: textEditingControllerTelefone
-      );
-
-    }
-  }
-
-  Widget inputTelSec(String tipoSelecionado){
-    if(tipoTelSecSelecionado.contains("Fixo")){
-      return ZInputTelefoneFixo(
-        themeData: Theme.of(state.context),
-        telefoneFixoFocus: focusNodeTelefoneSec,
-        controllerTelefoneFixo: textEditingControllerTelefoneSec,
-        campoObrigatorio: flagTelSec,
-      );
-    }else if(tipoTelSecSelecionado.contains("Celular")){
-      return ZInputCelular(
-        themeData: Theme.of(state.context),
-        celularFocus: focusNodeTelefoneSec,
-        controllerCelular: textEditingControllerTelefoneSec,
-        campoObrigatorio: flagTelSec,
-      );
-    }else{
-      return ZInputGeneric(
-          themeData: Theme.of(state.context),
-          titulo: "Telefone",
-          inputPadraoFocus: focusNodeTelefone,
-          tipoTeclado: TextInputType.number,
-          campoObrigatorio: flagTelSec,
-          controllerInputPadrao: textEditingControllerTelefoneSec
-      );
-
-    }
-  }
-
-
-  Function flagHabilitarEmailSecundario(){
-    if(preencheuEmail){
-      return (){
-        state.setState(() {
-          flagEmailPressionada();
-          segundoEmail = true;
-          if(segundoEmail){
-            textoEmail = "REMOVER EMAIL";
-            iconEmail = Icon(Icons.remove);
-          }else{
-            textoEmail = "ADICIONAR EMAIL";
-            iconEmail = Icon(Icons.add);
-          }
-        });
-      };
-    }else{
-      return null;
-    }
-  }
-
-  Function flagHabilitarTelefone(){
-    if(preencheuTelefone){
-      return (){
-        state.setState(() {
-          flagPressionada();
-          if(segundoTel){
-            textoTelefone = "REMOVER TELEFONE";
-            icon = Icon(Icons.remove);
-          }else{
-            textoTelefone = "ADICIONAR TELEFONE";
-            icon = Icon(Icons.add);
-          }
-        });
-      };
-    }else{
-      return null;
-    }
-
-  }
-
-  bool onChangedTelefone (String telefone){
-    state.setState(() {
-      if(telefone.length > 8 && tipoTelSelecionado != ""){
-        return preencheuTelefone = true;
-      }else{
-        return preencheuTelefone = false;
-      }
-    });
-  }
-
-  Function tileHabilitarTelefone(){
-    if(preencheuTelefone){
-      return (){
-        state.setState(() {
-          segundoTel = ! segundoTel;
-          if(segundoTel){
-            textoTelefone = "REMOVER TELEFONE";
-            icon = Icon(Icons.remove);
-            //_view.resetTelSec();
-          }else{
-            textoTelefone = "ADICIONAR TELEFONE";
-            icon = Icon(Icons.add);
-            //resetTelSec();
-          }
-        });
-      };
-    }else{
-      return null;
-    }
-  }
-
   bool validarCamposObrigatorios() {
-    if (preencheuNome ) {
+    if (preencheuNome) {
       return true;
     } else {
       return false;
     }
   }
 
-  Widget zTileAdcTel() {
-    new Container(
-      margin: EdgeInsets.only(top: 16),
-      child: new ZTile(
-        onTap: (){},
-        leading: Text(
-            textoTelefone,
-            style: TextStyle(
-                color: Color(0xFF801F92),
-                fontSize: 14,
-                fontWeight: FontWeight.w500
-            )
-        ),
-        trailing: SizedBox(
-          width: 35,
-          child: IconButton(
-            onPressed: textEditingControllerNumero.text != null ? (){
-              state.setState(() {
-                segundoTel = ! segundoTel;
-                if(segundoTel){
-                  textoTelefone = "REMOVER TELEFONE";
-                  icon = Icon(Icons.remove);
-                  //_view.resetTelSec();
-                }else{
-                  textoTelefone = "ADICIONAR TELEFONE";
-                  icon = Icon(Icons.add);
-                  resetTelSec();
-                }
-              });
-            } : (){},
-            color: Color(0xFF801F92),
-            icon: icon,
-          ),
-        ),
-      ),
-    );
-  }
-
-  resetTelSec(){
-    state.setState(() {
-      hintSec="";
-      mascaraSec="";
-      flagTel = true;
-      flagTelSec = false;
-      textEditingControllerTelefoneSec.text="";
-      tipoTelSecSelecionado="";
-    });
-  }
-
-
-
-  resetEmailSec(){
-    state.setState(() {
-      flagEmail = true;
-      flagEmailSec = false;
-      textEditingControllerEmailSec.text="";
-      tipoEmailSecSelecionado="";
-    });
-  }
-
-  Widget emailSecundario(){
-    if(segundoEmail){
-      return  new Container(
-        margin: EdgeInsets.only(top: 4),
-        color: Colors.white,
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            new Divider(
-              height: 1.0,
-            ),
-            new Padding(
-              padding: const EdgeInsets.only(left: 15.0,right: 6),
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "EMAIL 2",
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xF0000000),
-                        fontWeight: FontWeight.w500
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.flag,
-                          color: definirCorEmailFlagSec(),
-                        ),
-                        onPressed: (){
-                          state.setState(() {
-                            flagEmailPressionada();
-                          });
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.delete_forever,
-                          color: Color(0xFFE53629),
-                        ),
-                        onPressed: (){
-                          state.setState(() {
-                            segundoEmail = ! segundoEmail;
-                            if(segundoEmail){
-                              textoEmail = "REMOVER EMAIL";
-                              iconEmail = Icon(Icons.remove);
-
-                            }else{
-                              textoEmail = "ADICIONAR EMAIL";
-                              iconEmail = Icon(Icons.add);
-                              resetEmailSec();
-                            }
-                          });
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            new Divider(
-              height: 1.0,
-            ),
-            new Container(
-              child: new ZCollectionBottomSheet(
-                campoObrigatorio: false,
-                valorPadrao: tipoEmailSecSelecionado,
-                themeData: Theme.of(state.context),
-                title: "Tipo de Email",
-                lista: listaTipoEmailSec,
-                onChange: (value){
-                  state.setState(() {
-                    focusEmailSec.requestFocus();
-                    tipoEmailSecSelecionado = value.titulo;
-                    textEditingControllerEmailSec.text="";
-                  });
-                },
-              ),
-            ),
-            new Divider(
-              height: 1.0,
-            ),
-            new ZInputEmail(
-              themeData: Theme.of(state.context),
-              controllerEmail: textEditingControllerEmailSec,
-              emailFocus: focusEmailSec,
-              campoObrigatorio: flagEmailSec,
-            ),
-          ],
-        ),
-      );
-    }else{
-      return Container();
-    }
-  }
-
-  Widget telefoneSecundario(){
-    if(segundoTel){
-      return  new Container(
-        margin: EdgeInsets.only(top: 4),
-        color: Colors.white,
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            new Divider(
-              height: 1.0,
-            ),
-            new Padding(
-              padding: const EdgeInsets.only(left: 15.0,right: 6),
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "TELEFONE 2",
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xF0000000),
-                        fontWeight: FontWeight.w500
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.flag,
-                          color: definirCorFlagSec(),
-                        ),
-                        onPressed: (){
-                          state.setState(() {
-                            flagPressionada();
-                          });
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.delete_forever,
-                          color: Color(0xFFE53629),
-                        ),
-                        onPressed: (){
-                          state.setState(() {
-                            segundoTel = ! segundoTel;
-                            if(segundoTel){
-                              textoTelefone = "REMOVER TELEFONE";
-                              icon = Icon(Icons.remove);
-
-                            }else{
-                              textoTelefone = "ADICIONAR TELEFONE";
-                              icon = Icon(Icons.add);
-                              resetTelSec();
-                            }
-                          });
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            new Divider(
-              height: 1.0,
-            ),
-            new Container(
-              child: new ZCollectionBottomSheet(
-                campoObrigatorio: false,
-                valorPadrao: tipoTelSecSelecionado,
-                themeData: Theme.of(state.context),
-                title: "Tipo de Telefone",
-                lista: listaTipoTelefoneSecundario,
-                onChange: (value){
-                  state.setState(() {
-                    definirMascaraTelefoneSecundario(value);
-                    focusTelefoneSec.requestFocus();
-                    tipoTelSecSelecionado = value.titulo;
-                    textEditingControllerTelefoneSec.text="";
-                  });
-                },
-              ),
-            ),
-            new Divider(
-              height: 1.0,
-            ),
-            inputTelSec(tipoTelSecSelecionado)
-          ],
-        ),
-      );
-    }else{
-      return Container();
-    }
-
-  }
-
-
-  flagPressionada(){
-    flagTel = !flagTel;
-    flagTelSec = !flagTelSec;
-    definirCorFlag();
-    definirCorFlagSec();
-
-
-  }
-  flagEmailPressionada(){
-    flagEmail = !flagEmail;
-    flagEmailSec = !flagEmailSec;
-    definirCorEmailFlag();
-    definirCorEmailFlagSec();
-  }
-
-  definirMascaraTelefone(ZCollectionItem texto){
-    if(texto.chave.contains("Fixo")){
-      mascara = "(##) ####-####";
-      hint = "( ** ) **** - ****";
-    }else if(texto.chave.contains("Celular")){
-      mascara = "(##) #####-####";
-      hint = "( ** ) 9 **** - ****";
-    }
-
-  }
-  definirMascaraTelefoneSecundario(ZCollectionItem texto){
-    if(texto.chave.contains("Fixo")){
-      mascaraSec = "(##) ####-####";
-      hintSec = "( ** ) **** - ****";
-    }else if(texto.chave.contains("Celular")){
-      mascaraSec = "(##) #####-####";
-      hintSec = "( ** ) 9 **** - ****";
-    }
-  }
-
-  Color definirCorFlagSec(){
-    if(flagTelSec){
-      return Color(0xFF2BBAB4);
-    }else{
-      return  Color(0xFFE6E6E6);
-    }
-  }
-
-  Color definirCorFlag(){
-    if(flagTel){
-      return Color(0xFF2BBAB4);
-    }else{
-      return  Color(0xFFE6E6E6);
-    }
-  }
-
-  Color definirCorEmailFlag(){
-    if(flagEmail){
-      return Color(0xFF2BBAB4);
-    }else{
-      return  Color(0xFFE6E6E6);
-    }
-  }
-  Color definirCorEmailFlagSec(){
-    if(flagEmailSec){
-      return Color(0xFF2BBAB4);
-    }else{
-      return  Color(0xFFE6E6E6);
-    }
-  }
-
-  void onCEPChange(String cep) async {
-    if (cep.length == 9) {
-      _dialogUtils.showZProgressDialog("Buscando endereço...", 0.5, _globalKey);
-
-      var endereco;
-
-      var conexao = await _testeConexaoService.testarConexao();
-
-      if (conexao == true) {
-        endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
-        if (endereco != null) {
-          _globalKey.currentState
-              .refresh(1.0, "Endereço encontrado", success: true);
-
-          if (state.mounted) {
-            state.setState(() {
-              textEditingControllerEstado.text = endereco.uf;
-              textEditingControllerCidade.text = endereco.localidade;
-              textEditingControllerBairro.text = endereco.bairro;
-              textEditingControllerRua.text = endereco.logradouro;
-
-              focusNodeNumero.requestFocus();
-            });
-          }
-        } else {
-          Future.delayed(Duration(milliseconds: 1000), () {
-            _globalKey.currentState.refresh(
-                1.0, "Não foi possível encontrar o endereço.",
-                success: false);
-          });
-        }
-      } else {
-        Future.delayed(Duration(milliseconds: 1000), () {
-          _globalKey.currentState.refresh(1.0,
-              "Você está sem conexão, Não foi possível encontrar o endereço.",
-              success: false);
-        });
-      }
-
-      Future.delayed(new Duration(milliseconds: 1000), () {
-        _dialogUtils.dismiss();
-      });
-    }
-  }
-
   Future escolherMetodoSelecionarFoto() {
-    return showModalBottomSheet<String>(
-        context: state.context,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        builder: (builder) {
-          return new Container(
-              height: 130,
-              decoration: new BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(10.0),
-                      topRight: const Radius.circular(10.0))),
-              child: new Column(
-                children: <Widget>[
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        padding: const EdgeInsets.only(top: 18, bottom: 8),
-                        child: new Text(
-                          "De onde você quer escolher a foto ?",
-                          style: new TextStyle(color: Color(0xff999999)),
-                        ),
-                      )
-                    ],
-                  ),
-                  new Divider(color: Color(0xffCECECE)),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      new Expanded(
-                          flex: 5,
-                          child: new GestureDetector(
-                            onTap: () => escolherImagem(ImageSource.camera)
-                                .then((_) => _dialogUtils.dismiss()),
-                            child: new Container(
-                              color: Colors.transparent,
-                              child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Container(
-                                    padding: const EdgeInsets.only(top: 8),
-                                    child: new Icon(
-                                      Icons.camera_alt,
-                                      color: MainStyle.get(state.context)
-                                          .primaryColor,
-                                    ),
-                                  ),
-                                  new Container(
-                                    margin: const EdgeInsets.only(top: 6),
-                                    child: new Text(
-                                      "Usar Câmera",
-                                      style: new TextStyle(
-                                          color: Color(0xff999999)),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )),
-                      new Expanded(
-                          flex: 5,
-                          child: new GestureDetector(
-                              onTap: () => escolherImagem(ImageSource.gallery)
+    if (editarAtivo) {
+      return showModalBottomSheet<String>(
+          context: state.context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          builder: (builder) {
+            return new Container(
+                height: 130,
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(10.0),
+                        topRight: const Radius.circular(10.0))),
+                child: new Column(
+                  children: <Widget>[
+                    new Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        new Container(
+                          padding: const EdgeInsets.only(top: 18, bottom: 8),
+                          child: new Text(
+                            "De onde você quer escolher a foto ?",
+                            style: new TextStyle(color: Color(0xff999999)),
+                          ),
+                        )
+                      ],
+                    ),
+                    new Divider(color: Color(0xffCECECE)),
+                    new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        new Expanded(
+                            flex: 5,
+                            child: new GestureDetector(
+                              onTap: () => escolherImagem(ImageSource.camera)
                                   .then((_) => _dialogUtils.dismiss()),
                               child: new Container(
                                 color: Colors.transparent,
@@ -791,7 +250,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                                     new Container(
                                       padding: const EdgeInsets.only(top: 8),
                                       child: new Icon(
-                                        Icons.add_photo_alternate,
+                                        Icons.camera_alt,
                                         color: MainStyle.get(state.context)
                                             .primaryColor,
                                       ),
@@ -799,23 +258,53 @@ class ZUserInfoView extends IView<ZUserInfo> {
                                     new Container(
                                       margin: const EdgeInsets.only(top: 6),
                                       child: new Text(
-                                        "Usar Galeria",
+                                        "Usar Câmera",
                                         style: new TextStyle(
                                             color: Color(0xff999999)),
                                       ),
                                     )
                                   ],
                                 ),
-                              )))
-                    ],
-                  ),
-                ],
-              ));
-        });
+                              ),
+                            )),
+                        new Expanded(
+                            flex: 5,
+                            child: new GestureDetector(
+                                onTap: () => escolherImagem(ImageSource.gallery)
+                                    .then((_) => _dialogUtils.dismiss()),
+                                child: new Container(
+                                  color: Colors.transparent,
+                                  child: new Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      new Container(
+                                        padding: const EdgeInsets.only(top: 8),
+                                        child: new Icon(
+                                          Icons.add_photo_alternate,
+                                          color: MainStyle.get(state.context)
+                                              .primaryColor,
+                                        ),
+                                      ),
+                                      new Container(
+                                        margin: const EdgeInsets.only(top: 6),
+                                        child: new Text(
+                                          "Usar Galeria",
+                                          style: new TextStyle(
+                                              color: Color(0xff999999)),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )))
+                      ],
+                    ),
+                  ],
+                ));
+          });
+    }
   }
 
   Future<void> escolherImagem(ImageSource source) async {
-
     var imagem = await ImagePicker.pickImage(source: source, imageQuality: 70);
 
     if (imagem != null) {
@@ -841,9 +330,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
         if (state.widget.onChangeProfileImage != null)
           state.widget.onChangeProfileImage(base64);
-
       }
-
     }
   }
 

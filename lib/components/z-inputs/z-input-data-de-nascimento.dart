@@ -82,7 +82,7 @@ class _ZInputDataNascimentoState extends State<ZInputDataNascimento> {
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
         textMask: "##/##/####",
-        hintText: "DD / MM / AAAA",enabled: widget.enabled);
+        hintText: "dd / mm / aaaa",enabled: widget.enabled);
   }
 
   void initData() {
