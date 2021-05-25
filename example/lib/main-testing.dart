@@ -89,6 +89,7 @@ class _MainTestingState extends State<MainTesting> {
     return MainStyle.get(context).getDefaultScaffold(
       "Componente de teste",
       _buildBody(),
+
     );
   }
 
@@ -142,7 +143,8 @@ class _MainTestingState extends State<MainTesting> {
               }
             },
           ),
-          ZForm(
+          new RaisedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder:(context)=> ZUserInfo()));}, child: new Text("teste"),)
+         , ZForm(
             onChange: (lista) {
               print(lista);
             },

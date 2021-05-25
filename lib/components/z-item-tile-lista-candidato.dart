@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
 
 class ZItemTileListaCandidato extends StatefulWidget {
@@ -165,11 +166,11 @@ class _ZItemTileListaCandidatoState extends State<ZItemTileListaCandidato> {
                                   right: 0.0,
                                   bottom: 4.0,
                                   top: 6.0),
-                              child: new Icon(
-                                Icons.account_tree_outlined,
-                                color: Color(0xFF808080),
-                                size: 16.0,
-                              ),
+                              child: SvgPicture.asset(
+                                "assets/arvore.svg",
+                                semanticsLabel: 'status-aprovado.svg',
+                                placeholderBuilder: (context) => Icon(Icons.error),
+                              )
                             ),
                             new Container(
                               margin: EdgeInsets.only(
