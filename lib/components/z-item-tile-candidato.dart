@@ -17,11 +17,11 @@ class _ZItemTileCandidatoState extends State<ZItemTileCandidato> {
 
   Widget retornarNome(){
     if(widget.nome==null){
-      return new Text(widget.nome);
+      return new Text('');
     }else{
-      return new ZNomeReduzido(
-        text: widget.nome,
-        textStyle: TextStyle(
+      return new Text(
+        widget.nome,
+        style: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
             fontWeight: FontWeight.w600
@@ -60,7 +60,7 @@ class _ZItemTileCandidatoState extends State<ZItemTileCandidato> {
     }
   }
 
-  Widget retotnarEmail(){
+  Widget retornarEmail(){
     if(widget.email==null){
       return Text('');
     }else{
@@ -132,7 +132,7 @@ class _ZItemTileCandidatoState extends State<ZItemTileCandidato> {
                                 new Container(
                                   margin: EdgeInsets.only(
                                       left: 4.0, bottom: 4.0),
-                                  child: retotnarEmail(),
+                                  child: retornarEmail(),
                                 ),
                                 new Row(
                                   children: [
