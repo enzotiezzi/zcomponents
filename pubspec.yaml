@@ -57,6 +57,8 @@ dependencies:
   flutter_image_compress: ^0.7.0
   brasil_fields: ^1.0.0
   crypto: ^2.1.5
+  flutter_colorpicker: ^0.3.4
+
 
 dev_dependencies:
   flutter_test:
