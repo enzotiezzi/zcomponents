@@ -5,7 +5,6 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/paginated-list.dart';
 import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/settings/api-settings.dart';
-import 'package:z_components/view-model/conta-view-model.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
 
 class ContasService extends Service implements IContasService {
@@ -14,13 +13,14 @@ class ContasService extends Service implements IContasService {
   ContasService(String token) : super(token);
 
   @override
-  Future<ZResponse<UsuarioContaViewModel>> listarUsuariosConta( SearchOptions searchOptions) async {
+  Future<ZResponse<UsuarioContaViewModel>> listarUsuariosConta(
+      SearchOptions searchOptions) async {
     var params = searchOptions.toHttpParams();
     try {
       var res = await request("$_URL/usuario-conta$params", Service.HTTP_GET);
-
+      print(res.body);
       return PaginatedList<UsuarioContaViewModel>(
-          response: res, deserializer: UsuarioContaViewModel.fromJson)
+              response: res, deserializer: UsuarioContaViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;

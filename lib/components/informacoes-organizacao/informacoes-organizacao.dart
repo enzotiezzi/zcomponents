@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/informacoes-organizacao/informacoes-organizacao-view.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
 import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-inputs/z-input-email.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-inputs/z-input-name.dart';
+import 'package:z_components/config/z-tipo-textos.dart';
 import 'package:z_components/styles/main-style.dart';
+
+import '../z-text.dart';
 
 class InformacoesOrganizacao extends StatefulWidget {
   ThemeData themeData;
@@ -77,6 +81,13 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
       child: new Column(
         children: [
           _montarFotoPerfil(),
+          ZText(
+            tituloText: "DADOS GERAIS",
+            zTipos: ZTipoTextos.isTitulo,
+          ),
+          new Divider(
+            height: 1.0,
+          ),
           new ZInputName(
             themeData: widget.themeData,
             nomeFocus: _view.nomeFocusNode,
@@ -84,6 +95,16 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             enabled: false,
           ),
           _montarCamposPfPj(true),
+          new Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: ZText(
+              tituloText: "DADOS DE CONTATO",
+              zTipos: ZTipoTextos.isTitulo,
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
           ZInputCelular(
             themeData: widget.themeData,
             celularFocus: _view.telefoneFocusNode,
@@ -96,16 +117,106 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             controllerEmail: _view.emailController,
             enabled: widget.editarDados,
           ),
-          ZInputGeneric(
-              themeData: widget.themeData,
-              titulo: "Código Ativação",
-              inputPadraoFocus: _view.codigoFocusNode,
-              controllerInputPadrao: _view.codigoController,
-              enabled: false),
+          new Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: ZInputGeneric(
+                themeData: widget.themeData,
+                titulo: "Código Ativação",
+                inputPadraoFocus: _view.codigoFocusNode,
+                controllerInputPadrao: _view.codigoController,
+                enabled: false),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: ZText(
+              tituloText: "DADOS DE CONTATO",
+              zTipos: ZTipoTextos.isTitulo,
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: new ZInputCEP(
+              enabled: widget.editarDados,
+              themeData: Theme.of(context),
+              controllerCep: _view.textEditingControllerCEP,
+              cepFocus: _view.focusNodeCEP,
+              onChange: _view.onCEPChange,
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: new ZInputGeneric(
+              enabled: widget.editarDados,
+              themeData: Theme.of(context),
+              titulo: "Estado",
+              controllerInputPadrao: _view.textEditingControllerEstado,
+              hintText: "Estado",
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: new ZInputGeneric(
+              enabled: widget.editarDados,
+              themeData: Theme.of(context),
+              titulo: "Cidade",
+              controllerInputPadrao: _view.textEditingControllerCidade,
+              hintText: "Cidade",
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: new ZInputGeneric(
+              enabled: widget.editarDados,
+              themeData: Theme.of(context),
+              titulo: "Bairro",
+              controllerInputPadrao: _view.textEditingControllerBairro,
+              hintText: "Bairro",
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: new ZInputGeneric(
+              enabled: widget.editarDados,
+              themeData: Theme.of(context),
+              titulo: "Rua",
+              controllerInputPadrao: _view.textEditingControllerRua,
+              hintText: "Rua",
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: new ZInputGeneric(
+              enabled: widget.editarDados,
+              themeData: Theme.of(context),
+              titulo: "Número",
+              controllerInputPadrao: _view.textEditingControllerNumero,
+              inputPadraoFocus: _view.focusNodeNumero,
+              hintText: "Número",
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
           _buildRowCorPrimaria(),
           _buildTextoCorPrimaria(),
           _buildRowCorSecundaria(),
           _buildTextoCorSecundaria(),
+          _exibirBotao()
         ],
       ),
     );
@@ -253,8 +364,53 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
     );
   }
 
+  Widget _exibirBotao() {
+    if (widget.editarDados) {
+      return new Material(
+        elevation: 4.0,
+        child: new Container(
+          color: Colors.white,
+          height: MediaQuery.of(context).size.height / 8,
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              new RaisedButton(
+                onPressed: () {},
+                child: new Container(
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      new Container(
+                        padding: const EdgeInsets.only(right: 40, left: 40),
+                        child: new Text(
+                          "PRÓXIMO",
+                          style: Theme.of(context)
+                              .textTheme
+                              .button
+                              .copyWith(color: Color(0xFFFFFFFF)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                color: Theme.of(context).accentColor,
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30),
+                ),
+                padding: const EdgeInsets.only(left: 10, right: 10),
+              )
+            ],
+          ),
+        ),
+      );
+    } else {
+      return new Container();
+    }
+  }
+
   Widget _buildTextoCorSecundaria() {
     return new Container(
+      margin: EdgeInsets.only(bottom: 10.0),
       color: Color(0xFFF0F0F0),
       padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
       child: new Row(
