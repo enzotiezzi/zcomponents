@@ -7,11 +7,16 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:z_components/api/contas/contas-service.dart';
 import 'package:z_components/api/contas/i-contas-service.dart';
+import 'package:z_components/api/endereco/endereco-service.dart';
+import 'package:z_components/api/endereco/i-endereco-service.dart';
+import 'package:z_components/api/teste-conexao/i-teste-conexao-service.dart';
+import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
 
 import '../../i-view.dart';
+import '../z-progress-dialog.dart';
 import 'informacoes-organizacao.dart';
 
 class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
@@ -34,6 +39,20 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   TextEditingController telefoneController = new TextEditingController();
   FocusNode codigoFocusNode = new FocusNode();
   TextEditingController codigoController = new TextEditingController();
+  var focusNodeCEP = new FocusNode();
+  var focusNodeNumero = new FocusNode();
+  var textEditingControllerCEP = new TextEditingController();
+  var textEditingControllerEstado = new TextEditingController();
+  var textEditingControllerCidade = new TextEditingController();
+  var textEditingControllerBairro = new TextEditingController();
+  var textEditingControllerRua = new TextEditingController();
+  var textEditingControllerNumero = new TextEditingController();
+  GlobalKey<ZProgressDialogState> _globalKey =
+  new GlobalKey<ZProgressDialogState>();
+  ITesteConexaoService _testeConexaoService;
+  IEnderecoService _enderecoService;
+
+
 
   DialogUtils _dialogUtils;
 
@@ -53,6 +72,9 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   @override
   Future<void> initView() async {
     _dialogUtils = new DialogUtils(state.context);
+    _testeConexaoService = new TesteConexaoService();
+    _enderecoService = new EnderecoService();
+
     if (state.widget.editarDados) {
       Future.delayed(Duration(milliseconds: 1000), () {
         FocusScope.of(state.context).requestFocus(telefoneFocusNode);
@@ -239,6 +261,51 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
           imagemPerfil = bytes;
         });
       }
+    }
+  }
+
+  void onCEPChange(String cep) async {
+    if (cep.length == 9) {
+      _dialogUtils.showZProgressDialog("Buscando endereço...", 0.5, _globalKey);
+
+      var endereco;
+
+      var conexao = await _testeConexaoService.testarConexao();
+
+      if (conexao == true) {
+        endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
+        if (endereco != null) {
+          _globalKey.currentState
+              .refresh(1.0, "Endereço encontrado", success: true);
+
+          if (state.mounted) {
+            state.setState(() {
+              textEditingControllerEstado.text = endereco.uf;
+              textEditingControllerCidade.text = endereco.localidade;
+              textEditingControllerBairro.text = endereco.bairro;
+              textEditingControllerRua.text = endereco.logradouro;
+
+              focusNodeNumero.requestFocus();
+            });
+          }
+        } else {
+          Future.delayed(Duration(milliseconds: 1000), () {
+            _globalKey.currentState.refresh(
+                1.0, "Não foi possível encontrar o endereço.",
+                success: false);
+          });
+        }
+      } else {
+        Future.delayed(Duration(milliseconds: 1000), () {
+          _globalKey.currentState.refresh(1.0,
+              "Você está sem conexão, Não foi possível encontrar o endereço.",
+              success: false);
+        });
+      }
+
+      Future.delayed(new Duration(milliseconds: 1000), () {
+        _dialogUtils.dismiss();
+      });
     }
   }
 }
