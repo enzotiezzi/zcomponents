@@ -41,10 +41,10 @@ class _UsuariosState extends State<Usuarios> {
         new ZSearchBar(
           key: _view.keySearchBar,
           camposFiltro: [
-            new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+            new FiltroCampo(key: "nomeUsuario", value: "nome Usuario"),
           ],
           filtroPrincipal:
-              new FiltroCampo(key: "NomeNivel", value: "Nome nivel"),
+              new FiltroCampo(key: "nomeUsuario", value: "nome Usuario"),
           onFilter: (filters) async {
             SearchOptions searchOptions = new SearchOptions();
             searchOptions.filters = filters;
