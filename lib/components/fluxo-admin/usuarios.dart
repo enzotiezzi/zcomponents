@@ -96,7 +96,9 @@ class _UsuariosState extends State<Usuarios> {
     String appsFormatados = "";
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
-        appsFormatados = "$appsFormatados, ${lista[i].nomeApp}";
+       if(i==0){appsFormatados = "$appsFormatados- ${lista[i].nomeApp}";}else{
+         appsFormatados = "$appsFormatados, ${lista[i].nomeApp}";
+       }
       }
     } else {
       appsFormatados = "Sem apps vinculados";
