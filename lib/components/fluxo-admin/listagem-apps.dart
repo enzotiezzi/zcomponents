@@ -49,7 +49,7 @@ class _ListagemAppsState extends State<ListagemApps> {
         dataExpiracao: app.dataExpiracao ?? "nunca",
         dataVinculo: app.dataVinculo,
         nomeModulo: app.nomeApp,
-        perfilAcesso: app.nomePerfil ?? "",
+        perfilAcesso: app.nomePerfil ?? "Não contém perfil",
         statusVinculo: app.status,
       ),
     );
