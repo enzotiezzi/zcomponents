@@ -92,7 +92,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
+    return GestureDetector(
       onTap: widget.onTap,
       child: new IntrinsicHeight(
         child: new Container(
@@ -119,9 +119,11 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                             new Container(
                                 margin: EdgeInsets.only(
                                     left: 9.0, bottom: 6.0, top: 6.0),
-                                child: retornarNome()),
+                                child: retornarNome()
+                            ),
                           ],
                         ),
+
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -129,18 +131,16 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                               flex: 15,
                               child: new Container(
                                   margin: EdgeInsets.only(
-                                      left: 9.0,
-                                      right: 0.0,
-                                      bottom: 4.0,
-                                      top: 6.0),
-                                  child: new Text("Apps:")),
+                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  child: new Text(
+                                      "Apps:"
+                                  )
+                              ),
                             ),
                             Expanded(
                               flex: 35,
                               child: new Container(
-                                margin: EdgeInsets.only(
-                                  left: 4.0,
-                                ),
+                                margin: EdgeInsets.only(left: 4.0,),
                                 child: retotnarAppVinculado(),
                               ),
                             ),
@@ -153,47 +153,45 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                               flex: 15,
                               child: new Container(
                                   margin: EdgeInsets.only(
-                                      left: 9.0,
-                                      right: 0.0,
-                                      bottom: 4.0,
-                                      top: 6.0),
-                                  child: new Text("E-mail:")),
+                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  child: new Text(
+                                      "E-mail:"
+                                  )
+                              ),
                             ),
                             Expanded(
                               flex: 35,
                               child: new Container(
-                                margin: EdgeInsets.only(
-                                  left: 4.0,
-                                ),
+                                margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarEmail(),
                               ),
                             ),
                           ],
                         ),
+
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 15,
+                              flex:15,
                               child: new Container(
                                   margin: EdgeInsets.only(
-                                      left: 9.0,
-                                      right: 0.0,
-                                      bottom: 4.0,
-                                      top: 6.0),
-                                  child: new Text("Status:")),
+                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  child: new Text(
+                                      "Status:"
+                                  )
+                              ),
                             ),
                             Expanded(
                               flex: 35,
                               child: new Container(
-                                margin: EdgeInsets.only(
-                                  left: 4.0,
-                                ),
+                                margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarStatus(),
                               ),
                             ),
                           ],
                         ),
+
                       ],
                     ),
                   ),
