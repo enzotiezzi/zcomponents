@@ -98,6 +98,18 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             height: 1.0,
           ),
           _montarCamposPfPj(true),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: ZInputGeneric(
+                themeData: widget.themeData,
+                titulo: "Código Ativação",
+                inputPadraoFocus: _view.codigoFocusNode,
+                controllerInputPadrao: _view.codigoController,
+                enabled: false),
+          ),
+
           new Container(
             margin: EdgeInsets.only(top: 10.0),
             child: ZText(
@@ -126,18 +138,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
           new Divider(
             height: 1.0,
           ),
-          new Container(
-            margin: EdgeInsets.only(top: 10.0),
-            child: ZInputGeneric(
-                themeData: widget.themeData,
-                titulo: "Código Ativação",
-                inputPadraoFocus: _view.codigoFocusNode,
-                controllerInputPadrao: _view.codigoController,
-                enabled: false),
-          ),
-          new Divider(
-            height: 1.0,
-          ),
+
           new Container(
             margin: EdgeInsets.only(top: 10.0),
             child: ZText(

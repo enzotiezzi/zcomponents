@@ -28,8 +28,7 @@ class MainStyle {
       String hintText,
       bool enabled,
       ThemeData themeData,
-      bool campoObrigatorio
-      }) {
+      bool campoObrigatorio}) {
     if (enabled == null) {
       enabled = true;
     }
@@ -45,10 +44,10 @@ class MainStyle {
                 new Expanded(
                   flex: 4,
                   child: new Container(
-                    padding: const EdgeInsets.only(
-                        top: 12.0, bottom: 12.0, left: 16.0),
-                    child: returnRequiredField(title, themeData,campoObrigatorio)
-                  ),
+                      padding: const EdgeInsets.only(
+                          top: 12.0, bottom: 12.0, left: 16.0),
+                      child: returnRequiredField(
+                          title, themeData, campoObrigatorio)),
                 ),
                 new Expanded(
                   flex: 7,
@@ -61,7 +60,7 @@ class MainStyle {
                             keyboardType: typeKeyboard,
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
-                            controller: controller,readOnly:enabled ,
+                            controller: controller,
                             cursorColor: Color(0xFF801F92),
                             style: themeData.textTheme.bodyText1,
                             inputFormatters: [
@@ -75,7 +74,8 @@ class MainStyle {
                             },
                             decoration: InputDecoration(
                               hintText: hintText,
-                              hintStyle: themeData.textTheme.bodyText1.copyWith(color: Color(0xFFC7C7C7)),
+                              hintStyle: themeData.textTheme.bodyText1
+                                  .copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),
@@ -104,7 +104,8 @@ class MainStyle {
                             },
                             decoration: InputDecoration(
                               hintText: hintText,
-                              hintStyle: themeData.textTheme.bodyText1.copyWith(color: Color(0xFFC7C7C7)),
+                              hintStyle: themeData.textTheme.bodyText1
+                                  .copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),
@@ -127,8 +128,9 @@ class MainStyle {
   }
 }
 
-  Widget returnRequiredField(String title, ThemeData themeData, bool campoObrigatorio){
-  if(campoObrigatorio){
+Widget returnRequiredField(
+    String title, ThemeData themeData, bool campoObrigatorio) {
+  if (campoObrigatorio) {
     return new RichText(
       maxLines: 2,
       text: TextSpan(
@@ -138,16 +140,14 @@ class MainStyle {
             style: themeData.textTheme.bodyText1
                 .copyWith(color: Color(0xff999999)),
           ),
-          TextSpan(
-              text: "*",
-              style: TextStyle(color: Colors.redAccent)
-          )
+          TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
         ],
       ),
     );
-  }else {
+  } else {
     return new Text(title,
-        style: themeData.textTheme.bodyText1.copyWith(color: Color(0XFF999999)));
+        style:
+            themeData.textTheme.bodyText1.copyWith(color: Color(0XFF999999)));
   }
 }
 
