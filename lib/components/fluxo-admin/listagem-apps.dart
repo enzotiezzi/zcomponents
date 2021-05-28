@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -46,8 +47,12 @@ class _ListagemAppsState extends State<ListagemApps> {
   Widget _montarCardUsuario(AppUsuarioContaViewModel app) {
     return new Container(
       child: new ZItemTileModuloAdm(
-        dataExpiracao: app.dataExpiracao ?? "nunca",
-        dataVinculo: app.dataVinculo,
+        dataExpiracao: (app.dataExpiracao != null)
+            ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataExpiracao))
+            : "nunca",
+        dataVinculo: (app.dataVinculo != null)
+            ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataVinculo))
+            : "nunca",
         nomeModulo: app.nomeApp,
         perfilAcesso: app.nomePerfil ?? "Não contém perfil",
         statusVinculo: app.status,
