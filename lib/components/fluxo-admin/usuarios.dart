@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
-import 'package:z_components/components/usuarios/usuarios-view.dart';
+import 'package:z_components/components/fluxo-admin/usuarios-view.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
+
+import 'listagem-apps.dart';
 
 class Usuarios extends StatefulWidget {
   ThemeData themeData;
@@ -42,20 +44,16 @@ class _UsuariosState extends State<Usuarios> {
       children: [
         new ZSearchBar(
           key: _view.keySearchBar,
-          camposFiltro: [
-            new FiltroCampo(key: "nomeUsuario", value: "nome Usuario"),
-          ],
+          camposFiltro: [],
           filtroPrincipal:
-              new FiltroCampo(key: "nomeUsuario", value: "nome Usuario"),
+              new FiltroCampo(key: "NomeUsuario", value: "nome Usuario"),
           onFilter: (filters) async {
             SearchOptions searchOptions = new SearchOptions();
-            searchOptions.filters = filters;
+            if (filters[0].value != "") {
+              searchOptions.filters = filters;
+            }
 
             await _view.buscarListaUsuarios(searchOptions);
-
-            searchOptions.pagination.pageNumber++;
-
-            _view.searchOptions = searchOptions;
           },
         ),
         _listarUsuarios()
@@ -82,6 +80,14 @@ class _UsuariosState extends State<Usuarios> {
         quantidadeApps: usuario.appLista.length.toString(),
         status: usuario.status,
         appsVinculados: _listaAppsVinculados(usuario.appLista),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ListagemApps(
+                        listaApps: usuario.appLista,
+                      )));
+        },
       ),
     );
   }

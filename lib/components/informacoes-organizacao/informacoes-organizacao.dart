@@ -94,6 +94,9 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             controllerNome: _view.nomeController,
             enabled: false,
           ),
+          new Divider(
+            height: 1.0,
+          ),
           _montarCamposPfPj(true),
           new Container(
             margin: EdgeInsets.only(top: 10.0),
@@ -111,11 +114,17 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             controllerCelular: _view.telefoneController,
             enabled: widget.editarDados,
           ),
+          new Divider(
+            height: 1.0,
+          ),
           ZInputEmail(
             themeData: widget.themeData,
             emailFocus: _view.emailFocusNode,
             controllerEmail: _view.emailController,
             enabled: widget.editarDados,
+          ),
+          new Divider(
+            height: 1.0,
           ),
           new Container(
             margin: EdgeInsets.only(top: 10.0),
@@ -132,7 +141,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
           new Container(
             margin: EdgeInsets.only(top: 10.0),
             child: ZText(
-              tituloText: "DADOS DE CONTATO",
+              tituloText: "DADOS DE LOCALIZAÇÃO",
               zTipos: ZTipoTextos.isTitulo,
             ),
           ),
@@ -269,11 +278,14 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               inputPadraoFocus: _view.nomeFantasiaFocusNode,
               controllerInputPadrao: _view.nomeFantasiaController,
               enabled: false),
+          new Divider(
+            height: 1.0,
+          ),
           ZInputCNPJ(
               themeData: widget.themeData,
               cnpjFocus: _view.cnpjFocusNode,
               controllerCNPJ: _view.cnpjController,
-              enabled: false)
+              enabled: false),
         ],
       );
     } else {

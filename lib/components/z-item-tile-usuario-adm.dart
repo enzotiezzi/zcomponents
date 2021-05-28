@@ -8,7 +8,7 @@ class ZItemTileUsuarioAdm extends StatefulWidget {
   final String email;
   final String status;
   final String quantidadeApps;
-  final Function onTap;
+  Function onTap;
 
   ZItemTileUsuarioAdm(
       {this.nomeUsuario,

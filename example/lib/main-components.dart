@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/components/informacoes-organizacao/informacoes-organizacao.dart';
-import 'package:z_components/components/usuarios/usuarios.dart';
 import 'package:z_components_example/tela-teste-card.dart';
+import 'package:z_components/components/fluxo-admin/usuarios.dart';
 
 class MainComponents extends StatefulWidget {
   @override
@@ -19,11 +19,10 @@ class _MainComponentsState extends State<MainComponents> {
       ),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add
-        ),
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> TelaTesteCard()));
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => TelaTesteCard()));
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -57,7 +56,6 @@ class _MainComponentsState extends State<MainComponents> {
                 MaterialPageRoute(
                     builder: (context) => Usuarios(
                           themeData: Theme.of(context),
-
                         )));
           },
           () {},

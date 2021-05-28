@@ -152,28 +152,23 @@ class _MainTestingState extends State<MainTesting> {
               ZFormViewModel(
                   nomeCampo: "CPF",
                   obrigatorio: true,
-                  enabled: false,
                   tipoValorCampo: "cpf",
                   maxLength: 20),
               ZFormViewModel(
                   nomeCampo: "texto",
                   obrigatorio: false,
-                  enabled: false,
                   tipoValorCampo: "text"),
               ZFormViewModel(
                   nomeCampo: "Cel",
                   obrigatorio: true,
-                  enabled: false,
                   tipoValorCampo: "celular"),
               ZFormViewModel(
                   nomeCampo: "numero",
                   obrigatorio: false,
-                  enabled: false,
                   tipoValorCampo: "number"),
               ZFormViewModel(
                 nomeCampo: "Data",
                 obrigatorio: true,
-                enabled: false,
                 tipoValorCampo: "date",
               ),
               ZFormViewModel(

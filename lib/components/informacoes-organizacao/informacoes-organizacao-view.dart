@@ -26,7 +26,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   Color pickerSecundaria = Color(0xFF801F92);
 
   FocusNode nomeFocusNode = new FocusNode();
-  TextEditingController nomeController = new TextEditingController();
+  TextEditingController nomeController = new TextEditingController(text: "Giuliano O Goria");
   FocusNode nomeFantasiaFocusNode = new FocusNode();
   TextEditingController nomeFantasiaController = new TextEditingController();
   FocusNode cpfFocusNode = new FocusNode();
