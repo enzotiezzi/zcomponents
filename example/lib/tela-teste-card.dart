@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
+import 'package:z_components/components/modulo/detalhe-modulo.dart';
+import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -38,9 +40,12 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             ),
             SizedBox(height: 10,),
             ZItemTileModuloAdm(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetalheModulo(editarDados: false,AppUsuarioContaViewModel: AppUsuarioContaViewModel(),)));
+              },
               nomeModulo: "Módulo",
               perfilAcesso: "Perfil",
-              statusVinculo: "Revogado",
+              statusVinculo: "Ativo",
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
             )
