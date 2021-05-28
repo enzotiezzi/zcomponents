@@ -158,6 +158,7 @@ class _ZInputCelularState extends State<ZInputCelular> {
     if (celular.length < 15 && celular != "") {
       _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
+
       if (widget.validacao != null) widget.validacao(false);
     } else {
       if (widget.validacao != null) widget.validacao(true);

@@ -61,7 +61,7 @@ class MainStyle {
                             keyboardType: typeKeyboard,
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
-                            controller: controller,
+                            controller: controller,readOnly:enabled ,
                             cursorColor: Color(0xFF801F92),
                             style: themeData.textTheme.bodyText1,
                             inputFormatters: [
