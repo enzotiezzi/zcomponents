@@ -2,13 +2,16 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
+import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
 
+import '../z-item-tile-usuario-adm.dart';
 import 'listagem-apps-view.dart';
 
 class ListagemApps extends StatefulWidget {
   List<AppUsuarioContaViewModel> listaApps;
+  UsuarioContaViewModel usuario;
 
-  ListagemApps({this.listaApps});
+  ListagemApps({this.listaApps, this.usuario});
 
   @override
   _ListagemAppsState createState() => _ListagemAppsState();
@@ -36,6 +39,25 @@ class _ListagemAppsState extends State<ListagemApps> {
   }
 
   Widget _buildBody() {
+    return new Column(
+      children: [
+        new Container(
+          child: new ZItemTileUsuarioAdm(
+            nomeUsuario: widget.usuario.nomeUsuario,
+            email: widget.usuario.email,
+            quantidadeApps: widget.usuario.appLista.length.toString(),
+            status: widget.usuario.status,
+            appsVinculados: _view.listarAppsVinculados(widget.usuario.appLista),
+          ),
+        ),
+        new Expanded(
+          child: _ListarModulos(),
+        )
+      ],
+    );
+  }
+
+  Widget _ListarModulos() {
     return new ListView.builder(
         padding: EdgeInsets.only(top: 20.0),
         shrinkWrap: true,

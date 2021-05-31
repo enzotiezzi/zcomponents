@@ -1,8 +1,9 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/i-view.dart';
+import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'listagem-apps.dart';
 
-class ListagemAppsView extends IView<ListagemApps>{
+class ListagemAppsView extends IView<ListagemApps> {
   ListagemAppsView(State<ListagemApps> state) : super(state);
 
   @override
@@ -12,8 +13,21 @@ class ListagemAppsView extends IView<ListagemApps>{
   }
 
   @override
-  Future<void> initView() {
+  Future<void> initView() {}
 
+  String listarAppsVinculados(List<AppUsuarioContaViewModel> lista) {
+    String appsFormatados = "";
+    if (lista != null && lista.length != 0) {
+      for (int i = 0; i < lista.length; i++) {
+        if (i == 0) {
+          appsFormatados = "$appsFormatados- ${lista[i].nomeApp}";
+        } else {
+          appsFormatados = "$appsFormatados, ${lista[i].nomeApp}";
+        }
+      }
+    } else {
+      appsFormatados = "Sem apps vinculados";
+    }
+    return appsFormatados;
   }
-
 }
