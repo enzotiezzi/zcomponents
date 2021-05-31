@@ -79,26 +79,29 @@ class _UsuariosState extends State<Usuarios> {
         email: usuario.email,
         quantidadeApps: usuario.appLista.length.toString(),
         status: usuario.status,
-        appsVinculados: _listaAppsVinculados(usuario.appLista),
+        appsVinculados: _listarAppsVinculados(usuario.appLista),
         onTap: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ListagemApps(
                         listaApps: usuario.appLista,
+                        usuario: usuario,
                       )));
         },
       ),
     );
   }
 
-  String _listaAppsVinculados(List<AppUsuarioContaViewModel> lista) {
+  String _listarAppsVinculados(List<AppUsuarioContaViewModel> lista) {
     String appsFormatados = "";
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
-       if(i==0){appsFormatados = "$appsFormatados- ${lista[i].nomeApp}";}else{
-         appsFormatados = "$appsFormatados, ${lista[i].nomeApp}";
-       }
+        if (i == 0) {
+          appsFormatados = "$appsFormatados- ${lista[i].nomeApp}";
+        } else {
+          appsFormatados = "$appsFormatados, ${lista[i].nomeApp}";
+        }
       }
     } else {
       appsFormatados = "Sem apps vinculados";
