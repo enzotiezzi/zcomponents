@@ -33,7 +33,7 @@ class _UsuariosState extends State<Usuarios> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: new Text("Usuários"),
+        title: new Text("GESTÃO USUÁRIO"),
       ),
       body: _buildBody(),
     );
@@ -80,6 +80,7 @@ class _UsuariosState extends State<Usuarios> {
         quantidadeApps: usuario.appLista.length.toString(),
         status: usuario.status,
         appsVinculados: _listarAppsVinculados(usuario.appLista),
+        telefone: usuario.telefone,
         onTap: () {
           Navigator.push(
               context,

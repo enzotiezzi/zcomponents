@@ -62,7 +62,7 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "Data de Expiração",
+        "Data de expiração",
         TextInputType.number,
             () {
           FocusScope.of(context).requestFocus(widget.dataFocus);
@@ -83,7 +83,8 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
         textMask: "##/##/####",
-        hintText: "dd / mm / aaaa",enabled: widget.enabled);
+        hintText: "dd / mm / aaaa",
+        enabled: widget.enabled);
   }
 
   void initData() {
@@ -150,7 +151,7 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
             widget.validacao(false);
           } else if (dataDigitada.isBefore(dataAtual) == true) {
             _dialogUtils.showAlertDialogNewAviso(
-                "Data Passada!", "Insira uma data válida.");
+                "Data Inválida!", "Insira uma data futura.");
             widget.validacao(false);
           } else {
             widget.valideMes = true;
@@ -166,7 +167,7 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
             widget.validacao(false);
           } else if (dataDigitada.isBefore(dataAtual) == true) {
             _dialogUtils.showAlertDialogNewAviso(
-                "Data Passada!", "Insira uma data válida.");
+                "Data Inválida!", "Insira uma data futura.");
             widget.validacao(false);
           } else {
             widget.valideMes = true;
@@ -180,7 +181,7 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
               widget.validacao(false);
             } else if (dataDigitada.isBefore(dataAtual) == true) {
               _dialogUtils.showAlertDialogNewAviso(
-                  "Data Passada!", "Insira uma data válida.");
+                  "Data Inválida!", "Insira uma data futura.");
               widget.validacao(false);
             } else {
               widget.valideMes = true;
@@ -193,7 +194,7 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
               widget.validacao(false);
             } else if (dataDigitada.isBefore(dataAtual) == true) {
               _dialogUtils.showAlertDialogNewAviso(
-                  "Data Passada!", "Insira uma data válida.");
+                  "Data Inválida!", "Insira uma data futura.");
               widget.validacao(false);
             } else {
               widget.valideMes = true;
@@ -234,7 +235,7 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
         widget.validacao(false);
       } else if (dataDigitada.isBefore(dataAtual) == true) {
         _dialogUtils.showAlertDialogNewAviso(
-            "Data Passada!", "Insira uma data válida.");
+            "Data Inválida!", "Insira uma data futura.");
         widget.validacao(false);
       } else {
         widget.validacao(true);

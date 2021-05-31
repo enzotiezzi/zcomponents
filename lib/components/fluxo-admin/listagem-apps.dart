@@ -1,5 +1,6 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/modulo/detalhe-modulo.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
@@ -32,7 +33,7 @@ class _ListagemAppsState extends State<ListagemApps> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: new Text("Usuários"),
+        title: new Text("USUÁRIOS"),
       ),
       body: _buildBody(),
     );
@@ -49,8 +50,10 @@ class _ListagemAppsState extends State<ListagemApps> {
                 email: widget.usuario.email,
                 quantidadeApps: widget.usuario.appLista.length.toString(),
                 status: widget.usuario.status,
+                telefone: widget.usuario.telefone,
                 appsVinculados:
                     _view.listarAppsVinculados(widget.usuario.appLista),
+
               ),
             )),
         new Expanded(
@@ -74,13 +77,20 @@ class _ListagemAppsState extends State<ListagemApps> {
       child: new ZItemTileModuloAdm(
         dataExpiracao: (app.dataExpiracao != null)
             ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataExpiracao))
-            : "nunca",
+            : "Nunca",
         dataVinculo: (app.dataVinculo != null)
             ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataVinculo))
-            : "nunca",
+            : "Nunca",
         nomeModulo: app.nomeApp,
         perfilAcesso: app.nomePerfil ?? "Não contém perfil",
         statusVinculo: app.status,
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetalheModulo(
+            cliqueEditar: false,
+            editarDados: false,
+            appUsuarioContaViewModel: app,
+          )));
+        },
       ),
     );
   }
