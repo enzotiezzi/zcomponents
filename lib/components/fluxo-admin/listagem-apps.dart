@@ -41,15 +41,18 @@ class _ListagemAppsState extends State<ListagemApps> {
   Widget _buildBody() {
     return new Column(
       children: [
-        new Container(
-          child: new ZItemTileUsuarioAdm(
-            nomeUsuario: widget.usuario.nomeUsuario,
-            email: widget.usuario.email,
-            quantidadeApps: widget.usuario.appLista.length.toString(),
-            status: widget.usuario.status,
-            appsVinculados: _view.listarAppsVinculados(widget.usuario.appLista),
-          ),
-        ),
+        new Material(
+            elevation: 4,
+            child: new Container(margin: EdgeInsets.only(top: 10.0),
+              child: new ZItemTileUsuarioAdm(
+                nomeUsuario: widget.usuario.nomeUsuario,
+                email: widget.usuario.email,
+                quantidadeApps: widget.usuario.appLista.length.toString(),
+                status: widget.usuario.status,
+                appsVinculados:
+                    _view.listarAppsVinculados(widget.usuario.appLista),
+              ),
+            )),
         new Expanded(
           child: _ListarModulos(),
         )
