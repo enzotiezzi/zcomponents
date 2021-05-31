@@ -7,7 +7,8 @@ class ZItemTileUsuarioAdm extends StatefulWidget {
   final String email;
   final String status;
   final String quantidadeApps;
-  Function onTap;
+  final Function onTap;
+  final String telefone;
 
   ZItemTileUsuarioAdm(
       {this.nomeUsuario,
@@ -15,7 +16,8 @@ class ZItemTileUsuarioAdm extends StatefulWidget {
       this.email,
       this.status,
       this.quantidadeApps,
-      this.onTap});
+      this.onTap,
+      this.telefone});
 
   @override
   _ZItemTileUsuarioAdmState createState() => _ZItemTileUsuarioAdmState();
@@ -76,6 +78,25 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
     }
   }
 
+  Widget retornarTelefone(){
+    if(widget.telefone ==null || widget.telefone.isEmpty){
+      return Text(
+          'Não possui telefone',
+          style: TextStyle(
+          color: Color(0xFF000000),
+           fontSize: 12,
+      ));
+    }else{
+      return Text(
+        widget.telefone,
+        style: TextStyle(
+          color: Color(0xFF000000),
+          fontSize: 12,
+        ),
+      );
+    }
+  }
+
   Widget retornarStatus() {
     if (widget.status == null) {
       return Text('');
@@ -101,8 +122,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
             elevation: 2,
             color: Colors.white,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6.0),
-                side: BorderSide(color: Theme.of(context).accentColor)),
+                borderRadius: BorderRadius.circular(6.0),),
             child: Container(
               alignment: Alignment.centerLeft,
               child: Row(
@@ -128,7 +148,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 15,
+                              flex: 20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -138,7 +158,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                               ),
                             ),
                             Expanded(
-                              flex: 35,
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retotnarAppVinculado(),
@@ -150,7 +170,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 15,
+                              flex: 20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -160,7 +180,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                               ),
                             ),
                             Expanded(
-                              flex: 35,
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarEmail(),
@@ -173,7 +193,30 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex:15,
+                              flex: 20,
+                              child: new Container(
+                                  margin: EdgeInsets.only(
+                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  child: new Text(
+                                      "Telefone:"
+                                  )
+                              ),
+                            ),
+                            Expanded(
+                              flex: 25,
+                              child: new Container(
+                                margin: EdgeInsets.only(left: 4.0,),
+                                child: retornarTelefone(),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex:20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -183,7 +226,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                               ),
                             ),
                             Expanded(
-                              flex: 35,
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarStatus(),
