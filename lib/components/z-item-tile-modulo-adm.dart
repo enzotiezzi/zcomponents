@@ -106,8 +106,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
             elevation: 2,
             color: Colors.white,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6.0),
-                side: BorderSide(color: Theme.of(context).accentColor)),
+                borderRadius: BorderRadius.circular(6.0),),
             child: Container(
               alignment: Alignment.centerLeft,
               child: Row(
@@ -133,7 +132,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 15,
+                              flex: 20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -143,7 +142,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                               ),
                             ),
                             Expanded(
-                              flex: 35,
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retotnarPerfilAcesso(),
@@ -156,7 +155,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 15,
+                              flex: 20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -166,7 +165,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                               ),
                             ),
                             Expanded(
-                              flex: 35,
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarStatusVinculo(),
@@ -179,7 +178,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex:15,
+                              flex:20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -189,7 +188,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                               ),
                             ),
                             Expanded(
-                              flex: 35,
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarDataExpiracao(),
@@ -202,7 +201,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex:15,
+                              flex:20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -212,7 +211,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                               ),
                             ),
                             Expanded(
-                              flex: 35,
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarDataVinculo(),

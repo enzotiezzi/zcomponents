@@ -3,6 +3,8 @@ import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/modulo/detalhe-modulo.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
+import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -34,6 +36,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 appsVinculados: "Z Chamados, Quadro Pessoal, Lançamento",
                 nomeUsuario: "Luiz Fernando",
                 status: "Ativo",
+                telefone: "(11)961479207",
                 onTap: (){},
                 quantidadeApps: "3",
               ),
@@ -41,13 +44,31 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             SizedBox(height: 10,),
             ZItemTileModuloAdm(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetalheModulo(editarDados: false,AppUsuarioContaViewModel: AppUsuarioContaViewModel(),)));
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=>DetalheModulo(
+                      editarDados: false,
+                      cliqueEditar: false,
+                      appUsuarioContaViewModel: AppUsuarioContaViewModel(
+                          nomeApp: "ZColaborador",
+                          dataExpiracao: null,
+                          dataVinculo: null,
+                          descricaoPerfil: "Não possui",
+                          status: "Ativo"
+                      ),
+                    )));
               },
               nomeModulo: "Módulo",
               perfilAcesso: "Perfil",
               statusVinculo: "Ativo",
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
+            ),
+            ZInputCPF(
+              themeData: Theme.of(context),
+              cpfFocus: new FocusNode(),
+              controllerCpf: new TextEditingController(),
+              validacao: (b){},
+
             )
           ],
         ),
