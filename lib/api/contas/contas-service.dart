@@ -6,6 +6,8 @@ import 'package:z_components/components/filtro/paginated-list.dart';
 import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/settings/api-settings.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
+
+import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
 
 class ContasService extends Service implements IContasService {
@@ -55,5 +57,24 @@ class ContasService extends Service implements IContasService {
     } catch (e) {
       return null;
     }
+  }
+  Future modificarAcesso(AppUsuarioContaViewModel appUsuarioContaViewModel) async{
+    var res =
+    await request(
+        "$_URL/app-usuario-conta/acesso",
+        Service.HTTP_PUT,
+        body: appUsuarioContaViewModel.toMap());
+
+    print(appUsuarioContaViewModel.status);
+    print(res.statusCode.toString());
+
+    if(res.statusCode==200){
+
+    }else{
+
+    }
+
+
+
   }
 }

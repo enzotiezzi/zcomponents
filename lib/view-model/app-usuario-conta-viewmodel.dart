@@ -50,4 +50,23 @@ class AppUsuarioContaViewModel {
       dataExpiracao: json["dataExpiracao"],
     );
   }
+
+  Map toMap(){
+    return {
+      "idApp": this.idApp,
+      "nomeApp": this.nomeApp,
+      "idUsuario":this.idUsuario,
+      "email": this.email,
+      "telefone":this.telefone,
+      "idConta": this.idConta,
+      "nomeConta":this.nomeConta,
+      "status":this.status,
+      "dataVinculo":this.dataVinculo,
+      "dataExpiracao":this.dataExpiracao,
+      "idPerfil":this.idPerfil,
+      "nomePerfil": this.nomePerfil,
+      "descricaoPerfil": this.descricaoPerfil,
+      "tipoConta":this.tipoConta
+    };
+  }
 }
