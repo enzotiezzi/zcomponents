@@ -3,6 +3,7 @@ import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/components/informacoes-organizacao/informacoes-organizacao.dart';
 import 'package:z_components_example/tela-teste-card.dart';
 import 'package:z_components/components/fluxo-admin/usuarios.dart';
+import 'package:z_components/components/listagem-contas/listagem-contas.dart';
 import 'package:z_components/components/fluxo-admin/modulos.dart';
 
 class MainComponents extends StatefulWidget {
@@ -49,6 +50,8 @@ class _MainComponentsState extends State<MainComponents> {
                           themeData: Theme.of(context),
                           editarDados: false,
                           textoFoto: "",
+                          idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
+                          infoOrganizacaoViewModel: null,
                         )));
           },
           () {
@@ -60,15 +63,21 @@ class _MainComponentsState extends State<MainComponents> {
                         )));
           },
           () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context)=> Modulos(
-                    themeData: Theme.of(context),
-                  )
-              ));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Modulos(
+                          themeData: Theme.of(context),
+                        )));
           },
-          () {}
+          () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ListagemContas(
+                          themeData: Theme.of(context),
+                        )));
+          }
         ],
         listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas"],
       ),
