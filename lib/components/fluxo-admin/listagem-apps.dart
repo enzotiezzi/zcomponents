@@ -85,6 +85,8 @@ class _ListagemAppsState extends State<ListagemApps> {
         perfilAcesso: app.nomePerfil ?? "Não contém perfil",
         statusVinculo: app.status,
         onTap: (){
+          print(widget.usuario.toString());
+          print(app.toMap());
           Navigator.push(context, MaterialPageRoute(builder: (context)=>DetalheModulo(
             cliqueEditar: false,
             editarDados: false,

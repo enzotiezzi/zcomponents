@@ -22,14 +22,13 @@ class DetalheModulo extends StatefulWidget {
 class _DetalheModuloState extends State<DetalheModulo> {
 
   DetalheModuloView _view;
-  //AppUsuarioContaViewModel appUsuarioContaViewModel;
 
   @override
   void initState() {
     _view = DetalheModuloView(this);
     _view.initView();
-    //appUsuarioContaViewModel = widget.AppUsuarioContaViewModel;
     super.initState();
+    print(widget.appUsuarioContaViewModel.toMap());
   }
 
   @override
@@ -76,14 +75,9 @@ class _DetalheModuloState extends State<DetalheModulo> {
                   builder: (context) => DetalheModulo(
                     editarDados: true,
                     cliqueEditar: true,
-                    appUsuarioContaViewModel: AppUsuarioContaViewModel(
-                        nomeApp: widget.appUsuarioContaViewModel.nomeApp,
-                        dataExpiracao: widget.appUsuarioContaViewModel.dataExpiracao,
-                        dataVinculo: widget.appUsuarioContaViewModel.dataVinculo,
-                        descricaoPerfil: widget.appUsuarioContaViewModel.nomePerfil,
-                        status: widget.appUsuarioContaViewModel.status ?? "Não contém perfil"
+                    appUsuarioContaViewModel: widget.appUsuarioContaViewModel
                     ),
-                  )));
+                  ));
         },
       );
     }
@@ -110,7 +104,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
     }
   }
 
-  Widget exibirBotaoRevogar(){
+  Widget exibirBotaoModificar(){
     if(widget.cliqueEditar==true){
       return Material(
         //elevation: 4,
@@ -121,7 +115,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               new RaisedButton(
-                onPressed: (){},
+                onPressed: _view.cliqueModificarAcesso(widget.appUsuarioContaViewModel),
                 child: new Container(
                   child: new Row(
                     mainAxisSize: MainAxisSize.min,
@@ -129,7 +123,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
                       new Container(
                         padding: const EdgeInsets.only(right: 40,left: 40),
                         child: Text(
-                          "REVOGAR ACESSO",
+                          _view.textModificar,
                           style: Theme.of(context)
                               .textTheme
                               .button
@@ -246,7 +240,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
             hintText: _view.hintDataVinculo,
             controllerInputPadrao: _view.dataVinculoController
         ),
-        exibirBotaoRevogar()
+        exibirBotaoModificar()
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:z_components/components/z-perfil-item.dart';
 import 'package:z_components/components/informacoes-organizacao/informacoes-organizacao.dart';
 import 'package:z_components_example/tela-teste-card.dart';
 import 'package:z_components/components/fluxo-admin/usuarios.dart';
+import 'package:z_components/components/fluxo-admin/modulos.dart';
 
 class MainComponents extends StatefulWidget {
   @override
@@ -58,7 +59,15 @@ class _MainComponentsState extends State<MainComponents> {
                           themeData: Theme.of(context),
                         )));
           },
-          () {},
+          () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context)=> Modulos(
+                    themeData: Theme.of(context),
+                  )
+              ));
+          },
           () {}
         ],
         listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas"],
