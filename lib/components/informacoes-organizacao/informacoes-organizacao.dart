@@ -9,6 +9,7 @@ import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-inputs/z-input-name.dart';
 import 'package:z_components/config/z-tipo-textos.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 
 import '../z-text.dart';
 
@@ -16,8 +17,15 @@ class InformacoesOrganizacao extends StatefulWidget {
   ThemeData themeData;
   bool editarDados;
   String textoFoto;
+  InfoOrganizacaoViewModel infoOrganizacaoViewModel;
+  String idConta;
 
-  InformacoesOrganizacao({this.themeData, this.textoFoto, this.editarDados});
+  InformacoesOrganizacao(
+      {this.themeData,
+      this.textoFoto,
+      this.editarDados,
+      this.infoOrganizacaoViewModel,
+      this.idConta});
 
   @override
   _InformacoesOrganizacaoState createState() => _InformacoesOrganizacaoState();
@@ -70,6 +78,9 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
                         themeData: Theme.of(context),
                         editarDados: true,
                         textoFoto: "Editar Logo",
+                        idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
+                        infoOrganizacaoViewModel:
+                            _view.infoOrganizacaoViewModel,
                       )));
         },
       );
@@ -109,7 +120,6 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
                 controllerInputPadrao: _view.codigoController,
                 enabled: false),
           ),
-
           new Container(
             margin: EdgeInsets.only(top: 10.0),
             child: ZText(
@@ -138,7 +148,6 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
           new Divider(
             height: 1.0,
           ),
-
           new Container(
             margin: EdgeInsets.only(top: 10.0),
             child: ZText(
@@ -217,6 +226,18 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               controllerInputPadrao: _view.textEditingControllerNumero,
               inputPadraoFocus: _view.focusNodeNumero,
               hintText: "Número",
+            ),
+          ),
+          new Divider(
+            height: 1.0,
+          ),
+          new Container(
+            child: new ZInputGeneric(
+              enabled: widget.editarDados,
+              themeData: Theme.of(context),
+              titulo: "Complemento",
+              controllerInputPadrao: _view.complementoController,
+              hintText: "Complemento",
             ),
           ),
           new Divider(
@@ -388,7 +409,9 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               new RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _view.editarDadosOrganizacao();
+                },
                 child: new Container(
                   child: new Row(
                     mainAxisSize: MainAxisSize.min,
