@@ -8,6 +8,7 @@ class ZItemTileModuloAdm extends StatefulWidget {
   final String dataVinculo;
   final String dataExpiracao;
   final Function onTap;
+  final bool visibilidade;
 
   ZItemTileModuloAdm(
       {this.nomeModulo,
@@ -15,7 +16,8 @@ class ZItemTileModuloAdm extends StatefulWidget {
         this.statusVinculo,
         this.dataVinculo,
         this.dataExpiracao,
-        this.onTap}
+        this.onTap,
+        this.visibilidade=false}
         );
 
   @override
@@ -90,6 +92,22 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,
+        ),
+      );
+    }
+  }
+
+  Widget _retornarArrow(){
+    if(widget.visibilidade){
+      return Container();
+    }else{
+      return Expanded(
+        flex: 5,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_forward_ios_outlined),
+          ],
         ),
       );
     }
@@ -224,15 +242,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
                     ),
                   ),
 
-                  Expanded(
-                    flex: 5,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_forward_ios_outlined),
-                      ],
-                    ),
-                  )
+                  _retornarArrow()
                 ],
               ),
             ),

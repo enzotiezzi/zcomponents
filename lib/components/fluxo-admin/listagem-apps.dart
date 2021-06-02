@@ -46,6 +46,7 @@ class _ListagemAppsState extends State<ListagemApps> {
             elevation: 4,
             child: new Container(margin: EdgeInsets.only(top: 10.0),
               child: new ZItemTileUsuarioAdm(
+                visibilidade: true,
                 nomeUsuario: widget.usuario.nomeUsuario,
                 email: widget.usuario.email,
                 quantidadeApps: widget.usuario.appLista.length.toString(),
