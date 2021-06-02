@@ -90,16 +90,15 @@ class ContasService extends Service implements IContasService {
 
   @override
   Future<List<AppViewModel>> listarAplicativos(String idModulo) async {
-    List<AppViewModel> apps;
-    try {
+    try{
       var url = "$_URL/modulos/${idModulo}/apps";
       var response = await request(url, Service.HTTP_GET);
       print(response.body);
       print(response.statusCode);
-      apps.add(AppViewModel.fromJson(json.decode(response.body)));
-      print(apps.toString());
-      return apps;
-    } catch (e) {
+      return (json.decode(response.body) as List)
+          .map((x) => AppViewModel.fromJson(x))
+          .toList();
+    }catch(e){
       return null;
     }
   }
