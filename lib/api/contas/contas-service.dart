@@ -5,9 +5,11 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/paginated-list.dart';
 import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/settings/api-settings.dart';
+import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
+import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
 
 class ContasService extends Service implements IContasService {
@@ -22,6 +24,7 @@ class ContasService extends Service implements IContasService {
     try {
       var res = await request("$_URL/usuarios$params", Service.HTTP_GET);
       print(res.body);
+      print(res.statusCode);
       return PaginatedList<UsuarioContaViewModel>(
               response: res, deserializer: UsuarioContaViewModel.fromJson)
           .mapToPaginatedList();
@@ -29,6 +32,7 @@ class ContasService extends Service implements IContasService {
       return null;
     }
   }
+
 
   @override
   Future<InfoOrganizacaoViewModel> buscarDadosOrganizacao(
@@ -67,14 +71,38 @@ class ContasService extends Service implements IContasService {
 
     print(appUsuarioContaViewModel.status);
     print(res.statusCode.toString());
+  }
 
-    if(res.statusCode==200){
 
-    }else{
-
+  @override
+  Future<ZResponse<ModuloContaViewModel>> listarModulosConta(SearchOptions searchOptions) async{
+    print("chamou");
+    var params = searchOptions.toHttpParams();
+    try {
+      var res = await request("$_URL/modulos$params", Service.HTTP_GET);
+      print(res.body);
+      print(res.statusCode);
+      return PaginatedList<ModuloContaViewModel>(
+          response: res, deserializer: ModuloContaViewModel.fromJson)
+          .mapToPaginatedList();
+    } catch (e) {
+      return null;
     }
+  }
 
-
-
+  @override
+  Future<List<AppViewModel>> listarAplicativos(String idModulo) async{
+    List<AppViewModel> apps;
+    try{
+      var url = "$_URL/modulos/${idModulo}/apps";
+      var response = await request(url, Service.HTTP_GET);
+      print(response.body);
+      print(response.statusCode);
+      apps.add(AppViewModel.fromJson(json.decode(response.body)));
+      print(apps.toString());
+      return apps;
+    }catch(e){
+      return null;
+    }
   }
 }
