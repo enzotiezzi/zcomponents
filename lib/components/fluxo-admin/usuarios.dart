@@ -46,7 +46,7 @@ class _UsuariosState extends State<Usuarios> {
           key: _view.keySearchBar,
           camposFiltro: [],
           filtroPrincipal:
-              new FiltroCampo(key: "NomeUsuario", value: "nome Usuario"),
+              new FiltroCampo(key: "Usuario.Nome", value: "nome Usuario"),
           onFilter: (filters) async {
             SearchOptions searchOptions = new SearchOptions();
             if (filters[0].value != "") {
@@ -75,12 +75,12 @@ class _UsuariosState extends State<Usuarios> {
   Widget _montarCardUsuario(UsuarioContaViewModel usuario) {
     return new Container(
       child: new ZItemTileUsuarioAdm(
-        nomeUsuario: usuario.nomeUsuario,
-        email: usuario.email,
+        nomeUsuario: usuario.usuario.nome,
+        email: usuario.usuario.email,
         quantidadeApps: usuario.appLista.length.toString(),
         status: usuario.status,
         appsVinculados: _listarAppsVinculados(usuario.appLista),
-        telefone: usuario.telefone,
+        telefone: usuario.usuario.telefone,
         onTap: () {
           Navigator.push(
               context,
@@ -99,9 +99,9 @@ class _UsuariosState extends State<Usuarios> {
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].nomeApp}";
+          appsFormatados = "$appsFormatados- ${lista[i].app.nome}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].nomeApp}";
+          appsFormatados = "$appsFormatados, ${lista[i].app.nome}";
         }
       }
     } else {

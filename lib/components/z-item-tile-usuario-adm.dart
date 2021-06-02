@@ -9,6 +9,7 @@ class ZItemTileUsuarioAdm extends StatefulWidget {
   final String quantidadeApps;
   final Function onTap;
   final String telefone;
+  final bool visibilidade;
 
   ZItemTileUsuarioAdm(
       {this.nomeUsuario,
@@ -17,7 +18,8 @@ class ZItemTileUsuarioAdm extends StatefulWidget {
       this.status,
       this.quantidadeApps,
       this.onTap,
-      this.telefone});
+      this.telefone,
+      this.visibilidade=false});
 
   @override
   _ZItemTileUsuarioAdmState createState() => _ZItemTileUsuarioAdmState();
@@ -106,6 +108,22 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
         style: TextStyle(
           color: Color(0xFF000000),
           fontSize: 12,
+        ),
+      );
+    }
+  }
+
+  Widget _retornarArrow(){
+    if(widget.visibilidade){
+      return Container();
+    }else{
+      return Expanded(
+        flex: 5,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_forward_ios_outlined),
+          ],
         ),
       );
     }
@@ -238,15 +256,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    flex: 5,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_forward_ios_outlined),
-                      ],
-                    ),
-                  )
+                  _retornarArrow()
                 ],
               ),
             ),

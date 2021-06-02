@@ -20,9 +20,9 @@ class ListagemAppsView extends IView<ListagemApps> {
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].nomeApp}";
+          appsFormatados = "$appsFormatados- ${lista[i].app.nome}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].nomeApp}";
+          appsFormatados = "$appsFormatados, ${lista[i].app.nome}";
         }
       }
     } else {
