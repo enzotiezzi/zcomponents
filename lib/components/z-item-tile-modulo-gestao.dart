@@ -106,7 +106,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
                               ),
                             ),
                             Expanded(
-                              flex: 25,
+                              flex: 35,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornarStatusVinculo(),

@@ -49,7 +49,7 @@ class _ModulosState extends State<Modulos> {
           key: _view.keySearchBar,
           camposFiltro: [],
           filtroPrincipal:
-          new FiltroCampo(key: "NomeModulo", value: "nome Modulo"),
+          new FiltroCampo(key: "Modulo.Nome", value: "nome"),
           onFilter: (filters) async{
             SearchOptions searchOptions = new SearchOptions();
             if (filters[0].value != "") {

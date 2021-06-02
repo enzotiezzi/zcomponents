@@ -1,6 +1,8 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/fluxo-admin/listagem-aplicativos-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
+import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
@@ -67,10 +69,17 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
 
   Widget _montarCardAplicativo (AppViewModel appViewModel){
     print(appViewModel.nome);
-    return Container(
-      child: Text(
-        appViewModel.nome
-      ),
-    );
+    return ZItemTileModuloAdm(
+      onTap: (){},
+      nomeModulo: appViewModel.nome,
+      statusVinculo: widget.moduloContaViewModel.status,
+      perfilAcesso: "Não possui",
+      dataVinculo: (widget.moduloContaViewModel.dataVinculo != null)
+          ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataVinculo))
+          : "Nunca",
+      dataExpiracao:(widget.moduloContaViewModel.dataInativacao != null)
+          ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataInativacao))
+          : "Nunca",
+      );
   }
 }
