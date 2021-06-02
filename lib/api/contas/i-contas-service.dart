@@ -16,4 +16,6 @@ abstract class IContasService {
   Future modificarAcesso( AppUsuarioContaViewModel appUsuarioContaViewModel );
   Future<ZResponse<ModuloContaViewModel>> listarModulosConta(SearchOptions searchOptions);
   Future<List<AppViewModel>> listarAplicativos(String idModulo);
+  Future<ZResponse<AppUsuarioContaViewModel>> listarUsuariosPorModuloEApp(
+      String idModulo, String idApp);
 }
