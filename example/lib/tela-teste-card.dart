@@ -43,7 +43,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               ),
             ),
             SizedBox(height: 10,),
-            ZItemTileModuloAdm(
+        /*    ZItemTileModuloAdm(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(
                     builder: (context)=>DetalheModulo(
@@ -63,7 +63,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               statusVinculo: "Ativo",
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
-            ),
+            ),*/
             ZItemTileModuloGestao(
               onTap: (){},
               nomeModulo: "Quadro pessoal",

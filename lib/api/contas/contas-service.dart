@@ -33,7 +33,6 @@ class ContasService extends Service implements IContasService {
     }
   }
 
-
   @override
   Future<InfoOrganizacaoViewModel> buscarDadosOrganizacao(
       String idConta) async {
@@ -62,20 +61,19 @@ class ContasService extends Service implements IContasService {
       return null;
     }
   }
-  Future modificarAcesso(AppUsuarioContaViewModel appUsuarioContaViewModel) async{
-    var res =
-    await request(
-        "$_URL/app-usuario-conta/acesso",
-        Service.HTTP_PUT,
+
+  Future modificarAcesso(
+      AppUsuarioContaViewModel appUsuarioContaViewModel) async {
+    var res = await request("$_URL/app-usuario-conta/acesso", Service.HTTP_PUT,
         body: appUsuarioContaViewModel.toMap());
 
     print(appUsuarioContaViewModel.status);
     print(res.statusCode.toString());
   }
 
-
   @override
-  Future<ZResponse<ModuloContaViewModel>> listarModulosConta(SearchOptions searchOptions) async{
+  Future<ZResponse<ModuloContaViewModel>> listarModulosConta(
+      SearchOptions searchOptions) async {
     print("chamou");
     var params = searchOptions.toHttpParams();
     try {
@@ -83,7 +81,7 @@ class ContasService extends Service implements IContasService {
       print(res.body);
       print(res.statusCode);
       return PaginatedList<ModuloContaViewModel>(
-          response: res, deserializer: ModuloContaViewModel.fromJson)
+              response: res, deserializer: ModuloContaViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
@@ -91,9 +89,9 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<List<AppViewModel>> listarAplicativos(String idModulo) async{
+  Future<List<AppViewModel>> listarAplicativos(String idModulo) async {
     List<AppViewModel> apps;
-    try{
+    try {
       var url = "$_URL/modulos/${idModulo}/apps";
       var response = await request(url, Service.HTTP_GET);
       print(response.body);
@@ -101,7 +99,23 @@ class ContasService extends Service implements IContasService {
       apps.add(AppViewModel.fromJson(json.decode(response.body)));
       print(apps.toString());
       return apps;
-    }catch(e){
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<ZResponse<AppUsuarioContaViewModel>> listarUsuariosPorModuloEApp(
+      String idModulo, String idApp) async {
+    try {
+      var res = await request(
+          "$_URL/modulos/${idModulo}/apps/$idApp", Service.HTTP_GET);
+      print(res.body);
+      print(res.statusCode);
+      return PaginatedList<AppUsuarioContaViewModel>(
+              response: res, deserializer: AppUsuarioContaViewModel.fromJson)
+          .mapToPaginatedList();
+    } catch (e) {
       return null;
     }
   }

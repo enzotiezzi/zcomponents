@@ -1,72 +1,64 @@
+import 'package:z_components/view-model/app-view-model.dart';
+import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
+
 class AppUsuarioContaViewModel {
   String idApp;
-  String nomeApp;
   String idUsuario;
-  String nomeUsuario;
-  String email;
-  String telefone;
   String idConta;
-  String nomeConta;
   String status;
   String dataVinculo;
-  String dataExpiracao;
+  String dataInativacao;
   String idPerfil;
-  String nomePerfil;
-  String descricaoPerfil;
   String tipoConta;
   bool alteraTotem;
+  bool ativo;
+  String token;
+  UsuarioAdmViewModel usuario;
+  AppViewModel app;
 
-  AppUsuarioContaViewModel({
-    this.idApp,
-    this.nomeApp,
-    this.idUsuario,
-    this.nomeUsuario,
-    this.email,
-    this.telefone,
-    this.idConta,
-    this.nomeConta,
-    this.status,
-    this.dataVinculo,
-    this.dataExpiracao,
-    this.idPerfil,
-    this.nomePerfil,
-    this.descricaoPerfil,
-    this.tipoConta,
-    this.alteraTotem,
-  });
+  AppUsuarioContaViewModel(
+      {this.idApp,
+      this.idUsuario,
+      this.idConta,
+      this.status,
+      this.dataVinculo,
+      this.dataInativacao,
+      this.idPerfil,
+      this.tipoConta,
+      this.alteraTotem,
+      this.ativo,
+      this.token,
+      this.usuario,
+      this.app});
 
-  factory AppUsuarioContaViewModel.fromJson(Map<String, dynamic> json) {
+  static AppUsuarioContaViewModel fromJson(Map<String, dynamic> json) {
     return new AppUsuarioContaViewModel(
-      idApp: json["idApp"],
-      nomeApp: json["nomeApp"],
-      idUsuario: json["idUsuario"],
-      nomeUsuario: json["nomeUsuario"],
-      email: json["email"],
-      telefone: json["telefone"],
-      idConta: json["idConta"],
-      nomeConta: json["nomeConta"],
-      status: json["status"],
-      dataVinculo: json["dataVinculo"],
-      dataExpiracao: json["dataExpiracao"],
-    );
+        idApp: json["idApp"],
+        idUsuario: json["idUsuario"],
+        idConta: json["idConta"],
+        status: json["status"],
+        dataVinculo: json["dataVinculo"],
+        dataInativacao: json["dataInativacao"],
+        ativo: json["ativo"],
+        token: json["token"],
+        usuario: UsuarioAdmViewModel.fromJson(json['usuario']),
+        app: AppViewModel.fromJson(json['app']));
   }
 
-  Map toMap(){
+  Map toMap() {
     return {
       "idApp": this.idApp,
-      "nomeApp": this.nomeApp,
-      "idUsuario":this.idUsuario,
-      "email": this.email,
-      "telefone":this.telefone,
+      "idUsuario": this.idUsuario,
       "idConta": this.idConta,
-      "nomeConta":this.nomeConta,
-      "status":this.status,
-      "dataVinculo":this.dataVinculo,
-      "dataExpiracao":this.dataExpiracao,
-      "idPerfil":this.idPerfil,
-      "nomePerfil": this.nomePerfil,
-      "descricaoPerfil": this.descricaoPerfil,
-      "tipoConta":this.tipoConta
+      "status": this.status,
+      "dataVinculo": this.dataVinculo,
+      "dataInativacao": this.dataInativacao,
+      "idPerfil": this.idPerfil,
+      "tipoConta": this.tipoConta,
+      "ativo": this.ativo,
+      "token": this.token,
+      "usuario": this.usuario.toMap(),
+      "app": this.app.toMap(),
     };
   }
 }

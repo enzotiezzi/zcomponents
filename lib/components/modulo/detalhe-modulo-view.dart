@@ -55,8 +55,8 @@ class DetalheModuloView extends IView<DetalheModulo>{
 
 
   Widget _preencherDados(){
-    titulo = state.widget.appUsuarioContaViewModel.nomeApp;
-    perfilController.text = state.widget.appUsuarioContaViewModel.nomePerfil ?? "Não contém perfil";
+    titulo = state.widget.appUsuarioContaViewModel.app.nome;
+    perfilController.text = "Não contém perfil";
     dataVinculoController.text = _validarDataVinculo();
     dataExpiracaoController.text = _validarDataExpiracao();
     statusController.text = state.widget.appUsuarioContaViewModel.status;
@@ -76,8 +76,8 @@ class DetalheModuloView extends IView<DetalheModulo>{
   }
 
   String _validarDataExpiracao(){
-    if(state.widget.appUsuarioContaViewModel.dataExpiracao != null){
-      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel.dataExpiracao));
+    if(state.widget.appUsuarioContaViewModel.dataInativacao != null){
+      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel.dataInativacao));
     }else{
       return "Nunca";
     }
