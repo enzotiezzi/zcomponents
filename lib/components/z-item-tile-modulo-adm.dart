@@ -119,13 +119,14 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
       onTap: widget.onTap,
       child: new IntrinsicHeight(
         child: new Container(
-          margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+          margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),
           child: Material(
             elevation: 2,
             color: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),),
             child: Container(
+              padding: const EdgeInsets.only(top: 8,bottom: 8,left: 7,right: 7),
               alignment: Alignment.centerLeft,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
