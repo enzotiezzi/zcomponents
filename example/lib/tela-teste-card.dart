@@ -6,6 +6,10 @@ import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
+import 'package:z_components/components/fluxo-admin/detalhe-usuario.dart';
+import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
+import 'package:z_components/view-model/app-view-model.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -65,7 +69,23 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               dataVinculo: "01/09/2018",
             ),*/
             ZItemTileModuloGestao(
-              onTap: (){},
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=>
+                        DetalheUsuario(
+                          editarDados: false,
+                          cliqueEditar: false,
+                          appUsuarioContaViewModel: new AppUsuarioContaViewModel(
+                            status: "Ativo",
+                            dataVinculo: (null != null)
+                                ? UtilData.obterDataDDMMAAAA(DateTime.parse(null))
+                                : "Nunca",
+                            dataInativacao: "",
+                            app: new AppViewModel(nome: "Teste"),
+                            usuario: new UsuarioAdmViewModel(nome: "Teste")
+                          ),
+                        )));
+              },
               nomeModulo: "Quadro pessoal",
               status: "Ativo",
               visibilidade: true,
