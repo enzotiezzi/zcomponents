@@ -45,7 +45,7 @@ class _ZAbaState extends State<ZAba> {
                 child: new Text(
                   item.titulo,
                   style: TextStyle(
-                      color: Color(0xff801F92), fontWeight: FontWeight.w600),
+                      color: Color(0xff000000), fontWeight: FontWeight.w600),
                 ),
               ),
             ),

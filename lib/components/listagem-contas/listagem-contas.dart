@@ -1,10 +1,13 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/z-item-tile.dart';
+import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/z-item-tile-conta.dart';
 
+import 'detalhe-conta.dart';
 import 'listagem-contas-view.dart';
 
 class ListagemContas extends StatefulWidget {
@@ -63,17 +66,30 @@ class _ListagemContasState extends State<ListagemContas> {
             padding: EdgeInsets.only(top: 20.0),
             controller: _view.scrollController,
             shrinkWrap: true,
-            itemCount: 1,
-            itemBuilder: (builder, index) => _montarCardUsuario()));
+            itemCount: _view.listaContas.length,
+            itemBuilder: (builder, index) =>
+                _montarCardUsuario(_view.listaContas[index])));
   }
 
-  Widget _montarCardUsuario() {
-    return new Container(
+  Widget _montarCardUsuario(ContaV2ViewModel item) {
+    return new GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetalheConta(
+                      themeData: Theme.of(context),
+                      contaV2ViewModel: item,
+                    )));
+      },
       child: new ZItemTileConta(
-        dataVinculo: "01/06/2021",
-        appsVinculados: "ZColaborador, ZPonto, ZCentral",
-        ativo: true,
-        nomeConta: "Zellar",
+        visibilidade: false,
+        dataVinculo: (item.dataVinculo != null)
+            ? UtilData.obterDataDDMMAAAA(DateTime.parse(item.dataVinculo))
+            : "Nunca",
+        appsVinculados: _view.listarAppsVinculados(item.appLista),
+        ativo: item.contaLogada,
+        nomeConta: item.nomeConta ?? "",
       ),
     );
   }
