@@ -33,7 +33,7 @@ class _ListagemAppsState extends State<ListagemApps> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: new Text("USUÁRIOS"),
+        title: new Text("USUÁRIO"),
       ),
       body: _buildBody(),
     );
