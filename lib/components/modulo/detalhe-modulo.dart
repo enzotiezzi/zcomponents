@@ -122,7 +122,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
             ),
             animatedWidgetFollowingHeader: new Container(
               padding: const EdgeInsets.only(top: 8,bottom: 8),
-              child: new Icon(Icons.unfold_less,color: Color(0xffcccccc),),
+              child: new Icon(Icons.arrow_drop_down,color: Color(0xffcccccc),),
             ),
             children: [
               new ZItemTileUsuarioAdm(

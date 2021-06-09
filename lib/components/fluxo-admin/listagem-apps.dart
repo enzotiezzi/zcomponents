@@ -77,9 +77,7 @@ class _ListagemAppsState extends State<ListagemApps> {
               ),
               animatedWidgetFollowingHeader: new Container(
                 padding: const EdgeInsets.only(top: 8,bottom: 8),
-                child:(_view.icons2 == true)
-                    ? new Icon(Icons.unfold_less, color: Color(0xffE6E6E6))
-                    : new Icon(Icons.unfold_less, color: Color(0xffE6E6E6)),
+                child: new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
               ),
               children: [
                 new Divider(height: 1.0,),
