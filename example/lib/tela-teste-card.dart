@@ -113,21 +113,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                       print("2");
                     },
                     titulo: "Feriados"),
-                ZAbaViewModel(
-                    onTap: () {
-                      print("3");
-                    },
-                    titulo: "Submenu 3"),
-                ZAbaViewModel(
-                    onTap: () {
-                      print("4");
-                    },
-                    titulo: "Submenu 4"),
-                ZAbaViewModel(
-                    onTap: () {
-                      print("5");
-                    },
-                    titulo: "Submenu 5")
+
               ],
             )
           ],

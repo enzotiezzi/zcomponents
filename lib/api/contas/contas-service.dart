@@ -6,6 +6,7 @@ import 'package:z_components/components/filtro/paginated-list.dart';
 import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/settings/api-settings.dart';
 import 'package:z_components/view-model/app-view-model.dart';
+import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -113,6 +114,21 @@ class ContasService extends Service implements IContasService {
       print(res.statusCode);
       return PaginatedList<AppUsuarioContaViewModel>(
               response: res, deserializer: AppUsuarioContaViewModel.fromJson)
+          .mapToPaginatedList();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<ZResponse<ContaV2ViewModel>> listarContas(
+      SearchOptions searchOptions) async {
+    var params = searchOptions.toHttpParams();
+    try {
+      var res = await request("$_URL/usuarios/contas$params", Service.HTTP_GET);
+      print(res.body);
+      return PaginatedList<ContaV2ViewModel>(
+          response: res, deserializer: ContaV2ViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
