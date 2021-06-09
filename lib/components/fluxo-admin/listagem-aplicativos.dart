@@ -28,6 +28,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     _view.initView();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -39,7 +40,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     );
   }
 
-  Widget _buildBody (){
+  Widget _buildBody() {
     return new Column(
       children: [
         new Material(
@@ -54,14 +55,13 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 16),
-                      padding: const EdgeInsets.only(top: 8,bottom: 8),
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
                       child: new Text(
                         widget.moduloContaViewModel.modulo.nome,
                         style: new TextStyle(
-                            color:Colors.black,
-                            fontWeight:FontWeight.w500,
-                            fontSize: MainStyle.get(context).fontSizePadrao
-                        ),
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: MainStyle.get(context).fontSizePadrao),
                       ),
                     ),
                   ],
@@ -69,7 +69,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
               ),
             ),
             animatedWidgetFollowingHeader: new Container(
-              padding: const EdgeInsets.only(top: 8,bottom: 8),
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: new Icon(Icons.unfold_less, color: Color(0xffE6E6E6)),
             ),
             children: [
@@ -88,22 +88,22 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     );
   }
 
-  Widget _listarAplicativos(){
+  Widget _listarAplicativos() {
     return new ListView.builder(
       padding: EdgeInsets.only(top: 20.0),
       shrinkWrap: true,
       itemCount: _view.listaModulos.length,
-      itemBuilder: (context,index)=>
-      _montarCardAplicativo(_view.listaModulos[index]),
+      itemBuilder: (context, index) =>
+          _montarCardAplicativo(_view.listaModulos[index]),
     );
   }
 
-  Widget _montarCardAplicativo (AppViewModel appViewModel){
+  Widget _montarCardAplicativo(AppViewModel appViewModel) {
     print(appViewModel.nome);
     return Container(
-      child: new ZItemTileModuloGestao(
-        nomeModulo: appViewModel.nomeExibicao,
-        status: widget.moduloContaViewModel.status,
-    );
+        child: new ZItemTileModuloGestao(
+      nomeModulo: appViewModel.nomeExibicao,
+      status: widget.moduloContaViewModel.status,
+    ));
   }
 }
