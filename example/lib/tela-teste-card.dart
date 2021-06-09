@@ -46,30 +46,14 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 quantidadeApps: "3",
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            /*    ZItemTileModuloAdm(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>DetalheModulo(
-                      editarDados: false,
-                      cliqueEditar: false,
-                      appUsuarioContaViewModel: AppUsuarioContaViewModel(
-                          nomeApp: "ZColaborador",
-                          dataExpiracao: null,
-                          dataVinculo: null,
-                          descricaoPerfil: "Não possui",
-                          status: "Ativo"
-                      ),
-                    )));
-              },
+            SizedBox(height: 10,),
+            ZItemTileModuloAdm(
               nomeModulo: "Módulo",
               perfilAcesso: "Perfil",
               statusVinculo: "Ativo",
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
-            ),*/
+            ),
             ZItemTileModuloGestao(
               onTap: () {
                 Navigator.push(

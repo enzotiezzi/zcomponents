@@ -1,10 +1,12 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/fluxo-admin/listagem-aplicativos-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
+import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 
@@ -31,7 +33,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     return new Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("APLICATIVOS"),
+        title: new Text("APLICATIVOS"),
       ),
       body: _buildBody(),
     );
@@ -42,16 +44,44 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
       children: [
         new Material(
           elevation: 4,
-          child: new Container(
-              margin: EdgeInsets.only(top: 10.0),
-              child: ZItemTileModuloGestao(
+          child: new ConfigurableExpansionTile(
+            initiallyExpanded: false,
+            borderColorStart: Color(0xffcccccc),
+            borderColorEnd: Color(0xffcccccc),
+            header: new Expanded(
+              child: new Container(
+                child: Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 16),
+                      padding: const EdgeInsets.only(top: 8,bottom: 8),
+                      child: new Text(
+                        widget.moduloContaViewModel.modulo.nome,
+                        style: new TextStyle(
+                            color:Colors.black,
+                            fontWeight:FontWeight.w500,
+                            fontSize: MainStyle.get(context).fontSizePadrao
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            animatedWidgetFollowingHeader: new Container(
+              padding: const EdgeInsets.only(top: 8,bottom: 8),
+              child: new Icon(Icons.unfold_less, color: Color(0xffE6E6E6)),
+            ),
+            children: [
+              new ZItemTileModuloGestao(
                 visibilidade: true,
                 status: widget.moduloContaViewModel.status,
                 nomeModulo: widget.moduloContaViewModel.modulo.nome,
-              ),
+              )
+            ],
           ),
         ),
-        Expanded(
+        new Expanded(
           child: _listarAplicativos(),
         )
       ],
@@ -70,28 +100,10 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
 
   Widget _montarCardAplicativo (AppViewModel appViewModel){
     print(appViewModel.nome);
-    return ZItemTileModuloAdm(
-      onTap: (){
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context)=>
-                    ListagemUsuarios(
-                      moduloContaViewModel: widget.moduloContaViewModel,
-                      appViewModel: appViewModel,
-                    )
-            )
-        );
-      },
-      nomeModulo: appViewModel.nome,
-      statusVinculo: widget.moduloContaViewModel.status,
-      perfilAcesso: "Não possui",
-      dataVinculo: (widget.moduloContaViewModel.dataVinculo != null)
-          ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataVinculo))
-          : "Nunca",
-      dataExpiracao:(widget.moduloContaViewModel.dataInativacao != null)
-          ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataInativacao))
-          : "Nunca",
-      );
+    return Container(
+      child: new ZItemTileModuloGestao(
+        nomeModulo: appViewModel.nomeExibicao,
+        status: widget.moduloContaViewModel.status,
+    );
   }
 }

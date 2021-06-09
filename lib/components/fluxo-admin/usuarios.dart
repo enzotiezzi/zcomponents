@@ -33,7 +33,7 @@ class _UsuariosState extends State<Usuarios> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: new Text("GESTÃO USUÁRIO"),
+        title: new Text("USUÁRIO"),
       ),
       body: _buildBody(),
     );
