@@ -1,4 +1,5 @@
 import 'app-usuario-conta-viewmodel.dart';
+import 'conta.dart';
 
 class ContaV2ViewModel {
   String idConta;
@@ -12,20 +13,21 @@ class ContaV2ViewModel {
   bool ativo;
   bool contaLogada;
   String dataVinculo;
+  Conta conta;
 
-  ContaV2ViewModel({
-    this.idConta,
-    this.idUsuario,
-    this.nomeConta,
-    this.nomeUsuario,
-    this.email,
-    this.telefone,
-    this.appLista,
-    this.status,
-    this.ativo,
-    this.contaLogada,
-    this.dataVinculo,
-  });
+  ContaV2ViewModel(
+      {this.idConta,
+      this.idUsuario,
+      this.nomeConta,
+      this.nomeUsuario,
+      this.email,
+      this.telefone,
+      this.appLista,
+      this.status,
+      this.ativo,
+      this.contaLogada,
+      this.dataVinculo,
+      this.conta});
 
   static ContaV2ViewModel fromJson(Map<String, dynamic> json) {
     return new ContaV2ViewModel(
@@ -44,6 +46,9 @@ class ContaV2ViewModel {
       ativo: json["ativo"],
       contaLogada: json["contaLogada"],
       dataVinculo: json["dataVinculo"],
+      conta: Conta.fromJson(
+        json['conta'],
+      ),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import '../../z-item-tile-conta.dart';
@@ -40,19 +41,32 @@ class _DetalheContaState extends State<DetalheConta> {
       children: [
         new Material(
             elevation: 4,
-            child: new Container(
-              margin: EdgeInsets.only(top: 10.0),
-              child: new ZItemTileConta(
-                visibilidade: true,
-                dataVinculo: (widget.contaV2ViewModel.dataVinculo != null)
-                    ? UtilData.obterDataDDMMAAAA(
-                        DateTime.parse(widget.contaV2ViewModel.dataVinculo))
-                    : "Nunca",
-                appsVinculados: _view
-                    .listarAppsVinculados(widget.contaV2ViewModel.appLista),
-                ativo: widget.contaV2ViewModel.contaLogada,
-                nomeConta: widget.contaV2ViewModel.nomeConta ?? "",
-              ),
+            child: new ConfigurableExpansionTile(
+              animatedWidgetFollowingHeader: new Icon(Icons.arrow_drop_down),
+              header: new Expanded(
+                  child: new Container(
+                padding: EdgeInsets.all(16.0),
+                child: new Text(
+                  widget.contaV2ViewModel.conta.nome,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              )),
+              children: [
+                new Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                  child: new ZItemTileConta(
+                    visibilidade: true,
+                    dataVinculo: (widget.contaV2ViewModel.dataVinculo != null)
+                        ? UtilData.obterDataDDMMAAAA(
+                            DateTime.parse(widget.contaV2ViewModel.dataVinculo))
+                        : "Nunca",
+                    appsVinculados: _view
+                        .listarAppsVinculados(widget.contaV2ViewModel.appLista),
+                    ativo: widget.contaV2ViewModel.contaLogada,
+                    nomeConta: widget.contaV2ViewModel.conta.nome ?? "",
+                  ),
+                )
+              ],
             )),
         exibirBotaoModificar()
       ],
@@ -62,38 +76,36 @@ class _DetalheContaState extends State<DetalheConta> {
   Widget exibirBotaoModificar() {
     if (!widget.contaV2ViewModel.contaLogada) {
       return new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // ignore: deprecated_member_use
-              new RaisedButton(
-                onPressed: () {},
-                child: new Container(
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      new Container(
-                        padding: const EdgeInsets.only(right: 40, left: 40),
-                        child: Text(
-                          "TROCAR CONTA",
-                          style: Theme.of(context)
-                              .textTheme
-                              .button
-                              .copyWith(color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                color: Theme.of(context).accentColor,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30),
-                ),
-                padding: const EdgeInsets.only(left: 10, right: 10),
-              )
-            ],
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // ignore: deprecated_member_use
+          new RaisedButton(
+            onPressed: () {},
+            child: new Container(
+              child: new Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  new Container(
+                    padding: const EdgeInsets.only(right: 40, left: 40),
+                    child: Text(
+                      "TROCAR CONTA",
+                      style: Theme.of(context)
+                          .textTheme
+                          .button
+                          .copyWith(color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            color: Theme.of(context).accentColor,
+            shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30),
+            ),
+            padding: const EdgeInsets.only(left: 10, right: 10),
           )
-
-      ;
+        ],
+      );
     } else {
       return Container();
     }
