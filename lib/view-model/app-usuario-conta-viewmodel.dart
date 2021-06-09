@@ -41,8 +41,12 @@ class AppUsuarioContaViewModel {
         dataInativacao: json["dataInativacao"],
         ativo: json["ativo"],
         token: json["token"],
-        usuario: UsuarioAdmViewModel.fromJson(json['usuario']),
-        app: AppViewModel.fromJson(json['app']));
+        usuario: (json['usuario'] == null)
+            ? new UsuarioAdmViewModel()
+            : UsuarioAdmViewModel.fromJson(json['usuario']),
+        app: (json['app'] == null)
+            ? new AppViewModel()
+            : AppViewModel.fromJson(json['app']));
   }
 
   Map toMap() {

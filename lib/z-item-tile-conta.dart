@@ -6,13 +6,15 @@ class ZItemTileConta extends StatefulWidget {
   String appsVinculados;
   String dataVinculo;
   bool ativo;
+  bool visibilidade;
 
   ZItemTileConta(
       {this.imagemPerfil,
       this.dataVinculo,
       this.appsVinculados,
       this.ativo,
-      this.nomeConta});
+      this.nomeConta,
+      this.visibilidade});
 
   @override
   _ZItemTileContaState createState() => _ZItemTileContaState();
@@ -113,20 +115,28 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    flex: 10,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_forward_ios_outlined),
-                      ],
-                    ),
-                  )
+                  _retornarArrow()
                 ],
               ),
             )),
       ),
     );
+  }
+
+  Widget _retornarArrow() {
+    if (widget.visibilidade) {
+      return Container();
+    } else {
+      return Expanded(
+        flex: 10,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_forward_ios_outlined),
+          ],
+        ),
+      );
+    }
   }
 
   Widget retotnarAppVinculado() {
