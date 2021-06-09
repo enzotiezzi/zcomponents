@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
-import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/z-item-tile-conta.dart';
-
 import 'detalhe-conta.dart';
 import 'listagem-contas-view.dart';
 
@@ -23,10 +20,8 @@ class ListagemContas extends StatefulWidget {
 class _ListagemContasState extends State<ListagemContas> {
   ListagemContasView _view;
 
-
   @override
   void initState() {
-
     _view = ListagemContasView(this);
     _view.initView();
     super.initState();
@@ -93,6 +88,7 @@ class _ListagemContasState extends State<ListagemContas> {
         appsVinculados: _view.listarAppsVinculados(item.appLista),
         ativo: item.contaLogada,
         nomeConta: item.conta.nome ?? "",
+        tamanhoLista: item.appLista.length,
       ),
     );
   }

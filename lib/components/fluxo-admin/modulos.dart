@@ -34,7 +34,7 @@ class _ModulosState extends State<Modulos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("GESTÃO DE MÓDULOS"),
+        title: new Text("MÓDULOS"),
         centerTitle: true,
       ),
       body: _buildBody(),
@@ -45,7 +45,7 @@ class _ModulosState extends State<Modulos> {
   Widget _buildBody (){
     return new Column(
       children: [
-        ZSearchBar(
+        new ZSearchBar(
           key: _view.keySearchBar,
           camposFiltro: [],
           filtroPrincipal:

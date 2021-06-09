@@ -7,6 +7,7 @@ class ZItemTileConta extends StatefulWidget {
   String dataVinculo;
   bool ativo;
   bool visibilidade;
+  int tamanhoLista;
 
   ZItemTileConta(
       {this.imagemPerfil,
@@ -14,7 +15,8 @@ class ZItemTileConta extends StatefulWidget {
       this.appsVinculados,
       this.ativo,
       this.nomeConta,
-      this.visibilidade});
+      this.visibilidade,
+      this.tamanhoLista});
 
   @override
   _ZItemTileContaState createState() => _ZItemTileContaState();
@@ -81,6 +83,7 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
                                         color: Colors.grey, fontSize: 12.0),
                                   )),
                             ),
+                            _montarTamanhoLista(),
                             Expanded(
                               flex: 25,
                               child: new Container(
@@ -137,6 +140,20 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
         ),
       );
     }
+  }
+
+  Widget _montarTamanhoLista() {
+    if (widget.tamanhoLista != null && widget.tamanhoLista != 0) {
+      return new Container(
+          margin: EdgeInsets.only(right: 4.0),
+          padding: EdgeInsets.only(top: 4.0, bottom: 4, left: 6, right: 6),
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.6),
+              borderRadius: BorderRadius.circular(6)),
+          child: new Text(widget.tamanhoLista.toString()),
+        );
+    } else
+      return new Container();
   }
 
   Widget retotnarAppVinculado() {

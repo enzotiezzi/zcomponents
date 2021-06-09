@@ -1,8 +1,10 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
+import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
@@ -40,21 +42,60 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
       children: [
         new Material(
             elevation: 4,
-            child: new Container(
-              margin: EdgeInsets.only(top: 10.0),
-              child: ZItemTileModuloAdm(
-                visibilidade: true,
-                nomeModulo: widget.appViewModel.nome,
-                statusVinculo: widget.moduloContaViewModel.status,
-                perfilAcesso: "Não possui",
-                dataVinculo: (widget.moduloContaViewModel.dataVinculo != null)
-                    ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataVinculo))
-                    : "Nunca",
-                dataExpiracao:(widget.moduloContaViewModel.dataInativacao != null)
-                    ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataInativacao))
-                    : "Nunca",
-              )
-            )
+            child:  ConfigurableExpansionTile(
+              initiallyExpanded: false,
+              onExpansionChanged: (bool){
+                setState(() {
+                  _view.icons2 = bool;
+                });
+              },
+              borderColorStart: Color(0xffcccccc),
+              borderColorEnd: Color(0xffcccccc),
+              header: new Expanded(
+                child: new Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 16),
+                        padding: const EdgeInsets.only(top: 8,bottom: 8),
+                        child: new Text(
+                          widget.appViewModel.nomeExibicao,
+                          style: new TextStyle(
+                              color:Colors.black,
+                              fontWeight:FontWeight.w500,
+                              fontSize: MainStyle.get(context).fontSizePadrao
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              animatedWidgetFollowingHeader: new Container(
+                padding: const EdgeInsets.only(top: 8,bottom: 8),
+                child:(_view.icons2 == true)
+                    ? new Icon(Icons.arrow_drop_up, color: Color(0xffE6E6E6))
+                    : new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
+              ),
+              children: [
+                Divider(height: 1,),
+                new Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                  child: ZItemTileModuloAdm(
+                    visibilidade: true,
+                    nomeModulo: widget.appViewModel.nomeExibicao,
+                    statusVinculo: widget.moduloContaViewModel.status,
+                    perfilAcesso: "Não possui",
+                    dataVinculo: (widget.moduloContaViewModel.dataVinculo != null)
+                        ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataVinculo))
+                        : "Nunca",
+                    dataExpiracao:(widget.moduloContaViewModel.dataInativacao != null)
+                        ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataInativacao))
+                        : "Nunca",
+                  ),
+                ),
+              ],
+            ),
         ),
         Expanded(
           child: _listaUsuarios(),
