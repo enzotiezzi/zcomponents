@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/fluxo-admin/listagem-aplicativos-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
+import 'package:z_components/components/modulo/detalhe-aplicativo.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -70,7 +71,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
             ),
             animatedWidgetFollowingHeader: new Container(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: new Icon(Icons.unfold_less, color: Color(0xffE6E6E6)),
+              child: new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
             ),
             children: [
               new ZItemTileModuloGestao(
@@ -95,6 +96,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
       itemCount: _view.listaModulos.length,
       itemBuilder: (context, index) =>
           _montarCardAplicativo(_view.listaModulos[index]),
+
     );
   }
 
@@ -103,6 +105,12 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     return Container(
         child: new ZItemTileModuloGestao(
       nomeModulo: appViewModel.nomeExibicao,
+      onTap: (){
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context)=>DetalheAplicativo(
+              appViewModel: appViewModel,contaViewModel: widget.moduloContaViewModel,
+            )));
+      },
       status: widget.moduloContaViewModel.status,
     ));
   }

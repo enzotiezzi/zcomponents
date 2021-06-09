@@ -37,16 +37,27 @@ class _ZAbaState extends State<ZAba> {
             borderRadius: BorderRadius.circular(6.0),
             elevation: 2,
             child: new Container(
+              padding: EdgeInsets.only(top: 10,left: 10),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(6.0)),
-              child: new Container(
-                margin: EdgeInsets.all(6.0),
-                child: new Text(
-                  item.titulo,
-                  style: TextStyle(
-                      color: Color(0xff000000), fontWeight: FontWeight.w600),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  new Container(
+                    margin: EdgeInsets.all(6.0),
+                    child: item.icon,
+                  ),
+                  new Container(
+                    margin: EdgeInsets.all(6.0),
+                    child: new Text(
+                      item.titulo,
+                      style: TextStyle(
+                          color: Color(0xff000000), fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

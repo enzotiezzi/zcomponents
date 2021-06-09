@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/api/conta/i-conta-service.dart';
 import 'package:z_components/api/contas/contas-service.dart';
 import 'package:z_components/api/contas/i-contas-service.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/fluxo-admin/listagem-aplicativos.dart';
 import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/i-view.dart';
@@ -14,6 +15,7 @@ class ListagemAplicativosView extends IView<ListagemAplicativos>{
 
   IContasService contasService;
   List<AppViewModel> listaModulos = [];
+  SearchOptions searchOptions = new SearchOptions();
 
   bool icons2 = true;
 
@@ -26,11 +28,11 @@ class ListagemAplicativosView extends IView<ListagemAplicativos>{
   @override
   Future<void> initView() async{
     contasService = new ContasService(NovoToken.newToken);
-    await buscarAplicativos();
+    await buscarAplicativos(searchOptions);
   }
 
-  Future<void> buscarAplicativos ()async{
-    var res = await contasService.listarAplicativos(state.widget.moduloContaViewModel.idModulo);
+  Future<void> buscarAplicativos (SearchOptions searchOptions)async{
+    var res = await contasService.listarAplicativos(searchOptions,state.widget.moduloContaViewModel.idModulo);
     if(res !=null){
       state.setState(() {
         listaModulos = res;
