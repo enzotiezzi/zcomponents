@@ -16,7 +16,7 @@ class ZItemTileModuloGestao extends StatefulWidget {
 class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
   Widget retornarNomeModulo() {
     if (widget.nomeModulo == null) {
-      return new Text(widget.nomeModulo);
+      return new Text("");
     } else {
       return new Text(
         widget.nomeModulo,

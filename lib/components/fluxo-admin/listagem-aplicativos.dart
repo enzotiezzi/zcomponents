@@ -33,7 +33,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     return new Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("APLICATIVO"),
+        title: new Text("APLICATIVOS"),
       ),
       body: _buildBody(),
     );
@@ -44,13 +44,8 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
       children: [
         new Material(
           elevation: 4,
-          child: ConfigurableExpansionTile(
+          child: new ConfigurableExpansionTile(
             initiallyExpanded: false,
-            onExpansionChanged: (bool){
-              setState(() {
-                _view.icons2 = bool;
-              });
-            },
             borderColorStart: Color(0xffcccccc),
             borderColorEnd: Color(0xffcccccc),
             header: new Expanded(
@@ -63,9 +58,9 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
                       child: new Text(
                         widget.moduloContaViewModel.modulo.nome,
                         style: new TextStyle(
-                          color:Colors.black,
-                          fontWeight:FontWeight.w500,
-                          fontSize: MainStyle.get(context).fontSizePadrao
+                            color:Colors.black,
+                            fontWeight:FontWeight.w500,
+                            fontSize: MainStyle.get(context).fontSizePadrao
                         ),
                       ),
                     ),
@@ -75,24 +70,18 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
             ),
             animatedWidgetFollowingHeader: new Container(
               padding: const EdgeInsets.only(top: 8,bottom: 8),
-              child:(_view.icons2 == true)
-                  ? new Icon(Icons.arrow_drop_up, color: Color(0xffE6E6E6))
-                  : new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
+              child: new Icon(Icons.unfold_less, color: Color(0xffE6E6E6)),
             ),
             children: [
-              Divider(height: 1,),
-              new Container(
-                margin: EdgeInsets.only(top: 10.0),
-                child: ZItemTileModuloGestao(
-                  visibilidade: true,
-                  status: widget.moduloContaViewModel.status,
-                  nomeModulo: widget.moduloContaViewModel.modulo.nome,
-                ),
-              ),
+              new ZItemTileModuloGestao(
+                visibilidade: true,
+                status: widget.moduloContaViewModel.status,
+                nomeModulo: widget.moduloContaViewModel.modulo.nome,
+              )
             ],
-          )
+          ),
         ),
-        Expanded(
+        new Expanded(
           child: _listarAplicativos(),
         )
       ],
@@ -111,66 +100,10 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
 
   Widget _montarCardAplicativo (AppViewModel appViewModel){
     print(appViewModel.nome);
-    return Material(
-      elevation: 4,
-      child: ConfigurableExpansionTile(
-        initiallyExpanded: false,
-        onExpansionChanged: (bool){},
-        borderColorStart: Color(0xffcccccc),
-        borderColorEnd: Color(0xffcccccc),
-        header: new Expanded(
-          child: new Container(
-            //color: Colors.white,
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 16),
-                  padding: const EdgeInsets.only(top: 8,bottom: 8),
-                  child: new Text(
-                    appViewModel.nomeExibicao,
-                    style: new TextStyle(
-                        color:Colors.black,
-                        fontWeight:FontWeight.w500,
-                        fontSize: MainStyle.get(context).fontSizePadrao
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        animatedWidgetFollowingHeader: new Container(
-
-          padding: const EdgeInsets.only(top: 8,bottom: 8),
-          child: new Icon(Icons.unfold_less,color: Color(0xffcccccc),),
-        ),
-        children: [
-          Divider(height: 1,),
-          new ZItemTileModuloAdm(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context)=>
-                          ListagemUsuarios(
-                            moduloContaViewModel: widget.moduloContaViewModel,
-                            appViewModel: appViewModel,
-                          )
-                  )
-              );
-            },
-            nomeModulo: appViewModel.nomeExibicao,
-            statusVinculo: widget.moduloContaViewModel.status,
-            perfilAcesso: "Não possui",
-            dataVinculo: (widget.moduloContaViewModel.dataVinculo != null)
-                ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataVinculo))
-                : "Nunca",
-            dataExpiracao:(widget.moduloContaViewModel.dataInativacao != null)
-                ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataInativacao))
-                : "Nunca",
-          ),
-        ],
-      ),
+    return Container(
+      child: new ZItemTileModuloGestao(
+        nomeModulo: appViewModel.nomeExibicao,
+        status: widget.moduloContaViewModel.status,
     );
   }
 }

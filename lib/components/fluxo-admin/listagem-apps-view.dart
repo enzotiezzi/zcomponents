@@ -6,6 +6,8 @@ import 'listagem-apps.dart';
 class ListagemAppsView extends IView<ListagemApps> {
   ListagemAppsView(State<ListagemApps> state) : super(state);
 
+  bool icons2 = true;
+
   @override
   Future<void> afterBuild() {
     // TODO: implement afterBuild
