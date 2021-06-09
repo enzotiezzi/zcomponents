@@ -90,9 +90,10 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<List<AppViewModel>> listarAplicativos(String idModulo) async {
+  Future<List<AppViewModel>> listarAplicativos(SearchOptions searchOptions, String idModulo) async {
+    var params = searchOptions.toHttpParams();
     try{
-      var url = "$_URL/modulos/${idModulo}/apps";
+      var url = "$_URL/modulos/${idModulo}/apps$params";
       var response = await request(url, Service.HTTP_GET);
       print(response.body);
       print(response.statusCode);
