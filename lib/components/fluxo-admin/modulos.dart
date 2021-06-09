@@ -34,7 +34,7 @@ class _ModulosState extends State<Modulos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("GESTÃO DE MÓDULOS"),
+        title: new Text("GESTÃO DE MÓDULO"),
         centerTitle: true,
       ),
       body: _buildBody(),
