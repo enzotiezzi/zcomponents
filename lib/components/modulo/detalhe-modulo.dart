@@ -1,19 +1,26 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/modulo/detalhe-modulo-view.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
+import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
+
+import '../z-item-tile-modulo-adm.dart';
+import '../z-item-tile-usuario-adm.dart';
 
 class DetalheModulo extends StatefulWidget {
 
   final bool editarDados;
   AppUsuarioContaViewModel appUsuarioContaViewModel;
   bool cliqueEditar;
+  UsuarioContaViewModel usuario;
 
-  DetalheModulo({this.editarDados,this.appUsuarioContaViewModel,this.cliqueEditar});
+  DetalheModulo({this.editarDados,this.appUsuarioContaViewModel,this.cliqueEditar,this.usuario});
 
   @override
   _DetalheModuloState createState() => _DetalheModuloState();
@@ -36,7 +43,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          _montarBotaoEditar()
+          //_montarBotaoEditar()
         ],
         centerTitle: true,
         title: Text(
@@ -86,8 +93,50 @@ class _DetalheModuloState extends State<DetalheModulo> {
   Widget _buildBody(){
     return new Column(
       children: [
-        new ZHeader(
-          titulo: _view.titulo,
+        Material(
+          elevation: 4,
+          child: new ConfigurableExpansionTile(
+            initiallyExpanded: false,
+            onExpansionChanged: (bool){},
+            borderColorStart: Color(0xffcccccc),
+            borderColorEnd: Color(0xffcccccc),
+            header: new Expanded(
+              child: new Container(
+                child: Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 16),
+                      padding: const EdgeInsets.only(top: 8,bottom: 8),
+                      child: new Text(
+                        widget.appUsuarioContaViewModel.app.nomeExibicao,
+                        style: new TextStyle(
+                            color:Colors.black,
+                            fontWeight:FontWeight.w500,
+                            fontSize: MainStyle.get(context).fontSizePadrao
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            animatedWidgetFollowingHeader: new Container(
+              padding: const EdgeInsets.only(top: 8,bottom: 8),
+              child: new Icon(Icons.unfold_less,color: Color(0xffcccccc),),
+            ),
+            children: [
+              new ZItemTileUsuarioAdm(
+                visibilidade: true,
+                nomeUsuario: widget.usuario.usuario.nome,
+                email: widget.usuario.usuario.email,
+                quantidadeApps: widget.usuario.appLista.length.toString(),
+                status: widget.usuario.status,
+                telefone: widget.usuario.usuario.telefone,
+                appsVinculados:
+                _view.listarAppsVinculados(widget.usuario.appLista),
+              ),
+            ],
+          ),
         ),
         new Expanded(child: _buildCampos()),
         exibirBotaoConfirmar()
@@ -101,50 +150,6 @@ class _DetalheModuloState extends State<DetalheModulo> {
         return true;
     }else {
       return false;
-    }
-  }
-
-  Widget exibirBotaoModificar(){
-    if(widget.cliqueEditar==true){
-      return Material(
-        //elevation: 4,
-        child: new Container(
-          color: Colors.transparent,
-          padding: EdgeInsets.only(top: 6,bottom: 6),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              new RaisedButton(
-                onPressed: _view.cliqueModificarAcesso(widget.appUsuarioContaViewModel),
-                child: new Container(
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      new Container(
-                        padding: const EdgeInsets.only(right: 40,left: 40),
-                        child: Text(
-                          _view.textModificar,
-                          style: Theme.of(context)
-                              .textTheme
-                              .button
-                              .copyWith(color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                color: Theme.of(context).accentColor,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30),
-                ),
-                padding: const EdgeInsets.only(left: 10, right: 10),
-              )
-            ],
-          ),
-        ),
-      );
-    }else{
-      return Container();
     }
   }
 
@@ -198,18 +203,22 @@ class _DetalheModuloState extends State<DetalheModulo> {
     return new ListView(
       shrinkWrap: true,
       children: [
-        ZInputGeneric(
-          themeData: Theme.of(context),
-          titulo: "Perfil",
-          inputPadraoFocus: _view.perfilFocus,
-          controllerInputPadrao: _view.perfilController,
-          tipoTeclado: TextInputType.text,
-          proximoFocus: _view.dataExpiracaoFocus,
-          hintText: _view.hintNomePerfil,
-          enabled: retornarEnabled(widget.editarDados),
+
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          child: new ZInputGeneric(
+            themeData: Theme.of(context),
+            titulo: "Perfil",
+            inputPadraoFocus: _view.perfilFocus,
+            controllerInputPadrao: _view.perfilController,
+            tipoTeclado: TextInputType.text,
+            proximoFocus: _view.dataExpiracaoFocus,
+            hintText: _view.hintNomePerfil,
+            enabled: retornarEnabled(widget.editarDados),
+          ),
         ),
         new Divider(height: 1.0,),
-        ZInputGeneric(
+        new ZInputGeneric(
           themeData: Theme.of(context),
           titulo: "Status",
           inputPadraoFocus: _view.statusFocus,
@@ -232,7 +241,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
           },
         ),
         new Divider(height: 1.0,),
-        ZInputGeneric(
+        new ZInputGeneric(
             themeData: Theme.of(context),
             enabled: false,
             titulo: "Data de vinculo",
@@ -240,7 +249,6 @@ class _DetalheModuloState extends State<DetalheModulo> {
             hintText: _view.hintDataVinculo,
             controllerInputPadrao: _view.dataVinculoController
         ),
-        exibirBotaoModificar()
       ],
     );
   }
