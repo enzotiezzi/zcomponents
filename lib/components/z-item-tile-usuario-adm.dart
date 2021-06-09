@@ -135,7 +135,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
       onTap: widget.onTap,
       child: new IntrinsicHeight(
         child: new Container(
-          margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+          margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),
           child: Material(
             elevation: 2,
             color: Colors.white,

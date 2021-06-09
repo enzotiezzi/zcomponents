@@ -19,6 +19,7 @@ class ListagemUsuariosView extends IView<ListagemUsuarios>{
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
   ScrollController scrollController;
+  bool icons2 = true;
 
   @override
   Future<void> afterBuild() {

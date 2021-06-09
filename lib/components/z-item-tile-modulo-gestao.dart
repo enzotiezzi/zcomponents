@@ -64,7 +64,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
       onTap: widget.onTap,
       child: IntrinsicHeight(
         child: Container(
-          margin: const EdgeInsets.only(left: 7, right: 16, bottom: 8, top: 8),
+          margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),
           child: Material(
             elevation: 2,
             color: Colors.white,

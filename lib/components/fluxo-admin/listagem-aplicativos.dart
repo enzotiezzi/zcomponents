@@ -80,7 +80,6 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
               )
             ],
           ),
-
         ),
         new Expanded(
           child: _listarAplicativos(),
@@ -105,7 +104,6 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
       child: new ZItemTileModuloGestao(
         nomeModulo: appViewModel.nomeExibicao,
         status: widget.moduloContaViewModel.status,
-      )
     );
   }
 }

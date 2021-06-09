@@ -15,6 +15,8 @@ class ListagemAplicativosView extends IView<ListagemAplicativos>{
   IContasService contasService;
   List<AppViewModel> listaModulos = [];
 
+  bool icons2 = true;
+
   @override
   Future<void> afterBuild() {
     // TODO: implement afterBuild
