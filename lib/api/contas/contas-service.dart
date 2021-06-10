@@ -8,10 +8,10 @@ import 'package:z_components/settings/api-settings.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
-
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
+import 'package:z_components/view-model/perfil-viewmodel.dart';
 
 class ContasService extends Service implements IContasService {
   String _URL = "${ApiSettings.ENDPOINT_API_V1}/contas";
@@ -140,7 +140,7 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<bool> mudarStatusUsuario(
+  Future<bool> editarDadosUsuario(
       String idModulo,
       String idApp,
       String idUsuario,
@@ -156,6 +156,20 @@ class ContasService extends Service implements IContasService {
         return false;
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
+      SearchOptions searchOptions) async {
+    var params = searchOptions.toHttpParams();
+    try {
+      var res = await request("$_URL/perfil$params", Service.HTTP_GET);
+      print(res.body);
+      return PaginatedList<PerfilViewModel>(
+              response: res, deserializer: PerfilViewModel.fromJson)
+          .mapToPaginatedList();
+    } catch (e) {
+      return null;
     }
   }
 }

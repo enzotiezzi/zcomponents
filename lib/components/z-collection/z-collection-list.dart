@@ -182,14 +182,13 @@ class ZCollectionListState extends State<ZCollectionList> {
           children: [
             new Container(
               alignment: Alignment.topCenter,
-              height: 42,
               color: Colors.white,
               child: new ZTile(
                   onTap: () {
                     _selecionarItem(item);
                   },
                   leading: new Container(
-                    width: MediaQuery.of(context).size.width / 1.1,
+
                     child: new Text(
                       "${item.titulo ?? item.valor}",
                       style: widget.theme.textTheme.bodyText1,

@@ -5,6 +5,7 @@ import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
+import 'package:z_components/view-model/perfil-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
 
 abstract class IContasService {
@@ -29,6 +30,9 @@ abstract class IContasService {
 
   Future<ZResponse<ContaV2ViewModel>> listarContas(SearchOptions searchOptions);
 
-  Future<bool> mudarStatusUsuario(String idModulo, String idApp,
+  Future<bool> editarDadosUsuario(String idModulo, String idApp,
       String idUsuario, AppUsuarioContaViewModel appUsuarioContaViewModel);
+
+  Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
+      SearchOptions searchOptions);
 }
