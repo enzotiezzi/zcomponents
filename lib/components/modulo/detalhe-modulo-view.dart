@@ -4,6 +4,7 @@ import 'package:z_components/api/contas/contas-service.dart';
 import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/components/fluxo-admin/usuarios.dart';
 import 'package:z_components/components/modulo/detalhe-modulo.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -13,6 +14,7 @@ class DetalheModuloView extends IView<DetalheModulo>{
   DetalheModuloView(State<DetalheModulo> state) : super(state);
 
   IContasService contasService;
+  DialogUtils dialogUtils;
 
   @override
   Future<void> afterBuild() {
@@ -21,6 +23,7 @@ class DetalheModuloView extends IView<DetalheModulo>{
   @override
   Future<void> initView() {
     _preencherDados();
+    dialogUtils = new DialogUtils(state.context);
     contasService = new ContasService(NovoToken.newToken);
     if (state.widget.editarDados) {
       Future.delayed(Duration(seconds: 1), () {
@@ -51,8 +54,20 @@ class DetalheModuloView extends IView<DetalheModulo>{
   String hintDataVinculo='';
   bool preencheuDataExpiracao=false;
   String textModificar='';
+  String textModificarAcesso='';
 
 
+  void definirTextoMenu(){
+    if(statusController.text=="Ativo"){
+      state.setState(() {
+        textModificarAcesso = "Revogar";
+      });
+    }else{
+      state.setState(() {
+        textModificarAcesso = "Ativar";
+      });
+    }
+  }
 
   Widget _preencherDados(){
     titulo = state.widget.appUsuarioContaViewModel.app.nome;
@@ -92,12 +107,16 @@ class DetalheModuloView extends IView<DetalheModulo>{
   }
 
   Function editarOnPressed(){
-    if(validarCampos()){
+    bool validar = validarCampos();
+    if(validar){
       return (){
-        Navigator.pushReplacement(
-            state.context,
-            MaterialPageRoute(
-                builder: (_)=>Usuarios(themeData: Theme.of(state.context),)));
+        if(dataExpiracaoController.text.isEmpty){
+          dialogUtils.showAlertDialogNewAviso("Data inválida", "Por favor, revise a Data obrigatória");
+          dataExpiracaoFocus.requestFocus();
+        }else{
+          print("Válido");
+        }
+
       };
     }else{
       return null;

@@ -14,21 +14,59 @@ import '../z-item-tile-modulo-adm.dart';
 import '../z-item-tile-usuario-adm.dart';
 
 class DetalheModulo extends StatefulWidget {
-
   final bool editarDados;
   AppUsuarioContaViewModel appUsuarioContaViewModel;
   bool cliqueEditar;
   UsuarioContaViewModel usuario;
 
-  DetalheModulo({this.editarDados,this.appUsuarioContaViewModel,this.cliqueEditar,this.usuario});
+  DetalheModulo(
+      {this.editarDados,
+      this.appUsuarioContaViewModel,
+      this.cliqueEditar,
+      this.usuario});
 
   @override
   _DetalheModuloState createState() => _DetalheModuloState();
 }
 
 class _DetalheModuloState extends State<DetalheModulo> {
-
   DetalheModuloView _view;
+  String textoModificar='';
+
+
+
+  String _definirTexto(){
+    if(widget.appUsuarioContaViewModel.status=="Ativo"){
+      return "Revogar";
+    }else{
+      return "Ativar";
+    }
+  }
+
+  _escolhaMenuItem(String itemEscolhido){
+    if(itemEscolhido.contains("Editar")){
+      return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetalheModulo(
+              editarDados: true,
+              cliqueEditar: true,
+              appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
+              usuario: widget.usuario,
+            ),
+          ));
+    }else{
+      return print("Modificou");
+    }
+  }
+
+  Widget _definirIcone(String item){
+    if(item.contains("Editar")){
+      return Icon(Icons.edit,color: Theme.of(context).primaryColor,);
+    }else{
+      return Icon(Icons.block_flipped,color: Colors.red,);
+    }
+  }
 
   @override
   void initState() {
@@ -38,20 +76,40 @@ class _DetalheModuloState extends State<DetalheModulo> {
     print(widget.appUsuarioContaViewModel.toMap());
   }
 
+
   @override
   Widget build(BuildContext context) {
+
+    List<String> itensMenu = [
+      "Editar dados",
+      _definirTexto()
+    ];
+
     return Scaffold(
       appBar: AppBar(
         actions: [
-          //_montarBotaoEditar()
+          PopupMenuButton<String>(
+            onSelected: _escolhaMenuItem,
+            itemBuilder: (context){
+              return itensMenu.map((String item){
+                return PopupMenuItem<String>(
+                  value: item,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(item),
+                      _definirIcone(item)
+                    ],
+                  ),
+                );
+              }).toList();
+            },
+          )
         ],
         centerTitle: true,
         title: Text(
           "APLICATIVO",
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color:Colors.white
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: _buildBody(),
@@ -79,25 +137,26 @@ class _DetalheModuloState extends State<DetalheModulo> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DetalheModulo(
+                builder: (context) => DetalheModulo(
                     editarDados: true,
                     cliqueEditar: true,
-                    appUsuarioContaViewModel: widget.appUsuarioContaViewModel
-                    ),
-                  ));
+                    appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
+                    usuario: widget.usuario,
+                ),
+              ));
         },
       );
     }
   }
 
-  Widget _buildBody(){
+  Widget _buildBody() {
     return new Column(
       children: [
         Material(
           elevation: 4,
           child: new ConfigurableExpansionTile(
             initiallyExpanded: false,
-            onExpansionChanged: (bool){},
+            onExpansionChanged: (bool) {},
             borderColorStart: Color(0xffcccccc),
             borderColorEnd: Color(0xffcccccc),
             header: new Expanded(
@@ -106,14 +165,13 @@ class _DetalheModuloState extends State<DetalheModulo> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 16),
-                      padding: const EdgeInsets.only(top: 8,bottom: 8),
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
                       child: new Text(
                         widget.appUsuarioContaViewModel.app.nomeExibicao,
                         style: new TextStyle(
-                            color:Colors.black,
-                            fontWeight:FontWeight.w500,
-                            fontSize: MainStyle.get(context).fontSizePadrao
-                        ),
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: MainStyle.get(context).fontSizePadrao),
                       ),
                     ),
                   ],
@@ -121,8 +179,11 @@ class _DetalheModuloState extends State<DetalheModulo> {
               ),
             ),
             animatedWidgetFollowingHeader: new Container(
-              padding: const EdgeInsets.only(top: 8,bottom: 8),
-              child: new Icon(Icons.arrow_drop_down,color: Color(0xffcccccc),),
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: new Icon(
+                Icons.arrow_drop_down,
+                color: Color(0xffcccccc),
+              ),
             ),
             children: [
               new ZItemTileUsuarioAdm(
@@ -133,7 +194,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
                 status: widget.usuario.status,
                 telefone: widget.usuario.usuario.telefone,
                 appsVinculados:
-                _view.listarAppsVinculados(widget.usuario.appLista),
+                    _view.listarAppsVinculados(widget.usuario.appLista),
               ),
             ],
           ),
@@ -144,17 +205,17 @@ class _DetalheModuloState extends State<DetalheModulo> {
     );
   }
 
-  bool retornarEnabled(bool editar){
+  bool retornarEnabled(bool editar) {
     print(editar);
-    if(editar==true){
-        return true;
-    }else {
+    if (editar == true) {
+      return true;
+    } else {
       return false;
     }
   }
 
-  Widget exibirBotaoConfirmar(){
-    if(widget.cliqueEditar==true){
+  Widget exibirBotaoConfirmar() {
+    if (widget.cliqueEditar == true) {
       return Material(
         elevation: 4,
         child: new Container(
@@ -171,7 +232,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       new Container(
-                        padding: const EdgeInsets.only(right: 40,left: 40),
+                        padding: const EdgeInsets.only(right: 40, left: 40),
                         child: Text(
                           "CONFIRMAR",
                           style: Theme.of(context)
@@ -193,17 +254,15 @@ class _DetalheModuloState extends State<DetalheModulo> {
           ),
         ),
       );
-    }else{
+    } else {
       return Container();
     }
   }
 
-
-  Widget _buildCampos(){
+  Widget _buildCampos() {
     return new ListView(
       shrinkWrap: true,
       children: [
-
         Container(
           margin: EdgeInsets.only(top: 10),
           child: new ZInputGeneric(
@@ -217,7 +276,9 @@ class _DetalheModuloState extends State<DetalheModulo> {
             enabled: retornarEnabled(widget.editarDados),
           ),
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new ZInputGeneric(
           themeData: Theme.of(context),
           titulo: "Status",
@@ -226,29 +287,32 @@ class _DetalheModuloState extends State<DetalheModulo> {
           controllerInputPadrao: _view.statusController,
           enabled: false,
         ),
-        new Divider(height: 1.0,),
-        new  ZInputDataExpiracao(
+        new Divider(
+          height: 1.0,
+        ),
+        new ZInputDataExpiracao(
           themeData: Theme.of(context),
           dataFocus: _view.dataExpiracaoFocus,
           enabled: retornarEnabled(widget.editarDados),
           controllerData: _view.dataExpiracaoController,
           validacao: (validate) {
-            if(validate){
+            if (validate) {
               //widget.appUsuarioContaViewModel.dataExpiracao = _view.dataVinculoController.text;
               _view.preencheuDataExpiracao = true;
               _view.validarCampos();
             }
           },
         ),
-        new Divider(height: 1.0,),
+        new Divider(
+          height: 1.0,
+        ),
         new ZInputGeneric(
             themeData: Theme.of(context),
             enabled: false,
             titulo: "Data de vinculo",
             inputPadraoFocus: _view.dataVinculoFocus,
             hintText: _view.hintDataVinculo,
-            controllerInputPadrao: _view.dataVinculoController
-        ),
+            controllerInputPadrao: _view.dataVinculoController),
       ],
     );
   }
