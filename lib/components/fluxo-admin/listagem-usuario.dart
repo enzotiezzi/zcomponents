@@ -140,28 +140,12 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
               context,
               MaterialPageRoute(
                 builder: (context) => DetalheUsuario(
-                    editarDados: true,
-                    cliqueEditar: true,
+                    editarDados: false,
+                    cliqueEditar: false,
                     appUsuarioContaViewModel: app),
               ));
         },
       ),
     );
-  }
-
-  String _listarAppsVinculados(List<AppUsuarioContaViewModel> lista) {
-    String appsFormatados = "";
-    if (lista != null && lista.length != 0) {
-      for (int i = 0; i < lista.length; i++) {
-        if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nome}";
-        } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nome}";
-        }
-      }
-    } else {
-      appsFormatados = "Sem apps vinculados";
-    }
-    return appsFormatados;
   }
 }

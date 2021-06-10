@@ -5,4 +5,5 @@ class SvgUtils {
   static final String STATUSNAOENVIADO = 'assets/status-nao-enviado.svg';
   static final String STATUSPARCIALMENTEENVIADO = 'assets/status-parcialmente-enviado.svg';
   static final String STATUSAGUARDANDOVALIDACAO = 'assets/status-aguardando-validacao.svg';
+  static final String ASSETMORE = 'assets/more.svg';
 }

@@ -161,7 +161,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
   Widget _buildSvgScanIcon() {
     return SvgPicture.asset(
       SvgUtils.ASSETSCANICON,
-      semanticsLabel: 'scan-doc.svg',
+      semanticsLabel: 'more.svg',
       placeholderBuilder: (context) => Icon(Icons.error),
       color: Theme.of(context).accentColor,
     );
