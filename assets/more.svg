@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="right-icon" transform="translate(24 24) rotate(180)">
+    <rect id="Retângulo_3373" data-name="Retângulo 3373" width="24" height="24" rx="6" transform="translate(24) rotate(90)" fill="#fff"/>
+    <path id="Icon_material-more-vert" data-name="Icon material-more-vert" d="M2,4A2,2,0,1,0,0,2,2.006,2.006,0,0,0,2,4ZM2,6A2,2,0,1,0,4,8,2.006,2.006,0,0,0,2,6Zm0,6a2,2,0,1,0,2,2A2.006,2.006,0,0,0,2,12Z" transform="translate(9.8 4)" fill="#2bbab4"/>
+  </g>
+</svg>

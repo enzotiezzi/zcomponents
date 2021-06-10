@@ -1,8 +1,9 @@
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/modulo/detalhe-modulo.dart';
 import 'package:z_components/components/modulo/detalhe-usuario-view.dart';
-import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
+import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -36,23 +37,27 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [      PopupMenuButton<String>(
-          onSelected: _escolhaMenuItem,
-          itemBuilder: (context){
-            return _view.itensMenu.map((String item){
-              return PopupMenuItem<String>(
-                value: item,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(item),
-                    _definirIcone(item)
-                  ],
-                ),
-              );
-            }).toList();
-          },
-        )],
+        actions: [
+          PopupMenuButton<String>(
+            icon: SvgPicture.asset(
+              SvgUtils.ASSETMORE,
+              semanticsLabel: "more.svg",
+              placeholderBuilder: (context) => Icon(Icons.error),
+            ),
+            onSelected: _escolhaMenuItem,
+            itemBuilder: (context) {
+              return _view.itensMenu.map((String item) {
+                return PopupMenuItem<String>(
+                  value: item,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text(item), _definirIcone(item)],
+                  ),
+                );
+              }).toList();
+            },
+          )
+        ],
         centerTitle: true,
         title: Text(
           "USUÁRIO",
@@ -62,7 +67,6 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
       body: _buildBody(),
     );
   }
-
 
   Widget _buildBody() {
     return new Column(
@@ -119,7 +123,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
               ],
             )),
         new Expanded(child: _buildCampos()),
-        //exibirBotaoConfirmar()
+        exibirBotaoConfirmar()
       ],
     );
   }
@@ -134,7 +138,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
           inputPadraoFocus: _view.perfilFocus,
           controllerInputPadrao: _view.perfilController,
           tipoTeclado: TextInputType.text,
-          proximoFocus: _view.dataExpiracaoFocus,
+          proximoFocus: _view.emailFocus,
           hintText: _view.hintNomePerfil,
           enabled: retornarEnabled(widget.editarDados),
         ),
@@ -143,27 +147,21 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
         ),
         ZInputGeneric(
           themeData: Theme.of(context),
-          titulo: "Status",
-          inputPadraoFocus: _view.statusFocus,
+          titulo: "Nome",
+          inputPadraoFocus: _view.nomeFocus,
           hintText: _view.hintStatus,
-          controllerInputPadrao: _view.statusController,
+          controllerInputPadrao: _view.nomeController,
           enabled: false,
         ),
         new Divider(
           height: 1.0,
         ),
-        new ZInputDataExpiracao(
+        new ZInputGeneric(
+          titulo: "Email",
           themeData: Theme.of(context),
-          dataFocus: _view.dataExpiracaoFocus,
+          inputPadraoFocus: _view.emailFocus,
           enabled: retornarEnabled(widget.editarDados),
-          controllerData: _view.dataExpiracaoController,
-          validacao: (validate) {
-            if (validate) {
-              //widget.appUsuarioContaViewModel.dataExpiracao = _view.dataVinculoController.text;
-              _view.preencheuDataExpiracao = true;
-              _view.validarCampos();
-            }
-          },
+          controllerInputPadrao: _view.emailController,
         ),
         new Divider(
           height: 1.0,
@@ -171,10 +169,10 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
         ZInputGeneric(
             themeData: Theme.of(context),
             enabled: false,
-            titulo: "Data de vinculo",
-            inputPadraoFocus: _view.dataVinculoFocus,
+            titulo: "Telefone",
+            inputPadraoFocus: _view.telefoneFocus,
             hintText: _view.hintDataVinculo,
-            controllerInputPadrao: _view.dataVinculoController),
+            controllerInputPadrao: _view.telefoneController),
         //  exibirBotaoModificar()
       ],
     );
@@ -187,25 +185,6 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
     } else {
       return false;
     }
-  }
-
-  Widget _montarBotaoEditar() {
-      return new GestureDetector(
-        child: new Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(12)),
-          margin: EdgeInsets.all(10.0),
-          padding: EdgeInsets.all(4.0),
-          child: Icon(
-            Icons.more_vert,
-            size: 26,
-            color: Theme.of(context).accentColor,
-          ),
-        ),
-        onTap: () {},
-      );
-
   }
 
   Widget exibirBotaoConfirmar() {
@@ -253,28 +232,33 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
     }
   }
 
-
-
-  _escolhaMenuItem(String itemEscolhido){
-    if(itemEscolhido.contains("Editar")){
+  _escolhaMenuItem(String itemEscolhido) {
+    if (itemEscolhido.contains("Editar")) {
       return Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetalheModulo(
+            builder: (context) => DetalheUsuario(
               editarDados: true,
               cliqueEditar: true,
               appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
             ),
           ));
-    }else{
+    } else {
       return print("Modificou");
     }
   }
 
-  Widget _definirIcone(String item){
-    if(item.contains("Editar")){
-      return Icon(Icons.edit,color: Theme.of(context).primaryColor,);
-    }else{
-      return Icon(Icons.block_flipped,color: Colors.red,);
-    }}
+  Widget _definirIcone(String item) {
+    if (item.contains("Editar")) {
+      return Icon(
+        Icons.edit,
+        color: Theme.of(context).primaryColor,
+      );
+    } else {
+      return Icon(
+        Icons.block_flipped,
+        color: Colors.red,
+      );
+    }
+  }
 }

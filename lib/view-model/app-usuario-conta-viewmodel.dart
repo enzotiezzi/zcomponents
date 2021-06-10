@@ -1,4 +1,5 @@
 import 'package:z_components/view-model/app-view-model.dart';
+import 'package:z_components/view-model/perfil-viewmodel.dart';
 import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
 
 class AppUsuarioContaViewModel {
@@ -14,6 +15,7 @@ class AppUsuarioContaViewModel {
   bool ativo;
   String token;
   UsuarioAdmViewModel usuario;
+  PerfilViewModel perfil;
   AppViewModel app;
 
   AppUsuarioContaViewModel(
@@ -29,6 +31,7 @@ class AppUsuarioContaViewModel {
       this.ativo,
       this.token,
       this.usuario,
+      this.perfil,
       this.app});
 
   static AppUsuarioContaViewModel fromJson(Map<String, dynamic> json) {
@@ -41,6 +44,9 @@ class AppUsuarioContaViewModel {
         dataInativacao: json["dataInativacao"],
         ativo: json["ativo"],
         token: json["token"],
+        perfil: (json['perfil'] == null)
+            ? new PerfilViewModel()
+            : PerfilViewModel.fromJson(json['perfil']),
         usuario: (json['usuario'] == null)
             ? new UsuarioAdmViewModel()
             : UsuarioAdmViewModel.fromJson(json['usuario']),
