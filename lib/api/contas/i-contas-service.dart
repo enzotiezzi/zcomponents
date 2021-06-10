@@ -21,10 +21,11 @@ abstract class IContasService {
   Future<ZResponse<ModuloContaViewModel>> listarModulosConta(
       SearchOptions searchOptions);
 
-  Future<List<AppViewModel>> listarAplicativos(SearchOptions searchOptions,String idModulo);
+  Future<ZResponse<AppViewModel>> listarAplicativos(
+      SearchOptions searchOptions, String idModulo);
 
   Future<ZResponse<AppUsuarioContaViewModel>> listarUsuariosPorModuloEApp(
-      String idModulo, String idApp);
+      String idModulo, String idApp, SearchOptions searchOptions);
 
   Future<ZResponse<ContaV2ViewModel>> listarContas(SearchOptions searchOptions);
 }

@@ -62,28 +62,29 @@ class ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
                 ))
           ],
         ),
-     new Expanded(child:    new ListView.builder(
-         shrinkWrap: true,
-         itemCount: widget.contas.length,
-         itemBuilder: (context, index) {
-           var item = widget.contas[index];
+        new Expanded(
+            child: new ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.contas.length,
+                itemBuilder: (context, index) {
+                  var item = widget.contas[index];
 
-           return new ListTile(
-             leading: new CircleAvatar(
-               backgroundColor: item.corPrimaria,
-               child: new Text(
-                 "${item.nomeFantasia[0]}",
-                 style: new TextStyle(color: item.corSecundaria),
-               ),
-             ),
-             title: new Text("${item.nomeFantasia}"),
-             subtitle: new Text(_view.verificarContaAtiva(item.idConta)
-                 ? "Conta ativa"
-                 : ""),
-             trailing: new Icon(Icons.arrow_forward_ios),
-             onTap: () => _view.selecionarConta(item),
-           );
-         }))
+                  return new ListTile(
+                    leading: new CircleAvatar(
+                      backgroundColor: item.corPrimaria,
+                      child: new Text(
+                        "${item.nomeFantasia[0]}",
+                        style: new TextStyle(color: item.corSecundaria),
+                      ),
+                    ),
+                    title: new Text("${item.nomeFantasia}"),
+                    subtitle: new Text(_view.verificarContaAtiva(item.idConta)
+                        ? "Conta ativa"
+                        : ""),
+                    trailing: new Icon(Icons.arrow_forward_ios),
+                    onTap: () => _view.selecionarConta(item),
+                  );
+                }))
       ],
     );
   }
