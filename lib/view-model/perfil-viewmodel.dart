@@ -16,4 +16,12 @@ class PerfilViewModel {
       idApp: json["idApp"],
     );
   }
+
+  Map toMap() {
+    return {
+      "idPerfil": this.idPerfil,
+      "nome": this.nome,
+      "idApp": this.idApp,
+    };
+  }
 }

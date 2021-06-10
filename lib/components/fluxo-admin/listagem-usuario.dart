@@ -135,15 +135,20 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
         email: app.usuario.email,
         appsVinculados: "",
         quantidadeApps: "",
-        onTap: () {
-          Navigator.push(
+        onTap: () async {
+          var res = await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => DetalheUsuario(
+                    idModulo: widget.moduloContaViewModel.idModulo,
                     editarDados: false,
                     cliqueEditar: false,
                     appUsuarioContaViewModel: app),
               ));
+          if (res != null && res) {
+            _view.searchOptions = new SearchOptions();
+            await _view.buscarUsuario(_view.searchOptions);
+          }
         },
       ),
     );

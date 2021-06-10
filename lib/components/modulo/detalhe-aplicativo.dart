@@ -95,7 +95,10 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ListagemUsuarios(appViewModel: widget.appViewModel,)));
+                          builder: (context) => ListagemUsuarios(
+                                appViewModel: widget.appViewModel,
+                                moduloContaViewModel: widget.contaViewModel,
+                              )));
                 },
                 titulo: "Usuários",
                 icon: Icon(Icons.group)),

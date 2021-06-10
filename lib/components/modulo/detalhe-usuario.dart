@@ -15,9 +15,13 @@ class DetalheUsuario extends StatefulWidget {
   final bool editarDados;
   AppUsuarioContaViewModel appUsuarioContaViewModel;
   bool cliqueEditar;
+  String idModulo;
 
   DetalheUsuario(
-      {this.editarDados, this.appUsuarioContaViewModel, this.cliqueEditar});
+      {this.editarDados,
+      this.appUsuarioContaViewModel,
+      this.cliqueEditar,
+      this.idModulo});
 
   @override
   _DetalheUsuarioState createState() => _DetalheUsuarioState();
@@ -241,10 +245,11 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
               editarDados: true,
               cliqueEditar: true,
               appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
+              idModulo: widget.idModulo,
             ),
           ));
     } else {
-      return print("Modificou");
+      _view.showDialogAlterarAcesso();
     }
   }
 

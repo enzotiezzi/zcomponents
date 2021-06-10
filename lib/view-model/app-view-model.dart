@@ -44,7 +44,7 @@ class AppViewModel {
     "dataVersao":this.dataVersao,
     "projectKeyFirebase":this.projectKeyFirebase,
     "idModulo":this.idModulo,
-    "modulo":this.modulo,
+    "modulo":this.modulo.toMap(),
     "nomeExibicao":this.nomeExibicao
    };
   }
