@@ -27,6 +27,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
   String hintDataExpiracao = '';
   String hintDataVinculo = '';
   bool preencheuDataExpiracao = false;
+  List<String> itensMenu =[];
 
   @override
   Future<void> afterBuild() {
@@ -36,7 +37,19 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
 
   @override
   Future<void> initView() {
+    itensMenu = [
+      "Editar dados",
+      _definirTexto()
+    ];
     _preencherDados();
+  }
+
+  String _definirTexto(){
+    if(state.widget.appUsuarioContaViewModel.status=="Ativo"){
+      return "Revogar";
+    }else{
+      return "Ativar";
+    }
   }
 
   Widget _preencherDados() {

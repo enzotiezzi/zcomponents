@@ -1,5 +1,6 @@
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/modulo/detalhe-modulo.dart';
 import 'package:z_components/components/modulo/detalhe-usuario-view.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
@@ -35,7 +36,23 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [_montarBotaoEditar()],
+        actions: [      PopupMenuButton<String>(
+          onSelected: _escolhaMenuItem,
+          itemBuilder: (context){
+            return _view.itensMenu.map((String item){
+              return PopupMenuItem<String>(
+                value: item,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(item),
+                    _definirIcone(item)
+                  ],
+                ),
+              );
+            }).toList();
+          },
+        )],
         centerTitle: true,
         title: Text(
           "USUÁRIO",
@@ -45,6 +62,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
       body: _buildBody(),
     );
   }
+
 
   Widget _buildBody() {
     return new Column(
@@ -234,4 +252,29 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
       return Container();
     }
   }
+
+
+
+  _escolhaMenuItem(String itemEscolhido){
+    if(itemEscolhido.contains("Editar")){
+      return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetalheModulo(
+              editarDados: true,
+              cliqueEditar: true,
+              appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
+            ),
+          ));
+    }else{
+      return print("Modificou");
+    }
+  }
+
+  Widget _definirIcone(String item){
+    if(item.contains("Editar")){
+      return Icon(Icons.edit,color: Theme.of(context).primaryColor,);
+    }else{
+      return Icon(Icons.block_flipped,color: Colors.red,);
+    }}
 }

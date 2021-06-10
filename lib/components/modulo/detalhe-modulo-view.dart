@@ -15,23 +15,6 @@ class DetalheModuloView extends IView<DetalheModulo>{
 
   IContasService contasService;
   DialogUtils dialogUtils;
-
-  @override
-  Future<void> afterBuild() {
-  }
-
-  @override
-  Future<void> initView() {
-    _preencherDados();
-    dialogUtils = new DialogUtils(state.context);
-    contasService = new ContasService(NovoToken.newToken);
-    if (state.widget.editarDados) {
-      Future.delayed(Duration(seconds: 1), () {
-        FocusScope.of(state.context).requestFocus(perfilFocus);
-      });
-    }
-  }
-
   TextEditingController dataExpiracaoController = new TextEditingController();
   FocusNode dataExpiracaoFocus = new FocusNode();
   TextEditingController dataController = new TextEditingController();
@@ -55,6 +38,26 @@ class DetalheModuloView extends IView<DetalheModulo>{
   bool preencheuDataExpiracao=false;
   String textModificar='';
   String textModificarAcesso='';
+
+
+
+  @override
+  Future<void> afterBuild() {
+  }
+
+  @override
+  Future<void> initView() {
+
+    _preencherDados();
+    dialogUtils = new DialogUtils(state.context);
+    contasService = new ContasService(NovoToken.newToken);
+    if (state.widget.editarDados) {
+      Future.delayed(Duration(seconds: 1), () {
+        FocusScope.of(state.context).requestFocus(perfilFocus);
+      });
+    }
+  }
+
 
 
   void definirTextoMenu(){
