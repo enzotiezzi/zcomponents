@@ -5,6 +5,7 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
+import 'package:z_components/components/modulo/detalhe-usuario.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -132,9 +133,18 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
         status: app.status,
         telefone: app.usuario.telefone,
         email: app.usuario.email,
-        appsVinculados:"",
+        appsVinculados: "",
         quantidadeApps: "",
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetalheUsuario(
+                    editarDados: true,
+                    cliqueEditar: true,
+                    appUsuarioContaViewModel: app),
+              ));
+        },
       ),
     );
   }

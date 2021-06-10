@@ -1,13 +1,13 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:z_components/components/fluxo-admin/detalhe-usuario.dart';
+import 'package:z_components/components/modulo/detalhe-usuario.dart';
 import 'package:z_components/i-view.dart';
 
-class DetalheUsuarioView extends IView<DetalheUsuario>{
+class DetalheUsuarioView extends IView<DetalheUsuario> {
   DetalheUsuarioView(State<DetalheUsuario> state) : super(state);
 
   String titulo = "";
-  String textModificar='';
+  String textModificar = '';
 
   TextEditingController dataExpiracaoController = new TextEditingController();
   FocusNode dataExpiracaoFocus = new FocusNode();
@@ -22,11 +22,12 @@ class DetalheUsuarioView extends IView<DetalheUsuario>{
   TextEditingController dataVinculoController = new TextEditingController();
   FocusNode dataVinculoFocus = new FocusNode();
 
-  String hintNomePerfil= '';
-  String hintStatus='';
-  String hintDataExpiracao='';
-  String hintDataVinculo='';
-  bool preencheuDataExpiracao=false;
+  String hintNomePerfil = '';
+  String hintStatus = '';
+  String hintDataExpiracao = '';
+  String hintDataVinculo = '';
+  bool preencheuDataExpiracao = false;
+  List<String> itensMenu =[];
 
   @override
   Future<void> afterBuild() {
@@ -36,51 +37,61 @@ class DetalheUsuarioView extends IView<DetalheUsuario>{
 
   @override
   Future<void> initView() {
+    itensMenu = [
+      "Editar dados",
+      _definirTexto()
+    ];
     _preencherDados();
-
   }
 
-  Widget _preencherDados(){
+  String _definirTexto(){
+    if(state.widget.appUsuarioContaViewModel.status=="Ativo"){
+      return "Revogar";
+    }else{
+      return "Ativar";
+    }
+  }
+
+  Widget _preencherDados() {
     titulo = state.widget.appUsuarioContaViewModel.app.nome;
     perfilController.text = "Não contém perfil";
     dataVinculoController.text = _validarDataVinculo();
     dataExpiracaoController.text = _validarDataExpiracao();
     statusController.text = state.widget.appUsuarioContaViewModel.status;
-    if(state.widget.appUsuarioContaViewModel.status == "Ativo"){
+    if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
       textModificar = "REVOGAR ACESSO";
-    }else{
-      textModificar="ATIVAR ACESSO";
+    } else {
+      textModificar = "ATIVAR ACESSO";
     }
   }
 
-  bool validarCampos(){
-    if(preencheuDataExpiracao){
+  bool validarCampos() {
+    if (preencheuDataExpiracao) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
-  String _validarDataVinculo(){
-    if(state.widget.appUsuarioContaViewModel.dataVinculo != null){
-      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel.dataVinculo));
-    }else{
+  String _validarDataVinculo() {
+    if (state.widget.appUsuarioContaViewModel.dataVinculo != null) {
+      return UtilData.obterDataDDMMAAAA(
+          DateTime.parse(state.widget.appUsuarioContaViewModel.dataVinculo));
+    } else {
       return "Nunca";
     }
   }
 
-  String _validarDataExpiracao(){
-    if(state.widget.appUsuarioContaViewModel.dataInativacao != null){
-      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel.dataInativacao));
-    }else{
+  String _validarDataExpiracao() {
+    if (state.widget.appUsuarioContaViewModel.dataInativacao != null) {
+      return UtilData.obterDataDDMMAAAA(
+          DateTime.parse(state.widget.appUsuarioContaViewModel.dataInativacao));
+    } else {
       return "Nunca";
     }
   }
 
-  Function cliqueModificarAcesso(){}
+  Function cliqueModificarAcesso() {}
 
-  Function editarOnPressed(){
-
-  }
-
+  Function editarOnPressed() {}
 }
