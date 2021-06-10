@@ -112,7 +112,8 @@ class ContasService extends Service implements IContasService {
     var params = searchOptions.toHttpParams();
     try {
       var res = await request(
-          "$_URL/modulos/${idModulo}/apps/$idApp/usuarios$params", Service.HTTP_GET);
+          "$_URL/modulos/${idModulo}/apps/$idApp/usuarios$params",
+          Service.HTTP_GET);
       print(res.body);
       print(res.statusCode);
       return PaginatedList<AppUsuarioContaViewModel>(
@@ -135,6 +136,26 @@ class ContasService extends Service implements IContasService {
           .mapToPaginatedList();
     } catch (e) {
       return null;
+    }
+  }
+
+  @override
+  Future<bool> mudarStatusUsuario(
+      String idModulo,
+      String idApp,
+      String idUsuario,
+      AppUsuarioContaViewModel appUsuarioContaViewModel) async {
+    try {
+      var res = await request(
+          "$_URL/modulos/$idModulo/apps/$idApp/usuarios/$idUsuario/acesso",
+          Service.HTTP_PUT,
+          body: appUsuarioContaViewModel.toMap());
+      if (res.statusCode == 200 || res.statusCode == 204) {
+        return true;
+      } else
+        return false;
+    } catch (e) {
+      return false;
     }
   }
 }

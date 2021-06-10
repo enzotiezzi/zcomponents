@@ -28,4 +28,7 @@ abstract class IContasService {
       String idModulo, String idApp, SearchOptions searchOptions);
 
   Future<ZResponse<ContaV2ViewModel>> listarContas(SearchOptions searchOptions);
+
+  Future<bool> mudarStatusUsuario(String idModulo, String idApp,
+      String idUsuario, AppUsuarioContaViewModel appUsuarioContaViewModel);
 }
