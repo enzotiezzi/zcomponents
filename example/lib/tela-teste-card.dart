@@ -88,10 +88,12 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             ZAba(
               zAbaViewModel: [
                 ZAbaViewModel(
+                  icon: Icon(Icons.person),
                     onTap: () {
                       print("1");
                     },
                     titulo: "UF(Estados)"),
+
                 ZAbaViewModel(
                     onTap: () {
                       print("2");
