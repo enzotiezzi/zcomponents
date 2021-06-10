@@ -37,7 +37,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario>{
   @override
   Future<void> initView() {
     _preencherDados();
-    throw UnimplementedError();
+
   }
 
   Widget _preencherDados(){

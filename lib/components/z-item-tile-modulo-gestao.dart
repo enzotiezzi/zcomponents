@@ -16,7 +16,7 @@ class ZItemTileModuloGestao extends StatefulWidget {
 class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
   Widget retornarNomeModulo() {
     if (widget.nomeModulo == null) {
-      return new Text(widget.nomeModulo);
+      return new Text("");
     } else {
       return new Text(
         widget.nomeModulo,
@@ -64,7 +64,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
       onTap: widget.onTap,
       child: IntrinsicHeight(
         child: Container(
-          margin: const EdgeInsets.only(left: 7, right: 16, bottom: 8, top: 8),
+          margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),
           child: Material(
             elevation: 2,
             color: Colors.white,
@@ -72,6 +72,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
               borderRadius: BorderRadius.circular(6.0),
             ),
             child: Container(
+              padding: const EdgeInsets.only(top: 8,bottom: 8,left: 7,right: 7),
               alignment: Alignment.centerLeft,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

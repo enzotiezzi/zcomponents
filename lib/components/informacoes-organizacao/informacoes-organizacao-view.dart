@@ -11,6 +11,7 @@ import 'package:z_components/api/endereco/i-endereco-service.dart';
 import 'package:z_components/api/teste-conexao/i-teste-conexao-service.dart';
 import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
+import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 import '../../i-view.dart';
@@ -73,8 +74,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     _dialogUtils = new DialogUtils(state.context);
     _testeConexaoService = new TesteConexaoService();
     _enderecoService = new EnderecoService();
-    _contasService = new ContasService(
-        "eyJhbGciOiJSUzI1NiIsImtpZCI6IjA5MGQ1Y2IyMTNiYmQ2OTVhMWZmNmFlNWUwMzUxNGI2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MjI4MjAyMzQsImV4cCI6MTYyMjgyMzgzNCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpHZXN0b3IiLCJzdWIiOiIwMjFmOTE4Mi0zZjQxLTRmMGEtYWFkYy00MDc3NmU2MGQwNGMiLCJhdXRoX3RpbWUiOjE2MjI4MTEzNjAsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiIzS0U2RUNEUlRIR0dYQURBTUNXR1pHQUVEWDJEM1lPTCIsImFjY291bnQiOiJaZWxsYXIyIiwiaWRBY2NvdW50IjoiOGU2ZWI2MzItYjcwNy00MTNmLWExNTItM2NmZmQxZjk4MmI1IiwiaWRDb2xhYm9yYWRvciI6IjE1ODQyQzJFLUM3RDctNERENS04RkE5LUZFMzNDQkQ2NENFQyIsInByZWZlcnJlZF91c2VybmFtZSI6IjQyNi45MTAuMjU4LTYxIiwiZW1haWwiOiJsdWl6Lmx1Y2lhQHplbGxhci5jb20uYnIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlcl92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJMdWl6IEx1Y2lhIE5ldG8iLCJwaG9uZV9udW1iZXIiOiIxMTk0ODQ4NDEyMCIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.WbWga26u8lGjjpWpDy8ygo37h7Bjwgqsq8FvB7zkuq3aE5DDyvCwGgNjVFOy6uEWaicqo3vZ6RAvnLBeNKzTE9Dg-hoMZC2zRO6BORDCSVWjcyKEYi59O4vZ0GxlBDDS1MB4yhnTz4DC--Le_VYE4bHaqm2hqkyrlVwhMNFXzc-sqdgxKQdwNqLCsu_QxKKi-QhfzKa8KWCa19ktekhxIS6kGESQeVMG1HCxwpf16-pR8gKoPxk0FEZAtZuVcIJlce1tfx2sb7w0Vu5dnRb9BwgVxkzNGifJZ8uYnmcM54BWQQ7YzeVj55mEyC6kA0vDjEpgaAh3Y6--07Cmrdg5JQ");
+    _contasService = new ContasService(NovoToken.newToken);
     if (state.widget.infoOrganizacaoViewModel == null &&
         !state.widget.editarDados) {
       await _buscarDadosOrganizacao();

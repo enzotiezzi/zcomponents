@@ -1,30 +1,40 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
+import 'package:z_components/components/filtro/filtro-campo.dart';
+import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
+import 'package:z_components/components/modulo/detalhe-usuario.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
+import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 
+import '../z-item-tile-modulo-gestao.dart';
 
 class ListagemUsuarios extends StatefulWidget {
   AppViewModel appViewModel;
   ModuloContaViewModel moduloContaViewModel;
-  ListagemUsuarios({this.appViewModel,this.moduloContaViewModel});
+
+  ListagemUsuarios({this.appViewModel, this.moduloContaViewModel});
+
   @override
   _ListagemUsuariosState createState() => _ListagemUsuariosState();
 }
 
 class _ListagemUsuariosState extends State<ListagemUsuarios> {
-
   ListagemUsuariosView _view;
+
   @override
   void initState() {
     _view = ListagemUsuariosView(this);
     _view.initView();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,26 +45,65 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
       body: _buildBody(),
     );
   }
-  Widget _buildBody(){
-   return new Column(
+
+  Widget _buildBody() {
+    return new Column(
       children: [
         new Material(
-            elevation: 4,
-            child: new Container(
-              margin: EdgeInsets.only(top: 10.0),
-              child: ZItemTileModuloAdm(
+          elevation: 4,
+          child: ConfigurableExpansionTile(
+            initiallyExpanded: true,
+            onExpansionChanged: (bool) {},
+            borderColorStart: Color(0xffcccccc),
+            borderColorEnd: Color(0xffcccccc),
+            header: new Expanded(
+              child: new Container(
+                child: Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 16),
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: new Text(
+                        widget.appViewModel.nomeExibicao,
+                        style: new TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: MainStyle.get(context).fontSizePadrao),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            animatedWidgetFollowingHeader: new Container(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: new Icon(
+                Icons.arrow_drop_down,
+                color: Color(0xffcccccc),
+              ),
+            ),
+            children: [
+              new ZItemTileModuloGestao(
+                status: "Ativo",
+                nomeModulo: widget.appViewModel.nomeExibicao,
                 visibilidade: true,
-                nomeModulo: widget.appViewModel.nome,
-                statusVinculo: widget.moduloContaViewModel.status,
-                perfilAcesso: "Não possui",
-                dataVinculo: (widget.moduloContaViewModel.dataVinculo != null)
-                    ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataVinculo))
-                    : "Nunca",
-                dataExpiracao:(widget.moduloContaViewModel.dataInativacao != null)
-                    ? UtilData.obterDataDDMMAAAA(DateTime.parse(widget.moduloContaViewModel.dataInativacao))
-                    : "Nunca",
               )
-            )
+            ],
+          ),
+        ),
+        new ZSearchBar(
+          key: _view.keySearchBar,
+          camposFiltro: [],
+          filtroPrincipal:
+              new FiltroCampo(key: "Usuario.Nome", value: "nome Usuario"),
+          onFilter: (filters) async {
+            SearchOptions searchOptions = new SearchOptions();
+            if (filters[0].value != "") {
+              searchOptions.filters = filters;
+            }
+
+            await _view.buscarUsuario(searchOptions);
+          },
         ),
         Expanded(
           child: _listaUsuarios(),
@@ -62,16 +111,17 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
       ],
     );
   }
-  Widget _listaUsuarios (){
-    if(_view.listaUsuarioPorApp != null){
-      return
-      new ListView.builder(
+
+  Widget _listaUsuarios() {
+    if (_view.listaUsuarioPorApp != null) {
+      return new ListView.builder(
           padding: EdgeInsets.only(top: 20.0),
           shrinkWrap: true,
+          controller: _view.scrollController,
           itemCount: _view.listaUsuarioPorApp.length,
           itemBuilder: (builder, index) =>
               _montarCardUsuario(_view.listaUsuarioPorApp[index]));
-    }else{
+    } else {
       return new Container();
     }
   }
@@ -83,26 +133,19 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
         status: app.status,
         telefone: app.usuario.telefone,
         email: app.usuario.email,
-        appsVinculados: _listarAppsVinculados(_view.listaUsuarioPorApp),
-        quantidadeApps: _view.listaUsuarioPorApp.length.toString(),
-        onTap: () {},
+        appsVinculados: "",
+        quantidadeApps: "",
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetalheUsuario(
+                    editarDados: false,
+                    cliqueEditar: false,
+                    appUsuarioContaViewModel: app),
+              ));
+        },
       ),
     );
-  }
-
-  String _listarAppsVinculados(List<AppUsuarioContaViewModel> lista) {
-    String appsFormatados = "";
-    if (lista != null && lista.length != 0) {
-      for (int i = 0; i < lista.length; i++) {
-        if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nome}";
-        } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nome}";
-        }
-      }
-    } else {
-      appsFormatados = "Sem apps vinculados";
-    }
-    return appsFormatados;
   }
 }

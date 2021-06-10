@@ -93,6 +93,7 @@ flutter:
     - assets/status-aguardando-validacao.svg
     - assets/Z_Documentos.svg
     - assets/arvore.svg
+    - assets/more.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

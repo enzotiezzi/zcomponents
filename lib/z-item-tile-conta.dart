@@ -6,13 +6,17 @@ class ZItemTileConta extends StatefulWidget {
   String appsVinculados;
   String dataVinculo;
   bool ativo;
+  bool visibilidade;
+  int tamanhoLista;
 
   ZItemTileConta(
       {this.imagemPerfil,
       this.dataVinculo,
       this.appsVinculados,
       this.ativo,
-      this.nomeConta});
+      this.nomeConta,
+      this.visibilidade,
+      this.tamanhoLista});
 
   @override
   _ZItemTileContaState createState() => _ZItemTileContaState();
@@ -79,6 +83,7 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
                                         color: Colors.grey, fontSize: 12.0),
                                   )),
                             ),
+                            _montarTamanhoLista(),
                             Expanded(
                               flex: 25,
                               child: new Container(
@@ -113,20 +118,42 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    flex: 10,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_forward_ios_outlined),
-                      ],
-                    ),
-                  )
+                  _retornarArrow()
                 ],
               ),
             )),
       ),
     );
+  }
+
+  Widget _retornarArrow() {
+    if (widget.visibilidade) {
+      return Container();
+    } else {
+      return Expanded(
+        flex: 10,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_forward_ios_outlined),
+          ],
+        ),
+      );
+    }
+  }
+
+  Widget _montarTamanhoLista() {
+    if (widget.tamanhoLista != null && widget.tamanhoLista != 0) {
+      return new Container(
+          margin: EdgeInsets.only(right: 4.0),
+          padding: EdgeInsets.only(top: 4.0, bottom: 4, left: 6, right: 6),
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.6),
+              borderRadius: BorderRadius.circular(6)),
+          child: new Text(widget.tamanhoLista.toString()),
+        );
+    } else
+      return new Container();
   }
 
   Widget retotnarAppVinculado() {

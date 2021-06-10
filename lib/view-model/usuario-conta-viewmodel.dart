@@ -10,6 +10,7 @@ class UsuarioContaViewModel {
   bool ativo;
   bool contaLogada;
   String dataVinculo;
+  String perfil;
   UsuarioAdmViewModel usuario;
   int appQtde;
 
@@ -21,6 +22,7 @@ class UsuarioContaViewModel {
       this.ativo,
       this.contaLogada,
       this.dataVinculo,
+      this.perfil,
       this.usuario,
       this.appQtde});
 
@@ -37,6 +39,7 @@ class UsuarioContaViewModel {
         ativo: json["ativo"],
         contaLogada: json["contaLogada"],
         dataVinculo: json["dataVinculo"],
+        perfil: json["perfil"],
         usuario: UsuarioAdmViewModel.fromJson(
           json['usuario'],
         ),

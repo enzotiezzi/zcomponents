@@ -6,6 +6,7 @@ import 'package:z_components/components/filtro/paginated-list.dart';
 import 'package:z_components/components/filtro/z-response.dart';
 import 'package:z_components/settings/api-settings.dart';
 import 'package:z_components/view-model/app-view-model.dart';
+import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -89,30 +90,48 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<List<AppViewModel>> listarAplicativos(String idModulo) async {
-    try{
-      var url = "$_URL/modulos/${idModulo}/apps";
+  Future<ZResponse<AppViewModel>> listarAplicativos(
+      SearchOptions searchOptions, String idModulo) async {
+    var params = searchOptions.toHttpParams();
+    try {
+      var url = "$_URL/modulos/${idModulo}/apps$params";
       var response = await request(url, Service.HTTP_GET);
       print(response.body);
       print(response.statusCode);
-      return (json.decode(response.body) as List)
-          .map((x) => AppViewModel.fromJson(x))
-          .toList();
-    }catch(e){
+      return PaginatedList<AppViewModel>(
+              response: response, deserializer: AppViewModel.fromJson)
+          .mapToPaginatedList();
+    } catch (e) {
       return null;
     }
   }
 
   @override
   Future<ZResponse<AppUsuarioContaViewModel>> listarUsuariosPorModuloEApp(
-      String idModulo, String idApp) async {
+      String idModulo, String idApp, SearchOptions searchOptions) async {
+    var params = searchOptions.toHttpParams();
     try {
       var res = await request(
-          "$_URL/modulos/${idModulo}/apps/$idApp", Service.HTTP_GET);
+          "$_URL/modulos/${idModulo}/apps/$idApp/usuarios$params", Service.HTTP_GET);
       print(res.body);
       print(res.statusCode);
       return PaginatedList<AppUsuarioContaViewModel>(
               response: res, deserializer: AppUsuarioContaViewModel.fromJson)
+          .mapToPaginatedList();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<ZResponse<ContaV2ViewModel>> listarContas(
+      SearchOptions searchOptions) async {
+    var params = searchOptions.toHttpParams();
+    try {
+      var res = await request("$_URL/usuarios/contas$params", Service.HTTP_GET);
+      print(res.body);
+      return PaginatedList<ContaV2ViewModel>(
+              response: res, deserializer: ContaV2ViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
