@@ -5,6 +5,7 @@ import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/usuarios.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
 
@@ -19,6 +20,7 @@ class UsuariosView extends IView<Usuarios> {
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
   ScrollController scrollController;
+  DialogUtils _dialogUtils;
 
   @override
   Future<void> afterBuild() {
@@ -28,11 +30,13 @@ class UsuariosView extends IView<Usuarios> {
 
   @override
   Future<void> initView() async {
-    contasService = new ContasService(
-        NovoToken.newToken);
+    _dialogUtils = new DialogUtils(state.context);
+    contasService = new ContasService(NovoToken.newToken);
+    _dialogUtils.showProgressDialog();
     await buscarListaUsuarios(searchOptions);
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);
+    _dialogUtils.dismiss();
   }
 
   Future<void> buscarListaUsuarios(SearchOptions searchOptions,

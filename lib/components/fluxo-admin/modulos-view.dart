@@ -5,11 +5,12 @@ import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/modulos.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/i-view.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 
-class ModulosView extends IView<Modulos>{
+class ModulosView extends IView<Modulos> {
   ModulosView(State<Modulos> state) : super(state);
 
   List<ModuloContaViewModel> listaModulos = [];
@@ -18,21 +19,23 @@ class ModulosView extends IView<Modulos>{
   PaginationMetaData paginationMetaData = new PaginationMetaData();
   ScrollController scrollController;
   IContasService contasService;
+  DialogUtils _dialogUtils;
 
   @override
-  Future<void> initView() async{
-    contasService = new ContasService(
-    NovoToken.newToken);
+  Future<void> initView() async {
+    _dialogUtils = new DialogUtils(state.context);
 
+    contasService = new ContasService(NovoToken.newToken);
+    _dialogUtils.showProgressDialog();
     await buscarListaModulos(searchOptions);
 
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);
+    _dialogUtils.dismiss();
   }
 
   @override
-  Future<void> afterBuild() {
-  }
+  Future<void> afterBuild() {}
 
   Future<void> buscarListaModulos(SearchOptions searchOptions,
       {bool scrollPage}) async {
@@ -63,6 +66,4 @@ class ModulosView extends IView<Modulos>{
       }
     }
   }
-
-
 }

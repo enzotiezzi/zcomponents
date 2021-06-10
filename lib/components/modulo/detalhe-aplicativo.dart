@@ -1,5 +1,6 @@
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/modulo/detalhe-aplicativo-view.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 import 'package:z_components/components/z-aba/z-aba.dart';
@@ -11,18 +12,16 @@ import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 
 class DetalheAplicativo extends StatefulWidget {
-
   AppViewModel appViewModel;
   ModuloContaViewModel contaViewModel;
 
-  DetalheAplicativo({this.appViewModel,this.contaViewModel});
+  DetalheAplicativo({this.appViewModel, this.contaViewModel});
 
   @override
   _DetalheAplicativoState createState() => _DetalheAplicativoState();
 }
 
 class _DetalheAplicativoState extends State<DetalheAplicativo> {
-
   DetalheAplicativoView _view;
 
   @override
@@ -44,14 +43,14 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
     );
   }
 
-  Widget _buildBody(){
+  Widget _buildBody() {
     return new Column(
       children: [
         new Material(
           elevation: 4,
           child: ConfigurableExpansionTile(
             initiallyExpanded: true,
-            onExpansionChanged: (bool){},
+            onExpansionChanged: (bool) {},
             borderColorStart: Color(0xffcccccc),
             borderColorEnd: Color(0xffcccccc),
             header: new Expanded(
@@ -60,14 +59,13 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 16),
-                      padding: const EdgeInsets.only(top: 8,bottom: 8),
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
                       child: new Text(
                         widget.appViewModel.nomeExibicao,
                         style: new TextStyle(
-                            color:Colors.black,
-                            fontWeight:FontWeight.w500,
-                            fontSize: MainStyle.get(context).fontSizePadrao
-                        ),
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: MainStyle.get(context).fontSizePadrao),
                       ),
                     ),
                   ],
@@ -75,8 +73,11 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
               ),
             ),
             animatedWidgetFollowingHeader: new Container(
-              padding: const EdgeInsets.only(top: 8,bottom: 8),
-              child: new Icon(Icons.arrow_drop_down,color: Color(0xffcccccc),),
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: new Icon(
+                Icons.arrow_drop_down,
+                color: Color(0xffcccccc),
+              ),
             ),
             children: [
               new ZItemTileModuloGestao(
@@ -89,8 +90,17 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
         ),
         new ZAba(
           zAbaViewModel: [
-            ZAbaViewModel(onTap: (){}, titulo: "Usuários",icon: Icon(Icons.group)),
-            ZAbaViewModel(onTap: (){}, titulo: "Parâmetros",icon:Icon(Icons.settings))
+            ZAbaViewModel(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListagemUsuarios(appViewModel: widget.appViewModel,)));
+                },
+                titulo: "Usuários",
+                icon: Icon(Icons.group)),
+            ZAbaViewModel(
+                onTap: () {}, titulo: "Parâmetros", icon: Icon(Icons.settings))
           ],
         ),
         new Expanded(child: _buildCampos())
@@ -98,7 +108,7 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
     );
   }
 
-  Widget _buildCampos(){
+  Widget _buildCampos() {
     return new ListView(
       shrinkWrap: true,
       children: [
@@ -109,7 +119,9 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
           controllerInputPadrao: _view.nomeController,
           inputPadraoFocus: _view.moduloFocus,
         ),
-        new Divider(height: 1,),
+        new Divider(
+          height: 1,
+        ),
         new ZInputGeneric(
           themeData: Theme.of(context),
           titulo: "Versão",
@@ -117,7 +129,9 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
           controllerInputPadrao: _view.versaoController,
           inputPadraoFocus: _view.versaoFocus,
         ),
-        new Divider(height: 1,),
+        new Divider(
+          height: 1,
+        ),
         new ZInputGeneric(
           themeData: Theme.of(context),
           titulo: "Data da Versão",
@@ -125,7 +139,9 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
           controllerInputPadrao: _view.dataVersaoController,
           inputPadraoFocus: _view.dataVersaoFocus,
         ),
-        new Divider(height: 1,),
+        new Divider(
+          height: 1,
+        ),
         new ZInputGeneric(
           themeData: Theme.of(context),
           titulo: "Módulo",
@@ -133,7 +149,9 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
           controllerInputPadrao: _view.moduloController,
           inputPadraoFocus: _view.moduloFocus,
         ),
-        new Divider(height: 1,),
+        new Divider(
+          height: 1,
+        ),
       ],
     );
   }
