@@ -38,4 +38,6 @@ abstract class IContasService {
 
   Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
       SearchOptions searchOptions, String idApp);
+
+  Future<UsuarioContaViewModel> buscarDadosUsuarioConta (String idUsuario);
 }
