@@ -15,7 +15,6 @@ import 'package:z_components/view-model/perfil-viewmodel.dart';
 
 class ContasService extends Service implements IContasService {
   String _URL = "${ApiSettings.ENDPOINT_API_V1}/contas";
-  String _URLAPPS = "${ApiSettings.ENDPOINT_API_V1}/app";
 
   ContasService(String token) : super(token);
 
@@ -166,7 +165,7 @@ class ContasService extends Service implements IContasService {
       SearchOptions searchOptions, String idApp) async {
     var params = searchOptions.toHttpParams();
     try {
-      var res = await request("$_URLAPPS/$idApp/perfil$params", Service.HTTP_GET);
+      var res = await request("$_URL/app/$idApp/perfil$params", Service.HTTP_GET);
       print(res.body);
       return PaginatedList<PerfilViewModel>(
               response: res, deserializer: PerfilViewModel.fromJson)
