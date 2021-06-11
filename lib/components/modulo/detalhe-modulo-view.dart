@@ -159,22 +159,9 @@ class DetalheModuloView extends IView<DetalheModulo>{
   }
 
   Function editarOnPressed(){
-    bool validar = validarCampos();
-    if(validar){
-      return (){
-        if(dataExpiracaoController.text.isEmpty){
-          _dialogUtils.showAlertDialogNewAviso("Data inválida", "Por favor, revise a Data obrigatória");
-          dataExpiracaoFocus.requestFocus();
-        }else{
-          state.setState(() {
-            state.widget.appUsuarioContaViewModel.perfil.nome = perfilController.text;
-            print(state.widget.appUsuarioContaViewModel.dataInativacao);
-            print(dataExpiracaoController.text);
-            state.widget.appUsuarioContaViewModel.dataInativacao = _montarData(dataExpiracaoController.text);
-            _alterarAcesso("perfil");
-          });
-        }
-
+    if(alterouPerfil){
+      return ()async{
+            await _alterarAcesso("perfil");
       };
     }else{
       return null;
