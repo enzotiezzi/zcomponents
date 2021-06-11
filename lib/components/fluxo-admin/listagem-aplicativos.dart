@@ -1,6 +1,9 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
+import 'package:z_components/components/filtro/filtro-campo.dart';
+import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/listagem-aplicativos-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
@@ -74,13 +77,25 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
               child: new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
             ),
             children: [
-              new ZItemTileModuloGestao(
+              new ZItemTileCardBasico(
                 visibilidade: true,
-                status: widget.moduloContaViewModel.status,
-                nomeModulo: widget.moduloContaViewModel.modulo.nome,
+                nome: widget.moduloContaViewModel.modulo.nome,
               )
             ],
           ),
+        ),
+        new ZSearchBar(
+          key: _view.keySearchBar,
+          camposFiltro: [],
+          filtroPrincipal:
+              new FiltroCampo(key: "NomeExibicao", value: "nome Exibição"),
+          onFilter: (filters) async {
+            SearchOptions searchOptions = new SearchOptions();
+            if (filters[0].value != "") {
+              searchOptions.filters = filters;
+            }
+            await _view.buscarAplicativos(searchOptions);
+          },
         ),
         new Expanded(
           child: _listarAplicativos(),
@@ -93,25 +108,27 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     return new ListView.builder(
       padding: EdgeInsets.only(top: 20.0),
       shrinkWrap: true,
+      controller: _view.scrollController,
       itemCount: _view.listaModulos.length,
       itemBuilder: (context, index) =>
           _montarCardAplicativo(_view.listaModulos[index]),
-
     );
   }
 
   Widget _montarCardAplicativo(AppViewModel appViewModel) {
     print(appViewModel.nome);
     return Container(
-        child: new ZItemTileModuloGestao(
-      nomeModulo: appViewModel.nomeExibicao,
-      onTap: (){
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context)=>DetalheAplicativo(
-              appViewModel: appViewModel,contaViewModel: widget.moduloContaViewModel,
-            )));
+        child: new ZItemTileCardBasico(
+      nome: appViewModel.nomeExibicao,
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetalheAplicativo(
+                      appViewModel: appViewModel,
+                      contaViewModel: widget.moduloContaViewModel,
+                    )));
       },
-      status: widget.moduloContaViewModel.status,
     ));
   }
 }
