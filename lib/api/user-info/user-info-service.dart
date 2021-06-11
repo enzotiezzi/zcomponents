@@ -4,14 +4,14 @@ import 'package:z_components/api/user-info/i-user-info-service.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 class UserInfoService extends Service implements IUserInfoService {
-  var _URL = "https://identity-server-dev.zellar.com.br/apis";
+  var _URL = "https://identity-admin-api.zellar.com.br/api";
 
   UserInfoService(String token) : super(token);
 
   @override
   Future<bool> editarInformacoes(BuscarInfo input) async {
     try {
-      var url = "$_URL/usuario-pessoa";
+      var url = "$_URL/Users";
 
       var response = await request(url, Service.HTTP_PUT, body: input.toMap());
 
@@ -22,14 +22,15 @@ class UserInfoService extends Service implements IUserInfoService {
   }
 
   @override
-  Future<BuscarInfo> buscarInformacoesUsuarioPessoa() async{
+  Future<BuscarInfo> buscarInformacoesUsuarioPessoa() async {
     try {
-      var url = "$_URL/usuario-pessoa";
+      var url = "$_URL/Users";
 
       var response = await request(url, Service.HTTP_GET);
+      print(response.statusCode);
 
       return BuscarInfo.fromJson(json.decode(response.body));
-    } catch(e){
+    } catch (e) {
       return null;
     }
   }

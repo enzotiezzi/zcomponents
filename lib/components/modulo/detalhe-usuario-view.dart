@@ -72,12 +72,13 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
     } else {
       itensMenu = ["Editar dados", _definirTexto()];
     }
-    _preencherDados();
+    preencherDados();
   }
 
   Future<List<ZCollectionItem>> buscarPerfis(
       SearchOptions searchOptions) async {
-    var res = await _contasService.buscarListaPerfis(searchOptions);
+    var res = await _contasService.buscarListaPerfis(
+        searchOptions, state.widget.appUsuarioContaViewModel.app.idApp);
     List<ZCollectionItem> listaAux = [];
     if (res != null) {
       paginationMetaData = res.paginationMetaData;
@@ -108,7 +109,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
     }
   }
 
-  Widget _preencherDados() {
+  Widget preencherDados() {
     titulo = state.widget.appUsuarioContaViewModel.app.nome;
     perfilController.text = state.widget.appUsuarioContaViewModel.perfil.nome ??
         "Não contém perfil";
@@ -136,7 +137,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
   Function editarOnPressed() {
     if (alterouPerfil) {
       return () async {
-        await _alterarAcesso();
+        await _alterarAcesso("perfil");
       };
     } else
       return null;
@@ -213,7 +214,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
                                     "Ativo";
                               }
                               Navigator.pop(context);
-                              await _alterarAcesso();
+                              await _alterarAcesso("acesso");
                             },
                             child: new Container(
                               padding: const EdgeInsets.all(12),
@@ -234,18 +235,19 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
             ));
   }
 
-  Future<void> _alterarAcesso() async {
+  Future<void> _alterarAcesso(String operacao) async {
     _dialogUtils.showProgressDialog();
 
     var res = await _contasService.editarDadosUsuario(
         state.widget.idModulo,
         state.widget.appUsuarioContaViewModel.idApp,
         state.widget.appUsuarioContaViewModel.idUsuario,
-        state.widget.appUsuarioContaViewModel);
+        state.widget.appUsuarioContaViewModel,
+        operacao);
 
     if (res != null && res) {
       _dialogUtils.dismiss();
-      Navigator.of(state.context).pop(true);
+      Navigator.of(state.context).pop(state.widget.appUsuarioContaViewModel);
     } else {
       _dialogUtils.dismiss();
       _dialogUtils.showAlertDialogErro(

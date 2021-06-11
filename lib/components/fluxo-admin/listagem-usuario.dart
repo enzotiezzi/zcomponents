@@ -145,7 +145,7 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
                     cliqueEditar: false,
                     appUsuarioContaViewModel: app),
               ));
-          if (res != null && res) {
+          if (res != null) {
             _view.searchOptions = new SearchOptions();
             await _view.buscarUsuario(_view.searchOptions);
           }

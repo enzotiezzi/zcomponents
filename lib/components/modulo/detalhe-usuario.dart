@@ -150,6 +150,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
             widget.appUsuarioContaViewModel.perfil.idApp =
                 value.chaveSecundaria;
             widget.appUsuarioContaViewModel.perfil.idPerfil = value.chave;
+            widget.appUsuarioContaViewModel.idPerfil = value.chave;
             setState(() {
               _view.alterouPerfil = true;
             });
@@ -230,7 +231,6 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
             inputPadraoFocus: _view.telefoneFocus,
             hintText: _view.hintDataVinculo,
             controllerInputPadrao: _view.telefoneController),
-        //  exibirBotaoModificar()
       ],
     );
   }
@@ -280,9 +280,9 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
     }
   }
 
-  _escolhaMenuItem(String itemEscolhido) {
+  _escolhaMenuItem(String itemEscolhido) async {
     if (itemEscolhido.contains("Editar")) {
-      return Navigator.push(
+      var res = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => DetalheUsuario(
@@ -292,6 +292,11 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
               idModulo: widget.idModulo,
             ),
           ));
+      if (res != null) {
+        widget.appUsuarioContaViewModel = res;
+        _view.preencherDados();
+        setState(() {});
+      }
     } else {
       _view.showDialogAlterarAcesso();
     }
