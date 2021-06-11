@@ -5,9 +5,7 @@ import 'package:z_components/components/modulo/detalhe-aplicativo-view.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 import 'package:z_components/components/z-aba/z-aba.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
-import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
 import 'package:z_components/styles/main-style.dart';
-import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 

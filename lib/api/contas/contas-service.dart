@@ -168,6 +168,7 @@ class ContasService extends Service implements IContasService {
       AppUsuarioContaViewModel appUsuarioContaViewModel,
       String tipo) async {
     try {
+      print(appUsuarioContaViewModel.toMap());
       var res = await request(
           "$_URL/usuarios/$idUsuario/modulos/$idModulo/apps/$idApp/$tipo",
           Service.HTTP_PUT,
@@ -187,7 +188,8 @@ class ContasService extends Service implements IContasService {
       SearchOptions searchOptions, String idApp) async {
     var params = searchOptions.toHttpParams();
     try {
-      var res = await request("$_URL/app/$idApp/perfil$params", Service.HTTP_GET);
+      var res =
+          await request("$_URL/app/$idApp/perfil$params", Service.HTTP_GET);
       print(res.body);
       return PaginatedList<PerfilViewModel>(
               response: res, deserializer: PerfilViewModel.fromJson)

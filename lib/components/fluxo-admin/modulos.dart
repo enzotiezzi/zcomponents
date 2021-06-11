@@ -6,9 +6,10 @@ import 'package:z_components/components/fluxo-admin/listagem-aplicativos.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/fluxo-admin/modulos-view.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
-import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 import 'package:z_components/view-model/modulo-viewmodel.dart';
+
+import '../z-item-tile-modulo-gestao.dart';
 
 class Modulos extends StatefulWidget {
 
@@ -82,8 +83,8 @@ class _ModulosState extends State<Modulos> {
     print(_view.listaModulos);
     print(moduloContaViewModel.toMap());
     return new Container(
-      child: new ZItemTileCardBasico(
-        nome: moduloContaViewModel.modulo.nome,
+      child: new ZItemTileModuloGestao(
+        nomeModulo: moduloContaViewModel.modulo.nome,status:  moduloContaViewModel.status,
         onTap: (){
           Navigator.push(
               context,

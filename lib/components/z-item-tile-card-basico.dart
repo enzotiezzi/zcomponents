@@ -1,43 +1,29 @@
 import 'package:flutter/material.dart';
 
-class ZItemTileModuloGestao extends StatefulWidget {
+class ZItemTileCardBasico extends StatefulWidget {
   final Function onTap;
-  final String nomeModulo;
-  final String status;
+  final String nome;
+
   final bool visibilidade;
 
-  ZItemTileModuloGestao(
-      {this.onTap, this.nomeModulo, this.status, this.visibilidade = false});
+  ZItemTileCardBasico(
+      {this.onTap, this.nome, this.visibilidade = false});
 
   @override
-  _ZItemTileModuloGestaoState createState() => _ZItemTileModuloGestaoState();
+  _ZItemTileCardBasicoState createState() => _ZItemTileCardBasicoState();
 }
 
-class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
+class _ZItemTileCardBasicoState extends State<ZItemTileCardBasico> {
   Widget retornarNomeModulo() {
-    if (widget.nomeModulo == null) {
+    if (widget.nome == null) {
       return new Text("");
     } else {
       return new Text(
-        widget.nomeModulo,
+        widget.nome,
         style: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
             fontWeight: FontWeight.w600),
-      );
-    }
-  }
-
-  Widget retornarStatusVinculo() {
-    if (widget.status == null) {
-      return Text('');
-    } else {
-      return Text(
-        widget.status,
-        style: TextStyle(
-          color: Color(0xFF000000),
-          fontSize: 12,
-        ),
       );
     }
   }
@@ -47,7 +33,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
       return Container();
     } else {
       return Expanded(
-        flex: 5,
+        flex: 3,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -89,30 +75,6 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
                                 margin: EdgeInsets.only(
                                     left: 9.0, bottom: 6.0, top: 6.0),
                                 child: retornarNomeModulo()),
-                          ],
-                        ),
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 20,
-                              child: new Container(
-                                  margin: EdgeInsets.only(
-                                      left: 9.0,
-                                      right: 0.0,
-                                      bottom: 4.0,
-                                      top: 6.0),
-                                  child: new Text("Status:")),
-                            ),
-                            Expanded(
-                              flex: 35,
-                              child: new Container(
-                                margin: EdgeInsets.only(
-                                  left: 4.0,
-                                ),
-                                child: retornarStatusVinculo(),
-                              ),
-                            ),
                           ],
                         ),
                       ],
