@@ -48,6 +48,19 @@ class ContasService extends Service implements IContasService {
     }
   }
 
+
+  @override
+  Future<UsuarioContaViewModel> buscarDadosUsuarioConta(String idUsuario) async{
+    try{
+      var url = "$_URL/contas/usuarios$idUsuario";
+      var response = await request(url, Service.HTTP_GET);
+
+      return UsuarioContaViewModel.fromJson(json.decode(response.body));
+    }catch(e){
+      return null;
+    }
+  }
+
   @override
   Future<InfoOrganizacaoViewModel> editarDadosOrganizacao(
       InfoOrganizacaoViewModel infoOrganizacaoViewModel) async {
@@ -196,4 +209,5 @@ class ContasService extends Service implements IContasService {
       return null;
     }
   }
+
 }
