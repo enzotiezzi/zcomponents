@@ -155,7 +155,7 @@ class _ListagemAppsState extends State<ListagemApps> {
                 ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataVinculo))
                 : "Nunca",
             nomeModulo: app.app.nomeExibicao,
-            perfilAcesso: "Não contém perfil",
+            perfilAcesso: app.perfil.nome,
             statusVinculo: app.status,
             onTap: () {
               print(widget.usuario.toString());
