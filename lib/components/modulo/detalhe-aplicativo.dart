@@ -48,45 +48,24 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
       children: [
         new Material(
           elevation: 4,
-          child: ConfigurableExpansionTile(
-            initiallyExpanded: true,
-            onExpansionChanged: (bool) {},
-            borderColorStart: Color(0xffcccccc),
-            borderColorEnd: Color(0xffcccccc),
-            header: new Expanded(
-              child: new Container(
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 16),
-                      padding: const EdgeInsets.only(top: 8, bottom: 8),
-                      child: new Text(
-                        widget.appViewModel.nomeExibicao,
-                        style: new TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontSize: MainStyle.get(context).fontSizePadrao),
-                      ),
+          child: new Container(
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(top: 16, bottom: 16),
+                    child: new Text(
+                      widget.appViewModel.nomeExibicao,
+                      style: new TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: MainStyle.get(context).fontSizePadrao),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            animatedWidgetFollowingHeader: new Container(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: new Icon(
-                Icons.arrow_drop_down,
-                color: Color(0xffcccccc),
-              ),
-            ),
-            children: [
-              new ZItemTileModuloGestao(
-                status: widget.contaViewModel.status,
-                nomeModulo: widget.appViewModel.nomeExibicao,
-                visibilidade: true,
-              )
-            ],
-          ),
+
         ),
         new ZAba(
           zAbaViewModel: [

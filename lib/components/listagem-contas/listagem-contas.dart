@@ -45,12 +45,13 @@ class _ListagemContasState extends State<ListagemContas> {
           key: _view.keySearchBar,
           camposFiltro: [],
           filtroPrincipal:
-              new FiltroCampo(key: "NomeUsuario", value: "nome Usuario"),
+              new FiltroCampo(key: "Conta.Nome", value: "nome conta"),
           onFilter: (filters) async {
             SearchOptions searchOptions = new SearchOptions();
             if (filters[0].value != "") {
               searchOptions.filters = filters;
             }
+            await _view.buscarListaContas(searchOptions);
           },
         ),
         _listarUsuarios()

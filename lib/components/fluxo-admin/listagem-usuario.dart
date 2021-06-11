@@ -83,9 +83,8 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
               ),
             ),
             children: [
-              new ZItemTileModuloGestao(
-                status: "Ativo",
-                nomeModulo: widget.appViewModel.nomeExibicao,
+              new ZItemTileCardBasico(
+                nome: widget.appViewModel.nomeExibicao,
                 visibilidade: true,
               )
             ],

@@ -54,7 +54,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
             ),
-            ZItemTileModuloGestao(
+            ZItemTileCardBasico(
               onTap: () {
                 Navigator.push(
                     context,
@@ -75,8 +75,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                                           nome: "Teste")),
                             )));
               },
-              nomeModulo: "Quadro pessoal",
-              status: "Ativo",
+              nome: "Quadro pessoal",
               visibilidade: true,
             ),
             ZInputCPF(

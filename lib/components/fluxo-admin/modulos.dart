@@ -82,9 +82,8 @@ class _ModulosState extends State<Modulos> {
     print(_view.listaModulos);
     print(moduloContaViewModel.toMap());
     return new Container(
-      child: new ZItemTileModuloGestao(
-        nomeModulo: moduloContaViewModel.modulo.nome,
-        status: moduloContaViewModel.status,
+      child: new ZItemTileCardBasico(
+        nome: moduloContaViewModel.modulo.nome,
         onTap: (){
           Navigator.push(
               context,
