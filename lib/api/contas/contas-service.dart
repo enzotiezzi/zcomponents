@@ -15,6 +15,7 @@ import 'package:z_components/view-model/perfil-viewmodel.dart';
 
 class ContasService extends Service implements IContasService {
   String _URL = "${ApiSettings.ENDPOINT_API_V1}/contas";
+  String _URLAPPS = "${ApiSettings.ENDPOINT_API_V1}/app";
 
   ContasService(String token) : super(token);
 
@@ -144,10 +145,12 @@ class ContasService extends Service implements IContasService {
       String idModulo,
       String idApp,
       String idUsuario,
-      AppUsuarioContaViewModel appUsuarioContaViewModel) async {
+      AppUsuarioContaViewModel appUsuarioContaViewModel,
+      String tipo) async {
     try {
+      print(appUsuarioContaViewModel.toMap());
       var res = await request(
-          "$_URL/modulos/$idModulo/apps/$idApp/usuarios/$idUsuario/acesso",
+          "$_URL/modulos/$idModulo/apps/$idApp/usuarios/$idUsuario/$tipo",
           Service.HTTP_PUT,
           body: appUsuarioContaViewModel.toMap());
       if (res.statusCode == 200 || res.statusCode == 204) {
@@ -160,10 +163,10 @@ class ContasService extends Service implements IContasService {
   }
 
   Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
-      SearchOptions searchOptions) async {
+      SearchOptions searchOptions, String idApp) async {
     var params = searchOptions.toHttpParams();
     try {
-      var res = await request("$_URL/perfil$params", Service.HTTP_GET);
+      var res = await request("$_URLAPPS/$idApp/perfil$params", Service.HTTP_GET);
       print(res.body);
       return PaginatedList<PerfilViewModel>(
               response: res, deserializer: PerfilViewModel.fromJson)

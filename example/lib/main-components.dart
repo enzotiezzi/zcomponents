@@ -5,6 +5,7 @@ import 'package:z_components_example/tela-teste-card.dart';
 import 'package:z_components/components/fluxo-admin/usuarios.dart';
 import 'package:z_components/components/listagem-contas/listagem-contas.dart';
 import 'package:z_components/components/fluxo-admin/modulos.dart';
+import 'package:z_components/components/z-user-info/z-user-info.dart';
 
 class MainComponents extends StatefulWidget {
   @override
@@ -39,8 +40,8 @@ class _MainComponentsState extends State<MainComponents> {
         right: 10.0,
       ),
       child: new ZPerfilItem(
-        numeroQuadrados: 4,
-        listaIcones: [Icons.add, Icons.add, Icons.add, Icons.add],
+        numeroQuadrados: 5,
+        listaIcones: [Icons.add, Icons.add, Icons.add, Icons.add, Icons.add],
         listaOnTap: [
           () {
             Navigator.push(
@@ -78,8 +79,17 @@ class _MainComponentsState extends State<MainComponents> {
                           themeData: Theme.of(context),
                         )));
           }
+
+          ,(){
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ZUserInfo(
+                    )));
+          }
         ],
-        listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas"],
+        listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas", "Meu Perfil"],
       ),
     );
   }

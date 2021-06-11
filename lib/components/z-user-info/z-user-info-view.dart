@@ -13,6 +13,7 @@ import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/api/user-info/i-user-info-service.dart';
 import 'package:z_components/api/user-info/user-info-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
+import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
@@ -57,62 +58,11 @@ class ZUserInfoView extends IView<ZUserInfo> {
   var focusTelefoneSec = new FocusNode();
   var focusEmailSec = new FocusNode();
 
-  IEnderecoService _enderecoService;
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
   ITesteConexaoService _testeConexaoService;
   bool editarAtivo = false;
   String textoFoto = "";
-
-  List<ZCollectionItem> listaTipoTelefone = [
-    ZCollectionItem(
-        chave: "Celular Pessoal",
-        titulo: "Celular Pessoal",
-        valor: "Celular Pessoal"),
-    ZCollectionItem(
-        chave: "Celular Corporativo",
-        titulo: "Celular Corporativo",
-        valor: "Celular Corporativo"),
-    ZCollectionItem(
-        chave: "Fixo Residência",
-        titulo: "Fixo Residência",
-        valor: "Fixo Residência"),
-    ZCollectionItem(
-        chave: "Fixo Comercial",
-        titulo: "Fixo Comercial",
-        valor: "Fixo Comercial"),
-  ];
-
-  List<ZCollectionItem> listaTipoTelefoneSecundario = [
-    ZCollectionItem(
-        chave: "Celular Pessoal",
-        titulo: "Celular Pessoal",
-        valor: "Celular Pessoal"),
-    ZCollectionItem(
-        chave: "Celular Corporativo",
-        titulo: "Celular Corporativo",
-        valor: "Celular Corporativo"),
-    ZCollectionItem(
-        chave: "Fixo Residência",
-        titulo: "Fixo Residência",
-        valor: "Fixo Residência"),
-    ZCollectionItem(
-        chave: "Fixo Comercial",
-        titulo: "Fixo Comercial",
-        valor: "Fixo Comercial"),
-  ];
-
-  List<ZCollectionItem> listaTipoEmail = [
-    ZCollectionItem(chave: "Pessoal", titulo: "Pessoal", valor: "Pessoal"),
-    ZCollectionItem(
-        chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
-  ];
-
-  List<ZCollectionItem> listaTipoEmailSec = [
-    ZCollectionItem(chave: "Pessoal", titulo: "Pessoal", valor: "Pessoal"),
-    ZCollectionItem(
-        chave: "Corporativo", titulo: "Corporativo", valor: "Corporativo")
-  ];
 
   String textoTelefone = "ADICIONAR TELEFONE";
   String textoEmail = "ADICIONAR EMAIL";
@@ -143,10 +93,8 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   BuscarInfo _userInfo;
 
-  IIdentityServer _identityServer;
-
   GlobalKey<ZProgressDialogState> _globalKey =
-  new GlobalKey<ZProgressDialogState>();
+      new GlobalKey<ZProgressDialogState>();
 
   DialogUtils _dialogUtils;
 
@@ -158,42 +106,15 @@ class ZUserInfoView extends IView<ZUserInfo> {
   Future<void> initView() {
     _userInfo = new BuscarInfo();
     _dialogUtils = new DialogUtils(state.context);
-    _enderecoService = new EnderecoService();
-    _arquivoService = new ArquivoService(state.widget.token);
-    _userInfoService = new UserInfoService(state.widget.token);
+    _arquivoService = new ArquivoService(NovoToken.newToken);
+    _userInfoService = new UserInfoService(NovoToken.newToken);
     _testeConexaoService = new TesteConexaoService();
-
-    textEditingControllerNome.text = state.widget.userInfo?.nome;
-    textEditingControllerTelefone.text = state.widget.userInfo?.telefone;
-    textEditingControllerEmail.text = state.widget.userInfo?.email;
-    textEditingControllerCEP.text = state.widget.userInfo?.cep;
-    textEditingControllerEstado.text = state.widget.userInfo?.estado;
-    textEditingControllerCidade.text = state.widget.userInfo?.cidade;
-    textEditingControllerBairro.text = state.widget.userInfo?.bairro;
-    textEditingControllerRua.text = state.widget.userInfo?.logradouro;
-    textEditingControllerNumero.text = state.widget.userInfo?.numero;
-    textEditingControllerCPF.text = state.widget.userInfo?.cpf;
-    textEditingControllerNomeReduzido.text =
-        state.widget.userInfo?.nomeReduzido;
-    textEditingControllerEmailSec.text = state.widget.userInfo?.emailSec;
-    textEditingControllerTelefoneSec.text = state.widget.userInfo?.telefoneSec;
-/*
-    if (state.widget.userInfo.dataNascimento != null) {
-      textEditingControllerDataNascimento.text =
-          _montarData(state.widget.userInfo.dataNascimento);
-    }
- */
+    _buscarInfo();
   }
 
   @override
   Future<void> afterBuild() async {
-    if (state.widget.userInfo.fotoBase64.length > 0) {
-      if (state.mounted) {
-        state.setState(() {
-          imagemPerfil = state.widget.userInfo.fotoBase64;
-        });
-      }
-    }
+
   }
 
   bool validarCamposObrigatorios() {
@@ -202,6 +123,25 @@ class ZUserInfoView extends IView<ZUserInfo> {
     } else {
       return false;
     }
+  }
+
+  Future<void> _buscarInfo() async {
+    var res = await _userInfoService.buscarInformacoesUsuarioPessoa();
+    if (res != null) {
+      _userInfo = res;
+      _preencherControllers();
+      if (state.mounted) {
+        state.setState(() {});
+      }
+    }
+  }
+
+  void _preencherControllers() {
+    textEditingControllerNome.text = _userInfo?.nome;
+    textEditingControllerTelefone.text = _userInfo?.telefone;
+    textEditingControllerEmail.text = _userInfo?.email;
+    textEditingControllerCPF.text = _userInfo?.username;
+    textEditingControllerNomeReduzido.text = _userInfo?.nomeReduzido;
   }
 
   Future escolherMetodoSelecionarFoto() {
@@ -338,26 +278,16 @@ class ZUserInfoView extends IView<ZUserInfo> {
     var userInfo = new BuscarInfo(
       idUsuario: state.widget.userInfo?.idUsuario,
       username: state.widget.userInfo?.username,
-      cpf: state.widget.userInfo?.cpf,
-      nomeSocial: state.widget.userInfo?.nomeSocial,
+      cpf: state.widget.userInfo?.username,
       idPessoa: state.widget.userInfo?.idPessoa,
-      complemento: state.widget.userInfo?.complemento,
       celular: state.widget.userInfo?.celular,
-      telefoneSec: state.widget.userInfo.telefoneSec,
-      emailSec: state.widget.userInfo.emailSec,
       nome: textEditingControllerNome.text,
-      bairro: textEditingControllerBairro.text,
-      logradouro: textEditingControllerRua.text,
-      cep: textEditingControllerCEP.text,
-      estado: textEditingControllerEstado.text,
       dataNascimento: (textEditingControllerDataNascimento.text != "" &&
-          textEditingControllerDataNascimento.text != null)
+              textEditingControllerDataNascimento.text != null)
           ? "${textEditingControllerDataNascimento.text.split("/")[2]}-${textEditingControllerDataNascimento.text.split("/")[1]}-${textEditingControllerDataNascimento.text.split("/")[0]}"
           : null,
-      cidade: textEditingControllerCidade.text,
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
-      numero: textEditingControllerNumero.text,
       nomeReduzido: textEditingControllerNomeReduzido.text,
       fotoBase64: (state.widget.userInfo.fotoBase64 == null)
           ? null
@@ -365,60 +295,6 @@ class ZUserInfoView extends IView<ZUserInfo> {
       idFoto: (state.widget.userInfo.idFoto == "")
           ? null
           : state.widget.userInfo.idFoto,
-      anexoCartaoAlimentacaoStatus:
-      state.widget.userInfo.anexoCartaoAlimentacaoStatus,
-      anexoCartaoContaBancariaStatus:
-      state.widget.userInfo.anexoCartaoContaBancariaStatus,
-      anexoCartaoValeTransporteStatus:
-      state.widget.userInfo.anexoCartaoValeTransporteStatus,
-      anexoCarteiraVacinacaoStatus:
-      state.widget.userInfo.anexoCarteiraVacinacaoStatus,
-      anexoCertidaoNascimentoCasamentoStatus:
-      state.widget.userInfo.anexoCertidaoNascimentoCasamentoStatus,
-      anexoComprovanteEnderecoStatus:
-      state.widget.userInfo.anexoComprovanteEnderecoStatus,
-      anexoCPFStatus: state.widget.userInfo.anexoCPFStatus,
-      anexoCTPSStatus: state.widget.userInfo.anexoCTPSStatus,
-      anexoEscolaridadeStatus: state.widget.userInfo.anexoEscolaridadeStatus,
-      anexoPISStatus: state.widget.userInfo.anexoPISStatus,
-      anexoRGStatus: state.widget.userInfo.anexoRGStatus,
-      anexoTituloEleitorStatus: state.widget.userInfo.anexoTituloEleitorStatus,
-      idAnexoCartaoAlimentacao: state.widget.userInfo.idAnexoCartaoAlimentacao,
-      idAnexoCartaoAlimentacao_Verso:
-      state.widget.userInfo.idAnexoCartaoAlimentacao_Verso,
-      idAnexoCartaoContaBancaria:
-      state.widget.userInfo.idAnexoCartaoContaBancaria,
-      idAnexoCartaoContaBancaria_Verso:
-      state.widget.userInfo.idAnexoCartaoContaBancaria_Verso,
-      idAnexoCartaoValeTransporte:
-      state.widget.userInfo.idAnexoCartaoValeTransporte,
-      idAnexoCartaoValeTransporte_Verso:
-      state.widget.userInfo.idAnexoCartaoValeTransporte_Verso,
-      idAnexoCarteiraVacinacao: state.widget.userInfo.idAnexoCarteiraVacinacao,
-      idAnexoCarteiraVacinacao_Verso:
-      state.widget.userInfo.idAnexoCarteiraVacinacao_Verso,
-      idAnexoCertidaoNascimentoCasamento:
-      state.widget.userInfo.idAnexoCertidaoNascimentoCasamento,
-      idAnexoCertidaoNascimentoCasamento_Verso:
-      state.widget.userInfo.idAnexoCertidaoNascimentoCasamento_Verso,
-      idAnexoComprovanteEndereco:
-      state.widget.userInfo.idAnexoComprovanteEndereco,
-      idAnexoComprovanteEndereco_Verso:
-      state.widget.userInfo.idAnexoComprovanteEndereco_Verso,
-      idAnexoCPF: state.widget.userInfo.idAnexoCPF,
-      idAnexoCPF_Verso: state.widget.userInfo.idAnexoCPF_Verso,
-      idAnexoCTPS: state.widget.userInfo.idAnexoCTPS,
-      idAnexoCTPS_Verso: state.widget.userInfo.idAnexoCTPS_Verso,
-      idAnexoEscolaridade: state.widget.userInfo.idAnexoEscolaridade,
-      idAnexoEscolaridade_Verso:
-      state.widget.userInfo.idAnexoEscolaridade_Verso,
-      idAnexoPIS: state.widget.userInfo.idAnexoPIS,
-      idAnexoPIS_Verso: state.widget.userInfo.idAnexoPIS_Verso,
-      idAnexoRG: state.widget.userInfo.idAnexoRG,
-      idAnexoRG_Verso: state.widget.userInfo.idAnexoRG_Verso,
-      idAnexoTituloEleitor: state.widget.userInfo.idAnexoTituloEleitor,
-      idAnexoTituloEleitor_Verso:
-      state.widget.userInfo.idAnexoTituloEleitor_Verso,
     );
 
     _dialogUtils.showZProgressDialog(
@@ -433,10 +309,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     }
 
     if (res) {
-      userInfo.atualizado = true;
-    } else {
-      userInfo.atualizado = false;
-    }
+    } else {}
 
     Future.delayed(Duration(milliseconds: 1000), () {
       _globalKey.currentState.refresh(1.0, "Pronto", success: true);
@@ -472,7 +345,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                 new Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   margin:
-                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                   child: new Text(
                     message,
                     textAlign: TextAlign.center,
@@ -502,7 +375,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                     style: new TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize:
-                        MainStyle.get(context).fontSizeLeadinCancelar),
+                            MainStyle.get(context).fontSizeLeadinCancelar),
                   ),
                 ),
               ),
@@ -512,14 +385,5 @@ class ZUserInfoView extends IView<ZUserInfo> {
         ),
       ),
     );
-  }
-
-  String _montarData(String data) {
-    if (data.isNotEmpty) {
-      DateTime date = DateTime.parse(data);
-      return "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";
-    } else {
-      return "";
-    }
   }
 }

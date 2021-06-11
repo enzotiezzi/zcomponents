@@ -31,8 +31,8 @@ abstract class IContasService {
   Future<ZResponse<ContaV2ViewModel>> listarContas(SearchOptions searchOptions);
 
   Future<bool> editarDadosUsuario(String idModulo, String idApp,
-      String idUsuario, AppUsuarioContaViewModel appUsuarioContaViewModel);
+      String idUsuario, AppUsuarioContaViewModel appUsuarioContaViewModel, String tipo);
 
   Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
-      SearchOptions searchOptions);
+      SearchOptions searchOptions, String idApp);
 }
