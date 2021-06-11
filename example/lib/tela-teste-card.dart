@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
-import 'package:z_components/components/modulo/detalhe-modulo.dart';
-import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
-import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-inputs/z-input-cpf.dart';
-import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
-import 'package:z_components/components/fluxo-admin/detalhe-usuario.dart';
-import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
-import 'package:z_components/view-model/app-view-model.dart';
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:z_components/components/z-aba/z-aba.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 
@@ -53,30 +45,6 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               statusVinculo: "Ativo",
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
-            ),
-            ZItemTileCardBasico(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetalheUsuario(
-                              editarDados: false,
-                              cliqueEditar: false,
-                              appUsuarioContaViewModel:
-                                  new AppUsuarioContaViewModel(
-                                      status: "Ativo",
-                                      dataVinculo: (null != null)
-                                          ? UtilData.obterDataDDMMAAAA(
-                                              DateTime.parse(null))
-                                          : "Nunca",
-                                      dataInativacao: "",
-                                      app: new AppViewModel(nome: "Teste"),
-                                      usuario: new UsuarioAdmViewModel(
-                                          nome: "Teste")),
-                            )));
-              },
-              nome: "Quadro pessoal",
-              visibilidade: true,
             ),
             ZInputCPF(
               themeData: Theme.of(context),
