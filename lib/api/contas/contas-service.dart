@@ -161,6 +161,28 @@ class ContasService extends Service implements IContasService {
     }
   }
 
+  Future<bool> editarDadosFluxoUsuario(
+      String idModulo,
+      String idApp,
+      String idUsuario,
+      AppUsuarioContaViewModel appUsuarioContaViewModel,
+      String tipo) async {
+    try {
+      var res = await request(
+          "$_URL/usuarios/$idUsuario/modulos/$idModulo/apps/$idApp/$tipo",
+          Service.HTTP_PUT,
+          body: appUsuarioContaViewModel.toMap());
+      print(res.body);
+      print(res.statusCode);
+      if (res.statusCode == 200 || res.statusCode == 204) {
+        return true;
+      } else
+        return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
       SearchOptions searchOptions, String idApp) async {
     var params = searchOptions.toHttpParams();

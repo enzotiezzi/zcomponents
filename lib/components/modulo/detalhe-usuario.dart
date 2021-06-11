@@ -309,10 +309,11 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
         color: Theme.of(context).primaryColor,
       );
     } else {
-      return Icon(
-        Icons.block_flipped,
-        color: Colors.red,
-      );
+      if(widget.appUsuarioContaViewModel.status == "Ativo"){
+        return Icon(Icons.block_flipped,color: Colors.red,);
+      }else{
+        return Icon(Icons.check_circle,color: Theme.of(context).accentColor,);
+      }
     }
   }
 }
