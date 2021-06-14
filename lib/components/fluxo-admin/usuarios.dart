@@ -51,7 +51,7 @@ class _UsuariosState extends State<Usuarios> {
             SearchOptions searchOptions = new SearchOptions();
             OrderByExpression order = new OrderByExpression();
             order.propertyName = "Usuario.Nome";
-            order.orientation = "asc";
+            order.orientation = "ASC";
             searchOptions.orders = [order];
             if (filters[0].value != "") {
               searchOptions.filters = filters;

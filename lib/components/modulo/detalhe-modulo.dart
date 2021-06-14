@@ -36,21 +36,19 @@ class DetalheModulo extends StatefulWidget {
 
 class _DetalheModuloState extends State<DetalheModulo> {
   DetalheModuloView _view;
-  String textoModificar='';
+  String textoModificar = '';
 
-
-
-  String _definirTexto(){
-    if(widget.appUsuarioContaViewModel.status=="Ativo"){
+  String _definirTexto() {
+    if (widget.appUsuarioContaViewModel.status == "Ativo") {
       return "Revogar";
-    }else{
+    } else {
       return "Ativar";
     }
   }
 
-  _escolhaMenuItem(String itemEscolhido)async{
-    if(itemEscolhido.contains("Editar")){
-      var res = await  Navigator.push(
+  _escolhaMenuItem(String itemEscolhido) async {
+    if (itemEscolhido.contains("Editar")) {
+      var res = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => DetalheModulo(
@@ -65,21 +63,29 @@ class _DetalheModuloState extends State<DetalheModulo> {
         _view.preencherDados();
         setState(() {});
       }
-    }else{
+    } else {
       return _view.showDialogAlterarAcesso();
     }
   }
 
-  Widget _definirIcone(String item){
-    if(item.contains("Editar")){
-      return Icon(Icons.edit,color: Theme.of(context).primaryColor,);
-    }else{
-      if(widget.appUsuarioContaViewModel.status == "Ativo"){
-        return Icon(Icons.block_flipped,color: Colors.red,);
-      }else{
-        return Icon(Icons.check_circle,color: Theme.of(context).accentColor,);
+  Widget _definirIcone(String item) {
+    if (item.contains("Editar")) {
+      return Icon(
+        Icons.edit,
+        color: Theme.of(context).primaryColor,
+      );
+    } else {
+      if (widget.appUsuarioContaViewModel.status == "Ativo") {
+        return Icon(
+          Icons.block_flipped,
+          color: Colors.red,
+        );
+      } else {
+        return Icon(
+          Icons.check_circle,
+          color: Theme.of(context).accentColor,
+        );
       }
-
     }
   }
 
@@ -90,7 +96,6 @@ class _DetalheModuloState extends State<DetalheModulo> {
     super.initState();
     print(widget.appUsuarioContaViewModel.toMap());
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +109,8 @@ class _DetalheModuloState extends State<DetalheModulo> {
               placeholderBuilder: (context) => Icon(Icons.error),
             ),
             onSelected: _escolhaMenuItem,
-            itemBuilder: (context){
-              return _view.itensMenu.map((String item){
+            itemBuilder: (context) {
+              return _view.itensMenu.map((String item) {
                 return PopupMenuItem<String>(
                   value: item,
                   child: Row(
@@ -134,7 +139,9 @@ class _DetalheModuloState extends State<DetalheModulo> {
           elevation: 4,
           child: new ConfigurableExpansionTile(
             initiallyExpanded: false,
-            onExpansionChanged: (bool) {setState(() {});},
+            onExpansionChanged: (bool) {
+              setState(() {});
+            },
             borderColorStart: Color(0xffcccccc),
             borderColorEnd: Color(0xffcccccc),
             header: new Expanded(
@@ -209,6 +216,10 @@ class _DetalheModuloState extends State<DetalheModulo> {
           if (filter[0].value.isNotEmpty) {
             searchOptions.filters = filter;
           }
+          OrderByExpression order = new OrderByExpression();
+          order.propertyName = "Nome";
+          order.orientation = "ASC";
+          searchOptions.orders = [order];
           var lista = await _view.buscarPerfis(searchOptions);
           setState(() {
             _view.keyPerfil.currentState.atualizarLista(lista);
@@ -220,8 +231,12 @@ class _DetalheModuloState extends State<DetalheModulo> {
             if (filter[0].value.isNotEmpty) {
               searchOptions.filters = filter;
             }
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Nome";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
             searchOptions.pagination.pageNumber =
-            _view.paginationMetaData.currentPage++;
+                _view.paginationMetaData.currentPage++;
             var lista = await _view.buscarPerfis(searchOptions);
             lista = listaAnterior + lista;
             setState(() {
