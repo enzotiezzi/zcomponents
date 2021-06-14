@@ -52,7 +52,7 @@ class ContasService extends Service implements IContasService {
   @override
   Future<AppUsuarioContaViewModel> buscarDadosUsuarioConta(String idUsuario) async{
     try{
-      var url = "$_URL/contas/usuarios/$idUsuario";
+      var url = "$_URL/usuarios/$idUsuario";
       var response = await request(url, Service.HTTP_GET);
 
       return AppUsuarioContaViewModel.fromJson(json.decode(response.body));

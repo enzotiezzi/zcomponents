@@ -30,6 +30,10 @@ class UsuariosView extends IView<Usuarios> {
 
   @override
   Future<void> initView() async {
+    OrderByExpression order = new OrderByExpression();
+    order.propertyName="Usuario.Nome";
+    order.orientation = "asc";
+    searchOptions.orders = [order];
     _dialogUtils = new DialogUtils(state.context);
     contasService = new ContasService(NovoToken.newToken);
     _dialogUtils.showProgressDialog();

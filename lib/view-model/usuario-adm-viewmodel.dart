@@ -19,7 +19,7 @@ class UsuarioAdmViewModel {
       "idUsuario": this.idUsuario,
       "telefone": this.telefone,
       "email": this.email,
-      "userName": this.userName,
+      "username": this.userName,
     };
   }
 
@@ -29,7 +29,7 @@ class UsuarioAdmViewModel {
       idUsuario: json['idUsuario'],
       telefone: json['telefone'],
       email: json['email'],
-      userName: json['userName'],
+      userName: json['username'],
     );
   }
 }
