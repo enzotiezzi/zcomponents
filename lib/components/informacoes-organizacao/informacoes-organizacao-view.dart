@@ -385,6 +385,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
         keyProgress.currentState.refresh(1.0, "Dados atualizados com sucesso!");
         Future.delayed(Duration(milliseconds: 1500), () {
           _dialogUtils.dismiss();
+          Navigator.of(state.context).pop(true);
         });
       });
     } else {
@@ -407,6 +408,6 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   }
 
   String toHex(Color color) {
-    return "#'${color.red.toRadixString(16).padLeft(2, '0')}${color.green.toRadixString(16).padLeft(2, '0')}${color.blue.toRadixString(16).padLeft(2, '0')}'";
+    return "#${color.red.toRadixString(16).padLeft(2, '0')}${color.green.toRadixString(16).padLeft(2, '0')}${color.blue.toRadixString(16).padLeft(2, '0')}";
   }
 }

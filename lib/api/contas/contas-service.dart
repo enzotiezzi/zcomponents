@@ -62,7 +62,7 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<InfoOrganizacaoViewModel> editarDadosOrganizacao(
+  Future<bool> editarDadosOrganizacao(
       InfoOrganizacaoViewModel infoOrganizacaoViewModel) async {
     try {
       var url = "$_URL/contas/${infoOrganizacaoViewModel.idConta}";
@@ -70,7 +70,10 @@ class ContasService extends Service implements IContasService {
       var response = await request(url, Service.HTTP_PUT,
           body: infoOrganizacaoViewModel.toMap());
 
-      return InfoOrganizacaoViewModel.fromJson(json.decode(response.body));
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        return true;
+      } else
+        return null;
     } catch (e) {
       return null;
     }

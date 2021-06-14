@@ -18,51 +18,52 @@ class InfoOrganizacaoViewModel {
   String codigoAtivacao;
   String corPrimaria;
   String corSecundaria;
+  String context;
 
-  InfoOrganizacaoViewModel({
-    this.idConta,
-    this.nome,
-    this.nomeFantasia,
-    this.cpfOuCNPJ,
-    this.tipoPessoa,
-    this.dataCriacao,
-    this.logradouro,
-    this.cep,
-    this.numero,
-    this.bairro,
-    this.complemento,
-    this.cidade,
-    this.estado,
-    this.telefone,
-    this.email,
-    this.ativo,
-    this.codigoAtivacao,
-    this.corPrimaria,
-    this.corSecundaria,
-  });
+  InfoOrganizacaoViewModel(
+      {this.idConta,
+      this.nome,
+      this.nomeFantasia,
+      this.cpfOuCNPJ,
+      this.tipoPessoa,
+      this.dataCriacao,
+      this.logradouro,
+      this.cep,
+      this.numero,
+      this.bairro,
+      this.complemento,
+      this.cidade,
+      this.estado,
+      this.telefone,
+      this.email,
+      this.ativo,
+      this.codigoAtivacao,
+      this.corPrimaria,
+      this.corSecundaria,
+      this.context});
 
   static InfoOrganizacaoViewModel fromJson(Map<String, dynamic> json) {
     return new InfoOrganizacaoViewModel(
-      idConta: json['idConta'],
-      nome: json['nome'],
-      nomeFantasia: json['nomeFantasia'],
-      cpfOuCNPJ: json['cpfOuCNPJ'],
-      tipoPessoa: json['tipoPessoa'],
-      dataCriacao: json['dataCriacao'],
-      logradouro: json['logradouro'],
-      cep: json['cep'],
-      numero: json['numero'],
-      bairro: json['bairro'],
-      complemento: json['complemento'],
-      cidade: json['cidade'],
-      estado: json['estado'],
-      telefone: json['telefone'],
-      email: json['email'],
-      ativo: json['ativo'],
-      codigoAtivacao: json['codigoAtivacao'],
-      corPrimaria: json['corPrimaria'],
-      corSecundaria: json['corSecundaria'],
-    );
+        idConta: json['idConta'],
+        nome: json['nome'],
+        nomeFantasia: json['nomeFantasia'],
+        cpfOuCNPJ: json['cpfOuCNPJ'],
+        tipoPessoa: json['tipoPessoa'],
+        dataCriacao: json['dataCriacao'],
+        logradouro: json['logradouro'],
+        cep: json['cep'],
+        numero: json['numero'],
+        bairro: json['bairro'],
+        complemento: json['complemento'],
+        cidade: json['cidade'],
+        estado: json['estado'],
+        telefone: json['telefone'],
+        email: json['email'],
+        ativo: json['ativo'],
+        codigoAtivacao: json['codigoAtivacao'],
+        corPrimaria: json['corPrimaria'],
+        corSecundaria: json['corSecundaria'],
+        context: json["context"]);
   }
 
   Map toMap() {
@@ -86,6 +87,7 @@ class InfoOrganizacaoViewModel {
       "codigoAtivacao": this.codigoAtivacao,
       "corPrimaria": this.corPrimaria,
       "corSecundaria": this.corSecundaria,
+      "context": this.context
     };
   }
 }

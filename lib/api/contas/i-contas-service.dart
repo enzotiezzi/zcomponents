@@ -14,7 +14,7 @@ abstract class IContasService {
 
   Future<InfoOrganizacaoViewModel> buscarDadosOrganizacao(String idConta);
 
-  Future<InfoOrganizacaoViewModel> editarDadosOrganizacao(
+  Future<bool> editarDadosOrganizacao(
       InfoOrganizacaoViewModel infoOrganizacaoViewModel);
 
   Future modificarAcesso(AppUsuarioContaViewModel appUsuarioContaViewModel);
@@ -30,14 +30,22 @@ abstract class IContasService {
 
   Future<ZResponse<ContaV2ViewModel>> listarContas(SearchOptions searchOptions);
 
-  Future<bool> editarDadosUsuario(String idModulo, String idApp,
-      String idUsuario, AppUsuarioContaViewModel appUsuarioContaViewModel, String tipo);
+  Future<bool> editarDadosUsuario(
+      String idModulo,
+      String idApp,
+      String idUsuario,
+      AppUsuarioContaViewModel appUsuarioContaViewModel,
+      String tipo);
 
-  Future<bool> editarDadosFluxoUsuario(String idModulo, String idApp,
-      String idUsuario, AppUsuarioContaViewModel appUsuarioContaViewModel,String tipo);
+  Future<bool> editarDadosFluxoUsuario(
+      String idModulo,
+      String idApp,
+      String idUsuario,
+      AppUsuarioContaViewModel appUsuarioContaViewModel,
+      String tipo);
 
   Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
       SearchOptions searchOptions, String idApp);
 
-  Future<AppUsuarioContaViewModel> buscarDadosUsuarioConta (String idUsuario);
+  Future<AppUsuarioContaViewModel> buscarDadosUsuarioConta(String idUsuario);
 }
