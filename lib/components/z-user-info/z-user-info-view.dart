@@ -128,7 +128,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> _buscarInfo() async {
-    var res = await _userInfoService.buscarDadosUsuarioConta("");
+    var res = await _userInfoService.buscarDadosUsuarioConta("021f9182-3f41-4f0a-aadc-40776e60d04c");
     if (res != null) {
       _userInfo = res;
       _preencherControllers();

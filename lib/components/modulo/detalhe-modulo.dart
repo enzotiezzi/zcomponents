@@ -318,15 +318,9 @@ class _DetalheModuloState extends State<DetalheModulo> {
         new ZInputDataExpiracao(
           themeData: Theme.of(context),
           dataFocus: _view.dataExpiracaoFocus,
-          enabled: retornarEnabled(widget.editarDados),
+          enabled: false,
           controllerData: _view.dataExpiracaoController,
-          validacao: (validate) {
-            if (validate) {
-              //widget.appUsuarioContaViewModel.dataExpiracao = _view.dataVinculoController.text;
-              _view.preencheuDataExpiracao = true;
-              _view.validarCampos();
-            }
-          },
+          validacao: (validate) {},
         ),
         new Divider(
           height: 1.0,

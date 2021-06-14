@@ -81,6 +81,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     } else {
       _popularControllers(state.widget.infoOrganizacaoViewModel);
     }
+    state.setState(() {});
 
     if (state.widget.editarDados) {
       Future.delayed(Duration(milliseconds: 1000), () {
@@ -343,6 +344,10 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     } else {
       cpfController.text = infoOrganizacaoViewModel.cpfOuCNPJ ?? "";
     }
+    if (infoOrganizacaoViewModel.corPrimaria != null) {
+      corPrimaria = fromHex(infoOrganizacaoViewModel.corPrimaria);
+      corSecundaria = fromHex(infoOrganizacaoViewModel.corSecundaria);
+    }
   }
 
   void _atualizarViewModel(InfoOrganizacaoViewModel infoOrganizacaoViewModel) {
@@ -391,4 +396,18 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
       });
     }
   }
+
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+/*
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';*/
+
 }
