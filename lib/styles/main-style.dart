@@ -62,7 +62,8 @@ class MainStyle {
                             focusNode: currentFocus,
                             controller: controller,
                             cursorColor: Color(0xFF801F92),
-                            style: themeData.textTheme.bodyText1,
+                            style: themeData.textTheme.bodyText1
+                                .copyWith(color: corTexto(themeData, enabled)),
                             inputFormatters: [
                               new MaskTextInputFormatter(mask: textMask)
                             ],
@@ -95,7 +96,8 @@ class MainStyle {
                             focusNode: currentFocus,
                             controller: controller,
                             cursorColor: Color(0xFF801F92),
-                            style: themeData.textTheme.bodyText1,
+                            style: themeData.textTheme.bodyText1
+                                .copyWith(color: corTexto(themeData, enabled)),
                             onSubmitted: (text) {
                               currentFocus.unfocus();
                               if (nextFocus != null) {
@@ -126,6 +128,13 @@ class MainStyle {
       ),
     );
   }
+}
+
+Color corTexto(ThemeData themeData, bool enabled) {
+  if (enabled) {
+    return themeData.textTheme.bodyText1.color;
+  } else
+    return Colors.grey;
 }
 
 Widget returnRequiredField(

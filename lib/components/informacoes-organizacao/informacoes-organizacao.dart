@@ -251,9 +251,9 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             height: 1.0,
           ),
           _buildRowCorPrimaria(),
-          _buildTextoCorPrimaria(),
+          // _buildTextoCorPrimaria(),
           _buildRowCorSecundaria(),
-          _buildTextoCorSecundaria(),
+          //   _buildTextoCorSecundaria(),
           _exibirBotao()
         ],
       ),
@@ -269,28 +269,18 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Container(
-                    width: 100.0,
-                    height: 100.0,
-                    decoration: new BoxDecoration(
-                      color: const Color(0xff7c94b6),
-                      image: new DecorationImage(
-                        image: _buildImagemPerfil(),
-                        fit: BoxFit.cover,
+                  new Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      _buildImagemPerfil(),
+                      new Text(
+                        widget.textoFoto,
+                        style: TextStyle(color: _corTextoFoto()),
                       ),
-                      shape: BoxShape.circle,
-                      border: new Border.all(
-                        color: MainStyle.get(context).primaryColor,
-                        width: 4.0,
-                      ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[new Text(widget.textoFoto)],
-              )
             ],
           )),
       onTap: _view.escolherMetodoSelecionarFoto,
@@ -471,10 +461,46 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
     );
   }
 
-  ImageProvider _buildImagemPerfil() {
-    if (_view.imagemPerfil != null) return MemoryImage(_view.imagemPerfil);
+  Widget _buildImagemPerfil() {
+    if (_view.imagemPerfil != null)
+      return new Container(
+        width: 150.0,
+        height: 100.0,
+        decoration: new BoxDecoration(
+            color: Colors.white,
+            border: new Border.all(
+              color: Colors.grey,
+              width: 1.0,
+            ),
+            image: new DecorationImage(
+              image: MemoryImage(_view.imagemPerfil),
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(6.0)),
+      );
+    else
+      return new Container(
+        width: 150.0,
+        height: 100.0,
+        decoration: new BoxDecoration(
+            color: Colors.white,
+            border: new Border.all(
+              color: Colors.grey,
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(6.0)),
+        child: new Icon(
+          Icons.camera_alt,
+          color: Color(0xff2BBAB4),
+          size: 40,
+        ),
+      );
+  }
 
-    return NetworkImage(
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+  Color _corTextoFoto() {
+    if (_view.imagemPerfil != null) {
+      return Colors.white;
+    } else
+      return Colors.black;
   }
 }
