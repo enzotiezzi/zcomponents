@@ -48,7 +48,7 @@ class _ListagemAppsState extends State<ListagemApps> {
             elevation: 4,
             child: new ConfigurableExpansionTile(
               initiallyExpanded: true,
-              onExpansionChanged: (bool){
+              onExpansionChanged: (bool) {
                 setState(() {
                   _view.icons2 = bool;
                 });
@@ -61,14 +61,13 @@ class _ListagemAppsState extends State<ListagemApps> {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(left: 16),
-                        padding: const EdgeInsets.only(top: 8,bottom: 8),
+                        padding: const EdgeInsets.only(top: 8, bottom: 8),
                         child: new Text(
                           widget.usuario.usuario.nome,
                           style: new TextStyle(
-                              color:Colors.black,
-                              fontWeight:FontWeight.w500,
-                              fontSize: MainStyle.get(context).fontSizePadrao
-                          ),
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: MainStyle.get(context).fontSizePadrao),
                         ),
                       ),
                     ],
@@ -76,11 +75,14 @@ class _ListagemAppsState extends State<ListagemApps> {
                 ),
               ),
               animatedWidgetFollowingHeader: new Container(
-                padding: const EdgeInsets.only(top: 8,bottom: 8),
-                child: new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                child:
+                    new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
               ),
               children: [
-                new Divider(height: 1.0,),
+                new Divider(
+                  height: 1.0,
+                ),
                 new Container(
                   margin: EdgeInsets.only(top: 10.0),
                   child: new ZItemTileUsuarioAdm(
@@ -91,7 +93,7 @@ class _ListagemAppsState extends State<ListagemApps> {
                     status: widget.usuario.status,
                     telefone: widget.usuario.usuario.telefone,
                     appsVinculados:
-                    _view.listarAppsVinculados(widget.usuario.appLista),
+                        _view.listarAppsVinculados(widget.usuario.appLista),
                   ),
                 )
               ],
@@ -113,65 +115,73 @@ class _ListagemAppsState extends State<ListagemApps> {
   }
 
   Widget _montarCardUsuario(AppUsuarioContaViewModel app) {
-    return new Material(
-      elevation: 4,
-      child: new ConfigurableExpansionTile(
-        initiallyExpanded: false,
-        onExpansionChanged: (bool){},
-        borderColorStart: Color(0xffcccccc),
-        borderColorEnd: Color(0xffcccccc),
-        header: new Expanded(
-          child: new Container(
-            //color: Colors.white,
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 16),
-                  padding: const EdgeInsets.only(top: 8,bottom: 8),
-                  child: new Text(
-                    app.app.nomeExibicao,
-                    style: new TextStyle(
-                        color:Colors.black,
-                        fontWeight:FontWeight.w500,
-                        fontSize: MainStyle.get(context).fontSizePadrao
+    return new Container(
+      margin: EdgeInsets.only(bottom: 10.0),
+      child: new Material(
+        elevation: 4,
+        child: new ConfigurableExpansionTile(
+          initiallyExpanded: false,
+          onExpansionChanged: (bool) {},
+          borderColorStart: Color(0xffcccccc),
+          borderColorEnd: Color(0xffcccccc),
+          header: new Expanded(
+            child: new Container(
+              //color: Colors.white,
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(top: 8, bottom: 8),
+                    child: new Text(
+                      app.app.nomeExibicao,
+                      style: new TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: MainStyle.get(context).fontSizePadrao),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+          animatedWidgetFollowingHeader: new Container(
+            padding: const EdgeInsets.only(top: 8, bottom: 8),
+            child: new Icon(
+              Icons.unfold_less,
+              color: Color(0xffcccccc),
+            ),
+          ),
+          children: [
+            Divider(
+              height: 1.0,
+            ),
+            new ZItemTileModuloAdm(
+              dataExpiracao: (app.dataInativacao != null)
+                  ? UtilData.obterDataDDMMAAAA(
+                      DateTime.parse(app.dataInativacao))
+                  : "Nunca",
+              dataVinculo: (app.dataVinculo != null)
+                  ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataVinculo))
+                  : "Nunca",
+              nomeModulo: app.app.nomeExibicao,
+              perfilAcesso: app.perfil.nome,
+              statusVinculo: app.status,
+              onTap: () {
+                print(widget.usuario.toString());
+                print(app.toMap());
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetalheModulo(
+                              cliqueEditar: false,
+                              editarDados: false,
+                              appUsuarioContaViewModel: app,
+                              usuario: widget.usuario,
+                            )));
+              },
+            )
+          ],
         ),
-        animatedWidgetFollowingHeader: new Container(
-          padding: const EdgeInsets.only(top: 8,bottom: 8),
-          child: new Icon(Icons.unfold_less,color: Color(0xffcccccc),),
-        ),
-        children: [
-          Divider(height: 1.0,),
-          new ZItemTileModuloAdm(
-            dataExpiracao: (app.dataInativacao != null)
-                ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataInativacao))
-                : "Nunca",
-            dataVinculo: (app.dataVinculo != null)
-                ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataVinculo))
-                : "Nunca",
-            nomeModulo: app.app.nomeExibicao,
-            perfilAcesso: app.perfil.nome,
-            statusVinculo: app.status,
-            onTap: () {
-              print(widget.usuario.toString());
-              print(app.toMap());
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DetalheModulo(
-                        cliqueEditar: false,
-                        editarDados: false,
-                        appUsuarioContaViewModel: app,
-                        usuario: widget.usuario,
-                      )));
-            },
-          )
-        ],
       ),
     );
   }

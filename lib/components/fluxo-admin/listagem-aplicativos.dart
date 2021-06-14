@@ -14,6 +14,8 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 
+import '../z-item-tile-card-basico.dart';
+
 class ListagemAplicativos extends StatefulWidget {
   ModuloContaViewModel moduloContaViewModel;
 
@@ -77,9 +79,9 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
               child: new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
             ),
             children: [
-              new ZItemTileCardBasico(
+              new ZItemTileModuloGestao(
                 visibilidade: true,
-                nome: widget.moduloContaViewModel.modulo.nome,
+                nomeModulo: widget.moduloContaViewModel.modulo.nome,status:  widget.moduloContaViewModel.status,
               )
             ],
           ),
