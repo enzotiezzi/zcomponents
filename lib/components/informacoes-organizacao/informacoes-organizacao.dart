@@ -70,8 +70,8 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             color: Theme.of(context).accentColor,
           ),
         ),
-        onTap: () {
-          Navigator.push(
+        onTap: () async {
+          var res = await Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => InformacoesOrganizacao(
@@ -82,6 +82,10 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
                         infoOrganizacaoViewModel:
                             _view.infoOrganizacaoViewModel,
                       )));
+
+          if (res != null) {
+            await _view.initView();
+          }
         },
       );
     }
@@ -135,6 +139,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             celularFocus: _view.telefoneFocusNode,
             controllerCelular: _view.telefoneController,
             enabled: widget.editarDados,
+            validacao: (bool) {},
           ),
           new Divider(
             height: 1.0,
@@ -144,6 +149,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             emailFocus: _view.emailFocusNode,
             controllerEmail: _view.emailController,
             enabled: widget.editarDados,
+            validacao: (bool) {},
           ),
           new Divider(
             height: 1.0,
@@ -165,6 +171,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               controllerCep: _view.textEditingControllerCEP,
               cepFocus: _view.focusNodeCEP,
               onChange: _view.onCEPChange,
+              validacao: (bool) {},
             ),
           ),
           new Divider(
