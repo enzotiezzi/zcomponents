@@ -368,6 +368,8 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     } else {
       infoOrganizacaoViewModel.cpfOuCNPJ = cpfController.text;
     }
+    infoOrganizacaoViewModel.corPrimaria = toHex(corPrimaria);
+    infoOrganizacaoViewModel.corSecundaria = toHex(corSecundaria);
   }
 
   Future<void> editarDadosOrganizacao() async {
@@ -403,11 +405,8 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     buffer.write(hexString.replaceFirst('#', ''));
     return Color(int.parse(buffer.toString(), radix: 16));
   }
-/*
-  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
-      '${alpha.toRadixString(16).padLeft(2, '0')}'
-      '${red.toRadixString(16).padLeft(2, '0')}'
-      '${green.toRadixString(16).padLeft(2, '0')}'
-      '${blue.toRadixString(16).padLeft(2, '0')}';*/
 
+  String toHex(Color color) {
+    return "#'${color.red.toRadixString(16).padLeft(2, '0')}${color.green.toRadixString(16).padLeft(2, '0')}${color.blue.toRadixString(16).padLeft(2, '0')}'";
+  }
 }
