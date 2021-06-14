@@ -49,6 +49,10 @@ class _UsuariosState extends State<Usuarios> {
               new FiltroCampo(key: "Usuario.Nome", value: "nome Usuario"),
           onFilter: (filters) async {
             SearchOptions searchOptions = new SearchOptions();
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Usuario.Nome";
+            order.orientation = "asc";
+            searchOptions.orders = [order];
             if (filters[0].value != "") {
               searchOptions.filters = filters;
             }
@@ -99,9 +103,9 @@ class _UsuariosState extends State<Usuarios> {
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nome}";
+          appsFormatados = "$appsFormatados- ${lista[i].app.nomeExibicao}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nome}";
+          appsFormatados = "$appsFormatados, ${lista[i].app.nomeExibicao}";
         }
       }
     } else {

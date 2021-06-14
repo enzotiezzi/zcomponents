@@ -67,6 +67,10 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
     _contasService = new ContasService(NovoToken.newToken);
     if (state.widget.editarDados) {
       itensMenu = [_definirTexto()];
+      OrderByExpression order = new OrderByExpression();
+      order.propertyName = "Nome";
+      order.orientation = "ASC";
+      searchOptions.orders = [order];
       listaPerfis = await buscarPerfis(searchOptions);
       state.setState(() {});
     } else {
