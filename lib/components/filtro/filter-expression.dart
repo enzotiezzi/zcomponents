@@ -39,7 +39,8 @@ class SearchOptions {
     for(var i = 0; i < orders.length; i++) {
       var order = orders[i];
 
-      params["Filters[$i].order"] = order.orientation;
+      params["Orders[$i].propertyName"] = order.propertyName;
+      params["Orders[$i].orientation"] = order.orientation;
     }
 
     params["Pagination.PageNumber"] = pagination.pageNumber.toString();
