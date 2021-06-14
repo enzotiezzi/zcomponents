@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:z_components/api/arquivo/arquivo-service.dart';
 import 'package:z_components/api/arquivo/i-arquivo-service.dart';
+import 'package:z_components/api/contas/contas-service.dart';
+import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/api/endereco/endereco-service.dart';
 import 'package:z_components/api/endereco/i-endereco-service.dart';
 import 'package:z_components/api/identity-server/i-identity-server.dart';
@@ -25,8 +27,10 @@ import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
+import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
 import '../../i-view.dart';
 import '../z-alert-dialog.dart';
 
@@ -59,7 +63,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   var focusEmailSec = new FocusNode();
 
   IArquivoService _arquivoService;
-  IUserInfoService _userInfoService;
+  IContasService _userInfoService;
   ITesteConexaoService _testeConexaoService;
   bool editarAtivo = false;
   String textoFoto = "";
@@ -91,7 +95,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   bool preencheuEmail = false;
   bool preencheuTelefone = false;
 
-  BuscarInfo _userInfo;
+  AppUsuarioContaViewModel _userInfo;
 
   GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
@@ -104,18 +108,16 @@ class ZUserInfoView extends IView<ZUserInfo> {
 
   @override
   Future<void> initView() {
-    _userInfo = new BuscarInfo();
+    _userInfo = new AppUsuarioContaViewModel();
     _dialogUtils = new DialogUtils(state.context);
     _arquivoService = new ArquivoService(NovoToken.newToken);
-    _userInfoService = new UserInfoService(NovoToken.newToken);
+    _userInfoService = new ContasService(NovoToken.newToken);
     _testeConexaoService = new TesteConexaoService();
     _buscarInfo();
   }
 
   @override
-  Future<void> afterBuild() async {
-
-  }
+  Future<void> afterBuild() async {}
 
   bool validarCamposObrigatorios() {
     if (preencheuNome) {
@@ -126,7 +128,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> _buscarInfo() async {
-    var res = await _userInfoService.buscarInformacoesUsuarioPessoa();
+    var res = await _userInfoService.buscarDadosUsuarioConta("");
     if (res != null) {
       _userInfo = res;
       _preencherControllers();
@@ -137,11 +139,11 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   void _preencherControllers() {
-    textEditingControllerNome.text = _userInfo?.nome;
-    textEditingControllerTelefone.text = _userInfo?.telefone;
-    textEditingControllerEmail.text = _userInfo?.email;
-    textEditingControllerCPF.text = _userInfo?.username;
-    textEditingControllerNomeReduzido.text = _userInfo?.nomeReduzido;
+    textEditingControllerNome.text = _userInfo.usuario?.nome;
+    textEditingControllerTelefone.text = _userInfo.usuario?.telefone;
+    textEditingControllerEmail.text = _userInfo.usuario?.email;
+    textEditingControllerCPF.text = _userInfo.usuario?.userName;
+    textEditingControllerNomeReduzido.text = "";
   }
 
   Future escolherMetodoSelecionarFoto() {
@@ -305,7 +307,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     var conexao = await _testeConexaoService.testarConexao();
 
     if (conexao) {
-      res = await _userInfoService.editarInformacoes(userInfo);
+      // res = await _userInfoService.editarInformacoes(userInfo);
     }
 
     if (res) {
