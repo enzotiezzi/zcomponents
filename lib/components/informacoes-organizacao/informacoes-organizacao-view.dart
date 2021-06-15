@@ -15,6 +15,7 @@ import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/arquivo-viewmodel.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 import '../../i-view.dart';
 import '../z-progress-dialog.dart';
@@ -403,8 +404,9 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     print(state.widget.infoOrganizacaoViewModel);
     var res = await _contasService
         .editarDadosOrganizacao(state.widget.infoOrganizacaoViewModel);
+    var resImagem = await _atualizarImagem();
 
-    if (res != null) {
+    if (res != null && resImagem) {
       Future.delayed(Duration(milliseconds: 500), () {
         keyProgress.currentState.refresh(1.0, "Dados atualizados com sucesso!");
         Future.delayed(Duration(milliseconds: 1500), () {
@@ -422,6 +424,23 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
         });
       });
     }
+  }
+
+  Future<bool> _atualizarImagem() async {
+    var base64 = base64Encode(imagemPerfil);
+    var res = await _arquivoService.atualizarImagem(new ArquivoViewModel(
+      id: idConta,
+      nome: "cover.jpg",
+      contentType: "image/jpg",
+      descricao: "logo_conta",
+      conteudo: base64,
+      tamanho: base64.length.toDouble(),
+      container: "LogoConta",
+    ));
+    if (res != null) {
+      return true;
+    } else
+      return false;
   }
 
   static Color fromHex(String hexString) {
