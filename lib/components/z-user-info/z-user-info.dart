@@ -64,7 +64,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
               child: Icon(
                 Icons.edit,
                 size: 26,
-                color: Theme.of(context).accentColor,
+                color: Color(0xFF2BBAB4),
               ),
             ),
             onTap: () {
@@ -193,7 +193,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
         new Divider(
           height: 1.0,
         ),
-        new ZInputDataNascimento(
+       /* new ZInputDataNascimento(
           enabled: _view.editarAtivo,
           dataFocus: _view.focusNodeDataNascimento,
           themeData: Theme.of(context),
@@ -203,7 +203,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
         ),
         new Divider(
           height: 1.0,
-        ),
+        ),*/
         new Container(
           margin: EdgeInsets.only(top: 10.0),
           child: ZText(
