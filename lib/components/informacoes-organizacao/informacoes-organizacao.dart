@@ -50,7 +50,9 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconeVoltar(context: context,),
+        leading: IconeVoltar(
+          context: context,
+        ),
         centerTitle: true,
         title: new Text("Info. da Organização"),
         actions: [_montarBotaoEditar()],
@@ -72,8 +74,8 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
           padding: EdgeInsets.all(4.0),
           child: Icon(
             Icons.edit,
-            size: 26,
-            color: Theme.of(context).accentColor,
+            size: 24,
+            color: Color(0XFF2BBAB4),
           ),
         ),
         onTap: () async {

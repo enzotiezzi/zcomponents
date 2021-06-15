@@ -1,43 +1,36 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/svg.dart';
+import 'package:z_components/components/utils/svg.dart';
 
 class IconeVoltar extends StatefulWidget {
-
   final BuildContext context;
   final Function onTap;
 
-  IconeVoltar({this.context,this.onTap});
+  IconeVoltar({this.context, this.onTap});
+
   @override
   _IconeVoltarState createState() => _IconeVoltarState();
 }
 
 class _IconeVoltarState extends State<IconeVoltar> {
-
-  Function onTapVoltar(){
-    if(widget.onTap == null){
-      return (){
+  Function onTapVoltar() {
+    if (widget.onTap == null) {
+      return () {
         Navigator.of(context).pop();
       };
-    }else{
+    } else {
       return widget.onTap;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Color(0xFFFFFFFF),
-          borderRadius: BorderRadius.circular(8)
-      ),
-      margin: EdgeInsets.only(left: 20,top: 15,bottom: 15,right: 13),
-      //padding: EdgeInsets.only(bottom: 20),
-      child: GestureDetector(
-        onTap: onTapVoltar(),
-        child: new Icon(
-          Icons.arrow_back_ios_outlined, color: Theme.of(context).primaryColor,size: 16,
+    return new IconButton(
+        icon: SvgPicture.asset(
+          SvgUtils.ASSETLEFTICON,
+          semanticsLabel: "leftIcon.svg",
+          placeholderBuilder: (context) => Icon(Icons.error),
         ),
-      ),
-    );
+        onPressed: onTapVoltar());
   }
 }
