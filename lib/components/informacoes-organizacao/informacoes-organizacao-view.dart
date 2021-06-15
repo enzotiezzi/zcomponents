@@ -125,6 +125,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
               onColorChanged: changeColorPrimaria,
               showLabel: true,
               pickerAreaHeightPercent: 0.8,
+              enableAlpha: false,
             ),
           ),
           actions: <Widget>[
@@ -152,6 +153,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
             child: ColorPicker(
               pickerColor: pickerSecundaria,
               onColorChanged: changeColorSecundaria,
+              enableAlpha: false,
               showLabel: true,
               pickerAreaHeightPercent: 0.8,
             ),
