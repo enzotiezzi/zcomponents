@@ -19,6 +19,12 @@ abstract class IContasService {
 
   Future modificarAcesso(AppUsuarioContaViewModel appUsuarioContaViewModel);
 
+  Future modificarAcessoAtivar(UsuarioContaViewModel usuarioContaViewModel);
+
+  Future modificarAcessoInativar(UsuarioContaViewModel usuarioContaViewModel);
+
+  Future modificarAcessoBloquear(UsuarioContaViewModel usuarioContaViewModel);
+
   Future<ZResponse<ModuloContaViewModel>> listarModulosConta(
       SearchOptions searchOptions);
 
