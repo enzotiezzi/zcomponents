@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -21,16 +22,16 @@ class ZCollectionList extends StatefulWidget {
 
   ZCollectionList(
       {this.lista,
-        this.key,
-        this.theme,
-        this.titulo: "",
-        this.ultimoValor,
-        this.color,
-        this.skip: 0,
-        this.take: 0,
-        this.onChange,
-        this.filtroPrincipal,
-        this.onScroll})
+      this.key,
+      this.theme,
+      this.titulo: "",
+      this.ultimoValor,
+      this.color,
+      this.skip: 0,
+      this.take: 0,
+      this.onChange,
+      this.filtroPrincipal,
+      this.onScroll})
       : super(key: key);
 
   @override
@@ -63,23 +64,15 @@ class ZCollectionListState extends State<ZCollectionList> {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: widget.theme.backgroundColor,
-      appBar: new CupertinoNavigationBar(
+      appBar: new AppBar(
           backgroundColor: widget.color,
-          leading: new GestureDetector(
-            onTap: () => _selecionarItem(widget.ultimoValor),
-            child: new Container(
-              padding: EdgeInsets.only(right: 20.0),
-              color: Colors.transparent,
-              child: new Icon(
-                Icons.arrow_back_ios,
-                size: 20.0,
-                color: Colors.white,
-              ),
-            ),
+          leading: IconeVoltar(
+            context: context,
           ),
-          middle: new Container(
+          centerTitle: true,
+          title: new Container(
             child: new Text(
-              widget.titulo,
+              widget.titulo.toUpperCase(),
               style: new TextStyle(color: Colors.white),
             ),
           )),
@@ -88,9 +81,9 @@ class ZCollectionListState extends State<ZCollectionList> {
           _buildFiltro(),
           new Expanded(
               child: new Container(
-                margin: EdgeInsets.only(top: 16.0),
-                child: _buildLista(),
-              ))
+            margin: EdgeInsets.only(top: 16.0),
+            child: _buildLista(),
+          ))
         ],
       ),
     );
@@ -121,38 +114,38 @@ class ZCollectionListState extends State<ZCollectionList> {
                           )),
                       new Expanded(
                           child: new CupertinoTextField(
-                            placeholderStyle: new TextStyle(
-                                color: Color(0xff999999), fontSize: 17),
-                            placeholder: "Busca",
-                            decoration:
+                        placeholderStyle: new TextStyle(
+                            color: Color(0xff999999), fontSize: 17),
+                        placeholder: "Busca",
+                        decoration:
                             new BoxDecoration(color: Colors.transparent),
-                            onChanged: (text) {
-                              if (text.length >= 3 || text.length == 0) {
-                                if (widget.onChange != null) {
-                                  textoBusca = text;
-                                  widget.onChange([
-                                    new FilterExpression(
-                                        propertyName: widget.filtroPrincipal.key,
-                                        operatorBetween: "OrElse",
-                                        operator: "Contains",
-                                        value: text)
-                                  ]);
-                                } else {
-                                  text = text.toLowerCase();
-                                  keyLista = new GlobalKey();
-                                  setState(() {
-                                    if (text.length > 0)
-                                      _listaFiltro = widget.lista
-                                          .where((x) =>
+                        onChanged: (text) {
+                          if (text.length >= 3 || text.length == 0) {
+                            if (widget.onChange != null) {
+                              textoBusca = text;
+                              widget.onChange([
+                                new FilterExpression(
+                                    propertyName: widget.filtroPrincipal.key,
+                                    operatorBetween: "OrElse",
+                                    operator: "Contains",
+                                    value: text)
+                              ]);
+                            } else {
+                              text = text.toLowerCase();
+                              keyLista = new GlobalKey();
+                              setState(() {
+                                if (text.length > 0)
+                                  _listaFiltro = widget.lista
+                                      .where((x) =>
                                           x.valor.toLowerCase().contains(text))
-                                          .toList();
-                                    else
-                                      _listaFiltro = widget.lista;
-                                  });
-                                }
-                              }
-                            },
-                          )),
+                                      .toList();
+                                else
+                                  _listaFiltro = widget.lista;
+                              });
+                            }
+                          }
+                        },
+                      )),
                     ],
                   ),
                 ),
@@ -188,7 +181,6 @@ class ZCollectionListState extends State<ZCollectionList> {
                     _selecionarItem(item);
                   },
                   leading: new Container(
-
                     child: new Text(
                       "${item.titulo ?? item.valor}",
                       style: widget.theme.textTheme.bodyText1,
@@ -217,7 +209,7 @@ class ZCollectionListState extends State<ZCollectionList> {
       });
     } else {
       var listaSkipTake =
-      widget.lista.skip(widget.skip).take(widget.take).toList();
+          widget.lista.skip(widget.skip).take(widget.take).toList();
 
       if (listaSkipTake != null && listaSkipTake.length > 0) {
         setState(() {
@@ -233,7 +225,7 @@ class ZCollectionListState extends State<ZCollectionList> {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         var listaSkipTake =
-        widget.lista.skip(widget.skip).take(widget.take).toList();
+            widget.lista.skip(widget.skip).take(widget.take).toList();
         if (listaSkipTake != null && listaSkipTake.length > 0) {
           setState(() {
             _listaFiltro.addAll(listaSkipTake);
