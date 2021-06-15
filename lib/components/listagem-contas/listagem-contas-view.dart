@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:z_components/api/arquivo/arquivo-service.dart';
+import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/contas/contas-service.dart';
 import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
@@ -21,6 +25,7 @@ class ListagemContasView extends IView<ListagemContas> {
   PaginationMetaData paginationMetaData = new PaginationMetaData();
   ScrollController scrollController;
   IContasService contasService;
+  IArquivoService _arquivoService;
   DialogUtils _dialogUtils;
 
   @override
@@ -34,6 +39,7 @@ class ListagemContasView extends IView<ListagemContas> {
     _dialogUtils = DialogUtils(state.context);
     _dialogUtils.showProgressDialog();
     contasService = new ContasService(NovoToken.newToken);
+    _arquivoService = new ArquivoService(NovoToken.newToken);
 
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);
@@ -54,6 +60,13 @@ class ListagemContasView extends IView<ListagemContas> {
         listaContas = listaContas + res.body;
       } else {
         listaContas = res.body;
+      }
+      for (int i = 0; i < listaContas.length; i++) {
+        var doc = await _arquivoService.buscarAnexo(listaContas[i].idConta);
+
+        if (doc != null) {
+          listaContas[i].conta.logo = base64Decode(doc.conteudo);
+        }
       }
       if (state.mounted) {
         state.setState(() {
@@ -82,9 +95,11 @@ class ListagemContasView extends IView<ListagemContas> {
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nomeExibicao ?? ""}";
+          appsFormatados =
+              "$appsFormatados- ${lista[i].app.nomeExibicao ?? ""}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nomeExibicao ?? ""}";
+          appsFormatados =
+              "$appsFormatados, ${lista[i].app.nomeExibicao ?? ""}";
         }
       }
     } else {

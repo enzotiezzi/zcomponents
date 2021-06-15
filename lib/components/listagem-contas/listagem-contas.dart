@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
@@ -86,6 +88,7 @@ class _ListagemContasState extends State<ListagemContas> {
                     )));
       },
       child: new ZItemTileConta(
+        imagemPerfil: _montarImagem(item.conta.logo),
         visibilidade: false,
         dataVinculo: (item.dataVinculo != null)
             ? UtilData.obterDataDDMMAAAA(DateTime.parse(item.dataVinculo))
@@ -96,5 +99,21 @@ class _ListagemContasState extends State<ListagemContas> {
         tamanhoLista: item.appLista.length,
       ),
     );
+  }
+
+  Widget _montarImagem(Uint8List logo) {
+    if (logo != null) {
+      return new Container(
+        decoration: new BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(6.0), topLeft: Radius.circular(6.0)),
+          image: new DecorationImage(
+            image: MemoryImage(logo),
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    } else
+      return new Container();
   }
 }

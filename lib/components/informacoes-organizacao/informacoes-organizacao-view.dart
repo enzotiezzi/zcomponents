@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:z_components/api/arquivo/arquivo-service.dart';
+import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/contas/contas-service.dart';
 import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/api/endereco/endereco-service.dart';
@@ -47,6 +49,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   var textEditingControllerRua = new TextEditingController();
   var textEditingControllerNumero = new TextEditingController();
   TextEditingController complementoController = new TextEditingController();
+  IArquivoService _arquivoService;
   GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
   ITesteConexaoService _testeConexaoService;
@@ -59,6 +62,8 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   Uint8List imagemPerfil;
   InfoOrganizacaoViewModel infoOrganizacaoViewModel =
       new InfoOrganizacaoViewModel();
+
+  String idConta = "";
 
   InformacoesOrganizacaoView(State<InformacoesOrganizacao> state)
       : super(state);
@@ -75,18 +80,35 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     _testeConexaoService = new TesteConexaoService();
     _enderecoService = new EnderecoService();
     _contasService = new ContasService(NovoToken.newToken);
+    _arquivoService = new ArquivoService(NovoToken.newToken);
+
     if (state.widget.infoOrganizacaoViewModel == null &&
         !state.widget.editarDados) {
+      _dialogUtils.showProgressDialog();
       await _buscarDadosOrganizacao();
+      await _buscarImagem();
+      _dialogUtils.dismiss();
     } else {
       _popularControllers(state.widget.infoOrganizacaoViewModel);
     }
+
     state.setState(() {});
 
     if (state.widget.editarDados) {
       Future.delayed(Duration(milliseconds: 1000), () {
         FocusScope.of(state.context).requestFocus(telefoneFocusNode);
       });
+    }
+  }
+
+  Future<void> _buscarImagem() async {
+    var doc = await _arquivoService.buscarAnexo(idConta);
+
+    if (doc != null) {
+      imagemPerfil = base64Decode(doc.conteudo);
+      if (state.mounted) {
+        state.setState(() {});
+      }
     }
   }
 
@@ -348,6 +370,8 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
       corPrimaria = fromHex(infoOrganizacaoViewModel.corPrimaria);
       corSecundaria = fromHex(infoOrganizacaoViewModel.corSecundaria);
     }
+    idConta = infoOrganizacaoViewModel.idConta;
+    imagemPerfil = state.widget.imagemPerfil;
   }
 
   void _atualizarViewModel(InfoOrganizacaoViewModel infoOrganizacaoViewModel) {
