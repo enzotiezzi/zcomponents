@@ -25,6 +25,8 @@ class ListagemApps extends StatefulWidget {
 class _ListagemAppsState extends State<ListagemApps> {
   ListagemAppsView _view;
 
+  AppUsuarioContaViewModel result;
+
   @override
   void initState() {
     _view = ListagemAppsView(this);
@@ -176,12 +178,12 @@ class _ListagemAppsState extends State<ListagemApps> {
                   ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataVinculo))
                   : "Nunca",
               nomeModulo: app.app.nomeExibicao,
-              perfilAcesso: app.perfil.nome,
-              statusVinculo: app.status,
+              perfilAcesso: retornaPerfil(app.perfil.nome),
+              statusVinculo: retornaStatus(app.status),
               onTap: () async{
                 print(widget.usuario.toString());
                 print(app.toMap());
-                await Navigator.push(
+                final resultado  = await Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => DetalheModulo(
@@ -190,11 +192,32 @@ class _ListagemAppsState extends State<ListagemApps> {
                               appUsuarioContaViewModel: app,
                               usuario: widget.usuario,
                             )));
+                
+               setState(() {
+                 result = resultado;
+               });
+
               },
             )
           ],
         ),
       ),
     );
+  }
+  
+  String retornaPerfil (String app){
+    if(result ==null || result.perfil.nome.isEmpty){
+      return app;
+    }else{
+      return result.perfil.nome;
+    }
+  }
+  
+  String retornaStatus (String app){
+    if (result==null || result.status.isEmpty){
+      return app;
+    }else{
+      return result.status;
+    }
   }
 }
