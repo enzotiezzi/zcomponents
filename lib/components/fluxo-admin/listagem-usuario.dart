@@ -79,7 +79,10 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
             if (filters[0].value != "") {
               searchOptions.filters = filters;
             }
-
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Usuario.Nome";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
             await _view.buscarUsuario(searchOptions);
           },
         ),

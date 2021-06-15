@@ -158,6 +158,10 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
         },
         onFilter: (filter) async {
           SearchOptions searchOptions = new SearchOptions();
+          OrderByExpression order = new OrderByExpression();
+          order.propertyName = "Nome";
+          order.orientation = "ASC";
+          searchOptions.orders = [order];
           if (filter[0].value.isNotEmpty) {
             searchOptions.filters = filter;
           }
@@ -169,6 +173,10 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
         onScroll: (filter, listaAnterior) async {
           if (_view.paginationMetaData.hasNext) {
             SearchOptions searchOptions = new SearchOptions();
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Nome";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
             if (filter[0].value.isNotEmpty) {
               searchOptions.filters = filter;
             }
@@ -309,10 +317,16 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
         color: Theme.of(context).primaryColor,
       );
     } else {
-      if(widget.appUsuarioContaViewModel.status == "Ativo"){
-        return Icon(Icons.block_flipped,color: Colors.red,);
-      }else{
-        return Icon(Icons.check_circle,color: Theme.of(context).accentColor,);
+      if (widget.appUsuarioContaViewModel.status == "Ativo") {
+        return Icon(
+          Icons.block_flipped,
+          color: Colors.red,
+        );
+      } else {
+        return Icon(
+          Icons.check_circle,
+          color: Theme.of(context).accentColor,
+        );
       }
     }
   }

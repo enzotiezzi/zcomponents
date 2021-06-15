@@ -96,6 +96,10 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
             if (filters[0].value != "") {
               searchOptions.filters = filters;
             }
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "NomeExibicao";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
             await _view.buscarAplicativos(searchOptions);
           },
         ),

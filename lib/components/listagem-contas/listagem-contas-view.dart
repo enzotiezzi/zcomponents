@@ -37,6 +37,10 @@ class ListagemContasView extends IView<ListagemContas> {
 
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);
+    OrderByExpression order = new OrderByExpression();
+    order.propertyName = "Conta.Nome";
+    order.orientation = "ASC";
+    searchOptions.orders = [order];
     await buscarListaContas(searchOptions);
     _dialogUtils.dismiss();
   }
@@ -63,6 +67,10 @@ class ListagemContasView extends IView<ListagemContas> {
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
       if (this.paginationMetaData.hasNext) {
+        OrderByExpression order = new OrderByExpression();
+        order.propertyName = "Conta.Nome";
+        order.orientation = "ASC";
+        searchOptions.orders = [order];
         this.searchOptions.pagination.pageNumber++;
         await buscarListaContas(this.searchOptions, scrollPage: true);
       }

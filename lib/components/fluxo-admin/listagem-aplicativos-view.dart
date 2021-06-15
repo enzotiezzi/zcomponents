@@ -37,6 +37,10 @@ class ListagemAplicativosView extends IView<ListagemAplicativos> {
     contasService = new ContasService(NovoToken.newToken);
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);
+    OrderByExpression order = new OrderByExpression();
+    order.propertyName = "NomeExibicao";
+    order.orientation = "ASC";
+    searchOptions.orders = [order];
     await buscarAplicativos(searchOptions);
     _dialogUtils.dismiss();
   }
@@ -55,6 +59,10 @@ class ListagemAplicativosView extends IView<ListagemAplicativos> {
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
       if (this.paginationMetaData.hasNext) {
+        OrderByExpression order = new OrderByExpression();
+        order.propertyName = "NomeExibicao";
+        order.orientation = "ASC";
+        searchOptions.orders = [order];
         this.searchOptions.pagination.pageNumber++;
         await buscarAplicativos(this.searchOptions, scrollPage: true);
       }

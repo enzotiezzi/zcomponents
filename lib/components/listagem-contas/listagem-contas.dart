@@ -51,6 +51,10 @@ class _ListagemContasState extends State<ListagemContas> {
             if (filters[0].value != "") {
               searchOptions.filters = filters;
             }
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Conta.Nome";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
             await _view.buscarListaContas(searchOptions);
           },
         ),
