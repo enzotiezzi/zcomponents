@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/modulo/detalhe-modulo-view.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-header.dart';
@@ -83,7 +84,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
       } else {
         return Icon(
           Icons.check_circle,
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).primaryColor,
         );
       }
     }
@@ -101,6 +102,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context, onTap: (){Navigator.of(context).pop(widget.appUsuarioContaViewModel);},),
         actions: [
           PopupMenuButton<String>(
             icon: SvgPicture.asset(

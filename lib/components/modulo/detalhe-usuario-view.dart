@@ -165,7 +165,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
                     ),
                     new Container(
                       child: new Text(
-                        "O acesso ao aplicativo: ${state.widget.appUsuarioContaViewModel.app.nomeExibicao} será $tipoDialog para ${state.widget.appUsuarioContaViewModel.usuario.nome}",
+                        "O acesso ao aplicativo: ${state.widget.appUsuarioContaViewModel.app.nomeExibicao.toUpperCase()} será $tipoDialog para ${state.widget.appUsuarioContaViewModel.usuario.nome.toUpperCase()}",
                         style: TextStyle(fontSize: 14),
                         textAlign: TextAlign.center,
                       ),

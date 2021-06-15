@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import '../../z-item-tile-conta.dart';
 import 'detalhe-conta-view.dart';
@@ -31,6 +32,7 @@ class _DetalheContaState extends State<DetalheConta> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         centerTitle: true,
         title: new Text("CONTA"),
       ),

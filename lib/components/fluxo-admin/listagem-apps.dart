@@ -1,7 +1,9 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/fluxo-admin/usuarios.dart';
 import 'package:z_components/components/modulo/detalhe-modulo.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -23,17 +25,29 @@ class ListagemApps extends StatefulWidget {
 class _ListagemAppsState extends State<ListagemApps> {
   ListagemAppsView _view;
 
+  AppUsuarioContaViewModel result;
+
   @override
   void initState() {
     _view = ListagemAppsView(this);
+    print("lista app");
+    print(widget.listaApps);
     _view.initView();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    print("lista did");
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          leading: IconeVoltar(context: context),
         centerTitle: true,
         title: new Text("USUÁRIO"),
       ),
@@ -164,12 +178,12 @@ class _ListagemAppsState extends State<ListagemApps> {
                   ? UtilData.obterDataDDMMAAAA(DateTime.parse(app.dataVinculo))
                   : "Nunca",
               nomeModulo: app.app.nomeExibicao,
-              perfilAcesso: app.perfil.nome,
-              statusVinculo: app.status,
-              onTap: () {
+              perfilAcesso: retornaPerfil(app.perfil.nome),
+              statusVinculo: retornaStatus(app.status),
+              onTap: () async{
                 print(widget.usuario.toString());
                 print(app.toMap());
-                Navigator.push(
+                final resultado  = await Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => DetalheModulo(
@@ -178,11 +192,32 @@ class _ListagemAppsState extends State<ListagemApps> {
                               appUsuarioContaViewModel: app,
                               usuario: widget.usuario,
                             )));
+                
+               setState(() {
+                 result = resultado;
+               });
+
               },
             )
           ],
         ),
       ),
     );
+  }
+  
+  String retornaPerfil (String app){
+    if(result ==null || result.perfil.nome.isEmpty){
+      return app;
+    }else{
+      return result.perfil.nome;
+    }
+  }
+  
+  String retornaStatus (String app){
+    if (result==null || result.status.isEmpty){
+      return app;
+    }else{
+      return result.status;
+    }
   }
 }
