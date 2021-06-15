@@ -8,6 +8,7 @@ import 'package:z_components/components/fluxo-admin/listagem-aplicativos-view.da
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/modulo/detalhe-aplicativo.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -39,6 +40,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         centerTitle: true,
         title: new Text("APLICATIVOS"),
       ),

@@ -376,7 +376,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     _dialogUtils.showZProgressDialog("Atualizando dados", 0.4, keyProgress);
     _atualizarViewModel(state.widget.infoOrganizacaoViewModel);
     state.widget.infoOrganizacaoViewModel.idConta = state.widget.idConta;
-
+    print(state.widget.infoOrganizacaoViewModel);
     var res = await _contasService
         .editarDadosOrganizacao(state.widget.infoOrganizacaoViewModel);
 
