@@ -84,7 +84,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
       } else {
         return Icon(
           Icons.check_circle,
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).primaryColor,
         );
       }
     }
@@ -102,7 +102,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconeVoltar(context: context, onTap: (){Navigator.of(context).pop(widget.appUsuarioContaViewModel.app);},),
+        leading: IconeVoltar(context: context, onTap: (){Navigator.of(context).pop(widget.appUsuarioContaViewModel);},),
         actions: [
           PopupMenuButton<String>(
             icon: SvgPicture.asset(
