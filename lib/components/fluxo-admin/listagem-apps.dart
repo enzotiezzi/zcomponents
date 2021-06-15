@@ -1,7 +1,9 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/fluxo-admin/usuarios.dart';
 import 'package:z_components/components/modulo/detalhe-modulo.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -26,14 +28,24 @@ class _ListagemAppsState extends State<ListagemApps> {
   @override
   void initState() {
     _view = ListagemAppsView(this);
+    print("lista app");
+    print(widget.listaApps);
     _view.initView();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    print("lista did");
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          leading: IconeVoltar(context: context),
         centerTitle: true,
         title: new Text("USUÁRIO"),
       ),
@@ -166,10 +178,10 @@ class _ListagemAppsState extends State<ListagemApps> {
               nomeModulo: app.app.nomeExibicao,
               perfilAcesso: app.perfil.nome,
               statusVinculo: app.status,
-              onTap: () {
+              onTap: () async{
                 print(widget.usuario.toString());
                 print(app.toMap());
-                Navigator.push(
+                await Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => DetalheModulo(

@@ -2,6 +2,7 @@ import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/modulo/detalhe-aplicativo-view.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 import 'package:z_components/components/z-aba/z-aba.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
@@ -34,6 +35,7 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         title: Text("APLICATIVO"),
         centerTitle: true,
       ),
