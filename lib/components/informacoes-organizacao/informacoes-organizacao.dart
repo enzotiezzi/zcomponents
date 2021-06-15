@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:z_components/components/informacoes-organizacao/informacoes-organizacao-view.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
@@ -20,13 +22,15 @@ class InformacoesOrganizacao extends StatefulWidget {
   String textoFoto;
   InfoOrganizacaoViewModel infoOrganizacaoViewModel;
   String idConta;
+  Uint8List imagemPerfil;
 
   InformacoesOrganizacao(
       {this.themeData,
       this.textoFoto,
       this.editarDados,
       this.infoOrganizacaoViewModel,
-      this.idConta});
+      this.idConta,
+      this.imagemPerfil});
 
   @override
   _InformacoesOrganizacaoState createState() => _InformacoesOrganizacaoState();
@@ -83,6 +87,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
                         idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
                         infoOrganizacaoViewModel:
                             _view.infoOrganizacaoViewModel,
+                        imagemPerfil: _view.imagemPerfil,
                       )));
 
           if (res != null) {
