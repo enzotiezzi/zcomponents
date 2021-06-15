@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/informacoes-organizacao/informacoes-organizacao-view.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
@@ -45,6 +46,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         centerTitle: true,
         title: new Text("Info. da Organização"),
         actions: [_montarBotaoEditar()],

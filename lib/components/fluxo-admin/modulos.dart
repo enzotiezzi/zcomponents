@@ -5,6 +5,7 @@ import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/listagem-aplicativos.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/fluxo-admin/modulos-view.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 import 'package:z_components/view-model/modulo-viewmodel.dart';
@@ -34,6 +35,7 @@ class _ModulosState extends State<Modulos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         title: new Text("MÓDULOS"),
         centerTitle: true,
       ),

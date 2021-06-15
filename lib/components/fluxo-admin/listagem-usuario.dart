@@ -6,6 +6,7 @@ import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
 import 'package:z_components/components/modulo/detalhe-usuario.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -39,6 +40,7 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         centerTitle: true,
         title: Text("LISTAGEM USUÁRIO"),
       ),
