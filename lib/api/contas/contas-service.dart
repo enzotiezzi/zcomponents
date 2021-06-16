@@ -91,6 +91,30 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
+  Future modificarAcessoAtivar(UsuarioContaViewModel usuarioContaViewModel) async{
+    var res = await request(
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/ativar",
+        Service.HTTP_PUT,
+        body: usuarioContaViewModel.toMap());
+  }
+
+  @override
+  Future modificarAcessoBloquear(UsuarioContaViewModel usuarioContaViewModel) async{
+    var res = await request(
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/inativar",
+        Service.HTTP_PUT,
+        body: usuarioContaViewModel.toMap());
+  }
+
+  @override
+  Future modificarAcessoInativar(UsuarioContaViewModel usuarioContaViewModel) async{
+    var res = await request(
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/bloquear",
+        Service.HTTP_PUT,
+        body: usuarioContaViewModel.toMap());
+  }
+
+  @override
   Future<ZResponse<ModuloContaViewModel>> listarModulosConta(
       SearchOptions searchOptions) async {
     print("chamou");
@@ -216,4 +240,6 @@ class ContasService extends Service implements IContasService {
       return null;
     }
   }
+
+
 }
