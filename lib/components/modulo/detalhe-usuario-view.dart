@@ -40,6 +40,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
   GlobalKey<ZCollectionState> keyPerfil = new GlobalKey<ZCollectionState>();
   IContasService _contasService;
   bool alterouPerfil = false;
+  String textModificarAcesso = '';
 
   String hintNomePerfil = '';
   String hintStatus = '';
@@ -107,8 +108,10 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
 
   String _definirTexto() {
     if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
+      textModificarAcesso = "Revogar";
       return "Revogar";
     } else {
+      textModificarAcesso = "Ativar";
       return "Ativar";
     }
   }
@@ -165,7 +168,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
                     ),
                     new Container(
                       child: new Text(
-                        "O acesso ao aplicativo: ${state.widget.appUsuarioContaViewModel.app.nomeExibicao.toUpperCase()} será $tipoDialog para ${state.widget.appUsuarioContaViewModel.usuario.nome.toUpperCase()}",
+                        "O acesso ao aplicativo: ${state.widget.appUsuarioContaViewModel.app.nomeExibicao.toUpperCase()} será $tipoDialog HOJE para ${state.widget.appUsuarioContaViewModel.usuario.nome.toUpperCase()}",
                         style: TextStyle(fontSize: 14),
                         textAlign: TextAlign.center,
                       ),
@@ -255,7 +258,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
     } else {
       _dialogUtils.dismiss();
       _dialogUtils.showAlertDialogErro(
-          "Erro!", "Não foi possivel finalizar a alteração.");
+          "Erro!", "Não foi possivel $textModificarAcesso o acesso.");
       print("Erro");
     }
   }

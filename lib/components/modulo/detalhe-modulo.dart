@@ -39,56 +39,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
   DetalheModuloView _view;
   String textoModificar = '';
 
-  String _definirTexto() {
-    if (widget.appUsuarioContaViewModel.status == "Ativo") {
-      return "Revogar";
-    } else {
-      return "Ativar";
-    }
-  }
 
-  _escolhaMenuItem(String itemEscolhido) async {
-    if (itemEscolhido.contains("Editar")) {
-      var res = await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetalheModulo(
-              editarDados: true,
-              cliqueEditar: true,
-              appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
-              usuario: widget.usuario,
-            ),
-          ));
-      if (res != null) {
-        widget.appUsuarioContaViewModel = res;
-        _view.preencherDados();
-        setState(() {});
-      }
-    } else {
-      return _view.showDialogAlterarAcesso();
-    }
-  }
-
-  Widget _definirIcone(String item) {
-    if (item.contains("Editar")) {
-      return Icon(
-        Icons.edit,
-        color: Theme.of(context).primaryColor,
-      );
-    } else {
-      if (widget.appUsuarioContaViewModel.status == "Ativo") {
-        return Icon(
-          Icons.block_flipped,
-          color: Colors.red,
-        );
-      } else {
-        return Icon(
-          Icons.check_circle,
-          color: Theme.of(context).primaryColor,
-        );
-      }
-    }
-  }
 
   @override
   void initState() {
@@ -351,5 +302,55 @@ class _DetalheModuloState extends State<DetalheModulo> {
             controllerInputPadrao: _view.dataVinculoController),
       ],
     );
+  }
+  String _definirTexto() {
+    if (widget.appUsuarioContaViewModel.status == "Ativo") {
+      return "Revogar";
+    } else {
+      return "Ativar";
+    }
+  }
+
+  _escolhaMenuItem(String itemEscolhido) async {
+    if (itemEscolhido.contains("Editar")) {
+      var res = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetalheModulo(
+              editarDados: true,
+              cliqueEditar: true,
+              appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
+              usuario: widget.usuario,
+            ),
+          ));
+      if (res != null) {
+        widget.appUsuarioContaViewModel = res;
+        _view.preencherDados();
+        setState(() {});
+      }
+    } else {
+      return _view.showDialogAlterarAcesso();
+    }
+  }
+
+  Widget _definirIcone(String item) {
+    if (item.contains("Editar")) {
+      return Icon(
+        Icons.edit,
+        color: Theme.of(context).primaryColor,
+      );
+    } else {
+      if (widget.appUsuarioContaViewModel.status == "Ativo") {
+        return Icon(
+          Icons.block_flipped,
+          color: Colors.red,
+        );
+      } else {
+        return Icon(
+          Icons.check_circle,
+          color: Theme.of(context).primaryColor,
+        );
+      }
+    }
   }
 }

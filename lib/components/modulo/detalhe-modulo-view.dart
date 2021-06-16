@@ -95,8 +95,10 @@ class DetalheModuloView extends IView<DetalheModulo> {
 
   String _definirTexto() {
     if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
+      textModificarAcesso = "Revogar";
       return "Revogar";
     } else {
+      textModificarAcesso = "Ativar";
       return "Ativar";
     }
   }
@@ -116,7 +118,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
       });
     } else {
       state.setState(() {
-        textModificarAcesso = "Ativar";
+
       });
     }
   }
@@ -227,7 +229,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
                     ),
                     new Container(
                       child: new Text(
-                        "O acesso do aplicativo: ${state.widget.appUsuarioContaViewModel.app.nomeExibicao.toUpperCase()} será $tipoDialog para ${state.widget.appUsuarioContaViewModel.usuario.nome.toUpperCase()}",
+                        "O acesso do aplicativo: ${state.widget.appUsuarioContaViewModel.app.nomeExibicao.toUpperCase()} será $tipoDialog HOJE para ${state.widget.appUsuarioContaViewModel.usuario.nome.toUpperCase()}",
                         style: TextStyle(fontSize: 14),
                         textAlign: TextAlign.center,
                       ),
@@ -317,7 +319,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
     } else {
       _dialogUtils.dismiss();
       _dialogUtils.showAlertDialogErro(
-          "Erro!", "Não foi possivel finalizar a alteração.");
+          "Erro!", "Não foi possivel $textModificarAcesso o acesso.");
       print("Erro");
     }
   }
