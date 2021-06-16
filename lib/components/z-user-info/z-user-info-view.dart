@@ -61,7 +61,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   IArquivoService _arquivoService;
   IUserInfoService _userInfoService;
   ITesteConexaoService _testeConexaoService;
-  bool editarAtivo = false;
+
   String textoFoto = "";
 
   String textoTelefone = "ADICIONAR TELEFONE";
@@ -103,19 +103,22 @@ class ZUserInfoView extends IView<ZUserInfo> {
   ZUserInfoView(State<ZUserInfo> state) : super(state);
 
   @override
-  Future<void> initView() {
+  Future<void> initView() async {
     _userInfo = new BuscarInfo();
     _dialogUtils = new DialogUtils(state.context);
     _arquivoService = new ArquivoService(NovoToken.newToken);
     _userInfoService = new UserInfoService(NovoToken.newToken);
     _testeConexaoService = new TesteConexaoService();
-    _buscarInfo();
+    if (state.widget.editarAtivo) {
+      Future.delayed(Duration(milliseconds: 400), () {
+        FocusScope.of(state.context).requestFocus(focusNodeNome);
+      });
+    }
+    await _buscarInfo();
   }
 
   @override
-  Future<void> afterBuild() async {
-
-  }
+  Future<void> afterBuild() async {}
 
   bool validarCamposObrigatorios() {
     if (preencheuNome) {
@@ -145,7 +148,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future escolherMetodoSelecionarFoto() {
-    if (editarAtivo) {
+    if (state.widget.editarAtivo) {
       return showModalBottomSheet<String>(
           context: state.context,
           shape: RoundedRectangleBorder(
@@ -309,17 +312,29 @@ class ZUserInfoView extends IView<ZUserInfo> {
     }
 
     if (res) {
-    } else {}
+      Future.delayed(Duration(milliseconds: 1000), () {
+        _globalKey.currentState.refresh(1.0, "Pronto", success: true);
+      });
+      Future.delayed(new Duration(milliseconds: 2000), () {
+        _dialogUtils.dismiss();
+        Navigator.of(state.context).pop();
 
-    Future.delayed(Duration(milliseconds: 1000), () {
-      _globalKey.currentState.refresh(1.0, "Pronto", success: true);
-    });
-    Future.delayed(new Duration(seconds: 1), () {
-      _dialogUtils.dismiss();
+        if (state.widget.onEditFinish != null)
+          state.widget.onEditFinish(userInfo);
+      });
+    } else {
+      Future.delayed(Duration(milliseconds: 1000), () {
+        _globalKey.currentState.refresh(1.0, "Erro ao criar o usuário", success: false);
+      });
+      Future.delayed(new Duration(milliseconds: 2000), () {
+        _dialogUtils.dismiss();
 
-      if (state.widget.onEditFinish != null)
-        state.widget.onEditFinish(userInfo);
-    });
+        if (state.widget.onEditFinish != null)
+          state.widget.onEditFinish(userInfo);
+      });
+    }
+
+
   }
 
   void showAlertDialogNew(String title, String message) async {

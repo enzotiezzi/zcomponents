@@ -6,6 +6,8 @@ import 'package:z_components/components/fluxo-admin/usuarios.dart';
 import 'package:z_components/components/listagem-contas/listagem-contas.dart';
 import 'package:z_components/components/fluxo-admin/modulos.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
+
 
 class MainComponents extends StatefulWidget {
   @override
@@ -85,7 +87,7 @@ class _MainComponentsState extends State<MainComponents> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ZUserInfo(
+                    builder: (context) => ZUserInfo(userInfo: new BuscarInfo(),
                     )));
           }
         ],
