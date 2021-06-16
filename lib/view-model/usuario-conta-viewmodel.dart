@@ -45,4 +45,20 @@ class UsuarioContaViewModel {
         ),
         appQtde: json["appQtde"]);
   }
+
+  Map toMap(){
+    return {
+      "idConta":this.idConta,
+      "idUsuario":this.idUsuario,
+      "appLista":this.appLista,
+      "status":this.status,
+      "ativo":this.ativo,
+      "contaLogada":this.contaLogada,
+      "dataVinculo":this.dataVinculo,
+      "perfil":this.perfil,
+      "usuario":this.usuario.toMap(),
+      "appQtde":this.appQtde
+
+    };
+  }
 }
