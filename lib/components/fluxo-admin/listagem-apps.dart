@@ -49,7 +49,7 @@ class _ListagemAppsState extends State<ListagemApps> {
       appBar: AppBar(
           leading: IconeVoltar(context: context),
         centerTitle: true,
-        title: new Text("USUÁRIO"),
+        title: new Text(" APPS DO USUÁRIO"),
       ),
       body: _buildBody(),
     );

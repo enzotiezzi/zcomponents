@@ -36,7 +36,7 @@ class _UsuariosState extends State<Usuarios> {
         elevation: 4,
         leading: IconeVoltar(context: context,),
         centerTitle: true,
-        title: new Text("USUÁRIO"),
+        title: new Text("USUÁRIOS"),
       ),
       body: _buildBody(),
     );
