@@ -256,9 +256,15 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
       _dialogUtils.dismiss();
       Navigator.of(state.context).pop(state.widget.appUsuarioContaViewModel);
     } else {
+      if (operacao == "perfil") textModificarAcesso = "alterar";
+      if (state.widget.appUsuarioContaViewModel.status == "Inativo") {
+        state.widget.appUsuarioContaViewModel.status = "Ativo";
+      } else {
+        state.widget.appUsuarioContaViewModel.status = "Inativo";
+      }
       _dialogUtils.dismiss();
       _dialogUtils.showAlertDialogErro(
-          "Erro!", "Não foi possivel $textModificarAcesso o acesso.");
+          "Erro!", "Não foi possivel $textModificarAcesso o $operacao.");
       print("Erro");
     }
   }
