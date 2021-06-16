@@ -206,8 +206,12 @@ class _ListagemAppsState extends State<ListagemApps> {
   }
   
   String retornaPerfil (String app){
-    if(result ==null || result.perfil.nome.isEmpty){
-      return app;
+    if(result ==null  || result.perfil.nome == null || result.perfil.nome.isEmpty){
+        if(app==null|| app.isEmpty ){
+          return "Não contém perfil";
+        }else{
+          return app;
+        }
     }else{
       return result.perfil.nome;
     }
