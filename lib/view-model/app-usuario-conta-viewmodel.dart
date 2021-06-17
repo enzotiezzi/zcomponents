@@ -69,7 +69,7 @@ class AppUsuarioContaViewModel {
       "token": this.token,
       "usuario": this.usuario.toMap(),
       "app": this.app.toMap(),
-      "perfil":this.perfil.toMap()
+      "perfil": (this.perfil.idPerfil != null) ? this.perfil.toMap() : null
     };
   }
 }

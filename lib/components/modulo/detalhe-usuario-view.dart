@@ -108,13 +108,14 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
 
   String _definirTexto() {
     if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
-      textModificarAcesso = "Revogar";
+      textModificarAcesso = "Inativar";
       return "Revogar";
     } else {
       textModificarAcesso = "Ativar";
       return "Ativar";
     }
   }
+
 
   Widget preencherDados() {
     titulo = state.widget.appUsuarioContaViewModel.app.nome;
@@ -250,7 +251,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
         state.widget.appUsuarioContaViewModel.idApp,
         state.widget.appUsuarioContaViewModel.idUsuario,
         state.widget.appUsuarioContaViewModel,
-        operacao);
+        textModificarAcesso);
 
     if (res != null && res) {
       _dialogUtils.dismiss();

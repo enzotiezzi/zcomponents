@@ -129,7 +129,13 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
                     appUsuarioContaViewModel: app),
               ));
           if (res != null) {
+            _view.listaUsuarioPorApp.clear();
             _view.searchOptions = new SearchOptions();
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Usuario.Nome";
+            order.orientation = "ASC";
+            _view.searchOptions.orders = [order];
+
             await _view.buscarUsuario(_view.searchOptions);
           }
         },
