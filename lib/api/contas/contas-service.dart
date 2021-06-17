@@ -101,7 +101,7 @@ class ContasService extends Service implements IContasService {
   @override
   Future modificarAcessoBloquear(UsuarioContaViewModel usuarioContaViewModel) async{
     var res = await request(
-        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/inativar",
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/bloquear",
         Service.HTTP_PUT,
         body: usuarioContaViewModel.toMap());
   }
@@ -109,7 +109,7 @@ class ContasService extends Service implements IContasService {
   @override
   Future modificarAcessoInativar(UsuarioContaViewModel usuarioContaViewModel) async{
     var res = await request(
-        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/bloquear",
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/inativar",
         Service.HTTP_PUT,
         body: usuarioContaViewModel.toMap());
   }
@@ -194,6 +194,8 @@ class ContasService extends Service implements IContasService {
           "$_URL/modulos/$idModulo/apps/$idApp/usuarios/$idUsuario/$tipo",
           Service.HTTP_PUT,
           body: appUsuarioContaViewModel.toMap());
+      print(res.body);
+      print(res.statusCode);
       if (res.statusCode == 200 || res.statusCode == 204) {
         return true;
       } else
