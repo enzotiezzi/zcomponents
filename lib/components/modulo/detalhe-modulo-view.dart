@@ -117,9 +117,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
         textModificarAcesso = "Revogar";
       });
     } else {
-      state.setState(() {
-
-      });
+      state.setState(() {});
     }
   }
 
@@ -317,6 +315,11 @@ class DetalheModuloView extends IView<DetalheModulo> {
       _dialogUtils.dismiss();
       Navigator.of(state.context).pop(state.widget.appUsuarioContaViewModel);
     } else {
+      if (state.widget.appUsuarioContaViewModel.status == "Inativo") {
+        state.widget.appUsuarioContaViewModel.status = "Ativo";
+      } else {
+        state.widget.appUsuarioContaViewModel.status = "Inativo";
+      }
       _dialogUtils.dismiss();
       _dialogUtils.showAlertDialogErro(
           "Erro!", "Não foi possivel $textModificarAcesso o acesso.");
