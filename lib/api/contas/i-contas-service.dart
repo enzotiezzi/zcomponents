@@ -54,4 +54,6 @@ abstract class IContasService {
       SearchOptions searchOptions, String idApp);
 
   Future<AppUsuarioContaViewModel> buscarDadosUsuarioConta(String idUsuario);
+
+  Future<bool> alterarConta(String idConta);
 }

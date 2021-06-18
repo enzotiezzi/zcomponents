@@ -42,7 +42,6 @@ class ContasService extends Service implements IContasService {
 
       var response = await request(url, Service.HTTP_GET);
 
-
       return InfoOrganizacaoViewModel.fromJson(json.decode(response.body));
     } catch (e) {
       return null;
@@ -65,7 +64,6 @@ class ContasService extends Service implements IContasService {
   @override
   Future<bool> editarDadosOrganizacao(
       InfoOrganizacaoViewModel infoOrganizacaoViewModel) async {
-
     try {
       var url = "$_URL/contas/${infoOrganizacaoViewModel.idConta}";
 
@@ -91,7 +89,8 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future modificarAcessoAtivar(UsuarioContaViewModel usuarioContaViewModel) async{
+  Future modificarAcessoAtivar(
+      UsuarioContaViewModel usuarioContaViewModel) async {
     var res = await request(
         "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/ativar",
         Service.HTTP_PUT,
@@ -99,17 +98,19 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future modificarAcessoBloquear(UsuarioContaViewModel usuarioContaViewModel) async{
+  Future modificarAcessoBloquear(
+      UsuarioContaViewModel usuarioContaViewModel) async {
     var res = await request(
-        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/inativar",
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/bloquear",
         Service.HTTP_PUT,
         body: usuarioContaViewModel.toMap());
   }
 
   @override
-  Future modificarAcessoInativar(UsuarioContaViewModel usuarioContaViewModel) async{
+  Future modificarAcessoInativar(
+      UsuarioContaViewModel usuarioContaViewModel) async {
     var res = await request(
-        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/bloquear",
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/inativar",
         Service.HTTP_PUT,
         body: usuarioContaViewModel.toMap());
   }
@@ -194,6 +195,8 @@ class ContasService extends Service implements IContasService {
           "$_URL/modulos/$idModulo/apps/$idApp/usuarios/$idUsuario/$tipo",
           Service.HTTP_PUT,
           body: appUsuarioContaViewModel.toMap());
+      print(res.body);
+      print(res.statusCode);
       if (res.statusCode == 200 || res.statusCode == 204) {
         return true;
       } else
@@ -241,5 +244,19 @@ class ContasService extends Service implements IContasService {
     }
   }
 
-
+  Future<bool> alterarConta(String idConta) async {
+    try {
+      var res = await request(
+          "$_URL/usuarios/contas/$idConta/selecionar",
+          Service.HTTP_PUT,
+        );
+      print(res.statusCode);
+      if (res.statusCode == 200 || res.statusCode == 204) {
+        return true;
+      } else
+        return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }

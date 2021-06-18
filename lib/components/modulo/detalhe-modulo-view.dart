@@ -95,7 +95,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
 
   String _definirTexto() {
     if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
-      textModificarAcesso = "Revogar";
+      textModificarAcesso = "Inativar";
       return "Revogar";
     } else {
       textModificarAcesso = "Ativar";
@@ -114,7 +114,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
   void definirTextoMenu() {
     if (statusController.text == "Ativo") {
       state.setState(() {
-        textModificarAcesso = "Revogar";
+        textModificarAcesso = "Inativar";
       });
     } else {
       state.setState(() {});
@@ -303,13 +303,16 @@ class DetalheModuloView extends IView<DetalheModulo> {
 
   Future<void> _alterarAcesso(String operacao) async {
     _dialogUtils.showProgressDialog();
+    if(operacao.contains("perfil")){
+      textModificarAcesso = "perfil";
+    }
 
     var res = await contasService.editarDadosFluxoUsuario(
         state.widget.appUsuarioContaViewModel.app.idModulo,
         state.widget.appUsuarioContaViewModel.idApp,
         state.widget.appUsuarioContaViewModel.idUsuario,
         state.widget.appUsuarioContaViewModel,
-        operacao);
+        textModificarAcesso);
 
     if (res != null && res) {
       _dialogUtils.dismiss();
