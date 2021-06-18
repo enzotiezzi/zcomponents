@@ -303,6 +303,9 @@ class DetalheModuloView extends IView<DetalheModulo> {
 
   Future<void> _alterarAcesso(String operacao) async {
     _dialogUtils.showProgressDialog();
+    if(operacao.contains("perfil")){
+      textModificarAcesso = "perfil";
+    }
 
     var res = await contasService.editarDadosFluxoUsuario(
         state.widget.appUsuarioContaViewModel.app.idModulo,

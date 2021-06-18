@@ -246,6 +246,10 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
   Future<void> _alterarAcesso(String operacao) async {
     _dialogUtils.showProgressDialog();
 
+    if(operacao.contains("perfil")){
+      textModificarAcesso = "perfil";
+    }
+
     var res = await _contasService.editarDadosUsuario(
         state.widget.idModulo,
         state.widget.appUsuarioContaViewModel.idApp,
