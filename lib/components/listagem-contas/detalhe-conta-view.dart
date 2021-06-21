@@ -32,7 +32,7 @@ class DetalheContaViewModel extends IView<DetalheConta> {
 
   @override
   Future<void> initView() {
-    _contaService = new ContasService(NovoToken.newToken);
+    _contaService = new ContasService(state.widget.token);
     _dialogUtils = new DialogUtils(state.context);
   }
 
@@ -146,6 +146,9 @@ class DetalheContaViewModel extends IView<DetalheConta> {
     if (res) {
       _globalKey.currentState
           .refresh(1.0, "Conta trocada com sucesso.", success: true);
+
+      if (state.widget.onAccountChange != null)
+        await state.widget.onAccountChange(state.widget.contaV2ViewModel);
 
       state.setState(() {});
     } else {

@@ -11,8 +11,14 @@ import 'detalhe-conta-view.dart';
 class DetalheConta extends StatefulWidget {
   ContaV2ViewModel contaV2ViewModel;
   ThemeData themeData;
+  String token;
+  Function(ContaV2ViewModel) onAccountChange;
 
-  DetalheConta({this.contaV2ViewModel, this.themeData});
+  DetalheConta(
+      {this.contaV2ViewModel,
+      this.themeData,
+      this.token,
+      this.onAccountChange});
 
   @override
   _DetalheContaState createState() => _DetalheContaState();
@@ -32,7 +38,9 @@ class _DetalheContaState extends State<DetalheConta> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconeVoltar(context: context,),
+        leading: IconeVoltar(
+          context: context,
+        ),
         centerTitle: true,
         title: new Text("CONTA"),
       ),

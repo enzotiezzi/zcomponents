@@ -13,8 +13,12 @@ import 'listagem-contas-view.dart';
 
 class ListagemContas extends StatefulWidget {
   ThemeData themeData;
+  String token;
+  Function(ContaV2ViewModel) onAccountChange;
 
-  ListagemContas({this.themeData});
+  ListagemContas(
+      {this.themeData, this.token, this.onAccountChange, GlobalKey key})
+      : super(key: key);
 
   @override
   _ListagemContasState createState() => _ListagemContasState();
@@ -34,7 +38,9 @@ class _ListagemContasState extends State<ListagemContas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconeVoltar(context: context,),
+        leading: IconeVoltar(
+          context: context,
+        ),
         centerTitle: true,
         title: new Text("CONTAS"),
       ),
@@ -87,6 +93,7 @@ class _ListagemContasState extends State<ListagemContas> {
                 builder: (context) => DetalheConta(
                       themeData: Theme.of(context),
                       contaV2ViewModel: item,
+                      token: widget.token,
                     )));
       },
       child: new ZItemTileConta(
