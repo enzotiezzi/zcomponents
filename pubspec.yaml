@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  provider: ^2.0.1
   flutter_datetime_picker: ^1.5.1
   mask_shifter: ^0.1.0
   cached_network_image: ^2.0.0
