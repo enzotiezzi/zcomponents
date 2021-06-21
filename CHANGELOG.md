@@ -1,3 +1,31 @@
+## 0.9.36+6
+
+* Ajuste tema Contas
+
+## 0.9.36+5
+
+* Ajuste Contas
+
+## 0.9.36+4
+
+* Ajuste Contas
+
+## 0.9.36+3
+
+* Ajuste Contas
+
+## 0.9.36+2
+
+* Ajuste Contas
+
+## 0.9.36+1
+
+* Ajuste Contas
+
+## 0.9.36
+
+* Fluxo Contas
+
 ## 0.9.35+29
 
 * Meu Perfil

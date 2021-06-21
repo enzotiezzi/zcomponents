@@ -37,7 +37,7 @@ class _DetalheContaState extends State<DetalheConta> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor:  widget.themeData.primaryColor,
         leading: IconeVoltar(
           context: context,
         ),
@@ -187,7 +187,7 @@ class _DetalheContaState extends State<DetalheConta> {
                   ],
                 ),
               ),
-              color: Theme.of(context).accentColor,
+              color:  widget.themeData.accentColor,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30),
               ),
@@ -201,7 +201,7 @@ class _DetalheContaState extends State<DetalheConta> {
           padding: EdgeInsets.only(top: 20.0),
           child: new Text(
             "Você está utilizando esta conta no momento.",
-            style: TextStyle(color: Color(0xff2BBAB4)),
+            style: TextStyle(color:  widget.themeData.primaryColor),
           ));
     }
   }

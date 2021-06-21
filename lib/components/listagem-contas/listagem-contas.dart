@@ -21,10 +21,10 @@ class ListagemContas extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ListagemContasState createState() => _ListagemContasState();
+  ListagemContasState createState() => ListagemContasState();
 }
 
-class _ListagemContasState extends State<ListagemContas> {
+class ListagemContasState extends State<ListagemContas> {
   ListagemContasView _view;
 
   @override
@@ -38,6 +38,7 @@ class _ListagemContasState extends State<ListagemContas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: widget.themeData.primaryColor,
         leading: IconeVoltar(
           context: context,
         ),
@@ -91,9 +92,10 @@ class _ListagemContasState extends State<ListagemContas> {
             context,
             MaterialPageRoute(
                 builder: (context) => DetalheConta(
-                      themeData: Theme.of(context),
+                      themeData: widget.themeData,
                       contaV2ViewModel: item,
                       token: widget.token,
+                      onAccountChange: widget.onAccountChange,
                     )));
       },
       child: new ZItemTileConta(
@@ -124,5 +126,14 @@ class _ListagemContasState extends State<ListagemContas> {
       );
     } else
       return new Container();
+  }
+
+  void updateToken(String token, ThemeData theme) {
+    if (mounted) {
+      widget.token = token;
+      widget.themeData = theme;
+    }
+
+    _view.initView();
   }
 }
