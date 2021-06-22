@@ -4,6 +4,7 @@ import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-aba/z-aba.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
+import 'package:z_components/components/z-item-tile-os.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -68,6 +69,17 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                     titulo: "Feriados"),
 
               ],
+            ),
+            ZItemTileOS(
+              codigo: "012192102910",
+              onde: "Zellar Vital Brasil > Banheiro",
+              oque: "Dispenser Papel",
+              porque: "Dispenser Papel",
+              prioridade: "Baixa",
+              dataSla: "12/08/2025",
+              visibilidade: true,
+              emAndamento: true,
+              onPressedFinalizar: (){},
             )
           ],
         ),
