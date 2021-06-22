@@ -9,7 +9,6 @@ import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 
@@ -38,8 +37,8 @@ class ListagemContasView extends IView<ListagemContas> {
   Future<void> initView() async {
     _dialogUtils = DialogUtils(state.context);
     _dialogUtils.showProgressDialog();
-    contasService = new ContasService(NovoToken.newToken);
-    _arquivoService = new ArquivoService(NovoToken.newToken);
+    contasService = new ContasService(state.widget.token);
+    _arquivoService = new ArquivoService(state.widget.token);
 
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);

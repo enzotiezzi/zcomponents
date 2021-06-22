@@ -13,14 +13,18 @@ import 'listagem-contas-view.dart';
 
 class ListagemContas extends StatefulWidget {
   ThemeData themeData;
+  String token;
+  Function(ContaV2ViewModel) onAccountChange;
 
-  ListagemContas({this.themeData});
+  ListagemContas(
+      {this.themeData, this.token, this.onAccountChange, GlobalKey key})
+      : super(key: key);
 
   @override
-  _ListagemContasState createState() => _ListagemContasState();
+  ListagemContasState createState() => ListagemContasState();
 }
 
-class _ListagemContasState extends State<ListagemContas> {
+class ListagemContasState extends State<ListagemContas> {
   ListagemContasView _view;
 
   @override
@@ -34,7 +38,10 @@ class _ListagemContasState extends State<ListagemContas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconeVoltar(context: context,),
+        backgroundColor: widget.themeData.primaryColor,
+        leading: IconeVoltar(
+          context: context,
+        ),
         centerTitle: true,
         title: new Text("CONTAS"),
       ),
@@ -85,8 +92,10 @@ class _ListagemContasState extends State<ListagemContas> {
             context,
             MaterialPageRoute(
                 builder: (context) => DetalheConta(
-                      themeData: Theme.of(context),
+                      themeData: widget.themeData,
                       contaV2ViewModel: item,
+                      token: widget.token,
+                      onAccountChange: widget.onAccountChange,
                     )));
       },
       child: new ZItemTileConta(
@@ -117,5 +126,14 @@ class _ListagemContasState extends State<ListagemContas> {
       );
     } else
       return new Container();
+  }
+
+  void updateToken(String token, ThemeData theme) {
+    if (mounted) {
+      widget.token = token;
+      widget.themeData = theme;
+    }
+
+    _view.initView();
   }
 }

@@ -11,8 +11,14 @@ import 'detalhe-conta-view.dart';
 class DetalheConta extends StatefulWidget {
   ContaV2ViewModel contaV2ViewModel;
   ThemeData themeData;
+  String token;
+  Function(ContaV2ViewModel) onAccountChange;
 
-  DetalheConta({this.contaV2ViewModel, this.themeData});
+  DetalheConta(
+      {this.contaV2ViewModel,
+      this.themeData,
+      this.token,
+      this.onAccountChange});
 
   @override
   _DetalheContaState createState() => _DetalheContaState();
@@ -31,8 +37,10 @@ class _DetalheContaState extends State<DetalheConta> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconeVoltar(context: context,),
+      appBar: AppBar(backgroundColor:  widget.themeData.primaryColor,
+        leading: IconeVoltar(
+          context: context,
+        ),
         centerTitle: true,
         title: new Text("CONTA"),
       ),
@@ -179,7 +187,7 @@ class _DetalheContaState extends State<DetalheConta> {
                   ],
                 ),
               ),
-              color: Theme.of(context).accentColor,
+              color:  widget.themeData.accentColor,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30),
               ),
@@ -193,7 +201,7 @@ class _DetalheContaState extends State<DetalheConta> {
           padding: EdgeInsets.only(top: 20.0),
           child: new Text(
             "Você está utilizando esta conta no momento.",
-            style: TextStyle(color: Color(0xff2BBAB4)),
+            style: TextStyle(color:  widget.themeData.primaryColor),
           ));
     }
   }

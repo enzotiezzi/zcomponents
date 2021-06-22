@@ -7,6 +7,7 @@ import 'package:z_components/components/listagem-contas/listagem-contas.dart';
 import 'package:z_components/components/fluxo-admin/modulos.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
+import 'package:z_components/components/utils/novo_token.dart';
 
 
 class MainComponents extends StatefulWidget {
@@ -78,7 +79,7 @@ class _MainComponentsState extends State<MainComponents> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ListagemContas(
-                          themeData: Theme.of(context),
+                          themeData: Theme.of(context),token: NovoToken.newToken,
                         )));
           }
 
