@@ -1,3 +1,11 @@
+## 0.9.36+8
+
+* Card de OS
+
+## 0.9.36+7
+
+* Retirar provider
+
 ## 0.9.36+6
 
 * Ajuste tema Contas

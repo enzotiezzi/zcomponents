@@ -150,6 +150,7 @@ class DetalheContaViewModel extends IView<DetalheConta> {
     await Future.delayed(
         new Duration(seconds: 1), () => _dialogUtils.dismiss());
     Navigator.of(state.context).pop();
+    Navigator.of(state.context).pop();
     if (state.widget.onAccountChange != null && res)
       await state.widget.onAccountChange(state.widget.contaV2ViewModel);
   }
