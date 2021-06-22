@@ -5,6 +5,7 @@ import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-aba/z-aba.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-os.dart';
+import 'package:z_components/components/z-header.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -27,6 +28,9 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            ZHeader(
+              titulo: "Minhas Ordens de Serviço",
+            ),
             Container(
               margin: EdgeInsets.only(top: 16),
               child: new ZItemTileUsuarioAdm(
@@ -39,7 +43,9 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 quantidadeApps: "3",
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             ZItemTileModuloAdm(
               nomeModulo: "Módulo",
               perfilAcesso: "Perfil",
@@ -56,18 +62,16 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             ZAba(
               zAbaViewModel: [
                 ZAbaViewModel(
-                  icon: Icon(Icons.person),
+                    icon: Icon(Icons.person),
                     onTap: () {
                       print("1");
                     },
                     titulo: "UF(Estados)"),
-
                 ZAbaViewModel(
                     onTap: () {
                       print("2");
                     },
                     titulo: "Feriados"),
-
               ],
             ),
             ZItemTileOS(
@@ -79,7 +83,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               dataSla: "12/08/2025",
               visibilidade: true,
               emAndamento: true,
-              onPressedFinalizar: (){},
+              onPressedFinalizar: () {},
             )
           ],
         ),

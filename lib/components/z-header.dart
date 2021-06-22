@@ -52,13 +52,14 @@ class ZHeaderState extends State<ZHeader> {
     switch (widget.zTipos) {
       case ZTipoHeader.isPadrao:
         return new Material(
+          elevation: 4,
           child: Container(
             decoration: BoxDecoration(
-                color: const Color(0xFFF7F7F7),
-                border: Border(
-                    bottom: BorderSide(color: Colors.grey.withOpacity(0.7)))),
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+              color: Colors.white,
+            ),
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(
+                bottom: 16.0, top: 16.0, right: 16, left: 16),
             child: new Text(
               widget.titulo,
               style: MainStyle.get(context).titleStyleText,
