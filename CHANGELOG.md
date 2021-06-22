@@ -1,3 +1,7 @@
+## 0.9.36+7
+
+* Retirar provider
+
 ## 0.9.36+6
 
 * Ajuste tema Contas
