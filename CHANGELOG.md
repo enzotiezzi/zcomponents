@@ -1,3 +1,7 @@
+## 0.9.36+7
+
+* Card de OS
+
 ## 0.9.36+6
 
 * Ajuste tema Contas
