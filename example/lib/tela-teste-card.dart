@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
-import 'package:z_components/components/modulo/detalhe-modulo.dart';
-import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
-import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-inputs/z-input-cpf.dart';
-import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
-import 'package:z_components/components/fluxo-admin/detalhe-usuario.dart';
-import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
-import 'package:z_components/view-model/app-view-model.dart';
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:z_components/components/z-aba/z-aba.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
+import 'package:z_components/components/z-item-tile-os.dart';
+import 'package:z_components/components/z-header.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -34,6 +28,9 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            ZHeader(
+              titulo: "Minhas Ordens de Serviço",
+            ),
             Container(
               margin: EdgeInsets.only(top: 16),
               child: new ZItemTileUsuarioAdm(
@@ -46,38 +43,15 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 quantidadeApps: "3",
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             ZItemTileModuloAdm(
               nomeModulo: "Módulo",
               perfilAcesso: "Perfil",
               statusVinculo: "Ativo",
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
-            ),
-            ZItemTileModuloGestao(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetalheUsuario(
-                              editarDados: false,
-                              cliqueEditar: false,
-                              appUsuarioContaViewModel:
-                                  new AppUsuarioContaViewModel(
-                                      status: "Ativo",
-                                      dataVinculo: (null != null)
-                                          ? UtilData.obterDataDDMMAAAA(
-                                              DateTime.parse(null))
-                                          : "Nunca",
-                                      dataInativacao: "",
-                                      app: new AppViewModel(nome: "Teste"),
-                                      usuario: new UsuarioAdmViewModel(
-                                          nome: "Teste")),
-                            )));
-              },
-              nomeModulo: "Quadro pessoal",
-              status: "Ativo",
-              visibilidade: true,
             ),
             ZInputCPF(
               themeData: Theme.of(context),
@@ -88,19 +62,28 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             ZAba(
               zAbaViewModel: [
                 ZAbaViewModel(
-                  icon: Icon(Icons.person),
+                    icon: Icon(Icons.person),
                     onTap: () {
                       print("1");
                     },
                     titulo: "UF(Estados)"),
-
                 ZAbaViewModel(
                     onTap: () {
                       print("2");
                     },
                     titulo: "Feriados"),
-
               ],
+            ),
+            ZItemTileOS(
+              codigo: "012192102910",
+              onde: "Zellar Vital Brasil > Banheiro",
+              oque: "Dispenser Papel",
+              porque: "Dispenser Papel",
+              prioridade: "Baixa",
+              dataSla: "12/08/2025",
+              visibilidade: true,
+              emAndamento: true,
+              onPressedFinalizar: () {},
             )
           ],
         ),

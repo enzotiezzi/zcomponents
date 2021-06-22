@@ -27,6 +27,10 @@ class ModulosView extends IView<Modulos> {
 
     contasService = new ContasService(NovoToken.newToken);
     _dialogUtils.showProgressDialog();
+    OrderByExpression order = new OrderByExpression();
+    order.propertyName = "Modulo.Nome";
+    order.orientation = "ASC";
+    searchOptions.orders = [order];
     await buscarListaModulos(searchOptions);
 
     scrollController = new ScrollController();
@@ -60,6 +64,10 @@ class ModulosView extends IView<Modulos> {
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
       if (this.paginationMetaData.hasNext) {
+        OrderByExpression order = new OrderByExpression();
+        order.propertyName = "Modulo.Nome";
+        order.orientation = "ASC";
+        searchOptions.orders = [order];
         this.searchOptions.pagination.pageNumber++;
 
         await buscarListaModulos(this.searchOptions, scrollPage: true);

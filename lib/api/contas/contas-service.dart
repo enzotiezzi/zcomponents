@@ -8,10 +8,10 @@ import 'package:z_components/settings/api-settings.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
-
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
+import 'package:z_components/view-model/perfil-viewmodel.dart';
 
 class ContasService extends Service implements IContasService {
   String _URL = "${ApiSettings.ENDPOINT_API_V1}/contas";
@@ -49,7 +49,20 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<InfoOrganizacaoViewModel> editarDadosOrganizacao(
+  Future<AppUsuarioContaViewModel> buscarDadosUsuarioConta(
+      String idUsuario) async {
+    try {
+      var url = "$_URL/usuarios/$idUsuario";
+      var response = await request(url, Service.HTTP_GET);
+
+      return AppUsuarioContaViewModel.fromJson(json.decode(response.body));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<bool> editarDadosOrganizacao(
       InfoOrganizacaoViewModel infoOrganizacaoViewModel) async {
     try {
       var url = "$_URL/contas/${infoOrganizacaoViewModel.idConta}";
@@ -57,7 +70,10 @@ class ContasService extends Service implements IContasService {
       var response = await request(url, Service.HTTP_PUT,
           body: infoOrganizacaoViewModel.toMap());
 
-      return InfoOrganizacaoViewModel.fromJson(json.decode(response.body));
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        return true;
+      } else
+        return null;
     } catch (e) {
       return null;
     }
@@ -70,6 +86,33 @@ class ContasService extends Service implements IContasService {
 
     print(appUsuarioContaViewModel.status);
     print(res.statusCode.toString());
+  }
+
+  @override
+  Future modificarAcessoAtivar(
+      UsuarioContaViewModel usuarioContaViewModel) async {
+    var res = await request(
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/ativar",
+        Service.HTTP_PUT,
+        body: usuarioContaViewModel.toMap());
+  }
+
+  @override
+  Future modificarAcessoBloquear(
+      UsuarioContaViewModel usuarioContaViewModel) async {
+    var res = await request(
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/bloquear",
+        Service.HTTP_PUT,
+        body: usuarioContaViewModel.toMap());
+  }
+
+  @override
+  Future modificarAcessoInativar(
+      UsuarioContaViewModel usuarioContaViewModel) async {
+    var res = await request(
+        "$_URL/usuarios/${usuarioContaViewModel.idUsuario}/inativar",
+        Service.HTTP_PUT,
+        body: usuarioContaViewModel.toMap());
   }
 
   @override
@@ -112,7 +155,8 @@ class ContasService extends Service implements IContasService {
     var params = searchOptions.toHttpParams();
     try {
       var res = await request(
-          "$_URL/modulos/${idModulo}/apps/$idApp/usuarios$params", Service.HTTP_GET);
+          "$_URL/modulos/${idModulo}/apps/$idApp/usuarios$params",
+          Service.HTTP_GET);
       print(res.body);
       print(res.statusCode);
       return PaginatedList<AppUsuarioContaViewModel>(
@@ -135,6 +179,84 @@ class ContasService extends Service implements IContasService {
           .mapToPaginatedList();
     } catch (e) {
       return null;
+    }
+  }
+
+  @override
+  Future<bool> editarDadosUsuario(
+      String idModulo,
+      String idApp,
+      String idUsuario,
+      AppUsuarioContaViewModel appUsuarioContaViewModel,
+      String tipo) async {
+    try {
+      print(appUsuarioContaViewModel.toMap());
+      var res = await request(
+          "$_URL/modulos/$idModulo/apps/$idApp/usuarios/$idUsuario/$tipo",
+          Service.HTTP_PUT,
+          body: appUsuarioContaViewModel.toMap());
+      print(res.body);
+      print(res.statusCode);
+      if (res.statusCode == 200 || res.statusCode == 204) {
+        return true;
+      } else
+        return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> editarDadosFluxoUsuario(
+      String idModulo,
+      String idApp,
+      String idUsuario,
+      AppUsuarioContaViewModel appUsuarioContaViewModel,
+      String tipo) async {
+    try {
+      print(appUsuarioContaViewModel.toMap());
+      var res = await request(
+          "$_URL/usuarios/$idUsuario/modulos/$idModulo/apps/$idApp/$tipo",
+          Service.HTTP_PUT,
+          body: appUsuarioContaViewModel.toMap());
+      print(res.body);
+      print(res.statusCode);
+      if (res.statusCode == 200 || res.statusCode == 204) {
+        return true;
+      } else
+        return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
+      SearchOptions searchOptions, String idApp) async {
+    var params = searchOptions.toHttpParams();
+    try {
+      var res =
+          await request("$_URL/app/$idApp/perfil$params", Service.HTTP_GET);
+      print(res.body);
+      return PaginatedList<PerfilViewModel>(
+              response: res, deserializer: PerfilViewModel.fromJson)
+          .mapToPaginatedList();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<bool> alterarConta(String idConta) async {
+    try {
+      var res = await request(
+          "$_URL/usuarios/contas/$idConta/selecionar",
+          Service.HTTP_PUT,
+        );
+      print(res.statusCode);
+      if (res.statusCode == 200 || res.statusCode == 204) {
+        return true;
+      } else
+        return false;
+    } catch (e) {
+      return false;
     }
   }
 }

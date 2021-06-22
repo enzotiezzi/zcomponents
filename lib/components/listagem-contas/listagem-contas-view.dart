@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:z_components/api/arquivo/arquivo-service.dart';
+import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/contas/contas-service.dart';
 import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 
@@ -21,6 +24,7 @@ class ListagemContasView extends IView<ListagemContas> {
   PaginationMetaData paginationMetaData = new PaginationMetaData();
   ScrollController scrollController;
   IContasService contasService;
+  IArquivoService _arquivoService;
   DialogUtils _dialogUtils;
 
   @override
@@ -33,10 +37,15 @@ class ListagemContasView extends IView<ListagemContas> {
   Future<void> initView() async {
     _dialogUtils = DialogUtils(state.context);
     _dialogUtils.showProgressDialog();
-    contasService = new ContasService(NovoToken.newToken);
+    contasService = new ContasService(state.widget.token);
+    _arquivoService = new ArquivoService(state.widget.token);
 
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);
+    OrderByExpression order = new OrderByExpression();
+    order.propertyName = "Conta.Nome";
+    order.orientation = "ASC";
+    searchOptions.orders = [order];
     await buscarListaContas(searchOptions);
     _dialogUtils.dismiss();
   }
@@ -51,6 +60,13 @@ class ListagemContasView extends IView<ListagemContas> {
       } else {
         listaContas = res.body;
       }
+      for (int i = 0; i < listaContas.length; i++) {
+        var doc = await _arquivoService.buscarAnexo(listaContas[i].idConta);
+
+        if (doc != null) {
+          listaContas[i].conta.logo = base64Decode(doc.conteudo);
+        }
+      }
       if (state.mounted) {
         state.setState(() {
           paginationMetaData = res.paginationMetaData;
@@ -63,6 +79,10 @@ class ListagemContasView extends IView<ListagemContas> {
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
       if (this.paginationMetaData.hasNext) {
+        OrderByExpression order = new OrderByExpression();
+        order.propertyName = "Conta.Nome";
+        order.orientation = "ASC";
+        searchOptions.orders = [order];
         this.searchOptions.pagination.pageNumber++;
         await buscarListaContas(this.searchOptions, scrollPage: true);
       }
@@ -74,9 +94,11 @@ class ListagemContasView extends IView<ListagemContas> {
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nomeExibicao ?? ""}";
+          appsFormatados =
+              "$appsFormatados- ${lista[i].app.nomeExibicao ?? ""}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nomeExibicao ?? ""}";
+          appsFormatados =
+              "$appsFormatados, ${lista[i].app.nomeExibicao ?? ""}";
         }
       }
     } else {

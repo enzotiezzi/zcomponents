@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:z_components/api/arquivo/arquivo-service.dart';
+import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/contas/contas-service.dart';
 import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/api/endereco/endereco-service.dart';
@@ -13,6 +15,7 @@ import 'package:z_components/api/teste-conexao/teste-conexao-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/arquivo-viewmodel.dart';
 import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 import '../../i-view.dart';
 import '../z-progress-dialog.dart';
@@ -47,6 +50,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   var textEditingControllerRua = new TextEditingController();
   var textEditingControllerNumero = new TextEditingController();
   TextEditingController complementoController = new TextEditingController();
+  IArquivoService _arquivoService;
   GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
   ITesteConexaoService _testeConexaoService;
@@ -59,6 +63,8 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   Uint8List imagemPerfil;
   InfoOrganizacaoViewModel infoOrganizacaoViewModel =
       new InfoOrganizacaoViewModel();
+
+  String idConta = "";
 
   InformacoesOrganizacaoView(State<InformacoesOrganizacao> state)
       : super(state);
@@ -75,17 +81,35 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     _testeConexaoService = new TesteConexaoService();
     _enderecoService = new EnderecoService();
     _contasService = new ContasService(NovoToken.newToken);
+    _arquivoService = new ArquivoService(NovoToken.newToken);
+
     if (state.widget.infoOrganizacaoViewModel == null &&
         !state.widget.editarDados) {
+      _dialogUtils.showProgressDialog();
       await _buscarDadosOrganizacao();
+      await _buscarImagem();
+      _dialogUtils.dismiss();
     } else {
       _popularControllers(state.widget.infoOrganizacaoViewModel);
     }
+
+    state.setState(() {});
 
     if (state.widget.editarDados) {
       Future.delayed(Duration(milliseconds: 1000), () {
         FocusScope.of(state.context).requestFocus(telefoneFocusNode);
       });
+    }
+  }
+
+  Future<void> _buscarImagem() async {
+    var doc = await _arquivoService.buscarAnexo(idConta);
+
+    if (doc != null) {
+      imagemPerfil = base64Decode(doc.conteudo);
+      if (state.mounted) {
+        state.setState(() {});
+      }
     }
   }
 
@@ -101,6 +125,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
               onColorChanged: changeColorPrimaria,
               showLabel: true,
               pickerAreaHeightPercent: 0.8,
+              enableAlpha: false,
             ),
           ),
           actions: <Widget>[
@@ -128,6 +153,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
             child: ColorPicker(
               pickerColor: pickerSecundaria,
               onColorChanged: changeColorSecundaria,
+              enableAlpha: false,
               showLabel: true,
               pickerAreaHeightPercent: 0.8,
             ),
@@ -343,6 +369,12 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     } else {
       cpfController.text = infoOrganizacaoViewModel.cpfOuCNPJ ?? "";
     }
+    if (infoOrganizacaoViewModel.corPrimaria != null) {
+      corPrimaria = fromHex(infoOrganizacaoViewModel.corPrimaria);
+      corSecundaria = fromHex(infoOrganizacaoViewModel.corSecundaria);
+    }
+    idConta = infoOrganizacaoViewModel.idConta;
+    imagemPerfil = state.widget.imagemPerfil;
   }
 
   void _atualizarViewModel(InfoOrganizacaoViewModel infoOrganizacaoViewModel) {
@@ -363,21 +395,25 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     } else {
       infoOrganizacaoViewModel.cpfOuCNPJ = cpfController.text;
     }
+    infoOrganizacaoViewModel.corPrimaria = toHex(corPrimaria);
+    infoOrganizacaoViewModel.corSecundaria = toHex(corSecundaria);
   }
 
   Future<void> editarDadosOrganizacao() async {
     _dialogUtils.showZProgressDialog("Atualizando dados", 0.4, keyProgress);
     _atualizarViewModel(state.widget.infoOrganizacaoViewModel);
     state.widget.infoOrganizacaoViewModel.idConta = state.widget.idConta;
-
+    print(state.widget.infoOrganizacaoViewModel);
     var res = await _contasService
         .editarDadosOrganizacao(state.widget.infoOrganizacaoViewModel);
+    var resImagem = await _atualizarImagem();
 
-    if (res != null) {
+    if (res != null && resImagem) {
       Future.delayed(Duration(milliseconds: 500), () {
         keyProgress.currentState.refresh(1.0, "Dados atualizados com sucesso!");
         Future.delayed(Duration(milliseconds: 1500), () {
           _dialogUtils.dismiss();
+          Navigator.of(state.context).pop(true);
         });
       });
     } else {
@@ -390,5 +426,33 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
         });
       });
     }
+  }
+
+  Future<bool> _atualizarImagem() async {
+    var base64 = base64Encode(imagemPerfil);
+    var res = await _arquivoService.atualizarImagem(new ArquivoViewModel(
+      id: idConta,
+      nome: "cover.jpg",
+      contentType: "image/jpg",
+      descricao: "logo_conta",
+      conteudo: base64,
+      tamanho: base64.length.toDouble(),
+      container: "LogoConta",
+    ));
+    if (res != null) {
+      return true;
+    } else
+      return false;
+  }
+
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  String toHex(Color color) {
+    return "#${color.red.toRadixString(16).padLeft(2, '0')}${color.green.toRadixString(16).padLeft(2, '0')}${color.blue.toRadixString(16).padLeft(2, '0')}";
   }
 }

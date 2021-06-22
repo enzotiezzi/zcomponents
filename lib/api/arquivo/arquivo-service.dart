@@ -5,7 +5,6 @@ import 'package:z_components/settings/api-settings.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
 import 'package:z_components/view-model/foto-detalhe-viewmodel.dart';
 
-
 class ArquivoService extends Service implements IArquivoService {
   static final String _URL = "${ApiSettings.ENDPOINT_API_V1}/arquivos/arquivos";
 
@@ -16,9 +15,26 @@ class ArquivoService extends Service implements IArquivoService {
     try {
       var url = "$_URL";
 
-      var response = await request(url, Service.HTTP_POST, body: arquivoViewModel.toMap());
+      var response =
+          await request(url, Service.HTTP_POST, body: arquivoViewModel.toMap());
 
       return jsonDecode(response.body);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<bool> atualizarImagem(ArquivoViewModel arquivoViewModel) async {
+    try {
+      var url = "$_URL";
+
+      var response =
+          await request(url, Service.HTTP_PUT, body: arquivoViewModel.toMap());
+
+      if (response.statusCode == 200) {
+        return true;
+      }
     } catch (e) {
       return null;
     }
@@ -35,5 +51,4 @@ class ArquivoService extends Service implements IArquivoService {
       return null;
     }
   }
-
 }

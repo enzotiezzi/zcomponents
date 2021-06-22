@@ -30,6 +30,10 @@ class UsuariosView extends IView<Usuarios> {
 
   @override
   Future<void> initView() async {
+    OrderByExpression order = new OrderByExpression();
+    order.propertyName = "Usuario.Nome";
+    order.orientation = "ASC";
+    searchOptions.orders = [order];
     _dialogUtils = new DialogUtils(state.context);
     contasService = new ContasService(NovoToken.newToken);
     _dialogUtils.showProgressDialog();
@@ -61,8 +65,11 @@ class UsuariosView extends IView<Usuarios> {
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
       if (this.paginationMetaData.hasNext) {
+        OrderByExpression order = new OrderByExpression();
+        order.propertyName = "Usuario.Nome";
+        order.orientation = "ASC";
+        searchOptions.orders = [order];
         this.searchOptions.pagination.pageNumber++;
-
         await buscarListaUsuarios(this.searchOptions, scrollPage: true);
       }
     }

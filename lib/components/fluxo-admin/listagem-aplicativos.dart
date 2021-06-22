@@ -1,15 +1,21 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
+import 'package:z_components/components/filtro/filtro-campo.dart';
+import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/listagem-aplicativos-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario-view.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/modulo/detalhe-aplicativo.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
+
+import '../z-item-tile-card-basico.dart';
 
 class ListagemAplicativos extends StatefulWidget {
   ModuloContaViewModel moduloContaViewModel;
@@ -34,6 +40,7 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         centerTitle: true,
         title: new Text("APLICATIVOS"),
       ),
@@ -76,11 +83,27 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
             children: [
               new ZItemTileModuloGestao(
                 visibilidade: true,
-                status: widget.moduloContaViewModel.status,
-                nomeModulo: widget.moduloContaViewModel.modulo.nome,
+                nomeModulo: widget.moduloContaViewModel.modulo.nome,status:  widget.moduloContaViewModel.status,
               )
             ],
           ),
+        ),
+        new ZSearchBar(
+          key: _view.keySearchBar,
+          camposFiltro: [],
+          filtroPrincipal:
+              new FiltroCampo(key: "NomeExibicao", value: "nome Exibição"),
+          onFilter: (filters) async {
+            SearchOptions searchOptions = new SearchOptions();
+            if (filters[0].value != "") {
+              searchOptions.filters = filters;
+            }
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "NomeExibicao";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
+            await _view.buscarAplicativos(searchOptions);
+          },
         ),
         new Expanded(
           child: _listarAplicativos(),
@@ -93,25 +116,27 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
     return new ListView.builder(
       padding: EdgeInsets.only(top: 20.0),
       shrinkWrap: true,
+      controller: _view.scrollController,
       itemCount: _view.listaModulos.length,
       itemBuilder: (context, index) =>
           _montarCardAplicativo(_view.listaModulos[index]),
-
     );
   }
 
   Widget _montarCardAplicativo(AppViewModel appViewModel) {
     print(appViewModel.nome);
     return Container(
-        child: new ZItemTileModuloGestao(
-      nomeModulo: appViewModel.nomeExibicao,
-      onTap: (){
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context)=>DetalheAplicativo(
-              appViewModel: appViewModel,contaViewModel: widget.moduloContaViewModel,
-            )));
+        child: new ZItemTileCardBasico(
+      nome: appViewModel.nomeExibicao,
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetalheAplicativo(
+                      appViewModel: appViewModel,
+                      contaViewModel: widget.moduloContaViewModel,
+                    )));
       },
-      status: widget.moduloContaViewModel.status,
     ));
   }
 }

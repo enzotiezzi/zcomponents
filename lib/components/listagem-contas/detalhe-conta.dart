@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import '../../z-item-tile-conta.dart';
 import 'detalhe-conta-view.dart';
@@ -8,8 +11,14 @@ import 'detalhe-conta-view.dart';
 class DetalheConta extends StatefulWidget {
   ContaV2ViewModel contaV2ViewModel;
   ThemeData themeData;
+  String token;
+  Function(ContaV2ViewModel) onAccountChange;
 
-  DetalheConta({this.contaV2ViewModel, this.themeData});
+  DetalheConta(
+      {this.contaV2ViewModel,
+      this.themeData,
+      this.token,
+      this.onAccountChange});
 
   @override
   _DetalheContaState createState() => _DetalheContaState();
@@ -28,7 +37,10 @@ class _DetalheContaState extends State<DetalheConta> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor:  widget.themeData.primaryColor,
+        leading: IconeVoltar(
+          context: context,
+        ),
         centerTitle: true,
         title: new Text("CONTA"),
       ),
@@ -58,6 +70,8 @@ class _DetalheContaState extends State<DetalheConta> {
                 new Container(
                   margin: EdgeInsets.only(top: 10.0),
                   child: new ZItemTileConta(
+                    imagemPerfil:
+                        _montarImagem(widget.contaV2ViewModel.conta.logo),
                     tamanhoLista: widget.contaV2ViewModel.appLista.length,
                     visibilidade: true,
                     dataVinculo: (widget.contaV2ViewModel.dataVinculo != null)
@@ -173,7 +187,7 @@ class _DetalheContaState extends State<DetalheConta> {
                   ],
                 ),
               ),
-              color: Theme.of(context).accentColor,
+              color:  widget.themeData.accentColor,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30),
               ),
@@ -187,8 +201,24 @@ class _DetalheContaState extends State<DetalheConta> {
           padding: EdgeInsets.only(top: 20.0),
           child: new Text(
             "Você está utilizando esta conta no momento.",
-            style: TextStyle(color: Color(0xff2BBAB4)),
+            style: TextStyle(color:  widget.themeData.primaryColor),
           ));
     }
+  }
+
+  Widget _montarImagem(Uint8List logo) {
+    if (logo != null) {
+      return new Container(
+        decoration: new BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(6.0), topLeft: Radius.circular(6.0)),
+          image: new DecorationImage(
+            image: MemoryImage(logo),
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    } else
+      return new Container();
   }
 }

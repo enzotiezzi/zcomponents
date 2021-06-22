@@ -1,3 +1,43 @@
+## 0.9.36+9
+
+* Header atualizado
+
+## 0.9.36+8
+
+* Card de OS
+
+## 0.9.36+7
+
+* Retirar provider
+
+## 0.9.36+6
+
+* Ajuste tema Contas
+
+## 0.9.36+5
+
+* Ajuste Contas
+
+## 0.9.36+4
+
+* Ajuste Contas
+
+## 0.9.36+3
+
+* Ajuste Contas
+
+## 0.9.36+2
+
+* Ajuste Contas
+
+## 0.9.36+1
+
+* Ajuste Contas
+
+## 0.9.36
+
+* Fluxo Contas
+
 ## 0.9.35+29
 
 * Meu Perfil

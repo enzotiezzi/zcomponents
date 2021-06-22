@@ -1,9 +1,13 @@
 import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:z_components/components/filtro/filter-expression.dart';
+import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/modulo/detalhe-modulo.dart';
 import 'package:z_components/components/modulo/detalhe-usuario-view.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
@@ -15,9 +19,13 @@ class DetalheUsuario extends StatefulWidget {
   final bool editarDados;
   AppUsuarioContaViewModel appUsuarioContaViewModel;
   bool cliqueEditar;
+  String idModulo;
 
   DetalheUsuario(
-      {this.editarDados, this.appUsuarioContaViewModel, this.cliqueEditar});
+      {this.editarDados,
+      this.appUsuarioContaViewModel,
+      this.cliqueEditar,
+      this.idModulo});
 
   @override
   _DetalheUsuarioState createState() => _DetalheUsuarioState();
@@ -37,6 +45,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(context: context,),
         actions: [
           PopupMenuButton<String>(
             icon: SvgPicture.asset(
@@ -128,20 +137,79 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
     );
   }
 
+  Widget _montarCampoPerfil() {
+    if (widget.editarDados) {
+      return ZCollection(
+        key: _view.keyPerfil,
+        filtroPrincipal: new FiltroCampo(key: "Nome", value: "Nome"),
+        titulo: "Perfil",
+        lista: _view.listaPerfis,
+        themeData: Theme.of(context),
+        valorPadrao: _view.perfilController.text,
+        onChange: (value) {
+          if (value != null) {
+            widget.appUsuarioContaViewModel.perfil.nome = value.titulo;
+            widget.appUsuarioContaViewModel.perfil.idApp =
+                value.chaveSecundaria;
+            widget.appUsuarioContaViewModel.perfil.idPerfil = value.chave;
+            widget.appUsuarioContaViewModel.idPerfil = value.chave;
+            setState(() {
+              _view.alterouPerfil = true;
+            });
+          }
+        },
+        onFilter: (filter) async {
+          SearchOptions searchOptions = new SearchOptions();
+          OrderByExpression order = new OrderByExpression();
+          order.propertyName = "Nome";
+          order.orientation = "ASC";
+          searchOptions.orders = [order];
+          if (filter[0].value.isNotEmpty) {
+            searchOptions.filters = filter;
+          }
+          var lista = await _view.buscarPerfis(searchOptions);
+          setState(() {
+            _view.keyPerfil.currentState.atualizarLista(lista);
+          });
+        },
+        onScroll: (filter, listaAnterior) async {
+          if (_view.paginationMetaData.hasNext) {
+            SearchOptions searchOptions = new SearchOptions();
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Nome";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
+            if (filter[0].value.isNotEmpty) {
+              searchOptions.filters = filter;
+            }
+            searchOptions.pagination.pageNumber =
+                _view.paginationMetaData.currentPage++;
+            var lista = await _view.buscarPerfis(searchOptions);
+            lista = listaAnterior + lista;
+            setState(() {
+              _view.keyPerfil.currentState.atualizarLista(lista);
+            });
+          }
+        },
+      );
+    } else
+      return ZInputGeneric(
+        themeData: Theme.of(context),
+        titulo: "Perfil",
+        inputPadraoFocus: _view.perfilFocus,
+        controllerInputPadrao: _view.perfilController,
+        tipoTeclado: TextInputType.text,
+        proximoFocus: _view.emailFocus,
+        hintText: _view.hintNomePerfil,
+        enabled: false,
+      );
+  }
+
   Widget _buildCampos() {
     return new ListView(
       shrinkWrap: true,
       children: [
-        ZInputGeneric(
-          themeData: Theme.of(context),
-          titulo: "Perfil",
-          inputPadraoFocus: _view.perfilFocus,
-          controllerInputPadrao: _view.perfilController,
-          tipoTeclado: TextInputType.text,
-          proximoFocus: _view.emailFocus,
-          hintText: _view.hintNomePerfil,
-          enabled: retornarEnabled(widget.editarDados),
-        ),
+        _montarCampoPerfil(),
         new Divider(
           height: 1.0,
         ),
@@ -160,7 +228,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
           titulo: "Email",
           themeData: Theme.of(context),
           inputPadraoFocus: _view.emailFocus,
-          enabled: retornarEnabled(widget.editarDados),
+          enabled: false,
           controllerInputPadrao: _view.emailController,
         ),
         new Divider(
@@ -173,18 +241,8 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
             inputPadraoFocus: _view.telefoneFocus,
             hintText: _view.hintDataVinculo,
             controllerInputPadrao: _view.telefoneController),
-        //  exibirBotaoModificar()
       ],
     );
-  }
-
-  bool retornarEnabled(bool editar) {
-    print(editar);
-    if (editar == true) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   Widget exibirBotaoConfirmar() {
@@ -232,19 +290,25 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
     }
   }
 
-  _escolhaMenuItem(String itemEscolhido) {
+  _escolhaMenuItem(String itemEscolhido) async {
     if (itemEscolhido.contains("Editar")) {
-      return Navigator.push(
+      var res = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => DetalheUsuario(
               editarDados: true,
               cliqueEditar: true,
               appUsuarioContaViewModel: widget.appUsuarioContaViewModel,
+              idModulo: widget.idModulo,
             ),
           ));
+      if (res != null) {
+        widget.appUsuarioContaViewModel = res;
+        _view.preencherDados();
+        setState(() {});
+      }
     } else {
-      return print("Modificou");
+      _view.showDialogAlterarAcesso();
     }
   }
 
@@ -255,10 +319,17 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
         color: Theme.of(context).primaryColor,
       );
     } else {
-      return Icon(
-        Icons.block_flipped,
-        color: Colors.red,
-      );
+      if (widget.appUsuarioContaViewModel.status == "Ativo") {
+        return Icon(
+          Icons.block_flipped,
+          color: Colors.red,
+        );
+      } else {
+        return Icon(
+          Icons.check_circle,
+          color: Theme.of(context).primaryColor,
+        );
+      }
     }
   }
 }

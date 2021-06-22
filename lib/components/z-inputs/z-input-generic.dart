@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_shifter/mask_shifter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/styles/main-style.dart';
+
 
 class ZInputGeneric extends StatefulWidget {
   final Key key;
@@ -85,12 +83,16 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             obscureText: widget.obscureText,
                             controller: widget.controllerInputPadrao,
                             cursorColor: Color(0xFF801F92),
-                            style: widget.themeData.textTheme.bodyText1,
+                            style: widget.themeData.textTheme.bodyText1
+                                .copyWith(
+                                    color: corTexto(
+                                        widget.themeData, widget.enabled)),
                             inputFormatters: [
                               MaskTextInputFormatter(
                                 mask: widget.textMask,
                               ),
-                              LengthLimitingTextInputFormatter(widget.maxLength??1000),
+                              LengthLimitingTextInputFormatter(
+                                  widget.maxLength ?? 1000),
                             ],
                             onSubmitted: (text) {
                               widget.inputPadraoFocus.unfocus();
@@ -115,7 +117,6 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             onChanged: (text) {
                               if (widget.onChange != null)
                                 widget.onChange(text);
-
                             },
                           )
                         : new TextField(
@@ -127,7 +128,10 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             obscureText: widget.obscureText,
                             controller: widget.controllerInputPadrao,
                             cursorColor: Color(0xFF801F92),
-                            style: widget.themeData.textTheme.bodyText1,
+                            style: widget.themeData.textTheme.bodyText1
+                                .copyWith(
+                                    color: corTexto(
+                                        widget.themeData, widget.enabled)),
                             maxLengthEnforcement: MaxLengthEnforcement.none,
                             onSubmitted: (text) {
                               widget.inputPadraoFocus.unfocus();
@@ -135,9 +139,11 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
                               }
-                            },  inputFormatters: [
-                      LengthLimitingTextInputFormatter(widget.maxLength??1000),
-                    ],
+                            },
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(
+                                  widget.maxLength ?? 1000),
+                            ],
                             decoration: InputDecoration(
                               hintText: widget.hintText,
                               hintStyle: widget.themeData.textTheme.bodyText1
@@ -164,6 +170,13 @@ class _ZInputGenericState extends State<ZInputGeneric> {
         ),
       ),
     );
+  }
+
+  Color corTexto(ThemeData themeData, bool enabled) {
+    if (enabled) {
+      return themeData.textTheme.bodyText1.color;
+    } else
+      return Colors.grey;
   }
 
   Widget _returnRequiredField() {

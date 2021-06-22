@@ -63,7 +63,7 @@ class Paramenters {
     if (width <= xs) {
       fontSize = 15;
     } else if (width > xs && width <= x) {
-      fontSize = 18;
+      fontSize = 16;
     }
     return fontSize;
   }

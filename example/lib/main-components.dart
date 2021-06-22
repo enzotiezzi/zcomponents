@@ -5,6 +5,10 @@ import 'package:z_components_example/tela-teste-card.dart';
 import 'package:z_components/components/fluxo-admin/usuarios.dart';
 import 'package:z_components/components/listagem-contas/listagem-contas.dart';
 import 'package:z_components/components/fluxo-admin/modulos.dart';
+import 'package:z_components/components/z-user-info/z-user-info.dart';
+import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
+import 'package:z_components/components/utils/novo_token.dart';
+
 
 class MainComponents extends StatefulWidget {
   @override
@@ -39,8 +43,8 @@ class _MainComponentsState extends State<MainComponents> {
         right: 10.0,
       ),
       child: new ZPerfilItem(
-        numeroQuadrados: 4,
-        listaIcones: [Icons.add, Icons.add, Icons.add, Icons.add],
+        numeroQuadrados: 5,
+        listaIcones: [Icons.add, Icons.add, Icons.add, Icons.add, Icons.add],
         listaOnTap: [
           () {
             Navigator.push(
@@ -75,11 +79,20 @@ class _MainComponentsState extends State<MainComponents> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ListagemContas(
-                          themeData: Theme.of(context),
+                          themeData: Theme.of(context),token: NovoToken.newToken,
                         )));
           }
+
+          ,(){
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ZUserInfo(userInfo: new BuscarInfo(),
+                    )));
+          }
         ],
-        listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas"],
+        listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas", "Meu Perfil"],
       ),
     );
   }

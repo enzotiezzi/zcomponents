@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:z_components/components/informacoes-organizacao/informacoes-organizacao-view.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-inputs/z-input-cep.dart';
 import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
@@ -19,13 +22,15 @@ class InformacoesOrganizacao extends StatefulWidget {
   String textoFoto;
   InfoOrganizacaoViewModel infoOrganizacaoViewModel;
   String idConta;
+  Uint8List imagemPerfil;
 
   InformacoesOrganizacao(
       {this.themeData,
       this.textoFoto,
       this.editarDados,
       this.infoOrganizacaoViewModel,
-      this.idConta});
+      this.idConta,
+      this.imagemPerfil});
 
   @override
   _InformacoesOrganizacaoState createState() => _InformacoesOrganizacaoState();
@@ -45,6 +50,9 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(
+          context: context,
+        ),
         centerTitle: true,
         title: new Text("Info. da Organização"),
         actions: [_montarBotaoEditar()],
@@ -66,12 +74,12 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
           padding: EdgeInsets.all(4.0),
           child: Icon(
             Icons.edit,
-            size: 26,
-            color: Theme.of(context).accentColor,
+            size: 24,
+            color: Color(0XFF2BBAB4),
           ),
         ),
-        onTap: () {
-          Navigator.push(
+        onTap: () async {
+          var res = await Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => InformacoesOrganizacao(
@@ -81,7 +89,12 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
                         idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
                         infoOrganizacaoViewModel:
                             _view.infoOrganizacaoViewModel,
+                        imagemPerfil: _view.imagemPerfil,
                       )));
+
+          if (res != null) {
+            await _view.initView();
+          }
         },
       );
     }
@@ -135,6 +148,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             celularFocus: _view.telefoneFocusNode,
             controllerCelular: _view.telefoneController,
             enabled: widget.editarDados,
+            validacao: (bool) {},
           ),
           new Divider(
             height: 1.0,
@@ -144,6 +158,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             emailFocus: _view.emailFocusNode,
             controllerEmail: _view.emailController,
             enabled: widget.editarDados,
+            validacao: (bool) {},
           ),
           new Divider(
             height: 1.0,
@@ -165,6 +180,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               controllerCep: _view.textEditingControllerCEP,
               cepFocus: _view.focusNodeCEP,
               onChange: _view.onCEPChange,
+              validacao: (bool) {},
             ),
           ),
           new Divider(
@@ -244,9 +260,9 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             height: 1.0,
           ),
           _buildRowCorPrimaria(),
-          _buildTextoCorPrimaria(),
+          // _buildTextoCorPrimaria(),
           _buildRowCorSecundaria(),
-          _buildTextoCorSecundaria(),
+          //   _buildTextoCorSecundaria(),
           _exibirBotao()
         ],
       ),
@@ -262,28 +278,18 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Container(
-                    width: 100.0,
-                    height: 100.0,
-                    decoration: new BoxDecoration(
-                      color: const Color(0xff7c94b6),
-                      image: new DecorationImage(
-                        image: _buildImagemPerfil(),
-                        fit: BoxFit.cover,
+                  new Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      _buildImagemPerfil(),
+                      new Text(
+                        widget.textoFoto,
+                        style: TextStyle(color: _corTextoFoto()),
                       ),
-                      shape: BoxShape.circle,
-                      border: new Border.all(
-                        color: MainStyle.get(context).primaryColor,
-                        width: 4.0,
-                      ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[new Text(widget.textoFoto)],
-              )
             ],
           )),
       onTap: _view.escolherMetodoSelecionarFoto,
@@ -464,10 +470,46 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
     );
   }
 
-  ImageProvider _buildImagemPerfil() {
-    if (_view.imagemPerfil != null) return MemoryImage(_view.imagemPerfil);
+  Widget _buildImagemPerfil() {
+    if (_view.imagemPerfil != null)
+      return new Container(
+        width: 150.0,
+        height: 100.0,
+        decoration: new BoxDecoration(
+            color: Colors.white,
+            border: new Border.all(
+              color: Colors.grey,
+              width: 1.0,
+            ),
+            image: new DecorationImage(
+              image: MemoryImage(_view.imagemPerfil),
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(6.0)),
+      );
+    else
+      return new Container(
+        width: 150.0,
+        height: 100.0,
+        decoration: new BoxDecoration(
+            color: Colors.white,
+            border: new Border.all(
+              color: Colors.grey,
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(6.0)),
+        child: new Icon(
+          Icons.camera_alt,
+          color: Color(0xff2BBAB4),
+          size: 40,
+        ),
+      );
+  }
 
-    return NetworkImage(
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+  Color _corTextoFoto() {
+    if (_view.imagemPerfil != null) {
+      return Colors.white;
+    } else
+      return Colors.black;
   }
 }

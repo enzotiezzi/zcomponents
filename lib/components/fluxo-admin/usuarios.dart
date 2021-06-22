@@ -3,6 +3,7 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/fluxo-admin/usuarios-view.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
@@ -32,8 +33,10 @@ class _UsuariosState extends State<Usuarios> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 4,
+        leading: IconeVoltar(context: context,),
         centerTitle: true,
-        title: new Text("USUÁRIO"),
+        title: new Text("USUÁRIOS"),
       ),
       body: _buildBody(),
     );
@@ -49,6 +52,10 @@ class _UsuariosState extends State<Usuarios> {
               new FiltroCampo(key: "Usuario.Nome", value: "nome Usuario"),
           onFilter: (filters) async {
             SearchOptions searchOptions = new SearchOptions();
+            OrderByExpression order = new OrderByExpression();
+            order.propertyName = "Usuario.Nome";
+            order.orientation = "ASC";
+            searchOptions.orders = [order];
             if (filters[0].value != "") {
               searchOptions.filters = filters;
             }
@@ -99,9 +106,9 @@ class _UsuariosState extends State<Usuarios> {
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nome}";
+          appsFormatados = "$appsFormatados- ${lista[i].app.nomeExibicao}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nome}";
+          appsFormatados = "$appsFormatados, ${lista[i].app.nomeExibicao}";
         }
       }
     } else {

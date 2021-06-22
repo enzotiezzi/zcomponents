@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:z_components/api/conta/conta-service.dart';
-import 'package:z_components/api/conta/i-conta-service.dart';
+import 'package:z_components/api/contas/contas-service.dart';
+import 'package:z_components/api/contas/i-contas-service.dart';
 import 'package:z_components/components/listagem-contas/detalhe-conta.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
-import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
-
 import '../../i-view.dart';
 import '../z-alert-dialog.dart';
 import '../z-progress-dialog.dart';
 
 class DetalheContaViewModel extends IView<DetalheConta> {
   DetalheContaViewModel(State<DetalheConta> state) : super(state);
-  IContaServce _contaService;
+  IContasService _contaService;
 
   DialogUtils _dialogUtils;
 
@@ -30,7 +28,7 @@ class DetalheContaViewModel extends IView<DetalheConta> {
 
   @override
   Future<void> initView() {
-    _contaService = new ContaService(NovoToken.newToken);
+    _contaService = new ContasService(state.widget.token);
     _dialogUtils = new DialogUtils(state.context);
   }
 
@@ -113,8 +111,6 @@ class DetalheContaViewModel extends IView<DetalheConta> {
                             splashColor: const Color(0xffe6e6e6),
                             onTap: () async {
                               await _trocarConta();
-
-                              Navigator.pop(context);
                             },
                             child: new Container(
                               padding: const EdgeInsets.all(12),
@@ -138,7 +134,8 @@ class DetalheContaViewModel extends IView<DetalheConta> {
   Future _trocarConta() async {
     _dialogUtils.showZProgressDialog("Trocando de conta", 0.5, _globalKey);
 
-    var res = await _contaService.trocarContaAtiva(state.widget.contaV2ViewModel.conta.idConta);
+    var res = await _contaService
+        .alterarConta(state.widget.contaV2ViewModel.conta.idConta);
 
     if (res) {
       _globalKey.currentState
@@ -152,5 +149,8 @@ class DetalheContaViewModel extends IView<DetalheConta> {
 
     await Future.delayed(
         new Duration(seconds: 1), () => _dialogUtils.dismiss());
+    Navigator.of(state.context).pop();
+    if (state.widget.onAccountChange != null && res)
+      await state.widget.onAccountChange(state.widget.contaV2ViewModel);
   }
 }
