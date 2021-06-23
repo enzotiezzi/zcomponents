@@ -1,3 +1,7 @@
+## 0.9.36+10
+
+* Ajuste no card OS
+
 ## 0.9.36+9
 
 * Header atualizado

@@ -81,7 +81,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               porque: "Dispenser Papel",
               prioridade: "Baixa",
               dataSla: "12/08/2025",
-              visibilidade: true,
+              visibilidade: false,
               emAndamento: true,
               onPressedFinalizar: () {},
             )
