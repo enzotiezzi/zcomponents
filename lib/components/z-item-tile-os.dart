@@ -38,7 +38,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       child: new IntrinsicHeight(
         child: new Container(
           margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),
-          child: new Material(
+          child: Material(
             elevation: 2,
             color: Colors.white,
             shape: RoundedRectangleBorder(
@@ -46,13 +46,12 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
             child: new Container(
               padding: const EdgeInsets.only(top: 8,bottom: 8,left: 7,right: 7),
               alignment: Alignment.centerLeft,
-
-              child: new Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  new Expanded(
-                    flex: 20,
-                    child: new Column(
+                  Expanded(
+                    flex: 25,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         new Row(
@@ -61,26 +60,26 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Container(
                                 margin: EdgeInsets.only(
                                     left: 9.0, bottom: 6.0, top: 6.0),
-                                child: retornaCodigo(widget.codigo),
-                              ),
+                                child: retornaCodigo(widget.codigo)
+                            ),
                             new Row(
-                                children: [
-                                  Container(
-                                    child: Text("Prioridade: "),
-                                  ),
-                                  Container(
-                                    child: Text("Baixa"),
-                                  )
-                                ],
-                              ),
+                              children: [
+                                new Container(
+                                  child: Text("Prioridade: "),
+                                ),
+                                new Container(
+                                  child: retornaPrioridade(widget.prioridade),
+                                )
+                              ],
+                            ),
                           ],
                         ),
 
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              flex: 8,
+                            new Expanded(
+                              flex: 20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -89,20 +88,22 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                                   )
                               ),
                             ),
-                            Expanded(
+                            new Expanded(
                               flex: 25,
                               child: new Container(
-                                child: retornaOnde(widget.onde),
+                                margin: EdgeInsets.only(left: 4.0,),
+                                child: retornaOnde(widget.oque),
                               ),
                             ),
+                            espacoAdicional()
                           ],
                         ),
 
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              flex: 12,
+                            new Expanded(
+                              flex: 20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -111,28 +112,22 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                                   )
                               ),
                             ),
-                            Expanded(
-                              flex: 20,
+                            new Expanded(
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaOque(widget.oque),
                               ),
                             ),
-                            Expanded(
-                              flex: 20,
-                              child: Container(
-                                height: 20,
-                                child: retornaBotao()
-                              ),
-                            ),
+                            retornaBotao()
                           ],
                         ),
 
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              flex: 12,
+                            new Expanded(
+                              flex:20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -141,22 +136,22 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                                   )
                               ),
                             ),
-                            Expanded(
-                              flex: 40,
+                            new Expanded(
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaPorque(widget.porque),
                               ),
                             ),
+                            espacoAdicional()
                           ],
                         ),
-
 
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              flex: 12,
+                            new Expanded(
+                              flex:20,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -165,35 +160,24 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                                   )
                               ),
                             ),
-                            Expanded(
-                              flex: 40,
+                            new Expanded(
+                              flex: 25,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaDataSla(widget.dataSla),
                               ),
                             ),
+                            espacoAdicional()
                           ],
                         ),
+
+
+
                       ],
                     ),
                   ),
 
-
-
-                  Expanded(
-                    flex: 3,
-                    child: new Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 15),
-                            child: retornaArrow(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                  retornaArrow()
                 ],
               ),
             ),
@@ -209,7 +193,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       return Text("Motivo não encontrado");
     }else{
       return Text(
-        widget.oque,
+        widget.oque,overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600
@@ -225,8 +209,8 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
         widget.onde,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600
+            fontSize: 12,
+            fontWeight: FontWeight.w600
         ),
       );
     }
@@ -237,6 +221,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }else{
       return Text(
         widget.porque,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600
@@ -250,9 +235,10 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }else{
       return new Text(
         widget.dataSla,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600
+            fontSize: 12,
+            fontWeight: FontWeight.w600
         ),
       );
     }
@@ -262,7 +248,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       return new Text("Código não identificado");
     }else{
       return Text(
-        widget.codigo,
+        widget.codigo, overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12.0,
             color: Color(0xFF000000),
@@ -276,7 +262,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       return new Text("Não têm");
     }else{
       return Text(
-        widget.prioridade,
+        widget.prioridade,overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12.0,
             color: Color(0xFF000000),
@@ -287,9 +273,28 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
   Widget retornaBotao(){
     if(widget.emAndamento){
-      return RaisedButton(
-        child: Text("Finalizar"),
-        onPressed: widget.onPressedFinalizar,
+      return  Expanded(
+        flex: 30,
+        child: Container(
+            margin: EdgeInsets.only(left: 4.0,),
+            height: 20,
+            child: RaisedButton(
+              child: Text("Finalizar",style: TextStyle(color: Colors.white),),
+              onPressed: widget.onPressedFinalizar,
+              color: Theme.of(context).primaryColor,
+            )
+        ),
+      );
+
+    }else{
+      return Container();
+    }
+  }
+  Widget espacoAdicional(){
+    if(widget.emAndamento){
+      return Expanded(
+        flex: 30,
+        child: Container(),
       );
     }else{
       return Container();
@@ -297,9 +302,20 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
   Widget retornaArrow(){
     if(widget.visibilidade){
-      return Container();
+      return Expanded(flex:5,child: Container());
     }else{
-      return Icon(Icons.arrow_forward_ios_outlined);
+      return Expanded(
+        flex: 5,
+        child: Container(
+          margin: EdgeInsets.only(top: 5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.arrow_forward_ios_outlined),
+            ],
+          ),
+        ),
+      );
     }
   }
 }
