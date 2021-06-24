@@ -77,12 +77,12 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             ZItemTileOS(
               codigo: "012192102910",
               onde: "Zellar Vital Brasil > Banheiro",
-              oque: "Dispenser Papel",
+              oque: "Zellar Vital Brasil > Banheiro",
               porque: "Dispenser Papel",
               prioridade: "Baixa",
               dataSla: "12/08/2025",
               visibilidade: false,
-              emAndamento: true,
+              emAndamento: false,
               onPressedFinalizar: () {},
             )
           ],
