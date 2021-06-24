@@ -31,6 +31,9 @@ class ZItemTileOS extends StatefulWidget {
 }
 
 class _ZItemTileOSState extends State<ZItemTileOS> {
+
+  int flexAndamento=0;
+  double flex2Andamento=0.0;
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
@@ -79,7 +82,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex: 20,
+                              flex: 15,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -89,13 +92,13 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: 42,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaOnde(widget.oque),
                               ),
                             ),
-                            espacoAdicional()
+                            //espacoAdicional()
                           ],
                         ),
 
@@ -103,7 +106,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex: 20,
+                              flex: 15,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -113,7 +116,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: flexEmandamento(),
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaOque(widget.oque),
@@ -127,7 +130,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex:20,
+                              flex:15,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -137,13 +140,13 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: 42,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaPorque(widget.porque),
                               ),
                             ),
-                            espacoAdicional()
+                            //espacoAdicional()
                           ],
                         ),
 
@@ -151,7 +154,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex:20,
+                              flex:15,
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -161,13 +164,13 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: 42,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaDataSla(widget.dataSla),
                               ),
                             ),
-                            espacoAdicional()
+                            //espacoAdicional()
                           ],
                         ),
 
@@ -273,21 +276,29 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
   Widget retornaBotao(){
     if(widget.emAndamento){
-      return  Expanded(
-        flex: 30,
-        child: Container(
-            margin: EdgeInsets.only(left: 4.0,),
-            height: 20,
-            child: RaisedButton(
-              child: Text("Finalizar",style: TextStyle(color: Colors.white),),
+      return  Container(
+          margin: EdgeInsets.only(left: 4.0,),
+          padding: EdgeInsets.only(bottom: 20),
+          height: 20,
+          child: Container(
+            child: IconButton(
+              //iconSize: 40,
+              icon: Icon(Icons.stop_circle_outlined,size: 40,),
               onPressed: widget.onPressedFinalizar,
-              color: Theme.of(context).primaryColor,
-            )
-        ),
+              color: Colors.red,
+            ),
+          )
       );
 
     }else{
       return Container();
+    }
+  }
+  int flexEmandamento(){
+    if(widget.emAndamento){
+        return 32;
+    }else{
+      return  42;
     }
   }
   Widget espacoAdicional(){
@@ -307,7 +318,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       return Expanded(
         flex: 5,
         child: Container(
-          margin: EdgeInsets.only(top: 5),
+          margin: EdgeInsets.only(top: 35),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
