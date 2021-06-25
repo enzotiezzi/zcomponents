@@ -1,3 +1,11 @@
+## 0.9.37+2
+
+* Atualizacao Injector
+
+## 0.9.37+1
+
+* Atualizacao Injector
+
 ## 0.9.37
 
 * Atualizacao Injector
