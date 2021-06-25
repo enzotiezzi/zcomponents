@@ -3,10 +3,10 @@ import 'package:injector/injector.dart';
 class ZInjector {
   static void registerDependency<T>(Object instance) {
     if (!Injector.appInstance.exists<T>())
-      Injector.appInstance.registerDependency(() => instance, dependencyName: T.runtimeType.toString());
+      Injector.appInstance.registerDependency<T>(() => instance);
   }
 
   static T getDependency<T>() {
-    return Injector.appInstance.get(dependencyName: T.runtimeType.toString());
+    return Injector.appInstance.get<T>();
   }
 }
