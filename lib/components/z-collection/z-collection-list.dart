@@ -126,7 +126,7 @@ class ZCollectionListState extends State<ZCollectionList> {
                               widget.onChange([
                                 new FilterExpression(
                                     propertyName: widget.filtroPrincipal.key,
-                                    operatorBetween: "OrElse",
+                                    operatorBetween: "AndAlso",
                                     operator: "Contains",
                                     value: text)
                               ]);
@@ -240,7 +240,8 @@ class ZCollectionListState extends State<ZCollectionList> {
         widget.onScroll([
           new FilterExpression(
               propertyName: widget.filtroPrincipal.key,
-              operatorBetween: "OrElse",
+              operatorBetween: "AndAlso"
+                  "",
               operator: "Contains",
               value: textoBusca)
         ], _listaFiltro);
