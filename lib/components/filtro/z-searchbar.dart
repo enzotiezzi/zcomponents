@@ -62,7 +62,7 @@ class ZSearchBarState extends State<ZSearchBar> {
                             widget.onFilter([
                               new FilterExpression(
                                   propertyName: widget.filtroPrincipal.key,
-                                  operatorBetween: "OrElse",
+                                  operatorBetween: "AndAlso",
                                   operator: "Contains",
                                   value: value)
                             ]);
@@ -158,7 +158,7 @@ class _ZFilterState extends State<_ZFilter> {
                 filters.add(new FilterExpression(
                     value: value,
                     operator: "Contains",
-                    operatorBetween: "OrElse",
+                    operatorBetween: "AndAlso",
                     propertyName: key));
             });
       },
