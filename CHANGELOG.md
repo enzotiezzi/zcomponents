@@ -1,3 +1,19 @@
+## 0.9.37+3
+
+* Alteracao busca
+
+## 0.9.37+2
+
+* Atualizacao Injector
+
+## 0.9.37+1
+
+* Atualizacao Injector
+
+## 0.9.37
+
+* Atualizacao Injector
+
 ## 0.9.36+10
 
 * Ajuste no card OS

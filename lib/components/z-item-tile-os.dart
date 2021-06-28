@@ -95,7 +95,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               flex: 42,
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
-                                child: retornaOnde(widget.oque),
+                                child: retornaOnde(widget.onde),
                               ),
                             ),
                             //espacoAdicional()
