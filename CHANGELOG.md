@@ -1,3 +1,7 @@
+## 0.9.37+4
+
+* Icone no card de OS
+
 ## 0.9.37+3
 
 * Alteracao busca
