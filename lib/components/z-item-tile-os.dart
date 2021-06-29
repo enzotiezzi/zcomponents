@@ -22,7 +22,7 @@ class ZItemTileOS extends StatefulWidget {
     this.dataSla,
     this.visibilidade = false,
     this.emAndamento =false,
-    this.onPressedFinalizar = null,
+    this.onPressedFinalizar,
     this.onTap
   });
 
@@ -31,6 +31,7 @@ class ZItemTileOS extends StatefulWidget {
 }
 
 class _ZItemTileOSState extends State<ZItemTileOS> {
+
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
@@ -79,7 +80,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex: 20,
+                              flex: flexCampoDescAndamento(),
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -89,13 +90,13 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: flexCampoConteudoAndamento(),
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
-                                child: retornaOnde(widget.oque),
+                                child: retornaOnde(widget.onde),
                               ),
                             ),
-                            espacoAdicional()
+                            //espacoAdicional()
                           ],
                         ),
 
@@ -103,7 +104,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex: 20,
+                              flex: flexCampoDescAndamento(),
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -113,7 +114,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: flexEmAndamento(),
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaOque(widget.oque),
@@ -127,7 +128,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex:20,
+                              flex:flexCampoDescAndamento(),
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -137,13 +138,13 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: flexCampoConteudoAndamento(),
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaPorque(widget.porque),
                               ),
                             ),
-                            espacoAdicional()
+                            //espacoAdicional()
                           ],
                         ),
 
@@ -151,7 +152,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             new Expanded(
-                              flex:20,
+                              flex:flexCampoDescAndamento(),
                               child: new Container(
                                   margin: EdgeInsets.only(
                                       left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
@@ -161,13 +162,13 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                               ),
                             ),
                             new Expanded(
-                              flex: 25,
+                              flex: flexCampoConteudoAndamento(),
                               child: new Container(
                                 margin: EdgeInsets.only(left: 4.0,),
                                 child: retornaDataSla(widget.dataSla),
                               ),
                             ),
-                            espacoAdicional()
+                            //espacoAdicional()
                           ],
                         ),
 
@@ -273,16 +274,17 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
   Widget retornaBotao(){
     if(widget.emAndamento){
-      return  Expanded(
-        flex: 30,
-        child: Container(
-            margin: EdgeInsets.only(left: 4.0,),
-            height: 20,
-            child: RaisedButton(
-              child: Text("Finalizar",style: TextStyle(color: Colors.white),),
-              onPressed: widget.onPressedFinalizar,
-              color: Theme.of(context).primaryColor,
-            )
+      return  GestureDetector(
+        onTap: widget.onPressedFinalizar,
+        child: Material(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),),
+          elevation: 4,
+          child: Container(
+            padding: const EdgeInsets.all(2.0),
+            child: Icon(Icons.check,size: 40,
+              color: Theme.of(context).primaryColor,),
+          ),
         ),
       );
 
@@ -290,6 +292,32 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       return Container();
     }
   }
+
+
+  int flexEmAndamento(){
+    if(widget.emAndamento){
+        return 35;
+    }else{
+      return  25;
+    }
+  }
+
+  int flexCampoDescAndamento(){
+    if(widget.emAndamento){
+      return 15;
+    }else{
+      return  20;
+    }
+  }
+
+  int flexCampoConteudoAndamento(){
+    if(widget.emAndamento){
+      return 42;
+    }else{
+      return  25;
+    }
+  }
+
   Widget espacoAdicional(){
     if(widget.emAndamento){
       return Expanded(
@@ -307,7 +335,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       return Expanded(
         flex: 5,
         child: Container(
-          margin: EdgeInsets.only(top: 5),
+          //margin: EdgeInsets.only(top: 35),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

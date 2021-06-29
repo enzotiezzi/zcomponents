@@ -53,6 +53,22 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               dataExpiracao: "20/05/2020",
               dataVinculo: "01/09/2018",
             ),
+            ZItemTileOS(
+              codigo: "012192102910",
+              onde: "Zellar Vital Brasil > Banheiro",
+              oque: "Zellar Vital Brasil > Banheiro",
+              porque: "Dispenser Papel",
+              prioridade: "Baixa",
+              dataSla: "12/08/2025",
+              visibilidade: false,
+              emAndamento: true,
+              onPressedFinalizar: () {
+                print("tap no icone");
+              },
+              onTap: (){
+                print("tap no card");
+              },
+            ),
             ZInputCPF(
               themeData: Theme.of(context),
               cpfFocus: new FocusNode(),
@@ -74,17 +90,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                     titulo: "Feriados"),
               ],
             ),
-            ZItemTileOS(
-              codigo: "012192102910",
-              onde: "Zellar Vital Brasil > Banheiro",
-              oque: "Dispenser Papel",
-              porque: "Dispenser Papel",
-              prioridade: "Baixa",
-              dataSla: "12/08/2025",
-              visibilidade: false,
-              emAndamento: true,
-              onPressedFinalizar: () {},
-            )
+
           ],
         ),
       ),
