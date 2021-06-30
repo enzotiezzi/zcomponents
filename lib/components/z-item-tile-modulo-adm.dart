@@ -106,7 +106,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.arrow_forward_ios_outlined),
+            Icon(Icons.arrow_forward_ios_outlined, color:Theme.of(context).primaryColor,),
           ],
         ),
       );
