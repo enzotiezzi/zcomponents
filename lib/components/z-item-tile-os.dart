@@ -38,14 +38,14 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       onTap: widget.onTap,
       child: new IntrinsicHeight(
         child: new Container(
-          margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),
+          margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 5),
           child: Material(
             elevation: 2,
             color: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6.0),),
             child: new Container(
-              padding: const EdgeInsets.only(top: 8,bottom: 8,left: 7,right: 7),
+              padding: const EdgeInsets.only(top: 8,bottom: 8,left: 7,right: 5),
               alignment: Alignment.centerLeft,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +60,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                           children: [
                             new Container(
                                 margin: EdgeInsets.only(
-                                    left: 9.0, bottom: 6.0, top: 6.0),
+                                    left: 9.0, bottom: 6.0, top: 6),
                                 child: retornaCodigo(widget.codigo)
                             ),
                             new Row(
@@ -82,8 +82,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: EdgeInsets.only(
-                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  margin: marginOnde(),
                                   child: new Text(
                                       "Onde:"
                                   )
@@ -92,7 +91,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoConteudoAndamento(),
                               child: new Container(
-                                margin: EdgeInsets.only(left: 4.0,),
+                                margin: EdgeInsets.only(left: 2,),
                                 child: retornaOnde(widget.onde),
                               ),
                             ),
@@ -106,8 +105,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: EdgeInsets.only(
-                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  margin: marginOque(),
                                   child: new Text(
                                       "O que:"
                                   )
@@ -116,7 +114,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexEmAndamento(),
                               child: new Container(
-                                margin: EdgeInsets.only(left: 4.0,),
+                                margin: EdgeInsets.only(left: 3,),
                                 child: retornaOque(widget.oque),
                               ),
                             ),
@@ -130,11 +128,10 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: EdgeInsets.only(
-                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  margin: marginPorque(),
                                   child: new Text(
                                       "Por que:"
-                                  )
+                              )
                               ),
                             ),
                             new Expanded(
@@ -154,8 +151,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: EdgeInsets.only(
-                                      left: 9.0, right: 0.0, bottom: 4.0, top: 6.0),
+                                  margin: marginSLA(),
                                   child: new Text(
                                       "Data SLA:"
                                   )
@@ -234,12 +230,17 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     if(dataSla ==null || dataSla.isEmpty){
       return new Text("Sem SLA");
     }else{
-      return new Text(
-        widget.dataSla,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600
+      return Container(
+          margin:EdgeInsets.only(
+            top: 5
+          ),
+        child: new Text(
+          widget.dataSla,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600
+          ),
         ),
       );
     }
@@ -273,20 +274,25 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
   Widget retornaBotao(){
+
     if(widget.emAndamento){
-      return  GestureDetector(
-        onTap: widget.onPressedFinalizar,
-        child: Material(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),),
-          elevation: 4,
-          child: Container(
-            padding: const EdgeInsets.all(2.0),
-            child: Icon(Icons.check,size: 40,
-              color: Theme.of(context).primaryColor,),
+      return  Stack(
+        children: [
+          GestureDetector(
+            onTap: widget.onPressedFinalizar,
+            child: Material(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),),
+              elevation: 4,
+              child: Container(
+                padding: const EdgeInsets.all(0),
+                child: Icon(Icons.check,size:33,
+                  color: Theme.of(context).primaryColor,),
+              ),
+            ),
           ),
-        ),
-      );
+        ],
+    );
 
     }else{
       return Container();
@@ -296,7 +302,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
 
   int flexEmAndamento(){
     if(widget.emAndamento){
-        return 35;
+        return 36;
     }else{
       return  25;
     }
@@ -335,15 +341,66 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       return Expanded(
         flex: 5,
         child: Container(
-          //margin: EdgeInsets.only(top: 35),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.arrow_forward_ios_outlined),
+              Icon(Icons.arrow_forward_ios_outlined, color:Theme.of(context).primaryColor,),
             ],
           ),
         ),
       );
     }
   }
+
+  EdgeInsetsGeometry marginOnde(){
+    if(widget.emAndamento){
+      return EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 0, top: 0
+      );
+    }else{
+      return
+      EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+      );
+    }
+  }
+  EdgeInsetsGeometry marginOque() {
+    if (widget.emAndamento) {
+      return EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 5, top: 6
+      );
+    } else {
+      return
+      EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+      );
+    }
+  }
+
+  EdgeInsetsGeometry marginPorque() {
+    if (widget.emAndamento) {
+      return EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 1, top: 0
+      );
+    } else {
+      return
+      EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+      );
+    }
+  }
+  EdgeInsetsGeometry marginSLA() {
+    if (widget.emAndamento) {
+      return EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 2, top:6
+      );
+    } else {
+      return
+      EdgeInsets.only(
+          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+      );
+    }
+  }
+
+
 }

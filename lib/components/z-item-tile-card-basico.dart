@@ -37,7 +37,7 @@ class _ZItemTileCardBasicoState extends State<ZItemTileCardBasico> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.arrow_forward_ios_outlined),
+            Icon(Icons.arrow_forward_ios_outlined, color:Theme.of(context).primaryColor,),
           ],
         ),
       );

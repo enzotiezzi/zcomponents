@@ -51,7 +51,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.arrow_forward_ios_outlined),
+            Icon(Icons.arrow_forward_ios_outlined, color:Theme.of(context).primaryColor,),
           ],
         ),
       );
