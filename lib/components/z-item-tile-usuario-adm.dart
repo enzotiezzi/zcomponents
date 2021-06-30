@@ -147,7 +147,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.arrow_forward_ios_outlined),
+            Icon(Icons.arrow_forward_ios_outlined, color:Theme.of(context).primaryColor,),
           ],
         ),
       );
