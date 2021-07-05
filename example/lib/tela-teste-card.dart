@@ -59,7 +59,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               oque: "Zellar Vital Brasil > Banheiro",
               porque: "Dispenser Papel",
               prioridade: "Baixa",
-              dataSla: "",
+              dataSla: "Sem SLA",
               visibilidade:false,
               emAndamento: true,
               onPressedFinalizar: () {

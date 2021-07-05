@@ -244,7 +244,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }else{
       return Container(
           margin:EdgeInsets.only(
-            top: 5
+            top: 6
           ),
         child: new Text(
           widget.dataSla,
@@ -367,24 +367,24 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   EdgeInsetsGeometry marginOnde(){
     if(widget.emAndamento){
       return EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 0, top: 0
+          left: 8, right: 0.0, bottom: 0, top: 0
       );
     }else{
       return
       EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+          left: 8, right: 0.0, bottom: 4.0, top: 6.0
       );
     }
   }
   EdgeInsetsGeometry marginOque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 6, top: 6
+          left: 8, right: 0.0, bottom: 6, top: 6
       );
     } else {
       return
       EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+          left: 8, right: 0.0, bottom: 4.0, top: 6.0
       );
     }
   }
@@ -392,24 +392,24 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   EdgeInsetsGeometry marginPorque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 1, top: 0
+          left: 8, right: 0.0, bottom: 1, top: 0
       );
     } else {
       return
       EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+          left: 8, right: 0.0, bottom: 4.0, top: 6.0
       );
     }
   }
   EdgeInsetsGeometry marginSLA() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 2, top:6
+          left: 8, right: 0.0, bottom: 2, top:6
       );
     } else {
       return
       EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 0, top: 6
+          left: 8, right: 0.0, bottom: 0, top: 6
       );
     }
   }
