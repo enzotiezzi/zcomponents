@@ -228,7 +228,19 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
   Widget retornaDataSla (String dataSla){
     if(dataSla ==null || dataSla.isEmpty){
-      return new Text("Sem SLA");
+      return new  Container(
+        margin:EdgeInsets.only(
+            top:6
+        ),
+        child: new Text(
+          "Sem SLA",
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600
+          ),
+        ),
+      );
     }else{
       return Container(
           margin:EdgeInsets.only(
@@ -367,7 +379,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   EdgeInsetsGeometry marginOque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 5, top: 6
+          left: 9.0, right: 0.0, bottom: 6, top: 6
       );
     } else {
       return
@@ -397,7 +409,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     } else {
       return
       EdgeInsets.only(
-          left: 9.0, right: 0.0, bottom: 4.0, top: 6.0
+          left: 9.0, right: 0.0, bottom: 0, top: 6
       );
     }
   }
