@@ -59,9 +59,9 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               oque: "Zellar Vital Brasil > Banheiro",
               porque: "Dispenser Papel",
               prioridade: "Baixa",
-              dataSla: "12/08/2025",
-              visibilidade: false,
-              emAndamento: true,
+              dataSla: "",
+              visibilidade:true,
+              emAndamento: false,
               onPressedFinalizar: () {
                 print("tap no icone");
               },
