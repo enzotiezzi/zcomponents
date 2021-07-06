@@ -1,3 +1,7 @@
+## 0.9.37+6
+
+* ajuste no card de OS
+
 ## 0.9.37+5
 
 * ajuste  no card de OS
