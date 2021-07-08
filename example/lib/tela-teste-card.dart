@@ -60,6 +60,22 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               porque: "Dispenser Papel",
               prioridade: "Baixa",
               dataSla: "",
+              visibilidade:false,
+              emAndamento: true,
+              onPressedFinalizar: () {
+                print("tap no icone");
+              },
+              onTap: (){
+                print("tap no card");
+              },
+            ),
+            ZItemTileOS(
+              codigo: "012192102910",
+              onde: "Zellar Vital Brasil > Banheiro",
+              oque: "Zellar Vital Brasil > Banheiro",
+              porque: "Dispenser Papel",
+              prioridade: "Baixa",
+              dataSla: "",
               visibilidade:true,
               emAndamento: false,
               onPressedFinalizar: () {

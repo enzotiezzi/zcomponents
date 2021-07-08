@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZItemTileOS extends StatefulWidget {
@@ -231,9 +232,8 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   Widget retornaDataSla (String dataSla){
     if(dataSla ==null || dataSla.isEmpty){
       return new  Container(
-        margin:EdgeInsets.only(
-            top:8
-        ),
+         margin:topSla(),
+
         child: new Text(
           "Sem SLA",
           overflow: TextOverflow.ellipsis,
@@ -374,7 +374,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }else{
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
+          left: 8, right: 0, bottom: 0, top: 4
       );
     }
   }
@@ -386,7 +386,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     } else {
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
+          left: 8, right: 0, bottom: 0, top: 4
       );
     }
   }
@@ -399,7 +399,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     } else {
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
+          left: 8, right: 0, bottom: 0, top: 4
       );
     }
   }
@@ -411,10 +411,22 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     } else {
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 0, top: 8
+          left: 8, right: 0, bottom: 0, top:4
       );
     }
   }
 
+  EdgeInsetsGeometry topSla(){
+    if(widget.emAndamento){
+      return EdgeInsets.only(
+        top: 8
+      );
+    } else {
+      return
+          EdgeInsets.only(
+            top:4
+          );
+    }
+  }
 
 }
