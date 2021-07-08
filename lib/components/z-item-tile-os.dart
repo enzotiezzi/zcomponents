@@ -83,7 +83,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginOnde(),
+                                  margin: _marginOnde(),
                                   child: new Text(
                                       "Onde:"
                                   )
@@ -106,7 +106,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginOque(),
+                                  margin: _marginOque(),
                                   child: new Text(
                                       "O que:"
                                   )
@@ -129,7 +129,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginPorque(),
+                                  margin: _marginPorque(),
                                   child: new Text(
                                       "Por que:"
                               )
@@ -152,10 +152,10 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginSLA(),
+                                  margin: _marginSLA(),
                                   child: new Text(
                                       "Data SLA:"
-                                  )
+        0                          )
                               ),
                             ),
                             new Expanded(
@@ -232,7 +232,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   Widget retornaDataSla (String dataSla){
     if(dataSla ==null || dataSla.isEmpty){
       return new  Container(
-         margin:topSla(),
+         margin:_DefinirMargemSla(),
 
         child: new Text(
           "Sem SLA",
@@ -366,7 +366,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
 
-  EdgeInsetsGeometry marginOnde(){
+  EdgeInsetsGeometry _marginOnde(){
     if(widget.emAndamento){
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
@@ -378,7 +378,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       );
     }
   }
-  EdgeInsetsGeometry marginOque() {
+  EdgeInsetsGeometry _marginOque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 8, top: 8
@@ -391,7 +391,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
 
-  EdgeInsetsGeometry marginPorque() {
+  EdgeInsetsGeometry _marginPorque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
@@ -403,7 +403,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       );
     }
   }
-  EdgeInsetsGeometry marginSLA() {
+  EdgeInsetsGeometry _marginSLA() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 2, top:8
@@ -416,7 +416,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
 
-  EdgeInsetsGeometry topSla(){
+  EdgeInsetsGeometry _DefinirMargemSla(){
     if(widget.emAndamento){
       return EdgeInsets.only(
         top: 8
