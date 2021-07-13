@@ -442,16 +442,4 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
 
-  EdgeInsetsGeometry _definirMarginSla(){
-    if(widget.emAndamento){
-      return EdgeInsets.only(
-        top: 8
-      );
-    } else {
-      return
-          EdgeInsets.only(
-            top:4
-          );
-    }
-  }
 }
