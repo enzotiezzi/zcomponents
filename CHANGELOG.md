@@ -1,3 +1,7 @@
+## 0.9.37+8
+
+* ajuste alinhamento card OS
+
 ## 0.9.37+7
 
 * ajuste no card de OS data SLA

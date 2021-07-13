@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZItemTileOS extends StatefulWidget {
@@ -82,7 +83,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginOnde(),
+                                  margin: _alinharMarginOnde(),
                                   child: new Text(
                                       "Onde:"
                                   )
@@ -105,7 +106,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginOque(),
+                                  margin: _alinharMarginOque(),
                                   child: new Text(
                                       "O que:"
                                   )
@@ -128,16 +129,16 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginPorque(),
+                                  margin: _alinharMarginPorque(),
                                   child: new Text(
                                       "Por que:"
-                              )
+                                  )
                               ),
                             ),
                             new Expanded(
                               flex: flexCampoConteudoAndamento(),
                               child: new Container(
-                                margin: EdgeInsets.only(left: 0,),
+                                margin: _definirMarginWidgetPorque(),
                                 child: retornaPorque(widget.porque),
                               ),
                             ),
@@ -151,7 +152,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginSLA(),
+                                  margin: _alinharMarginData(),
                                   child: new Text(
                                       "Data SLA:"
                                   )
@@ -231,9 +232,8 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   Widget retornaDataSla (String dataSla){
     if(dataSla ==null || dataSla.isEmpty){
       return new  Container(
-        margin:EdgeInsets.only(
-            top:8
-        ),
+        margin: _definirMarginSla(),
+
         child: new Text(
           "Sem SLA",
           overflow: TextOverflow.ellipsis,
@@ -245,9 +245,9 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       );
     }else{
       return Container(
-          margin:EdgeInsets.only(
+        margin:EdgeInsets.only(
             top: 8
-          ),
+        ),
         child: new Text(
           widget.dataSla,
           overflow: TextOverflow.ellipsis,
@@ -306,7 +306,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
             ),
           ),
         ],
-    );
+      );
 
     }else{
       return Container();
@@ -316,7 +316,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
 
   int flexEmAndamento(){
     if(widget.emAndamento){
-        return 36;
+      return 36;
     }else{
       return  25;
     }
@@ -366,53 +366,79 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
 
-  EdgeInsetsGeometry marginOnde(){
+  EdgeInsetsGeometry _alinharMarginOnde(){
     if(widget.emAndamento){
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
       );
     }else{
       return
-      EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
-      );
+        EdgeInsets.only(
+            left: 8, right: 0, bottom: 0, top: 4
+        );
     }
   }
-  EdgeInsetsGeometry marginOque() {
+  EdgeInsetsGeometry _alinharMarginOque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 8, top: 8
       );
     } else {
       return
-      EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
-      );
+        EdgeInsets.only(
+            left: 8, right: 0, bottom: 0, top: 4
+        );
     }
   }
 
-  EdgeInsetsGeometry marginPorque() {
+  EdgeInsetsGeometry _alinharMarginPorque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
       );
     } else {
       return
-      EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
-      );
+        EdgeInsets.only(
+            left: 8, right: 0, bottom: 0, top: 2
+        );
     }
   }
-  EdgeInsetsGeometry marginSLA() {
+  EdgeInsetsGeometry _alinharMarginData() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 2, top:8
       );
     } else {
       return
-      EdgeInsets.only(
-          left: 8, right: 0, bottom: 0, top: 8
+        EdgeInsets.only(
+            left: 8, right: 0, bottom: 0, top:4
+        );
+    }
+  }
+
+  EdgeInsetsGeometry _definirMarginSla(){
+    if(widget.emAndamento){
+      return EdgeInsets.only(
+          top: 8
       );
+    } else {
+      return
+        EdgeInsets.only(
+            top:4
+        );
+    }
+  }
+
+  EdgeInsetsGeometry _definirMarginWidgetPorque(){
+    if(widget.emAndamento){
+      return EdgeInsets.only(
+        top: 0
+      );
+    }else{
+      return
+        EdgeInsets.only(
+          top: 2
+        );
     }
   }
 
