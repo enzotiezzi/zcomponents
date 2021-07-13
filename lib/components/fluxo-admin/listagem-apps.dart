@@ -16,7 +16,7 @@ class ListagemApps extends StatefulWidget {
   List<AppUsuarioContaViewModel> listaApps;
   UsuarioContaViewModel usuario;
 
-  ListagemApps({this.listaApps, this.usuario});
+    ListagemApps({this.listaApps, this.usuario});
 
   @override
   _ListagemAppsState createState() => _ListagemAppsState();
