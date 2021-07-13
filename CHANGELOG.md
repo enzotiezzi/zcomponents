@@ -1,3 +1,15 @@
+## 0.9.37+7
+
+* ajuste no card de OS data SLA
+
+## 0.9.37+6
+
+* ajuste no card de OS
+
+## 0.9.37+5
+
+* ajuste  no card de OS
+
 ## 0.9.37+4
 
 * Icone no card de OS

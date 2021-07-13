@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZItemTileOS extends StatefulWidget {
@@ -82,7 +83,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginOnde(),
+                                  margin: _alinharMarginOnde(),
                                   child: new Text(
                                       "Onde:"
                                   )
@@ -105,7 +106,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex: flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginOque(),
+                                  margin: _alinharMarginOque(),
                                   child: new Text(
                                       "O que:"
                                   )
@@ -128,7 +129,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginPorque(),
+                                  margin: _alinharMarginPorque(),
                                   child: new Text(
                                       "Por que:"
                               )
@@ -151,10 +152,10 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
                             new Expanded(
                               flex:flexCampoDescAndamento(),
                               child: new Container(
-                                  margin: marginSLA(),
+                                  margin: _alinharMarginData(),
                                   child: new Text(
                                       "Data SLA:"
-                                  )
+                                 )
                               ),
                             ),
                             new Expanded(
@@ -231,9 +232,8 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   Widget retornaDataSla (String dataSla){
     if(dataSla ==null || dataSla.isEmpty){
       return new  Container(
-        margin:EdgeInsets.only(
-            top:8
-        ),
+         margin: _definirMarginSla(),
+
         child: new Text(
           "Sem SLA",
           overflow: TextOverflow.ellipsis,
@@ -366,7 +366,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
 
-  EdgeInsetsGeometry marginOnde(){
+  EdgeInsetsGeometry _alinharMarginOnde(){
     if(widget.emAndamento){
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
@@ -374,11 +374,11 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }else{
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
+          left: 8, right: 0, bottom: 0, top: 4
       );
     }
   }
-  EdgeInsetsGeometry marginOque() {
+  EdgeInsetsGeometry _alinharMarginOque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 8, top: 8
@@ -386,12 +386,12 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     } else {
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
+          left: 8, right: 0, bottom: 0, top: 4
       );
     }
   }
 
-  EdgeInsetsGeometry marginPorque() {
+  EdgeInsetsGeometry _alinharMarginPorque() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
@@ -399,11 +399,11 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     } else {
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 4, top: 8
+          left: 8, right: 0, bottom: 0, top: 4
       );
     }
   }
-  EdgeInsetsGeometry marginSLA() {
+  EdgeInsetsGeometry _alinharMarginData() {
     if (widget.emAndamento) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 2, top:8
@@ -411,10 +411,21 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     } else {
       return
       EdgeInsets.only(
-          left: 8, right: 0, bottom: 0, top: 8
+          left: 8, right: 0, bottom: 0, top:4
       );
     }
   }
 
-
+  EdgeInsetsGeometry _definirMarginSla(){
+    if(widget.emAndamento){
+      return EdgeInsets.only(
+        top: 8
+      );
+    } else {
+      return
+          EdgeInsets.only(
+            top:4
+          );
+    }
+  }
 }
