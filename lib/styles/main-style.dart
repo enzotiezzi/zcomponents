@@ -6,7 +6,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/styles/media-query.dart';
 
 class MainStyle {
-  static const Color APP_THEME = Colors.amber;
+  static const Color APP_THEME = const Color(0xFF2BBAB4);
 
   static _MainStyle get(BuildContext context) => _MainStyle(context: context);
 

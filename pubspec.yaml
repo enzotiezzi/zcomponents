@@ -57,7 +57,8 @@ dependencies:
   brasil_fields: ^1.0.0
   crypto: ^2.1.5
   flutter_colorpicker: ^0.3.4
-
+  flutter_bloc: ^7.0.1
+  flutter_treeview: ^1.0.4+1
 
 dev_dependencies:
   flutter_test:
