@@ -69,7 +69,7 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
         },true,
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
-        textMask: "XX.XXX.XXX/XXXX-XX",
+        textMask: "##.###.###/####-##",
         hintText: "00.000.000/0000-00",enabled: widget.enabled);
   }
 

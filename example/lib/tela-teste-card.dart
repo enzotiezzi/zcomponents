@@ -6,6 +6,7 @@ import 'package:z_components/components/z-aba/z-aba.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-os.dart';
 import 'package:z_components/components/z-header.dart';
+import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -89,6 +90,12 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               themeData: Theme.of(context),
               cpfFocus: new FocusNode(),
               controllerCpf: new TextEditingController(),
+              validacao: (b) {},
+            ),
+            ZInputCNPJ(
+              themeData: Theme.of(context),
+              cnpjFocus: new FocusNode(),
+              controllerCNPJ: new TextEditingController(),
               validacao: (b) {},
             ),
             ZAba(
