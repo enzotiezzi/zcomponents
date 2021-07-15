@@ -14,13 +14,17 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   final String token;
 
   TreeViewController _treeViewController;
+  TextEditingController _searchTextController = new TextEditingController();
 
   IEstruturaEmpresaService _estruturaEmpresaService;
 
   TreeViewController get treeViewController => _treeViewController;
 
+  TextEditingController get searchTextController => _searchTextController;
+
   ZEstruturaEmpresaCubit({@required this.token})
-      : super(new ZEstruturaEmpresaCubitModel(nodes: [], selectedNode: null)) {
+      : super(new ZEstruturaEmpresaCubitModel(
+            nodes: [], selectedNode: null, niveis: [])) {
     _estruturaEmpresaService = new EstruturaEmpresaService(token);
 
     _treeViewController = new TreeViewController(children: []);
@@ -28,7 +32,12 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
   @override
   Future<void> buscarEstruturaEmpresa() async {
-    var res = await _estruturaEmpresaService.listarNiveis(new SearchOptions());
+    var searchOptions = new SearchOptions();
+
+    searchOptions.orders
+        .add(new OrderByExpression(propertyName: "Nome", orientation: "ASC"));
+
+    var res = await _estruturaEmpresaService.listarNiveis(searchOptions);
 
     if (res != null) {
       var niveis = res.body;
@@ -39,9 +48,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
       _treeViewController = new TreeViewController(children: nodes);
 
       emit(new ZEstruturaEmpresaCubitModel(
-        nodes: nodes,
-        selectedNode: state.selectedNode
-      ));
+          nodes: nodes, selectedNode: state.selectedNode, niveis: niveis));
     }
   }
 
@@ -50,10 +57,10 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     for (var i = 0; i < niveis.length; i++) {
       var nivel = niveis[i];
 
-      var node =
-          new Node<Nivel>(key: nivel.idNivel, label: nivel.nome, data: nivel, children: []);
+      var node = new Node<Nivel>(
+          key: nivel.idNivel, label: nivel.nome, data: nivel, children: []);
 
-      if(parent != null)
+      if (parent != null)
         parent.children.add(node);
       else
         nodes.add(node);
@@ -62,11 +69,57 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     }
   }
 
+  void _depthSearch(
+      Node parent, List<Nivel> niveis, List<Node<Nivel>> nodes, String filter) {
+    for (var i = 0; i < niveis.length; i++) {
+      var nivel = niveis[i];
+
+      found = false;
+      _depthFilterSearch(filter, nivel);
+
+      var node = new Node<Nivel>(
+          key: nivel.idNivel, label: nivel.nome, data: nivel, children: []);
+
+      if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) ||
+          found) {
+        if (parent != null)
+          parent.children.add(node);
+        else
+          nodes.add(node);
+      }
+
+      _depthSearch(node, nivel.niveis, nodes, filter);
+    }
+  }
+
+  bool found = false;
+  void _depthFilterSearch(String filter, Nivel nivel) {
+    if (nivel.nome.toLowerCase().contains(filter.toLowerCase())) found = true;
+
+    if (!found) {
+      for (var i = 0; i < nivel.niveis.length; i++) {
+        var nivelAtual = nivel.niveis[i];
+
+        _depthFilterSearch(filter, nivelAtual);
+      }
+    }
+  }
+
   @override
   void selecionarNo(Node node) {
     emit(new ZEstruturaEmpresaCubitModel(
-      nodes: state.nodes,
-      selectedNode: node
-    ));
+        nodes: state.nodes, selectedNode: node, niveis: state.niveis));
+  }
+
+  @override
+  void filtrarEstruturaEmpresa(String nome) {
+    List<Node<Nivel>> nodes = [];
+
+    _depthSearch(null, state.niveis, nodes, nome);
+
+    _treeViewController = new TreeViewController(children: nodes);
+
+    emit(new ZEstruturaEmpresaCubitModel(
+        selectedNode: state.selectedNode, niveis: state.niveis, nodes: nodes));
   }
 }

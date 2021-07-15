@@ -11,6 +11,8 @@ class FilterExpression {
 class OrderByExpression {
   String propertyName;
   String orientation;
+
+  OrderByExpression({this.propertyName, this.orientation});
 }
 
 class SearchOptions {
