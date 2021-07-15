@@ -1,3 +1,7 @@
+## 0.9.37+9
+
+* ajuste na mascara do cnpj
+
 ## 0.9.37+8
 
 * ajuste alinhamento card OS
