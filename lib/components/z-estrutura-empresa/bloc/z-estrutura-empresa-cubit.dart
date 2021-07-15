@@ -78,10 +78,13 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
       _depthFilterSearch(filter, nivel);
 
       var node = new Node<Nivel>(
-          key: nivel.idNivel, label: nivel.nome, data: nivel, children: []);
+          key: nivel.idNivel,
+          label: nivel.nome,
+          data: nivel,
+          children: [],
+          expanded: true);
 
-      if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) ||
-          found) {
+      if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) || found) {
         if (parent != null)
           parent.children.add(node);
         else
@@ -93,6 +96,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   }
 
   bool found = false;
+
   void _depthFilterSearch(String filter, Nivel nivel) {
     if (nivel.nome.toLowerCase().contains(filter.toLowerCase())) found = true;
 
