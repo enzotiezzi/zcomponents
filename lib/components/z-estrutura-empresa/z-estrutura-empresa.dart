@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
+import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile.dart';
@@ -12,10 +13,12 @@ import 'package:z_components/view-model/conta.dart';
 class ZEstruturaEmpresa extends StatelessWidget {
   final String token;
   final GlobalKey key;
+  final void Function(Nivel) onNodeSelected;
 
   ZEstruturaEmpresaCubit _bloc;
 
-  ZEstruturaEmpresa({@required this.token, @required this.key});
+  ZEstruturaEmpresa(
+      {@required this.token, @required this.key, this.onNodeSelected});
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
     expanderTheme: ExpanderThemeData(
@@ -63,7 +66,12 @@ class ZEstruturaEmpresa extends StatelessWidget {
               child: new TreeView(
                   controller: _bloc.treeViewController,
                   theme: _treeViewTheme,
-                  onNodeTap: (String key) {},
+                  onNodeTap: (String key) {
+                    var node = _bloc.treeViewController.getNode(key);
+
+                    if (onNodeSelected != null)
+                      onNodeSelected(node.data as Nivel);
+                  },
                   nodeBuilder: (context, node) => new Container(
                         padding: const EdgeInsets.all(8.0),
                         child: new Row(
