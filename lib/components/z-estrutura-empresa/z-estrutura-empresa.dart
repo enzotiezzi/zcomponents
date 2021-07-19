@@ -2,18 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
+import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/view-model/conta.dart';
 
 class ZEstruturaEmpresa extends StatelessWidget {
   final String token;
   final GlobalKey key;
+  final void Function(Nivel) onNodeSelected;
 
   ZEstruturaEmpresaCubit _bloc;
 
-  ZEstruturaEmpresa({@required this.token, @required this.key});
+  ZEstruturaEmpresa(
+      {@required this.token, @required this.key, this.onNodeSelected});
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
     expanderTheme: ExpanderThemeData(
@@ -59,13 +64,35 @@ class ZEstruturaEmpresa extends StatelessWidget {
             Widget widget = new Container(
               padding: const EdgeInsets.all(8.0),
               child: new TreeView(
-                controller: _bloc.treeViewController,
-                theme: _treeViewTheme,
-                nodeBuilder: (context, node) => new Container(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new Text(node.label),
-                ),
-              ),
+                  controller: _bloc.treeViewController,
+                  theme: _treeViewTheme,
+                  onNodeTap: (String key) {
+                    var node = _bloc.treeViewController.getNode(key);
+
+                    if (onNodeSelected != null)
+                      onNodeSelected(node.data as Nivel);
+                  },
+                  nodeBuilder: (context, node) => new Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            new Expanded(
+                              child: new Text(node.label),
+                              flex: 90,
+                            ),
+                            new Expanded(
+                              child: new IconButton(
+                                  icon: new Icon(
+                                    Icons.chevron_right,
+                                    color: MainStyle.APP_THEME,
+                                  ),
+                                  onPressed: null),
+                              flex: 10,
+                            )
+                          ],
+                        ),
+                      )),
             );
 
             if (state.nodes.length == 0)
@@ -102,7 +129,8 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                 keyboardType: TextInputType.text,
                                 controller: _bloc.searchTextController,
                                 onChanged: (value) {
-                                  Future.delayed(new Duration(microseconds: 500), (){
+                                  Future.delayed(
+                                      new Duration(microseconds: 500), () {
                                     _bloc.filtrarEstruturaEmpresa(value);
                                   });
                                 },
@@ -118,11 +146,11 @@ class ZEstruturaEmpresa extends StatelessWidget {
                     new Expanded(
                         flex: 15,
                         child: new IconButton(
-                            icon: new Icon(
-                              Icons.filter_list_outlined,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            onPressed: () async {})),
+                          icon: new Icon(
+                            Icons.filter_list_outlined,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        )),
                   ],
                 ),
                 new Expanded(child: widget)
