@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile.dart';
@@ -56,6 +57,9 @@ class ZEstruturaEmpresa extends StatelessWidget {
         },
         child: new Scaffold(
           appBar: new AppBar(
+            leading: IconeVoltar(
+              context: context,
+            ),
             title: Text("ESTRUTURA DE EMPRESA"),
             centerTitle: true,
           ),
