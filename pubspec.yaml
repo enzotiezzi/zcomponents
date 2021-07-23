@@ -1,7 +1,7 @@
 name: z_components
 description: Z_Components is a package that contains a set of standardized components to facilitate, optimize, and accelerate the development of Zellar company's Android / IOS applications.
 
-version: 0.9.37+8
+version: 0.9.37+9
 
 homepage: https://github.com/victortmarques/zcomponents
 
@@ -57,7 +57,8 @@ dependencies:
   brasil_fields: ^1.0.0
   crypto: ^2.1.5
   flutter_colorpicker: ^0.3.4
-
+  flutter_bloc: ^7.0.1
+  flutter_treeview: ^1.0.4+1
 
 dev_dependencies:
   flutter_test:
