@@ -1,3 +1,7 @@
+## 0.9.37+10
+
+* Ajuste estrutura de empresa
+
 ## 0.9.37+9
 
 * ajuste na mascara do cnpj
