@@ -22,9 +22,11 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
   TextEditingController get searchTextController => _searchTextController;
 
+  Node get selectedNode => state.selectedNode;
+
   ZEstruturaEmpresaCubit({@required this.token})
       : super(new ZEstruturaEmpresaCubitModel(
-            nodes: [], selectedNode: null, niveis: [])) {
+            nodes: [], selectedNode: null, niveis: [], isLoading: true)) {
     _estruturaEmpresaService = new EstruturaEmpresaService(token);
 
     _treeViewController = new TreeViewController(children: []);
@@ -37,18 +39,23 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     searchOptions.orders
         .add(new OrderByExpression(propertyName: "Nome", orientation: "ASC"));
 
+    emit(state.patchState(isLoading: true));
+
     var res = await _estruturaEmpresaService.listarNiveis(searchOptions);
+
+    emit(state.patchState(isLoading: false));
 
     if (res != null) {
       var niveis = res.body;
+
       List<Node<Nivel>> nodes = [];
 
       _depthConvertion(null, niveis, nodes);
 
       _treeViewController = new TreeViewController(children: nodes);
 
-      emit(new ZEstruturaEmpresaCubitModel(
-          nodes: nodes, selectedNode: state.selectedNode, niveis: niveis));
+      emit(state.patchState(
+          nodes: nodes, selectedNode: state.selectedNode, niveis: niveis, isLoading: false));
     }
   }
 
@@ -111,8 +118,8 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
   @override
   void selecionarNo(Node node) {
-    emit(new ZEstruturaEmpresaCubitModel(
-        nodes: state.nodes, selectedNode: node, niveis: state.niveis));
+    emit(state.patchState(
+        nodes: state.nodes, selectedNode: node, niveis: state.niveis, isLoading: false));
   }
 
   @override
@@ -123,7 +130,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
     _treeViewController = new TreeViewController(children: nodes);
 
-    emit(new ZEstruturaEmpresaCubitModel(
-        selectedNode: state.selectedNode, niveis: state.niveis, nodes: nodes));
+    emit(state.patchState(
+        selectedNode: state.selectedNode, niveis: state.niveis, nodes: nodes, isLoading: false));
   }
 }
