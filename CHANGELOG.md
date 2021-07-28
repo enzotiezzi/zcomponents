@@ -1,3 +1,7 @@
+## 0.9.37+11
+
+* Criação do componente de endereco
+
 ## 0.9.37+10
 
 * Ajuste estrutura de empresa
