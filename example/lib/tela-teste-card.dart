@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-usuario-adm.dart';
 import 'package:z_components/components/z-item-tile-modulo-adm.dart';
@@ -7,6 +9,9 @@ import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-os.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
+import 'package:z_components/components/z-endereco/z-input-endereco.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -14,8 +19,19 @@ class TelaTesteCard extends StatefulWidget {
 }
 
 class _TelaTesteCardState extends State<TelaTesteCard> {
+  TextEditingController cep = new TextEditingController();
+  TextEditingController logradouro = new TextEditingController();
+  TextEditingController numero = new TextEditingController();
+  TextEditingController cidade = new TextEditingController();
+  TextEditingController bairro = new TextEditingController();
+  TextEditingController complemento = new TextEditingController();
+  TextEditingController estado = new TextEditingController();
+  List<ZCollectionItem> lista=[];
+
   @override
   Widget build(BuildContext context) {
+  print("card");
+    print(cep.text);
     return Scaffold(
       appBar: new AppBar(
         centerTitle: true,
@@ -86,6 +102,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 print("tap no card");
               },
             ),
+
             ZInputCPF(
               themeData: Theme.of(context),
               cpfFocus: new FocusNode(),
@@ -112,6 +129,17 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                     },
                     titulo: "Feriados"),
               ],
+            ),
+            ZInputEndereco(
+              themeData: Theme.of(context),
+              campoObrigatorio: true,
+              cepController: cep,
+              bairroController: bairro,
+              cidadeController: cidade,
+              complementoController: complemento,
+              estadoController: estado,
+              logradouroController: logradouro,
+              numeroController: numero,
             ),
 
           ],
