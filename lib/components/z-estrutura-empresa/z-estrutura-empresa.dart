@@ -16,10 +16,10 @@ class ZEstruturaEmpresa extends StatelessWidget {
   final GlobalKey key;
   final void Function(Nivel) onNodeSelected;
 
-  ZEstruturaEmpresaCubit _bloc;
-
   ZEstruturaEmpresa(
       {@required this.token, @required this.key, this.onNodeSelected});
+
+  ZEstruturaEmpresaCubit _bloc;
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
     expanderTheme: ExpanderThemeData(
@@ -73,11 +73,10 @@ class ZEstruturaEmpresa extends StatelessWidget {
                   onNodeTap: (String key) {
                     var node = _bloc.treeViewController.getNode(key);
 
-                    if (onNodeSelected != null)
-                      onNodeSelected(node.data as Nivel);
+                    _bloc.selecionarNo(node);
                   },
                   nodeBuilder: (context, node) => new Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -91,7 +90,11 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                     Icons.chevron_right,
                                     color: MainStyle.APP_THEME,
                                   ),
-                                  onPressed: null),
+                                  onPressed: () {
+                                    if (onNodeSelected != null)
+                                      onNodeSelected(
+                                          _bloc.selectedNode?.data as Nivel);
+                                  }),
                               flex: 10,
                             )
                           ],
@@ -99,7 +102,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                       )),
             );
 
-            if (state.nodes.length == 0)
+            if (state.isLoading)
               widget = new Center(
                 child: new ZLoading(),
               );
@@ -133,10 +136,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                 keyboardType: TextInputType.text,
                                 controller: _bloc.searchTextController,
                                 onChanged: (value) {
-                                  Future.delayed(
-                                      new Duration(microseconds: 500), () {
-                                    _bloc.filtrarEstruturaEmpresa(value);
-                                  });
+                                  _bloc.filtrarEstruturaEmpresa(value);
                                 },
                                 placeholder: "Buscar",
                                 decoration: new BoxDecoration(
