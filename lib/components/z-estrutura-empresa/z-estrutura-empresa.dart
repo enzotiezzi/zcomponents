@@ -15,9 +15,13 @@ class ZEstruturaEmpresa extends StatelessWidget {
   final String token;
   final GlobalKey key;
   final void Function(Nivel) onNodeSelected;
+  final void Function() onInfoSelected;
 
   ZEstruturaEmpresa(
-      {@required this.token, @required this.key, this.onNodeSelected});
+      {@required this.token,
+      @required this.key,
+      this.onNodeSelected,
+      this.onInfoSelected});
 
   ZEstruturaEmpresaCubit _bloc;
 
@@ -57,6 +61,16 @@ class ZEstruturaEmpresa extends StatelessWidget {
         },
         child: new Scaffold(
           appBar: new AppBar(
+            actions: [
+              IconButton(
+                  icon: Icon(
+                    Icons.info,
+                    size: 28,
+                  ),
+                  onPressed: () {
+                    onInfoSelected();
+                  }),
+            ],
             leading: IconeVoltar(
               context: context,
             ),
