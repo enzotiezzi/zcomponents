@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
-
-
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-endereco/z-input-endereco.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 class TelaTesteCard extends StatefulWidget {
   @override
   _TelaTesteCardState createState() => _TelaTesteCardState();
@@ -10,6 +11,15 @@ class TelaTesteCard extends StatefulWidget {
 
 class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ZSelectionItem> listaSelecao = [];
+
+  TextEditingController cep = new TextEditingController();
+  TextEditingController logradouro = new TextEditingController();
+  TextEditingController numero = new TextEditingController();
+  TextEditingController cidade = new TextEditingController();
+  TextEditingController bairro = new TextEditingController();
+  TextEditingController complemento = new TextEditingController();
+  TextEditingController estado = new TextEditingController();
+  List<ZCollectionItem> lista=[];
 
   @override
   void initState() {
@@ -55,6 +65,26 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            ZInputEndereco(
+              themeData: Theme.of(context),
+              campoObrigatorio: true,
+              cepController: cep,
+              bairroController: bairro,
+              cidadeController: cidade,
+              complementoController: complemento,
+              estadoController: estado,
+              logradouroController: logradouro,
+              numeroController: numero,
+              validacao: (bool){
+                print(bool);
+              },
+            ),
+
+            ZCollection(
+              titulo: "Teste",
+              lista: lista,
+              themeData: Theme.of(context),
+            ),
 
             new Container(
               margin: EdgeInsets.only(top: 10),

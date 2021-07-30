@@ -11,6 +11,7 @@ class ZInputEndereco extends StatefulWidget {
   final TextEditingController bairroController;
   final TextEditingController cidadeController;
   final TextEditingController estadoController;
+  void Function(bool) validacao;
 
   ZInputEndereco({
     this.campoObrigatorio=false,
@@ -22,6 +23,7 @@ class ZInputEndereco extends StatefulWidget {
     @required this.bairroController,
     @required this.cidadeController,
     @required this.estadoController,
+    this.validacao
     }
     );
   @override
@@ -90,6 +92,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
         print(resultado);
         setState(() {
           endereco = resultado;
+          _validarEndereco();
         });
       },
     );
@@ -149,6 +152,18 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
           ),
         ),
       );
+    }
+  }
+
+  void _validarEndereco() {
+    if (widget.cepController.text.isEmpty || widget.cepController.text ==null
+        || widget.logradouroController.text.isEmpty || widget.logradouroController == null
+        || widget.cidadeController.text.isEmpty || widget.cidadeController == null
+        || widget.bairroController.text.isEmpty || widget.bairroController == null
+        || widget.numeroController.text.isEmpty || widget.numeroController == null) {
+      if (widget.validacao != null) widget.validacao(false);
+    } else {
+      if (widget.validacao != null) widget.validacao(true);
     }
   }
 }
