@@ -13,19 +13,18 @@ class ZInputEndereco extends StatefulWidget {
   final TextEditingController estadoController;
   void Function(bool) validacao;
 
-  ZInputEndereco({
-    this.campoObrigatorio=false,
-    @required this.themeData,
-    @required this.cepController,
-    @required this.logradouroController,
-    @required this.numeroController,
-    @required this.complementoController,
-    @required this.bairroController,
-    @required this.cidadeController,
-    @required this.estadoController,
-    this.validacao
-    }
-    );
+  ZInputEndereco(
+      {this.campoObrigatorio = false,
+      @required this.themeData,
+      @required this.cepController,
+      @required this.logradouroController,
+      @required this.numeroController,
+      @required this.complementoController,
+      @required this.bairroController,
+      @required this.cidadeController,
+      @required this.estadoController,
+      this.validacao});
+
   @override
   _ZInputEnderecoState createState() => _ZInputEnderecoState();
 }
@@ -33,6 +32,7 @@ class ZInputEndereco extends StatefulWidget {
 class _ZInputEnderecoState extends State<ZInputEndereco> {
   String endereco;
   String _anterior = "Selecione seu endereço";
+
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
@@ -50,11 +50,12 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
                     flex: 65,
                     fit: FlexFit.tight,
                     child: new Text(
-                      (endereco == null || endereco.isEmpty &&
-                          _anterior.contains("Selecione"))
+                      (endereco == null ||
+                              endereco.isEmpty &&
+                                  _anterior.contains("Selecione"))
                           ? _anterior
                           : endereco,
-                      style:  _retornaCorTexto(),
+                      style: _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -72,22 +73,20 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
           )
         ],
       ),
-      onTap: ()async{
-        final resultado  = await Navigator.push(
+      onTap: () async {
+        final resultado = await Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context)=> ZInputCamposEndereco(
-                    themeData: widget.themeData,
-                  cepController: widget.cepController,
-                  numeroController: widget.numeroController,
-                  logradouroController: widget.logradouroController,
-                  estadoController: widget.estadoController,
-                  complementoController: widget.complementoController,
-                  cidadeController: widget.cidadeController,
-                  bairroController: widget.bairroController,
-                    )
-            )
-        );
+                builder: (context) => ZInputCamposEndereco(
+                      themeData: widget.themeData,
+                      cepController: widget.cepController,
+                      numeroController: widget.numeroController,
+                      logradouroController: widget.logradouroController,
+                      estadoController: widget.estadoController,
+                      complementoController: widget.complementoController,
+                      cidadeController: widget.cidadeController,
+                      bairroController: widget.bairroController,
+                    )));
         print("endereço");
         print(resultado);
         setState(() {
@@ -98,20 +97,21 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
     );
   }
 
-  Color _retornaCorIcon(){
-    if(endereco == null || endereco.isEmpty && _anterior.contains("Selecione")){
+  Color _retornaCorIcon() {
+    if (endereco == null ||
+        endereco.isEmpty && _anterior.contains("Selecione")) {
       return widget.themeData.primaryColor;
-    }
-    else{
+    } else {
       return Colors.black;
     }
   }
 
-  TextStyle _retornaCorTexto(){
-    if(endereco == null || endereco.isEmpty && _anterior.contains("Selecione")){
-      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.primaryColor);
-    }
-    else{
+  TextStyle _retornaCorTexto() {
+    if (endereco == null ||
+        endereco.isEmpty && _anterior.contains("Selecione")) {
+      return widget.themeData.textTheme.bodyText1
+          .copyWith(color: widget.themeData.primaryColor);
+    } else {
       return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     }
   }
@@ -156,11 +156,17 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
   }
 
   void _validarEndereco() {
-    if (widget.cepController.text.isEmpty || widget.cepController.text ==null
-        || widget.logradouroController.text.isEmpty || widget.logradouroController == null
-        || widget.cidadeController.text.isEmpty || widget.cidadeController == null
-        || widget.bairroController.text.isEmpty || widget.bairroController == null
-        || widget.numeroController.text.isEmpty || widget.numeroController == null) {
+    if (endereco.isEmpty ||
+        widget.cepController.text.isEmpty ||
+        widget.cepController.text == null ||
+        widget.logradouroController.text.isEmpty ||
+        widget.logradouroController == null ||
+        widget.cidadeController.text.isEmpty ||
+        widget.cidadeController == null ||
+        widget.bairroController.text.isEmpty ||
+        widget.bairroController == null ||
+        widget.numeroController.text.isEmpty ||
+        widget.numeroController == null) {
       if (widget.validacao != null) widget.validacao(false);
     } else {
       if (widget.validacao != null) widget.validacao(true);

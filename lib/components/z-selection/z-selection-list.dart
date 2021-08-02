@@ -18,16 +18,17 @@ class ZSelectionList extends StatefulWidget {
   Function(List<FilterExpression>) onChange;
   Function(List<FilterExpression>, List<ZSelectionItem>) onScroll;
 
-  ZSelectionList({this.lista,
-    this.key,
-    this.theme,
-    this.titulo: "",
-    this.color,
-    this.skip: 0,
-    this.take: 0,
-    this.onChange,
-    this.filtroPrincipal,
-    this.onScroll})
+  ZSelectionList(
+      {this.lista,
+      this.key,
+      this.theme,
+      this.titulo: "",
+      this.color,
+      this.skip: 0,
+      this.take: 0,
+      this.onChange,
+      this.filtroPrincipal,
+      this.onScroll})
       : super(key: key);
 
   @override
@@ -77,9 +78,9 @@ class ZSelectionListState extends State<ZSelectionList> {
           _buildFiltro(),
           new Expanded(
               child: new Container(
-                margin: EdgeInsets.only(top: 16.0),
-                child: _buildLista(),
-              )),
+            margin: EdgeInsets.only(top: 16.0),
+            child: _buildLista(),
+          )),
           _exibirBotao()
         ],
       ),
@@ -111,39 +112,38 @@ class ZSelectionListState extends State<ZSelectionList> {
                           )),
                       new Expanded(
                           child: new CupertinoTextField(
-                            placeholderStyle: new TextStyle(
-                                color: Color(0xff999999), fontSize: 17),
-                            placeholder: "Busca",
-                            decoration:
+                        placeholderStyle: new TextStyle(
+                            color: Color(0xff999999), fontSize: 17),
+                        placeholder: "Busca",
+                        decoration:
                             new BoxDecoration(color: Colors.transparent),
-                            onChanged: (text) {
-                              if (text.length >= 3 || text.length == 0) {
-                                if (widget.onChange != null) {
-                                  textoBusca = text;
-                                  widget.onChange([
-                                    new FilterExpression(
-                                        propertyName: widget.filtroPrincipal
-                                            .key,
-                                        operatorBetween: "AndAlso",
-                                        operator: "Contains",
-                                        value: text)
-                                  ]);
-                                } else {
-                                  text = text.toLowerCase();
-                                  keyLista = new GlobalKey();
-                                  setState(() {
-                                    if (text.length > 0)
-                                      _listaFiltro = widget.lista
-                                          .where((x) =>
+                        onChanged: (text) {
+                          if (text.length >= 3 || text.length == 0) {
+                            if (widget.onChange != null) {
+                              textoBusca = text;
+                              widget.onChange([
+                                new FilterExpression(
+                                    propertyName: widget.filtroPrincipal.key,
+                                    operatorBetween: "AndAlso",
+                                    operator: "Contains",
+                                    value: text)
+                              ]);
+                            } else {
+                              text = text.toLowerCase();
+                              keyLista = new GlobalKey();
+                              setState(() {
+                                if (text.length > 0)
+                                  _listaFiltro = widget.lista
+                                      .where((x) =>
                                           x.valor.toLowerCase().contains(text))
-                                          .toList();
-                                    else
-                                      _listaFiltro = widget.lista;
-                                  });
-                                }
-                              }
-                            },
-                          )),
+                                      .toList();
+                                else
+                                  _listaFiltro = widget.lista;
+                              });
+                            }
+                          }
+                        },
+                      )),
                     ],
                   ),
                 ),
@@ -182,9 +182,8 @@ class ZSelectionListState extends State<ZSelectionList> {
                   },
                   leading: new Row(
                     children: [
-                      new Checkbox(activeColor: Theme
-                          .of(context)
-                          .primaryColor,
+                      new Checkbox(
+                          activeColor: Theme.of(context).primaryColor,
                           value: item.selecionado,
                           onChanged: (bool) {
                             setState(() {
@@ -192,10 +191,12 @@ class ZSelectionListState extends State<ZSelectionList> {
                             });
                           }),
                       new Container(
+                        width: MediaQuery.of(context).size.width / 1.4,
                         child: new Text(
                           "${item.titulo ?? item.valor}",
                           style: widget.theme.textTheme.bodyText1,
-                          maxLines: 2,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       )
                     ],
@@ -216,16 +217,13 @@ class ZSelectionListState extends State<ZSelectionList> {
       elevation: 4.0,
       child: new Container(
         color: Colors.white,
-        height: MediaQuery
-            .of(context)
-            .size
-            .height / 8,
+        height: MediaQuery.of(context).size.height / 8,
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             new RaisedButton(
               onPressed: () {
-                _selecionarItem(widget.lista);
+                _selecionarItem(_listaFiltro);
               },
               child: new Container(
                 child: new Row(
@@ -235,8 +233,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                       padding: const EdgeInsets.only(right: 40, left: 40),
                       child: new Text(
                         "PRÓXIMO",
-                        style: Theme
-                            .of(context)
+                        style: Theme.of(context)
                             .textTheme
                             .button
                             .copyWith(color: Color(0xFFFFFFFF)),
@@ -245,9 +242,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                   ],
                 ),
               ),
-              color: Theme
-                  .of(context)
-                  .primaryColor,
+              color: Theme.of(context).primaryColor,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30),
               ),
@@ -270,7 +265,7 @@ class ZSelectionListState extends State<ZSelectionList> {
       });
     } else {
       var listaSkipTake =
-      widget.lista.skip(widget.skip).take(widget.take).toList();
+          widget.lista.skip(widget.skip).take(widget.take).toList();
 
       if (listaSkipTake != null && listaSkipTake.length > 0) {
         setState(() {
@@ -286,7 +281,7 @@ class ZSelectionListState extends State<ZSelectionList> {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         var listaSkipTake =
-        widget.lista.skip(widget.skip).take(widget.take).toList();
+            widget.lista.skip(widget.skip).take(widget.take).toList();
         if (listaSkipTake != null && listaSkipTake.length > 0) {
           setState(() {
             _listaFiltro.addAll(listaSkipTake);

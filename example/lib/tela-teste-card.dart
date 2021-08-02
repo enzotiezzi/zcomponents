@@ -26,7 +26,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     listaSelecao = [
       ZSelectionItem(
           chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
-      ZSelectionItem(chave: "1", titulo: "1", valor: "1"),
+      ZSelectionItem(chave: "1", titulo: "Instalador de isolantes térmicos de caldeira e tubulações", valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
       ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
       ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
       ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
