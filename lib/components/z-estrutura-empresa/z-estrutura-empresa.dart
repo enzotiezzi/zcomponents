@@ -93,7 +93,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                   onPressed: () {
                                     if (onNodeSelected != null)
                                       onNodeSelected(
-                                          _bloc.selectedNode?.data as Nivel);
+                                          node.data as Nivel);
                                   }),
                               flex: 10,
                             )
