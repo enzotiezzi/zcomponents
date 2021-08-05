@@ -4,12 +4,17 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
+import 'package:z_components/components/z-selection/z-selection-item.dart';
+import 'package:z_components/components/z-selection/z-selection-list.dart';
+import 'package:z_components/components/z-text.dart';
+import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/config/z-tipo-textos.dart';
 
-class ZCollection extends StatefulWidget {
+class ZSelection extends StatefulWidget {
   final String titulo;
-  final List<ZCollectionItem> lista;
+  final List<ZSelectionItem> lista;
   final ThemeData themeData;
-  final ValueChanged<ZCollectionItem> onChange;
+  final ValueChanged<List<ZSelectionItem>> onChange;
   final String valorPadrao;
   final Color colorStyle;
   final int skip;
@@ -17,49 +22,49 @@ class ZCollection extends StatefulWidget {
   final bool campoObrigatorio;
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
-  Function(List<FilterExpression>, List<ZCollectionItem>) onScroll;
+  Function(List<FilterExpression>, List<ZSelectionItem>) onScroll;
 
-  ZCollection(
+  ZSelection(
       {Key key,
-        @required this.titulo,
-        @required this.lista,
-        @required this.themeData,
-        this.onChange,
-        this.valorPadrao,
-        this.colorStyle: const Color(0xff2bbab4),
-        this.skip: 0,
-        this.take: 0,
-        this.campoObrigatorio = false,
-        this.filtroPrincipal,
-        this.onFilter,
-        this.onScroll})
+      @required this.titulo,
+      @required this.lista,
+      @required this.themeData,
+      this.onChange,
+      this.valorPadrao,
+      this.colorStyle: const Color(0xff2bbab4),
+      this.skip: 0,
+      this.take: 0,
+      this.campoObrigatorio = false,
+      this.filtroPrincipal,
+      this.onFilter,
+      this.onScroll})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ZCollectionState();
+  State<StatefulWidget> createState() => ZSelectionState();
 }
 
-class ZCollectionState extends State<ZCollection> {
-  ZCollectionItem _itemSelecionado = new ZCollectionItem();
-  String _anterior = "Selecione";
-  GlobalKey<ZCollectionListState> keyLista =
-  new GlobalKey<ZCollectionListState>();
+class ZSelectionState extends State<ZSelection> {
+  List<ZSelectionItem> _itemSelecionado = new List<ZSelectionItem>();
+  GlobalKey<ZSelectionListState> keyLista =
+      new GlobalKey<ZSelectionListState>();
 
-  ZCollectionItem get itemSelecionado => _itemSelecionado;
+  List<ZSelectionItem> get itemSelecionado => _itemSelecionado;
+  List<ZSelectionItem> listaRespostas = [];
 
   @override
   void initState() {
-    buscarValorPadrao(widget.lista);
-    //setarvalor();
+    _montarListaRespostas();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
-      child: new Column(
-        children: <Widget>[
-          new Container(
+    return new Column(
+      children: <Widget>[
+        new GestureDetector(
+          onTap: _irParaSelecaoDeItemHorizontal,
+          child: new Container(
             height: 39,
             color: Colors.white,
             padding: EdgeInsets.only(left: 16.0, right: 14),
@@ -71,11 +76,8 @@ class ZCollectionState extends State<ZCollection> {
                     flex: 65,
                     fit: FlexFit.tight,
                     child: new Text(
-                      (_itemSelecionado?.valor == null &&
-                          _anterior == "Selecione")
-                          ? _anterior
-                          : _itemSelecionado?.valor,
-                      style:  _retornaCorTexto(),
+                      "Selecione",
+                      style: _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -91,74 +93,92 @@ class ZCollectionState extends State<ZCollection> {
               ],
             ),
           ),
-        ],
-      ),
-      onTap: _irParaSelecaoDeItemHorizontal,
+        ),
+        _montarTituloItensSelecionados(),
+        _montarItensSelecionados()
+      ],
     );
   }
-  Color _retornaCorIcon(){
-    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
-      return widget.themeData.primaryColor;
-    }
-    else{
-      return Colors.black;
+
+  Color _retornaCorIcon() {
+    return widget.themeData.primaryColor;
+  }
+
+  Widget _montarTituloItensSelecionados() {
+    if (listaRespostas.isEmpty) {
+      return new Container();
+    } else {
+      return new Column(
+        children: [
+          new Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: new ZText(
+              zTipos: ZTipoTextos.isTitulo,
+              tituloText: "Itens selecionados",
+            ),
+          ),
+          new Divider(
+            height: 1,
+          )
+        ],
+      );
     }
   }
 
-  TextStyle _retornaCorTexto(){
-    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
-      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.primaryColor);
-    }
-    else{
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
-    }
-  }
-
-
-  void atualizarLista(List<ZCollectionItem> lista) {
-    keyLista.currentState.atualizarLista(lista);
-  }
-
-  void buscarValorPadrao(List<ZCollectionItem> lista) {
-    if (lista != null && lista.length > 0) {
-      if (widget.valorPadrao != null) {
-        var vP =
-            lista.where((lista) => lista.chave == widget.valorPadrao).first;
-        if (vP != null) {
-          setState(() {
-            _itemSelecionado = vP;
+  Widget _montarItensSelecionados() {
+    if (listaRespostas.isEmpty) {
+      return new Container();
+    } else {
+      return new ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: listaRespostas.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                new ZTile(
+                  leading: new Text(
+                    listaRespostas[index].titulo,
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                new Divider(
+                  height: 1,
+                )
+              ],
+            );
           });
-        }
+    }
+  }
+
+  TextStyle _retornaCorTexto() {
+    return widget.themeData.textTheme.bodyText1
+        .copyWith(color: widget.themeData.primaryColor);
+  }
+
+  void _montarListaRespostas() {
+    listaRespostas.clear();
+    for (int i = 0; i < widget.lista.length; i++) {
+      if (widget.lista[i].selecionado) {
+        listaRespostas.add(widget.lista[i]);
       }
     }
   }
 
-  void setarvalor() {
-    if (_itemSelecionado?.valor != null) {
-      setState(() {
-        _anterior = _itemSelecionado?.valor;
-      });
-    }
+  void atualizarLista(List<ZSelectionItem> lista) {
+    keyLista.currentState.atualizarLista(lista);
   }
 
-/*
-  return ZCollectionList(
-  lista: widget.lista,
-  titulo: widget.titulo,
-  );
-*/
-
   void _irParaSelecaoDeItemHorizontal() async {
-    _itemSelecionado = await Navigator.push<ZCollectionItem>(
+    _itemSelecionado = await Navigator.push<List<ZSelectionItem>>(
         context,
         new PageRouteBuilder(
           pageBuilder: (BuildContext context, Animation animation,
               Animation secondaryAnimation) {
-            return ZCollectionList(
+            return ZSelectionList(
               key: keyLista,
               lista: widget.lista,
               titulo: widget.titulo,
-              ultimoValor: _itemSelecionado,
               color: widget.colorStyle,
               skip: widget.skip,
               take: widget.take,
@@ -187,6 +207,7 @@ class ZCollectionState extends State<ZCollection> {
             );
           },
         ));
+    _montarListaRespostas();
     if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
     setState(() {});
