@@ -4,6 +4,7 @@ import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
+
 class TelaTesteCard extends StatefulWidget {
   @override
   _TelaTesteCardState createState() => _TelaTesteCardState();
@@ -19,14 +20,18 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   TextEditingController bairro = new TextEditingController();
   TextEditingController complemento = new TextEditingController();
   TextEditingController estado = new TextEditingController();
-  List<ZCollectionItem> lista=[];
+  List<ZCollectionItem> lista = [];
 
   @override
   void initState() {
     listaSelecao = [
       ZSelectionItem(
           chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
-      ZSelectionItem(chave: "1", titulo: "Instalador de isolantes térmicos de caldeira e tubulações", valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
+      ZSelectionItem(
+          chave: "1",
+          titulo:
+              "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+          valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
       ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
       ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
       ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
@@ -47,6 +52,9 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ZSelectionItem(chave: "19", titulo: "19", valor: "19"),
       ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
+    setState(() {
+
+    });
     super.initState();
   }
 
@@ -75,17 +83,15 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               estadoController: estado,
               logradouroController: logradouro,
               numeroController: numero,
-              validacao: (bool){
+              validacao: (bool) {
                 print(bool);
               },
             ),
-
             ZCollection(
               titulo: "Teste",
               lista: lista,
               themeData: Theme.of(context),
             ),
-
             new Container(
               margin: EdgeInsets.only(top: 10),
               child: ZSelection(

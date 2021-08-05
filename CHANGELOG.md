@@ -1,3 +1,23 @@
+## 0.9.37+18
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+17
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+16
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+15
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+14
+
+* Ajuste ZSelection
+
 ## 0.9.37+13
 
 * Att ZSelection

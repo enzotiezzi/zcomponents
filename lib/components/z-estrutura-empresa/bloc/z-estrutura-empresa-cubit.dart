@@ -11,7 +11,7 @@ import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-emp
 
 class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     implements ZEstruturaEmpresaActions {
-  final String token;
+  bool carregou = false;
 
   TreeViewController _treeViewController;
   TextEditingController _searchTextController = new TextEditingController();
@@ -24,22 +24,22 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
   Node get selectedNode => state.selectedNode;
 
-  ZEstruturaEmpresaCubit({@required this.token})
+  ZEstruturaEmpresaCubit()
       : super(new ZEstruturaEmpresaCubitModel(
             nodes: [], selectedNode: null, niveis: [], isLoading: true)) {
-    _estruturaEmpresaService = new EstruturaEmpresaService(token);
-
     _treeViewController = new TreeViewController(children: []);
   }
 
   @override
-  Future<void> buscarEstruturaEmpresa() async {
+  Future<void> buscarEstruturaEmpresa(String token) async {
+    carregou = true;
     var searchOptions = new SearchOptions();
 
     searchOptions.orders
         .add(new OrderByExpression(propertyName: "Nome", orientation: "ASC"));
 
     emit(state.patchState(isLoading: true));
+    _estruturaEmpresaService = new EstruturaEmpresaService(token);
 
     var res = await _estruturaEmpresaService.listarNiveis(searchOptions);
 
@@ -55,7 +55,10 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
       _treeViewController = new TreeViewController(children: nodes);
 
       emit(state.patchState(
-          nodes: nodes, selectedNode: state.selectedNode, niveis: niveis, isLoading: false));
+          nodes: nodes,
+          selectedNode: state.selectedNode,
+          niveis: niveis,
+          isLoading: false));
     }
   }
 
@@ -119,7 +122,10 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   @override
   void selecionarNo(Node node) {
     emit(state.patchState(
-        nodes: state.nodes, selectedNode: node, niveis: state.niveis, isLoading: false));
+        nodes: state.nodes,
+        selectedNode: node,
+        niveis: state.niveis,
+        isLoading: false));
   }
 
   @override
@@ -131,6 +137,9 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     _treeViewController = new TreeViewController(children: nodes);
 
     emit(state.patchState(
-        selectedNode: state.selectedNode, niveis: state.niveis, nodes: nodes, isLoading: false));
+        selectedNode: state.selectedNode,
+        niveis: state.niveis,
+        nodes: nodes,
+        isLoading: false));
   }
 }
