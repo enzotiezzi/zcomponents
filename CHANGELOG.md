@@ -1,3 +1,7 @@
+## 0.9.37+19
+
+* Ajuste ZEstruturaEmpresa
+
 ## 0.9.37+18
 
 * Ajuste ZEstruturaEmpresa
