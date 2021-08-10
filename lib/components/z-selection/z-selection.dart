@@ -12,7 +12,7 @@ import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZSelection extends StatefulWidget {
   final String titulo;
-  final List<ZSelectionItem> lista;
+   List<ZSelectionItem> lista;
   final ThemeData themeData;
   final ValueChanged<List<ZSelectionItem>> onChange;
   final String valorPadrao;
@@ -157,6 +157,9 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   void _montarListaRespostas() {
+    if (_itemSelecionado != null) {
+      widget.lista = _itemSelecionado;
+    }
     listaRespostas.clear();
     for (int i = 0; i < widget.lista.length; i++) {
       if (widget.lista[i].selecionado) {
@@ -207,6 +210,7 @@ class ZSelectionState extends State<ZSelection> {
             );
           },
         ));
+
     _montarListaRespostas();
     if (widget.onChange != null) widget.onChange(_itemSelecionado);
 

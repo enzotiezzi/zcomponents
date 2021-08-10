@@ -23,7 +23,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
       this.onNodeSelected,
       this.onInfoSelected});
 
-  ZEstruturaEmpresaCubit _bloc;
+  ZEstruturaEmpresaCubit _bloc = new ZEstruturaEmpresaCubit();
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
     expanderTheme: ExpanderThemeData(
@@ -51,11 +51,11 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   if(!_bloc.carregou){
+     _bloc.buscarEstruturaEmpresa(token);
+   }
     return new BlocProvider(
         create: (context) {
-          _bloc = new ZEstruturaEmpresaCubit(token: token);
-
-          _bloc.buscarEstruturaEmpresa();
 
           return _bloc;
         },
@@ -107,7 +107,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                   onPressed: () {
                                     if (onNodeSelected != null)
                                       onNodeSelected(
-                                          _bloc.selectedNode?.data as Nivel);
+                                          node.data as Nivel);
                                   }),
                               flex: 10,
                             )
