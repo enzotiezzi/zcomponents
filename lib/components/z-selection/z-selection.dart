@@ -12,7 +12,7 @@ import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZSelection extends StatefulWidget {
   final String titulo;
-   List<ZSelectionItem> lista;
+  List<ZSelectionItem> lista;
   final ThemeData themeData;
   final ValueChanged<List<ZSelectionItem>> onChange;
   final String valorPadrao;
@@ -137,9 +137,14 @@ class ZSelectionState extends State<ZSelection> {
             return Column(
               children: [
                 new ZTile(
-                  leading: new Text(
-                    listaRespostas[index].titulo,
-                    style: TextStyle(color: Colors.grey),
+                  leading: new Container(
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    child: new Text(
+                      listaRespostas[index].titulo,
+                      style: TextStyle(color: Colors.grey),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 new Divider(

@@ -232,7 +232,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                     new Container(
                       padding: const EdgeInsets.only(right: 40, left: 40),
                       child: new Text(
-                        "PRÓXIMO",
+                        "SALVAR",
                         style: Theme.of(context)
                             .textTheme
                             .button

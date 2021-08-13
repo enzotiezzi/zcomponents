@@ -6,6 +6,7 @@ import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -16,12 +17,14 @@ class ZEstruturaEmpresa extends StatelessWidget {
   final GlobalKey key;
   final void Function(Nivel) onNodeSelected;
   final void Function() onInfoSelected;
+  final String header;
 
   ZEstruturaEmpresa(
       {@required this.token,
       @required this.key,
       this.onNodeSelected,
-      this.onInfoSelected});
+      this.onInfoSelected,
+      this.header});
 
   ZEstruturaEmpresaCubit _bloc = new ZEstruturaEmpresaCubit();
 
@@ -51,12 +54,11 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   if(!_bloc.carregou){
-     _bloc.buscarEstruturaEmpresa(token);
-   }
+    if (!_bloc.carregou) {
+      _bloc.buscarEstruturaEmpresa(token);
+    }
     return new BlocProvider(
         create: (context) {
-
           return _bloc;
         },
         child: new Scaffold(
@@ -106,8 +108,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                   ),
                                   onPressed: () {
                                     if (onNodeSelected != null)
-                                      onNodeSelected(
-                                          node.data as Nivel);
+                                      onNodeSelected(node.data as Nivel);
                                   }),
                               flex: 10,
                             )
@@ -123,6 +124,11 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
             return new Column(
               children: [
+                new ZHeader(
+                  child: new Text(header),
+                  titulo: header,
+                  elevation: 4,
+                ),
                 new Row(
                   children: <Widget>[
                     new Expanded(
