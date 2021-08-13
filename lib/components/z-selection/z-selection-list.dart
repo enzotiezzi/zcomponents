@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
+import 'package:z_components/components/z-selection/dialog-itens-selecionados.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-tile.dart';
+
+import '../../config/z-dialog.dart';
+import '../../styles/main-style.dart';
+import '../z-alert-dialog.dart';
 
 class ZSelectionList extends StatefulWidget {
   GlobalKey key;
@@ -40,6 +45,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   ScrollController scrollController;
   GlobalKey keyLista = new GlobalKey();
   String textoBusca = "";
+  List<ZSelectionItem> listaSelecao = [];
 
   @override
   void initState() {
@@ -62,20 +68,22 @@ class ZSelectionListState extends State<ZSelectionList> {
     return new Scaffold(
       backgroundColor: widget.theme.backgroundColor,
       appBar: new AppBar(
-          backgroundColor: widget.color,
-          leading: IconeVoltar(
-            context: context,
+        backgroundColor: widget.color,
+        leading: IconeVoltar(
+          context: context,
+        ),
+        centerTitle: true,
+        title: new Container(
+          child: new Text(
+            widget.titulo.toUpperCase(),
+            style: new TextStyle(color: Colors.white),
           ),
-          centerTitle: true,
-          title: new Container(
-            child: new Text(
-              widget.titulo.toUpperCase(),
-              style: new TextStyle(color: Colors.white),
-            ),
-          )),
+        ),
+      ),
       body: new Column(
         children: <Widget>[
           _buildFiltro(),
+          _montarExibicaoContadorSelecionados(),
           new Expanded(
               child: new Container(
             margin: EdgeInsets.only(top: 16.0),
@@ -175,32 +183,54 @@ class ZSelectionListState extends State<ZSelectionList> {
               alignment: Alignment.topCenter,
               color: Colors.white,
               child: new ZTile(
-                  onTap: () {
-                    setState(() {
-                      item.selecionado = !item.selecionado;
-                    });
-                  },
-                  leading: new Row(
-                    children: [
-                      new Checkbox(
-                          activeColor: Theme.of(context).primaryColor,
-                          value: item.selecionado,
-                          onChanged: (bool) {
-                            setState(() {
-                              item.selecionado = bool;
-                            });
-                          }),
-                      new Container(
-                        width: MediaQuery.of(context).size.width / 1.4,
-                        child: new Text(
-                          "${item.titulo ?? item.valor}",
-                          style: widget.theme.textTheme.bodyText1,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      )
-                    ],
-                  )),
+                onTap: () {
+                  setState(() {
+                    item.selecionado = !item.selecionado;
+
+                    if (item.selecionado) {
+                      listaSelecao.add(item);
+                    } else {
+                      for (int i = 0; i < listaSelecao.length; i++) {
+                        if (listaSelecao[i].chave == item.chave) {
+                          listaSelecao.removeAt(i);
+                          break;
+                        }
+                      }
+                    }
+                  });
+                },
+                leading: new Row(
+                  children: [
+                    new Container(
+                      width: MediaQuery.of(context).size.width / 1.4,
+                      child: new Text(
+                        "${item.titulo ?? item.valor}",
+                        style: widget.theme.textTheme.bodyText1,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )
+                  ],
+                ),
+                trailing: new Checkbox(
+                    activeColor: Theme.of(context).primaryColor,
+                    value: item.selecionado,
+                    onChanged: (bool) {
+                      setState(() {
+                        item.selecionado = bool;
+                        if (item.selecionado) {
+                          listaSelecao.add(item);
+                        } else {
+                          for (int i = 0; i < listaSelecao.length; i++) {
+                            if (listaSelecao[i].chave == item.chave) {
+                              listaSelecao.removeAt(i);
+                              break;
+                            }
+                          }
+                        }
+                      });
+                    }),
+              ),
             ),
             new Divider(
               height: 2,
@@ -210,6 +240,42 @@ class ZSelectionListState extends State<ZSelectionList> {
         );
       },
     );
+  }
+
+  Widget _montarExibicaoContadorSelecionados() {
+    String contador = listaSelecao.length.toString();
+    if (contador == "0") {
+      return new Container();
+    } else {
+      return GestureDetector(
+        onTap: () {
+          dialogItensSelecionados();
+        },
+        child: new Container(
+          color: Colors.white,
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              new Container(
+                padding: EdgeInsets.only(left: 16),
+                child: new Text("${widget.titulo} selecionados"),
+              ),
+              new Container(
+                margin: EdgeInsets.only(right: 16.0),
+                child: new Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(6)),
+                    padding: EdgeInsets.all(6),
+                    child: new Text(
+                      contador.padLeft(2, "0"),
+                    )),
+              )
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   Widget _exibirBotao() {
@@ -311,5 +377,15 @@ class ZSelectionListState extends State<ZSelectionList> {
         _listaFiltro = lista;
       });
     }
+  }
+
+  void dialogItensSelecionados() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => DialogItensSelecionados(
+        listaSelecao: listaSelecao,
+        theme: widget.theme,
+      )
+    );
   }
 }
