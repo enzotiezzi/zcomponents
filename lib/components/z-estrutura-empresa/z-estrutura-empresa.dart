@@ -6,6 +6,7 @@ import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -14,14 +15,18 @@ import 'package:z_components/view-model/conta.dart';
 class ZEstruturaEmpresa extends StatelessWidget {
   final String token;
   final GlobalKey key;
+  final bool headerAtivo;
   final void Function(Nivel) onNodeSelected;
   final void Function() onInfoSelected;
+  final String header;
 
   ZEstruturaEmpresa(
       {@required this.token,
-      @required this.key,
-      this.onNodeSelected,
-      this.onInfoSelected});
+        @required this.key,
+        this.onNodeSelected,
+        this.onInfoSelected,
+        this.headerAtivo=false,
+        this.header=""});
 
   ZEstruturaEmpresaCubit _bloc = new ZEstruturaEmpresaCubit();
 
@@ -51,12 +56,11 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   if(!_bloc.carregou){
-     _bloc.buscarEstruturaEmpresa(token);
-   }
+    if (!_bloc.carregou) {
+      _bloc.buscarEstruturaEmpresa(token);
+    }
     return new BlocProvider(
         create: (context) {
-
           return _bloc;
         },
         child: new Scaffold(
@@ -90,30 +94,29 @@ class ZEstruturaEmpresa extends StatelessWidget {
                     _bloc.selecionarNo(node);
                   },
                   nodeBuilder: (context, node) => new Container(
-                        padding: const EdgeInsets.all(4.0),
-                        child: new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            new Expanded(
-                              child: new Text(node.label),
-                              flex: 90,
-                            ),
-                            new Expanded(
-                              child: new IconButton(
-                                  icon: new Icon(
-                                    Icons.chevron_right,
-                                    color: MainStyle.APP_THEME,
-                                  ),
-                                  onPressed: () {
-                                    if (onNodeSelected != null)
-                                      onNodeSelected(
-                                          node.data as Nivel);
-                                  }),
-                              flex: 10,
-                            )
-                          ],
+                    padding: const EdgeInsets.all(4.0),
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        new Expanded(
+                          child: new Text(node.label),
+                          flex: 90,
                         ),
-                      )),
+                        new Expanded(
+                          child: new IconButton(
+                              icon: new Icon(
+                                Icons.chevron_right,
+                                color: MainStyle.APP_THEME,
+                              ),
+                              onPressed: () {
+                                if (onNodeSelected != null)
+                                  onNodeSelected(node.data as Nivel);
+                              }),
+                          flex: 10,
+                        )
+                      ],
+                    ),
+                  )),
             );
 
             if (state.isLoading)
@@ -123,6 +126,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
             return new Column(
               children: [
+                adicionarHeader(),
                 new Row(
                   children: <Widget>[
                     new Expanded(
@@ -134,7 +138,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: Color(0xfff0f0f0),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(9.0))),
+                              BorderRadius.all(Radius.circular(9.0))),
                           child: new Row(
                             children: <Widget>[
                               new Container(
@@ -145,17 +149,17 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                   )),
                               new Expanded(
                                   child: new CupertinoTextField(
-                                placeholderStyle: new TextStyle(
-                                    color: Color(0xff999999), fontSize: 17),
-                                keyboardType: TextInputType.text,
-                                controller: _bloc.searchTextController,
-                                onChanged: (value) {
-                                  _bloc.filtrarEstruturaEmpresa(value);
-                                },
-                                placeholder: "Buscar",
-                                decoration: new BoxDecoration(
-                                    color: Colors.transparent),
-                              )),
+                                    placeholderStyle: new TextStyle(
+                                        color: Color(0xff999999), fontSize: 17),
+                                    keyboardType: TextInputType.text,
+                                    controller: _bloc.searchTextController,
+                                    onChanged: (value) {
+                                      _bloc.filtrarEstruturaEmpresa(value);
+                                    },
+                                    placeholder: "Buscar",
+                                    decoration: new BoxDecoration(
+                                        color: Colors.transparent),
+                                  )),
                             ],
                           ),
                         ),
@@ -176,5 +180,17 @@ class ZEstruturaEmpresa extends StatelessWidget {
             );
           }),
         ));
+  }
+
+  Widget adicionarHeader(){
+    if(headerAtivo == false){
+      return new Container();
+    }else{
+      return new ZHeader(
+        child: new Text(header),
+        titulo: header,
+        elevation: 4,
+      );
+    }
   }
 }

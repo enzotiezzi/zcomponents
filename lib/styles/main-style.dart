@@ -61,7 +61,7 @@ class MainStyle {
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: Color(0xFF801F92),
+                            cursorColor: themeData.primaryColor,
                             style: themeData.textTheme.bodyText1
                                 .copyWith(color: corTexto(themeData, enabled)),
                             inputFormatters: [
@@ -83,7 +83,7 @@ class MainStyle {
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: Color(0xFF801F92)),
+                                    BorderSide(color: themeData.primaryColor),
                               ),
                             ),
                             onChanged: onChange,
@@ -95,7 +95,7 @@ class MainStyle {
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: Color(0xFF801F92),
+                            cursorColor: themeData.primaryColor,
                             style: themeData.textTheme.bodyText1
                                 .copyWith(color: corTexto(themeData, enabled)),
                             onSubmitted: (text) {
@@ -114,7 +114,7 @@ class MainStyle {
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: Color(0xFF801F92)),
+                                    BorderSide(color: themeData.primaryColor),
                               ),
                             ),
                             onChanged: onChange,
