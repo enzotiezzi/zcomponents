@@ -157,7 +157,7 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   void _montarListaRespostas() {
-    if (_itemSelecionado != null) {
+    if (_itemSelecionado != null&& _itemSelecionado.isNotEmpty) {
       widget.lista = _itemSelecionado;
     }
     listaRespostas.clear();
