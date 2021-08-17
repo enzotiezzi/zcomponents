@@ -82,7 +82,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             focusNode: widget.inputPadraoFocus,
                             obscureText: widget.obscureText,
                             controller: widget.controllerInputPadrao,
-                            cursorColor: Color(0xFF801F92),
+                            cursorColor: widget.themeData.primaryColor,
                             style: widget.themeData.textTheme.bodyText1
                                 .copyWith(
                                     color: corTexto(
@@ -111,7 +111,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: Color(0xFF801F92)),
+                                    BorderSide(color: widget.themeData.primaryColor),
                               ),
                             ),
                             onChanged: (text) {
@@ -127,7 +127,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             focusNode: widget.inputPadraoFocus,
                             obscureText: widget.obscureText,
                             controller: widget.controllerInputPadrao,
-                            cursorColor: Color(0xFF801F92),
+                            cursorColor: widget.themeData.primaryColor,
                             style: widget.themeData.textTheme.bodyText1
                                 .copyWith(
                                     color: corTexto(
@@ -154,7 +154,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: Color(0xFF801F92)),
+                                    BorderSide(color: widget.themeData.primaryColor),
                               ),
                             ),
                             onChanged: (text) {
