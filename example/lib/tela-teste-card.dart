@@ -4,6 +4,17 @@ import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-inputs/z-input-email.dart';
+import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
+import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
+import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
+import 'package:z_components/components/z-inputs/z-input-name.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
+import 'package:z_components/components/z-inputs/z-input-telefone-fixo.dart';
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -13,6 +24,8 @@ class TelaTesteCard extends StatefulWidget {
 class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ZSelectionItem> listaSelecao = [];
 
+  final zEstrutura = GlobalKey();
+
   TextEditingController cep = new TextEditingController();
   TextEditingController logradouro = new TextEditingController();
   TextEditingController numero = new TextEditingController();
@@ -21,6 +34,17 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   TextEditingController complemento = new TextEditingController();
   TextEditingController estado = new TextEditingController();
   List<ZCollectionItem> lista = [];
+
+  GlobalKey<ZCollectionState> keyPorte =
+  new GlobalKey<ZCollectionState>();
+
+  List<ZCollectionItem> listaPorte = [
+    ZCollectionItem(valor: "T-E-S-T", chave: "TesteChave", titulo: "Teste"),
+    ZCollectionItem(valor: "Teste2", chave: "Teste2", titulo: "Teste2"),
+    ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3"),
+    ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
+    ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
+  ];
 
   @override
   void initState() {
