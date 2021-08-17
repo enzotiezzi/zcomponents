@@ -14,7 +14,7 @@ class ZSelection extends StatefulWidget {
   final String titulo;
   List<ZSelectionItem> lista;
   final ThemeData themeData;
-  final ValueChanged<List<ZSelectionItem>> onChange;
+  final ValueChanged<List<List<ZSelectionItem>>> onChange;
   final String valorPadrao;
   final Color colorStyle;
   final int skip;
@@ -23,6 +23,8 @@ class ZSelection extends StatefulWidget {
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
   Function(List<FilterExpression>, List<ZSelectionItem>) onScroll;
+  Function() onAdd;
+  String textoOnAdd;
 
   ZSelection(
       {Key key,
@@ -37,7 +39,9 @@ class ZSelection extends StatefulWidget {
       this.campoObrigatorio = false,
       this.filtroPrincipal,
       this.onFilter,
-      this.onScroll})
+      this.onScroll,
+      this.textoOnAdd,
+      this.onAdd})
       : super(key: key);
 
   @override
@@ -45,11 +49,11 @@ class ZSelection extends StatefulWidget {
 }
 
 class ZSelectionState extends State<ZSelection> {
-  List<ZSelectionItem> _itemSelecionado = new List<ZSelectionItem>();
+  List<List<ZSelectionItem>> _itemSelecionado = new  List<List<ZSelectionItem>>();
   GlobalKey<ZSelectionListState> keyLista =
       new GlobalKey<ZSelectionListState>();
 
-  List<ZSelectionItem> get itemSelecionado => _itemSelecionado;
+  List<List<ZSelectionItem>> get itemSelecionado => _itemSelecionado;
   List<ZSelectionItem> listaRespostas = [];
 
   @override
@@ -162,8 +166,8 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   void _montarListaRespostas() {
-    if (_itemSelecionado != null&& _itemSelecionado.isNotEmpty) {
-      widget.lista = _itemSelecionado;
+    if (_itemSelecionado != null && _itemSelecionado.isNotEmpty) {
+      widget.lista = _itemSelecionado[0];
     }
     listaRespostas.clear();
     for (int i = 0; i < widget.lista.length; i++) {
@@ -178,7 +182,7 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   void _irParaSelecaoDeItemHorizontal() async {
-    _itemSelecionado = await Navigator.push<List<ZSelectionItem>>(
+    _itemSelecionado = await Navigator.push<List<List<ZSelectionItem>>>(
         context,
         new PageRouteBuilder(
           pageBuilder: (BuildContext context, Animation animation,
@@ -194,6 +198,8 @@ class ZSelectionState extends State<ZSelection> {
               onChange: widget.onFilter,
               filtroPrincipal: widget.filtroPrincipal,
               onScroll: widget.onScroll,
+              onAdd: widget.onAdd,
+              textoOnAdd: widget.textoOnAdd,
             );
           },
           transitionsBuilder: (BuildContext context,

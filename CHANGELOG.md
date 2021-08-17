@@ -1,3 +1,15 @@
+## 0.9.37+25
+
+* Ajuste ZSelection
+
+## 0.9.37+24
+
+* Ajuste ZSelection
+
+## 0.9.37+23
+
+* Ajuste ZSelection
+
 ## 0.9.37+22
 
 * Ajuste header ZEstrutura

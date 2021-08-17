@@ -98,7 +98,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                   themeData: Theme.of(context),
                   titulo: "Teste Seleção",
                   onChange: (value) {
-                    listaSelecao = value;
+                    listaSelecao = value[0];
                   },
                   lista: listaSelecao),
             )
