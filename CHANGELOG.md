@@ -1,3 +1,31 @@
+## 0.9.37+26
+
+* Ajuste ZSelection
+
+## 0.9.37+25
+
+* Ajuste ZSelection
+
+## 0.9.37+24
+
+* Ajuste ZSelection
+
+## 0.9.37+23
+
+* Ajuste ZSelection
+
+## 0.9.37+22
+
+* Ajuste header ZEstrutura
+
+## 0.9.37+21
+
+* Ajuste header ZEstrutura
+
+## 0.9.37+20
+
+* Ajuste ZSelection
+
 ## 0.9.37+19
 
 * Ajuste ZEstruturaEmpresa

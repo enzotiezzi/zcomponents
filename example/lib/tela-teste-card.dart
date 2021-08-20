@@ -85,12 +85,50 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ZEstruturaEmpresa(
-        key: zEstrutura,
-        token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjA5MGQ1Y2IyMTNiYmQ2OTVhMWZmNmFlNWUwMzUxNGI2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MjkyMDg5NjksImV4cCI6MTYyOTIxMjU2OSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpSZWNydXRhbWVudG8iLCJzdWIiOiIwMjFmOTE4Mi0zZjQxLTRmMGEtYWFkYy00MDc3NmU2MGQwNGMiLCJhdXRoX3RpbWUiOjE2MjkxMjQ5MzMsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiIzS0U2RUNEUlRIR0dYQURBTUNXR1pHQUVEWDJEM1lPTCIsImFjY291bnQiOiJaZWxsYXIyIiwiaWRBY2NvdW50IjoiOGU2ZWI2MzItYjcwNy00MTNmLWExNTItM2NmZmQxZjk4MmI1IiwiaWRDb2xhYm9yYWRvciI6IjE1ODQyQzJFLUM3RDctNERENS04RkE5LUZFMzNDQkQ2NENFQyIsInByZWZlcnJlZF91c2VybmFtZSI6IjQyNi45MTAuMjU4LTYxIiwiZW1haWwiOiJsdWl6Lmx1Y2lhQHplbGxhci5jb20uYnIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlcl92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJMdWl6IEx1Y2lhIE5ldG8iLCJwaG9uZV9udW1iZXIiOiIxMTk0ODQ4NDEyMCIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.gp8ar4GcW1N8-1Kw1DwweBkzNFaztgurgJVW5elWunJ_GnZVyvPJUnSbzYYwVgMWfkdohAe2Wr4xE6WHCQSBgnPmWXnD_-j9xHuye52CW9oheUDAm2r_NBj9OyhTJXRpaiBJZuqDfYyq7Fhl9LiBLyEgkxZB4DLpEMmKfUQ7CFeyjaP4hAi1iICGtRnyw9z-VK22QwK7kvCwd3ru-Il1cdb5ZVS20addrPbaNSSGXHd0bBJdcB7ruWskMRmRnVoVp8dwY6yM4KWRNpa5K0k9GmQPYuYpJ53FZTLKonAV0exZ6f0oyaJRJoGKmtmICuYWUgaMBF0yGNe2egTxbRi9Ng",
-        onNodeSelected: (nivel){},
-        onInfoSelected: (){},
-      )
+      appBar: new AppBar(
+        centerTitle: true,
+        title: new Container(
+          child: new Text(
+            "Teste dos cards",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ZInputEndereco(
+              themeData: Theme.of(context),
+              campoObrigatorio: true,
+              cepController: cep,
+              bairroController: bairro,
+              cidadeController: cidade,
+              complementoController: complemento,
+              estadoController: estado,
+              logradouroController: logradouro,
+              numeroController: numero,
+              validacao: (bool) {
+                print(bool);
+              },
+            ),
+            ZCollection(
+              titulo: "Teste",
+              lista: lista,
+              themeData: Theme.of(context),
+            ),
+            new Container(
+              margin: EdgeInsets.only(top: 10),
+              child: ZSelection(
+                  themeData: Theme.of(context),
+                  titulo: "Teste Seleção",
+                  onChange: (value) {
+                    listaSelecao = value[0];
+                  },
+                  lista: listaSelecao),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

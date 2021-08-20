@@ -22,6 +22,8 @@ class ZSelectionList extends StatefulWidget {
   int take;
   Function(List<FilterExpression>) onChange;
   Function(List<FilterExpression>, List<ZSelectionItem>) onScroll;
+  Function() onAdd;
+  String textoOnAdd;
 
   ZSelectionList(
       {this.lista,
@@ -33,7 +35,9 @@ class ZSelectionList extends StatefulWidget {
       this.take: 0,
       this.onChange,
       this.filtroPrincipal,
-      this.onScroll})
+      this.onScroll,
+      this.onAdd,
+      this.textoOnAdd})
       : super(key: key);
 
   @override
@@ -89,10 +93,40 @@ class ZSelectionListState extends State<ZSelectionList> {
             margin: EdgeInsets.only(top: 16.0),
             child: _buildLista(),
           )),
+          montarAddMais(),
           _exibirBotao()
         ],
       ),
     );
+  }
+
+  Widget montarAddMais() {
+    if (widget.textoOnAdd == null || widget.textoOnAdd.isEmpty) {
+      return new Container();
+    } else {
+      return new Column(
+        children: [
+          new Divider(
+            height: 1,
+          ),
+          new ZTile(
+            onTap: () {
+              widget.onAdd();
+            },
+            leading: new Text(widget.textoOnAdd),
+            trailing: new IconButton(
+                icon: Icon(
+                  Icons.add,
+                  color: widget.theme.primaryColor,
+                ),
+                onPressed: () {}),
+          ),
+          new Divider(
+            height: 1,
+          ),
+        ],
+      );
+    }
   }
 
   Widget _buildFiltro() {
@@ -248,8 +282,9 @@ class ZSelectionListState extends State<ZSelectionList> {
       return new Container();
     } else {
       return GestureDetector(
-        onTap: () {
-          dialogItensSelecionados();
+        onTap: () async {
+          await dialogItensSelecionados();
+          if (mounted) setState(() {});
         },
         child: new Container(
           color: Colors.white,
@@ -298,7 +333,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                     new Container(
                       padding: const EdgeInsets.only(right: 40, left: 40),
                       child: new Text(
-                        "PRÓXIMO",
+                        "SALVAR",
                         style: Theme.of(context)
                             .textTheme
                             .button
@@ -321,7 +356,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   void _selecionarItem(List<ZSelectionItem> item) {
-    Navigator.of(context).pop(item);
+    Navigator.of(context).pop([item, listaSelecao]);
   }
 
   Future<void> _initList() {
@@ -379,13 +414,27 @@ class ZSelectionListState extends State<ZSelectionList> {
     }
   }
 
-  void dialogItensSelecionados() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => DialogItensSelecionados(
-        listaSelecao: listaSelecao,
-        theme: widget.theme,
-      )
-    );
+  Future<void> dialogItensSelecionados() async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DialogItensSelecionados(
+                  listaSelecao: listaSelecao,
+                  theme: widget.theme,
+                  keyListagemSelecao: widget.key,
+                )));
+  }
+
+  void atualizarListas(List<ZSelectionItem> listaAtualizado) {
+    listaSelecao = listaAtualizado;
+
+    for (int i = 0; i < _listaFiltro.length; i++) {
+      _listaFiltro[i].selecionado = false;
+      for (int j = 0; j < listaSelecao.length; j++) {
+        if (_listaFiltro[i].chave == listaSelecao[j].chave) {
+          _listaFiltro[i].selecionado = true;
+        }
+      }
+    }
   }
 }
