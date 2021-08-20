@@ -31,7 +31,7 @@ class ZInputEndereco extends StatefulWidget {
 
 class _ZInputEnderecoState extends State<ZInputEndereco> {
   String endereco;
-  String _anterior = "Selecione seu endereço";
+  String _anterior = "Preencha seu endereço";
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
                     child: new Text(
                       (endereco == null ||
                               endereco.isEmpty &&
-                                  _anterior.contains("Selecione"))
+                                  _anterior.contains("Preencha"))
                           ? _anterior
                           : endereco,
                       style: _retornaCorTexto(),
@@ -99,7 +99,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
 
   Color _retornaCorIcon() {
     if (endereco == null ||
-        endereco.isEmpty && _anterior.contains("Selecione")) {
+        endereco.isEmpty && _anterior.contains("Preencha")) {
       return widget.themeData.primaryColor;
     } else {
       return Colors.black;
@@ -108,7 +108,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
 
   TextStyle _retornaCorTexto() {
     if (endereco == null ||
-        endereco.isEmpty && _anterior.contains("Selecione")) {
+        endereco.isEmpty && _anterior.contains("Preencha")) {
       return widget.themeData.textTheme.bodyText1
           .copyWith(color: widget.themeData.primaryColor);
     } else {
