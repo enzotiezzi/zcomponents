@@ -127,53 +127,56 @@ class ZEstruturaEmpresa extends StatelessWidget {
             return new Column(
               children: [
                 adicionarHeader(),
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                      flex: 85,
-                      child: new Container(
-                        margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                new Container(
+                  color: Colors.white,
+                  child: new Row(
+                    children: <Widget>[
+                      new Expanded(
+                        flex: 85,
                         child: new Container(
-                          margin: EdgeInsets.only(left: 16, right: 2),
-                          decoration: BoxDecoration(
-                              color: Color(0xfff0f0f0),
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(9.0))),
-                          child: new Row(
-                            children: <Widget>[
-                              new Container(
-                                  padding: EdgeInsets.only(left: 8.0),
-                                  child: new Icon(
-                                    Icons.search,
-                                    color: Color(0xff999999),
-                                  )),
-                              new Expanded(
-                                  child: new CupertinoTextField(
-                                    placeholderStyle: new TextStyle(
-                                        color: Color(0xff999999), fontSize: 17),
-                                    keyboardType: TextInputType.text,
-                                    controller: _bloc.searchTextController,
-                                    onChanged: (value) {
-                                      _bloc.filtrarEstruturaEmpresa(value);
-                                    },
-                                    placeholder: "Buscar",
-                                    decoration: new BoxDecoration(
-                                        color: Colors.transparent),
-                                  )),
-                            ],
+                          margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                          child: new Container(
+                            margin: EdgeInsets.only(left: 16, right: 2),
+                            decoration: BoxDecoration(
+                                color: Color(0xfff0f0f0),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(9.0))),
+                            child: new Row(
+                              children: <Widget>[
+                                new Container(
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: new Icon(
+                                      Icons.search,
+                                      color: Color(0xff999999),
+                                    )),
+                                new Expanded(
+                                    child: new CupertinoTextField(
+                                      placeholderStyle: new TextStyle(
+                                          color: Color(0xff999999), fontSize: 17),
+                                      keyboardType: TextInputType.text,
+                                      controller: _bloc.searchTextController,
+                                      onChanged: (value) {
+                                        _bloc.filtrarEstruturaEmpresa(value);
+                                      },
+                                      placeholder: "Buscar",
+                                      decoration: new BoxDecoration(
+                                          color: Colors.transparent),
+                                    )),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    new Expanded(
-                        flex: 15,
-                        child: new IconButton(
-                          icon: new Icon(
-                            Icons.filter_list_outlined,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        )),
-                  ],
+                      new Expanded(
+                          flex: 15,
+                          child: new IconButton(
+                            icon: new Icon(
+                              Icons.filter_list_outlined,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          )),
+                    ],
+                  ),
                 ),
                 new Expanded(child: widget)
               ],
