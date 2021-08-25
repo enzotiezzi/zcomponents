@@ -23,6 +23,8 @@ class TelaTesteCard extends StatefulWidget {
 
 class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ZSelectionItem> listaSelecao = [];
+  List<ZSelectionItem> listaSelecaoRespostas = [];
+
 
   final zEstrutura = GlobalKey();
 
@@ -35,8 +37,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   TextEditingController estado = new TextEditingController();
   List<ZCollectionItem> lista = [];
 
-  GlobalKey<ZCollectionState> keyPorte =
-  new GlobalKey<ZCollectionState>();
+  GlobalKey<ZCollectionState> keyPorte = new GlobalKey<ZCollectionState>();
 
   List<ZCollectionItem> listaPorte = [
     ZCollectionItem(valor: "T-E-S-T", chave: "TesteChave", titulo: "Teste"),
@@ -54,7 +55,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ZSelectionItem(
           chave: "1",
           titulo:
-              "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+          "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
           valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
       ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
       ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
@@ -76,9 +77,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ZSelectionItem(chave: "19", titulo: "19", valor: "19"),
       ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
-    setState(() {
-
-    });
+    setState(() {});
     super.initState();
   }
 
@@ -120,9 +119,10 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               margin: EdgeInsets.only(top: 10),
               child: ZSelection(
                   themeData: Theme.of(context),
+                  listaRespostas: [],
                   titulo: "Teste Seleção",
                   onChange: (value) {
-                    listaSelecao = value[0];
+                    listaSelecaoRespostas = value[1];
                   },
                   lista: listaSelecao),
             )
