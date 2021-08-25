@@ -15,6 +15,9 @@ import 'package:z_components/components/z-inputs/z-input-telefone-fixo.dart';
 import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/config/z-dialog.dart';
+import 'package:z_components/styles/main-style.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -24,7 +27,6 @@ class TelaTesteCard extends StatefulWidget {
 class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ZSelectionItem> listaSelecao = [];
   List<ZSelectionItem> listaSelecaoRespostas = [];
-
 
   final zEstrutura = GlobalKey();
 
@@ -55,7 +57,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ZSelectionItem(
           chave: "1",
           titulo:
-          "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+              "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
           valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
       ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
       ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
@@ -83,51 +85,17 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        centerTitle: true,
-        title: new Container(
-          child: new Text(
-            "Teste dos cards",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ZInputEndereco(
-              themeData: Theme.of(context),
-              campoObrigatorio: true,
-              cepController: cep,
-              bairroController: bairro,
-              cidadeController: cidade,
-              complementoController: complemento,
-              estadoController: estado,
-              logradouroController: logradouro,
-              numeroController: numero,
-              validacao: (bool) {
-                print(bool);
-              },
-            ),
-            ZCollection(
-              titulo: "Teste",
-              lista: lista,
-              themeData: Theme.of(context),
-            ),
-            new Container(
-              margin: EdgeInsets.only(top: 10),
-              child: ZSelection(
-                  themeData: Theme.of(context),
-                  listaRespostas: [],
-                  titulo: "Teste Seleção",
-                  onChange: (value) {
-                    listaSelecaoRespostas = value[1];
-                  },
-                  lista: listaSelecao),
-            )
-          ],
-        ),
+    return new Scaffold(
+      body: new Container(
+        margin: EdgeInsets.only(top: 10),
+        child: ZSelection(
+            themeData: Theme.of(context),
+            listaRespostas: [],
+            titulo: "Teste Seleção",
+            onChange: (value) {
+              listaSelecaoRespostas = value[1];
+            },
+            lista: listaSelecao),
       ),
     );
   }

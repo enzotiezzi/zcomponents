@@ -1,3 +1,7 @@
+## 0.9.37+27
+
+* Ajuste ZSelection
+
 ## 0.9.37+26
 
 * Ajuste ZSelection
