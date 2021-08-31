@@ -13,6 +13,7 @@ import 'package:z_components/config/z-tipo-textos.dart';
 class ZSelection extends StatefulWidget {
   final String titulo;
   List<ZSelectionItem> lista;
+  List<ZSelectionItem> listaRespostas;
   final ThemeData themeData;
   final ValueChanged<List<List<ZSelectionItem>>> onChange;
   final String valorPadrao;
@@ -41,7 +42,8 @@ class ZSelection extends StatefulWidget {
       this.onFilter,
       this.onScroll,
       this.textoOnAdd,
-      this.onAdd})
+      this.onAdd,
+      this.listaRespostas})
       : super(key: key);
 
   @override
@@ -49,18 +51,12 @@ class ZSelection extends StatefulWidget {
 }
 
 class ZSelectionState extends State<ZSelection> {
-  List<List<ZSelectionItem>> _itemSelecionado = new  List<List<ZSelectionItem>>();
+  List<List<ZSelectionItem>> _itemSelecionado =
+      new List<List<ZSelectionItem>>();
   GlobalKey<ZSelectionListState> keyLista =
       new GlobalKey<ZSelectionListState>();
 
   List<List<ZSelectionItem>> get itemSelecionado => _itemSelecionado;
-  List<ZSelectionItem> listaRespostas = [];
-
-  @override
-  void initState() {
-    _montarListaRespostas();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +105,7 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   Widget _montarTituloItensSelecionados() {
-    if (listaRespostas.isEmpty) {
+    if (widget.listaRespostas.isEmpty) {
       return new Container();
     } else {
       return new Column(
@@ -130,24 +126,34 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   Widget _montarItensSelecionados() {
-    if (listaRespostas.isEmpty) {
+    if (widget.listaRespostas.isEmpty) {
       return new Container();
     } else {
       return new ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: listaRespostas.length,
+          itemCount: widget.listaRespostas.length,
           itemBuilder: (context, index) {
             return Column(
               children: [
                 new ZTile(
                   leading: new Container(
-                    width: MediaQuery.of(context).size.width / 1.2,
+                    width: MediaQuery.of(context).size.width / 1.4,
                     child: new Text(
-                      listaRespostas[index].titulo,
-                      style: TextStyle(color: Colors.grey),
+                      widget.listaRespostas[index].titulo,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  trailing: new IconButton(
+                    onPressed: () {
+                      widget.listaRespostas.removeAt(index);
+                      widget.onChange(_itemSelecionado);
+                      setState(() {});
+                    },
+                    icon: Icon(
+                      Icons.remove_circle_outline,
+                      color: Colors.red,
                     ),
                   ),
                 ),
@@ -163,18 +169,6 @@ class ZSelectionState extends State<ZSelection> {
   TextStyle _retornaCorTexto() {
     return widget.themeData.textTheme.bodyText1
         .copyWith(color: widget.themeData.primaryColor);
-  }
-
-  void _montarListaRespostas() {
-    if (_itemSelecionado != null && _itemSelecionado.isNotEmpty) {
-      widget.lista = _itemSelecionado[0];
-    }
-    listaRespostas.clear();
-    for (int i = 0; i < widget.lista.length; i++) {
-      if (widget.lista[i].selecionado) {
-        listaRespostas.add(widget.lista[i]);
-      }
-    }
   }
 
   void atualizarLista(List<ZSelectionItem> lista) {
@@ -200,6 +194,7 @@ class ZSelectionState extends State<ZSelection> {
               onScroll: widget.onScroll,
               onAdd: widget.onAdd,
               textoOnAdd: widget.textoOnAdd,
+              listaSelecao: widget.listaRespostas ?? [],
             );
           },
           transitionsBuilder: (BuildContext context,
@@ -221,11 +216,13 @@ class ZSelectionState extends State<ZSelection> {
             );
           },
         ));
+    if (_itemSelecionado != null) {
+      widget.listaRespostas = _itemSelecionado[1];
 
-    _montarListaRespostas();
-    if (widget.onChange != null) widget.onChange(_itemSelecionado);
+      if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
-    setState(() {});
+      setState(() {});
+    }
   }
 
   Widget _returnRequiredField() {

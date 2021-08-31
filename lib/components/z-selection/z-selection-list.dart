@@ -24,6 +24,7 @@ class ZSelectionList extends StatefulWidget {
   Function(List<FilterExpression>, List<ZSelectionItem>) onScroll;
   Function() onAdd;
   String textoOnAdd;
+  List<ZSelectionItem> listaSelecao;
 
   ZSelectionList(
       {this.lista,
@@ -37,7 +38,8 @@ class ZSelectionList extends StatefulWidget {
       this.filtroPrincipal,
       this.onScroll,
       this.onAdd,
-      this.textoOnAdd})
+      this.textoOnAdd,
+      this.listaSelecao})
       : super(key: key);
 
   @override
@@ -49,13 +51,13 @@ class ZSelectionListState extends State<ZSelectionList> {
   ScrollController scrollController;
   GlobalKey keyLista = new GlobalKey();
   String textoBusca = "";
-  List<ZSelectionItem> listaSelecao = [];
 
   @override
   void initState() {
     _listaFiltro = <ZSelectionItem>[];
     scrollController = new ScrollController();
     scrollController.addListener(_scrollListener);
+    montarRespostas();
     _initList();
     super.initState();
   }
@@ -98,6 +100,17 @@ class ZSelectionListState extends State<ZSelectionList> {
         ],
       ),
     );
+  }
+
+  void montarRespostas() {
+    for (int i = 0; i < widget.listaSelecao.length; i++) {
+      for (int j = 0; j < widget.lista.length; j++) {
+        widget.lista[j].selecionado = false;
+        if (widget.listaSelecao[i].chave == widget.lista[j].chave) {
+          widget.lista[j].selecionado = true;
+        }
+      }
+    }
   }
 
   Widget montarAddMais() {
@@ -222,11 +235,11 @@ class ZSelectionListState extends State<ZSelectionList> {
                     item.selecionado = !item.selecionado;
 
                     if (item.selecionado) {
-                      listaSelecao.add(item);
+                      widget.listaSelecao.add(item);
                     } else {
-                      for (int i = 0; i < listaSelecao.length; i++) {
-                        if (listaSelecao[i].chave == item.chave) {
-                          listaSelecao.removeAt(i);
+                      for (int i = 0; i < widget.listaSelecao.length; i++) {
+                        if (widget.listaSelecao[i].chave == item.chave) {
+                          widget.listaSelecao.removeAt(i);
                           break;
                         }
                       }
@@ -253,11 +266,11 @@ class ZSelectionListState extends State<ZSelectionList> {
                       setState(() {
                         item.selecionado = bool;
                         if (item.selecionado) {
-                          listaSelecao.add(item);
+                          widget.listaSelecao.add(item);
                         } else {
-                          for (int i = 0; i < listaSelecao.length; i++) {
-                            if (listaSelecao[i].chave == item.chave) {
-                              listaSelecao.removeAt(i);
+                          for (int i = 0; i < widget.listaSelecao.length; i++) {
+                            if (widget.listaSelecao[i].chave == item.chave) {
+                              widget.listaSelecao.removeAt(i);
                               break;
                             }
                           }
@@ -277,7 +290,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   Widget _montarExibicaoContadorSelecionados() {
-    String contador = listaSelecao.length.toString();
+    String contador = widget.listaSelecao.length.toString();
     if (contador == "0") {
       return new Container();
     } else {
@@ -302,6 +315,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                         color: Colors.grey.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(6)),
                     padding: EdgeInsets.all(6),
+                    margin: EdgeInsets.only(top: 8, bottom: 8),
                     child: new Text(
                       contador.padLeft(2, "0"),
                     )),
@@ -356,7 +370,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   void _selecionarItem(List<ZSelectionItem> item) {
-    Navigator.of(context).pop([item, listaSelecao]);
+    Navigator.of(context).pop([item, widget.listaSelecao]);
   }
 
   Future<void> _initList() {
@@ -419,19 +433,19 @@ class ZSelectionListState extends State<ZSelectionList> {
         context,
         MaterialPageRoute(
             builder: (context) => DialogItensSelecionados(
-                  listaSelecao: listaSelecao,
+                  listaSelecao: widget.listaSelecao,
                   theme: widget.theme,
                   keyListagemSelecao: widget.key,
                 )));
   }
 
   void atualizarListas(List<ZSelectionItem> listaAtualizado) {
-    listaSelecao = listaAtualizado;
+    widget.listaSelecao = listaAtualizado;
 
     for (int i = 0; i < _listaFiltro.length; i++) {
       _listaFiltro[i].selecionado = false;
-      for (int j = 0; j < listaSelecao.length; j++) {
-        if (_listaFiltro[i].chave == listaSelecao[j].chave) {
+      for (int j = 0; j < widget.listaSelecao.length; j++) {
+        if (_listaFiltro[i].chave == widget.listaSelecao[j].chave) {
           _listaFiltro[i].selecionado = true;
         }
       }
