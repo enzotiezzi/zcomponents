@@ -12,6 +12,8 @@ import 'package:z_components/settings/api-settings.dart';
 import 'i-identity-server.dart';
 
 class IdentityServer implements IIdentityServer {
+  static final String address = "identity-server-dev.zellar.com.br";
+
   String clientId;
   String redirectUrl;
   List<String> scopes;
@@ -130,7 +132,7 @@ class IdentityServer implements IIdentityServer {
       Dio dio = new Dio();
 
       var response = await dio.get(
-        "https://identity-server-dev.zellar.com.br/connect/userinfo",
+        "https://${IdentityServer.address}/connect/userinfo",
         options: Options(
           headers: {
             HttpHeaders.authorizationHeader: "Bearer $token",

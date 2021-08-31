@@ -1,4 +1,5 @@
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/components/z-identity-server/js-channels.dart';
 
 class ZRegisterUser {
@@ -12,19 +13,19 @@ class ZRegisterUser {
 
     additionalParameters.addAll({"inApp": "true", "tipoSenha": "pin"});
 
-    var uri = new Uri.https("identity-server-dev.zellar.com.br",
+    var uri = new Uri.https(IdentityServer.address,
         "/account/register", additionalParameters);
 
     await _flutterWebviewPlugin.launch(uri.toString(),
         javascriptChannels: <JavascriptChannel>[
-          JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+          JsChannels.getChannelFecharWebView((javaScriptMessage) {
             _flutterWebviewPlugin.close().then((_) {
               _flutterWebviewPlugin.dispose();
 
               if (onSignUpComplete != null) onSignUpComplete();
             });
           }),
-          JsChannels.getChanngelOkWebView((javaScriptMessage) {
+          JsChannels.getChannelOkWebView((javaScriptMessage) {
             _flutterWebviewPlugin.close().then((_) {
               _flutterWebviewPlugin.dispose();
 

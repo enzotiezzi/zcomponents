@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 import 'package:crypto/crypto.dart' as x;
 import 'package:http/http.dart' as http;
 import 'package:randombytes/randombytes.dart';
+import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/components/z-identity-server/js-channels.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-identity-server/z-token-viewmodel.dart';
@@ -42,7 +43,7 @@ class ZIdentityServer {
 
       await _flutterWebviewPlugin.launch(_generateURI().toString(),
           javascriptChannels: <JavascriptChannel>[
-            JsChannels.getChanngelFecharWebView((javaScriptMessage) {
+            JsChannels.getChannelFecharWebView((javaScriptMessage) {
               _flutterWebviewPlugin.close().then((_) {
                 _flutterWebviewPlugin.dispose();
               });
@@ -68,7 +69,7 @@ class ZIdentityServer {
   Future<ZTokenViewModel> refreshToken(String refreshToken) async {
     try {
       final response = await http.post(
-          'https://identity-server-dev.zellar.com.br/connect/token',
+          'https://${IdentityServer.address}/connect/token',
           headers: {
             HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },
@@ -104,10 +105,10 @@ class ZIdentityServer {
     }
 
     await _flutterWebviewPlugin.launch(
-        "https://identity-server-dev.zellar.com.br/account/Logout?inApp=true",
+        "https://${IdentityServer.address}/account/Logout?inApp=true",
         headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
         javascriptChannels: <JavascriptChannel>[
-          JsChannels.getChanngelOkWebView((javaScriptMessage) {
+          JsChannels.getChannelOkWebView((javaScriptMessage) {
             _flutterWebviewPlugin.close().then((_) {
               _flutterWebviewPlugin.dispose();
 
@@ -123,7 +124,7 @@ class ZIdentityServer {
     var codeChallengeBase64 = _generateCodeChallenge(_codeVerifier);
 
     final url =
-        Uri.https('identity-server-dev.zellar.com.br', '/connect/authorize', {
+        Uri.https(IdentityServer.address, '/connect/authorize', {
       'tipoSenha': 'pin',
       'inApp': 'true',
       'response_type': 'code',
@@ -164,7 +165,7 @@ class ZIdentityServer {
   Future<ZTokenViewModel> _getToken(String code) async {
     try {
       final response = await http.post(
-          'https://identity-server-dev.zellar.com.br/connect/token',
+          'https://${IdentityServer.address}/connect/token',
           headers: {
             HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },

@@ -8,7 +8,8 @@ import 'package:z_components/components/fluxo-admin/modulos.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/novo_token.dart';
-
+import 'package:z_components/api/identity-server/identity-server.dart';
+import 'package:z_components/components/z-identity-server/register/z-register-user.dart';
 
 class MainComponents extends StatefulWidget {
   @override
@@ -16,6 +17,28 @@ class MainComponents extends StatefulWidget {
 }
 
 class _MainComponentsState extends State<MainComponents> {
+  static String _clientId = 'ZExecutor';
+
+  static String _redirectUrl = 'net.openid.appexecutor:/oauth2redirect';
+
+  static List<String> _scopes = [
+    'openid',
+    'profile',
+    'email',
+    'offline_access',
+    'moltres.acesso.api.full'
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    var identityServer = new IdentityServer(
+        clientId: _clientId, redirectUrl: _redirectUrl, scopes: _scopes);
+
+    identityServer.login();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,20 +102,26 @@ class _MainComponentsState extends State<MainComponents> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ListagemContas(
-                          themeData: Theme.of(context),token: NovoToken.newToken,
+                          themeData: Theme.of(context),
+                          token: NovoToken.newToken,
                         )));
-          }
-
-          ,(){
-
+          },
+          () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ZUserInfo(userInfo: new BuscarInfo(),
-                    )));
+                    builder: (context) => ZUserInfo(
+                          userInfo: new BuscarInfo(),
+                        )));
           }
         ],
-        listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas", "Meu Perfil"],
+        listaTextos: [
+          "Info. de Organizacão",
+          "Usuários",
+          "Módulos",
+          "Contas",
+          "Meu Perfil"
+        ],
       ),
     );
   }
