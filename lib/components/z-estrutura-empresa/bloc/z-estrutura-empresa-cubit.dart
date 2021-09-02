@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:z_components/api/z-estrutura-empresa/i-estrutura-epresa-service.dart';
 import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
 import 'package:z_components/api/z-estrutura-empresa/z-estrutura-empresa-service.dart';
@@ -16,6 +17,9 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   TreeViewController _treeViewController;
   TextEditingController _searchTextController = new TextEditingController();
 
+  RefreshController refreshController =
+  RefreshController(initialRefresh: false);
+
   IEstruturaEmpresaService _estruturaEmpresaService;
 
   TreeViewController get treeViewController => _treeViewController;
@@ -26,7 +30,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
   ZEstruturaEmpresaCubit()
       : super(new ZEstruturaEmpresaCubitModel(
-            nodes: [], selectedNode: null, niveis: [], isLoading: true)) {
+      nodes: [], selectedNode: null, niveis: [], isLoading: true)) {
     _treeViewController = new TreeViewController(children: []);
   }
 
@@ -122,10 +126,8 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   @override
   void selecionarNo(Node node) {
     emit(state.patchState(
-        nodes: state.nodes,
-        selectedNode: node,
-        niveis: state.niveis,
-        isLoading: false));
+      selectedNode: node,
+    ));
   }
 
   @override
@@ -141,5 +143,36 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
         niveis: state.niveis,
         nodes: nodes,
         isLoading: false));
+  }
+
+  atualizarEstruturaEmpresa(Node node) {}
+
+  Future<Null> refresh(String token) async {
+    await buscarEstruturaEmpresa(token);
+
+    Future.delayed(new Duration(milliseconds: 1500), () {
+      refreshController.refreshCompleted();
+    });
+    emit(state);
+  }
+
+  @override
+  void adicionarNivel(Nivel nivel) {
+    _adicionarNivelFilho(nivel, state.selectedNode.data as Nivel, state.niveis);
+
+    emit(state.patchState(niveis: state.niveis));
+    filtrarEstruturaEmpresa("");
+  }
+
+  void _adicionarNivelFilho(Nivel nivelFilho, Nivel nivelPai, List<Nivel> niveis){
+    for(var i = 0; i < niveis.length; i++){
+      var nivel = niveis[i];
+
+      if(nivel.idNivel == nivelPai.idNivel){
+        nivelPai.niveis.add(nivelFilho);
+      }else{
+        _adicionarNivelFilho(nivelFilho, nivelPai, nivel.niveis);
+      }
+    }
   }
 }
