@@ -8,8 +8,8 @@ import 'package:z_components/components/fluxo-admin/modulos.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/novo_token.dart';
-import 'package:z_components/api/identity-server/identity-server.dart';
-import 'package:z_components/components/z-identity-server/register/z-register-user.dart';
+import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+
 
 class MainComponents extends StatefulWidget {
   @override
@@ -17,28 +17,7 @@ class MainComponents extends StatefulWidget {
 }
 
 class _MainComponentsState extends State<MainComponents> {
-  static String _clientId = 'ZExecutor';
-
-  static String _redirectUrl = 'net.openid.appexecutor:/oauth2redirect';
-
-  static List<String> _scopes = [
-    'openid',
-    'profile',
-    'email',
-    'offline_access',
-    'moltres.acesso.api.full'
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-
-    var identityServer = new IdentityServer(
-        clientId: _clientId, redirectUrl: _redirectUrl, scopes: _scopes);
-
-    identityServer.login();
-  }
-
+  ZEstruturaEmpresaCubit bloc = new  ZEstruturaEmpresaCubit();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +30,7 @@ class _MainComponentsState extends State<MainComponents> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => TelaTesteCard()));
+              MaterialPageRoute(builder: (context) => TelaTesteCard(bloc: bloc,)));
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -69,59 +48,53 @@ class _MainComponentsState extends State<MainComponents> {
         numeroQuadrados: 5,
         listaIcones: [Icons.add, Icons.add, Icons.add, Icons.add, Icons.add],
         listaOnTap: [
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => InformacoesOrganizacao(
-                          themeData: Theme.of(context),
-                          editarDados: false,
-                          textoFoto: "",
-                          idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
-                          infoOrganizacaoViewModel: null,
-                        )));
+                      themeData: Theme.of(context),
+                      editarDados: false,
+                      textoFoto: "",
+                      idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
+                      infoOrganizacaoViewModel: null,
+                    )));
           },
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => Usuarios(
-                          themeData: Theme.of(context),
-                        )));
+                      themeData: Theme.of(context),
+                    )));
           },
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => Modulos(
-                          themeData: Theme.of(context),
-                        )));
+                      themeData: Theme.of(context),
+                    )));
           },
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => ListagemContas(
-                          themeData: Theme.of(context),
-                          token: NovoToken.newToken,
-                        )));
-          },
-          () {
+                      themeData: Theme.of(context),token: NovoToken.newToken,
+                    )));
+          }
+
+          ,(){
+
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ZUserInfo(
-                          userInfo: new BuscarInfo(),
-                        )));
+                    builder: (context) => ZUserInfo(userInfo: new BuscarInfo(),
+                    )));
           }
         ],
-        listaTextos: [
-          "Info. de Organizacão",
-          "Usuários",
-          "Módulos",
-          "Contas",
-          "Meu Perfil"
-        ],
+        listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas", "Meu Perfil"],
       ),
     );
   }

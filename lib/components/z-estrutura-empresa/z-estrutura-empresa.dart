@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
@@ -19,6 +20,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
   final void Function(Nivel) onNodeSelected;
   final void Function() onInfoSelected;
   final String header;
+  final ZEstruturaEmpresaCubit bloc;
 
   ZEstruturaEmpresa(
       {@required this.token,
@@ -26,9 +28,10 @@ class ZEstruturaEmpresa extends StatelessWidget {
         this.onNodeSelected,
         this.onInfoSelected,
         this.headerAtivo=false,
-        this.header=""});
+        this.header="",
+        this.bloc});
 
-  ZEstruturaEmpresaCubit _bloc = new ZEstruturaEmpresaCubit();
+
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
     expanderTheme: ExpanderThemeData(
@@ -56,18 +59,16 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!_bloc.carregou) {
-      _bloc.buscarEstruturaEmpresa(token);
+    if (!bloc.carregou) {
+      bloc.buscarEstruturaEmpresa(token);
     }
-    return new BlocProvider(
-        create: (context) {
-          return _bloc;
-        },
+    return new BlocProvider.value(
+        value: bloc,
         child: new Scaffold(
           appBar: new AppBar(
             actions: [
-              IconButton(
-                  icon: Icon(
+              new IconButton(
+                  icon: new Icon(
                     Icons.info,
                     size: 28,
                   ),
@@ -75,48 +76,63 @@ class ZEstruturaEmpresa extends StatelessWidget {
                     onInfoSelected();
                   }),
             ],
-            leading: IconeVoltar(
+            leading: new IconeVoltar(
               context: context,
             ),
-            title: Text("ESTRUTURA DE EMPRESA"),
+            title: new Text("ESTRUTURA DE EMPRESA"),
             centerTitle: true,
           ),
           body: new BlocBuilder<ZEstruturaEmpresaCubit,
               ZEstruturaEmpresaCubitModel>(builder: (context, state) {
-            Widget widget = new Container(
-              padding: const EdgeInsets.all(8.0),
-              child: new TreeView(
-                  controller: _bloc.treeViewController,
-                  theme: _treeViewTheme,
-                  onNodeTap: (String key) {
-                    var node = _bloc.treeViewController.getNode(key);
+            Widget widget = new SmartRefresher(
+              controller: bloc.refreshController,
+              onRefresh: (){
+                bloc.refresh(token);
+              },
+              enablePullDown: true,
+              header: new ClassicHeader(
+                idleText: "Puxe para atualizar",
+                releaseText: "Solte para atualizar",
+                refreshingText: "Atualizando",
+                completeText: "Sua lista está atualizada!",
+                iconPos: IconPosition.right,
+              ),
+              child: new Container(
+                padding: const EdgeInsets.all(8.0),
+                child: new TreeView(
+                    controller: bloc.treeViewController,
+                    allowParentSelect: true,
+                    theme: _treeViewTheme,
+                    onNodeTap: (String key) {
+                      var node = bloc.treeViewController.getNode(key);
 
-                    _bloc.selecionarNo(node);
-                  },
-                  nodeBuilder: (context, node) => new Container(
-                    padding: const EdgeInsets.all(4.0),
-                    child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        new Expanded(
-                          child: new Text(node.label),
-                          flex: 90,
-                        ),
-                        new Expanded(
-                          child: new IconButton(
-                              icon: new Icon(
-                                Icons.chevron_right,
-                                color: MainStyle.APP_THEME,
-                              ),
-                              onPressed: () {
-                                if (onNodeSelected != null)
-                                  onNodeSelected(node.data as Nivel);
-                              }),
-                          flex: 10,
-                        )
-                      ],
-                    ),
-                  )),
+                      bloc.selecionarNo(node);
+                    },
+                    nodeBuilder: (context, node) => new Container(
+                      padding: const EdgeInsets.all(4.0),
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          new Expanded(
+                            child: new Text(node.label),
+                            flex: 90,
+                          ),
+                          new Expanded(
+                            child: new IconButton(
+                                icon: new Icon(
+                                  Icons.chevron_right,
+                                  color: MainStyle.APP_THEME,
+                                ),
+                                onPressed: () {
+                                  if (onNodeSelected != null)
+                                    onNodeSelected(node.data as Nivel);
+                                }),
+                            flex: 10,
+                          )
+                        ],
+                      ),
+                    )),
+              ),
             );
 
             if (state.isLoading)
@@ -154,9 +170,9 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                       placeholderStyle: new TextStyle(
                                           color: Color(0xff999999), fontSize: 17),
                                       keyboardType: TextInputType.text,
-                                      controller: _bloc.searchTextController,
+                                      controller: bloc.searchTextController,
                                       onChanged: (value) {
-                                        _bloc.filtrarEstruturaEmpresa(value);
+                                        bloc.filtrarEstruturaEmpresa(value);
                                       },
                                       placeholder: "Buscar",
                                       decoration: new BoxDecoration(
