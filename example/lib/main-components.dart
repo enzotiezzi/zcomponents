@@ -8,7 +8,8 @@ import 'package:z_components/components/fluxo-admin/modulos.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/novo_token.dart';
-
+import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
 
 class MainComponents extends StatefulWidget {
   @override
@@ -16,6 +17,8 @@ class MainComponents extends StatefulWidget {
 }
 
 class _MainComponentsState extends State<MainComponents> {
+  ZEstruturaEmpresaCubit bloc = new  ZEstruturaEmpresaCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +26,12 @@ class _MainComponentsState extends State<MainComponents> {
         centerTitle: true,
         title: new Text("ZAdmin"),
       ),
-      body: _buildBody(),
+      body: _buildEstruturaEmpresa(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => TelaTesteCard()));
+              MaterialPageRoute(builder: (context) => TelaTesteCard(bloc: bloc,)));
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -46,41 +49,41 @@ class _MainComponentsState extends State<MainComponents> {
         numeroQuadrados: 5,
         listaIcones: [Icons.add, Icons.add, Icons.add, Icons.add, Icons.add],
         listaOnTap: [
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => InformacoesOrganizacao(
-                          themeData: Theme.of(context),
-                          editarDados: false,
-                          textoFoto: "",
-                          idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
-                          infoOrganizacaoViewModel: null,
-                        )));
+                      themeData: Theme.of(context),
+                      editarDados: false,
+                      textoFoto: "",
+                      idConta: "3f2bdcbb-764f-48c7-0c33-08d7cf63e45b",
+                      infoOrganizacaoViewModel: null,
+                    )));
           },
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => Usuarios(
-                          themeData: Theme.of(context),
-                        )));
+                      themeData: Theme.of(context),
+                    )));
           },
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => Modulos(
-                          themeData: Theme.of(context),
-                        )));
+                      themeData: Theme.of(context),
+                    )));
           },
-          () {
+              () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => ListagemContas(
-                          themeData: Theme.of(context),token: NovoToken.newToken,
-                        )));
+                      themeData: Theme.of(context),token: NovoToken.newToken,
+                    )));
           }
 
           ,(){
@@ -94,6 +97,14 @@ class _MainComponentsState extends State<MainComponents> {
         ],
         listaTextos: ["Info. de Organizacão", "Usuários", "Módulos", "Contas", "Meu Perfil"],
       ),
+    );
+  }
+
+  Widget _buildEstruturaEmpresa(){
+    return new ZEstruturaEmpresa(
+      key: null,
+      token: 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImFhNmNiYWFjMmE0NDc3MThhNDg3YjNkOWE5YWU4YWM0IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MzExMDM3NjIsImV4cCI6MTYzMzY5NTc2MiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IldlYiBaZWxsYXIiLCJzdWIiOiIwMjFmOTE4Mi0zZjQxLTRmMGEtYWFkYy00MDc3NmU2MGQwNGMiLCJhdXRoX3RpbWUiOjE2MzExMDM3NTcsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiIzS0U2RUNEUlRIR0dYQURBTUNXR1pHQUVEWDJEM1lPTCIsImFjY291bnQiOiJ6ZWxsYXIyIiwiaWRBY2NvdW50IjoiZTUzMjdkZjMtNDE3ZS00NzUwLWIxZjktNzkwYjg3YjUwN2NjIiwiaWRDb2xhYm9yYWRvciI6IjE1ODQyQzJFLUM3RDctNERENS04RkE5LUZFMzNDQkQ2NENFQyIsInByZWZlcnJlZF91c2VybmFtZSI6IjQyNi45MTAuMjU4LTYxIiwiZW1haWwiOiJsdWl6Lmx1Y2lhQHplbGxhci5jb20uYnIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlcl92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJMdWl6IEx1Y2lhIE5ldG8iLCJwaG9uZV9udW1iZXIiOiIxMTk0ODQ4NDEyMCIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJyb2xlcyIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIl0sImFtciI6WyJwd2QiXX0.B3eFGfhhZ64zFGMrW1G_Ma__4gfTZEDvKVAkv-nXl0N05c2Ch9H8j6-f_SXUChaI4rRiSj_qstRuDkSr_nlnLIDt7nT31qvaRJY61iR8hJ2qy5VGXFLi0Pxsfc-HKe0cjR5v505ieZrIl5tPSp9uv_GOVn4J0xNRIsG6-x2vmAxRvi1FlidO93qRi47an8x_dMq8CWCdRJ4x3q3nFqFXF68qgFkWVZBAm0psPLmvU65gP5Df8iyv2KK3hcQvFaOUccsnqbCJwUHvFf0Eio3wL_ClNqDvLBCK25MJXO7iv01-i04tpKwNoaHQnp0twFologIb01CYIlqWge7vlZhtvA',
+      bloc: bloc,
     );
   }
 }
