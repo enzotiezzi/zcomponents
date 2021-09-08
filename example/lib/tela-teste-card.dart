@@ -2,22 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
-import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
-import 'package:z_components/components/z-inputs/z-input-email.dart';
-import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
-import 'package:z_components/components/z-inputs/z-input-cpf.dart';
-import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
-import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
-import 'package:z_components/components/z-inputs/z-input-name.dart';
-import 'package:z_components/components/z-inputs/z-input-cep.dart';
-import 'package:z_components/components/z-inputs/z-input-telefone-fixo.dart';
-import 'package:z_components/components/z-inputs/z-input-celular.dart';
-import 'package:z_components/components/z-inputs/z-input-generic.dart';
-import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
-import 'package:z_components/components/z-alert-dialog.dart';
-import 'package:z_components/config/z-dialog.dart';
-import 'package:z_components/styles/main-style.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -79,6 +64,11 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ZSelectionItem(chave: "19", titulo: "19", valor: "19"),
       ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
+    listaSelecaoRespostas = [
+      ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
+      ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
+      ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
+    ];
     setState(() {});
     super.initState();
   }
@@ -86,11 +76,14 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(
+        leading: new Text("TESTE"),
+      ),
       body: new Container(
         margin: EdgeInsets.only(top: 10),
         child: ZSelection(
             themeData: Theme.of(context),
-            listaRespostas: [],
+            listaRespostas: listaSelecaoRespostas,
             titulo: "Teste Seleção",
             onChange: (value) {
               listaSelecaoRespostas = value[1];

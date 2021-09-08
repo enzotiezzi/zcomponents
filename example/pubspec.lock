@@ -337,7 +337,7 @@ packages:
     source: hosted
     version: "2.0.0"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -524,7 +524,7 @@ packages:
       name: pull_to_refresh
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.3"
+    version: "1.6.5"
   randombytes:
     dependency: transitive
     description:
@@ -816,7 +816,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.9.37+27"
+    version: "0.9.37+28"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.24.0-10.1.pre"
+  flutter: ">=2.0.0"
