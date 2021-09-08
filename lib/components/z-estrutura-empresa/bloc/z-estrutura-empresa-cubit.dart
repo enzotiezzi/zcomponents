@@ -171,7 +171,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     _adicionarNivelFilho(nivel, state.selectedNode.data as Nivel, state.niveis);
 
     emit(state.patchState(niveis: state.niveis));
-    filtrarEstruturaEmpresa("");
+    filtrarEstruturaEmpresa(state.selectedNode.label);
   }
 
   void _adicionarNivelFilho(
