@@ -18,7 +18,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   TextEditingController _searchTextController = new TextEditingController();
 
   RefreshController refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   IEstruturaEmpresaService _estruturaEmpresaService;
 
@@ -30,7 +30,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
   ZEstruturaEmpresaCubit()
       : super(new ZEstruturaEmpresaCubitModel(
-      nodes: [], selectedNode: null, niveis: [], isLoading: true)) {
+            nodes: [], selectedNode: null, niveis: [], isLoading: true)) {
     _treeViewController = new TreeViewController(children: []);
   }
 
@@ -88,8 +88,8 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     for (var i = 0; i < niveis.length; i++) {
       var nivel = niveis[i];
 
-      found = false;
-      _depthFilterSearch(filter, nivel);
+      foundNodeInDepth = false;
+      _depthFilterSearch(filter, nivel.niveis);
 
       var node = new Node<Nivel>(
           key: nivel.idNivel,
@@ -98,27 +98,39 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
           children: [],
           expanded: true);
 
-      if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) || found) {
+      if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) &&
+          !foundNodeInDepth) {
+        _adicionarNiveisAoNo(node, nivel.niveis);
+
         if (parent != null)
           parent.children.add(node);
         else
           nodes.add(node);
+      } else {
+        if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) ||
+            foundNodeInDepth) {
+          if (parent != null)
+            parent.children.add(node);
+          else
+            nodes.add(node);
+        }
       }
 
       _depthSearch(node, nivel.niveis, nodes, filter);
     }
   }
 
-  bool found = false;
+  bool foundNodeInDepth = false;
 
-  void _depthFilterSearch(String filter, Nivel nivel) {
-    if (nivel.nome.toLowerCase().contains(filter.toLowerCase())) found = true;
+  void _depthFilterSearch(String filter, List<Nivel> niveis) {
+    if (!foundNodeInDepth) {
+      for (var i = 0; i < niveis.length; i++) {
+        var nivelAtual = niveis[i];
 
-    if (!found) {
-      for (var i = 0; i < nivel.niveis.length; i++) {
-        var nivelAtual = nivel.niveis[i];
+        if (nivelAtual.nome.toLowerCase().contains(filter.toLowerCase()))
+          foundNodeInDepth = true;
 
-        _depthFilterSearch(filter, nivelAtual);
+        _depthFilterSearch(filter, nivelAtual.niveis);
       }
     }
   }
@@ -145,8 +157,6 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
         isLoading: false));
   }
 
-  atualizarEstruturaEmpresa(Node node) {}
-
   Future<Null> refresh(String token) async {
     await buscarEstruturaEmpresa(token);
 
@@ -164,15 +174,33 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     filtrarEstruturaEmpresa("");
   }
 
-  void _adicionarNivelFilho(Nivel nivelFilho, Nivel nivelPai, List<Nivel> niveis){
-    for(var i = 0; i < niveis.length; i++){
+  void _adicionarNivelFilho(
+      Nivel nivelFilho, Nivel nivelPai, List<Nivel> niveis) {
+    for (var i = 0; i < niveis.length; i++) {
       var nivel = niveis[i];
 
-      if(nivel.idNivel == nivelPai.idNivel){
+      if (nivel.idNivel == nivelPai.idNivel) {
         nivelPai.niveis.add(nivelFilho);
-      }else{
+      } else {
         _adicionarNivelFilho(nivelFilho, nivelPai, nivel.niveis);
       }
+    }
+  }
+
+  void _adicionarNiveisAoNo(Node<Nivel> parentNode, List<Nivel> niveis) {
+    for (var i = 0; i < niveis.length; i++) {
+      var nivel = niveis[i];
+
+      var node = new Node<Nivel>(
+          key: nivel.idNivel,
+          label: nivel.nome,
+          data: nivel,
+          children: [],
+          expanded: true);
+
+      parentNode.children.add(node);
+
+      _adicionarNiveisAoNo(node, nivel.niveis);
     }
   }
 }
