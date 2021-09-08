@@ -1,3 +1,79 @@
+## 0.9.37+30
+
+* Ajuste ZSelection
+
+## 0.9.37+29
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+28
+
+* Ajuste ZSelection
+
+## 0.9.37+27
+
+* Ajuste ZSelection
+
+## 0.9.37+26
+
+* Ajuste ZSelection
+
+## 0.9.37+25
+
+* Ajuste ZSelection
+
+## 0.9.37+24
+
+* Ajuste ZSelection
+
+## 0.9.37+23
+
+* Ajuste ZSelection
+
+## 0.9.37+22
+
+* Ajuste header ZEstrutura
+
+## 0.9.37+21
+
+* Ajuste header ZEstrutura
+
+## 0.9.37+20
+
+* Ajuste ZSelection
+
+## 0.9.37+19
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+18
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+17
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+16
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+15
+
+* Ajuste ZEstruturaEmpresa
+
+## 0.9.37+14
+
+* Ajuste ZSelection
+
+## 0.9.37+13
+
+* Att ZSelection
+
+## 0.9.37+12
+
+* atualizacao do componente de endereco
+
 ## 0.9.37+11
 
 * Criação do componente de endereco

@@ -202,6 +202,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           themeData: widget.themeData,
           cepFocus: cepFocusNode,
           controllerCep: cepController,
+          proximoFocus: numeroFocusNode,
           campoObrigatorio: true,
           validacao: (cepValidado){
             if(cepValidado){
@@ -236,6 +237,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           enabled: true,
           inputPadraoFocus: numeroFocusNode,
           controllerInputPadrao: numeroController,
+          proximoFocus: complementoFocusNode,
           campoObrigatorio: true,
           onChange: (numero){
             validarCamposObrigatorios();

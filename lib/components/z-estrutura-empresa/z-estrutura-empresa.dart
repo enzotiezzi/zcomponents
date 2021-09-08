@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:z_components/api/z-estrutura-empresa/nivel.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/styles/main-style.dart';
@@ -14,16 +16,22 @@ import 'package:z_components/view-model/conta.dart';
 class ZEstruturaEmpresa extends StatelessWidget {
   final String token;
   final GlobalKey key;
+  final bool headerAtivo;
   final void Function(Nivel) onNodeSelected;
   final void Function() onInfoSelected;
+  final String header;
+  final ZEstruturaEmpresaCubit bloc;
 
   ZEstruturaEmpresa(
       {@required this.token,
-      @required this.key,
-      this.onNodeSelected,
-      this.onInfoSelected});
+        @required this.key,
+        this.onNodeSelected,
+        this.onInfoSelected,
+        this.headerAtivo=false,
+        this.header="",
+        this.bloc});
 
-  ZEstruturaEmpresaCubit _bloc;
+
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
     expanderTheme: ExpanderThemeData(
@@ -51,19 +59,16 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new BlocProvider(
-        create: (context) {
-          _bloc = new ZEstruturaEmpresaCubit(token: token);
-
-          _bloc.buscarEstruturaEmpresa();
-
-          return _bloc;
-        },
+    if (!bloc.carregou) {
+      bloc.buscarEstruturaEmpresa(token);
+    }
+    return new BlocProvider.value(
+        value: bloc,
         child: new Scaffold(
           appBar: new AppBar(
             actions: [
-              IconButton(
-                  icon: Icon(
+              new IconButton(
+                  icon: new Icon(
                     Icons.info,
                     size: 28,
                   ),
@@ -71,49 +76,63 @@ class ZEstruturaEmpresa extends StatelessWidget {
                     onInfoSelected();
                   }),
             ],
-            leading: IconeVoltar(
+            leading: new IconeVoltar(
               context: context,
             ),
-            title: Text("ESTRUTURA DE EMPRESA"),
+            title: new Text("ESTRUTURA DE EMPRESA"),
             centerTitle: true,
           ),
           body: new BlocBuilder<ZEstruturaEmpresaCubit,
               ZEstruturaEmpresaCubitModel>(builder: (context, state) {
-            Widget widget = new Container(
-              padding: const EdgeInsets.all(8.0),
-              child: new TreeView(
-                  controller: _bloc.treeViewController,
-                  theme: _treeViewTheme,
-                  onNodeTap: (String key) {
-                    var node = _bloc.treeViewController.getNode(key);
+            Widget widget = new SmartRefresher(
+              controller: bloc.refreshController,
+              onRefresh: (){
+                bloc.refresh(token);
+              },
+              enablePullDown: true,
+              header: new ClassicHeader(
+                idleText: "Puxe para atualizar",
+                releaseText: "Solte para atualizar",
+                refreshingText: "Atualizando",
+                completeText: "Sua lista está atualizada!",
+                iconPos: IconPosition.right,
+              ),
+              child: new Container(
+                padding: const EdgeInsets.all(8.0),
+                child: new TreeView(
+                    controller: bloc.treeViewController,
+                    allowParentSelect: true,
+                    theme: _treeViewTheme,
+                    onNodeTap: (String key) {
+                      var node = bloc.treeViewController.getNode(key);
 
-                    _bloc.selecionarNo(node);
-                  },
-                  nodeBuilder: (context, node) => new Container(
-                        padding: const EdgeInsets.all(4.0),
-                        child: new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            new Expanded(
-                              child: new Text(node.label),
-                              flex: 90,
-                            ),
-                            new Expanded(
-                              child: new IconButton(
-                                  icon: new Icon(
-                                    Icons.chevron_right,
-                                    color: MainStyle.APP_THEME,
-                                  ),
-                                  onPressed: () {
-                                    if (onNodeSelected != null)
-                                      onNodeSelected(
-                                          _bloc.selectedNode?.data as Nivel);
-                                  }),
-                              flex: 10,
-                            )
-                          ],
-                        ),
-                      )),
+                      bloc.selecionarNo(node);
+                    },
+                    nodeBuilder: (context, node) => new Container(
+                      padding: const EdgeInsets.all(4.0),
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          new Expanded(
+                            child: new Text(node.label),
+                            flex: 90,
+                          ),
+                          new Expanded(
+                            child: new IconButton(
+                                icon: new Icon(
+                                  Icons.chevron_right,
+                                  color: MainStyle.APP_THEME,
+                                ),
+                                onPressed: () {
+                                  if (onNodeSelected != null)
+                                    onNodeSelected(node.data as Nivel);
+                                }),
+                            flex: 10,
+                          )
+                        ],
+                      ),
+                    )),
+              ),
             );
 
             if (state.isLoading)
@@ -123,58 +142,74 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
             return new Column(
               children: [
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                      flex: 85,
-                      child: new Container(
-                        margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                adicionarHeader(),
+                new Container(
+                  color: Colors.white,
+                  child: new Row(
+                    children: <Widget>[
+                      new Expanded(
+                        flex: 85,
                         child: new Container(
-                          margin: EdgeInsets.only(left: 16, right: 2),
-                          decoration: BoxDecoration(
-                              color: Color(0xfff0f0f0),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(9.0))),
-                          child: new Row(
-                            children: <Widget>[
-                              new Container(
-                                  padding: EdgeInsets.only(left: 8.0),
-                                  child: new Icon(
-                                    Icons.search,
-                                    color: Color(0xff999999),
-                                  )),
-                              new Expanded(
-                                  child: new CupertinoTextField(
-                                placeholderStyle: new TextStyle(
-                                    color: Color(0xff999999), fontSize: 17),
-                                keyboardType: TextInputType.text,
-                                controller: _bloc.searchTextController,
-                                onChanged: (value) {
-                                  _bloc.filtrarEstruturaEmpresa(value);
-                                },
-                                placeholder: "Buscar",
-                                decoration: new BoxDecoration(
-                                    color: Colors.transparent),
-                              )),
-                            ],
+                          margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                          child: new Container(
+                            margin: EdgeInsets.only(left: 16, right: 2),
+                            decoration: BoxDecoration(
+                                color: Color(0xfff0f0f0),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(9.0))),
+                            child: new Row(
+                              children: <Widget>[
+                                new Container(
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: new Icon(
+                                      Icons.search,
+                                      color: Color(0xff999999),
+                                    )),
+                                new Expanded(
+                                    child: new CupertinoTextField(
+                                      placeholderStyle: new TextStyle(
+                                          color: Color(0xff999999), fontSize: 17),
+                                      keyboardType: TextInputType.text,
+                                      controller: bloc.searchTextController,
+                                      onChanged: (value) {
+                                        bloc.filtrarEstruturaEmpresa(value);
+                                      },
+                                      placeholder: "Buscar",
+                                      decoration: new BoxDecoration(
+                                          color: Colors.transparent),
+                                    )),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    new Expanded(
-                        flex: 15,
-                        child: new IconButton(
-                          icon: new Icon(
-                            Icons.filter_list_outlined,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        )),
-                  ],
+                      new Expanded(
+                          flex: 15,
+                          child: new IconButton(
+                            icon: new Icon(
+                              Icons.filter_list_outlined,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          )),
+                    ],
+                  ),
                 ),
                 new Expanded(child: widget)
               ],
             );
           }),
         ));
+  }
+
+  Widget adicionarHeader(){
+    if(headerAtivo == false){
+      return new Container();
+    }else{
+      return new ZHeader(
+        child: new Text(header),
+        titulo: header,
+        elevation: 4,
+      );
+    }
   }
 }

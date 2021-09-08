@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
-import 'package:z_components/components/z-collection/z-collection-item.dart';
-import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-selection/z-selection-list.dart';
 import 'package:z_components/components/z-text.dart';
@@ -12,9 +10,10 @@ import 'package:z_components/config/z-tipo-textos.dart';
 
 class ZSelection extends StatefulWidget {
   final String titulo;
-  final List<ZSelectionItem> lista;
+  List<ZSelectionItem> lista;
+  List<ZSelectionItem> listaRespostas;
   final ThemeData themeData;
-  final ValueChanged<List<ZSelectionItem>> onChange;
+  final ValueChanged<List<List<ZSelectionItem>>> onChange;
   final String valorPadrao;
   final Color colorStyle;
   final int skip;
@@ -23,6 +22,8 @@ class ZSelection extends StatefulWidget {
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
   Function(List<FilterExpression>, List<ZSelectionItem>) onScroll;
+  Function() onAdd;
+  String textoOnAdd;
 
   ZSelection(
       {Key key,
@@ -37,7 +38,10 @@ class ZSelection extends StatefulWidget {
       this.campoObrigatorio = false,
       this.filtroPrincipal,
       this.onFilter,
-      this.onScroll})
+      this.onScroll,
+      this.textoOnAdd,
+      this.onAdd,
+      this.listaRespostas})
       : super(key: key);
 
   @override
@@ -45,18 +49,12 @@ class ZSelection extends StatefulWidget {
 }
 
 class ZSelectionState extends State<ZSelection> {
-  List<ZSelectionItem> _itemSelecionado = new List<ZSelectionItem>();
+  List<List<ZSelectionItem>> _itemSelecionado =
+      new List<List<ZSelectionItem>>();
   GlobalKey<ZSelectionListState> keyLista =
       new GlobalKey<ZSelectionListState>();
 
-  List<ZSelectionItem> get itemSelecionado => _itemSelecionado;
-  List<ZSelectionItem> listaRespostas = [];
-
-  @override
-  void initState() {
-    _montarListaRespostas();
-    super.initState();
-  }
+  List<List<ZSelectionItem>> get itemSelecionado => _itemSelecionado;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +103,7 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   Widget _montarTituloItensSelecionados() {
-    if (listaRespostas.isEmpty) {
+    if (widget.listaRespostas.isEmpty) {
       return new Container();
     } else {
       return new Column(
@@ -126,20 +124,39 @@ class ZSelectionState extends State<ZSelection> {
   }
 
   Widget _montarItensSelecionados() {
-    if (listaRespostas.isEmpty) {
+    if (widget.listaRespostas.isEmpty) {
       return new Container();
     } else {
       return new ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: listaRespostas.length,
+          itemCount: widget.listaRespostas.length,
           itemBuilder: (context, index) {
             return Column(
               children: [
                 new ZTile(
-                  leading: new Text(
-                    listaRespostas[index].titulo,
-                    style: TextStyle(color: Colors.grey),
+                  leading: new Container(
+                    width: MediaQuery.of(context).size.width / 1.4,
+                    child: new Text(
+                      widget.listaRespostas[index].titulo,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  trailing: new IconButton(
+                    onPressed: () {
+                      widget.listaRespostas.removeAt(index);
+                      if (_itemSelecionado.length == 0) {
+                        _itemSelecionado.add(widget.lista);
+                        _itemSelecionado.add(widget.listaRespostas);
+                      }
+                      widget.onChange(_itemSelecionado);
+                      setState(() {});
+                    },
+                    icon: Icon(
+                      Icons.remove_circle_outline,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
                 new Divider(
@@ -156,21 +173,12 @@ class ZSelectionState extends State<ZSelection> {
         .copyWith(color: widget.themeData.primaryColor);
   }
 
-  void _montarListaRespostas() {
-    listaRespostas.clear();
-    for (int i = 0; i < widget.lista.length; i++) {
-      if (widget.lista[i].selecionado) {
-        listaRespostas.add(widget.lista[i]);
-      }
-    }
-  }
-
   void atualizarLista(List<ZSelectionItem> lista) {
     keyLista.currentState.atualizarLista(lista);
   }
 
   void _irParaSelecaoDeItemHorizontal() async {
-    _itemSelecionado = await Navigator.push<List<ZSelectionItem>>(
+    _itemSelecionado = await Navigator.push<List<List<ZSelectionItem>>>(
         context,
         new PageRouteBuilder(
           pageBuilder: (BuildContext context, Animation animation,
@@ -186,6 +194,9 @@ class ZSelectionState extends State<ZSelection> {
               onChange: widget.onFilter,
               filtroPrincipal: widget.filtroPrincipal,
               onScroll: widget.onScroll,
+              onAdd: widget.onAdd,
+              textoOnAdd: widget.textoOnAdd,
+              listaSelecao: widget.listaRespostas ?? [],
             );
           },
           transitionsBuilder: (BuildContext context,
@@ -207,9 +218,14 @@ class ZSelectionState extends State<ZSelection> {
             );
           },
         ));
-    _montarListaRespostas();
-    if (widget.onChange != null) widget.onChange(_itemSelecionado);
+    if (_itemSelecionado != null) {
+      widget.listaRespostas = _itemSelecionado[1];
 
+      if (widget.onChange != null) widget.onChange(_itemSelecionado);
+
+    } else {
+      _itemSelecionado = [];
+    }
     setState(() {});
   }
 

@@ -98,7 +98,7 @@ class ZCollectionState extends State<ZCollection> {
   }
   Color _retornaCorIcon(){
     if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
-      return widget.themeData.accentColor;
+      return widget.themeData.primaryColor;
     }
     else{
       return Colors.black;
@@ -107,7 +107,7 @@ class ZCollectionState extends State<ZCollection> {
 
   TextStyle _retornaCorTexto(){
     if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
-      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.accentColor);
+      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.primaryColor);
     }
     else{
       return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);

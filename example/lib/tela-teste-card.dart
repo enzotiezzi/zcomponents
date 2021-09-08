@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
-
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -10,13 +11,39 @@ class TelaTesteCard extends StatefulWidget {
 
 class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ZSelectionItem> listaSelecao = [];
+  List<ZSelectionItem> listaSelecaoRespostas = [];
+
+  final zEstrutura = GlobalKey();
+
+  TextEditingController cep = new TextEditingController();
+  TextEditingController logradouro = new TextEditingController();
+  TextEditingController numero = new TextEditingController();
+  TextEditingController cidade = new TextEditingController();
+  TextEditingController bairro = new TextEditingController();
+  TextEditingController complemento = new TextEditingController();
+  TextEditingController estado = new TextEditingController();
+  List<ZCollectionItem> lista = [];
+
+  GlobalKey<ZCollectionState> keyPorte = new GlobalKey<ZCollectionState>();
+
+  List<ZCollectionItem> listaPorte = [
+    ZCollectionItem(valor: "T-E-S-T", chave: "TesteChave", titulo: "Teste"),
+    ZCollectionItem(valor: "Teste2", chave: "Teste2", titulo: "Teste2"),
+    ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3"),
+    ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
+    ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
+  ];
 
   @override
   void initState() {
     listaSelecao = [
       ZSelectionItem(
           chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
-      ZSelectionItem(chave: "1", titulo: "1", valor: "1"),
+      ZSelectionItem(
+          chave: "1",
+          titulo:
+              "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+          valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
       ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
       ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
       ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
@@ -37,37 +64,31 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ZSelectionItem(chave: "19", titulo: "19", valor: "19"),
       ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
+    listaSelecaoRespostas = [
+      ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
+      ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
+      ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
+    ];
+    setState(() {});
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        centerTitle: true,
-        title: new Container(
-          child: new Text(
-            "Teste dos cards",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-        ),
+    return new Scaffold(
+      appBar: AppBar(
+        leading: new Text("TESTE"),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-
-            new Container(
-              margin: EdgeInsets.only(top: 10),
-              child: ZSelection(
-                  themeData: Theme.of(context),
-                  titulo: "Teste Seleção",
-                  onChange: (value) {
-                    listaSelecao = value;
-                  },
-                  lista: listaSelecao),
-            )
-          ],
-        ),
+      body: new Container(
+        margin: EdgeInsets.only(top: 10),
+        child: ZSelection(
+            themeData: Theme.of(context),
+            listaRespostas: listaSelecaoRespostas,
+            titulo: "Teste Seleção",
+            onChange: (value) {
+              listaSelecaoRespostas = value[1];
+            },
+            lista: listaSelecao),
       ),
     );
   }
