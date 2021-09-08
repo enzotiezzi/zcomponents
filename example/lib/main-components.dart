@@ -31,7 +31,7 @@ class _MainComponentsState extends State<MainComponents> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => TelaTesteCard(bloc: bloc,)));
+              MaterialPageRoute(builder: (context) => TelaTesteCard()));
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

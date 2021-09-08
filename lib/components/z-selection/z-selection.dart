@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
-import 'package:z_components/components/z-collection/z-collection-item.dart';
-import 'package:z_components/components/z-collection/z-collection-list.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-selection/z-selection-list.dart';
 import 'package:z_components/components/z-text.dart';
@@ -148,6 +146,10 @@ class ZSelectionState extends State<ZSelection> {
                   trailing: new IconButton(
                     onPressed: () {
                       widget.listaRespostas.removeAt(index);
+                      if (_itemSelecionado.length == 0) {
+                        _itemSelecionado.add(widget.lista);
+                        _itemSelecionado.add(widget.listaRespostas);
+                      }
                       widget.onChange(_itemSelecionado);
                       setState(() {});
                     },
@@ -221,8 +223,10 @@ class ZSelectionState extends State<ZSelection> {
 
       if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
-      setState(() {});
+    } else {
+      _itemSelecionado = [];
     }
+    setState(() {});
   }
 
   Widget _returnRequiredField() {

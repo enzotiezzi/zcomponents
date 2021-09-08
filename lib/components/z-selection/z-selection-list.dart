@@ -103,11 +103,11 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   void montarRespostas() {
-    for (int i = 0; i < widget.listaSelecao.length; i++) {
-      for (int j = 0; j < widget.lista.length; j++) {
-        widget.lista[j].selecionado = false;
-        if (widget.listaSelecao[i].chave == widget.lista[j].chave) {
-          widget.lista[j].selecionado = true;
+    for (int i = 0; i < widget.lista.length; i++) {
+      widget.lista[i].selecionado = false;
+      for (int j = 0; j < widget.listaSelecao.length; j++) {
+        if (widget.listaSelecao[j].chave == widget.lista[i].chave) {
+          widget.lista[i].selecionado = true;
         }
       }
     }
@@ -421,10 +421,11 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   void atualizarLista(List<ZSelectionItem> lista) {
+    _listaFiltro = lista;
+    montarRespostas();
+
     if (mounted) {
-      setState(() {
-        _listaFiltro = lista;
-      });
+      setState(() {});
     }
   }
 
