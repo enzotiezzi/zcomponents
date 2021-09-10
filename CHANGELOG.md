@@ -1,3 +1,7 @@
+## 0.9.38
+
+* Criacao componente Card convite
+
 ## 0.9.37+33
 
 * Ajuste ZHeader

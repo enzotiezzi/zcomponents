@@ -26,7 +26,7 @@ class _MainComponentsState extends State<MainComponents> {
         centerTitle: true,
         title: new Text("ZAdmin"),
       ),
-      body: _buildEstruturaEmpresa(),
+      body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
