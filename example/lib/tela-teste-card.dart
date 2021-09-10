@@ -3,6 +3,8 @@ import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/config/z-tipo-header.dart';
+import 'package:z_components/components/z-header.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -80,15 +82,17 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         leading: new Text("TESTE"),
       ),
       body: new Container(
-        margin: EdgeInsets.only(top: 10),
-        child: ZSelection(
-            themeData: Theme.of(context),
-            listaRespostas: listaSelecaoRespostas,
-            titulo: "Teste Seleção",
-            onChange: (value) {
-              listaSelecaoRespostas = value[1];
-            },
-            lista: listaSelecao),
+        child: ZHeader(
+          initiallyExpanded: true,
+          titulo: "Giuliano Ortiz Goria",
+          children: <Widget>[
+            new Container(
+              color: const Color(0xffF0F0F0),
+              padding: EdgeInsets.only(bottom: 5.0, top: 5.0),
+            )
+          ],
+          zTipos: ZTipoHeader.isExpansion,
+        ),
       ),
     );
   }

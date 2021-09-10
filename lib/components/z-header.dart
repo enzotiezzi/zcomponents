@@ -70,27 +70,30 @@ class ZHeaderState extends State<ZHeader> {
       case ZTipoHeader.isExpansion:
         return new Material(
           elevation: 4.0,
-          color: const Color(0xfff0f0f0),
+          color: Colors.white,
           child: new ConfigurableExpansionTile(
             initiallyExpanded: widget.initiallyExpanded,
             bottomBorderOn: true,
-            animatedWidgetFollowingHeader: new Icon(Icons.arrow_drop_down),
+            animatedWidgetFollowingHeader:
+                new Icon(Icons.arrow_drop_down, color: Colors.black),
             header: new Expanded(
               child: new Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   (widget.titulosAppBar == false)
-                      ? new Container(
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.only(
-                              left: 16.0, bottom: 10.0, top: 10.0),
-                          child: new Text(widget.titulo,
-                              style: new TextStyle(
-                                  fontSize: 20.0,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)),
+                      ? new Expanded(
+                          child: new Container(
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.only(
+                                bottom: 16.0, top: 16.0, right: 16, left: 16),
+                            child: new Text(widget.titulo,
+                                style: new TextStyle(
+                                    fontSize: 16.0,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black)),
+                          ),
                         )
                       : new Container(
                           child: widget.child,
