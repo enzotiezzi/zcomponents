@@ -93,10 +93,14 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         centerTitle: true,
       ),
       body: new Column(children: [
+        new Container(
+          height: 7,
+        ),
         new ZItemTileConvite(
           itemTileViewModel: new ItemTileViewModel(
             nome: "Matheus Albuquerque",
             status: "Lido",
+            icone: selectIcon(SelectStatus.LIDO),
             dataAdmissao: "02/06/2021",
             cargo: "Desenvolvedor Mobile",
             porcentagemPreenchimento: "80%",
@@ -108,28 +112,117 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         ),
         new ZItemTileConvite(
           itemTileViewModel: new ItemTileViewModel(
+            nome: "Monica Guerra",
+            status: "Em andamento",
+            icone: selectIcon(SelectStatus.EM_ANDAMENTO),
+            dataAdmissao: "14/09/2019",
+            cargo: "Designer",
+            porcentagemPreenchimento: "30%",
+            prazo: "3 Dias",
+          ),
+          onTileIsSelected: () {
+            print("OII");
+          },
+        ),
+        new ZItemTileConvite(
+          itemTileViewModel: new ItemTileViewModel(
+            nome: "Justino Braga",
+            status: "Finalizado",
+            icone: selectIcon(SelectStatus.FINALIZADO),
+            dataAdmissao: "06/11/2012",
+            cargo: "Desenvolvedor backend",
+            porcentagemPreenchimento: "21%",
+            prazo: "9 Dias",
+          ),
+          onTileIsSelected: () {
+            print("OII");
+          },
+        ),
+        new ZItemTileConvite(
+          itemTileViewModel: new ItemTileViewModel(
+            nome: "Laura Ambev",
+            status: "Aprovado",
+            icone: selectIcon(SelectStatus.APROVADO),
+            dataAdmissao: "31/07/2014",
+            cargo: "Desenvolvedor Java",
+            porcentagemPreenchimento: "71%",
+            prazo: "8 Dias",
+          ),
+        ),
+        new ZItemTileConvite(
+          itemTileViewModel: new ItemTileViewModel(
             nome: "Eduardo Silva",
             status: "Não Lido",
+            icone: selectIcon(SelectStatus.NAO_LIDO),
             dataAdmissao: "04/12/2020",
             cargo: "Desenvolvedor Web",
             porcentagemPreenchimento: "50%",
             prazo: "7 Dias",
           ),
-          onTileIsSelected: () {
-            print("OI");
-          },
         ),
         new ZItemTileConvite(
           itemTileViewModel: new ItemTileViewModel(
-            nome: "Monica Guerra",
-            status: "Em Andamento",
-            dataAdmissao: "30/09/2019",
-            cargo: "Designer",
-            porcentagemPreenchimento: "30%",
-            prazo: "3 Dias",
+            nome: "Adriano Imperador",
+            status: "Vencido",
+            icone: selectIcon(SelectStatus.VENCIDO),
+            dataAdmissao: "17/02/2002",
+            cargo: "CEO",
+            porcentagemPreenchimento: "14%",
+            prazo: "15 Dias",
           ),
         ),
       ]),
     );
+  }
+
+  Widget selectIcon(SelectStatus selectStatus) {
+    switch (selectStatus) {
+      case SelectStatus.EM_ANDAMENTO:
+        return new Container(
+            child: new Icon(
+          Icons.article_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.FINALIZADO:
+        return new Container(
+            child: new Icon(
+          Icons.sd_card_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+      case SelectStatus.APROVADO:
+        return new Container(
+            child: new Icon(
+          Icons.check_circle_outline,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.NAO_LIDO:
+        return new Container(
+            child: new Icon(
+          Icons.remove_red_eye_outlined,
+          size: 14,
+          color: Colors.red,
+        ));
+      case SelectStatus.LIDO:
+        return new Container(
+            child: new Icon(
+          Icons.remove_red_eye_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.VENCIDO:
+        return new Container(
+          child: new Icon(
+            Icons.circle,
+            color: Colors.red,
+            size: 8,
+          ),
+        );
+    }
   }
 }
