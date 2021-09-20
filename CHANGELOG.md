@@ -1,3 +1,7 @@
+## 0.9.38+1
+
+* Ajuste card convite e ZEstrutura
+
 ## 0.9.38
 
 * Criacao componente Card convite

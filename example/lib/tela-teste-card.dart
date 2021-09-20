@@ -95,4 +95,55 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       )),
     );
   }
+
+  Widget selectIcon(SelectStatus selectStatus) {
+    switch (selectStatus) {
+      case SelectStatus.EM_ANDAMENTO:
+        return new Container(
+            child: new Icon(
+          Icons.article_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.FINALIZADO:
+        return new Container(
+            child: new Icon(
+          Icons.sd_card_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+      case SelectStatus.APROVADO:
+        return new Container(
+            child: new Icon(
+          Icons.check_circle_outline,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.NAO_LIDO:
+        return new Container(
+            child: new Icon(
+          Icons.remove_red_eye_outlined,
+          size: 14,
+          color: Colors.red,
+        ));
+      case SelectStatus.LIDO:
+        return new Container(
+            child: new Icon(
+          Icons.remove_red_eye_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.VENCIDO:
+        return new Container(
+          child: new Icon(
+            Icons.circle,
+            color: Colors.red,
+            size: 8,
+          ),
+        );
+    }
+  }
 }

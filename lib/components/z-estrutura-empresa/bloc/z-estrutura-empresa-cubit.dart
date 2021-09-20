@@ -181,6 +181,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
       if (nivel.idNivel == nivelPai.idNivel) {
         nivelPai.niveis.add(nivelFilho);
+        searchTextController.text = nivelFilho.nome;
       } else {
         _adicionarNivelFilho(nivelFilho, nivelPai, nivel.niveis);
       }

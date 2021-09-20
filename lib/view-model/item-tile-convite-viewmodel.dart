@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+
+
 class ItemTileViewModel {
   String nome;
   String dataAdmissao;
@@ -6,6 +9,7 @@ class ItemTileViewModel {
   String status;
   String prazo;
   Function onTileIsSelected;
+  Widget icone;
 
   ItemTileViewModel({
     this.nome,
@@ -15,5 +19,6 @@ class ItemTileViewModel {
     this.prazo,
     this.onTileIsSelected,
     this.status,
+    this.icone,
   });
 }
