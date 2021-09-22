@@ -4,8 +4,9 @@ import 'package:z_components/components/z-item-tile-convite.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
-import 'package:z_components/components/utils/icone-voltar.dart';
-import 'package:z_components/view-model/item-tile-convite-viewmodel.dart';
+import 'package:z_components/config/z-tipo-header.dart';
+import 'package:z_components/components/z-header.dart';
+import 'package:z_components/components/z-selection/z-selection.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -79,57 +80,70 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        leading: new IconeVoltar(
-          context: context,
-        ),
-        title: new Text(
-          "TESTE DOS Z-CARDS",
-          style: new TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
+      appBar: AppBar(
+        leading: new Text("TESTE"),
       ),
-      body: new Column(children: [
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Matheus Albuquerque",
-            status: "Lido",
-            dataAdmissao: "02/06/2021",
-            cargo: "Desenvolvedor Mobile",
-            porcentagemPreenchimento: "80%",
-            prazo: "4 Dias",
-          ),
-          onTileIsSelected: () {
-            print("OI");
-          },
-        ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Eduardo Silva",
-            status: "Não Lido",
-            dataAdmissao: "04/12/2020",
-            cargo: "Desenvolvedor Web",
-            porcentagemPreenchimento: "50%",
-            prazo: "7 Dias",
-          ),
-          onTileIsSelected: () {
-            print("OI");
-          },
-        ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Monica Guerra",
-            status: "Em Andamento",
-            dataAdmissao: "30/09/2019",
-            cargo: "Designer",
-            porcentagemPreenchimento: "30%",
-            prazo: "3 Dias",
-          ),
-        ),
-      ]),
+      body: new Container(
+          child: ZSelection(
+        titulo: "teste",
+        lista: listaSelecao,
+        listaRespostas: listaSelecaoRespostas,
+        themeData: Theme.of(context),
+        onChange: (value) {
+          listaSelecaoRespostas = value[1];
+        },
+      )),
     );
+  }
+
+  Widget selectIcon(SelectStatus selectStatus) {
+    switch (selectStatus) {
+      case SelectStatus.EM_ANDAMENTO:
+        return new Container(
+            child: new Icon(
+          Icons.article_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.FINALIZADO:
+        return new Container(
+            child: new Icon(
+          Icons.sd_card_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+      case SelectStatus.APROVADO:
+        return new Container(
+            child: new Icon(
+          Icons.check_circle_outline,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.NAO_LIDO:
+        return new Container(
+            child: new Icon(
+          Icons.remove_red_eye_outlined,
+          size: 14,
+          color: Colors.red,
+        ));
+      case SelectStatus.LIDO:
+        return new Container(
+            child: new Icon(
+          Icons.remove_red_eye_outlined,
+          size: 14,
+          color: new Color(0xff2BBAB4),
+        ));
+
+      case SelectStatus.VENCIDO:
+        return new Container(
+          child: new Icon(
+            Icons.circle,
+            color: Colors.red,
+            size: 8,
+          ),
+        );
+    }
   }
 }
