@@ -11,7 +11,6 @@ import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/styles/main-style.dart';
 
-
 class ZEstruturaEmpresa extends StatelessWidget {
   final String token;
   final GlobalKey key;
@@ -22,14 +21,15 @@ class ZEstruturaEmpresa extends StatelessWidget {
   final ZEstruturaEmpresaCubit bloc;
   final bool exibeIconeVoltar;
 
-  ZEstruturaEmpresa({@required this.token,
+  ZEstruturaEmpresa({
+    @required this.token,
     @required this.key,
     this.onNodeSelected,
     this.onInfoSelected,
     this.headerAtivo = false,
     this.header = "",
     this.bloc,
-    this.exibeIconeVoltar:true,
+    this.exibeIconeVoltar = true,
   });
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
@@ -106,33 +106,32 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
                       bloc.selecionarNo(node);
                     },
-                    nodeBuilder: (context, node) =>
-                    new Container(
-                      padding: const EdgeInsets.all(4.0),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          new Expanded(
-                            child: new Text(node.label),
-                            flex: 90,
-                          ),
-                          new Expanded(
-                            child: new IconButton(
-                                icon: new Icon(
-                                  Icons.chevron_right,
-                                  color: MainStyle.APP_THEME,
-                                ),
-                                onPressed: () {
-                                  bloc.selecionarNo(node);
+                    nodeBuilder: (context, node) => new Container(
+                          padding: const EdgeInsets.all(4.0),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              new Expanded(
+                                child: new Text(node.label),
+                                flex: 90,
+                              ),
+                              new Expanded(
+                                child: new IconButton(
+                                    icon: new Icon(
+                                      Icons.chevron_right,
+                                      color: MainStyle.APP_THEME,
+                                    ),
+                                    onPressed: () {
+                                      bloc.selecionarNo(node);
 
-                                  if (onNodeSelected != null)
-                                    onNodeSelected(node.data as Nivel);
-                                }),
-                            flex: 10,
-                          )
-                        ],
-                      ),
-                    )),
+                                      if (onNodeSelected != null)
+                                        onNodeSelected(node.data as Nivel);
+                                    }),
+                                flex: 10,
+                              )
+                            ],
+                          ),
+                        )),
               ),
             );
 
@@ -157,7 +156,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: Color(0xfff0f0f0),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(9.0))),
+                                    BorderRadius.all(Radius.circular(9.0))),
                             child: new Row(
                               children: <Widget>[
                                 new Container(
@@ -168,18 +167,17 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                     )),
                                 new Expanded(
                                     child: new CupertinoTextField(
-                                      placeholderStyle: new TextStyle(
-                                          color: Color(0xff999999),
-                                          fontSize: 17),
-                                      keyboardType: TextInputType.text,
-                                      controller: bloc.searchTextController,
-                                      onChanged: (value) {
-                                        bloc.filtrarEstruturaEmpresa(value);
-                                      },
-                                      placeholder: "Buscar",
-                                      decoration: new BoxDecoration(
-                                          color: Colors.transparent),
-                                    )),
+                                  placeholderStyle: new TextStyle(
+                                      color: Color(0xff999999), fontSize: 17),
+                                  keyboardType: TextInputType.text,
+                                  controller: bloc.searchTextController,
+                                  onChanged: (value) {
+                                    bloc.filtrarEstruturaEmpresa(value);
+                                  },
+                                  placeholder: "Buscar",
+                                  decoration: new BoxDecoration(
+                                      color: Colors.transparent),
+                                )),
                               ],
                             ),
                           ),
@@ -190,9 +188,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                           child: new IconButton(
                             icon: new Icon(
                               Icons.filter_list_outlined,
-                              color: Theme
-                                  .of(context)
-                                  .primaryColor,
+                              color: Theme.of(context).primaryColor,
                             ),
                           )),
                     ],
@@ -216,8 +212,6 @@ class ZEstruturaEmpresa extends StatelessWidget {
       );
     }
   }
-
-
 
   Widget montarWidgetIconeVoltar(BuildContext context) {
     if (exibeIconeVoltar) {
