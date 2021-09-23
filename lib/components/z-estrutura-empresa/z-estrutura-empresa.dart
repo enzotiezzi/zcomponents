@@ -8,10 +8,8 @@ import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit-model.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-header.dart';
-import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/styles/main-style.dart';
-import 'package:z_components/view-model/conta.dart';
 
 class ZEstruturaEmpresa extends StatelessWidget {
   final String token;
@@ -21,15 +19,18 @@ class ZEstruturaEmpresa extends StatelessWidget {
   final void Function() onInfoSelected;
   final String header;
   final ZEstruturaEmpresaCubit bloc;
+  final bool exibeIconeVoltar;
 
-  ZEstruturaEmpresa(
-      {@required this.token,
-      @required this.key,
-      this.onNodeSelected,
-      this.onInfoSelected,
-      this.headerAtivo = false,
-      this.header = "",
-      this.bloc});
+  ZEstruturaEmpresa({
+    @required this.token,
+    @required this.key,
+    this.onNodeSelected,
+    this.onInfoSelected,
+    this.headerAtivo = false,
+    this.header = "",
+    this.bloc,
+    this.exibeIconeVoltar = true,
+  });
 
   final TreeViewTheme _treeViewTheme = TreeViewTheme(
     expanderTheme: ExpanderThemeData(
@@ -75,9 +76,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                     if (onInfoSelected != null) onInfoSelected();
                   }),
             ],
-            leading: new IconeVoltar(
-              context: context,
-            ),
+            leading: montarWidgetIconeVoltar(context),
             title: new Text("ESTRUTURA DE EMPRESA"),
             centerTitle: true,
           ),
@@ -211,6 +210,16 @@ class ZEstruturaEmpresa extends StatelessWidget {
         titulo: header,
         elevation: 4,
       );
+    }
+  }
+
+  Widget montarWidgetIconeVoltar(BuildContext context) {
+    if (exibeIconeVoltar) {
+      new IconeVoltar(
+        context: context,
+      );
+    } else {
+      return new Container();
     }
   }
 }
