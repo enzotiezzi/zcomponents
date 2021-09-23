@@ -4,8 +4,10 @@ import 'package:z_components/components/z-item-tile-convite.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
-import 'package:z_components/components/utils/icone-voltar.dart';
-import 'package:z_components/view-model/item-tile-convite-viewmodel.dart';
+import 'package:z_components/config/z-tipo-header.dart';
+import 'package:z_components/components/z-header.dart';
+import 'package:z_components/components/z-selection/z-selection.dart';
+import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -79,99 +81,29 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        leading: new IconeVoltar(
-          context: context,
-        ),
-        title: new Text(
-          "TESTE DOS Z-CARDS",
-          style: new TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
+      appBar: AppBar(
+        leading: new Text("TESTE"),
       ),
-      body: new Column(children: [
-        new Container(
-          height: 7,
+      body: new Container(
+        child: new Column(
+          children: [
+            new ZInputDataPadrao(
+              themeData: Theme.of(context),
+              controllerData: TextEditingController(),
+              dataFocus: FocusNode(),
+              legenda: "Data de inicio",
+              validacao: (validacaoDataInicio){},
+            ),
+            new ZInputDataPadrao(
+              themeData: Theme.of(context),
+              controllerData: TextEditingController(),
+              dataFocus: FocusNode(),
+              legenda: "Data final",
+              validacao: (validacaoDataFinal){},
+            ),
+          ],
         ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Matheus Albuquerque",
-            status: "Lido",
-            icone: selectIcon(SelectStatus.LIDO),
-            dataAdmissao: "02/06/2021",
-            cargo: "Desenvolvedor Mobile",
-            porcentagemPreenchimento: "80%",
-            prazo: "4 Dias",
-          ),
-          onTileIsSelected: () {
-            print("OI");
-          },
-        ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Monica Guerra",
-            status: "Em andamento",
-            icone: selectIcon(SelectStatus.EM_ANDAMENTO),
-            dataAdmissao: "14/09/2019",
-            cargo: "Designer",
-            porcentagemPreenchimento: "30%",
-            prazo: "3 Dias",
-          ),
-          onTileIsSelected: () {
-            print("OII");
-          },
-        ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Justino Braga",
-            status: "Finalizado",
-            icone: selectIcon(SelectStatus.FINALIZADO),
-            dataAdmissao: "06/11/2012",
-            cargo: "Desenvolvedor backend",
-            porcentagemPreenchimento: "21%",
-            prazo: "9 Dias",
-          ),
-          onTileIsSelected: () {
-            print("OII");
-          },
-        ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Laura Ambev",
-            status: "Aprovado",
-            icone: selectIcon(SelectStatus.APROVADO),
-            dataAdmissao: "31/07/2014",
-            cargo: "Desenvolvedor Java",
-            porcentagemPreenchimento: "71%",
-            prazo: "8 Dias",
-          ),
-        ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Eduardo Silva",
-            status: "Não Lido",
-            icone: selectIcon(SelectStatus.NAO_LIDO),
-            dataAdmissao: "04/12/2020",
-            cargo: "Desenvolvedor Web",
-            porcentagemPreenchimento: "50%",
-            prazo: "7 Dias",
-          ),
-        ),
-        new ZItemTileConvite(
-          itemTileViewModel: new ItemTileViewModel(
-            nome: "Adriano Imperador",
-            status: "Vencido",
-            icone: selectIcon(SelectStatus.VENCIDO),
-            dataAdmissao: "17/02/2002",
-            cargo: "CEO",
-            porcentagemPreenchimento: "14%",
-            prazo: "15 Dias",
-          ),
-        ),
-      ]),
+      ),
     );
   }
 
