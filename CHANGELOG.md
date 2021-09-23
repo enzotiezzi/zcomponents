@@ -1,3 +1,7 @@
+## 0.9.39
+
+* Criacao ZInput data padrao
+
 ## 0.9.38+1
 
 * Ajuste card convite e ZEstrutura
