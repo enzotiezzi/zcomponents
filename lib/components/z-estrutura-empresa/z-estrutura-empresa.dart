@@ -215,7 +215,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
   Widget montarWidgetIconeVoltar(BuildContext context) {
     if (exibeIconeVoltar) {
-      new IconeVoltar(
+      return new IconeVoltar(
         context: context,
       );
     } else {
