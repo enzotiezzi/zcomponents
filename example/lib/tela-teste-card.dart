@@ -8,7 +8,9 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
-import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
+import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
+import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -82,42 +84,15 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
-        leading: new Text("TESTE"),
-      ),
-      body: new Container(
-        child: new Column(
-          children: [
-            new ZInputDataPadrao(
-              themeData: Theme.of(context),
-              controllerData: TextEditingController(),
-              dataFocus: FocusNode(),
-              legenda: "Data de inicio",
-              validacao: (validacaoDataInicio) {},
-            ),
-            new ZInputDataPadrao(
-              themeData: Theme.of(context),
-              controllerData: TextEditingController(),
-              dataFocus: FocusNode(),
-              legenda: "Data final",
-              validacao: (validacaoDataFinal) {},
-            ),
-            new Container(margin: EdgeInsets.only(top: 16),
-              child: new ZItemTilePerguntaAdicional(
-                onPressed: () {},
-                opcoes: [
-                  "alternativa 1",
-                  "alternativa 2",
-                  "alternativa 3",
-                  "Alternativa 4",
-                  "Alternativa 5"
-                ],
-                textoPergunta:
-                    "Exemplo de pergunta teste pergunta grande para ver se quebra o texto",
-                tipoPergunta: "Alternativa",
-              ),
-            )
-          ],
+
+      body:Container(
+        child: ZEstruturaEmpresa(
+          token: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImFhNmNiYWFjMmE0NDc3MThhNDg3YjNkOWE5YWU4YWM0IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MzI0MTYwMjEsImV4cCI6MTYzMjQxOTYyMSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpSZWNydXRhbWVudG8iLCJzdWIiOiIwMjFmOTE4Mi0zZjQxLTRmMGEtYWFkYy00MDc3NmU2MGQwNGMiLCJhdXRoX3RpbWUiOjE2MzI0MTYwMjEsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiIzS0U2RUNEUlRIR0dYQURBTUNXR1pHQUVEWDJEM1lPTCIsImFjY291bnQiOiJ6ZWxsYXIyIiwiaWRBY2NvdW50IjoiZGRiNDQwNzUtMmJjYS00MDIzLWJhYTktYmU3NmNjNWM3Mzk3IiwiaWRDb2xhYm9yYWRvciI6IjE1ODQyQzJFLUM3RDctNERENS04RkE5LUZFMzNDQkQ2NENFQyIsInByZWZlcnJlZF91c2VybmFtZSI6IjQyNi45MTAuMjU4LTYxIiwiZW1haWwiOiJsdWl6Lmx1Y2lhQHplbGxhci5jb20uYnIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlcl92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJMdWl6IEx1Y2lhIE5ldG8iLCJwaG9uZV9udW1iZXIiOiIxMTk0ODQ4NDEyMCIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsIm1vbHRyZXMuYWNlc3NvLmFwaS5mdWxsIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.iYdr58utZ1lIDMKSb-lEWeZB2bZZI9fXrnmfCytz4xq1j5K19FTnf9LiYuzIJ9SDZZ4ty3zp44hquUXWqAYjHv3RcuJG0rC8VN0RwVDKdNp4Lbmx8ChCy_jgflxkL-1-bEQXNxS-oYDD-8xucsmeM0LuODPzPkKMwxZ_j8EBMdBt2jF7MEssbRvk6d0FFKQx9PlsPELK-Akdkkfhnuj7y4UORoJ0I28nEneyZKSIe-UvMx6B4UYnuJ9wU56xtkTl5VC-1Vriy7aLPz26aF8m0-IEoMh6tJva4el_eU5xNR9EUknpGJmsorTRCXDUk1Xe7MACCMuDvi6Sxt75V3gGJA",
+          headerAtivo: false,
+          header: " ",
+          bloc: ZEstruturaEmpresaCubit(),
+          exibeIconeVoltar: true,
+
         ),
       ),
     );
