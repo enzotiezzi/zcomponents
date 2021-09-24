@@ -1,3 +1,7 @@
+## 0.9.40
+
+* Criacao card pergunta adicional
+
 ## 0.9.39
 
 * Criacao ZInput data padrao
