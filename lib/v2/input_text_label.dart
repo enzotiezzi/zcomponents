@@ -112,9 +112,9 @@ class _InputTextLabel extends State<InputTextLabel>
                           if (widget.validator != null) {
                             var errorText = widget.validator(widget.textEditingController.text);
 
-                            setUIState(ZUIState.ERROR);
-
                             if(errorText != null) {
+                              setUIState(ZUIState.ERROR);
+
                               setState(() {
                                 _assistText = errorText;
                               });

@@ -1,3 +1,32 @@
+## 0.9.40
+
+* Criacao card pergunta adicional
+
+## 0.9.39
+
+* Criacao ZInput data padrao
+
+## 0.9.38+1
+
+* Ajuste card convite e ZEstrutura
+
+## 0.9.38
+
+* Criacao componente Card convite
+
+## 0.9.37+33
+
+* Ajuste ZHeader
+
+## 0.9.37+32
+
+* Ajuste ZHeader
+
+
+## 0.9.37+31
+
+* Ajuste ZEstruturaEmpresa
+
 ## 0.9.37+30
 
 * Ajuste ZSelection

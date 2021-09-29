@@ -2,6 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/view-model/item-tile-convite-viewmodel.dart';
 
+enum SelectStatus {
+  EM_ANDAMENTO,
+  VENCIDO,
+  LIDO,
+  NAO_LIDO,
+  FINALIZADO,
+  APROVADO,
+}
+
 class ZItemTileConvite extends StatefulWidget {
   final Function onTileIsSelected;
   final ItemTileViewModel itemTileViewModel;
@@ -19,28 +28,24 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
   Widget retornarStatus() {
     if (widget.itemTileViewModel.status == null) {
       return new Text(
-        'INDICAR STATUS',
+        "INDICAR STATUS",
         style: new TextStyle(
-            fontSize: 14,
-            color: Color(0xFF000000),
+            fontSize: 12,
+            color: new Color(0xFF000000),
             fontWeight: FontWeight.w600),
       );
     } else {
       return new Row(
         children: [
           new Container(
-            child: new Icon(
-              Icons.circle,
-              color: retornarCorStatus(),
-              size: 8,
-            ),
-            padding: new EdgeInsets.only(right: 4),
+            margin: const EdgeInsets.only(right: 2),
+            child: widget.itemTileViewModel.icone,
           ),
           new Text(
             widget.itemTileViewModel.status,
             style: new TextStyle(
                 fontSize: 14,
-                color: Color(0xFF000000),
+                color: new Color(0xFF000000),
                 fontWeight: FontWeight.w600),
           ),
         ],
@@ -48,24 +53,14 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
     }
   }
 
-  Color retornarCorStatus() {
-    switch (widget.itemTileViewModel.status.toUpperCase()) {
-      case "LIDO":
-        return Colors.green;
-      case "NÃO LIDO":
-        return Colors.red;
-      case "EM ANDAMENTO":
-        return Colors.yellowAccent;
-    }
-    return Colors.grey;
-  }
+  retornarIconeStatus() {}
 
   Widget retornarNome() {
     if (widget.itemTileViewModel.nome == null) {
       return new Text(
         'INDICAR NOME',
         style: new TextStyle(
-            fontSize: 14,
+            fontSize: 12,
             color: new Color(0xFF000000),
             fontWeight: FontWeight.w600),
       );
@@ -194,7 +189,15 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           new Container(
+                            child: new Icon(
+                              Icons.calendar_today_outlined,
+                              size: 14,
+                              color: new Color(0XFF2BBAB4),
+                            ),
                             margin: const EdgeInsets.only(left: 8, bottom: 4),
+                          ),
+                          new Container(
+                            margin: const EdgeInsets.only(left: 4, bottom: 4),
                             child: new Text(
                               "Admissão:",
                               style: new TextStyle(
@@ -216,8 +219,17 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               new Container(
+                                margin:
+                                    const EdgeInsets.only(left: 8, bottom: 4),
+                                child: new Icon(
+                                  Icons.work_outline,
+                                  size: 14,
+                                  color: new Color(0XFF2BBAB4),
+                                ),
+                              ),
+                              new Container(
                                 margin: const EdgeInsets.only(
-                                  left: 8,
+                                  left: 4,
                                   bottom: 4,
                                 ),
                                 child: new Text(
@@ -230,7 +242,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                               ),
                               new Container(
                                 margin: new EdgeInsets.only(
-                                  left: 8,
+                                  left: 4,
                                   bottom: 4,
                                 ),
                                 child: retornarCargo(),
@@ -247,8 +259,16 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           new Container(
+                            margin: const EdgeInsets.only(left: 8, bottom: 4),
+                            child: new Icon(
+                              Icons.analytics_outlined,
+                              size: 14,
+                              color: new Color(0XFF2BBAB4),
+                            ),
+                          ),
+                          new Container(
                             margin: const EdgeInsets.only(
-                              left: 8,
+                              left: 4,
                               bottom: 4,
                             ),
                             child: new Text(
@@ -260,7 +280,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                             ),
                           ),
                           new Container(
-                            margin: new EdgeInsets.only(left: 8, bottom: 2),
+                            margin: const EdgeInsets.only(left: 4, bottom: 2),
                             child: retornarPorcentagem(),
                           ),
                         ],
@@ -269,8 +289,16 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           new Container(
+                            margin: const EdgeInsets.only(left: 8, bottom: 4),
+                            child: new Icon(
+                              Icons.access_alarm_rounded,
+                              size: 14,
+                              color: new Color(0XFF2BBAB4),
+                            ),
+                          ),
+                          new Container(
                             margin: const EdgeInsets.only(
-                              left: 8,
+                              left: 4,
                               bottom: 4,
                             ),
                             child: new Text(
@@ -282,7 +310,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                             ),
                           ),
                           new Container(
-                            margin: const EdgeInsets.only(left: 4, bottom: 2),
+                            margin: const EdgeInsets.only(left: 2, bottom: 2),
                             child: retornarPrazo(),
                           ),
                         ],
