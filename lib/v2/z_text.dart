@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class ZText extends Text {
-  ZText(String data) : super(data);
+  final TextAlign textAlign;
+
+  ZText(String data, {this.textAlign}) : super(data, textAlign: textAlign);
 }

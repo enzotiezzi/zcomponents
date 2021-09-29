@@ -28,6 +28,8 @@ import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-candidato.dart';
 import 'package:z_components/components/z-item-tile-lista-candidato.dart';
 import 'package:z_components/v2/input_text_label.dart';
+import 'package:z_components/v2/z_text.dart';
+import 'package:z_components/v2/z_icon.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -79,13 +81,14 @@ class _MainTestingState extends State<MainTesting> {
       shrinkWrap: true,
       children: [
         InputTextLabel(
-          label: "Label",
-          leading: Icon(Icons.search),
-          sufix: Text("grs.", textAlign: TextAlign.end,),
-          prefix: Text("R\$"),
-          trailing: Icon(Icons.search),
-          assist: "Preencha tudo",
           textEditingController: textController1,
+          label: "Label",
+          leading: ZIcon(Icons.search),
+          sufix: ZText("grs.", textAlign: TextAlign.end,),
+          prefix: ZText("R\$"),
+          trailing: ZIcon(Icons.search),
+          assist: "Preencha tudo",
+          showMaxLength: true,
           validator: (value) {
             if(value.isEmpty)
               return "Texto não pode estar vázio";
@@ -96,10 +99,10 @@ class _MainTestingState extends State<MainTesting> {
         InputTextLabel(
           textEditingController: textController2,
           label: "Label 2",
-          leading: Icon(Icons.search),
-          sufix: Text("grs.", textAlign: TextAlign.end,),
-          prefix: Text("R\$"),
-          trailing: Icon(Icons.search),
+          leading: ZIcon(Icons.search),
+          sufix: ZText("grs.", textAlign: TextAlign.end,),
+          prefix: ZText("R\$"),
+          trailing: ZIcon(Icons.search),
           assist: "Preencha tudo",
           validator: (value) {
             if(value.isEmpty)
