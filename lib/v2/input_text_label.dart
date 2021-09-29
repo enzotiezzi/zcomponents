@@ -16,6 +16,7 @@ class InputTextLabel extends StatefulWidget {
   final FormFieldValidator<String> validator;
   final int maxLength;
   final bool showMaxLength;
+  final TextInputType textInputType;
 
   InputTextLabel(
       {@required this.textEditingController,
@@ -28,7 +29,8 @@ class InputTextLabel extends StatefulWidget {
       this.key,
       this.validator,
       this.maxLength: 16,
-      this.showMaxLength: false})
+      this.showMaxLength: false,
+      this.textInputType: TextInputType.text})
       : assert(textEditingController != null, label != null),
         super(key: key);
 
@@ -88,6 +90,7 @@ class _InputTextLabel extends State<InputTextLabel>
                       child: TextFormField(
                         controller: widget.textEditingController,
                         maxLength: widget.maxLength,
+                        keyboardType: widget.textInputType,
                         decoration: InputDecoration(
                             hintText: "Input Text",
                             border: InputBorder.none,
@@ -98,8 +101,7 @@ class _InputTextLabel extends State<InputTextLabel>
                             counterText: ""),
                         onChanged: (value) {
                           // APENAS PARA ATUALIZAR NÚMERO DE CARACTERES
-                          if(widget.showMaxLength)
-                            setState(() {});
+                          if (widget.showMaxLength) setState(() {});
 
                           if (widget.validator != null) {
                             var errorText = widget
@@ -136,7 +138,7 @@ class _InputTextLabel extends State<InputTextLabel>
                         }
                       },
                     ),
-                    flex: 86,
+                    flex: 68,
                   ),
                   Expanded(
                     child: widget.sufix,
@@ -162,7 +164,7 @@ class _InputTextLabel extends State<InputTextLabel>
                   Expanded(
                       flex: 10,
                       child: Text(
-                        widget.showMaxLength ? "${widget.textEditingController.text.length}/${widget.maxLength}" : "",
+                        _buildMaxLengthString(),
                         style: TextStyle(color: currentColor),
                       ))
                 ],
@@ -177,5 +179,11 @@ class _InputTextLabel extends State<InputTextLabel>
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
+  }
+
+  String _buildMaxLengthString(){
+    return widget.showMaxLength
+        ? "${widget.textEditingController.text.length}/${widget.maxLength}"
+        : "";
   }
 }
