@@ -16,16 +16,17 @@ class InputTextLabel extends StatefulWidget {
   final FormFieldValidator<String> validator;
 
   InputTextLabel(
-      {this.label,
+      {@required this.textEditingController,
+      @required this.label,
       this.leading,
       this.trailing,
       this.prefix,
       this.sufix,
       this.assist,
       this.key,
-      @required this.textEditingController,
       this.validator})
-      : super(key: key);
+      : assert(textEditingController != null, label != null),
+        super(key: key);
 
   @override
   State<StatefulWidget> createState() => _InputTextLabel();
@@ -33,7 +34,6 @@ class InputTextLabel extends StatefulWidget {
 
 class _InputTextLabel extends State<InputTextLabel>
     with UIFormState<InputTextLabel> {
-
   String _assistText = "";
 
   @override
@@ -92,10 +92,11 @@ class _InputTextLabel extends State<InputTextLabel>
                           disabledBorder: InputBorder.none,
                         ),
                         onChanged: (value) {
-                          if(widget.validator != null){
-                            var errorText = widget.validator(widget.textEditingController.text);
+                          if (widget.validator != null) {
+                            var errorText = widget
+                                .validator(widget.textEditingController.text);
 
-                            if(errorText == null){
+                            if (errorText == null) {
                               setUIState(ZUIState.FOCUS);
 
                               setState(() {
@@ -110,9 +111,10 @@ class _InputTextLabel extends State<InputTextLabel>
                           setUIState(ZUIState.FOCUS);
                         else {
                           if (widget.validator != null) {
-                            var errorText = widget.validator(widget.textEditingController.text);
+                            var errorText = widget
+                                .validator(widget.textEditingController.text);
 
-                            if(errorText != null) {
+                            if (errorText != null) {
                               setUIState(ZUIState.ERROR);
 
                               setState(() {
@@ -165,7 +167,6 @@ class _InputTextLabel extends State<InputTextLabel>
 
   @override
   void setState(fn) {
-    if(mounted)
-      super.setState(fn);
+    if (mounted) super.setState(fn);
   }
 }
