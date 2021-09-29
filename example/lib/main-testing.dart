@@ -27,7 +27,7 @@ import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-candidato.dart';
 import 'package:z_components/components/z-item-tile-lista-candidato.dart';
-
+import 'package:z_components/v2/input_text_label.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -60,27 +60,6 @@ class _MainTestingState extends State<MainTesting> {
 
   @override
   Future<void> initState() {
-    identityServer = new IdentityServer(
-        clientId: "ZTotem",
-        redirectUrl: "net.openid.appauthztotem:/oauth2redirect",
-        scopes: [
-          'openid',
-          'profile',
-          'email',
-          'offline_access',
-          'moltres.acesso.api.full'
-        ]);
-
-    teste(searchOptions).then((value) => {
-          this.setState(() {
-            grupos = converterParaZCollection(value.body) +
-                converterParaZCollection(value.body);
-            key = new GlobalKey();
-            this.paginationMetaData = value.paginationMetaData;
-            this.searchOptions.pagination.pageNumber++;
-          })
-        });
-
     super.initState();
   }
 
@@ -88,8 +67,48 @@ class _MainTestingState extends State<MainTesting> {
   Widget build(BuildContext context) {
     return MainStyle.get(context).getDefaultScaffold(
       "Componente de teste",
-      _buildBody(),
+      _buildTest(),
+    );
+  }
 
+  var textController1= new TextEditingController();
+  var textController2 = new TextEditingController();
+
+  Widget _buildTest() {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        InputTextLabel(
+          label: "Label",
+          leading: Icon(Icons.search),
+          sufix: Text("grs.", textAlign: TextAlign.end,),
+          prefix: Text("R\$"),
+          trailing: Icon(Icons.search),
+          assist: "Preencha tudo",
+          textEditingController: textController1,
+          validator: (value) {
+            if(value.isEmpty)
+              return "Texto não pode estar vázio";
+
+            return null;
+          },
+        ),
+        InputTextLabel(
+          textEditingController: textController2,
+          label: "Label 2",
+          leading: Icon(Icons.search),
+          sufix: Text("grs.", textAlign: TextAlign.end,),
+          prefix: Text("R\$"),
+          trailing: Icon(Icons.search),
+          assist: "Preencha tudo",
+          validator: (value) {
+            if(value.isEmpty)
+              return "Texto não pode estar vázio";
+
+            return null;
+          },
+        )
+      ],
     );
   }
 
@@ -143,8 +162,14 @@ class _MainTestingState extends State<MainTesting> {
               }
             },
           ),
-          new RaisedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder:(context)=> ZUserInfo()));}, child: new Text("teste"),)
-         , ZForm(
+          new RaisedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ZUserInfo()));
+            },
+            child: new Text("teste"),
+          ),
+          ZForm(
             onChange: (lista) {
               print(lista);
             },
@@ -208,8 +233,8 @@ class _MainTestingState extends State<MainTesting> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ZUserInfo(
-userInfo: BuscarInfo(),
-                        )));
+                              userInfo: BuscarInfo(),
+                            )));
               },
               color: Theme.of(context).accentColor,
               child: Text("SALVAR"),

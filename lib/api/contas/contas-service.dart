@@ -24,8 +24,7 @@ class ContasService extends Service implements IContasService {
     var params = searchOptions.toHttpParams();
     try {
       var res = await request("$_URL/usuarios$params", Service.HTTP_GET);
-      print(res.body);
-      print(res.statusCode);
+
       return PaginatedList<UsuarioContaViewModel>(
               response: res, deserializer: UsuarioContaViewModel.fromJson)
           .mapToPaginatedList();
