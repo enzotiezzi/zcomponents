@@ -8,7 +8,9 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
-import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
+import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
+import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -102,22 +104,6 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               dataFocus: FocusNode(),
               legenda: "Data final",
               validacao: (validacaoDataFinal) {},
-            ),
-            new Container(
-              margin: EdgeInsets.only(top: 16),
-              child: new ZItemTilePerguntaAdicional(
-                onPressed: () {},
-                opcoes: [
-                  "alternativa 1",
-                  "alternativa 2",
-                  "alternativa 3",
-                  "Alternativa 4",
-                  "Alternativa 5"
-                ],
-                textoPergunta:
-                    "Exemplo de pergunta teste pergunta grande para ver se quebra o texto",
-                tipoPergunta: "Alternativa",
-              ),
             ),
             new ZSelection(
               titulo: "Teste",
