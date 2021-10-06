@@ -71,7 +71,8 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       new ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
     listaSelecaoRespostas = [
-      new ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
+      new ZSelectionItem(
+          chave: "2", titulo: "2", valor: "2", obrigatorio: true),
       new ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
       new ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
     ];
@@ -102,7 +103,8 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               legenda: "Data final",
               validacao: (validacaoDataFinal) {},
             ),
-            new Container(margin: EdgeInsets.only(top: 16),
+            new Container(
+              margin: EdgeInsets.only(top: 16),
               child: new ZItemTilePerguntaAdicional(
                 onPressed: () {},
                 opcoes: [
@@ -116,6 +118,13 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                     "Exemplo de pergunta teste pergunta grande para ver se quebra o texto",
                 tipoPergunta: "Alternativa",
               ),
+            ),
+            new ZSelection(
+              titulo: "Teste",
+              lista: listaSelecao,
+              listaRespostas: listaSelecaoRespostas,
+              themeData: Theme.of(context),
+              onChange: (value) {},
             )
           ],
         ),
