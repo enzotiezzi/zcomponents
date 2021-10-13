@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ZTheme {
+  static Color primaryColor = const Color(0xff2bbab4);
+
   static Map<ZUIState, Color> colorStateMap = {
     ZUIState.ACTIVE: Colors.grey,
     ZUIState.WARNING: warningColor,

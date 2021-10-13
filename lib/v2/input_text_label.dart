@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/v2/i_ui_state.dart';
+import 'package:z_components/v2/z_icon.dart';
 import 'package:z_components/v2/z_theme.dart';
 
 class InputTextLabel extends StatefulWidget {
@@ -8,8 +9,8 @@ class InputTextLabel extends StatefulWidget {
   final TextEditingController textEditingController;
 
   final String label;
-  final Widget leading;
-  final Widget trailing;
+  final ZIcon leadingIcon;
+  final ZIcon trailingIcon;
   final Widget prefix;
   final Widget sufix;
   final String assist;
@@ -17,12 +18,13 @@ class InputTextLabel extends StatefulWidget {
   final int maxLength;
   final bool showMaxLength;
   final TextInputType textInputType;
+  final String placeHolder;
 
   InputTextLabel(
       {@required this.textEditingController,
       @required this.label,
-      this.leading,
-      this.trailing,
+      this.leadingIcon,
+      this.trailingIcon,
       this.prefix,
       this.sufix,
       this.assist,
@@ -30,6 +32,7 @@ class InputTextLabel extends StatefulWidget {
       this.validator,
       this.maxLength: 16,
       this.showMaxLength: false,
+      this.placeHolder,
       this.textInputType: TextInputType.text})
       : assert(textEditingController != null, label != null),
         super(key: key);
@@ -78,7 +81,7 @@ class _InputTextLabel extends State<InputTextLabel>
               child: Row(
                 children: [
                   Expanded(
-                    child: widget.leading,
+                    child: widget.leadingIcon,
                     flex: 8,
                   ),
                   Expanded(
@@ -92,7 +95,7 @@ class _InputTextLabel extends State<InputTextLabel>
                         maxLength: widget.maxLength,
                         keyboardType: widget.textInputType,
                         decoration: InputDecoration(
-                            hintText: "Input Text",
+                            hintText: widget.placeHolder,
                             border: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -145,7 +148,7 @@ class _InputTextLabel extends State<InputTextLabel>
                     flex: 8,
                   ),
                   Expanded(
-                    child: widget.trailing,
+                    child: widget.trailingIcon,
                     flex: 8,
                   )
                 ],
@@ -181,7 +184,7 @@ class _InputTextLabel extends State<InputTextLabel>
     if (mounted) super.setState(fn);
   }
 
-  String _buildMaxLengthString(){
+  String _buildMaxLengthString() {
     return widget.showMaxLength
         ? "${widget.textEditingController.text.length}/${widget.maxLength}"
         : "";

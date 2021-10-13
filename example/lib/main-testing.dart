@@ -83,10 +83,10 @@ class _MainTestingState extends State<MainTesting> {
         InputTextLabel(
           textEditingController: textController1,
           label: "Label",
-          leading: ZIcon(Icons.search),
+          leadingIcon: ZIcon(Icons.search),
           sufix: ZText("grs.", textAlign: TextAlign.end,),
           prefix: ZText("R\$"),
-          trailing: ZIcon(Icons.search),
+          trailingIcon: ZIcon(Icons.search),
           assist: "Preencha tudo",
           showMaxLength: true,
           validator: (value) {
@@ -99,10 +99,10 @@ class _MainTestingState extends State<MainTesting> {
         InputTextLabel(
           textEditingController: textController2,
           label: "Label 2",
-          leading: ZIcon(Icons.search),
+          leadingIcon: ZIcon(Icons.search),
           sufix: ZText("grs.", textAlign: TextAlign.end,),
           prefix: ZText("R\$"),
-          trailing: ZIcon(Icons.search),
+          trailingIcon: ZIcon(Icons.search),
           assist: "Preencha tudo",
           validator: (value) {
             if(value.isEmpty)

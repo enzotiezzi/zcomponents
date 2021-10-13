@@ -4,6 +4,7 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/v2/z_icon.dart';
 import 'package:z_components/v2/z_text.dart';
 import 'package:z_components/v2/input_text_label.dart';
+import 'package:z_components/v2/z_outlined_button.dart';
 
 class MainV2 extends StatefulWidget {
   const MainV2({Key key}) : super(key: key);
@@ -28,13 +29,14 @@ class _MainV2State extends State<MainV2> {
         InputTextLabel(
           textEditingController: textController1,
           label: "Label",
-          leading: ZIcon(Icons.search),
+          placeHolder: "Texto aqui",
+          leadingIcon: ZIcon(Icons.search),
+          prefix: ZText("R\$"),
           sufix: ZText(
             "grs.",
             textAlign: TextAlign.end,
           ),
-          prefix: ZText("R\$"),
-          trailing: ZIcon(Icons.search),
+          trailingIcon: ZIcon(Icons.search),
           assist: "Preencha tudo",
           showMaxLength: true,
           validator: (value) {
@@ -46,19 +48,29 @@ class _MainV2State extends State<MainV2> {
         InputTextLabel(
           textEditingController: textController2,
           label: "Label 2",
-          leading: ZIcon(Icons.search),
+          placeHolder: "Texto aqui",
+          leadingIcon: ZIcon(Icons.search),
+          prefix: ZText("R\$"),
           sufix: ZText(
             "grs.",
             textAlign: TextAlign.end,
           ),
-          prefix: ZText("R\$"),
-          trailing: ZIcon(Icons.search),
+          trailingIcon: ZIcon(Icons.search),
           assist: "Preencha tudo",
           validator: (value) {
             if (value.isEmpty) return "Texto não pode estar vázio";
 
             return null;
           },
+        ),
+        ZOutLinedButton(
+          text: "Button",
+          onPressed: () {},
+        ),
+        Chip(
+          label: Text("test"),
+          deleteIcon: Icon(Icons.cancel_outlined),
+          onDeleted: (){},
         )
       ],
     );
