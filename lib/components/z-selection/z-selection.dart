@@ -144,18 +144,11 @@ class ZSelectionState extends State<ZSelection> {
                     ),
                   ),
                   trailing: new IconButton(
-                    onPressed: () {
-                      widget.listaRespostas.removeAt(index);
-                      if (_itemSelecionado.length == 0) {
-                        _itemSelecionado.add(widget.lista);
-                        _itemSelecionado.add(widget.listaRespostas);
-                      }
-                      widget.onChange(_itemSelecionado);
-                      setState(() {});
-                    },
+                    onPressed: _buildOnPressedRemove(
+                        widget.listaRespostas[index].obrigatorio, index),
                     icon: Icon(
                       Icons.remove_circle_outline,
-                      color: Colors.red,
+                      color: _escolherCorIconeRemover( widget.listaRespostas[index].obrigatorio)
                     ),
                   ),
                 ),
@@ -166,6 +159,28 @@ class ZSelectionState extends State<ZSelection> {
             );
           });
     }
+  }
+
+  Color _escolherCorIconeRemover(bool podeRemover) {
+    if (!podeRemover)
+      return Colors.red;
+    else
+      return Colors.grey;
+  }
+
+  Function _buildOnPressedRemove(bool podeRemover, int index) {
+    if (!podeRemover)
+      return () {
+        widget.listaRespostas.removeAt(index);
+        if (_itemSelecionado.length == 0) {
+          _itemSelecionado.add(widget.lista);
+          _itemSelecionado.add(widget.listaRespostas);
+        }
+        widget.onChange(_itemSelecionado);
+        setState(() {});
+      };
+    else
+      return null;
   }
 
   TextStyle _retornaCorTexto() {
@@ -222,7 +237,6 @@ class ZSelectionState extends State<ZSelection> {
       widget.listaRespostas = _itemSelecionado[1];
 
       if (widget.onChange != null) widget.onChange(_itemSelecionado);
-
     } else {
       _itemSelecionado = [];
     }
