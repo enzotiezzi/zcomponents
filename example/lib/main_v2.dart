@@ -5,6 +5,8 @@ import 'package:z_components/v2/z_icon.dart';
 import 'package:z_components/v2/z_text.dart';
 import 'package:z_components/v2/input_text_label.dart';
 import 'package:z_components/v2/z_outlined_button.dart';
+import 'package:z_components/v2/z_check_box.dart';
+import 'package:z_components/v2/z_radio_button.dart';
 
 class MainV2 extends StatefulWidget {
   const MainV2({Key key}) : super(key: key);
@@ -16,6 +18,8 @@ class MainV2 extends StatefulWidget {
 class _MainV2State extends State<MainV2> {
   var textController1 = new TextEditingController();
   var textController2 = new TextEditingController();
+
+  String _groupValue = "Teste";
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +70,33 @@ class _MainV2State extends State<MainV2> {
         ZOutLinedButton(
           text: "Button",
           onPressed: () {},
+        ), ZCheckBox(
+          label: "Teste",
         ),
-        Chip(
-          label: Text("test"),
-          deleteIcon: Icon(Icons.cancel_outlined),
-          onDeleted: (){},
+        ZCheckBox(
+          label: "Teste",
+          textAlignment: ZTextAlignment.end,
+        ),
+        ZRadioButton<String>(
+          label: "Teste1",
+          textAlignment: ZTextAlignment.end,
+          groupValue: _groupValue,
+          value: "Teste1",
+          onChanged: (value){
+            setState(() {
+              _groupValue = value;
+            });
+          },
+        ),
+        ZRadioButton<String>(
+          label: "Teste2",
+          groupValue: _groupValue,
+          value: "Teste2",
+          onChanged: (value){
+            setState(() {
+              _groupValue = value;
+            });
+          },
         )
       ],
     );
