@@ -29,6 +29,7 @@ import 'package:z_components_example/main-testing.dart';
 import 'package:z_components_example/material_forms_sample.dart';
 
 import 'main-components.dart';
+import 'main_v2.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(MyApp()));
@@ -39,8 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new MainComponents(),
-      theme: CustomTheme.appTheme,
+      home: new MainV2(),
     );
   }
 }
