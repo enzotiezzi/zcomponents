@@ -27,7 +27,7 @@ import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-candidato.dart';
 import 'package:z_components/components/z-item-tile-lista-candidato.dart';
-import 'package:z_components/v2/input_text_label.dart';
+import 'package:z_components/v2/z_input_field/z_input_field.dart';
 import 'package:z_components/v2/z_text.dart';
 import 'package:z_components/v2/z_icon.dart';
 
@@ -80,31 +80,31 @@ class _MainTestingState extends State<MainTesting> {
     return ListView(
       shrinkWrap: true,
       children: [
-        InputTextLabel(
+        ZInputField(
           textEditingController: textController1,
           label: "Label",
           leadingIcon: ZIcon(Icons.search),
-          sufix: ZText("grs.", textAlign: TextAlign.end,),
-          prefix: ZText("R\$"),
+          suffix: ZText("grs.", textAlign: TextAlign.end,),
+          preffix: ZText("R\$"),
           trailingIcon: ZIcon(Icons.search),
-          assist: "Preencha tudo",
-          showMaxLength: true,
-          validator: (value) {
+          supportingText: "Preencha tudo",
+          characterCounter: true,
+          validations: (value) {
             if(value.isEmpty)
               return "Texto não pode estar vázio";
 
             return null;
           },
         ),
-        InputTextLabel(
+        ZInputField(
           textEditingController: textController2,
           label: "Label 2",
           leadingIcon: ZIcon(Icons.search),
-          sufix: ZText("grs.", textAlign: TextAlign.end,),
-          prefix: ZText("R\$"),
+          suffix: ZText("grs.", textAlign: TextAlign.end,),
+          preffix: ZText("R\$"),
           trailingIcon: ZIcon(Icons.search),
-          assist: "Preencha tudo",
-          validator: (value) {
+          supportingText: "Preencha tudo",
+          validations: (value) {
             if(value.isEmpty)
               return "Texto não pode estar vázio";
 

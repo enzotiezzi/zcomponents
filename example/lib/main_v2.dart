@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/v2/z_icon.dart';
 import 'package:z_components/v2/z_text.dart';
-import 'package:z_components/v2/input_text_label.dart';
+import 'package:z_components/v2/z_input_field/z_input_field_text.dart';
 import 'package:z_components/v2/z_outlined_button.dart';
 import 'package:z_components/v2/z_check_box.dart';
 import 'package:z_components/v2/z_radio_button.dart';
@@ -30,38 +30,38 @@ class _MainV2State extends State<MainV2> {
     return ListView(
       shrinkWrap: true,
       children: [
-        InputTextLabel(
+        ZInpuFieldText(
           textEditingController: textController1,
           label: "Label",
           placeHolder: "Texto aqui",
           leadingIcon: ZIcon(Icons.search),
-          prefix: ZText("R\$"),
-          sufix: ZText(
+          preffix: ZText("R\$"),
+          suffix: ZText(
             "grs.",
             textAlign: TextAlign.end,
           ),
           trailingIcon: ZIcon(Icons.search),
-          assist: "Preencha tudo",
-          showMaxLength: true,
-          validator: (value) {
+          supportingText: "Preencha tudo",
+          characterCounter: true,
+          validations: (value) {
             if (value.isEmpty) return "Texto não pode estar vázio";
 
             return null;
           },
         ),
-        InputTextLabel(
+        ZInpuFieldText(
           textEditingController: textController2,
           label: "Label 2",
           placeHolder: "Texto aqui",
           leadingIcon: ZIcon(Icons.search),
-          prefix: ZText("R\$"),
-          sufix: ZText(
+          preffix: ZText("R\$"),
+          suffix: ZText(
             "grs.",
             textAlign: TextAlign.end,
           ),
           trailingIcon: ZIcon(Icons.search),
-          assist: "Preencha tudo",
-          validator: (value) {
+          supportingText: "Preencha tudo",
+          validations: (value) {
             if (value.isEmpty) return "Texto não pode estar vázio";
 
             return null;
