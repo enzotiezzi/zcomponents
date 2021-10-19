@@ -10,7 +10,7 @@ import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
 import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
-
+import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -73,8 +73,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       new ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
     listaSelecaoRespostas = [
-      new ZSelectionItem(
-          chave: "2", titulo: "2", valor: "2", obrigatorio: true),
+      new ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
       new ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
       new ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
     ];
@@ -111,6 +110,10 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               listaRespostas: listaSelecaoRespostas,
               themeData: Theme.of(context),
               onChange: (value) {},
+            ),
+            ZItemTilePerguntaAdicional(
+              textoPergunta: "Teste",
+              onPressed: () {},
             )
           ],
         ),

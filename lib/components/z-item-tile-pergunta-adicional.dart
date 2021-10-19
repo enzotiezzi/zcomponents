@@ -35,36 +35,39 @@ class _ZItemTilePerguntaAdicionalState
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   new Expanded(
+                      flex: 9,
                       child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      new Container(
-                        margin: EdgeInsets.only(top: 8, bottom: 4, left: 8),
-                        child: retornarNomePergunta(),
-                      ),
-                      new Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           new Container(
-                            margin: const EdgeInsets.only(left: 8, bottom: 4),
-                            child: new Text(
-                              "Tipo de Pergunta:",
-                              style: new TextStyle(
-                                  fontSize: 13,
-                                  color: new Color(0xFF000000),
-                                  fontWeight: FontWeight.w600),
-                            ),
+                            margin: EdgeInsets.only(top: 8, bottom: 4, left: 8),
+                            child: retornarNomePergunta(),
                           ),
-                          new Container(
-                            margin: const EdgeInsets.only(left: 4, bottom: 2),
-                            child: retornarTipoPergunta(),
+                          new Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              new Container(
+                                margin:
+                                    const EdgeInsets.only(left: 8, bottom: 4),
+                                child: new Text(
+                                  "Tipo de Pergunta:",
+                                  style: new TextStyle(
+                                      fontSize: 13,
+                                      color: new Color(0xFF000000),
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              new Container(
+                                margin:
+                                    const EdgeInsets.only(left: 4, bottom: 2),
+                                child: retornarTipoPergunta(),
+                              ),
+                            ],
                           ),
+                          retornarOpcoes(),
                         ],
-                      ),
-                      retornarOpcoes(),
-                    ],
-                  )),
-                  _montarSetaDireita()
+                      )),
+                  new Expanded(flex: 1, child: _montarSetaDireita())
                 ],
               ),
             ),

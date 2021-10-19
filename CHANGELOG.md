@@ -1,3 +1,7 @@
+## 0.9.40+2
+
+* Ajuste componente ZSelection para ter item obrigatorio
+
 ## 0.9.40+1
 
 * Ajuste componente ZSelection para ter item obrigatorio

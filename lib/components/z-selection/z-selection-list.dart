@@ -108,7 +108,7 @@ class ZSelectionListState extends State<ZSelectionList> {
       for (int j = 0; j < widget.listaSelecao.length; j++) {
         if (widget.listaSelecao[j].chave == widget.lista[i].chave) {
           widget.lista[i].selecionado = true;
-          widget.lista[i].obrigatorio = true;
+          widget.lista[i].obrigatorio = widget.listaSelecao[j].obrigatorio;
         }
       }
     }
