@@ -1,3 +1,7 @@
+## 0.9.40+3
+
+* Ajuste componente ZItemTilePerguntaAdicional posicao seta
+
 ## 0.9.40+2
 
 * Ajuste componente ZSelection para ter item obrigatorio

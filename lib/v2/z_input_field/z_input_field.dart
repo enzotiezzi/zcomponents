@@ -1,50 +1,85 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/v2/i_ui_state.dart';
+import 'package:z_components/v2/z_icon.dart';
+import 'package:z_components/v2/z_text.dart';
 import 'package:z_components/v2/z_theme.dart';
 
-class InputTextLabel extends StatefulWidget {
+class ZInputField extends StatefulWidget {
   final Key key;
-  final TextEditingController textEditingController;
 
+  // BASE
   final String label;
-  final Widget leading;
-  final Widget trailing;
-  final Widget prefix;
-  final Widget sufix;
-  final String assist;
-  final FormFieldValidator<String> validator;
-  final int maxLength;
-  final bool showMaxLength;
-  final TextInputType textInputType;
+  final TextEditingController textEditingController;
+  final String placeHolder;
+  final bool mandatory;
 
-  InputTextLabel(
-      {@required this.textEditingController,
-      @required this.label,
-      this.leading,
-      this.trailing,
-      this.prefix,
-      this.sufix,
-      this.assist,
-      this.key,
-      this.validator,
-      this.maxLength: 16,
-      this.showMaxLength: false,
-      this.textInputType: TextInputType.text})
-      : assert(textEditingController != null, label != null),
+  // OPTIONAL
+  final bool clearable;
+  final String supportingText;
+  final bool characterCounter;
+  final ZIcon leadingIcon;
+  final ZIcon trailingIcon;
+  final ZText preffix;
+  final ZText suffix;
+  final bool multiLine;
+
+  // OTHER
+  final int minLength;
+  final int maxLength;
+  final double minNumber;
+  final double maxNumber;
+  final String minDate;
+  final String maxDate;
+  final String mask;
+  final FormFieldValidator<String> validations;
+
+  final TextInputType textInputType;
+  final bool password;
+
+  const ZInputField({
+    this.key,
+
+    @required this.label,
+    @required this.textEditingController,
+    @required this.placeHolder,
+    this.mandatory: false,
+
+    this.clearable,
+    this.supportingText,
+    this.characterCounter: false,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.preffix,
+    this.suffix,
+    this.multiLine: false,
+
+    this.minLength: 1,
+    this.maxLength: 16,
+    this.minNumber,
+    this.maxNumber,
+    this.minDate,
+    this.maxDate,
+    this.mask,
+    this.validations,
+
+    this.textInputType: TextInputType.text,
+    this.password: false
+  })  : assert(textEditingController != null, label != null),
+        assert(placeHolder != null),
         super(key: key);
 
   @override
   State<StatefulWidget> createState() => _InputTextLabel();
 }
 
-class _InputTextLabel extends State<InputTextLabel>
-    with UIFormState<InputTextLabel> {
+class _InputTextLabel extends State<ZInputField>
+    with UIFormState<ZInputField> {
   String _assistText = "";
 
   @override
   void initState() {
-    _assistText = widget.assist ?? "";
+    _assistText = widget.supportingText ?? "";
 
     super.initState();
   }
@@ -78,11 +113,11 @@ class _InputTextLabel extends State<InputTextLabel>
               child: Row(
                 children: [
                   Expanded(
-                    child: widget.leading,
+                    child: widget.leadingIcon,
                     flex: 8,
                   ),
                   Expanded(
-                    child: widget.prefix,
+                    child: widget.preffix,
                     flex: 8,
                   ),
                   Expanded(
@@ -91,8 +126,9 @@ class _InputTextLabel extends State<InputTextLabel>
                         controller: widget.textEditingController,
                         maxLength: widget.maxLength,
                         keyboardType: widget.textInputType,
+                        obscureText: widget.password,
                         decoration: InputDecoration(
-                            hintText: "Input Text",
+                            hintText: widget.placeHolder,
                             border: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -101,17 +137,17 @@ class _InputTextLabel extends State<InputTextLabel>
                             counterText: ""),
                         onChanged: (value) {
                           // APENAS PARA ATUALIZAR NÚMERO DE CARACTERES
-                          if (widget.showMaxLength) setState(() {});
+                          if (widget.characterCounter) setState(() {});
 
-                          if (widget.validator != null) {
+                          if (widget.validations != null) {
                             var errorText = widget
-                                .validator(widget.textEditingController.text);
+                                .validations(widget.textEditingController.text);
 
                             if (errorText == null) {
-                              setUIState(ZUIState.FOCUS);
+                              setUIState(ZUIState.FOCUSED);
 
                               setState(() {
-                                _assistText = widget.assist;
+                                _assistText = widget.supportingText;
                               });
                             }
                           }
@@ -119,11 +155,11 @@ class _InputTextLabel extends State<InputTextLabel>
                       ),
                       onFocusChange: (hasFocus) {
                         if (hasFocus && currentUIState != ZUIState.ERROR)
-                          setUIState(ZUIState.FOCUS);
+                          setUIState(ZUIState.FOCUSED);
                         else {
-                          if (widget.validator != null) {
+                          if (widget.validations != null) {
                             var errorText = widget
-                                .validator(widget.textEditingController.text);
+                                .validations(widget.textEditingController.text);
 
                             if (errorText != null) {
                               setUIState(ZUIState.ERROR);
@@ -141,11 +177,11 @@ class _InputTextLabel extends State<InputTextLabel>
                     flex: 68,
                   ),
                   Expanded(
-                    child: widget.sufix,
+                    child: widget.suffix,
                     flex: 8,
                   ),
                   Expanded(
-                    child: widget.trailing,
+                    child: widget.trailingIcon,
                     flex: 8,
                   )
                 ],
@@ -181,8 +217,8 @@ class _InputTextLabel extends State<InputTextLabel>
     if (mounted) super.setState(fn);
   }
 
-  String _buildMaxLengthString(){
-    return widget.showMaxLength
+  String _buildMaxLengthString() {
+    return widget.characterCounter
         ? "${widget.textEditingController.text.length}/${widget.maxLength}"
         : "";
   }

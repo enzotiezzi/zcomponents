@@ -22,7 +22,7 @@ mixin UIFormState<T extends StatefulWidget> on State<T> {
       case ZUIState.ERROR:
         newColor = ZTheme.errorColor;
         break;
-      case ZUIState.FOCUS:
+      case ZUIState.FOCUSED:
         newColor = ZTheme.focusColor;
         break;
     }
