@@ -146,10 +146,9 @@ class ZSelectionState extends State<ZSelection> {
                   trailing: new IconButton(
                     onPressed: _buildOnPressedRemove(
                         widget.listaRespostas[index].obrigatorio, index),
-                    icon: Icon(
-                      Icons.remove_circle_outline,
-                      color: _escolherCorIconeRemover( widget.listaRespostas[index].obrigatorio)
-                    ),
+                    icon: Icon(Icons.remove_circle_outline,
+                        color: _escolherCorIconeRemover(
+                            widget.listaRespostas[index].obrigatorio)),
                   ),
                 ),
                 new Divider(

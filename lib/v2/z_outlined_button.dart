@@ -20,10 +20,11 @@ class _ZOutLinedButtonState extends State<ZOutLinedButton> {
     return Material(
       child: OutlinedButton(
         onPressed: widget.onPressed,
-        child: new Text(widget.text ?? ""),
+        child: new Text(widget.text, style: TextStyle(color: ZTheme.primaryColor),),
         style: ButtonStyle(
-            textStyle: MaterialStateProperty.all<TextStyle>(
-                TextStyle(color: ZTheme.primaryColor))),
+          side: MaterialStateProperty.all<BorderSide>(BorderSide(
+            color: ZTheme.primaryColor
+          ))),
       ),
     );
   }
