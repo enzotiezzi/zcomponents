@@ -4,13 +4,14 @@ import 'package:z_components/components/z-item-tile-convite.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
-import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
-import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
-import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
+import 'package:z_components/components/utils/dialog-pesquisa-organizacional.dart';
+import 'package:z_components/view-model/dialog-pesquisa-orgazinacional-viewmodel.dart';
+import 'package:z_components/styles/main-style.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
+import 'package:z_components/config/z-dialog.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -114,7 +115,198 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             ZItemTilePerguntaAdicional(
               textoPergunta: "Teste",
               onPressed: () {},
-            )
+            ),
+            RaisedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => DialogIntroducaoPesquisaOrganizacional(
+                      dialogPesquisaOrgazinacionalViewModel:
+                          new DialogPesquisaOrgazinacionalViewModel(
+                        titulo:
+                            "Queremos saber como está sua experiência no Grupo GTP - Conte pra gente!",
+                        descricaoCentral:
+                            "Está pesquisa é ANÔNIMA e de acesso exclusivo do RH",
+                        textoBotaoConfirmar: "RESPONDER",
+                        textoBotaoCancelar: "IGNORAR",
+                        onTapBotaoConfirmar: () {},
+                        onTapBotaoCancelar: () async {
+                          Navigator.of(context).pop();
+                          await showDialog(
+                            context: context,
+                            builder: (BuildContext context) => ZAlertDialog(
+                              zDialog: ZDialog.alert,
+                              child: new Column(
+                                children: <Widget>[
+                                  new Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      new Container(
+                                        margin: const EdgeInsets.only(
+                                            bottom: 8, top: 4),
+                                        child: new Text("Atenção",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                    ],
+                                  ),
+                                  new Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      new Container(
+                                        padding: const EdgeInsets.only(
+                                          left: 16,
+                                          right: 16,
+                                          bottom: 4,
+                                        ),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.7,
+                                        child: new Column(
+                                          children: <Widget>[
+                                            new Text(
+                                                "Você deseja responder está pesquisa "
+                                                "em outro momento,quando se sentir mais "
+                                                "à vontade, ou não deseja mais visualiza-la?",
+                                                textAlign: TextAlign.center),
+                                            new Divider(
+                                              color: const Color(0xffdbdbdb),
+                                            ),
+                                            new Column(
+                                              children: [
+                                                new Container(
+                                                  child: new InkWell(
+                                                    borderRadius:
+                                                        new BorderRadius.all(
+                                                            const Radius
+                                                                .circular(30)),
+                                                    splashColor:
+                                                        const Color(0xffe6e6e6),
+                                                    onTap: () async {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      await showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return new ZAlertDialog(
+                                                              zDialog: ZDialog
+                                                                  .sucess,
+                                                              child: new Column(
+                                                                children: [
+                                                                  new Container(
+                                                                    margin: const EdgeInsets
+                                                                            .only(
+                                                                        bottom:
+                                                                            8,
+                                                                        left:
+                                                                            16,
+                                                                        right:
+                                                                            16,
+                                                                        top:
+                                                                            16),
+                                                                    child:
+                                                                        new Text(
+                                                                      "A pesquisa estará disponível fora do seu horário de trabalho, "
+                                                                      "para responde-la basta abrir o aplicativo",
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                    ),
+                                                                  ),
+                                                                  new Divider(
+                                                                    height: 1.0,
+                                                                  ),
+                                                                  new Container(
+                                                                    margin: const EdgeInsets
+                                                                            .only(
+                                                                        bottom:
+                                                                            8,
+                                                                        top: 8),
+                                                                    child:
+                                                                        new GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                      child: new Text(
+                                                                          "OK"),
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            );
+                                                          });
+                                                    },
+                                                    child: new Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8),
+                                                      child: new Text(
+                                                        "RESPONDER DEPOIS",
+                                                        style: new TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: MainStyle
+                                                                    .get(
+                                                                        context)
+                                                                .fontSizeLeadinCancelar),
+                                                      ),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              bottom: 8),
+                                                    ),
+                                                  ),
+                                                ),
+                                                new Container(
+                                                  child: new InkWell(
+                                                    borderRadius:
+                                                        new BorderRadius.all(
+                                                            const Radius
+                                                                .circular(30)),
+                                                    splashColor:
+                                                        const Color(0xffe6e6e6),
+                                                    onTap: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: new Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8),
+                                                      child: new Text(
+                                                        "NÃO VISUALIZAR MAIS",
+                                                        style: new TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: MainStyle
+                                                                    .get(
+                                                                        context)
+                                                                .fontSizeLeadinCancelar),
+                                                      ),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              bottom: 8),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+                child: Text("Teste")),
           ],
         ),
       ),
