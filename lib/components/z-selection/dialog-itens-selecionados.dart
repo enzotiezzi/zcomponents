@@ -41,7 +41,7 @@ class _DialogItensSelecionadosState extends State<DialogItensSelecionados> {
   Widget _buildBody() {
     return new Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(top:16),
+        margin: EdgeInsets.only(top: 16),
         child: new Column(
           children: [
             new Expanded(
@@ -63,14 +63,17 @@ class _DialogItensSelecionadosState extends State<DialogItensSelecionados> {
                         ),
                         trailing: new IconButton(
                           onPressed: () {
-                            widget.listaSelecao.removeAt(index);
-                            widget.keyListagemSelecao.currentState
-                                .atualizarListas(widget.listaSelecao);
-                            setState(() {});
+                            if (!widget.listaSelecao[index].obrigatorio) {
+                              widget.listaSelecao.removeAt(index);
+                              widget.keyListagemSelecao.currentState
+                                  .atualizarListas(widget.listaSelecao);
+                              setState(() {});
+                            }
                           },
                           icon: Icon(
                             Icons.remove_circle_outline,
-                            color: Colors.red,
+                            color: _escolherCorIconeRemover(
+                                widget.listaSelecao[index].obrigatorio),
                           ),
                         ),
                       ),
@@ -84,5 +87,12 @@ class _DialogItensSelecionadosState extends State<DialogItensSelecionados> {
             ),
           ],
         ));
+  }
+
+  Color _escolherCorIconeRemover(bool podeRemover) {
+    if (!podeRemover)
+      return Colors.red;
+    else
+      return Colors.grey;
   }
 }

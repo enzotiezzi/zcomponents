@@ -7,6 +7,10 @@ import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
+import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
+import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
+import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
+import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -84,15 +88,36 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         leading: new Text("TESTE"),
       ),
       body: new Container(
-          child: ZSelection(
-        titulo: "teste",
-        lista: listaSelecao,
-        listaRespostas: listaSelecaoRespostas,
-        themeData: Theme.of(context),
-        onChange: (value) {
-          listaSelecaoRespostas = value[1];
-        },
-      )),
+        child: new Column(
+          children: [
+            new ZInputDataPadrao(
+              themeData: Theme.of(context),
+              controllerData: TextEditingController(),
+              dataFocus: FocusNode(),
+              legenda: "Data de inicio",
+              validacao: (validacaoDataInicio) {},
+            ),
+            new ZInputDataPadrao(
+              themeData: Theme.of(context),
+              controllerData: TextEditingController(),
+              dataFocus: FocusNode(),
+              legenda: "Data final",
+              validacao: (validacaoDataFinal) {},
+            ),
+            new ZSelection(
+              titulo: "Teste",
+              lista: listaSelecao,
+              listaRespostas: listaSelecaoRespostas,
+              themeData: Theme.of(context),
+              onChange: (value) {},
+            ),
+            ZItemTilePerguntaAdicional(
+              textoPergunta: "Teste",
+              onPressed: () {},
+            )
+          ],
+        ),
+      ),
     );
   }
 

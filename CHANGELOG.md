@@ -1,3 +1,23 @@
+## 0.9.40+3
+
+* Ajuste componente ZItemTilePerguntaAdicional posicao seta
+
+## 0.9.40+2
+
+* Ajuste componente ZSelection para ter item obrigatorio
+
+## 0.9.40+1
+
+* Ajuste componente ZSelection para ter item obrigatorio
+
+## 0.9.40
+
+* Criacao card pergunta adicional
+
+## 0.9.39
+
+* Criacao ZInput data padrao
+
 ## 0.9.38+1
 
 * Ajuste card convite e ZEstrutura

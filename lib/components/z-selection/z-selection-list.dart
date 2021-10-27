@@ -108,6 +108,7 @@ class ZSelectionListState extends State<ZSelectionList> {
       for (int j = 0; j < widget.listaSelecao.length; j++) {
         if (widget.listaSelecao[j].chave == widget.lista[i].chave) {
           widget.lista[i].selecionado = true;
+          widget.lista[i].obrigatorio = widget.listaSelecao[j].obrigatorio;
         }
       }
     }
@@ -231,20 +232,22 @@ class ZSelectionListState extends State<ZSelectionList> {
               color: Colors.white,
               child: new ZTile(
                 onTap: () {
-                  setState(() {
-                    item.selecionado = !item.selecionado;
+                  if (!item.obrigatorio) {
+                    setState(() {
+                      item.selecionado = !item.selecionado;
 
-                    if (item.selecionado) {
-                      widget.listaSelecao.add(item);
-                    } else {
-                      for (int i = 0; i < widget.listaSelecao.length; i++) {
-                        if (widget.listaSelecao[i].chave == item.chave) {
-                          widget.listaSelecao.removeAt(i);
-                          break;
+                      if (item.selecionado) {
+                        widget.listaSelecao.add(item);
+                      } else {
+                        for (int i = 0; i < widget.listaSelecao.length; i++) {
+                          if (widget.listaSelecao[i].chave == item.chave) {
+                            widget.listaSelecao.removeAt(i);
+                            break;
+                          }
                         }
                       }
-                    }
-                  });
+                    });
+                  }
                 },
                 leading: new Row(
                   children: [
@@ -263,19 +266,23 @@ class ZSelectionListState extends State<ZSelectionList> {
                     activeColor: Theme.of(context).primaryColor,
                     value: item.selecionado,
                     onChanged: (bool) {
-                      setState(() {
-                        item.selecionado = bool;
-                        if (item.selecionado) {
-                          widget.listaSelecao.add(item);
-                        } else {
-                          for (int i = 0; i < widget.listaSelecao.length; i++) {
-                            if (widget.listaSelecao[i].chave == item.chave) {
-                              widget.listaSelecao.removeAt(i);
-                              break;
+                      if (!item.obrigatorio) {
+                        setState(() {
+                          item.selecionado = bool;
+                          if (item.selecionado) {
+                            widget.listaSelecao.add(item);
+                          } else {
+                            for (int i = 0;
+                                i < widget.listaSelecao.length;
+                                i++) {
+                              if (widget.listaSelecao[i].chave == item.chave) {
+                                widget.listaSelecao.removeAt(i);
+                                break;
+                              }
                             }
                           }
-                        }
-                      });
+                        });
+                      }
                     }),
               ),
             ),
