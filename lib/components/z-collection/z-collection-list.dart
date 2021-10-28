@@ -181,10 +181,12 @@ class ZCollectionListState extends State<ZCollectionList> {
                     _selecionarItem(item);
                   },
                   leading: new Container(
+                    width: MediaQuery.of(context).size.width / 1.3,
                     child: new Text(
                       "${item.titulo ?? item.valor}",
                       style: widget.theme.textTheme.bodyText1,
-                      maxLines: 2,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   )),
             ),

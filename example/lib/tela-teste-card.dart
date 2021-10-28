@@ -11,6 +11,8 @@ import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
 import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -35,7 +37,10 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   GlobalKey<ZCollectionState> keyPorte = new GlobalKey<ZCollectionState>();
 
   List<ZCollectionItem> listaPorte = [
-    ZCollectionItem(valor: "T-E-S-T", chave: "TesteChave", titulo: "Teste"),
+    ZCollectionItem(
+        valor: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+        chave: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+        titulo: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow"),
     ZCollectionItem(valor: "Teste2", chave: "Teste2", titulo: "Teste2"),
     ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3"),
     ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
@@ -104,10 +109,23 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               legenda: "Data final",
               validacao: (validacaoDataFinal) {},
             ),
-            new ZSelection(
+            new ZInputDataExpiracao(
+              themeData: Theme.of(context),
+              controllerData: numero,
+              onChange: (textoDataExpiracao){},
+              dataFocus: FocusNode(),
+              legenda: "Prazo Preenchimento",
+              validacao: (validacaoDataFinal) {
+                if(validacaoDataFinal){
+                  print("valido");
+                }else{
+                  print("não valido");
+                }
+              },
+            ),
+            new ZCollection(
               titulo: "Teste",
-              lista: listaSelecao,
-              listaRespostas: listaSelecaoRespostas,
+              lista: listaPorte,
               themeData: Theme.of(context),
               onChange: (value) {},
             ),

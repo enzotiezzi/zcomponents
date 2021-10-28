@@ -7,6 +7,7 @@ class ZInputDataExpiracao extends StatefulWidget {
   final Key key;
   FocusNode dataFocus;
   var controllerData = new TextEditingController();
+  String legenda;
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
   void Function(bool) validacao;
@@ -33,6 +34,7 @@ class ZInputDataExpiracao extends StatefulWidget {
     @required this.themeData,
     @required this.dataFocus,
     @required this.controllerData,
+    @required this.legenda,
     this.proximoFocus,
     this.validacao,this.enabled,
     this.campoObrigatorio = false
@@ -62,7 +64,7 @@ class _ZInputDataExpiracaoState extends State<ZInputDataExpiracao> {
   Widget build(BuildContext context) {
     return MainStyle.styleTextInput(
         context,
-        "Data de expiração",
+        widget.legenda,
         TextInputType.number,
             () {
           FocusScope.of(context).requestFocus(widget.dataFocus);
