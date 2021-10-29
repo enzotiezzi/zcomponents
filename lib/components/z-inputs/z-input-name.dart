@@ -9,6 +9,7 @@ class ZInputName extends StatefulWidget {
   var controllerNome = new TextEditingController();
   FocusNode proximoFocus;
   ValueChanged<String> onChange;
+  String nomeDoHintText;
   bool enabled;
   final bool campoObrigatorio;
   void Function(bool) validacao;
@@ -20,6 +21,7 @@ class ZInputName extends StatefulWidget {
     @required this.themeData,
     @required this.nomeFocus,
     @required this.controllerNome,
+    this.nomeDoHintText = "",
     this.proximoFocus,this.enabled,
     this.campoObrigatorio = false,
     this.validacao
@@ -62,6 +64,7 @@ class _ZInputNameState extends State<ZInputName> {
           countNome = 0;
         },
         false,
+        hintText: widget.nomeDoHintText,
         themeData: widget.themeData,
         campoObrigatorio: widget.campoObrigatorio,
         enabled: widget.enabled);
