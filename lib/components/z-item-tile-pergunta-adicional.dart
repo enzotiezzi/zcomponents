@@ -144,7 +144,7 @@ class _ZItemTilePerguntaAdicionalState
             ),
           ),
           new Container(
-            width: MediaQuery.of(context).size.width / 1.4,
+            width: MediaQuery.of(context).size.width / 1.6,
             margin: const EdgeInsets.only(left: 2, bottom: 8),
             child: new Text(
               textoOpcoes,
