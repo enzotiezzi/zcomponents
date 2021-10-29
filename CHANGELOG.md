@@ -1,3 +1,7 @@
+## 0.9.40+7
+
+* Ajuste overflow ZCollection
+
 ## 0.9.40+6
 
 * Ajuste viewmodel UserInfo
