@@ -8,6 +8,7 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/components/z-header.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
+import 'package:z_components/components/z-inputs/z-input-name.dart';
 import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
