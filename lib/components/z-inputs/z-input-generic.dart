@@ -35,7 +35,7 @@ class ZInputGeneric extends StatefulWidget {
       @required this.controllerInputPadrao,
       this.proximoFocus,
       this.maxLength,
-      this.enabled,
+      this.enabled: true,
       this.campoObrigatorio = false})
       : super(key: key);
 
