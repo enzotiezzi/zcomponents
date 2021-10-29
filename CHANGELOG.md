@@ -1,3 +1,15 @@
+## 0.9.40+6
+
+* Ajuste viewmodel UserInfo
+
+## 0.9.40+5
+
+* Ajuste viewmodel UserInfo
+
+## 0.9.40+4
+
+* Ajuste componente ZItemTilePerguntaAdicional posicao seta
+
 ## 0.9.40+3
 
 * Ajuste componente ZItemTilePerguntaAdicional posicao seta

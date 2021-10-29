@@ -11,6 +11,8 @@ import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
 import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
+import 'package:z_components/components/confirmacao-de-previsto/atualizar-dados-previsto.dart';
+import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -112,9 +114,27 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               onChange: (value) {},
             ),
             ZItemTilePerguntaAdicional(
-              textoPergunta: "Teste",
+              textoPergunta: "Teste",opcoes: [],
               onPressed: () {},
-            )
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AtualizarDadosPrevisto(
+                                dadosViewModel: AtualizarDadosViewModel(
+                                    cargo: "Dev",
+                                    tempoIntervalo: "00:30",
+                                    statusColaborador: "Ativo",
+                                    nomeColaborador: "Giuliano Ortiz",
+                                    horaTermino: "17:00",
+                                    horaInicio: "10:00",
+                                    escala: "5X2",
+                                    centroCusto: "Zellar"),finalizarAtualizacao: (value){},
+                              )));
+                },
+                child: new Text("teste"))
           ],
         ),
       ),
