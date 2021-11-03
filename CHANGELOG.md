@@ -1,3 +1,7 @@
+## 0.9.40+8
+
+* Ajuste ZForm
+
 ## 0.9.40+7
 
 * Ajuste overflow ZCollection

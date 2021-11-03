@@ -5,6 +5,7 @@ import 'package:z_components/i-view.dart';
 
 class ZFormView extends IView<ZForm> {
   List<String> listaRespostasUsuario = new List();
+  List<TextEditingController> listaControllers = [];
   Map<String, String> camposMapeados = {};
   ScrollController scrollControllerTudo = new ScrollController();
 
@@ -22,10 +23,9 @@ class ZFormView extends IView<ZForm> {
   }
 
   void _inicializarListaRespostas() {
-    for (int i = 0;
-        i < state.widget.viewmodel.length;
-        i++) {
+    for (int i = 0; i < state.widget.viewmodel.length; i++) {
       listaRespostasUsuario.add("");
+      listaControllers.add(new TextEditingController());
     }
 
     if (state.mounted) {

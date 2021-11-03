@@ -52,12 +52,9 @@ class _ZFormState extends State<ZForm> {
                 tipoTeclado: TextInputType.number,
                 maxLength: item.maxLength,
                 comMascara: true,
-                inputPadraoFocus: FocusNode(),
                 textMask: "##/##/####",
                 hintText: "DD / MM / AAAA",
-                controllerInputPadrao: TextEditingController(
-                  text: _view.listaRespostasUsuario[i],
-                ),
+                controllerInputPadrao: _view.listaControllers[i],
                 onChange: (text) {
                   if (text.length == 10) {
                     var textoSeparado = text.split("/");
@@ -84,9 +81,8 @@ class _ZFormState extends State<ZForm> {
                 titulo: item.nomeCampo,
                 tipoTeclado: TextInputType.number,
                 maxLength: item.maxLength,
-                inputPadraoFocus: FocusNode(),
                 controllerInputPadrao:
-                TextEditingController(text: widget.viewmodel[i].resposta),
+                _view.listaControllers[i],
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -112,9 +108,8 @@ class _ZFormState extends State<ZForm> {
                 textMask: "(##) #####-####",
                 maxLength: item.maxLength,
                 hintText: "( ** ) 9 **** - ****",
-                inputPadraoFocus: FocusNode(),
                 controllerInputPadrao:
-                TextEditingController(text: widget.viewmodel[i].resposta),
+                _view.listaControllers[i],
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -134,7 +129,6 @@ class _ZFormState extends State<ZForm> {
                 campoObrigatorio: item.obrigatorio,
                 enabled: item.enabled,
                 themeData: Theme.of(context),
-                inputPadraoFocus: FocusNode(),
                 tipoTeclado: TextInputType.number,
                 titulo: item.nomeCampo,
                 maxLength: item.maxLength,
@@ -142,7 +136,7 @@ class _ZFormState extends State<ZForm> {
                 textMask: "###.###.###-##",
                 hintText: "000.000.000-00",
                 controllerInputPadrao:
-                TextEditingController(text: widget.viewmodel[i].resposta),
+                _view.listaControllers[i],
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -163,10 +157,9 @@ class _ZFormState extends State<ZForm> {
                 enabled: item.enabled,
                 titulo: item.nomeCampo,
                 themeData: Theme.of(context),
-                inputPadraoFocus: FocusNode(),
                 maxLength: item.maxLength,
                 controllerInputPadrao:
-                TextEditingController(text: widget.viewmodel[i].resposta),
+                _view.listaControllers[i],
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -188,10 +181,9 @@ class _ZFormState extends State<ZForm> {
                 titulo: item.nomeCampo,
                 tipoTeclado: TextInputType.text,
                 themeData: Theme.of(context),
-                inputPadraoFocus: FocusNode(),
                 maxLength: item.maxLength,
                 controllerInputPadrao:
-                TextEditingController(text: widget.viewmodel[i].resposta),
+                _view.listaControllers[i],
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -212,10 +204,9 @@ class _ZFormState extends State<ZForm> {
                 enabled: item.enabled,
                 themeData: Theme.of(context),
                 titulo: item.nomeCampo,
-                inputPadraoFocus: FocusNode(),
                 maxLength: item.maxLength,
                 controllerInputPadrao:
-                TextEditingController(text: widget.viewmodel[i].resposta),
+                _view.listaControllers[i],
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
