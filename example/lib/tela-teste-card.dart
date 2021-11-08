@@ -51,6 +51,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3"),
     ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
     ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
+
   ];
 
   List<ZFormViewModel> listaForm = [

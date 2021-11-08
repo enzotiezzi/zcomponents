@@ -1,3 +1,7 @@
+## 0.9.40+9
+
+* Ajuste ZCollection
+
 ## 0.9.40+8
 
 * Ajuste ZForm
