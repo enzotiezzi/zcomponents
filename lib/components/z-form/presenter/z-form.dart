@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-form/view/z-form-view.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
-import 'package:z_components/components/z-inputs/z-input-celular.dart';
-import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 
 class ZForm extends StatefulWidget {
@@ -38,7 +36,7 @@ class _ZFormState extends State<ZForm> {
 
   List<Widget> _montarListaDinamicaDocumentos() {
     List<Widget> lista = new List();
-    for (int i = 0; i < _view.listaRespostasUsuario.length; i++) {
+    for (int i = 0; i < widget.viewmodel.length; i++) {
       var item = widget.viewmodel[i];
       if (item.tipoValorCampo == "date") {
         lista.add(new Column(
@@ -54,12 +52,12 @@ class _ZFormState extends State<ZForm> {
                 comMascara: true,
                 textMask: "##/##/####",
                 hintText: "DD / MM / AAAA",
-                controllerInputPadrao: _view.listaControllers[i],
+                controllerInputPadrao: item.controller,
                 onChange: (text) {
                   if (text.length == 10) {
                     var textoSeparado = text.split("/");
                     item.resposta =
-                    "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
+                        "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
                     widget.onChange(widget.viewmodel);
                   }
                 },
@@ -81,8 +79,7 @@ class _ZFormState extends State<ZForm> {
                 titulo: item.nomeCampo,
                 tipoTeclado: TextInputType.number,
                 maxLength: item.maxLength,
-                controllerInputPadrao:
-                _view.listaControllers[i],
+                controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -108,11 +105,13 @@ class _ZFormState extends State<ZForm> {
                 textMask: "(##) #####-####",
                 maxLength: item.maxLength,
                 hintText: "( ** ) 9 **** - ****",
-                controllerInputPadrao:
-                _view.listaControllers[i],
+                controllerInputPadrao: item.controller,
                 onChange: (text) {
-                  item.resposta = text.trim();
-                  widget.onChange(widget.viewmodel);
+                  if (text.length == 15) {
+                    item.resposta = text.trim();
+                    widget.onChange(widget.viewmodel);
+                    item.controller.text = item.resposta;
+                  }
                 },
               ),
             ),
@@ -135,8 +134,7 @@ class _ZFormState extends State<ZForm> {
                 comMascara: true,
                 textMask: "###.###.###-##",
                 hintText: "000.000.000-00",
-                controllerInputPadrao:
-                _view.listaControllers[i],
+                controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -158,8 +156,7 @@ class _ZFormState extends State<ZForm> {
                 titulo: item.nomeCampo,
                 themeData: Theme.of(context),
                 maxLength: item.maxLength,
-                controllerInputPadrao:
-                _view.listaControllers[i],
+                controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -182,8 +179,7 @@ class _ZFormState extends State<ZForm> {
                 tipoTeclado: TextInputType.text,
                 themeData: Theme.of(context),
                 maxLength: item.maxLength,
-                controllerInputPadrao:
-                _view.listaControllers[i],
+                controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);
@@ -205,8 +201,7 @@ class _ZFormState extends State<ZForm> {
                 themeData: Theme.of(context),
                 titulo: item.nomeCampo,
                 maxLength: item.maxLength,
-                controllerInputPadrao:
-                _view.listaControllers[i],
+                controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
                   widget.onChange(widget.viewmodel);

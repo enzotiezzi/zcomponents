@@ -14,6 +14,8 @@ import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-emp
 import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
+import 'package:z_components/components/z-form/presenter/z-form.dart';
+import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -39,13 +41,50 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
 
   List<ZCollectionItem> listaPorte = [
     ZCollectionItem(
-        valor: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
-        chave: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
-        titulo: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow"),
+        valor:
+            "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+        chave:
+            "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+        titulo:
+            "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow"),
     ZCollectionItem(valor: "Teste2", chave: "Teste2", titulo: "Teste2"),
     ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3"),
     ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
     ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
+  ];
+
+  List<ZFormViewModel> listaForm = [
+    ZFormViewModel(
+        nomeCampo: "Nome Completo",
+        obrigatorio: true,
+        enabled: true,
+        tipoValorCampo: "text",
+        controller: TextEditingController()),
+    ZFormViewModel(
+        nomeCampo: "Data Nascimento",
+        obrigatorio: false,
+        enabled: true,
+        maxLength: 10,
+        tipoValorCampo: "date",
+        controller: TextEditingController()),
+    ZFormViewModel(
+        nomeCampo: "Escolaridade",
+        obrigatorio: false,
+        enabled: true,
+        tipoValorCampo: "text",
+        controller: TextEditingController()),
+    ZFormViewModel(
+        nomeCampo: "Email",
+        obrigatorio: true,
+        enabled: true,
+        tipoValorCampo: "text",
+        controller: TextEditingController()),
+    ZFormViewModel(
+        nomeCampo: "Celular",
+        obrigatorio: true,
+        enabled: true,
+        tipoValorCampo: "celular",
+        controller: TextEditingController()),
   ];
 
   @override
@@ -94,7 +133,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         leading: new Text("TESTE"),
       ),
       body: new Container(
-        child: new Column(
+        child: new ListView(
           children: [
             new ZInputDataPadrao(
               themeData: Theme.of(context),
@@ -113,13 +152,13 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             new ZInputDataExpiracao(
               themeData: Theme.of(context),
               controllerData: numero,
-              onChange: (textoDataExpiracao){},
+              onChange: (textoDataExpiracao) {},
               dataFocus: FocusNode(),
               legenda: "Prazo Preenchimento",
               validacao: (validacaoDataFinal) {
-                if(validacaoDataFinal){
+                if (validacaoDataFinal) {
                   print("valido");
-                }else{
+                } else {
                   print("não valido");
                 }
               },
@@ -131,14 +170,21 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               onChange: (value) {},
             ),
             ZItemTilePerguntaAdicional(
-              textoPergunta: "Teste",opcoes: [],
+              textoPergunta: "Teste",
+              opcoes: [],
               onPressed: () {},
             ),
-            ElevatedButton(
-                onPressed: () {
-
-                },
-                child: new Text("teste"))
+            ElevatedButton(onPressed: () {}, child: new Text("teste")),
+            new Container(
+                margin: EdgeInsets.only(top: 16),
+                child: new ZForm(
+                  viewmodel: listaForm,
+                  onChange: (form) {
+                    setState(() {
+                      listaForm = form;
+                    });
+                  },
+                ))
           ],
         ),
       ),
