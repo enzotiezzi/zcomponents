@@ -39,13 +39,13 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
 
   List<ZCollectionItem> listaPorte = [
     ZCollectionItem(
-        valor: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
+        valor: "Instalador de isolantes térmicos de caldeira e, tubulações de teste 123 testando overflow",
         chave: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
         titulo: "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow"),
-    ZCollectionItem(valor: "Teste2", chave: "Teste2", titulo: "Teste2"),
-    ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3"),
-    ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
-    ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
+    ZCollectionItem(valor: "Teste2", chave: "Teste2", titulo: "Teste2",ordem: "C"),
+    ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3",ordem: "Z"),
+    ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4",ordem: "Z"),
+    ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5",ordem: "Z"),
   ];
 
   @override
