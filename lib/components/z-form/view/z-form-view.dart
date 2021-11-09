@@ -4,7 +4,7 @@ import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/i-view.dart';
 
 class ZFormView extends IView<ZForm> {
-  List<String> listaRespostasUsuario = new List();
+
   Map<String, String> camposMapeados = {};
   ScrollController scrollControllerTudo = new ScrollController();
 
@@ -22,15 +22,12 @@ class ZFormView extends IView<ZForm> {
   }
 
   void _inicializarListaRespostas() {
-    for (int i = 0;
-        i < state.widget.viewmodel.length;
-        i++) {
-      listaRespostasUsuario.add("");
+
+    for (int i = 0; i < state.widget.viewmodel.length; i++) {
+
     }
 
-    if (state.mounted) {
-      state.setState(() {});
-    }
+    if (state.mounted) state.setState(() {});
   }
 
   bool isValidDate(String input) {
