@@ -127,9 +127,18 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     super.initState();
   }
 
+  bool editado = false;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          setState(() {
+            editado = !editado;
+          });
+        },
+      ),
       appBar: AppBar(
         leading: new Text("TESTE"),
       ),
@@ -167,8 +176,13 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             new ZCollection(
               titulo: "Teste",
               lista: listaPorte,
+              key: keyPorte,
               themeData: Theme.of(context),
-              onChange: (value) {},
+              onChange: (value) {
+                setState(() {
+                  editado = false;
+                });
+              },
             ),
             ZItemTilePerguntaAdicional(
               textoPergunta: "Teste",
