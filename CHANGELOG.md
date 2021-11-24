@@ -1,3 +1,7 @@
+## 0.9.40+12
+
+* Ajuste Luiz
+
 ## 0.9.40+11
 
 * Ajuste ZDocumentos seta na lista de documentos
