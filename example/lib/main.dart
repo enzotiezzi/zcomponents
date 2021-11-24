@@ -28,6 +28,7 @@ import 'package:z_components_example/main-components.dart';
 import 'package:z_components_example/main-testing.dart';
 import 'package:z_components_example/material_forms_sample.dart';
 import 'package:z_components_example/tela-teste-card.dart';
+import 'package:z_components/components/utils/theme.dart';
 
 import 'main-components.dart';
 import 'main_v2.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: CustomTheme.appTheme,
       home: new MainComponents(),
     );
   }

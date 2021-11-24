@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-
 class ZInputGeneric extends StatefulWidget {
   final Key key;
   final ThemeData themeData;
@@ -95,7 +94,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                   widget.maxLength ?? 1000),
                             ],
                             onSubmitted: (text) {
-                              widget.inputPadraoFocus.unfocus();
+                              if (widget.inputPadraoFocus != null)
+                                widget.inputPadraoFocus.unfocus();
                               if (widget.proximoFocus != null) {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
@@ -110,8 +110,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                     BorderSide(color: Color(0xFFf0f0f0)),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: widget.themeData.primaryColor),
+                                borderSide: BorderSide(
+                                    color: widget.themeData.primaryColor),
                               ),
                             ),
                             onChanged: (text) {
@@ -134,7 +134,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                         widget.themeData, widget.enabled)),
                             maxLengthEnforcement: MaxLengthEnforcement.none,
                             onSubmitted: (text) {
-                              widget.inputPadraoFocus.unfocus();
+                              if (widget.inputPadraoFocus != null)
+                                widget.inputPadraoFocus.unfocus();
                               if (widget.proximoFocus != null) {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
@@ -153,8 +154,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                     BorderSide(color: Color(0xFFf0f0f0)),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: widget.themeData.primaryColor),
+                                borderSide: BorderSide(
+                                    color: widget.themeData.primaryColor),
                               ),
                             ),
                             onChanged: (text) {

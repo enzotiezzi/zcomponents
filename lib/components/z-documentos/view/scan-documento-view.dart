@@ -33,6 +33,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   Map<String, String> camposMapeados = {};
   Map<String, int> imagensMapeados = {};
   DialogUtils dialogUtils;
+  bool camposValidos = false;
 
   ScrollController scrollControllerTudo = new ScrollController();
 
@@ -120,7 +121,8 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
     _colaboradorDocumentoService =
         new ColaboradorDocumentoService(state.widget.token);
     await _inicializarListaRespostas();
-    await FlutterGeniusScan.setLicenceKey(state.widget.keyGeniusScan);
+    if (state.widget.keyGeniusScan != null)
+      await FlutterGeniusScan.setLicenceKey(state.widget.keyGeniusScan);
     await _buscarIdFotos();
   }
 
@@ -222,6 +224,8 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
       for (int i = 0;
           i < state.widget.colaboradorDocumentoViewModel.campos.length;
           i++) {
+        state.widget.colaboradorDocumentoViewModel.campos[i].resposta =
+            listaRespostasUsuario[i];
         if (state.widget.colaboradorDocumentoViewModel.campos[i].obrigatorio ==
                 true &&
             listaRespostasUsuario[i] == "") {

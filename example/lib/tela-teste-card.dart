@@ -16,6 +16,9 @@ import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
+import 'package:z_components/components/z-documentos/presenter/lista-documentos.dart';
+import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
+import 'package:z_components/view-model/documento-campo.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -51,7 +54,6 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     ZCollectionItem(valor: "Teste3", chave: "Teste3", titulo: "Teste3"),
     ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
     ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
-
   ];
 
   List<ZFormViewModel> listaForm = [
@@ -175,7 +177,33 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               opcoes: [],
               onPressed: () {},
             ),
-            ElevatedButton(onPressed: () {}, child: new Text("teste")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListaDocumentos(
+                                colaboradorDocumentoViewModel: [
+                                  ColaboradorDocumentoViewModel(
+                                      imagemObrigatoria: false,
+                                      nomeDocumento: "Documento teste",
+                                      qtdePaginaUpload: "0/2",
+                                      campos: [
+                                        new DocumentoCampo(
+                                          tipoValorCampo: "text",
+                                          obrigatorio: false,
+                                          nomeCampo: "nome",
+                                        ),
+                                        new DocumentoCampo(
+                                          tipoValorCampo: "date",
+                                          obrigatorio: false,
+                                          nomeCampo: "Data nascimento",
+                                        ),
+                                      ])
+                                ],
+                              )));
+                },
+                child: new Text("teste")),
             new Container(
                 margin: EdgeInsets.only(top: 16),
                 child: new ZForm(

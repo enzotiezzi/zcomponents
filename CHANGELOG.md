@@ -1,3 +1,11 @@
+## 0.9.40+11
+
+* Ajuste ZDocumentos seta na lista de documentos
+
+## 0.9.40+10
+
+* Ajuste ZDocumentos
+
 ## 0.9.40+9
 
 * Ajuste ZCollection
