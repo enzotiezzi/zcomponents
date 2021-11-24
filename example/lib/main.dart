@@ -23,13 +23,8 @@ import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
-import 'package:z_components_example/main-components.dart';
-import 'package:z_components_example/main-testing.dart';
-import 'package:z_components_example/material_forms_sample.dart';
 
 import 'main-components.dart';
-import 'main_v2.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(MyApp()));
@@ -40,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new MainV2(),
+      home: MainComponents(),
     );
   }
 }
