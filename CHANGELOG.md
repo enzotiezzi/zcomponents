@@ -1,3 +1,7 @@
+## 0.9.41
+
+* Atualizar para o flutter 2.8
+
 ## 0.9.40+12
 
 * Ajuste Luiz

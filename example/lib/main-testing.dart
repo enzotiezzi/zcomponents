@@ -20,16 +20,10 @@ import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 import 'package:z_components/components/z-pin-senha.dart';
 import 'package:z_components/config/z-tipo-senha.dart';
-import 'package:z_components/components/confirmar-senha/confirmar-senha.dart';
-import 'package:z_components/components/z-conta/z-conta.dart';
-import 'package:z_components/view-model/conta-view-model.dart';
 import 'package:z_components/components/z-user-info/z-user-info.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/z-item-tile-candidato.dart';
 import 'package:z_components/components/z-item-tile-lista-candidato.dart';
-import 'package:z_components/v2/z_input_field/z_input_field.dart';
-import 'package:z_components/v2/z_text.dart';
-import 'package:z_components/v2/z_icon.dart';
 
 class MainTesting extends StatefulWidget {
   @override
@@ -69,49 +63,7 @@ class _MainTestingState extends State<MainTesting> {
   Widget build(BuildContext context) {
     return MainStyle.get(context).getDefaultScaffold(
       "Componente de teste",
-      _buildTest(),
-    );
-  }
-
-  var textController1= new TextEditingController();
-  var textController2 = new TextEditingController();
-
-  Widget _buildTest() {
-    return ListView(
-      shrinkWrap: true,
-      children: [
-        ZInputField(
-          textEditingController: textController1,
-          label: "Label",
-          leadingIcon: ZIcon(Icons.search),
-          suffix: ZText("grs.", textAlign: TextAlign.end,),
-          preffix: ZText("R\$"),
-          trailingIcon: ZIcon(Icons.search),
-          supportingText: "Preencha tudo",
-          characterCounter: true,
-          validations: (value) {
-            if(value.isEmpty)
-              return "Texto não pode estar vázio";
-
-            return null;
-          },
-        ),
-        ZInputField(
-          textEditingController: textController2,
-          label: "Label 2",
-          leadingIcon: ZIcon(Icons.search),
-          suffix: ZText("grs.", textAlign: TextAlign.end,),
-          preffix: ZText("R\$"),
-          trailingIcon: ZIcon(Icons.search),
-          supportingText: "Preencha tudo",
-          validations: (value) {
-            if(value.isEmpty)
-              return "Texto não pode estar vázio";
-
-            return null;
-          },
-        )
-      ],
+      _buildBody(),
     );
   }
 
