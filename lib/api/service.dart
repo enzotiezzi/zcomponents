@@ -41,32 +41,32 @@ abstract class Service {
       switch (method) {
         case HTTP_GET:
           response =
-              await http.get(url, headers: headers).timeout(new Duration(seconds: timeout));
+              await http.get(Uri.parse(url), headers: headers).timeout(new Duration(seconds: timeout));
           break;
         case HTTP_POST:
           response = await http
-              .post(url,
+              .post(Uri.parse(url),
                   body: body != null ? json.encode(body) : {},
                   headers: this.headers)
               .timeout(new Duration(seconds: timeout));
           break;
         case HTTP_PUT:
           response = await http
-              .put(url,
+              .put(Uri.parse(url),
                   body: body != null ? json.encode(body) : {},
                   headers: this.headers)
               .timeout(new Duration(seconds: timeout));
           break;
         case HTTP_PATCH:
           response = await http
-              .patch(url,
+              .patch(Uri.parse(url),
                   body: body != null ? json.encode(body) : {},
                   headers: this.headers)
               .timeout(new Duration(seconds: timeout));
           break;
         case HTTP_DELETE:
           response = await http
-              .delete(url, headers: this.headers)
+              .delete(Uri.parse(url), headers: this.headers)
               .timeout(new Duration(seconds: timeout));
           break;
       }

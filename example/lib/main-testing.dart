@@ -212,7 +212,7 @@ class _MainTestingState extends State<MainTesting> {
     var url =
         "https://gateway-dev.zellar.com.br/api/v1/seguranca/grupo-acesso/niveis$params";
 
-    var res = await http.get(url, headers: headers);
+    var res = await http.get(Uri.parse(url), headers: headers);
 
     var a = new PaginatedList<GrupoResumo>(
             response: res, deserializer: GrupoResumo.fromJson)
