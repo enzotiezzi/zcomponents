@@ -197,9 +197,7 @@ class _HoraState extends State<ZHora> {
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
                                   maskONE: "XX:XX", maskTWO: "XX:XX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[/\\\\,.-]")),
-                              BlacklistingTextInputFormatter(RegExp(" ")),
+                              FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
                             ],
                             focusNode: _focusEntrada,
                             keyboardType: TextInputType.number,
@@ -241,10 +239,7 @@ class _HoraState extends State<ZHora> {
                                       inputFormatters: [
                                         MaskedTextInputFormatterShifter(
                                             maskONE: "XX:XX", maskTWO: "XX:XX"),
-                                        BlacklistingTextInputFormatter(
-                                            RegExp("[/\\\\,.-]")),
-                                        BlacklistingTextInputFormatter(
-                                            RegExp(" ")),
+                                        FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
                                       ],
                                       focusNode: _focusSaida,
                                       keyboardType: TextInputType.number,
@@ -311,9 +306,7 @@ class _HoraState extends State<ZHora> {
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
                                   maskONE: "XX:XX", maskTWO: "XX:XX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[/\\\\,.-]")),
-                              BlacklistingTextInputFormatter(RegExp(" ")),
+                              FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
                             ],
                             keyboardType: TextInputType.number,
                             // controller: _binding.controllerIntervalo,

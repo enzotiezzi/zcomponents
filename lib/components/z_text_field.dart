@@ -132,27 +132,32 @@ class ZTextField extends StatelessWidget {
       case ZMask.isTelefone:
         inputFormatters.add(MaskedTextInputFormatterShifter(
             maskONE: "(XX) XXXXX-XXXX", maskTWO: "(XX) XXXXX-XXXX"));
-        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[,]:")));
+        inputFormatters
+            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isCPF:
         inputFormatters.add(MaskedTextInputFormatterShifter(
             maskONE: "XXX.XXX.XXX-XX", maskTWO: "XXX.XXX.XXX-XX"));
-        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        inputFormatters
+            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isData:
         inputFormatters.add(MaskedTextInputFormatterShifter(
             maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"));
-        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        inputFormatters
+            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isCNPJ:
         inputFormatters.add(MaskedTextInputFormatterShifter(
             maskONE: "XX.XXX.XXX/XXXX-XX", maskTWO: "XX.XXX.XXX/XXXX-XX"));
-        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        inputFormatters
+            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isCEP:
         inputFormatters.add(MaskedTextInputFormatterShifter(
             maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"));
-        inputFormatters.add(BlacklistingTextInputFormatter(RegExp("[, ]:")));
+        inputFormatters
+            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
     }
 
