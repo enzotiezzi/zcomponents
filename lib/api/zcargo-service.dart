@@ -17,7 +17,7 @@ class ZCargoService extends Service implements IZCargoService {
     try {
       var url = "$_URL/listar-cargos";
 
-      var response = await http.get(url, headers: headers);
+      var response = await http.get(Uri.parse(url), headers: headers);
 
       var l = ((json.decode(response.body) as List)
           .map((i) => new CargoViewModel.fromJson(i))).toList();

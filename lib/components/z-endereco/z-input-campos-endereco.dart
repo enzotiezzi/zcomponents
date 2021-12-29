@@ -324,7 +324,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
 
     String url = "https://viacep.com.br/ws/${cep}/json/";
     http.Response response;
-    response = await http.get(url);
+    response = await http.get(Uri.parse(url));
     Map<String, dynamic> retorno = json.decode(response.body);
 
     if(response.statusCode == 200){

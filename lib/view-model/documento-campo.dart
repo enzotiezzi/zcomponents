@@ -11,6 +11,7 @@ class DocumentoCampo {
   String tamanhoPrecisaoValorCampo;
 
   bool obrigatorio;
+  String resposta;
 
   DocumentoCampo(
       {this.idDocumento,
@@ -19,7 +20,8 @@ class DocumentoCampo {
       this.obrigatorio,
       this.tamanhoPrecisaoValorCampo,
       this.tamanhoValorCampo,
-      this.tipoValorCampo});
+      this.tipoValorCampo,
+      this.resposta});
 
   factory DocumentoCampo.fromJson(Map<String, dynamic> json) {
     return new DocumentoCampo(

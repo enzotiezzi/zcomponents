@@ -17,7 +17,7 @@ class ZEmpresaService extends Service implements IZEmpresaService {
   Future<List<CompanyViewModel>> list() async {
     try {
       var url = "$_URL_API/buscar-empresa-por-usuario-app/$idUser/ZPonto";
-      var response = await http.get(url, headers: headers);
+      var response = await http.get(Uri.parse(url), headers: headers);
       var l = (json.decode(response.body) as List)
           .map((i) => new CompanyViewModel.fromJson(i));
       return l.toList();

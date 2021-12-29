@@ -21,7 +21,7 @@ class ZLocalService extends Service implements IZLocalService {
     try {
       var url = "$_uRL/buscar-centros-custo-empresa";
 
-      var response = await http.post(url,
+      var response = await http.post(Uri.parse(url),
           body: json.encode(filtro.toMap()), headers: headers);
 
       var l = ((json.decode(response.body) as List)

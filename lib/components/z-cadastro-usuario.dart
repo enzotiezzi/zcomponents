@@ -346,8 +346,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   MaskTextInputFormatter(
                                       mask: "(##) # ####-####",
                                       filter: {"#": RegExp(r'[0-9]')}),
-                                  BlacklistingTextInputFormatter(
-                                      RegExp("[\\\\,.]")),
+                                  FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
                                 ],
                               ),
                             ),
@@ -457,8 +456,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                                   MaskedTextInputFormatterShifter(
                                       maskONE: "XX/XX/XXXX",
                                       maskTWO: "XX/XX/XXXX"),
-                                  BlacklistingTextInputFormatter(
-                                      RegExp("[\\\\,.-]")),
+                                  FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
                                 ],
                               ),
                             ),

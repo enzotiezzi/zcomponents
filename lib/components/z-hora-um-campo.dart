@@ -67,7 +67,7 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
                 inputFormatters: [
                   MaskedTextInputFormatterShifter(
                       maskONE: "XX:XX", maskTWO: "XX:XX"),
-                  BlacklistingTextInputFormatter(RegExp("[/\\\\,.-]")),
+                  FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
                 ],
                 focusNode: _focusEntrada,
                 keyboardType: TextInputType.number,

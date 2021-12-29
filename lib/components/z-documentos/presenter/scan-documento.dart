@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/scan-documento-view.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
@@ -8,11 +9,16 @@ import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 
 class ScanDocumentos extends StatefulWidget {
   ColaboradorDocumentoViewModel colaboradorDocumentoViewModel;
+
   String token;
   String keyGeniusScan;
+  Function(ColaboradorDocumentoViewModel) retornarListaDocumentos;
 
   ScanDocumentos(
-      {this.colaboradorDocumentoViewModel, this.token, this.keyGeniusScan});
+      {this.colaboradorDocumentoViewModel,
+      this.token,
+      this.keyGeniusScan,
+      this.retornarListaDocumentos});
 
   @override
   _ScanDocumentosState createState() => _ScanDocumentosState();
@@ -32,11 +38,13 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(),
         centerTitle: true,
-        title:
-            new Text("${widget.colaboradorDocumentoViewModel.nomeDocumento}"),
+        title: new Text(
+            "${widget.colaboradorDocumentoViewModel.nomeDocumento.toUpperCase()}"),
       ),
       body: _scanDocumentos(),
+      bottomNavigationBar: _exibirBotao(),
     );
   }
 
@@ -56,7 +64,6 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
         _montarHeader("IMAGENS DO DOCUMENTO"),
         _buildAddFoto(),
         _buildListaFotos(),
-        _montarBotaoFinalizar()
       ],
     );
   }
@@ -216,30 +223,48 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     }
   }
 
-  Widget _montarBotaoFinalizar() {
-    return new Container(
-      margin: EdgeInsets.only(left: 20.0, right: 20.0),
-      child: new RaisedButton(
-        padding: EdgeInsets.only(bottom: 10.0, top: 10.0),
-        color: Color(0xff801F92),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(25.0))),
-        onPressed: () async {
-          bool validado = _view.mapearCamposComRespostas();
+  Widget _exibirBotao() {
+    return new Material(
+      elevation: 4.0,
+      child: new Container(
+        color: Colors.white,
+        height: MediaQuery.of(context).size.height / 8,
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            new ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xFF2BBAB4)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(
+                      top: 12, bottom: 12, left: 26, right: 26)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  )),
+                ),
+                onPressed: () async {
+                  bool validado = _view.mapearCamposComRespostas();
 
-          if (validado &&
-              (widget.colaboradorDocumentoViewModel.imagemObrigatoria &&
-                  _view.fotos.length > 0)) {
-            _view.dialogUtils.showProgressDialog();
-            await _view.enviarFotos();
-            await _view.salvarDocumentos();
-          } else {
-            _view.dialogUtils.showAlertDialogErro("Erro", "Dados incorretos!");
-          }
-        },
-        child: new Text(
-          "SALVAR",
-          style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  if (validado &&
+                      (widget.colaboradorDocumentoViewModel.imagemObrigatoria &&
+                          _view.fotos.length > 0)) {
+                    if (widget.retornarListaDocumentos == null) {
+                      _view.dialogUtils.showProgressDialog();
+                      await _view.enviarFotos();
+                      await _view.salvarDocumentos();
+                    } else {
+                      widget.retornarListaDocumentos(
+                          widget.colaboradorDocumentoViewModel);
+                      Navigator.of(context).pop();
+                    }
+                  } else {
+                    _view.dialogUtils
+                        .showAlertDialogErro("Erro", "Dados incorretos!");
+                  }
+                },
+                child: new Text("ENVIAR")),
+          ],
         ),
       ),
     );

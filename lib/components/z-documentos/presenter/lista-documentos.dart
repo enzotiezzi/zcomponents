@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/utils/documento-status.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/lista-documentos-view.dart';
+import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 
 class ListaDocumentos extends StatefulWidget {
   String idColaborador;
   String token;
   String keyGeniusScan;
+  List<ColaboradorDocumentoViewModel> colaboradorDocumentoViewModel;
+  Function(ColaboradorDocumentoViewModel) retornarListaDocumentos;
 
-  ListaDocumentos({this.idColaborador, this.token, this.keyGeniusScan});
+  ListaDocumentos(
+      {this.idColaborador,
+      this.token,
+      this.keyGeniusScan,
+      this.colaboradorDocumentoViewModel,
+      this.retornarListaDocumentos});
 
   @override
   _ListaDocumentosState createState() => _ListaDocumentosState();
@@ -29,6 +38,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconeVoltar(),
         centerTitle: true,
         title: new Text("DOCUMENTOS"),
       ),
@@ -75,8 +85,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                           item.nomeDocumento,
                           style: new TextStyle(
                             color: Color(0xff000000),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                            fontSize: 14,
                           ),
                         ),
                       ),
@@ -84,7 +93,10 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                   ),
                   new Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: _buildIconeStatus(item.status.toUpperCase()),
+                    child: new Icon(
+                      Icons.chevron_right,
+                      color: Colors.black,
+                    ),
                   )
                 ],
               ),

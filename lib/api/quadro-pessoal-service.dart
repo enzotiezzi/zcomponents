@@ -18,7 +18,7 @@ class QuadroPessoalService extends Service {
     try {
       var url = "$_URL/buscar-sequencia/$idColaborador/$idConta}";
 
-      var response = await http.get(url, headers: headers);
+      var response = await http.get(Uri.parse(url), headers: headers);
 
       var lista = (json.decode(response.body) as List)
           .map((x) => PosicaoAlocacaoSequenciaViewModel.fromJson(x));
@@ -33,7 +33,7 @@ class QuadroPessoalService extends Service {
     try {
       var url = "$_URL/listar-touf-colaborador/$idColaborador/$idConta";
 
-      var response = await http.get(url, headers: headers);
+      var response = await http.get(Uri.parse(url), headers: headers);
 
       var lista = new List<String>();
 

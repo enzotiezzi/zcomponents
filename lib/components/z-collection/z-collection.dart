@@ -15,6 +15,7 @@ class ZCollection extends StatefulWidget {
   final int skip;
   final int take;
   final bool campoObrigatorio;
+  bool editado;
   final bool bloquearCampo;
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
@@ -34,7 +35,8 @@ class ZCollection extends StatefulWidget {
         this.filtroPrincipal,
         this.onFilter,
         this.bloquearCampo = false,
-        this.onScroll})
+        this.onScroll,
+        this.editado = false})
       : super(key: key);
 
   @override
@@ -73,10 +75,7 @@ class ZCollectionState extends State<ZCollection> {
                     flex: 65,
                     fit: FlexFit.tight,
                     child: new Text(
-                      (_itemSelecionado?.valor == null &&
-                          _anterior == "Selecione")
-                          ? _anterior
-                          : _itemSelecionado?.valor,
+                      retornarTexto(),
                       style:  _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
@@ -95,6 +94,25 @@ class ZCollectionState extends State<ZCollection> {
       onTap: _irParaSelecaoDeItemHorizontal,
     );
   }
+
+  String retornarTexto(){
+    if(widget.editado){
+      if(_itemSelecionado?.valor == null &&
+          _anterior == "Selecione"){
+        return _anterior;
+      }else{
+        return _itemSelecionado?.valor + " (Editado)";
+      }
+    }else{
+      if(_itemSelecionado?.valor == null &&
+          _anterior == "Selecione"){
+        return _anterior;
+      }else{
+        return _itemSelecionado?.valor;
+      }
+    }
+  }
+
   Color _retornaCorIcon(){
     if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
       return widget.themeData.primaryColor;
