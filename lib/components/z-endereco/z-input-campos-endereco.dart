@@ -35,23 +35,17 @@ class ZInputCamposEndereco extends StatefulWidget {
 
 class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
   FocusNode cepFocusNode = new FocusNode();
-  TextEditingController cepController = new TextEditingController();
   FocusNode logradouroFocusNode = new FocusNode();
-  TextEditingController logradouroController = new TextEditingController();
   FocusNode estadoFocusNode = new FocusNode();
-  TextEditingController estadoController = new TextEditingController();
   FocusNode cidadeFocusNode = new FocusNode();
-  TextEditingController cidadeController = new TextEditingController();
   FocusNode bairroFocusNode = new FocusNode();
-  TextEditingController bairroController = new TextEditingController();
   FocusNode numeroFocusNode = new FocusNode();
-  TextEditingController numeroController = new TextEditingController();
   FocusNode complementoFocusNode = new FocusNode();
-  TextEditingController complementoController = new TextEditingController();
 
   String endereco="";
   bool cepPreenchido=false;
   bool camposValidados = false;
+  bool cepValido = false;
 
   Completer<GoogleMapController> _controller = Completer();
 
@@ -61,14 +55,36 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
   Set<Marker> _marcadores = {};
 
   @override
+  void initState() {
+    super.initState();
+    if(widget.cepController.text.isNotEmpty && widget.cepController.text.length == 9 && widget.cepController.text != null){
+      cepValido = true;
+      cepPreenchido = true;
+    }
+    if(widget.cepController.text.isNotEmpty && widget.cepController.text != null
+        && widget.logradouroController.text.isNotEmpty && widget.logradouroController.text != null
+        && widget.numeroController.text.isNotEmpty && widget.numeroController.text != null
+        && widget.bairroController.text.isNotEmpty && widget.bairroController.text != null
+        && widget.cidadeController.text.isNotEmpty && widget.cidadeController.text != null){
+      _preencherCampos();
+      _atualizarMapa(endereco);
+      _validarCamposObrigatorios();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: Text("CAMPOS DE ENDEREÇO"),
+        title: new Text("CAMPOS DE ENDEREÇO"),
         centerTitle: true,
         leading: new IconeVoltar(
           onTap: ()async{
-           Navigator.of(context).pop(endereco);
+            if(camposValidados){
+              Navigator.of(context).pop(endereco);
+            }else{
+              Navigator.of(context).pop("");
+            }
           },
         ),
       ),
@@ -201,16 +217,26 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
         new ZInputCEP(
           themeData: widget.themeData,
           cepFocus: cepFocusNode,
-          controllerCep: cepController,
-          proximoFocus: numeroFocusNode,
+          controllerCep: widget.cepController,
           campoObrigatorio: true,
           validacao: (cepValidado){
             if(cepValidado){
-              _consultaCep(cepController.text, context);
-              validarCamposObrigatorios();
+              _consultaCep(widget.cepController.text, context);
+              cepValido = true;
+              _validarCamposObrigatorios();
+              numeroFocusNode.requestFocus();
+            }else{
+              cepValido = false;
+              cepFocusNode.unfocus();
+              _validarCamposObrigatorios();
             }
           },
-          onChange: (cep){},
+          onChange: (cep){
+            if(cep.isEmpty){
+              cepValido = false;
+              _validarCamposObrigatorios();
+            }
+          },
         ),
         new Divider(height: 1.0,),
         new Container(
@@ -221,11 +247,11 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
             campoObrigatorio: true,
             enabled: true,
             inputPadraoFocus: logradouroFocusNode,
-            controllerInputPadrao: logradouroController,
+            controllerInputPadrao: widget.logradouroController,
             onChange: (rua){
-              validarCamposObrigatorios();
+              _validarCamposObrigatorios();
               _preencherCampos();
-              String montarEndereco = numeroController.text + " " + logradouroController.text + " " + bairroController.text;
+              String montarEndereco = widget.numeroController.text + " " + widget.logradouroController.text + " " + widget.bairroController.text;
               _atualizarMapa(montarEndereco);
             },
           ),
@@ -236,13 +262,13 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           titulo: "Número",
           enabled: true,
           inputPadraoFocus: numeroFocusNode,
-          controllerInputPadrao: numeroController,
+          controllerInputPadrao: widget.numeroController,
           proximoFocus: complementoFocusNode,
           campoObrigatorio: true,
           onChange: (numero){
-            validarCamposObrigatorios();
+            _validarCamposObrigatorios();
             _preencherCampos();
-            String montarEndereco = numeroController.text + " " + logradouroController.text + " " + bairroController.text;
+            String montarEndereco = widget.numeroController.text + " " + widget.logradouroController.text + " " + widget.bairroController.text;
             _atualizarMapa(montarEndereco);
           },
         ),
@@ -252,7 +278,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           titulo: "Complemento",
           enabled: true,
           inputPadraoFocus: complementoFocusNode,
-          controllerInputPadrao: complementoController,
+          controllerInputPadrao: widget.complementoController,
           onChange: (complemento){
             _preencherCampos();
           },
@@ -263,10 +289,10 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           titulo: "Bairro",
           enabled: true,
           inputPadraoFocus: bairroFocusNode,
-          controllerInputPadrao: bairroController,
+          controllerInputPadrao: widget.bairroController,
           campoObrigatorio: true,
           onChange: (bairro){
-            validarCamposObrigatorios();
+            _validarCamposObrigatorios();
             _preencherCampos();
           },
         ),
@@ -276,10 +302,12 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           titulo: "Cidade",
           enabled: true,
           inputPadraoFocus: cidadeFocusNode,
-          controllerInputPadrao: cidadeController,
+          controllerInputPadrao: widget.cidadeController,
+          barrarEntradaDeNumeros: true,
+          comMascara: true,
           campoObrigatorio: true,
           onChange: (cidade){
-            validarCamposObrigatorios();
+            _validarCamposObrigatorios();
             _preencherCampos();
           },
         ),
@@ -289,9 +317,11 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           titulo: "Estado",
           enabled: true,
           inputPadraoFocus: estadoFocusNode,
-          controllerInputPadrao: estadoController,
+          controllerInputPadrao: widget.estadoController,
+          comMascara: true,
+          barrarEntradaDeNumeros: true,
           onChange: (estado){
-            validarCamposObrigatorios();
+            _validarCamposObrigatorios();
             _preencherCampos();
           },
         ),
@@ -302,12 +332,13 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
     );
   }
 
-  void validarCamposObrigatorios(){
-    if(cepController.text.isNotEmpty && cepController.text != null
-    && logradouroController.text.isNotEmpty && logradouroController.text != null
-    && numeroController.text.isNotEmpty && numeroController.text != null
-    && bairroController.text.isNotEmpty && bairroController.text != null
-    && cidadeController.text.isNotEmpty && cidadeController.text != null){
+  void _validarCamposObrigatorios(){
+    if(widget.cepController.text.isNotEmpty && widget.cepController.text != null
+    && widget.logradouroController.text.isNotEmpty && widget.logradouroController.text != null
+    && widget.numeroController.text.isNotEmpty && widget.numeroController.text != null
+    && widget.bairroController.text.isNotEmpty && widget.bairroController.text != null
+    && widget.cidadeController.text.isNotEmpty && widget.cidadeController.text != null
+    && cepValido){
       setState(() {
         camposValidados = true;
       });
@@ -328,10 +359,10 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
     Map<String, dynamic> retorno = json.decode(response.body);
 
     if(response.statusCode == 200){
-      logradouroController.text = retorno["logradouro"];
-      bairroController.text = retorno["bairro"];
-      cidadeController.text = retorno["localidade"];
-      estadoController.text = retorno["uf"];
+      widget.logradouroController.text = retorno["logradouro"];
+      widget.bairroController.text = retorno["bairro"];
+      widget.cidadeController.text = retorno["localidade"];
+      widget.estadoController.text = retorno["uf"];
 
       _preencherCampos();
 
@@ -342,7 +373,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           retorno["localidade"] != null &&
           retorno["uf"] != null){
 
-        String montarLocalizacao = logradouroController.text + " " + bairroController.text;
+        String montarLocalizacao = widget.logradouroController.text + " " + widget.bairroController.text;
         setState(() {
            _atualizarMapa(montarLocalizacao);
           cepPreenchido = true;
@@ -361,17 +392,10 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
 
   void _preencherCampos(){
     setState(() {
-      widget.cepController.text = cepController.text;
-      widget.logradouroController.text = logradouroController.text;
-      widget.numeroController.text = numeroController.text;
-      widget.complementoController.text = complementoController.text;
-      widget.bairroController.text = bairroController.text;
-      widget.cidadeController.text = cidadeController.text;
-      widget.estadoController.text = estadoController.text;
-      endereco = logradouroController.text + ", "
-          + numeroController.text + ", "
-          + complementoController.text + ", "
-          + bairroController.text;
+      endereco = widget.logradouroController.text + ", "
+          + widget.numeroController.text + ", "
+          + widget.complementoController.text + ", "
+          + widget.bairroController.text;
     });
   }
 
