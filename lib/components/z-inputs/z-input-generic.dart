@@ -9,6 +9,7 @@ class ZInputGeneric extends StatefulWidget {
   String textMask;
   String titulo;
   bool comMascara;
+  bool barrarEntradaDeNumeros;
   TextInputType tipoTeclado;
   FocusNode inputPadraoFocus;
   ValueChanged<String> onChange;
@@ -27,6 +28,7 @@ class ZInputGeneric extends StatefulWidget {
       this.obscureText: false,
       this.tipoTeclado: TextInputType.text,
       this.comMascara: false,
+      this.barrarEntradaDeNumeros: false,
       @required this.themeData,
       @required this.titulo,
       this.textMask,
@@ -86,13 +88,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                 .copyWith(
                                     color: corTexto(
                                         widget.themeData, widget.enabled)),
-                            inputFormatters: [
-                              MaskTextInputFormatter(
-                                mask: widget.textMask,
-                              ),
-                              LengthLimitingTextInputFormatter(
-                                  widget.maxLength ?? 1000),
-                            ],
+                            inputFormatters: _retornaListaDeFormatacoes(),
                             onSubmitted: (text) {
                               if (widget.inputPadraoFocus != null)
                                 widget.inputPadraoFocus.unfocus();
@@ -171,6 +167,27 @@ class _ZInputGenericState extends State<ZInputGeneric> {
         ),
       ),
     );
+  }
+
+  List<TextInputFormatter> _retornaListaDeFormatacoes() {
+    if(widget.barrarEntradaDeNumeros){
+      return [
+        new FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),
+        new MaskTextInputFormatter(
+          mask: widget.textMask,
+        ),
+        new LengthLimitingTextInputFormatter(
+            widget.maxLength ?? 1000),
+      ];
+    }else{
+      return [
+        new MaskTextInputFormatter(
+          mask: widget.textMask,
+        ),
+        new LengthLimitingTextInputFormatter(
+            widget.maxLength ?? 1000),
+      ];
+    }
   }
 
   Color corTexto(ThemeData themeData, bool enabled) {

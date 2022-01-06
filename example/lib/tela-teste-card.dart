@@ -4,21 +4,15 @@ import 'package:z_components/components/z-item-tile-convite.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
-import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/components/z-header.dart';
-import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
-import 'package:z_components/components/z-inputs/z-input-name.dart';
-import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
-import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
-import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 import 'package:z_components/components/z-documentos/presenter/lista-documentos.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 import 'package:z_components/view-model/documento-campo.dart';
+import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -175,59 +169,18 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 }
               },
             ),
-            new ZCollection(
-              titulo: "Teste",
-              lista: listaPorte,
-              key: keyPorte,
+            new ZInputEndereco(
               themeData: Theme.of(context),
-              onChange: (value) {
-                setState(() {
-                  editado = false;
-                });
-              },
+              campoObrigatorio: true,
+              cepController: cep,
+              logradouroController: logradouro,
+              numeroController: numero,
+              complementoController: complemento,
+              bairroController: bairro,
+              cidadeController: cidade,
+              estadoController: estado,
+              validacao: (validarEndereco){},
             ),
-            ZItemTilePerguntaAdicional(
-              textoPergunta: "Teste",
-              opcoes: [],
-              onPressed: () {},
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ListaDocumentos(
-                                colaboradorDocumentoViewModel: [
-                                  ColaboradorDocumentoViewModel(
-                                      imagemObrigatoria: false,
-                                      nomeDocumento: "Documento teste",
-                                      qtdePaginaUpload: "0/2",
-                                      campos: [
-                                        new DocumentoCampo(
-                                          tipoValorCampo: "text",
-                                          obrigatorio: false,
-                                          nomeCampo: "nome",
-                                        ),
-                                        new DocumentoCampo(
-                                          tipoValorCampo: "date",
-                                          obrigatorio: false,
-                                          nomeCampo: "Data nascimento",
-                                        ),
-                                      ])
-                                ],
-                              )));
-                },
-                child: new Text("teste")),
-            new Container(
-                margin: EdgeInsets.only(top: 16),
-                child: new ZForm(
-                  viewmodel: listaForm,
-                  onChange: (form) {
-                    setState(() {
-                      listaForm = form;
-                    });
-                  },
-                ))
           ],
         ),
       ),
