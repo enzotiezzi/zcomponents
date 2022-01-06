@@ -84,11 +84,27 @@ class _ZInputCEPState extends State<ZInputCEP> {
       FocusScope.of(context).requestFocus(nextFocus);
     }
   }
+  static const List<String> sequenciaIlegal = [
+    "00000-000",
+    "11111-111",
+    "22222-222",
+    "33333-333",
+    "44444-444",
+    "55555-555",
+    "66666-666",
+    "77777-777",
+    "88888-888",
+    "99999-999"
+  ];
 
   void _validarCEP() {
     if (cep.length < 9 && cep != "") {
       _dialogUtils.showAlertDialogNewAviso(
           "CEP Inválido!", "Por Favor, Termine de digitar o seu cep.");
+      widget.validacao(false);
+    } else if(sequenciaIlegal.indexOf(cep)  != -1){
+      _dialogUtils.showAlertDialogNewAviso(
+          "CEP Inválido!", "Por Favor, Digite um cep válido.");
       widget.validacao(false);
     } else {
       widget.validacao(true);
