@@ -52,7 +52,7 @@ class IdentityServer implements IIdentityServer {
             .toIso8601String(),
       );
 
-      await setUserInfo();
+      await setUserInfo(token: authorizeAndExchangeCode.accessToken);
     }
   }
 
