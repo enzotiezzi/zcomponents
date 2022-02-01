@@ -263,7 +263,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                         .showAlertDialogErro("Erro", "Dados incorretos!");
                   }
                 },
-                child: new Text("ENVIAR")),
+                child: new Text("CONCLUIR")),
           ],
         ),
       ),
