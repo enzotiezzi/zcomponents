@@ -12,7 +12,7 @@ import 'package:z_components/settings/api-settings.dart';
 import 'i-identity-server.dart';
 
 class IdentityServer implements IIdentityServer {
-  static final String address = "identity-server.zellar.com.br";
+  static final String address = "identity-server-dev.zellar.com.br";
 
   String clientId;
   String redirectUrl;
