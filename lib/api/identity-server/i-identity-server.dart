@@ -9,7 +9,7 @@ abstract class IIdentityServer {
 
   Future setIdColaborador();
 
-  Future setUserInfo();
+  Future setUserInfo({String token});
 
   Future logout(Function function, {String token});
 

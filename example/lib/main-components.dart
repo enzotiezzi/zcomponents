@@ -10,6 +10,7 @@ import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 import 'package:z_components/components/utils/novo_token.dart';
 import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
+import 'package:z_components/api/identity-server/identity-server.dart';
 
 class MainComponents extends StatefulWidget {
   @override
@@ -18,6 +19,25 @@ class MainComponents extends StatefulWidget {
 
 class _MainComponentsState extends State<MainComponents> {
   ZEstruturaEmpresaCubit bloc = new ZEstruturaEmpresaCubit();
+
+  String _clientId = 'ZColaborador';
+  String _redirectUrl = 'net.openid.appzcolocalobador:/oauth2redirect';
+
+  List<String> _scopes = [
+    'openid',
+    'profile',
+    'email',
+    'offline_access',
+    'moltres.acesso.api.full'
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    new IdentityServer(
+        clientId: _clientId, redirectUrl: _redirectUrl, scopes: _scopes).login();
+  }
 
   @override
   Widget build(BuildContext context) {
