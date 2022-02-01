@@ -41,6 +41,8 @@ class IdentityServer implements IIdentityServer {
     var authorizeAndExchangeCode = await _zIdentityServer.authorize();
 
     if (authorizeAndExchangeCode != null) {
+      _sharedPreferences = await SharedPreferences.getInstance();
+
       await _sharedPreferences.setString(
           ApiSettings.API_TOKEN, authorizeAndExchangeCode.accessToken);
       await _sharedPreferences.setString(
