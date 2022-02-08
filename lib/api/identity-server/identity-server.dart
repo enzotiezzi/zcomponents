@@ -41,6 +41,8 @@ class IdentityServer implements IIdentityServer {
     var authorizeAndExchangeCode = await _zIdentityServer.authorize();
 
     if (authorizeAndExchangeCode != null) {
+      _sharedPreferences = await SharedPreferences.getInstance();
+
       await _sharedPreferences.setString(
           ApiSettings.API_TOKEN, authorizeAndExchangeCode.accessToken);
       await _sharedPreferences.setString(
@@ -52,7 +54,7 @@ class IdentityServer implements IIdentityServer {
             .toIso8601String(),
       );
 
-      await setUserInfo();
+      await setUserInfo(token: authorizeAndExchangeCode.accessToken);
     }
   }
 
@@ -143,6 +145,8 @@ class IdentityServer implements IIdentityServer {
       return UserInfo.fromJson(response.data);
     } catch (e) {
       print(e);
+
+      return null;
     }
   }
 
@@ -155,10 +159,7 @@ class IdentityServer implements IIdentityServer {
   Future setIdColaborador() async {}
 
   @override
-  Future setUserInfo() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    var token = _sharedPreferences.getString(ApiSettings.API_TOKEN);
-
+  Future setUserInfo({String token}) async {
     _user = await _findUserInfo(token);
 
     if (_user != null) {

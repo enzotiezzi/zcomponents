@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class ZFormViewModel {
   String idCampo;
   String idModelo;
@@ -18,6 +20,8 @@ class ZFormViewModel {
 
   bool enabled;
 
+  TextEditingController controller;
+
   ZFormViewModel(
       {this.idModelo,
       this.idCampo,
@@ -26,7 +30,8 @@ class ZFormViewModel {
       this.tamanhoPrecisaoValorCampo,
       this.tamanhoValorCampo,
       this.tipoValorCampo,
-      this.resposta,
+      this.resposta: "",
       this.maxLength,
-      this.enabled=true});
+      this.enabled: true,
+      this.controller});
 }

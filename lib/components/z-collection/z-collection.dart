@@ -15,6 +15,8 @@ class ZCollection extends StatefulWidget {
   final int skip;
   final int take;
   final bool campoObrigatorio;
+  bool editado;
+  final bool bloquearCampo;
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
   Function(List<FilterExpression>, List<ZCollectionItem>) onScroll;
@@ -32,7 +34,9 @@ class ZCollection extends StatefulWidget {
         this.campoObrigatorio = false,
         this.filtroPrincipal,
         this.onFilter,
-        this.onScroll})
+        this.bloquearCampo = false,
+        this.onScroll,
+        this.editado = false})
       : super(key: key);
 
   @override
@@ -62,31 +66,25 @@ class ZCollectionState extends State<ZCollection> {
           new Container(
             height: 39,
             color: Colors.white,
-            padding: EdgeInsets.only(left: 16.0, right: 14),
+            padding: const EdgeInsets.only(left: 16.0, right: 14),
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 _returnRequiredField(),
-                Flexible(
+                new Flexible(
                     flex: 65,
                     fit: FlexFit.tight,
                     child: new Text(
-                      (_itemSelecionado?.valor == null &&
-                          _anterior == "Selecione")
-                          ? _anterior
-                          : _itemSelecionado?.valor,
+                      retornarTexto(),
                       style:  _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     )),
-                Flexible(
+                new Flexible(
                   flex: 10,
                   fit: FlexFit.tight,
-                  child: new Icon(
-                    Icons.keyboard_arrow_right,
-                    color: _retornaCorIcon(),
-                  ),
+                  child: retornarIcone(),
                 ),
               ],
             ),
@@ -96,12 +94,43 @@ class ZCollectionState extends State<ZCollection> {
       onTap: _irParaSelecaoDeItemHorizontal,
     );
   }
+
+  String retornarTexto(){
+    if(widget.editado){
+      if(_itemSelecionado?.valor == null &&
+          _anterior == "Selecione"){
+        return _anterior;
+      }else{
+        return _itemSelecionado?.valor + " (Editado)";
+      }
+    }else{
+      if(_itemSelecionado?.valor == null &&
+          _anterior == "Selecione"){
+        return _anterior;
+      }else{
+        return _itemSelecionado?.valor;
+      }
+    }
+  }
+
   Color _retornaCorIcon(){
     if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
       return widget.themeData.primaryColor;
     }
     else{
       return Colors.black;
+    }
+  }
+
+  Icon retornarIcone(){
+    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+      return new Icon(
+          Icons.keyboard_arrow_right,
+          color: _retornaCorIcon());
+    }else{
+      return new Icon(
+          Icons.clear,
+          color: _retornaCorIcon());
     }
   }
 
@@ -149,47 +178,50 @@ class ZCollectionState extends State<ZCollection> {
 */
 
   void _irParaSelecaoDeItemHorizontal() async {
-    _itemSelecionado = await Navigator.push<ZCollectionItem>(
-        context,
-        new PageRouteBuilder(
-          pageBuilder: (BuildContext context, Animation animation,
-              Animation secondaryAnimation) {
-            return ZCollectionList(
-              key: keyLista,
-              lista: widget.lista,
-              titulo: widget.titulo,
-              ultimoValor: _itemSelecionado,
-              color: widget.colorStyle,
-              skip: widget.skip,
-              take: widget.take,
-              theme: widget.themeData,
-              onChange: widget.onFilter,
-              filtroPrincipal: widget.filtroPrincipal,
-              onScroll: widget.onScroll,
-            );
-          },
-          transitionsBuilder: (BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-              Widget child) {
-            return SlideTransition(
-              position: new Tween<Offset>(
-                begin: const Offset(1.0, 0.0),
-                end: Offset.zero,
-              ).animate(animation),
-              child: new SlideTransition(
+    if(!widget.bloquearCampo){
+      _itemSelecionado = await Navigator.push<ZCollectionItem>(
+          context,
+          new PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation animation,
+                Animation secondaryAnimation) {
+              return ZCollectionList(
+                key: keyLista,
+                lista: widget.lista,
+                titulo: widget.titulo,
+                ultimoValor: _itemSelecionado,
+                color: widget.colorStyle,
+                skip: widget.skip,
+                take: widget.take,
+                theme: widget.themeData,
+                onChange: widget.onFilter,
+                filtroPrincipal: widget.filtroPrincipal,
+                onScroll: widget.onScroll,
+              );
+            },
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return SlideTransition(
                 position: new Tween<Offset>(
-                  begin: Offset.zero,
-                  end: const Offset(1.0, 0.0),
-                ).animate(secondaryAnimation),
-                child: child,
-              ),
-            );
-          },
-        ));
-    if (widget.onChange != null) widget.onChange(_itemSelecionado);
+                  begin: const Offset(1.0, 0.0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: new SlideTransition(
+                  position: new Tween<Offset>(
+                    begin: Offset.zero,
+                    end: const Offset(1.0, 0.0),
+                  ).animate(secondaryAnimation),
+                  child: child,
+                ),
+              );
+            },
+          ));
+      if (widget.onChange != null) widget.onChange(_itemSelecionado);
 
-    setState(() {});
+      setState(() {});
+    }
+
   }
 
   Widget _returnRequiredField() {

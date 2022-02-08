@@ -181,10 +181,12 @@ class ZCollectionListState extends State<ZCollectionList> {
                     _selecionarItem(item);
                   },
                   leading: new Container(
+                    width: MediaQuery.of(context).size.width / 1.3,
                     child: new Text(
-                      "${item.titulo ?? item.valor}",
+                      _retornaTextoDoItem(_listaFiltro[index].ordem, _listaFiltro, index),
                       style: widget.theme.textTheme.bodyText1,
-                      maxLines: 2,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   )),
             ),
@@ -197,6 +199,15 @@ class ZCollectionListState extends State<ZCollectionList> {
       },
     );
   }
+
+  String _retornaTextoDoItem(String ordemItem, List<ZCollectionItem> listaFiltro, int index){
+    if(ordemItem == "Z"){
+      return "* ${listaFiltro[index].titulo ?? listaFiltro[index].valor}";
+    }else{
+      return "${listaFiltro[index].titulo ?? listaFiltro[index].valor} ";
+    }
+  }
+
 
   void _selecionarItem(ZCollectionItem item) {
     Navigator.of(context).pop(item);

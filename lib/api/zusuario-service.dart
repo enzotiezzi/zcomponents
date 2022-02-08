@@ -21,7 +21,7 @@ class ZUsuarioService extends Service implements IZUsuarioService {
       var url =
           "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf/$idConta";
 
-      var response = await http.get(url, headers: headers);
+      var response = await http.get(Uri.parse(url), headers: headers);
 
       return new UsuarioViewModel.fromJson(json.decode(response.body));
     } catch (e) {

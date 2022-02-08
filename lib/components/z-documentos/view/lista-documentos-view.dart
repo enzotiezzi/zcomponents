@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:z_components/api/arquivo/arquivo-service.dart';
@@ -40,35 +39,41 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
   }
 
   Future<void> _buscarListaDocumentos() async {
-    _dialogUtils.showProgressDialog();
-    var lista = await _colaboradorDocumentoService
-        .listarDocumentosColaborador(state.widget.idColaborador);
-    if (lista != null) {
-      for (int i = 0; i < lista.length; i++) {
-        var doc = await _arquivoService.buscarAnexo(lista[i].idImagemDocumento);
+    if (state.widget.colaboradorDocumentoViewModel == null) {
+      _dialogUtils.showProgressDialog();
+      var lista = await _colaboradorDocumentoService
+          .listarDocumentosColaborador(state.widget.idColaborador);
+      if (lista != null) {
+        for (int i = 0; i < lista.length; i++) {
+          var doc =
+              await _arquivoService.buscarAnexo(lista[i].idImagemDocumento);
 
-        if (doc != null) {
-          lista[i].imagemDocumento = base64Decode(doc.conteudo);
+          if (doc != null) {
+            lista[i].imagemDocumento = base64Decode(doc.conteudo);
+          }
         }
-      }
 
-      if (state.mounted) {
-        state.setState(() {
-          listaDocumentos = lista;
-        });
+        if (state.mounted) {
+          state.setState(() {
+            listaDocumentos = lista;
+          });
+        }
+        _dialogUtils.dismiss();
       }
-      _dialogUtils.dismiss();
-    }
+    } else
+      listaDocumentos = state.widget.colaboradorDocumentoViewModel;
   }
 
   Future<void> atualizarDocumento(int index) async {
     bool atualizou = await navigate(ScanDocumentos(
       colaboradorDocumentoViewModel: listaDocumentos[index],
+      retornarListaDocumentos: state.widget.retornarListaDocumentos,
       keyGeniusScan: state.widget.keyGeniusScan,
       token: state.widget.token,
     ));
     if (atualizou != null && atualizou) {
       await _buscarListaDocumentos();
+      listaDocumentos[index].documentoAtualizado=true;
     }
   }
 }

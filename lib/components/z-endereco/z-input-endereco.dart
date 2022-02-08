@@ -41,7 +41,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
           new Container(
             height: 39,
             color: Colors.white,
-            padding: EdgeInsets.only(left: 16.0, right: 14),
+            padding: const EdgeInsets.only(left: 16.0, right: 14),
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -77,7 +77,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
         final resultado = await Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ZInputCamposEndereco(
+                builder: (context) => new ZInputCamposEndereco(
                       themeData: widget.themeData,
                       cepController: widget.cepController,
                       numeroController: widget.numeroController,
@@ -87,8 +87,6 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
                       cidadeController: widget.cidadeController,
                       bairroController: widget.bairroController,
                     )));
-        print("endereço");
-        print(resultado);
         setState(() {
           endereco = resultado;
           _validarEndereco();
@@ -118,7 +116,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
 
   Widget _returnRequiredField() {
     if (widget.campoObrigatorio) {
-      return Flexible(
+      return new Flexible(
         flex: 45,
         fit: FlexFit.tight,
         child: new RichText(
@@ -130,18 +128,18 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
                 style: widget.themeData.textTheme.bodyText1
                     .copyWith(color: Color(0xff999999)),
               ),
-              TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
+              new TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
             ],
           ),
         ),
       );
     } else {
-      return Flexible(
+      return new Flexible(
         flex: 45,
         fit: FlexFit.tight,
-        child: RichText(
+        child: new RichText(
           maxLines: 2,
-          text: TextSpan(
+          text: new TextSpan(
             children: <TextSpan>[
               new TextSpan(
                 text: "Endereço",

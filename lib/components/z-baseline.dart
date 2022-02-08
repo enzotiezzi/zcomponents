@@ -164,7 +164,8 @@ class ZBaseLineState extends State<ZBaseLine> {
                           style:
                               MainStyle.get(context).mainStyleTextBaseLineInput,
                           inputFormatters: [
-                            BlacklistingTextInputFormatter(RegExp("[\\\\/,.]")),
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[0-9a-zA-Z]"))
                           ],
                           onSubmitted: (text) {
                             _fieldFocusChange(
@@ -298,7 +299,8 @@ class ZBaseLineState extends State<ZBaseLine> {
                             MaskTextInputFormatter(
                                 mask: "(##) # ####-####",
                                 filter: {"#": RegExp(r'[0-9]')}),
-                            BlacklistingTextInputFormatter(RegExp("[\\\\,.]")),
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[0-9a-zA-Z]"))
                           ],
                           onChanged: (text) {
                             widget.celular = text;
@@ -414,7 +416,8 @@ class ZBaseLineState extends State<ZBaseLine> {
                           inputFormatters: [
                             MaskedTextInputFormatterShifter(
                                 maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"),
-                            BlacklistingTextInputFormatter(RegExp("[\\\\,.-]")),
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[0-9a-zA-Z]"))
                           ],
                           onChanged: (text) {
                             widget.total = text;
@@ -584,8 +587,8 @@ class ZBaseLineState extends State<ZBaseLine> {
                             inputFormatters: [
                               MaskedTextInputFormatterShifter(
                                   maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"),
-                              BlacklistingTextInputFormatter(
-                                  RegExp("[\\\\,.]")),
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[0-9a-zA-Z]"))
                             ],
                             onChanged: widget.onChangedCEP),
                       ),
@@ -649,7 +652,8 @@ class ZBaseLineState extends State<ZBaseLine> {
                             MaskedTextInputFormatterShifter(
                                 maskONE: "XX.XXX.XXX/XXXX-XX",
                                 maskTWO: "XX.XXX.XXX/XXXX-XX"),
-                            BlacklistingTextInputFormatter(RegExp("[ ]")),
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[0-9a-zA-Z]"))
                           ],
                         ),
                       ),
@@ -977,5 +981,4 @@ class ZBaseLineState extends State<ZBaseLine> {
       FocusScope.of(context).requestFocus(nextFocus);
     }
   }
-
 }

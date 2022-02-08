@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-
 class ZInputGeneric extends StatefulWidget {
   final Key key;
   final ThemeData themeData;
@@ -10,6 +9,7 @@ class ZInputGeneric extends StatefulWidget {
   String textMask;
   String titulo;
   bool comMascara;
+  bool barrarEntradaDeNumeros;
   TextInputType tipoTeclado;
   FocusNode inputPadraoFocus;
   ValueChanged<String> onChange;
@@ -28,6 +28,7 @@ class ZInputGeneric extends StatefulWidget {
       this.obscureText: false,
       this.tipoTeclado: TextInputType.text,
       this.comMascara: false,
+      this.barrarEntradaDeNumeros: false,
       @required this.themeData,
       @required this.titulo,
       this.textMask,
@@ -35,7 +36,7 @@ class ZInputGeneric extends StatefulWidget {
       @required this.controllerInputPadrao,
       this.proximoFocus,
       this.maxLength,
-      this.enabled,
+      this.enabled: true,
       this.campoObrigatorio = false})
       : super(key: key);
 
@@ -87,15 +88,10 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                 .copyWith(
                                     color: corTexto(
                                         widget.themeData, widget.enabled)),
-                            inputFormatters: [
-                              MaskTextInputFormatter(
-                                mask: widget.textMask,
-                              ),
-                              LengthLimitingTextInputFormatter(
-                                  widget.maxLength ?? 1000),
-                            ],
+                            inputFormatters: _retornaListaDeFormatacoes(),
                             onSubmitted: (text) {
-                              widget.inputPadraoFocus.unfocus();
+                              if (widget.inputPadraoFocus != null)
+                                widget.inputPadraoFocus.unfocus();
                               if (widget.proximoFocus != null) {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
@@ -110,8 +106,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                     BorderSide(color: Color(0xFFf0f0f0)),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: widget.themeData.primaryColor),
+                                borderSide: BorderSide(
+                                    color: widget.themeData.primaryColor),
                               ),
                             ),
                             onChanged: (text) {
@@ -134,7 +130,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                         widget.themeData, widget.enabled)),
                             maxLengthEnforcement: MaxLengthEnforcement.none,
                             onSubmitted: (text) {
-                              widget.inputPadraoFocus.unfocus();
+                              if (widget.inputPadraoFocus != null)
+                                widget.inputPadraoFocus.unfocus();
                               if (widget.proximoFocus != null) {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
@@ -153,8 +150,8 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                                     BorderSide(color: Color(0xFFf0f0f0)),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: widget.themeData.primaryColor),
+                                borderSide: BorderSide(
+                                    color: widget.themeData.primaryColor),
                               ),
                             ),
                             onChanged: (text) {
@@ -170,6 +167,27 @@ class _ZInputGenericState extends State<ZInputGeneric> {
         ),
       ),
     );
+  }
+
+  List<TextInputFormatter> _retornaListaDeFormatacoes() {
+    if(widget.barrarEntradaDeNumeros){
+      return [
+        new FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),
+        new MaskTextInputFormatter(
+          mask: widget.textMask,
+        ),
+        new LengthLimitingTextInputFormatter(
+            widget.maxLength ?? 1000),
+      ];
+    }else{
+      return [
+        new MaskTextInputFormatter(
+          mask: widget.textMask,
+        ),
+        new LengthLimitingTextInputFormatter(
+            widget.maxLength ?? 1000),
+      ];
+    }
   }
 
   Color corTexto(ThemeData themeData, bool enabled) {

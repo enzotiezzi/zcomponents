@@ -69,7 +69,7 @@ class ZIdentityServer {
   Future<ZTokenViewModel> refreshToken(String refreshToken) async {
     try {
       final response = await http.post(
-          'https://${IdentityServer.address}/connect/token',
+         Uri.parse( 'https://${IdentityServer.address}/connect/token'),
           headers: {
             HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },
@@ -165,7 +165,7 @@ class ZIdentityServer {
   Future<ZTokenViewModel> _getToken(String code) async {
     try {
       final response = await http.post(
-          'https://${IdentityServer.address}/connect/token',
+          Uri.parse('https://${IdentityServer.address}/connect/token'),
           headers: {
             HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           },

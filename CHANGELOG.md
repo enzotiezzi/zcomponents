@@ -1,3 +1,43 @@
+## 0.9.41
+
+* Atualizar para o flutter 2.8
+
+## 0.9.40+12
+
+* Ajuste Luiz
+
+## 0.9.40+11
+
+* Ajuste ZDocumentos seta na lista de documentos
+
+## 0.9.40+10
+
+* Ajuste ZDocumentos
+
+## 0.9.40+9
+
+* Ajuste ZCollection
+
+## 0.9.40+8
+
+* Ajuste ZForm
+
+## 0.9.40+7
+
+* Ajuste overflow ZCollection
+
+## 0.9.40+6
+
+* Ajuste viewmodel UserInfo
+
+## 0.9.40+5
+
+* Ajuste viewmodel UserInfo
+
+## 0.9.40+4
+
+* Ajuste componente ZItemTilePerguntaAdicional posicao seta
+
 ## 0.9.40+3
 
 * Ajuste componente ZItemTilePerguntaAdicional posicao seta
