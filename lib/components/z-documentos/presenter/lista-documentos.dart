@@ -5,6 +5,7 @@ import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/lista-documentos-view.dart';
 import 'package:z_components/config/z-dialog.dart';
+import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 
 import '../../z-alert-dialog.dart';
@@ -36,6 +37,7 @@ class ListaDocumentos extends StatefulWidget {
 class _ListaDocumentosState extends State<ListaDocumentos> {
   ListaDocumentosView _view;
   bool _documentoAtualizado = true;
+
   @override
   void initState() {
     _view = ListaDocumentosView(this);
@@ -47,9 +49,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          _retornarDialogInformativo()
-        ],
+        actions: [_retornarDialogInformativo()],
         leading: IconeVoltar(),
         centerTitle: true,
         title: new Text("DOCUMENTOS"),
@@ -58,12 +58,13 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
     );
   }
 
-  Widget _retornarDialogInformativo(){
-    if(widget.iconeInformativo){
+  Widget _retornarDialogInformativo() {
+    if (widget.iconeInformativo) {
       return new IconButton(
-        onPressed: (){
+        onPressed: () {
           showDialog(
-              context: context,
+              barrierDismissible: false,
+              context: _view.state.context,
               builder: (context) {
                 return new ZAlertDialog(
                   zDialog: ZDialog.normal,
@@ -78,46 +79,48 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                           )),
                       new Container(
                         margin: const EdgeInsets.only(
-                            bottom: 8,
-                            left: 16,
-                            right: 16,),
+                          bottom: 8,
+                          left: 16,
+                          right: 16,
+                        ),
                         child: new Text(
                           widget.tituloTextoInformativo,
                           textAlign: TextAlign.center,
-                          style: new TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
+                          style: new TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       new Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 8,
-                            left: 16,
-                            right: 16,),
+                        margin: const EdgeInsets.all(16),
                         child: new Text(
-                          widget.textoInformativo,
+                          "${widget.textoInformativo}",
                           textAlign: TextAlign.center,
                         ),
                       ),
                       new Divider(
                         height: 1.0,
-                        color: Colors.black,
                       ),
-                      new Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 8, top: 8),
-                        child: new GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: new Text(
+                      new FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: new Container(
+                          margin: const EdgeInsets.only(bottom: 8, top: 8),
+                          child: new Container(
+                            width: 270,
+                            height: 22,
+                            margin: const EdgeInsets.only(top: 8),
+                            child: new Text(
                               "OK",
                               style: new TextStyle(
-                                fontWeight: FontWeight.bold
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: MainStyle.get(context)
+                                      .fontSizeLeadinCancelar,
+                                  color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );
@@ -128,7 +131,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
           size: 28,
         ),
       );
-    }else{
+    } else {
       return new Container();
     }
   }
@@ -197,18 +200,18 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         });
   }
 
-  Widget _retornarStatus(int index){
-    if(_view.listaDocumentos[index].documentoAtualizado){
+  Widget _retornarStatus(int index) {
+    if (_view.listaDocumentos[index].documentoAtualizado) {
       return new Container(
-        decoration: new ShapeDecoration(
-            shape: CircleBorder(), color: Colors.green),
+        decoration:
+            new ShapeDecoration(shape: CircleBorder(), color: Colors.green),
         child: Icon(
           Icons.ac_unit,
           color: Colors.transparent,
           size: 9,
         ),
       );
-    }else{
+    } else {
       return new Container();
     }
   }
