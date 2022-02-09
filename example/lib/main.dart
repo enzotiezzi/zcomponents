@@ -10,15 +10,15 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/components/z-progress-dialog.dart';
 import "package:z_components/view-model/batida-viewmodel.dart";
 import "package:z_components/view-model/z-tree-view-viewmodel.dart";
-import 'package:z_components/components/z-inputs/z-input-celular.dart';
 import 'dart:convert' show json;
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
-
+import 'package:z_components/components/z-documentos/presenter/lista-documentos.dart';
 import 'package:z_components/components/confirmacao-de-previsto/confirmar-previsto.dart';
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 import 'package:z_components/api/formulario/i-formulario-service.dart';
 import 'package:z_components/api/formulario/formulario-service.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
+import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
@@ -30,11 +30,28 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  List<ColaboradorDocumentoViewModel> documentos = [];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainComponents(),
+      home: new ListaDocumentos(
+        iconeInformativo: true,
+        textoInformativo: "Será necessário que nos encaminhe uma"
+            " foto /imagem dos documentos solicitados assim como"
+            "  o preenchimento de dados requisitados",
+        tituloTextoInformativo: "Informação de Documento",
+        colaboradorDocumentoViewModel: documentos.map((e) => new ColaboradorDocumentoViewModel(
+          nomeDocumento: e.nomeDocumento,
+          campos: e.campos,
+          idDocumento: e.idDocumento,
+          idImagemDocumento: e.idDocumento,
+          qtdePaginaUpload:
+          "0/${e.qtdePaginaUpload}",
+          imagemObrigatoria: true,
+        )).toList(),
+        retornarListaDocumentos: (documento) {},
+      ),
     );
   }
 }
@@ -45,6 +62,7 @@ class ComponentExemploClasse extends StatefulWidget {
 }
 
 class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
+
   var controllerEmail = new TextEditingController();
   var controlerPadrao = new TextEditingController();
   var controllerNome = new TextEditingController();
