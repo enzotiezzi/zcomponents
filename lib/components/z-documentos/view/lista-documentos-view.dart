@@ -86,6 +86,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
     ));
     if (atualizou != null && atualizou) {
       await _buscarListaDocumentos();
+      listaDocumentos[index].documentoAtualizado=true;
     }
   }
 }

@@ -11,6 +11,7 @@ class ColaboradorDocumentoViewModel {
   String horizontalOuVertical;
   String qtdePaginaUpload;
   bool imagemObrigatoria;
+  bool documentoAtualizado;
   List<dynamic> campos;
 
   ColaboradorDocumentoViewModel(
@@ -23,7 +24,8 @@ class ColaboradorDocumentoViewModel {
       this.campos,
       this.horizontalOuVertical,
       this.imagemObrigatoria,
-      this.qtdePaginaUpload});
+      this.qtdePaginaUpload,
+      this.documentoAtualizado=false});
 
   factory ColaboradorDocumentoViewModel.fromJson(Map<String, dynamic> json) {
     return new ColaboradorDocumentoViewModel(
@@ -36,6 +38,7 @@ class ColaboradorDocumentoViewModel {
         horizontalOuVertical: json['horizontalOuVertical'],
         qtdePaginaUpload: json['qtdePaginaUpload'],
         imagemObrigatoria: json['imagemObrigatoria'],
+        documentoAtualizado: json["documentoAtualizado"],
         campos: (json['campos'] != null)
             ? (json['campos']).map((x) => DocumentoCampo.fromJson(x)).toList()
             : new List());
@@ -49,7 +52,8 @@ class ColaboradorDocumentoViewModel {
       "status": this.status,
       "idImagemDocumento": this.idImagemDocumento,
       "imagemDocumento": this.imagemDocumento,
-      "imagemObrigatoria": this.imagemObrigatoria
+      "imagemObrigatoria": this.imagemObrigatoria,
+      "documentoAtualizado": this.documentoAtualizado
     };
   }
 }

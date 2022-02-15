@@ -51,7 +51,7 @@ dependencies:
   table_calendar: ^2.2.3
   flutter_genius_scan: ^4.3.0
   open_file: ^3.2.1
-  shared_preferences: ^2.0.11
+  shared_preferences: ^2.0.12
   flutter_svg: ^1.0.0
   flutter_image_compress: ^0.7.0
   brasil_fields: ^1.0.0

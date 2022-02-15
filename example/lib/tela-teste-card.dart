@@ -4,21 +4,16 @@ import 'package:z_components/components/z-item-tile-convite.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
-import 'package:z_components/config/z-tipo-header.dart';
-import 'package:z_components/components/z-header.dart';
-import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
-import 'package:z_components/components/z-inputs/z-input-name.dart';
-import 'package:z_components/components/z-estrutura-empresa/z-estrutura-empresa.dart';
-import 'package:z_components/components/z-estrutura-empresa/bloc/z-estrutura-empresa-cubit.dart';
 import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
-import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
 import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 import 'package:z_components/components/z-documentos/presenter/lista-documentos.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 import 'package:z_components/view-model/documento-campo.dart';
+import 'package:z_components/components/z-endereco/z-input-endereco.dart';
+import 'package:z_components/components/z-tile.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -88,6 +83,39 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         enabled: true,
         tipoValorCampo: "celular",
         controller: TextEditingController()),
+  ];
+
+  List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
+    new ColaboradorDocumentoViewModel(
+        nomeDocumento: "RG",
+        campos: [],
+        status: "",
+        horizontalOuVertical: "",
+        idColaborador: "",
+        idDocumento: "",
+        idImagemDocumento: "",
+        qtdePaginaUpload: "0"
+    ),
+    new ColaboradorDocumentoViewModel(
+        nomeDocumento: "Teste",
+        campos: [],
+        status: "",
+        horizontalOuVertical: "",
+        idColaborador: "",
+        idDocumento: "",
+        idImagemDocumento: "",
+        qtdePaginaUpload: "0"
+    ),
+    new ColaboradorDocumentoViewModel(
+        nomeDocumento: "Outro",
+        campos: [],
+        status: "",
+        horizontalOuVertical: "",
+        idColaborador: "",
+        idDocumento: "",
+        idImagemDocumento: "",
+        qtdePaginaUpload: "0"
+    ),
   ];
 
   @override
@@ -175,59 +203,59 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 }
               },
             ),
-            new ZCollection(
-              titulo: "Teste",
-              lista: listaPorte,
-              key: keyPorte,
+            new ZInputEndereco(
               themeData: Theme.of(context),
-              onChange: (value) {
-                setState(() {
-                  editado = false;
-                });
+              campoObrigatorio: true,
+              cepController: cep,
+              logradouroController: logradouro,
+              numeroController: numero,
+              complementoController: complemento,
+              bairroController: bairro,
+              cidadeController: cidade,
+              estadoController: estado,
+              validacao: (validarEndereco){},
+            ),
+            new ZTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new ListaDocumentos(
+                          iconeInformativo: true,
+                          textoInformativo: "Será necessário que nos encaminhe uma foto /imagem dos documentos solicitados assim como  o preenchimento de dados requisitados",
+                          tituloTextoInformativo: "Informação de Documento",
+                          colaboradorDocumentoViewModel: _listaDocumentosTemporario
+                              .map((e) => new ColaboradorDocumentoViewModel(
+                            nomeDocumento: e.nomeDocumento,
+                            campos: e.campos,
+                            idDocumento: e.idDocumento,
+                            idImagemDocumento: e.idDocumento,
+                            qtdePaginaUpload: "0/${e.qtdePaginaUpload}",
+                            imagemObrigatoria: true,
+                          ))
+                              .toList(),
+                          retornarListaDocumentos: (documento) {},
+                        )));
               },
+              leading: new Row(
+                children: [
+                  new Icon(
+                    Icons.wysiwyg,
+                    color: Colors.grey,
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    child: new Text("Documentos"),
+                  )
+                ],
+              ),
+              trailing: new Container(
+                child: new Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: Colors.grey,
+                ),
+              ),
             ),
-            ZItemTilePerguntaAdicional(
-              textoPergunta: "Teste",
-              opcoes: [],
-              onPressed: () {},
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ListaDocumentos(
-                                colaboradorDocumentoViewModel: [
-                                  ColaboradorDocumentoViewModel(
-                                      imagemObrigatoria: false,
-                                      nomeDocumento: "Documento teste",
-                                      qtdePaginaUpload: "0/2",
-                                      campos: [
-                                        new DocumentoCampo(
-                                          tipoValorCampo: "text",
-                                          obrigatorio: false,
-                                          nomeCampo: "nome",
-                                        ),
-                                        new DocumentoCampo(
-                                          tipoValorCampo: "date",
-                                          obrigatorio: false,
-                                          nomeCampo: "Data nascimento",
-                                        ),
-                                      ])
-                                ],
-                              )));
-                },
-                child: new Text("teste")),
-            new Container(
-                margin: EdgeInsets.only(top: 16),
-                child: new ZForm(
-                  viewmodel: listaForm,
-                  onChange: (form) {
-                    setState(() {
-                      listaForm = form;
-                    });
-                  },
-                ))
           ],
         ),
       ),
