@@ -60,8 +60,21 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
         }
         _dialogUtils.dismiss();
       }
-    } else
+    } else {
+      _dialogUtils.showProgressDialog();
+
       listaDocumentos = state.widget.colaboradorDocumentoViewModel;
+
+      for (int i = 0; i < listaDocumentos.length; i++) {
+        var doc =
+            await _arquivoService.buscarAnexo(listaDocumentos[i].idDocumento);
+
+        if (doc != null) {
+          listaDocumentos[i].imagemDocumento = base64Decode(doc.conteudo);
+        }
+      }
+      _dialogUtils.dismiss();
+    }
   }
 
   Future<void> atualizarDocumento(int index) async {
