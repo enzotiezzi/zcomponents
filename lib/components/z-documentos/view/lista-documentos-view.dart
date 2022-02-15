@@ -67,7 +67,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
 
       for (int i = 0; i < listaDocumentos.length; i++) {
         var doc =
-            await _arquivoService.buscarAnexo(listaDocumentos[i].idDocumento);
+            await _arquivoService.buscarAnexo(listaDocumentos[i].idImagemDocumento);
 
         if (doc != null) {
           listaDocumentos[i].imagemDocumento = base64Decode(doc.conteudo);
