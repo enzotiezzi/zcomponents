@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/utils/documento-status.dart';
@@ -158,17 +160,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                 children: <Widget>[
                   new Row(
                     children: <Widget>[
-                      new Container(
-                        margin: EdgeInsets.only(left: 16.0),
-                        height: 34,
-                        width: 51,
-                        decoration: (item.imagemDocumento == null)
-                            ? BoxDecoration()
-                            : BoxDecoration(
-                                image: DecorationImage(
-                                    image: Image.memory(item.imagemDocumento)
-                                        .image)),
-                      ),
+                      _retornarImagem(item.imagemDocumento),
                       new Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: new Text(
@@ -198,6 +190,22 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
             ),
           );
         });
+  }
+
+  Widget _retornarImagem(Uint8List image) {
+    if (image == null)
+      return new Container(
+        margin: EdgeInsets.only(left: 16.0),
+        height: 34,
+        width: 51,
+      );
+    else
+      return new Container(
+        margin: EdgeInsets.only(left: 16.0),
+        height: 34,
+        width: 51,
+        child: Image.memory(image),
+      );
   }
 
   Widget _retornarStatus(int index) {
