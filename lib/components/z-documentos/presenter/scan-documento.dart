@@ -259,7 +259,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                       Navigator.of(context).pop();
                     }
                   } else {
-                    _view.dialogUtils.showAlertDialogErro("",
+                    _view.dialogUtils.showAlertDialogErro(
                         "Infelizmente não conseguimos identificar o documento , por gentileza feche e tente novamente.");
                   }
                 },
