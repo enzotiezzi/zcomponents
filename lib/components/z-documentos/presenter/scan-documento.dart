@@ -259,11 +259,11 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                       Navigator.of(context).pop();
                     }
                   } else {
-                    _view.dialogUtils
-                        .showAlertDialogErro("Erro", "Dados incorretos!");
+                    _view.dialogUtils.showAlertDialogErro("",
+                        "Infelizmente não conseguimos identificar o documento , por gentileza feche e tente novamente.");
                   }
                 },
-                child: new Text("CONCLUIR")),
+                child: new Text("SALVAR")),
           ],
         ),
       ),
