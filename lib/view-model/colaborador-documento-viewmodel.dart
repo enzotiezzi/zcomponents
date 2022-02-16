@@ -12,20 +12,23 @@ class ColaboradorDocumentoViewModel {
   String qtdePaginaUpload;
   bool imagemObrigatoria;
   bool documentoAtualizado;
+  double porcentagemStatusPreenchimento;
   List<dynamic> campos;
 
-  ColaboradorDocumentoViewModel(
-      {this.idColaborador: "",
-      this.idDocumento: "",
-      this.nomeDocumento: "",
-      this.status: "",
-      this.idImagemDocumento: "",
-      this.imagemDocumento,
-      this.campos,
-      this.horizontalOuVertical,
-      this.imagemObrigatoria,
-      this.qtdePaginaUpload,
-      this.documentoAtualizado=false});
+  ColaboradorDocumentoViewModel({
+    this.idColaborador: "",
+    this.idDocumento: "",
+    this.nomeDocumento: "",
+    this.status: "",
+    this.idImagemDocumento: "",
+    this.imagemDocumento,
+    this.campos,
+    this.horizontalOuVertical,
+    this.imagemObrigatoria,
+    this.qtdePaginaUpload,
+    this.documentoAtualizado: false,
+    this.porcentagemStatusPreenchimento: 0.0,
+  });
 
   factory ColaboradorDocumentoViewModel.fromJson(Map<String, dynamic> json) {
     return new ColaboradorDocumentoViewModel(
@@ -41,11 +44,13 @@ class ColaboradorDocumentoViewModel {
         documentoAtualizado: json["documentoAtualizado"],
         campos: (json['campos'] != null)
             ? (json['campos']).map((x) => DocumentoCampo.fromJson(x)).toList()
-            : new List());
+            : new List(),
+        porcentagemStatusPreenchimento: json["porcentagemStatusPreenchimento"]);
   }
 
   Map toMap() {
     return {
+      "porcentagemStatusPreenchimento": this.porcentagemStatusPreenchimento,
       "idColaborador": this.idColaborador,
       "idDocumento": this.idDocumento,
       "nomeDocumento": this.nomeDocumento,

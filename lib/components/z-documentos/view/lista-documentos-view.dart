@@ -25,7 +25,6 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
 
   @override
   Future<void> afterBuild() {
-    // TODO: implement afterBuild
     throw UnimplementedError();
   }
 
@@ -66,8 +65,8 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
       listaDocumentos = state.widget.colaboradorDocumentoViewModel;
 
       for (int i = 0; i < listaDocumentos.length; i++) {
-        var doc =
-            await _arquivoService.buscarAnexo(listaDocumentos[i].idImagemDocumento);
+        var doc = await _arquivoService
+            .buscarAnexo(listaDocumentos[i].idImagemDocumento);
 
         if (doc != null) {
           listaDocumentos[i].imagemDocumento = base64Decode(doc.conteudo);
@@ -86,7 +85,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
     ));
     if (atualizou != null && atualizou) {
       await _buscarListaDocumentos();
-      listaDocumentos[index].documentoAtualizado=true;
+      listaDocumentos[index].documentoAtualizado = true;
     }
   }
 }

@@ -19,7 +19,7 @@ class DialogUtils {
       {String errorMessage}) async {
     return showDialog(
         context: _context,
-        barrierDismissible: true,
+        barrierDismissible: false,
         builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.erro,
               child: new Column(
@@ -69,9 +69,10 @@ class DialogUtils {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            new Container(padding: EdgeInsets.all(12),
+                            new Container(
+                              padding: EdgeInsets.all(12),
                               child: new Text(
-                                "ENTENDI",
+                                "FECHAR",
                                 style: new TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: MainStyle.get(context)
