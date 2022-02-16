@@ -25,7 +25,6 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
 
   @override
   Future<void> afterBuild() {
-    // TODO: implement afterBuild
     throw UnimplementedError();
   }
 
