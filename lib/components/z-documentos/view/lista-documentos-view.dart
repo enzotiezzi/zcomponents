@@ -72,6 +72,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
           listaDocumentos[i].imagemDocumento = base64Decode(doc.conteudo);
         }
       }
+      state.setState(() {});
       _dialogUtils.dismiss();
     }
   }
