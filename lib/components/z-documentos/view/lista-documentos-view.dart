@@ -77,9 +77,15 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
     }
   }
 
-  Future<void> atualizarDocumento(int index) async {
+  Future<void> abrirDocumento(index) async {
     _dialogUtils = new DialogUtils(state.context);
     _dialogUtils.showProgressDialog();
+    await atualizarDocumento(index);
+    _dialogUtils.dismiss();
+    state.setState(() {});
+  }
+
+  Future<void> atualizarDocumento(int index) async {
     bool atualizou = await navigate(ScanDocumentos(
       colaboradorDocumentoViewModel: listaDocumentos[index],
       retornarListaDocumentos: state.widget.retornarListaDocumentos,
