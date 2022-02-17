@@ -1,12 +1,15 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/documento-status.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/lista-documentos-view.dart';
 import 'package:z_components/config/z-dialog.dart';
+import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
-
 import '../../z-alert-dialog.dart';
 
 class ListaDocumentos extends StatefulWidget {
@@ -36,6 +39,7 @@ class ListaDocumentos extends StatefulWidget {
 class _ListaDocumentosState extends State<ListaDocumentos> {
   ListaDocumentosView _view;
   bool _documentoAtualizado = true;
+
   @override
   void initState() {
     _view = ListaDocumentosView(this);
@@ -45,12 +49,10 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          _retornarDialogInformativo()
-        ],
-        leading: IconeVoltar(),
+    return new Scaffold(
+      appBar: new AppBar(
+        actions: [_retornarDialogInformativo()],
+        leading: new IconeVoltar(),
         centerTitle: true,
         title: new Text("DOCUMENTOS"),
       ),
@@ -58,12 +60,13 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
     );
   }
 
-  Widget _retornarDialogInformativo(){
-    if(widget.iconeInformativo){
+  Widget _retornarDialogInformativo() {
+    if (widget.iconeInformativo) {
       return new IconButton(
-        onPressed: (){
+        onPressed: () {
           showDialog(
-              context: context,
+              barrierDismissible: false,
+              context: _view.state.context,
               builder: (context) {
                 return new ZAlertDialog(
                   zDialog: ZDialog.normal,
@@ -71,53 +74,55 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                   child: new Column(
                     children: [
                       new Container(
-                          margin: EdgeInsets.only(top: 16, bottom: 4),
-                          child: Icon(
+                          margin: const EdgeInsets.only(top: 16, bottom: 4),
+                          child: new Icon(
                             Icons.info,
-                            color: Color(0xFF1e26f7),
+                            color: const Color(0xFF1e26f7),
                           )),
                       new Container(
                         margin: const EdgeInsets.only(
-                            bottom: 8,
-                            left: 16,
-                            right: 16,),
+                          bottom: 8,
+                          left: 16,
+                          right: 16,
+                        ),
                         child: new Text(
                           widget.tituloTextoInformativo,
                           textAlign: TextAlign.center,
-                          style: new TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
+                          style: new TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       new Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 8,
-                            left: 16,
-                            right: 16,),
+                        margin: const EdgeInsets.all(16),
                         child: new Text(
-                          widget.textoInformativo,
+                          "${widget.textoInformativo}",
                           textAlign: TextAlign.center,
                         ),
                       ),
                       new Divider(
                         height: 1.0,
-                        color: Colors.black,
                       ),
-                      new Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 8, top: 8),
-                        child: new GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: new Text(
+                      new FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: new Container(
+                          margin: const EdgeInsets.only(bottom: 8, top: 8),
+                          child: new Container(
+                            width: 270,
+                            height: 22,
+                            margin: const EdgeInsets.only(top: 8),
+                            child: new Text(
                               "OK",
                               style: new TextStyle(
-                                fontWeight: FontWeight.bold
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: MainStyle.get(context)
+                                      .fontSizeLeadinCancelar,
+                                  color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );
@@ -128,7 +133,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
           size: 28,
         ),
       );
-    }else{
+    } else {
       return new Container();
     }
   }
@@ -141,14 +146,13 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
           var item = _view.listaDocumentos[index];
           return new GestureDetector(
             onTap: () async {
-              await _view.atualizarDocumento(index);
-              setState(() {});
+              _view.abrirDocumento(index);
             },
             child: new Container(
-              margin: EdgeInsets.only(top: 1),
+              margin: const EdgeInsets.only(top: 1),
               height: 50,
               decoration: new BoxDecoration(
-                color: Color(0xffffffff),
+                color: const Color(0xffffffff),
               ),
               child: new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,22 +160,23 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                   new Row(
                     children: <Widget>[
                       new Container(
-                        margin: EdgeInsets.only(left: 16.0),
+                        margin: const EdgeInsets.only(left: 16.0),
                         height: 34,
                         width: 51,
                         decoration: (item.imagemDocumento == null)
                             ? BoxDecoration()
                             : BoxDecoration(
-                                image: DecorationImage(
-                                    image: Image.memory(item.imagemDocumento)
-                                        .image)),
+                                image: new DecorationImage(
+                                    image:
+                                        new Image.memory(item.imagemDocumento)
+                                            .image)),
                       ),
                       new Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: new Text(
                           item.nomeDocumento,
                           style: new TextStyle(
-                            color: Color(0xff000000),
+                            color: const Color(0xff000000),
                             fontSize: 14,
                           ),
                         ),
@@ -182,12 +187,9 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                     children: [
                       _retornarStatus(index),
                       new Container(
-                        margin: EdgeInsets.only(right: 16),
-                        child: new Icon(
-                          Icons.chevron_right,
-                          color: Colors.black,
-                        ),
-                      ),
+                          margin: const EdgeInsets.only(right: 16),
+                          child: new Icon(Icons.chevron_right,
+                              color: Colors.black))
                     ],
                   )
                 ],
@@ -197,26 +199,62 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         });
   }
 
-  Widget _retornarStatus(int index){
-    if(_view.listaDocumentos[index].documentoAtualizado){
+  Widget _retornarImagem(Uint8List image) {
+    if (image == null)
+      return new Container(
+        margin: EdgeInsets.only(left: 16.0),
+        height: 34,
+        width: 51,
+      );
+    else
+      return new Container(
+        margin: EdgeInsets.only(left: 16.0),
+        height: 34,
+        width: 51,
+        child: Image.memory(image),
+      );
+  }
+
+  Widget _retornarStatus(int index) {
+    if (_view.listaDocumentos[index].porcentagemStatusPreenchimento < 1) {
       return new Container(
         decoration: new ShapeDecoration(
-            shape: CircleBorder(), color: Colors.green),
-        child: Icon(
+            shape: new CircleBorder(), color: Colors.transparent),
+        child: new Icon(
           Icons.ac_unit,
           color: Colors.transparent,
-          size: 9,
+          size: 8,
         ),
       );
-    }else{
-      return new Container();
+    } else if (_view.listaDocumentos[index].porcentagemStatusPreenchimento >
+            0 &&
+        _view.listaDocumentos[index].porcentagemStatusPreenchimento < 100) {
+      return new Container(
+        decoration:
+            new ShapeDecoration(shape: new CircleBorder(), color: Colors.amber),
+        child: new Icon(
+          Icons.ac_unit,
+          color: Colors.transparent,
+          size: 8,
+        ),
+      );
+    } else {
+      return new Container(
+        decoration:
+            new ShapeDecoration(shape: new CircleBorder(), color: Colors.green),
+        child: new Icon(
+          Icons.ac_unit,
+          color: Colors.transparent,
+          size: 8,
+        ),
+      );
     }
   }
 
   Widget _buildIconeStatus(String status) {
     switch (status.toUpperCase()) {
       case DocumentoStatusUtils.APROVADO:
-        return SvgPicture.asset(
+        return new SvgPicture.asset(
           SvgUtils.STATUSAPROVADO,
           semanticsLabel: 'status-aprovado.svg',
           placeholderBuilder: (context) => Icon(Icons.error),
@@ -224,7 +262,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         break;
 
       case DocumentoStatusUtils.REPROVADO:
-        return SvgPicture.asset(
+        return new SvgPicture.asset(
           SvgUtils.STATUSREPROVADO,
           semanticsLabel: 'status-reprovado.svg',
           placeholderBuilder: (context) => Icon(Icons.error),
@@ -232,7 +270,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         break;
 
       case DocumentoStatusUtils.NAO_ENVIADO:
-        return SvgPicture.asset(
+        return new SvgPicture.asset(
           SvgUtils.STATUSNAOENVIADO,
           semanticsLabel: 'status-nao-enviado.svg',
           placeholderBuilder: (context) => Icon(Icons.error),
@@ -240,7 +278,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         break;
 
       case DocumentoStatusUtils.PARCIALMENTE_ENVIADO:
-        return SvgPicture.asset(
+        return new SvgPicture.asset(
           SvgUtils.STATUSPARCIALMENTEENVIADO,
           semanticsLabel: 'status-parcialmente-enviado.svg',
           placeholderBuilder: (context) => Icon(Icons.error),
@@ -248,7 +286,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         break;
 
       case DocumentoStatusUtils.AGUARDANDO_VALIDACAO:
-        return SvgPicture.asset(
+        return new SvgPicture.asset(
           SvgUtils.STATUSAGUARDANDOVALIDACAO,
           semanticsLabel: "status-aguardando-avaliacao.svg",
           placeholderBuilder: (context) => Icon(Icons.error),

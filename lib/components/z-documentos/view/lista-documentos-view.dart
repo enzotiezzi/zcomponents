@@ -25,7 +25,6 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
 
   @override
   Future<void> afterBuild() {
-    // TODO: implement afterBuild
     throw UnimplementedError();
   }
 
@@ -60,8 +59,30 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
         }
         _dialogUtils.dismiss();
       }
-    } else
+    } else {
+      _dialogUtils.showProgressDialog();
+
       listaDocumentos = state.widget.colaboradorDocumentoViewModel;
+
+      for (int i = 0; i < listaDocumentos.length; i++) {
+        var doc = await _arquivoService
+            .buscarAnexo(listaDocumentos[i].idImagemDocumento);
+
+        if (doc != null) {
+          listaDocumentos[i].imagemDocumento = base64Decode(doc.conteudo);
+        }
+      }
+      state.setState(() {});
+      _dialogUtils.dismiss();
+    }
+  }
+
+  Future<void> abrirDocumento(index) async {
+    _dialogUtils = new DialogUtils(state.context);
+    _dialogUtils.showProgressDialog();
+    await atualizarDocumento(index);
+    _dialogUtils.dismiss();
+    state.setState(() {});
   }
 
   Future<void> atualizarDocumento(int index) async {
@@ -71,9 +92,12 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
       keyGeniusScan: state.widget.keyGeniusScan,
       token: state.widget.token,
     ));
-    if (atualizou != null && atualizou) {
+    _dialogUtils.dismiss();
+    if (atualizou != false && atualizou) {
       await _buscarListaDocumentos();
-      listaDocumentos[index].documentoAtualizado=true;
+      listaDocumentos[index].documentoAtualizado = true;
+      _dialogUtils.dismiss();
     }
+    _dialogUtils.dismiss();
   }
 }
