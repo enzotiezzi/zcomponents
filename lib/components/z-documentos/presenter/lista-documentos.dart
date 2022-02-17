@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/documento-status.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
@@ -182,6 +183,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                           ),
                         ),
                       ),
+
                     ],
                   ),
                   new Row(
@@ -195,10 +197,13 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                   )
                 ],
               ),
+
             ),
           );
-        });
+          });
+
   }
+
 
   Widget _retornarImagem(Uint8List image) {
     if (image == null)
