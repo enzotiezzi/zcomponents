@@ -78,15 +78,20 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
   }
 
   Future<void> atualizarDocumento(int index) async {
+    _dialogUtils = new DialogUtils(state.context);
+    _dialogUtils.showProgressDialog();
     bool atualizou = await navigate(ScanDocumentos(
       colaboradorDocumentoViewModel: listaDocumentos[index],
       retornarListaDocumentos: state.widget.retornarListaDocumentos,
       keyGeniusScan: state.widget.keyGeniusScan,
       token: state.widget.token,
     ));
-    if (atualizou != null && atualizou) {
+    _dialogUtils.dismiss();
+    if (atualizou != false && atualizou) {
       await _buscarListaDocumentos();
       listaDocumentos[index].documentoAtualizado = true;
+      _dialogUtils.dismiss();
     }
+    _dialogUtils.dismiss();
   }
 }
