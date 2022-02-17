@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/documento-status.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
@@ -171,7 +172,6 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                                         new Image.memory(item.imagemDocumento)
                                             .image)),
                       ),
-
                       new Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: new Text(
