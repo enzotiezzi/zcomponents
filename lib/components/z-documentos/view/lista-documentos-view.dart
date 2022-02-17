@@ -90,6 +90,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
     if (atualizou != false && atualizou) {
       await _buscarListaDocumentos();
       listaDocumentos[index].documentoAtualizado = true;
+      _dialogUtils.dismiss();
     }
     _dialogUtils.dismiss();
   }
