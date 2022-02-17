@@ -14,7 +14,7 @@ import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 class ListaDocumentosView extends IView<ListaDocumentos> {
   IColaboradorDocumentoService _colaboradorDocumentoService;
 
-  DialogUtils _dialogUtils;
+  DialogUtils dialogUtils;
 
   IArquivoService _arquivoService;
 
@@ -30,7 +30,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
 
   @override
   Future<void> initView() async {
-    _dialogUtils = new DialogUtils(state.context);
+    dialogUtils = new DialogUtils(state.context);
     _colaboradorDocumentoService =
         new ColaboradorDocumentoService(state.widget.token);
     _arquivoService = new ArquivoService(state.widget.token);
@@ -39,7 +39,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
 
   Future<void> _buscarListaDocumentos() async {
     if (state.widget.colaboradorDocumentoViewModel == null) {
-      _dialogUtils.showProgressDialog();
+      dialogUtils.showProgressDialog();
       var lista = await _colaboradorDocumentoService
           .listarDocumentosColaborador(state.widget.idColaborador);
       if (lista != null) {
@@ -57,10 +57,10 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
             listaDocumentos = lista;
           });
         }
-        _dialogUtils.dismiss();
+        dialogUtils.dismiss();
       }
     } else {
-      _dialogUtils.showProgressDialog();
+      dialogUtils.showProgressDialog();
 
       listaDocumentos = state.widget.colaboradorDocumentoViewModel;
 
@@ -73,25 +73,24 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
         }
       }
       state.setState(() {});
-      _dialogUtils.dismiss();
+      dialogUtils.dismiss();
     }
   }
 
   Future<void> atualizarDocumento(int index) async {
-    _dialogUtils = new DialogUtils(state.context);
-    _dialogUtils.showProgressDialog();
+
     bool atualizou = await navigate(ScanDocumentos(
       colaboradorDocumentoViewModel: listaDocumentos[index],
       retornarListaDocumentos: state.widget.retornarListaDocumentos,
       keyGeniusScan: state.widget.keyGeniusScan,
       token: state.widget.token,
     ));
-    _dialogUtils.dismiss();
+    dialogUtils.dismiss();
     if (atualizou != false && atualizou) {
       await _buscarListaDocumentos();
       listaDocumentos[index].documentoAtualizado = true;
-      _dialogUtils.dismiss();
+      dialogUtils.dismiss();
     }
-    _dialogUtils.dismiss();
+    dialogUtils.dismiss();
   }
 }
