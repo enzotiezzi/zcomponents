@@ -146,8 +146,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
           var item = _view.listaDocumentos[index];
           return new GestureDetector(
             onTap: () async {
-              await _view.atualizarDocumento(index);
-              setState(() {});
+              _view.abrirDocumento(index);
             },
             child: new Container(
               margin: const EdgeInsets.only(top: 1),
