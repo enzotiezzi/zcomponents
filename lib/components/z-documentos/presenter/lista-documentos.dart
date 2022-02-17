@@ -172,7 +172,6 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                                         new Image.memory(item.imagemDocumento)
                                             .image)),
                       ),
-
                       new Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: new Text(
@@ -183,7 +182,6 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                   new Row(
@@ -197,13 +195,10 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                   )
                 ],
               ),
-
             ),
           );
-          });
-
+        });
   }
-
 
   Widget _retornarImagem(Uint8List image) {
     if (image == null)
