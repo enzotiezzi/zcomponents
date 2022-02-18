@@ -92,12 +92,9 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
       keyGeniusScan: state.widget.keyGeniusScan,
       token: state.widget.token,
     ));
-    _dialogUtils.dismiss();
     if (atualizou != false && atualizou) {
       await _buscarListaDocumentos();
       listaDocumentos[index].documentoAtualizado = true;
-      _dialogUtils.dismiss();
     }
-    _dialogUtils.dismiss();
   }
 }

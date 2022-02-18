@@ -30,7 +30,18 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  List<ColaboradorDocumentoViewModel> documentos = [];
+  List<ColaboradorDocumentoViewModel> documentos = [
+    ColaboradorDocumentoViewModel(
+        nomeDocumento: "RG",
+        campos: [],
+        status: "",
+        horizontalOuVertical: "",
+        idColaborador: "",
+        idDocumento: "",
+        idImagemDocumento: "",
+        qtdePaginaUpload: "0"
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
