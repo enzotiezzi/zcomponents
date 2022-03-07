@@ -124,6 +124,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
     if (state.widget.keyGeniusScan != null)
       await FlutterGeniusScan.setLicenceKey(state.widget.keyGeniusScan);
     await _buscarIdFotos();
+    dialogUtils.dismiss();
   }
 
   void displayError(BuildContext context, PlatformException error) {

@@ -15,76 +15,53 @@ class DialogUtils {
     _context = context;
   }
 
-  Future showAlertDialogErro(String title, String message,
+  Future showAlertDialogErro(String message,
       {String errorMessage}) async {
-    return showDialog(
+    showDialog(
+        barrierDismissible: false,
         context: _context,
-        barrierDismissible: true,
-        builder: (BuildContext context) => ZAlertDialog(
-              zDialog: ZDialog.erro,
-              child: new Column(
-                children: <Widget>[
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        margin: const EdgeInsets.all(20),
-                        child: new Text(title,
-                            style: MainStyle.get(context).styleTittleDialog),
-                      )
-                    ],
+        builder: (BuildContext context) {
+          return new ZAlertDialog(
+            zDialog: ZDialog.erro,
+            child: new Column(
+              children: [
+                new Container(
+                  margin: const EdgeInsets.all(16),
+                  child: new Text(message,
+                      style: new TextStyle(
+                          fontSize:
+                              MainStyle.get(context).fontSizeEntradaSaida),
+                      textAlign: TextAlign.center),
+                ),
+                new Divider(
+                  height: 1.0,
+                ),
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Container(
+                    margin: const EdgeInsets.only(bottom: 8, top: 8),
+                    child: new Container(
+                      width: 200,
+                      height: 22,
+                      margin: const EdgeInsets.only(top: 8),
+                      child: new Text(
+                        "FECHAR",
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize:
+                                MainStyle.get(context).fontSizeLeadinCancelar,
+                            color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        padding: const EdgeInsets.only(
-                          left: 10.0,
-                          right: 10.0,
-                          bottom: 10.0,
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        child: new Column(
-                          children: <Widget>[
-                            new Text(message,
-                                style: new TextStyle(
-                                    fontSize: MainStyle.get(context)
-                                        .fontSizeEntradaSaida),
-                                textAlign: TextAlign.center),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  new Divider(
-                    color: const Color(0xffdbdbdb),
-                  ),
-                  new Container(
-                    child: new InkWell(
-                        splashColor: const Color(0xffe6e6e6),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: new Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            new Container(padding: EdgeInsets.all(12),
-                              child: new Text(
-                                "ENTENDI",
-                                style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: MainStyle.get(context)
-                                        .fontSizeLeadinCancelar),
-                              ),
-                            ),
-                          ],
-                        )),
-                    margin: const EdgeInsets.only(bottom: 8),
-                  )
-                ],
-              ),
-            ));
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   Future showAlertDialogNewAviso(String title, String message) async {

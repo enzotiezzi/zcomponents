@@ -25,7 +25,6 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
 
   @override
   Future<void> afterBuild() {
-    // TODO: implement afterBuild
     throw UnimplementedError();
   }
 
@@ -78,6 +77,14 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
     }
   }
 
+  Future<void> abrirDocumento(index) async {
+    _dialogUtils = new DialogUtils(state.context);
+    _dialogUtils.showProgressDialog();
+    await atualizarDocumento(index);
+    _dialogUtils.dismiss();
+    state.setState(() {});
+  }
+
   Future<void> atualizarDocumento(int index) async {
     bool atualizou = await navigate(ScanDocumentos(
       colaboradorDocumentoViewModel: listaDocumentos[index],
@@ -85,7 +92,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
       keyGeniusScan: state.widget.keyGeniusScan,
       token: state.widget.token,
     ));
-    if (atualizou != null && atualizou) {
+    if (atualizou != false && atualizou) {
       await _buscarListaDocumentos();
       listaDocumentos[index].documentoAtualizado = true;
     }
