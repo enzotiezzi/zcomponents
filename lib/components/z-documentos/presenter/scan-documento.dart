@@ -256,7 +256,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                     } else {
                       widget.retornarListaDocumentos(
                           widget.colaboradorDocumentoViewModel);
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(true);
                     }
                   } else {
                     _view.dialogUtils
