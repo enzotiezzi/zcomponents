@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/scan-documento-view.dart';
@@ -9,7 +10,6 @@ import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 
 class ScanDocumentos extends StatefulWidget {
   ColaboradorDocumentoViewModel colaboradorDocumentoViewModel;
-
   String token;
   String keyGeniusScan;
   Function(ColaboradorDocumentoViewModel) retornarListaDocumentos;
@@ -256,7 +256,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                     } else {
                       widget.retornarListaDocumentos(
                           widget.colaboradorDocumentoViewModel);
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(true);
                     }
                   } else {
                     _view.dialogUtils.showAlertDialogErro(

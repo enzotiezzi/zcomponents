@@ -37,6 +37,7 @@ class ListaDocumentos extends StatefulWidget {
 }
 
 class _ListaDocumentosState extends State<ListaDocumentos> {
+  DialogUtils _dialogUtils;
   ListaDocumentosView _view;
   bool _documentoAtualizado = true;
 
@@ -146,7 +147,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
           var item = _view.listaDocumentos[index];
           return new GestureDetector(
             onTap: () async {
-              _view.abrirDocumento(index);
+               _view.abrirDocumento(index);
             },
             child: new Container(
               margin: const EdgeInsets.only(top: 1),

@@ -35,7 +35,9 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconeVoltar(context: context,),
+        leading: IconeVoltar(
+          context: context,
+        ),
         title: Text("APLICATIVO"),
         centerTitle: true,
       ),
@@ -49,23 +51,22 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
         new Material(
           elevation: 4,
           child: new Container(
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 16),
-                    padding: const EdgeInsets.only(top: 16, bottom: 16),
-                    child: new Text(
-                      widget.appViewModel.nomeExibicao,
-                      style: new TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: MainStyle.get(context).fontSizePadrao),
-                    ),
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 16),
+                  padding: const EdgeInsets.only(top: 16, bottom: 16),
+                  child: new Text(
+                    widget.appViewModel.nomeExibicao,
+                    style: new TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: MainStyle.get(context).fontSizePadrao),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-
+          ),
         ),
         new ZAba(
           zAbaViewModel: [
