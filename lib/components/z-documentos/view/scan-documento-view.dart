@@ -5,8 +5,6 @@ import 'dart:typed_data';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_genius_scan/flutter_genius_scan.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:z_components/api/arquivo/arquivo-service.dart';
 import 'package:z_components/api/arquivo/i-arquivo-service.dart';
@@ -122,7 +120,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
         new ColaboradorDocumentoService(state.widget.token);
     await _inicializarListaRespostas();
     if (state.widget.keyGeniusScan != null)
-      await FlutterGeniusScan.setLicenceKey(state.widget.keyGeniusScan);
+      //await FlutterGeniusScan.setLicenceKey(state.widget.keyGeniusScan);
     await _buscarIdFotos();
     dialogUtils.dismiss();
   }
@@ -134,30 +132,30 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   }
 
   Future scanDocumento() {
-    FlutterGeniusScan.scanWithConfiguration({
-      'source': 'camera',
-      'defaultFilter': 'none',
-      'postProcessingActions': ['rotate'],
-      'multiPage': false,
-    }).then((result) async {
-      var scans = result['scans'];
-
-      var fotoCortada = scans[0]['enhancedUrl'].toString();
-
-      foto = fotoCortada.replaceAll("file://", '');
-
-      var file = File(foto);
-
-      var resultUint8List = await FlutterImageCompress.compressWithFile(
-        file.absolute.path,
-        minWidth: 1024,
-        quality: 70,
-      );
-
-      state.setState(() {
-        fotos.add(resultUint8List);
-      });
-    }, onError: (error) => displayError(state.context, error));
+    // FlutterGeniusScan.scanWithConfiguration({
+    //   'source': 'camera',
+    //   'defaultFilter': 'none',
+    //   'postProcessingActions': ['rotate'],
+    //   'multiPage': false,
+    // }).then((result) async {
+    //   var scans = result['scans'];
+    //
+    //   var fotoCortada = scans[0]['enhancedUrl'].toString();
+    //
+    //   foto = fotoCortada.replaceAll("file://", '');
+    //
+    //   var file = File(foto);
+    //
+    //   var resultUint8List = await FlutterImageCompress.compressWithFile(
+    //     file.absolute.path,
+    //     minWidth: 1024,
+    //     quality: 70,
+    //   );
+    //
+    //   state.setState(() {
+    //     fotos.add(resultUint8List);
+    //   });
+    // }, onError: (error) => displayError(state.context, error));
   }
 
   Future expandirImagem(int hero, int hero2, Uint8List caminho) async {
