@@ -13,6 +13,14 @@ class DocumentoCampo {
   bool obrigatorio;
   String resposta;
 
+  String idAtributo;
+  String idModelo;
+  String dataResposta;
+  String modelo;
+  String idTipo;
+  String label;
+  String tipo;
+
   DocumentoCampo(
       {this.idDocumento,
       this.idDocumentoCampo,
@@ -21,7 +29,15 @@ class DocumentoCampo {
       this.tamanhoPrecisaoValorCampo,
       this.tamanhoValorCampo,
       this.tipoValorCampo,
-      this.resposta});
+      this.resposta,
+      this.idAtributo,
+      this.idModelo,
+      this.dataResposta,
+      this.modelo,
+      this.idTipo,
+      this.label,
+      this.tipo
+      });
 
   factory DocumentoCampo.fromJson(Map<String, dynamic> json) {
     return new DocumentoCampo(
@@ -32,6 +48,14 @@ class DocumentoCampo {
       tamanhoPrecisaoValorCampo: json['tamanhoPrecisaoValorCampo'],
       tamanhoValorCampo: json['tamanhoValorCampo'],
       tipoValorCampo: json['tipoValorCampo'],
+      idAtributo: json["idAtributo"],
+      idModelo: json["idModelo"],
+      dataResposta: json["dataResposta"],
+      modelo: json["modelo"],
+      idTipo: json["idTipo"],
+      label: json["label"],
+      tipo: json["tipo"],
+      resposta: json["resposta"]
     );
   }
 }
