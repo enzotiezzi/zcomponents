@@ -13,7 +13,7 @@ class ColaboradorDocumentoViewModel {
   bool imagemObrigatoria;
   bool documentoAtualizado;
   double porcentagemStatusPreenchimento;
-  List<dynamic> campos;
+  List<DocumentoCampo> campos;
 
   ColaboradorDocumentoViewModel({
     this.idColaborador: "",
@@ -58,7 +58,8 @@ class ColaboradorDocumentoViewModel {
       "idImagemDocumento": this.idImagemDocumento,
       "imagemDocumento": this.imagemDocumento,
       "imagemObrigatoria": this.imagemObrigatoria,
-      "documentoAtualizado": this.documentoAtualizado
+      "documentoAtualizado": this.documentoAtualizado,
+      "campos": this.campos.map((x) => x.toMap()).toList(),
     };
   }
 }
