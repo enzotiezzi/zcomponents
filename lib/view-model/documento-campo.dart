@@ -58,4 +58,24 @@ class DocumentoCampo {
       resposta: json["resposta"]
     );
   }
+
+  Map toMap() {
+    return {
+      "idDocumento": this.idDocumento,
+      "idDocumentoCampo": this.idDocumentoCampo,
+      "nomeCampo": this.nomeCampo,
+      "obrigatorio": this.obrigatorio,
+      "tamanhoPrecisaoValorCampo": this.tamanhoPrecisaoValorCampo,
+      "tamanhoValorCampo": this.tamanhoValorCampo,
+      "tipoValorCampo": this.tipoValorCampo,
+      "idAtributo": this.idAtributo,
+      "dataResposta": this.dataResposta,
+      "idModelo": this.idModelo,
+      "modelo": this.modelo,
+      "idTipo": this.idTipo,
+      "label": this.label,
+      "tipo": this.tipo,
+      "resposta": this.resposta
+    };
+  }
 }
