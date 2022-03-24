@@ -189,8 +189,8 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                       _retornarStatus(index),
                       new Container(
                           margin: const EdgeInsets.only(right: 16),
-                          child: new Icon(Icons.chevron_right,
-                              color: Colors.black))
+                          child: new Icon(Icons.arrow_forward_ios_outlined,
+                              color: Colors.black,size: 14,))
                     ],
                   )
                 ],
@@ -224,7 +224,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         child: new Icon(
           Icons.ac_unit,
           color: Colors.transparent,
-          size: 8,
+          size: 9,
         ),
       );
     } else if (_view.listaDocumentos[index].porcentagemStatusPreenchimento >
@@ -236,7 +236,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         child: new Icon(
           Icons.ac_unit,
           color: Colors.transparent,
-          size: 8,
+          size: 9,
         ),
       );
     } else {
@@ -246,7 +246,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         child: new Icon(
           Icons.ac_unit,
           color: Colors.transparent,
-          size: 8,
+          size: 9,
         ),
       );
     }
