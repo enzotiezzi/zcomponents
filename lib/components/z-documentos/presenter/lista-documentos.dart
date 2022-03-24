@@ -224,7 +224,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         child: new Icon(
           Icons.ac_unit,
           color: Colors.transparent,
-          size: 9,
+          size: 8,
         ),
       );
     } else if (_view.listaDocumentos[index].porcentagemStatusPreenchimento >
@@ -236,7 +236,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         child: new Icon(
           Icons.ac_unit,
           color: Colors.transparent,
-          size: 9,
+          size: 8,
         ),
       );
     } else {
@@ -246,7 +246,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
         child: new Icon(
           Icons.ac_unit,
           color: Colors.transparent,
-          size: 9,
+          size: 8,
         ),
       );
     }
