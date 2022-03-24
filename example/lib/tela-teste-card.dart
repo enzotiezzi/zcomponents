@@ -175,6 +175,11 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       body: new Container(
         child: new ListView(
           children: [
+            new ZTile(
+              leading: Text("oi"),
+              trailing: Text("123456"),
+              margem: 0,
+            ),
             new ZInputDataPadrao(
               themeData: Theme.of(context),
               controllerData: TextEditingController(),
