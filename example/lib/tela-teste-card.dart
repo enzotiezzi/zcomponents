@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-convite.dart';
@@ -14,6 +15,7 @@ import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 import 'package:z_components/view-model/documento-campo.dart';
 import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/components/permissao-negada.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -94,8 +96,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0"),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Teste",
         campos: [],
@@ -104,8 +105,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0"),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Outro",
         campos: [],
@@ -114,8 +114,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0"),
   ];
 
   @override
@@ -163,7 +162,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   Widget build(BuildContext context) {
     return new Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           setState(() {
             editado = !editado;
           });
@@ -218,7 +217,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               bairroController: bairro,
               cidadeController: cidade,
               estadoController: estado,
-              validacao: (validarEndereco){},
+              validacao: (validarEndereco) {},
             ),
             new ZTile(
               onTap: () {
@@ -226,21 +225,25 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                     context,
                     new MaterialPageRoute(
                         builder: (context) => new ListaDocumentos(
-                          iconeInformativo: true,
-                          textoInformativo: "Será necessário que nos encaminhe uma foto /imagem dos documentos solicitados assim como  o preenchimento de dados requisitados",
-                          tituloTextoInformativo: "Informação de Documento",
-                          colaboradorDocumentoViewModel: _listaDocumentosTemporario
-                              .map((e) => new ColaboradorDocumentoViewModel(
-                            nomeDocumento: e.nomeDocumento,
-                            campos: e.campos,
-                            idDocumento: e.idDocumento,
-                            idImagemDocumento: e.idDocumento,
-                            qtdePaginaUpload: "0/${e.qtdePaginaUpload}",
-                            imagemObrigatoria: true,
-                          ))
-                              .toList(),
-                          retornarListaDocumentos: (documento) {},
-                        )));
+                              iconeInformativo: true,
+                              textoInformativo:
+                                  "Será necessário que nos encaminhe uma foto /imagem dos documentos solicitados assim como  o preenchimento de dados requisitados",
+                              tituloTextoInformativo: "Informação de Documento",
+                              colaboradorDocumentoViewModel:
+                                  _listaDocumentosTemporario
+                                      .map((e) =>
+                                          new ColaboradorDocumentoViewModel(
+                                            nomeDocumento: e.nomeDocumento,
+                                            campos: e.campos,
+                                            idDocumento: e.idDocumento,
+                                            idImagemDocumento: e.idDocumento,
+                                            qtdePaginaUpload:
+                                                "0/${e.qtdePaginaUpload}",
+                                            imagemObrigatoria: true,
+                                          ))
+                                      .toList(),
+                              retornarListaDocumentos: (documento) {},
+                            )));
               },
               leading: new Row(
                 children: [
@@ -251,6 +254,71 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                   new Container(
                     margin: const EdgeInsets.only(left: 8.0),
                     child: new Text("Documentos"),
+                  )
+                ],
+              ),
+              trailing: new Container(
+                child: new Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            new ZTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new PermissaoNegada(
+                              caminhoImagem: "assets/camera.png",
+                              onPressed: AppSettings.openAppSettings,
+                              textoPermissao:
+                                  "Infelizmente, não conseguimos acesso a sua camera. Sem está permissão você não conseguirá fazer o check-in. Entre nas configurações do aparelho e permita o acesso do app a sua camera.",
+                            )));
+              },
+              leading: new Row(
+                children: [
+                  new Icon(
+                    Icons.camera_alt,
+                    color: Colors.grey,
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    child: new Text("Permissao camera"),
+                  )
+                ],
+              ),
+              trailing: new Container(
+                child: new Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            new Divider(
+              height: 1,
+            ),
+            new ZTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new PermissaoNegada(
+                              caminhoImagem: "assets/location.png",
+                              onPressed: AppSettings.openAppSettings,
+                              textoPermissao:
+                                  "Infelizmente, não conseguimos acesso a sua localização. Sem está permissão você não conseguirá fazer o check-in. Entre nas configurações do aparelho e permita o acesso do app a sua localização",
+                            )));
+              },
+              leading: new Row(
+                children: [
+                  new Icon(
+                    Icons.pin_drop,
+                    color: Colors.grey,
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    child: new Text("Permissao localização"),
                   )
                 ],
               ),
