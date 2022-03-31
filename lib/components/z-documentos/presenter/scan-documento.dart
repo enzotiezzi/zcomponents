@@ -122,6 +122,8 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     );
   }
 
+
+
   Widget _buildAddFoto() {
     int quantidadeMaximaDePaginas = int.parse(
         widget.colaboradorDocumentoViewModel.qtdePaginaUpload.split("/")[1]);
@@ -130,7 +132,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
         margin: EdgeInsets.only(bottom: (_view.fotos.length > 0) ? 0 : 80),
         child: new InkWell(
           onTap: () {
-            _view.scanDocumento();
+            _view.showDialogBottomFoto();
           },
           child: new Container(
               color: Colors.white,

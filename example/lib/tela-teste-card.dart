@@ -16,6 +16,7 @@ import 'package:z_components/view-model/documento-campo.dart';
 import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/permissao-negada.dart';
+import 'package:z_components/view-model/documento-campo.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -319,6 +320,49 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                   new Container(
                     margin: const EdgeInsets.only(left: 8.0),
                     child: new Text("Permissao localização"),
+                  )
+                ],
+              ),
+              trailing: new Container(
+                child: new Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            new ZTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new ListaDocumentos(
+                              colaboradorDocumentoViewModel: [
+                                ColaboradorDocumentoViewModel(
+                                    campos: [
+                                      DocumentoCampo(
+                                        label: "teste",
+                                        obrigatorio: false,
+                                        tipo: "text",
+                                      )
+                                    ],
+                                    nomeDocumento: "Documento teste",
+                                    qtdePaginaUpload: "2/1")
+                              ],
+                              iconeInformativo: false,
+                              retornarListaDocumentos: (value) {
+                                print(value);
+                              },
+                            )));
+              },
+              leading: new Row(
+                children: [
+                  new Icon(
+                    Icons.document_scanner,
+                    color: Colors.grey,
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    child: new Text("Documentos"),
                   )
                 ],
               ),
