@@ -20,23 +20,25 @@ class ZCollection extends StatefulWidget {
   final FiltroCampo filtroPrincipal;
   final Function(List<FilterExpression>) onFilter;
   Function(List<FilterExpression>, List<ZCollectionItem>) onScroll;
+  Function onClear;
 
   ZCollection(
       {Key key,
-        @required this.titulo,
-        @required this.lista,
-        @required this.themeData,
-        this.onChange,
-        this.valorPadrao,
-        this.colorStyle: const Color(0xff2bbab4),
-        this.skip: 0,
-        this.take: 0,
-        this.campoObrigatorio = false,
-        this.filtroPrincipal,
-        this.onFilter,
-        this.bloquearCampo = false,
-        this.onScroll,
-        this.editado = false})
+      @required this.titulo,
+      @required this.lista,
+      @required this.themeData,
+      this.onChange,
+      this.valorPadrao,
+      this.colorStyle: const Color(0xff2bbab4),
+      this.skip: 0,
+      this.take: 0,
+      this.campoObrigatorio = false,
+      this.filtroPrincipal,
+      this.onFilter,
+      this.bloquearCampo = false,
+      this.onScroll,
+      this.editado = false,
+      this.onClear})
       : super(key: key);
 
   @override
@@ -47,7 +49,7 @@ class ZCollectionState extends State<ZCollection> {
   ZCollectionItem _itemSelecionado = new ZCollectionItem();
   String _anterior = "Selecione";
   GlobalKey<ZCollectionListState> keyLista =
-  new GlobalKey<ZCollectionListState>();
+      new GlobalKey<ZCollectionListState>();
 
   ZCollectionItem get itemSelecionado => _itemSelecionado;
 
@@ -76,7 +78,7 @@ class ZCollectionState extends State<ZCollection> {
                     fit: FlexFit.tight,
                     child: new Text(
                       retornarTexto(),
-                      style:  _retornaCorTexto(),
+                      style: _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -95,54 +97,53 @@ class ZCollectionState extends State<ZCollection> {
     );
   }
 
-  String retornarTexto(){
-    if(widget.editado){
-      if(_itemSelecionado?.valor == null &&
-          _anterior == "Selecione"){
+  String retornarTexto() {
+    if (widget.editado) {
+      if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
         return _anterior;
-      }else{
+      } else {
         return _itemSelecionado?.valor + " (Editado)";
       }
-    }else{
-      if(_itemSelecionado?.valor == null &&
-          _anterior == "Selecione"){
+    } else {
+      if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
         return _anterior;
-      }else{
+      } else {
         return _itemSelecionado?.valor;
       }
     }
   }
 
-  Color _retornaCorIcon(){
-    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
+  Color _retornaCorIcon() {
+    if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
       return widget.themeData.primaryColor;
-    }
-    else{
+    } else {
       return Colors.black;
     }
   }
 
-  Icon retornarIcone(){
-    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
-      return new Icon(
-          Icons.keyboard_arrow_right,
-          color: _retornaCorIcon());
-    }else{
-      return new Icon(
-          Icons.clear,
-          color: _retornaCorIcon());
+  Widget retornarIcone() {
+    if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
+      return new Icon(Icons.keyboard_arrow_right, color: _retornaCorIcon());
+    } else {
+      return IconButton(
+          onPressed: () {
+            setState(() {
+              _itemSelecionado = null;
+              if (widget.onClear != null) widget.onClear();
+            });
+          },
+          icon: new Icon(Icons.clear, color: _retornaCorIcon()));
     }
   }
 
-  TextStyle _retornaCorTexto(){
-    if(_itemSelecionado?.valor == null && _anterior == "Selecione"){
-      return widget.themeData.textTheme.bodyText1.copyWith(color: widget.themeData.primaryColor);
-    }
-    else{
+  TextStyle _retornaCorTexto() {
+    if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
+      return widget.themeData.textTheme.bodyText1
+          .copyWith(color: widget.themeData.primaryColor);
+    } else {
       return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     }
   }
-
 
   void atualizarLista(List<ZCollectionItem> lista) {
     keyLista.currentState.atualizarLista(lista);
@@ -178,7 +179,7 @@ class ZCollectionState extends State<ZCollection> {
 */
 
   void _irParaSelecaoDeItemHorizontal() async {
-    if(!widget.bloquearCampo){
+    if (!widget.bloquearCampo) {
       _itemSelecionado = await Navigator.push<ZCollectionItem>(
           context,
           new PageRouteBuilder(
@@ -221,7 +222,6 @@ class ZCollectionState extends State<ZCollection> {
 
       setState(() {});
     }
-
   }
 
   Widget _returnRequiredField() {

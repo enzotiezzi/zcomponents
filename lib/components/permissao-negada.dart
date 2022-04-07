@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:z_components/components/utils/icone-voltar.dart';
 
 class PermissaoNegada extends StatefulWidget {
   String textoPermissao;
@@ -18,6 +19,7 @@ class _PermissaoNegadaState extends State<PermissaoNegada> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
+        leading: new IconeVoltar(),
         title: new Text(
           "PERMISSÂO",
           style: const TextStyle(fontSize: 18),
