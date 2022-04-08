@@ -248,7 +248,8 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
     }
   }
 
-  Future scanDocumento() {
+  Future scanDocumento() async {
+
     FlutterGeniusScan.scanWithConfiguration({
       'source': 'camera',
       'defaultFilter': 'none',
