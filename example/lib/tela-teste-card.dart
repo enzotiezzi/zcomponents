@@ -91,13 +91,18 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "RG",
-        campos: [],
+        campos: [DocumentoCampo(
+      
+      tipoValorCampo: "numeric"
+    )],
         status: "",
         horizontalOuVertical: "",
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"),
+        qtdePaginaUpload: "0",
+        
+        ),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Teste",
         campos: [],
