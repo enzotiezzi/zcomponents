@@ -7,6 +7,8 @@ import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/scan-documento-view.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
+import 'package:z_components/view-model/colaborador-viewmodel.dart';
+import 'package:z_components/view-model/documento-campo.dart';
 
 class ScanDocumentos extends StatefulWidget {
   ColaboradorDocumentoViewModel colaboradorDocumentoViewModel;
@@ -72,14 +74,14 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     List<Widget> lista = new List();
     for (int i = 0; i < _view.listaRespostasUsuario.length; i++) {
       var item = widget.colaboradorDocumentoViewModel.campos[i];
-      if (item.tipoValorCampo == "date") {
+      if (item.mascara != null && item.mascara.isNotEmpty) {
         lista.add(new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
             titulo: item.nomeCampo,
             tipoTeclado: TextInputType.number,
             comMascara: true,
-            textMask: "##/##/####",
+            textMask: "${item.mascara}",
             controllerInputPadrao:
                 TextEditingController(text: _view.listaRespostasUsuario[i]),
             onChange: (text) {
@@ -121,8 +123,6 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
               .copyWith(fontWeight: FontWeight.bold)),
     );
   }
-
-
 
   Widget _buildAddFoto() {
     int quantidadeMaximaDePaginas = int.parse(

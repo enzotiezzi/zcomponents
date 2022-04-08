@@ -17,6 +17,8 @@ import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/permissao-negada.dart';
 import 'package:z_components/view-model/documento-campo.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -24,7 +26,7 @@ class TelaTesteCard extends StatefulWidget {
 }
 
 class _TelaTesteCardState extends State<TelaTesteCard> {
-  List<ZSelectionItem> listaSelecao = [];
+  List<ZCollectionItem> listaSelecao = [];
   List<ZSelectionItem> listaSelecaoRespostas = [];
 
   final zEstrutura = new GlobalKey();
@@ -91,13 +93,18 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "RG",
-        campos: [],
+        campos: [DocumentoCampo(
+      
+      tipoValorCampo: "numeric"
+    )],
         status: "",
         horizontalOuVertical: "",
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"),
+        qtdePaginaUpload: "0",
+        
+        ),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Teste",
         campos: [],
@@ -121,32 +128,32 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   @override
   void initState() {
     listaSelecao = [
-      new ZSelectionItem(
+      new ZCollectionItem(
           chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
-      new ZSelectionItem(
+      new ZCollectionItem(
           chave: "1",
           titulo:
               "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
           valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
-      new ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
-      new ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
-      new ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
-      new ZSelectionItem(chave: "5", titulo: "5", valor: "5"),
-      new ZSelectionItem(chave: "6", titulo: "6", valor: "6"),
-      new ZSelectionItem(chave: "7", titulo: "7", valor: "7"),
-      new ZSelectionItem(chave: "8", titulo: "8", valor: "8"),
-      new ZSelectionItem(chave: "9", titulo: "9", valor: "9"),
-      new ZSelectionItem(chave: "10", titulo: "10", valor: "10"),
-      new ZSelectionItem(chave: "11", titulo: "11", valor: "11"),
-      new ZSelectionItem(chave: "12", titulo: "12", valor: "12"),
-      new ZSelectionItem(chave: "13", titulo: "13", valor: "13"),
-      new ZSelectionItem(chave: "14", titulo: "14", valor: "14"),
-      new ZSelectionItem(chave: "15", titulo: "15", valor: "15"),
-      new ZSelectionItem(chave: "16", titulo: "16", valor: "16"),
-      new ZSelectionItem(chave: "17", titulo: "17", valor: "17"),
-      new ZSelectionItem(chave: "18", titulo: "18", valor: "18"),
-      new ZSelectionItem(chave: "19", titulo: "19", valor: "19"),
-      new ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
+      new ZCollectionItem(chave: "2", titulo: "2", valor: "2"),
+      new ZCollectionItem(chave: "3", titulo: "3", valor: "3"),
+      new ZCollectionItem(chave: "4", titulo: "4", valor: "4"),
+      new ZCollectionItem(chave: "5", titulo: "5", valor: "5"),
+      new ZCollectionItem(chave: "6", titulo: "6", valor: "6"),
+      new ZCollectionItem(chave: "7", titulo: "7", valor: "7"),
+      new ZCollectionItem(chave: "8", titulo: "8", valor: "8"),
+      new ZCollectionItem(chave: "9", titulo: "9", valor: "9"),
+      new ZCollectionItem(chave: "10", titulo: "10", valor: "10"),
+      new ZCollectionItem(chave: "11", titulo: "11", valor: "11"),
+      new ZCollectionItem(chave: "12", titulo: "12", valor: "12"),
+      new ZCollectionItem(chave: "13", titulo: "13", valor: "13"),
+      new ZCollectionItem(chave: "14", titulo: "14", valor: "14"),
+      new ZCollectionItem(chave: "15", titulo: "15", valor: "15"),
+      new ZCollectionItem(chave: "16", titulo: "16", valor: "16"),
+      new ZCollectionItem(chave: "17", titulo: "17", valor: "17"),
+      new ZCollectionItem(chave: "18", titulo: "18", valor: "18"),
+      new ZCollectionItem(chave: "19", titulo: "19", valor: "19"),
+      new ZCollectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
     listaSelecaoRespostas = [
       new ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
@@ -373,6 +380,18 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 ),
               ),
             ),
+            new ZCollection(
+              lista: listaSelecao,
+              themeData: Theme.of(context),
+              titulo: "teste",
+              onChange: (value) {},
+            ),
+            new ZCollection(
+              lista: listaSelecao,
+              themeData: Theme.of(context),
+              titulo: "teste",
+              onChange: (value) {},
+            )
           ],
         ),
       ),
