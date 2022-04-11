@@ -25,6 +25,7 @@ import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:z_components_example/tela-teste-card.dart';
 import 'main-components.dart';
+import 'package:z_components/view-model/documento-campo.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(MyApp()));
@@ -40,8 +41,7 @@ class MyApp extends StatelessWidget {
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0"),
   ];
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,6 @@ class ComponentExemploClasse extends StatefulWidget {
 }
 
 class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
-
   var controllerEmail = new TextEditingController();
   var controlerPadrao = new TextEditingController();
   var controllerNome = new TextEditingController();

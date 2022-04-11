@@ -93,10 +93,15 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "RG",
-        campos: [DocumentoCampo(
+        
+        campos: [
+          DocumentoCampo(
+         mascara: "##.###.###-##",
+          tipoValorCampo:"numeric"
       
-      tipoValorCampo: "numeric"
-    )],
+       
+    ),
+    ],
         status: "",
         horizontalOuVertical: "",
         idColaborador: "",
@@ -241,6 +246,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                                   _listaDocumentosTemporario
                                       .map((e) =>
                                           new ColaboradorDocumentoViewModel(
+                                            
                                             nomeDocumento: e.nomeDocumento,
                                             campos: e.campos,
                                             idDocumento: e.idDocumento,
