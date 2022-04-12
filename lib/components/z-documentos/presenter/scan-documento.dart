@@ -79,15 +79,12 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
           child: new ZInputGeneric(
             themeData: Theme.of(context),
             titulo: item.nomeCampo,
-            tipoTeclado: TextInputType.number,
             comMascara: true,
-            textMask: "${item.mascara}",
+            textMask: item.mascara,
             controllerInputPadrao:
                 TextEditingController(text: _view.listaRespostasUsuario[i]),
             onChange: (text) {
-              if (text.length == 10) {
-                _view.listaRespostasUsuario[i] = text.trim();
-              }
+              _view.listaRespostasUsuario[i] = text.trim();
             },
           ),
         ));
