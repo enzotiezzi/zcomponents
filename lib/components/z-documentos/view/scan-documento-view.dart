@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_genius_scan/flutter_genius_scan.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:z_components/api/arquivo/arquivo-service.dart';
 import 'package:z_components/api/arquivo/i-arquivo-service.dart';
 import 'package:z_components/api/colaborador-documento/colaborador-documento.dart';
@@ -133,7 +134,122 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
     } catch (e) {}
   }
 
-  Future scanDocumento() {
+  Future showDialogBottomFoto() {
+    return showModalBottomSheet<String>(
+        context: state.context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        builder: (builder) {
+          return new Container(
+              height: 130,
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(10.0),
+                      topRight: const Radius.circular(10.0))),
+              child: new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        padding: const EdgeInsets.only(top: 18, bottom: 8),
+                        child: new Text(
+                          "ADICIONAR FOTO",
+                          style: new TextStyle(color: Color(0xff999999)),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Divider(color: Color(0xffCECECE)),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Expanded(
+                          flex: 5,
+                          child: new GestureDetector(
+                            onTap: () {
+                              Navigator.pop(state.context);
+                              scanDocumento();
+                            },
+                            child: new Container(
+                              color: Colors.transparent,
+                              child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Container(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: new Icon(
+                                      Icons.camera_alt,
+                                      color: Color(0xFF2BBAB4),
+                                    ),
+                                  ),
+                                  new Container(
+                                    margin: const EdgeInsets.only(top: 6),
+                                    child: new Text(
+                                      "Usar Câmera",
+                                      style: new TextStyle(
+                                          color: Color(0xff999999)),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )),
+                      new Expanded(
+                          flex: 5,
+                          child: new GestureDetector(
+                              onTap: () {
+                                Navigator.pop(state.context);
+                                openGallery();
+                              },
+                              child: new Container(
+                                color: Colors.transparent,
+                                child: new Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    new Container(
+                                      padding: const EdgeInsets.only(top: 8),
+                                      child: new Icon(
+                                        Icons.add_photo_alternate,
+                                        color: Color(0xFF2BBAB4),
+                                      ),
+                                    ),
+                                    new Container(
+                                      margin: const EdgeInsets.only(top: 6),
+                                      child: new Text(
+                                        "Usar Galeria",
+                                        style: new TextStyle(
+                                            color: Color(0xff999999)),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )))
+                    ],
+                  ),
+                ],
+              ));
+        });
+  }
+
+  Future<String> openGallery() async {
+    var buscarfoto = await ImagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (buscarfoto != null) {
+      state.setState(() {
+        fotos.add(buscarfoto.readAsBytesSync());
+        Future.delayed(new Duration(milliseconds: 500), () {
+        });
+      });
+    }
+  }
+
+  Future scanDocumento() async {
+
     FlutterGeniusScan.scanWithConfiguration({
       'source': 'camera',
       'defaultFilter': 'none',

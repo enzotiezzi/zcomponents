@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-convite.dart';
@@ -14,6 +15,10 @@ import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 import 'package:z_components/view-model/documento-campo.dart';
 import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/components/permissao-negada.dart';
+import 'package:z_components/view-model/documento-campo.dart';
+import 'package:z_components/components/z-collection/z-collection-item.dart';
+import 'package:z_components/components/z-collection/z-collection.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -21,7 +26,7 @@ class TelaTesteCard extends StatefulWidget {
 }
 
 class _TelaTesteCardState extends State<TelaTesteCard> {
-  List<ZSelectionItem> listaSelecao = [];
+  List<ZCollectionItem> listaSelecao = [];
   List<ZSelectionItem> listaSelecaoRespostas = [];
 
   final zEstrutura = new GlobalKey();
@@ -88,14 +93,23 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "RG",
-        campos: [],
+        
+        campos: [
+          DocumentoCampo(
+         mascara: "##.###.###-##",
+          tipoValorCampo:"numeric"
+      
+       
+    ),
+    ],
         status: "",
         horizontalOuVertical: "",
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0",
+        
+        ),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Teste",
         campos: [],
@@ -104,8 +118,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0"),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Outro",
         campos: [],
@@ -114,39 +127,38 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0"),
   ];
 
   @override
   void initState() {
     listaSelecao = [
-      new ZSelectionItem(
+      new ZCollectionItem(
           chave: "Universidade", titulo: "Universidade", valor: "Universidade"),
-      new ZSelectionItem(
+      new ZCollectionItem(
           chave: "1",
           titulo:
               "Instalador de isolantes térmicos de caldeira e tubulações de teste 123 testando overflow",
           valor: "Instalador de isolantes térmicos de caldeira e tubulações"),
-      new ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
-      new ZSelectionItem(chave: "3", titulo: "3", valor: "3"),
-      new ZSelectionItem(chave: "4", titulo: "4", valor: "4"),
-      new ZSelectionItem(chave: "5", titulo: "5", valor: "5"),
-      new ZSelectionItem(chave: "6", titulo: "6", valor: "6"),
-      new ZSelectionItem(chave: "7", titulo: "7", valor: "7"),
-      new ZSelectionItem(chave: "8", titulo: "8", valor: "8"),
-      new ZSelectionItem(chave: "9", titulo: "9", valor: "9"),
-      new ZSelectionItem(chave: "10", titulo: "10", valor: "10"),
-      new ZSelectionItem(chave: "11", titulo: "11", valor: "11"),
-      new ZSelectionItem(chave: "12", titulo: "12", valor: "12"),
-      new ZSelectionItem(chave: "13", titulo: "13", valor: "13"),
-      new ZSelectionItem(chave: "14", titulo: "14", valor: "14"),
-      new ZSelectionItem(chave: "15", titulo: "15", valor: "15"),
-      new ZSelectionItem(chave: "16", titulo: "16", valor: "16"),
-      new ZSelectionItem(chave: "17", titulo: "17", valor: "17"),
-      new ZSelectionItem(chave: "18", titulo: "18", valor: "18"),
-      new ZSelectionItem(chave: "19", titulo: "19", valor: "19"),
-      new ZSelectionItem(chave: "20", titulo: "20", valor: "20"),
+      new ZCollectionItem(chave: "2", titulo: "2", valor: "2"),
+      new ZCollectionItem(chave: "3", titulo: "3", valor: "3"),
+      new ZCollectionItem(chave: "4", titulo: "4", valor: "4"),
+      new ZCollectionItem(chave: "5", titulo: "5", valor: "5"),
+      new ZCollectionItem(chave: "6", titulo: "6", valor: "6"),
+      new ZCollectionItem(chave: "7", titulo: "7", valor: "7"),
+      new ZCollectionItem(chave: "8", titulo: "8", valor: "8"),
+      new ZCollectionItem(chave: "9", titulo: "9", valor: "9"),
+      new ZCollectionItem(chave: "10", titulo: "10", valor: "10"),
+      new ZCollectionItem(chave: "11", titulo: "11", valor: "11"),
+      new ZCollectionItem(chave: "12", titulo: "12", valor: "12"),
+      new ZCollectionItem(chave: "13", titulo: "13", valor: "13"),
+      new ZCollectionItem(chave: "14", titulo: "14", valor: "14"),
+      new ZCollectionItem(chave: "15", titulo: "15", valor: "15"),
+      new ZCollectionItem(chave: "16", titulo: "16", valor: "16"),
+      new ZCollectionItem(chave: "17", titulo: "17", valor: "17"),
+      new ZCollectionItem(chave: "18", titulo: "18", valor: "18"),
+      new ZCollectionItem(chave: "19", titulo: "19", valor: "19"),
+      new ZCollectionItem(chave: "20", titulo: "20", valor: "20"),
     ];
     listaSelecaoRespostas = [
       new ZSelectionItem(chave: "2", titulo: "2", valor: "2"),
@@ -163,7 +175,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   Widget build(BuildContext context) {
     return new Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           setState(() {
             editado = !editado;
           });
@@ -218,7 +230,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               bairroController: bairro,
               cidadeController: cidade,
               estadoController: estado,
-              validacao: (validarEndereco){},
+              validacao: (validarEndereco) {},
             ),
             new ZTile(
               onTap: () {
@@ -226,21 +238,26 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                     context,
                     new MaterialPageRoute(
                         builder: (context) => new ListaDocumentos(
-                          iconeInformativo: true,
-                          textoInformativo: "Será necessário que nos encaminhe uma foto /imagem dos documentos solicitados assim como  o preenchimento de dados requisitados",
-                          tituloTextoInformativo: "Informação de Documento",
-                          colaboradorDocumentoViewModel: _listaDocumentosTemporario
-                              .map((e) => new ColaboradorDocumentoViewModel(
-                            nomeDocumento: e.nomeDocumento,
-                            campos: e.campos,
-                            idDocumento: e.idDocumento,
-                            idImagemDocumento: e.idDocumento,
-                            qtdePaginaUpload: "0/${e.qtdePaginaUpload}",
-                            imagemObrigatoria: true,
-                          ))
-                              .toList(),
-                          retornarListaDocumentos: (documento) {},
-                        )));
+                              iconeInformativo: true,
+                              textoInformativo:
+                                  "Será necessário que nos encaminhe uma foto /imagem dos documentos solicitados assim como  o preenchimento de dados requisitados",
+                              tituloTextoInformativo: "Informação de Documento",
+                              colaboradorDocumentoViewModel:
+                                  _listaDocumentosTemporario
+                                      .map((e) =>
+                                          new ColaboradorDocumentoViewModel(
+                                            
+                                            nomeDocumento: e.nomeDocumento,
+                                            campos: e.campos,
+                                            idDocumento: e.idDocumento,
+                                            idImagemDocumento: e.idDocumento,
+                                            qtdePaginaUpload:
+                                                "0/${e.qtdePaginaUpload}",
+                                            imagemObrigatoria: true,
+                                          ))
+                                      .toList(),
+                              retornarListaDocumentos: (documento) {},
+                            )));
               },
               leading: new Row(
                 children: [
@@ -261,6 +278,126 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 ),
               ),
             ),
+            new ZTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new PermissaoNegada(
+                              caminhoImagem: "assets/camera.png",
+                              onPressed: AppSettings.openAppSettings,
+                              textoPermissao:
+                                  "Infelizmente, não conseguimos acesso a sua camera. Sem está permissão você não conseguirá fazer o check-in. Entre nas configurações do aparelho e permita o acesso do app a sua camera.",
+                            )));
+              },
+              leading: new Row(
+                children: [
+                  new Icon(
+                    Icons.camera_alt,
+                    color: Colors.grey,
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    child: new Text("Permissao camera"),
+                  )
+                ],
+              ),
+              trailing: new Container(
+                child: new Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            new Divider(
+              height: 1,
+            ),
+            new ZTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new PermissaoNegada(
+                              caminhoImagem: "assets/location.png",
+                              onPressed: AppSettings.openAppSettings,
+                              textoPermissao:
+                                  "Infelizmente, não conseguimos acesso a sua localização. Sem está permissão você não conseguirá fazer o check-in. Entre nas configurações do aparelho e permita o acesso do app a sua localização",
+                            )));
+              },
+              leading: new Row(
+                children: [
+                  new Icon(
+                    Icons.pin_drop,
+                    color: Colors.grey,
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    child: new Text("Permissao localização"),
+                  )
+                ],
+              ),
+              trailing: new Container(
+                child: new Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            new ZTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new ListaDocumentos(
+                              colaboradorDocumentoViewModel: [
+                                ColaboradorDocumentoViewModel(
+                                    campos: [
+                                      DocumentoCampo(
+                                        label: "teste",
+                                        obrigatorio: false,
+                                        tipo: "text",
+                                      )
+                                    ],
+                                    nomeDocumento: "Documento teste",
+                                    qtdePaginaUpload: "2/1")
+                              ],
+                              iconeInformativo: false,
+                              retornarListaDocumentos: (value) {
+                                print(value);
+                              },
+                            )));
+              },
+              leading: new Row(
+                children: [
+                  new Icon(
+                    Icons.document_scanner,
+                    color: Colors.grey,
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    child: new Text("Documentos"),
+                  )
+                ],
+              ),
+              trailing: new Container(
+                child: new Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            new ZCollection(
+              lista: listaSelecao,
+              themeData: Theme.of(context),
+              titulo: "teste",
+              onChange: (value) {},
+            ),
+            new ZCollection(
+              lista: listaSelecao,
+              themeData: Theme.of(context),
+              titulo: "teste",
+              onChange: (value) {},
+            )
           ],
         ),
       ),
