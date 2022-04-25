@@ -188,7 +188,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                     children: [
                       _retornarStatus(index),
                       new Container(
-                          margin: const EdgeInsets.only(right: 16),
+                          margin: const EdgeInsets.only(left: 8, right: 16),
                           child: new Icon(Icons.arrow_forward_ios_outlined,
                               color: Colors.black,size: 14,))
                     ],
