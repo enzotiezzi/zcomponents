@@ -229,6 +229,7 @@ class ZSelectionListState extends State<ZSelectionList> {
             ),
             margin: const EdgeInsets.only(top: 8),
             child: new Container(
+              width:  MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(2.0),
               decoration: new BoxDecoration(
                   border: new Border.all(
@@ -236,97 +237,103 @@ class ZSelectionListState extends State<ZSelectionList> {
                   ),
                   borderRadius: new BorderRadius.all(Radius.circular(16.0))),
               child: new Text(
-                '${'Para encontrar os '+'${widget.titulo.toLowerCase()}' +' desejados, utilize o campo de busca acima.'}',
+                '${'Não há itens na lista para selecionar'}',
                 maxLines: 4,
                 style: TextStyle(fontSize: 15),
               ),
             ),
           ),
-          new Container(
-            height: MediaQuery.of(context).size.height * 0.35,
-            padding: const EdgeInsets.only(top: 16),
-            child: new SvgPicture.asset('assets/img_background.svg'),
+          Flexible(
+            child: new Container(
+              height: MediaQuery.of(context).size.height * 0.35,
+              padding: const EdgeInsets.only(top: 16),
+              child: new SvgPicture.asset('assets/img_background.svg'),
+            ),
           ),
         ],
       );
     } else {
-      return ListView.builder(
-        key: keyLista,
-        itemCount: _listaFiltro.length,
-        controller: scrollController,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          var item = _listaFiltro[index];
-          return new Column(
-            children: [
-              new Container(
-                alignment: Alignment.topCenter,
-                color: Colors.white,
-                child: new ZTile(
-                  onTap: () {
-                    if (!item.obrigatorio) {
-                      setState(() {
-                        item.selecionado = !item.selecionado;
+      setState(() {
+        return ListView.builder(
+          key: keyLista,
+          itemCount: _listaFiltro.length,
+          controller: scrollController,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            var item = _listaFiltro[index];
+            return new Column(
+              children: [
+                new Container(
+                  alignment: Alignment.topCenter,
+                  color: Colors.white,
+                  child: new ZTile(
+                    onTap: () {
+                      if (!item.obrigatorio) {
+                        setState(() {
+                          item.selecionado = !item.selecionado;
 
-                        if (item.selecionado) {
-                          widget.listaSelecao.add(item);
-                        } else {
-                          for (int i = 0; i < widget.listaSelecao.length; i++) {
-                            if (widget.listaSelecao[i].chave == item.chave) {
-                              widget.listaSelecao.removeAt(i);
-                              break;
-                            }
-                          }
-                        }
-                      });
-                    }
-                  },
-                  leading: new Row(
-                    children: [
-                      new Container(
-                        width: MediaQuery.of(context).size.width / 1.4,
-                        child: new Text(
-                          "${item.titulo ?? item.valor}",
-                          style: widget.theme.textTheme.bodyText1,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      )
-                    ],
-                  ),
-                  trailing: new Checkbox(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: item.selecionado,
-                      onChanged: (bool) {
-                        if (!item.obrigatorio) {
-                          setState(() {
-                            item.selecionado = bool;
-                            if (item.selecionado) {
-                              widget.listaSelecao.add(item);
-                            } else {
-                              for (int i = 0;
-                                  i < widget.listaSelecao.length;
-                                  i++) {
-                                if (widget.listaSelecao[i].chave ==
-                                    item.chave) {
-                                  widget.listaSelecao.removeAt(i);
-                                  break;
-                                }
+                          if (item.selecionado) {
+                            widget.listaSelecao.add(item);
+                          } else {
+                            for (int i = 0;
+                                i < widget.listaSelecao.length;
+                                i++) {
+                              if (widget.listaSelecao[i].chave == item.chave) {
+                                widget.listaSelecao.removeAt(i);
+                                break;
                               }
                             }
-                          });
-                        }
-                      }),
+                          }
+                        });
+                      }
+                    },
+                    leading: new Row(
+                      children: [
+                        new Container(
+                          width: MediaQuery.of(context).size.width / 1.4,
+                          child: new Text(
+                            "${item.titulo ?? item.valor}",
+                            style: widget.theme.textTheme.bodyText1,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      ],
+                    ),
+                    trailing: new Checkbox(
+                        activeColor: Theme.of(context).primaryColor,
+                        value: item.selecionado,
+                        onChanged: (bool) {
+                          if (!item.obrigatorio) {
+                            setState(() {
+                              item.selecionado = bool;
+                              if (item.selecionado) {
+                                widget.listaSelecao.add(item);
+                              } else {
+                                for (int i = 0;
+                                    i < widget.listaSelecao.length;
+                                    i++) {
+                                  if (widget.listaSelecao[i].chave ==
+                                      item.chave) {
+                                    widget.listaSelecao.removeAt(i);
+                                    break;
+                                  }
+                                }
+                              }
+                            });
+                          }
+                        }),
+                  ),
                 ),
-              ),
-              new Divider(
-                height: 2,
-                color: widget.theme.backgroundColor,
-              ),
-            ],
-          );
-        },
-      );
+                new Divider(
+                  height: 2,
+                  color: widget.theme.backgroundColor,
+                ),
+              ],
+            );
+          },
+        );
+      });
     }
   }
 
