@@ -222,7 +222,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   Widget _buildLista() {
-    if (widget.lista.isEmpty) {
+    if (_listaFiltro.isEmpty) {
       return new Column(
         children: [
           new Container(
