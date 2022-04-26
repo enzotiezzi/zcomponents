@@ -13,6 +13,7 @@ import '../../styles/main-style.dart';
 import '../z-alert-dialog.dart';
 
 class ZSelectionList extends StatefulWidget {
+  GlobalKey keyListaItens = new GlobalKey();
   GlobalKey key;
   List<ZSelectionItem> lista;
   final ThemeData theme;
@@ -93,6 +94,7 @@ class ZSelectionListState extends State<ZSelectionList> {
           _montarExibicaoContadorSelecionados(),
           new Expanded(
               child: new Container(
+            key: widget.keyListaItens,
             margin: EdgeInsets.only(top: 16.0),
             child: _buildLista(),
           )),
@@ -176,6 +178,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                             new BoxDecoration(color: Colors.transparent),
                         onChanged: (text) {
                           if (text.length >= 3 || text.length == 0) {
+                            widget.keyListaItens = new GlobalKey();
                             if (widget.onChange != null) {
                               textoBusca = text;
                               widget.onChange([
@@ -236,7 +239,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                   ),
                   borderRadius: new BorderRadius.all(Radius.circular(16.0))),
               child: new Text(
-                '${'Para encontrar os '+'${widget.titulo.toLowerCase()}' +' desejados, utilize o campo de busca acima.'}',
+                '${'Para encontrar os ' + '${widget.titulo.toLowerCase()}' + ' desejados, utilize o campo de busca acima.'}',
                 maxLines: 4,
                 style: TextStyle(fontSize: 15),
               ),
