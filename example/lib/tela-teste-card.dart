@@ -19,6 +19,7 @@ import 'package:z_components/components/permissao-negada.dart';
 import 'package:z_components/view-model/documento-campo.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-selection/z-selection.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -56,6 +57,8 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
   ];
 
+  List<ZSelectionItem> _listaSelecaoCargo = [];
+
   List<ZFormViewModel> listaForm = [
     ZFormViewModel(
         nomeCampo: "Nome Completo",
@@ -92,24 +95,17 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
 
   List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
     new ColaboradorDocumentoViewModel(
-        nomeDocumento: "RG",
-        
-        campos: [
-          DocumentoCampo(
-         mascara: "##.###.###-##",
-          tipoValorCampo:"numeric"
-      
-       
+      nomeDocumento: "RG",
+      campos: [
+        DocumentoCampo(mascara: "##.###.###-##", tipoValorCampo: "numeric"),
+      ],
+      status: "",
+      horizontalOuVertical: "",
+      idColaborador: "",
+      idDocumento: "",
+      idImagemDocumento: "",
+      qtdePaginaUpload: "0",
     ),
-    ],
-        status: "",
-        horizontalOuVertical: "",
-        idColaborador: "",
-        idDocumento: "",
-        idImagemDocumento: "",
-        qtdePaginaUpload: "0",
-        
-        ),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Teste",
         campos: [],
@@ -246,7 +242,6 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                                   _listaDocumentosTemporario
                                       .map((e) =>
                                           new ColaboradorDocumentoViewModel(
-                                            
                                             nomeDocumento: e.nomeDocumento,
                                             campos: e.campos,
                                             idDocumento: e.idDocumento,
@@ -397,7 +392,26 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               themeData: Theme.of(context),
               titulo: "teste",
               onChange: (value) {},
-            )
+            ),
+            new ZSelection(
+              key: Key(''),
+              titulo: "Cargos",
+              lista: [],
+              listaRespostas: [],
+              themeData: Theme.of(context),
+              textoOnAdd: "",
+              onChange: (listaSelecaoAtualizada) {
+                if (listaSelecaoAtualizada != null) {
+                 
+                }
+              },
+              onFilter: (filter) async {
+              },
+
+              onScroll: (filter, listaAnterior) async {
+              
+              },
+            ),
           ],
         ),
       ),
