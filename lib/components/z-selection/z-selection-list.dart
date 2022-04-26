@@ -178,7 +178,6 @@ class ZSelectionListState extends State<ZSelectionList> {
                             new BoxDecoration(color: Colors.transparent),
                         onChanged: (text) {
                           if (text.length >= 3 || text.length == 0) {
-                            widget.keyListaItens = new GlobalKey();
                             if (widget.onChange != null) {
                               textoBusca = text;
                               widget.onChange([
@@ -188,6 +187,8 @@ class ZSelectionListState extends State<ZSelectionList> {
                                     operator: "Contains",
                                     value: text)
                               ]);
+
+                       
                             } else {
                               text = text.toLowerCase();
                               keyLista = new GlobalKey();
@@ -201,6 +202,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                                   _listaFiltro = widget.lista;
                               });
                             }
+                          widget.keyListaItens = new GlobalKey();
                           }
                         },
                       )),
