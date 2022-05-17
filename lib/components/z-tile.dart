@@ -1,19 +1,31 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZTile extends StatefulWidget {
   final Widget leading;
   final Widget trailing;
   final GestureTapCallback onTap;
+  double margem;
 
-  ZTile({this.leading, this.trailing, this.onTap});
+  ZTile({this.leading, this.trailing, this.onTap, this.margem});
 
   @override
   _ZTileState createState() => _ZTileState();
+
 }
 
 class _ZTileState extends State<ZTile> {
   @override
+  void initState() {
+     super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if(widget.margem == null){
+      widget.margem = 16;
+    }
+
     return new GestureDetector(
       onTap: widget.onTap,
       child: new Container(
@@ -27,9 +39,7 @@ class _ZTileState extends State<ZTile> {
             ),
             new Container(
               child: widget.trailing,
-              margin: new EdgeInsets.only(
-                right: 16.0,
-              ),
+              margin: EdgeInsets.only(right: widget.margem),
             ),
           ],
         ),
