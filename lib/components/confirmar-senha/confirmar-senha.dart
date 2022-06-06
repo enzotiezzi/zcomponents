@@ -13,6 +13,7 @@ class ConfirmarSenha {
   ConfirmarSenha({@required this.token, @required this.context});
 
   Future<bool> dialogConfirmarSenha() {
+    TextEditingController senha = new TextEditingController();
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -41,6 +42,7 @@ class ConfirmarSenha {
               ],
             ),
             new PinCodeTextField(
+              controller:  senha,
               highlightColor: const Color(0xff2BBAB4),
               highlight: true,
               defaultBorderColor: const Color(0xffC7C7CC),
