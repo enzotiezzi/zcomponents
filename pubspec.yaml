@@ -60,6 +60,7 @@ dependencies:
   flutter_bloc: ^7.0.1
   flutter_treeview: ^1.0.4+1
   google_maps_flutter: ^0.5.11+1
+  google_maps_flutter_web: ^0.3.3
   geocoder: ^0.2.1
   app_settings: ^4.0.4
   permission_handler: ^8.3.0
