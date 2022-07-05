@@ -7,6 +7,8 @@ import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/scan-documento-view.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
+import 'package:z_components/view-model/colaborador-viewmodel.dart';
+import 'package:z_components/view-model/documento-campo.dart';
 
 class ScanDocumentos extends StatefulWidget {
   ColaboradorDocumentoViewModel colaboradorDocumentoViewModel;
@@ -72,20 +74,17 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     List<Widget> lista = new List();
     for (int i = 0; i < _view.listaRespostasUsuario.length; i++) {
       var item = widget.colaboradorDocumentoViewModel.campos[i];
-      if (item.tipoValorCampo == "date") {
+      if (item.mascara != null && item.mascara.isNotEmpty) {
         lista.add(new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
             titulo: item.nomeCampo,
-            tipoTeclado: TextInputType.number,
             comMascara: true,
-            textMask: "##/##/####",
+            textMask: item.mascara,
             controllerInputPadrao:
                 TextEditingController(text: _view.listaRespostasUsuario[i]),
             onChange: (text) {
-              if (text.length == 10) {
-                _view.listaRespostasUsuario[i] = text.trim();
-              }
+              _view.listaRespostasUsuario[i] = text.trim();
             },
           ),
         ));
@@ -130,7 +129,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
         margin: EdgeInsets.only(bottom: (_view.fotos.length > 0) ? 0 : 80),
         child: new InkWell(
           onTap: () {
-            _view.scanDocumento();
+            _view.showDialogBottomFoto();
           },
           child: new Container(
               color: Colors.white,
@@ -256,7 +255,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                     } else {
                       widget.retornarListaDocumentos(
                           widget.colaboradorDocumentoViewModel);
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(true);
                     }
                   } else {
                     _view.dialogUtils.showAlertDialogErro(

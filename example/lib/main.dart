@@ -23,7 +23,9 @@ import 'package:z_components/components/z-sequencia/z-sequencia.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:z_components_example/tela-teste-card.dart';
 import 'main-components.dart';
+import 'package:z_components/view-model/documento-campo.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(MyApp()));
@@ -39,30 +41,13 @@ class MyApp extends StatelessWidget {
         idColaborador: "",
         idDocumento: "",
         idImagemDocumento: "",
-        qtdePaginaUpload: "0"
-    ),
+        qtdePaginaUpload: "0"),
   ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new ListaDocumentos(
-        iconeInformativo: true,
-        textoInformativo: "Será necessário que nos encaminhe uma"
-            " foto /imagem dos documentos solicitados assim como"
-            "  o preenchimento de dados requisitados",
-        tituloTextoInformativo: "Informação de Documento",
-        colaboradorDocumentoViewModel: documentos.map((e) => new ColaboradorDocumentoViewModel(
-          nomeDocumento: e.nomeDocumento,
-          campos: e.campos,
-          idDocumento: e.idDocumento,
-          idImagemDocumento: e.idDocumento,
-          qtdePaginaUpload:
-          "0/${e.qtdePaginaUpload}",
-          imagemObrigatoria: true,
-        )).toList(),
-        retornarListaDocumentos: (documento) {},
-      ),
+      home: new TelaTesteCard(),
     );
   }
 }
@@ -73,7 +58,6 @@ class ComponentExemploClasse extends StatefulWidget {
 }
 
 class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
-
   var controllerEmail = new TextEditingController();
   var controlerPadrao = new TextEditingController();
   var controllerNome = new TextEditingController();
