@@ -1,26 +1,20 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:z_components/view-model/conta-v2-viewmodel.dart';
-import 'package:z_components/components/listagem-contas/listagem-contas.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/z-item-tile-convite.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
-import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
-import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 import 'package:z_components/components/z-documentos/presenter/lista-documentos.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
+import 'package:z_components/view-model/item-tile-convite-viewmodel.dart';
 import 'package:z_components/view-model/documento-campo.dart';
 import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/permissao-negada.dart';
-import 'package:z_components/view-model/documento-campo.dart';
-import 'package:z_components/components/z-collection/z-collection-item.dart';
-import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 
 class TelaTesteCard extends StatefulWidget {
@@ -185,6 +179,40 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       body: new Container(
         child: new ListView(
           children: [
+            new Container(
+              height: 20,
+            ),
+            new ZItemTileConvite(
+              itemTileViewModel: new ItemTileViewModel(
+                  nome: "Matheus Loureiro de Albuquerque",
+                  status: "FINALIZADO",
+                  cargo: "Deselvolvedor Flutter",
+                  dataAdmissao: "01/05/2021",
+                  porcentagemPreenchimento: "89%",
+                  prazo: " 7 dias",
+                  icone: selectIcon(SelectStatus.APROVADO),
+                  stateCard: changeTextStateCard(SelecionarEstadoCard.CORRIGIDO),
+                  onTileIsSelected: (){
+                    print("oi");
+                  }
+              ),
+            ),
+            new Container(
+              height: 20,
+            ),
+            new ZItemTileConvite(
+              itemTileViewModel: new ItemTileViewModel(
+                  nome: "Luiz Zellar",
+                  status: "EM ANDAMENTO",
+                  cargo: "Deselvolvedor Flutter",
+                  dataAdmissao: "01/07/2020",
+                  porcentagemPreenchimento: "100%",
+                  prazo: " 1 dias",
+                  icone: selectIcon(SelectStatus.EM_ANDAMENTO),
+                  stateCard: changeTextStateCard(SelecionarEstadoCard.CORRECAO_SOLICITADA),
+
+              ),
+            ),
             new ZTile(
               leading: Text("oi"),
               trailing: Text("123456"),
@@ -403,21 +431,24 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               themeData: Theme.of(context),
               textoOnAdd: "",
               onChange: (listaSelecaoAtualizada) {
-                if (listaSelecaoAtualizada != null) {
-                 
-                }
+                if (listaSelecaoAtualizada != null) {}
               },
-              onFilter: (filter) async {
-              },
-
-              onScroll: (filter, listaAnterior) async {
-              
-              },
+              onFilter: (filter) async {},
+              onScroll: (filter, listaAnterior) async {},
             ),
           ],
         ),
       ),
     );
+  }
+
+  String changeTextStateCard(SelecionarEstadoCard selecionarEstado) {
+    switch (selecionarEstado) {
+      case SelecionarEstadoCard.CORRIGIDO:
+        return "CORRIGIDO";
+      case SelecionarEstadoCard.CORRECAO_SOLICITADA:
+        return "CORRECAO SOLICITADA";
+    }
   }
 
   Widget selectIcon(SelectStatus selectStatus) {
