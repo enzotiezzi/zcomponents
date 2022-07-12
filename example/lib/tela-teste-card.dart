@@ -191,7 +191,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               themeData: Theme.of(context),
               titulo: "Titulo",
               lista: listaPorte,
-              bloquearCampo: true,
+              bloquearCampo: false,
               campoObrigatorio: true,
               onChange: (opcEscolhida) {
                 if (opcEscolhida != null) {
