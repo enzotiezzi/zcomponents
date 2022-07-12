@@ -52,6 +52,11 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
     ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
   ];
+  List<String> listaPortesString = [
+    "aberto",
+    "fechado",
+    "em abertura",
+  ];
 
   List<ZSelectionItem> _listaSelecaoCargo = [];
 
@@ -182,6 +187,18 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             new Container(
               height: 20,
             ),
+            new ZCollection(
+              themeData: Theme.of(context),
+              titulo: "Titulo",
+              lista: listaPorte,
+              bloquearCampo: true,
+              campoObrigatorio: true,
+              onChange: (opcEscolhida) {
+                if (opcEscolhida != null) {
+                  listaPortesString[0] = opcEscolhida.chave;
+                }
+              },
+            ),
             new ZItemTileConvite(
               itemTileViewModel: new ItemTileViewModel(
                   nome: "Matheus Loureiro de Albuquerque",
@@ -191,26 +208,26 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                   porcentagemPreenchimento: "89%",
                   prazo: " 7 dias",
                   icone: selectIcon(SelectStatus.APROVADO),
-                  stateCard: changeTextStateCard(SelecionarEstadoCard.CORRIGIDO),
-                  onTileIsSelected: (){
+                  stateCard:
+                      changeTextStateCard(SelecionarEstadoCard.CORRIGIDO),
+                  onTileIsSelected: () {
                     print("oi");
-                  }
-              ),
+                  }),
             ),
             new Container(
               height: 20,
             ),
             new ZItemTileConvite(
               itemTileViewModel: new ItemTileViewModel(
-                  nome: "Luiz Zellar",
-                  status: "EM ANDAMENTO",
-                  cargo: "Deselvolvedor Flutter",
-                  dataAdmissao: "01/07/2020",
-                  porcentagemPreenchimento: "100%",
-                  prazo: " 1 dias",
-                  icone: selectIcon(SelectStatus.EM_ANDAMENTO),
-                  stateCard: changeTextStateCard(SelecionarEstadoCard.CORRECAO_SOLICITADA),
-
+                nome: "Luiz Zellar",
+                status: "EM ANDAMENTO",
+                cargo: "Deselvolvedor Flutter",
+                dataAdmissao: "01/07/2020",
+                porcentagemPreenchimento: "100%",
+                prazo: " 1 dias",
+                icone: selectIcon(SelectStatus.EM_ANDAMENTO),
+                stateCard: changeTextStateCard(
+                    SelecionarEstadoCard.CORRECAO_SOLICITADA),
               ),
             ),
             new ZTile(
