@@ -254,8 +254,7 @@ class ZCollectionState extends State<ZCollection> {
     } else if (widget.bloquearCampo) {
       return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.grey);
     } else if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
-      return widget.themeData.textTheme.bodyText1
-          .copyWith(color: widget.themeData.primaryColor);
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     } else {
       return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     }
