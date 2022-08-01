@@ -321,6 +321,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               ),
             ),
             new ZTile(
+              disable: true,
               onTap: () {
                 Navigator.push(
                     context,
