@@ -5,7 +5,10 @@ import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
+
+import '../z-alert-dialog.dart';
 
 class ZCollectionList extends StatefulWidget {
   GlobalKey key;
@@ -75,7 +78,16 @@ class ZCollectionListState extends State<ZCollectionList> {
               widget.titulo.toUpperCase(),
               style: new TextStyle(color: Colors.white),
             ),
-          )),
+          ),
+        actions: [
+          new Container(
+              padding: EdgeInsets.only(right: 16),
+              child: new GestureDetector(
+                child: new Icon(Icons.info, size: 28),
+                onTap: () => retornarDialogAjuda(context),
+              ))
+        ],
+      ),
       body: new Column(
         children: <Widget>[
           _buildFiltro(),
@@ -270,4 +282,71 @@ class ZCollectionListState extends State<ZCollectionList> {
       });
     }
   }
+
+  Future retornarDialogAjuda(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => new ZAlertDialog(
+          zDialog: ZDialog.normal,
+          colorLine: const Color(0xFF1e26f7),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              new Container(
+                margin: const EdgeInsets.only(top: 16, bottom: 4),
+                child: new Icon(
+                  Icons.info,
+                  color: const Color(0xFF1e26f7),
+                ),
+              ),
+              new Container(
+                child: new Text(
+                    widget.titulo.toUpperCase(),
+                  style: new TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              new Container(
+                margin: const EdgeInsets.only(top: 8, bottom: 4),
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: new Text(
+                  "Para visualizar o nome completo do campo, "
+                      "basta pressionar e segurar o campo.",
+                  style: new TextStyle(
+                      leadingDistribution: TextLeadingDistribution.even,
+                      color: Colors.grey[700],
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              new OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: new Container(
+                  margin: const EdgeInsets.only(bottom: 8, top: 8),
+                  child: new Container(
+                    width: 270,
+                    height: 22,
+                    margin: const EdgeInsets.only(top: 8),
+                    child: new Text(
+                      "OK",
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:
+                          MainStyle.get(context).fontSizeLeadinCancelar,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+
 }
