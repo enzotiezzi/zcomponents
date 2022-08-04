@@ -260,64 +260,67 @@ class ZSelectionListState extends State<ZSelectionList> {
           var item = _listaFiltro[index];
           return new Column(
             children: [
-              new Container(
-                alignment: Alignment.topCenter,
-                color: Colors.white,
-                child: new ZTile(
-                  onTap: () {
-                    if (!item.obrigatorio) {
-                      setState(() {
-                        item.selecionado = !item.selecionado;
+              new Tooltip(
+                message: item.titulo,
+                child: new Container(
+                  alignment: Alignment.topCenter,
+                  color: Colors.white,
+                  child: new ZTile(
+                    onTap: () {
+                      if (!item.obrigatorio) {
+                        setState(() {
+                          item.selecionado = !item.selecionado;
 
-                        if (item.selecionado) {
-                          widget.listaSelecao.add(item);
-                        } else {
-                          for (int i = 0; i < widget.listaSelecao.length; i++) {
-                            if (widget.listaSelecao[i].chave == item.chave) {
-                              widget.listaSelecao.removeAt(i);
-                              break;
-                            }
-                          }
-                        }
-                      });
-                    }
-                  },
-                  leading: new Row(
-                    children: [
-                      new Container(
-                        width: MediaQuery.of(context).size.width / 1.4,
-                        child: new Text(
-                          "${item.titulo ?? item.valor}",
-                          style: widget.theme.textTheme.bodyText1,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      )
-                    ],
-                  ),
-                  trailing: new Checkbox(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: item.selecionado,
-                      onChanged: (bool) {
-                        if (!item.obrigatorio) {
-                          setState(() {
-                            item.selecionado = bool;
-                            if (item.selecionado) {
-                              widget.listaSelecao.add(item);
-                            } else {
-                              for (int i = 0;
-                                  i < widget.listaSelecao.length;
-                                  i++) {
-                                if (widget.listaSelecao[i].chave ==
-                                    item.chave) {
-                                  widget.listaSelecao.removeAt(i);
-                                  break;
-                                }
+                          if (item.selecionado) {
+                            widget.listaSelecao.add(item);
+                          } else {
+                            for (int i = 0; i < widget.listaSelecao.length; i++) {
+                              if (widget.listaSelecao[i].chave == item.chave) {
+                                widget.listaSelecao.removeAt(i);
+                                break;
                               }
                             }
-                          });
-                        }
-                      }),
+                          }
+                        });
+                      }
+                    },
+                    leading: new Row(
+                      children: [
+                        new Container(
+                          width: MediaQuery.of(context).size.width / 1.4,
+                          child: new Text(
+                            "${item.titulo ?? item.valor}",
+                            style: widget.theme.textTheme.bodyText1,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      ],
+                    ),
+                    trailing: new Checkbox(
+                        activeColor: Theme.of(context).primaryColor,
+                        value: item.selecionado,
+                        onChanged: (bool) {
+                          if (!item.obrigatorio) {
+                            setState(() {
+                              item.selecionado = bool;
+                              if (item.selecionado) {
+                                widget.listaSelecao.add(item);
+                              } else {
+                                for (int i = 0;
+                                    i < widget.listaSelecao.length;
+                                    i++) {
+                                  if (widget.listaSelecao[i].chave ==
+                                      item.chave) {
+                                    widget.listaSelecao.removeAt(i);
+                                    break;
+                                  }
+                                }
+                              }
+                            });
+                          }
+                        }),
+                  ),
                 ),
               ),
               new Divider(

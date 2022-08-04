@@ -173,22 +173,25 @@ class ZCollectionListState extends State<ZCollectionList> {
         var item = _listaFiltro[index];
         return new Column(
           children: [
-            new Container(
-              alignment: Alignment.topCenter,
-              color: Colors.white,
-              child: new ZTile(
-                  onTap: () {
-                    _selecionarItem(item);
-                  },
-                  leading: new Container(
-                    width: MediaQuery.of(context).size.width / 1.3,
-                    child: new Text(
-                      _retornaTextoDoItem(_listaFiltro[index].ordem, _listaFiltro, index),
-                      style: widget.theme.textTheme.bodyText1,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  )),
+            new Tooltip(
+              message: item.titulo,
+              child: new Container(
+                alignment: Alignment.topCenter,
+                color: Colors.white,
+                child: new ZTile(
+                    onTap: () {
+                      _selecionarItem(item);
+                    },
+                    leading: new Container(
+                      width: MediaQuery.of(context).size.width / 1.3,
+                      child: new Text(
+                        _retornaTextoDoItem(_listaFiltro[index].ordem, _listaFiltro, index),
+                        style: widget.theme.textTheme.bodyText1,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )),
+              ),
             ),
             new Divider(
               height: 2,
