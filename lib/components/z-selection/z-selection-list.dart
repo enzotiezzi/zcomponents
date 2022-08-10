@@ -266,6 +266,15 @@ class ZSelectionListState extends State<ZSelectionList> {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           var item = _listaFiltro[index];
+          if(widget.listaSelecao.length > 0){
+            for(int i=0;i<widget.listaSelecao.length;i++){
+              if(widget.listaSelecao[i].selecionado){
+                if(widget.listaSelecao[i].titulo.toLowerCase() == item.titulo.toLowerCase()){
+                  item.selecionado =true;
+                }
+              }
+            }
+          }
           return new Column(
             children: [
               new Tooltip(
