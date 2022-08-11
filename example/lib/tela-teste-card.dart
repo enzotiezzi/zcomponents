@@ -166,14 +166,6 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     super.initState();
   }
 
-  List<ZSelectionItem> testeLista = [
-    new ZSelectionItem(chave: "Desenvolvedor", titulo: "Desenvolvedor", valor: "Desenvolvedor"),
-    new ZSelectionItem(chave: "Teste2", titulo: "Teste2", valor: "Teste2"),
-    new ZSelectionItem(chave: "Teste3", titulo: "Teste3", valor: "Teste3"),
-    new ZSelectionItem(chave: "Teste4", titulo: "Teste4", valor: "Teste4"),
-  ];
-
-  List<ZSelectionItem> testeListaResposta = [];
   bool editado = false;
 
   @override
@@ -452,16 +444,14 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
             new ZSelection(
               key: Key(''),
               titulo: "Cargos",
-              lista: testeLista,
-              listaRespostas: testeListaResposta,
+              lista: [],
+              listaRespostas: [],
               themeData: Theme.of(context),
               textoOnAdd: "",
               onChange: (listaSelecaoAtualizada) {
                 if (listaSelecaoAtualizada != null) {}
               },
-              onFilter: (filter) async {
-                testeLista.where((element) => element.titulo == filter[0].value);
-              },
+              onFilter: (filter) async {},
               onScroll: (filter, listaAnterior) async {},
             ),
           ],
