@@ -106,6 +106,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
     0x44,
     0xAE,
   ]);
+  String tipoImage = "IMAGE";
 
   ZScanDocumentoView(State state) : super(state);
 
@@ -134,7 +135,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
     } catch (e) {}
   }
 
-  Future showDialogBottomFoto() {
+  Future showDialogBottomFoto(int i) {
     return showModalBottomSheet<String>(
         context: state.context,
         shape: RoundedRectangleBorder(
@@ -171,7 +172,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
                           child: new GestureDetector(
                             onTap: () {
                               Navigator.pop(state.context);
-                              scanDocumento();
+                              scanDocumento(i);
                             },
                             child: new Container(
                               color: Colors.transparent,
@@ -202,7 +203,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
                           child: new GestureDetector(
                               onTap: () {
                                 Navigator.pop(state.context);
-                                openGallery();
+                                openGallery(i);
                               },
                               child: new Container(
                                 color: Colors.transparent,
@@ -234,21 +235,21 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
         });
   }
 
-  Future<String> openGallery() async {
+  Future<String> openGallery(int i) async {
     var buscarfoto = await ImagePicker.pickImage(
       source: ImageSource.gallery,
     );
 
     if (buscarfoto != null) {
       state.setState(() {
-        fotos.add(buscarfoto.readAsBytesSync());
+        fotos[i] = buscarfoto.readAsBytesSync();
         Future.delayed(new Duration(milliseconds: 500), () {
         });
       });
     }
   }
 
-  Future scanDocumento() async {
+  Future scanDocumento(int i) async {
 
     FlutterGeniusScan.scanWithConfiguration({
       'source': 'camera',
@@ -271,7 +272,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
       );
 
       state.setState(() {
-        fotos.add(resultUint8List);
+        fotos[i] = resultUint8List;
       });
     }, onError: (error) => displayError(state.context, error));
   }
@@ -312,11 +313,10 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
         for (int j = 0;
             j < state.widget.colaboradorDocumentoViewModel.campos.length;
             j++) {
-          if (state.widget.colaboradorDocumentoViewModel.campos[i]
-                  .idDocumentoCampo ==
+          if (state.widget.colaboradorDocumentoViewModel.campos[i].idAtributo ==
               lista[j].idDocumentoCampo) {
             if (state.widget.colaboradorDocumentoViewModel.campos[i]
-                    .tipoValorCampo !=
+                    .tipo !=
                 "date") {
               listaRespostasUsuario[i] = lista[j].valor;
             } else {
@@ -349,7 +349,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
           return false;
         }
         if (state.widget.colaboradorDocumentoViewModel.campos[i]
-                .tipoValorCampo ==
+                .tipo ==
             "date") {
           try {
             var textoSeparado = listaRespostasUsuario[i].split("/");
@@ -360,7 +360,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
             if (validarData) {
               camposMapeados.addAll({
                 state.widget.colaboradorDocumentoViewModel.campos[i]
-                    .idDocumentoCampo: listaRespostasUsuario[i]
+                    .resposta: listaRespostasUsuario[i]
               });
             } else {
               return false;
@@ -371,7 +371,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
         } else {
           camposMapeados.addAll({
             state.widget.colaboradorDocumentoViewModel.campos[i]
-                .idDocumentoCampo: listaRespostasUsuario[i]
+                .resposta: listaRespostasUsuario[i]
           });
         }
       }
@@ -395,6 +395,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
         var idFotoArquivo = await _arquivoService.enviarImagem(arqModel);
 
         if (idFotoArquivo != null) {
+          state.widget.colaboradorDocumentoViewModel.campos[i].resposta = idFotoArquivo;
           listaIdArquivo.add(idFotoArquivo);
         }
       }
@@ -402,26 +403,30 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   }
 
   Future<void> _buscarIdFotos() async {
-    var lista = await _colaboradorDocumentoService.listarDocumentoImagem(
-        state.widget.colaboradorDocumentoViewModel.idColaborador,
-        state.widget.colaboradorDocumentoViewModel.idDocumento);
 
-    if (lista != null) {
-      for (int i = 0; i < lista.length; i++) {
-        await buscarFotos(lista[i].idImagem);
+    for (int i = 0; i < state.widget.colaboradorDocumentoViewModel.campos.length; i++) {
+      var itemIndex = state.widget.colaboradorDocumentoViewModel.campos[i];
+
+      if (itemIndex.tipo.toUpperCase() == tipoImage && itemIndex.resposta.isNotEmpty) {
+          await buscarFotos(itemIndex.resposta);
+      } else {
+        fotos.add(new Uint8List(0));
       }
-      if (state.mounted) {
-        state.setState(() {});
-      }
+    }
+    if (state.mounted) {
+      state.setState(() {});
     }
   }
 
   Future<void> buscarFotos(String idArquivo) async {
     var idFotoArquivo = await _arquivoService.buscarAnexo(idArquivo);
-    if (idFotoArquivo != null) {
+
+    if (idFotoArquivo != null && idFotoArquivo.conteudo != null) {
       Uint8List image = base64Decode(idFotoArquivo.conteudo);
 
       fotos.add(image);
+    } else {
+      fotos.add(new Uint8List(0));
     }
   }
 
