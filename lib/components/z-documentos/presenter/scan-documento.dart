@@ -161,15 +161,18 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                               borderRadius:
                               new BorderRadius.circular(6.0),
                             ),
-                            child: new FadeInImage(
-                              image: new MemoryImage(
-                                _view.fotos[index]
+                            child: ClipRRect(
+                              borderRadius: new BorderRadius.circular(6.0),
+                              child: new FadeInImage(
+                                image: new MemoryImage(
+                                  _view.fotos[index]
+                                ),
+                                placeholder: new MemoryImage(
+                                    _view.kTransparentImage),
+                                fit: BoxFit.fitWidth,
+                                height: 65,
+                                width: 75,
                               ),
-                              placeholder: new MemoryImage(
-                                  _view.kTransparentImage),
-                              fit: BoxFit.fitWidth,
-                              height: 65,
-                              width: 75,
                             ),
                           ),
                         )
