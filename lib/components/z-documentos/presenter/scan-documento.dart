@@ -79,7 +79,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     for (int i = 0; i < _view.listaRespostasUsuario.length; i++) {
       var item = widget.colaboradorDocumentoViewModel.campos[i];
 
-      if (item.tipo.toUpperCase() == _view.tipoImage) {
+      if (item.tipo.toUpperCase() == _view.tipoImage.toUpperCase()) {
         lista.add(new Container(
           child: new Column(
             children: [
@@ -94,10 +94,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                 trailing: new Container(
                   margin: EdgeInsets.only(right: 4),
                   child: new Icon(
-                      Icons.camera_enhance_rounded, color: Theme
-                      .of(context)
-                      .iconTheme
-                      .color),
+                      Icons.camera_enhance_rounded, color: Theme.of(context).iconTheme.color),
                 ),
                 onTap: () {
                   _view.showDialogBottomFoto(i);
@@ -170,7 +167,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                               ),
                               placeholder: new MemoryImage(
                                   _view.kTransparentImage),
-                              fit: BoxFit.fill,
+                              fit: BoxFit.fitWidth,
                               height: 65,
                               width: 75,
                             ),
