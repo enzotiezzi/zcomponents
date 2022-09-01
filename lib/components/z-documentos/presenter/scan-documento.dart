@@ -80,8 +80,32 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
       var item = widget.colaboradorDocumentoViewModel.campos[i];
 
       if (item.tipo.toUpperCase() == _view.tipoImage) {
-        lista.add(
-            _montarCampoImagem(item, i)
+        lista.add(new Container(
+          child: new Column(
+            children: [
+              new ZTile(
+                leading: new Container (
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.only(left: 4),
+                  child: new Text(item.descricao,
+                      style: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.w600)),
+                ),
+                trailing: new Container(
+                  margin: EdgeInsets.only(right: 4),
+                  child: new Icon(
+                      Icons.camera_enhance_rounded, color: Theme
+                      .of(context)
+                      .iconTheme
+                      .color),
+                ),
+                onTap: () {
+                  _view.showDialogBottomFoto(i);
+                },
+              ),
+              _montarFotoCampo(item, i),
+              new Divider(height: 1)
+            ]))
         );
       } else if (item.mascara != null && item.mascara.isNotEmpty) {
         lista.add(new Container(
@@ -115,77 +139,52 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     return lista;
   }
 
-
-  Widget _montarCampoImagem(ContratacaoDocumentoCampoViewModel itemIndex, int index) {
-    if (itemIndex.resposta != null && itemIndex.resposta.isNotEmpty) {
-
-      return new Container(
-        child: new Column(
-          children: [
-            new ZTile(
-              onTap: () {
-                _view.expandirImagem(index, index, _view.fotos[index]);
-              },
-              leading: new Container (
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.only(left: 4),
-                child: new Text(itemIndex.descricao,
-                    style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600)),
-              ),
-              trailing: new Container(
-                margin: EdgeInsets.only(right: 4),
-                child: new Hero(
-                  transitionOnUserGestures: true,
-                  tag: "image$index",
-                  child: new Container(
-                    margin: const EdgeInsets.only(
-                        left: 4, bottom: 8, top: 8),
-                    decoration: new BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius:
-                      new BorderRadius.circular(6.0),
-                    ),
-                    child: new FadeInImage(
-                      image: new MemoryImage(
-                          _view.fotos[index]),
-                      placeholder: new MemoryImage(
-                          _view.kTransparentImage),
-                      fit: BoxFit.fill,
-                      height: 65,
-                      width: 75,
-                    ),
-                  ),
-                )
-              ),
-            ),
-            new Divider(height: 1)
-          ],
+  Widget _montarFotoCampo(ContratacaoDocumentoCampoViewModel itemIndex, int index) {
+    if (_view.fotos[index].isNotEmpty) {
+    return new Column(
+      children: [
+        new Container(
+            padding: const EdgeInsets.only(top: 8, bottom: 8, right: 16, left: 16),
+            decoration: new BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(6)),
+            child: new Row(
+              children: <Widget>[
+                new SizedBox(
+                    height: 72,
+                    child: new GestureDetector(
+                        onTap: () => _view.expandirImagem(index, index, _view.fotos[index]),
+                        child: new Hero(
+                          transitionOnUserGestures: true,
+                          tag: "image$index",
+                          child: new Container(
+                            margin: const EdgeInsets.only(
+                                left: 4, bottom: 8, top: 8),
+                            decoration: new BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                              new BorderRadius.circular(6.0),
+                            ),
+                            child: new FadeInImage(
+                              image: new MemoryImage(
+                                _view.fotos[index]
+                              ),
+                              placeholder: new MemoryImage(
+                                  _view.kTransparentImage),
+                              fit: BoxFit.fill,
+                              height: 65,
+                              width: 75,
+                            ),
+                          ),
+                        )
+                    )
+                ),
+              ],
+            )
         ),
-      );
+      ],
+    );
     } else {
-     return new Container (
-        child: new Column(
-          children: [
-            new ZTile(
-              leading: new Container (
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.only(left: 4),
-                child: new Text(itemIndex.descricao,
-                    style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600)),
-              ),
-              trailing: new Container(
-                margin: EdgeInsets.only(right: 4),
-                child: new Icon(
-                    Icons.camera_enhance_rounded, color: Theme.of(context).iconTheme.color),
-              ),
-              onTap: () {
-                _view.showDialogBottomFoto(index);
-              },
-            ),
-            new Divider(height: 1)
-          ],
-        ),
-      );
+    return new Container();
     }
   }
 
