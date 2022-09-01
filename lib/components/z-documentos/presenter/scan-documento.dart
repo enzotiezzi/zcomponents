@@ -117,9 +117,9 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
 
 
   Widget _montarCampoImagem(ContratacaoDocumentoCampoViewModel itemIndex, int index) {
-
     if (itemIndex.resposta != null && itemIndex.resposta.isNotEmpty) {
-      return new Container (
+
+      return new Container(
         child: new Column(
           children: [
             new ZTile(
@@ -163,7 +163,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
         ),
       );
     } else {
-      new Container (
+     return new Container (
         child: new Column(
           children: [
             new ZTile(
