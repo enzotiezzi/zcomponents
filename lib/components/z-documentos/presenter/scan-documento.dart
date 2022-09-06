@@ -6,8 +6,11 @@ import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/utils/svg.dart';
 import 'package:z_components/components/z-documentos/view/scan-documento-view.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-tile.dart';
+import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 import 'package:z_components/view-model/colaborador-viewmodel.dart';
+import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.dart';
 import 'package:z_components/view-model/documento-campo.dart';
 
 class ScanDocumentos extends StatefulWidget {
@@ -40,7 +43,11 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconeVoltar(),
+        leading: IconeVoltar(
+          onTap: () {
+            Navigator.of(context).pop(false);
+          },
+        ),
         centerTitle: true,
         title: new Text(
             "${widget.colaboradorDocumentoViewModel.nomeDocumento.toUpperCase()}"),
@@ -63,9 +70,6 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
             children: _montarListaDinamicaDocumentos(),
           ),
         ),
-        _montarHeader("IMAGENS DO DOCUMENTO"),
-        _buildAddFoto(),
-        _buildListaFotos(),
       ],
     );
   }
@@ -74,7 +78,33 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     List<Widget> lista = new List();
     for (int i = 0; i < _view.listaRespostasUsuario.length; i++) {
       var item = widget.colaboradorDocumentoViewModel.campos[i];
-      if (item.mascara != null && item.mascara.isNotEmpty) {
+
+      if (item.tipo.toUpperCase() == _view.tipoImage.toUpperCase()) {
+        lista.add(new Container(
+          child: new Column(
+            children: [
+              new ZTile(
+                leading: new Container (
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.only(left: 4),
+                  child: new Text(item.descricao,
+                      style: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.w600)),
+                ),
+                trailing: new Container(
+                  margin: EdgeInsets.only(right: 4),
+                  child: new Icon(
+                      Icons.camera_enhance_rounded, color: Theme.of(context).iconTheme.color),
+                ),
+                onTap: () {
+                  _view.showDialogBottomFoto(i);
+                },
+              ),
+              _montarFotoCampo(item, i),
+              new Divider(height: 1)
+            ]))
+        );
+      } else if (item.mascara != null && item.mascara.isNotEmpty) {
         lista.add(new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
@@ -106,6 +136,58 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
     return lista;
   }
 
+  Widget _montarFotoCampo(ContratacaoDocumentoCampoViewModel itemIndex, int index) {
+    if (_view.fotos[index].isNotEmpty) {
+    return new Column(
+      children: [
+        new Container(
+            padding: const EdgeInsets.only(top: 8, bottom: 8, right: 16, left: 16),
+            decoration: new BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(6)),
+            child: new Row(
+              children: <Widget>[
+                new SizedBox(
+                    height: 72,
+                    child: new GestureDetector(
+                        onTap: () => _view.expandirImagem(index, index, _view.fotos[index]),
+                        child: new Hero(
+                          transitionOnUserGestures: true,
+                          tag: "image$index",
+                          child: new Container(
+                            margin: const EdgeInsets.only(
+                                left: 4, bottom: 8, top: 8),
+                            decoration: new BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                              new BorderRadius.circular(6.0),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: new BorderRadius.circular(6.0),
+                              child: new FadeInImage(
+                                image: new MemoryImage(
+                                  _view.fotos[index]
+                                ),
+                                placeholder: new MemoryImage(
+                                    _view.kTransparentImage),
+                                fit: BoxFit.fitWidth,
+                                height: 65,
+                                width: 75,
+                              ),
+                            ),
+                          ),
+                        )
+                    )
+                ),
+              ],
+            )
+        ),
+      ],
+    );
+    } else {
+    return new Container();
+    }
+  }
+
   Widget _montarHeader(String text) {
     return new Container(
       decoration: BoxDecoration(
@@ -119,107 +201,6 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
               .subtitle2
               .copyWith(fontWeight: FontWeight.bold)),
     );
-  }
-
-  Widget _buildAddFoto() {
-    int quantidadeMaximaDePaginas = int.parse(
-        widget.colaboradorDocumentoViewModel.qtdePaginaUpload.split("/")[1]);
-    if (quantidadeMaximaDePaginas > _view.fotos.length) {
-      return new Container(
-        margin: EdgeInsets.only(bottom: (_view.fotos.length > 0) ? 0 : 80),
-        child: new InkWell(
-          onTap: () {
-            _view.showDialogBottomFoto();
-          },
-          child: new Container(
-              color: Colors.white,
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Row(
-                    children: <Widget>[
-                      new Container(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 8, top: 10, bottom: 10),
-                          child: new Text(
-                            "ESCANEAR DOCUMENTO",
-                            style: Theme.of(context)
-                                .textTheme
-                                .button
-                                .copyWith(color: Theme.of(context).accentColor),
-                          )),
-                      new Container(
-                        margin: EdgeInsets.only(
-                            right: (_view.fotos.length == 0) ? 0 : 16),
-                        child: _buildSvgScanIcon(),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-        ),
-      );
-    } else {
-      return new Container();
-    }
-  }
-
-  Widget _buildSvgScanIcon() {
-    return SvgPicture.asset(
-      SvgUtils.ASSETSCANICON,
-      semanticsLabel: 'more.svg',
-      placeholderBuilder: (context) => Icon(Icons.error),
-      color: Theme.of(context).accentColor,
-    );
-  }
-
-  Widget _buildListaFotos() {
-    if (_view.fotos != null && _view.fotos.length > 0) {
-      return new Container(
-        padding: const EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 0),
-        color: new Color(0xFFFFFFFF),
-        child: new Row(
-          children: <Widget>[
-            new Expanded(
-                child: new SizedBox(
-              child: new ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _view.fotos.length,
-                itemBuilder: (BuildContext ctxt, int index) {
-                  return new GestureDetector(
-                      onTap: () {
-                        _view.expandirImagem(index, index, _view.fotos[index]);
-                      },
-                      child: new Hero(
-                        tag: "image${index}${index}",
-                        child: new Container(
-                            margin: EdgeInsets.only(left: 4, bottom: 16),
-                            decoration: new BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6.0),
-                              child: FadeInImage(
-                                image: MemoryImage(_view.fotos[index]),
-                                placeholder:
-                                    MemoryImage(_view.kTransparentImage),
-                                fit: BoxFit.cover,
-                                height: 58,
-                                width: 58,
-                              ),
-                            )),
-                      ));
-                },
-              ),
-              height: 72,
-            ))
-          ],
-        ),
-      );
-    } else {
-      return new Container();
-    }
   }
 
   Widget _exibirBotao() {

@@ -62,7 +62,7 @@ class FotoView extends IView<Foto> {
   Future<void> verificarSeDesejaExcluir() async {
     var res = await showAlertDialog();
     if (res != null) {
-      state.widget.fotos.removeAt(state.widget.hero);
+      state.widget.fotos[state.widget.hero] = Uint8List(0);
       selecionarItem(state.widget.fotos);
     } else {
       selecionarItem(state.widget.fotos);

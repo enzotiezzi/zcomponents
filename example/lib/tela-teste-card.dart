@@ -16,6 +16,7 @@ import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/permissao-negada.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
+import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -97,9 +98,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
     new ColaboradorDocumentoViewModel(
       nomeDocumento: "RG",
-      campos: [
-        DocumentoCampo(mascara: "##.###.###-##", tipoValorCampo: "numeric"),
-      ],
+      campos: [],
       status: "",
       horizontalOuVertical: "",
       idColaborador: "",
@@ -395,10 +394,23 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                               colaboradorDocumentoViewModel: [
                                 ColaboradorDocumentoViewModel(
                                     campos: [
-                                      DocumentoCampo(
-                                        label: "teste",
-                                        obrigatorio: false,
-                                        tipo: "text",
+                                      new ContratacaoDocumentoCampoViewModel(
+                                        resposta: '',
+                                        tipo: 'image',
+                                        descricao: "foto",
+                                        idAtributo: '',
+                                        idDocumento: '',
+                                        dataResposta: '15/06/2022',
+                                        tamanhoMaximo: 30
+                                      ),
+                                      new ContratacaoDocumentoCampoViewModel(
+                                          resposta: '',
+                                          tipo: 'text',
+                                        descricao: "aaaaaa",
+                                        idAtributo: '',
+                                          dataResposta: '15/06/2022',
+                                          idDocumento: '',
+                                        tamanhoMaximo: 30
                                       )
                                     ],
                                     nomeDocumento: "Documento teste",
