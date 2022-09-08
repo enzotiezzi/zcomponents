@@ -186,70 +186,85 @@ class _Foto extends State<Foto> {
 
   Future _buildDialogDeletarimagem(BuildContext context) {
     return showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return new ZAlertDialog(
-            zDialog: ZDialog.alert,
-            child: new Column(
+      context: context,
+      builder: (context) => new ZAlertDialog(
+        zDialog: ZDialog.alert,
+        colorLine: const Color(0xFF1e26f7),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            new Container(
+              child: new Text(
+                "Atenção",
+                style: new TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(top: 8, left: 4, right: 4),
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: new Text(
+                "Deseja mesmo excluir esta imagem?",
+                style: new TextStyle(
+                    leadingDistribution: TextLeadingDistribution.even,
+                    color: Colors.grey[700],
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                new Container(
-                  margin: const EdgeInsets.all(16),
-                  child: new Text(
-                    "Deseja mesmo deletar esta imagem?",
-                    textAlign: TextAlign.center,
+                new TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Container(
+                    margin: const EdgeInsets.only(bottom: 8, top: 8),
+                    child: new Container(
+                      width: MediaQuery.of(context).size.width / 4,
+                      height: 22,
+                      margin: const EdgeInsets.only(top: 8),
+                      child: new Text(
+                        "CANCELAR",
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),
-                new Divider(
-                  height: 1.0,
-                ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    new TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: new Container(
-                        margin: const EdgeInsets.only(bottom: 8, top: 8),
-                        child: new Container(
-                          width: 100,
-                          child: new Text(
-                            "CANCELAR",
-                            style: new TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                new TextButton(
+                  onPressed: () {
+                    _view.verificarSeDesejaExcluir(true);
+                  },
+                  child: new Container(
+                    margin: const EdgeInsets.only(bottom: 8, top: 8),
+                    child: new Container(
+                      width: MediaQuery.of(context).size.width / 4,
+                      height: 22,
+                      margin: const EdgeInsets.only(top: 8),
+                      child: new Text(
+                        "CONFIRMAR",
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                    new TextButton(
-                      onPressed: () async {
-                        Navigator.pop(context);
-                        _view.verificarSeDesejaExcluir(true);
-                      },
-                      child: new Container(
-                        margin: const EdgeInsets.only(bottom: 8, top: 8),
-                        child: new Container(
-                          width: 100,
-                          child: new Text(
-                            "CONFIRMAR",
-                            style: new TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
-          );
-        });
+          ],
+        ),
+      ),
+    );
   }
 }
