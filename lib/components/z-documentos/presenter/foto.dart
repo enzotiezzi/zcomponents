@@ -206,7 +206,7 @@ class _Foto extends State<Foto> {
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    new OutlinedButton(
+                    new TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -225,7 +225,7 @@ class _Foto extends State<Foto> {
                         ),
                       ),
                     ),
-                    new OutlinedButton(
+                    new TextButton(
                       onPressed: () async {
                         Navigator.pop(context);
                         _view.verificarSeDesejaExcluir(true);
