@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-documentos/view/foto-view.dart';
+import 'package:z_components/config/z-dialog.dart';
 
 class Foto extends StatefulWidget {
   final Uint8List image;
@@ -128,7 +130,7 @@ class _Foto extends State<Foto> {
                                   ),
                                   new RaisedButton(
                                     onPressed: () async {
-                                      await _view.verificarSeDesejaExcluir();
+                                      _buildDialogDeletarimagem(context);
                                     },
                                     child: new Container(
                                       child: new Row(
@@ -180,5 +182,74 @@ class _Foto extends State<Foto> {
     if (mounted) {
       super.setState(fn);
     }
+  }
+
+  Future _buildDialogDeletarimagem(BuildContext context) {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return new ZAlertDialog(
+            zDialog: ZDialog.alert,
+            child: new Column(
+              children: [
+                new Container(
+                  margin: const EdgeInsets.all(16),
+                  child: new Text(
+                    "Deseja mesmo deletar esta imagem?",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                new Divider(
+                  height: 1.0,
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    new OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Container(
+                        margin: const EdgeInsets.only(bottom: 8, top: 8),
+                        child: new Container(
+                          width: 100,
+                          child: new Text(
+                            "CANCELAR",
+                            style: new TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                    new OutlinedButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        _view.verificarSeDesejaExcluir(true);
+                      },
+                      child: new Container(
+                        margin: const EdgeInsets.only(bottom: 8, top: 8),
+                        child: new Container(
+                          width: 100,
+                          child: new Text(
+                            "CONFIRMAR",
+                            style: new TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
   }
 }
