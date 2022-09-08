@@ -26,42 +26,12 @@ class FotoView extends IView<Foto> {
     throw UnimplementedError();
   }
 
-  Future showAlertDialog() async {
-    var buttons = new List<Widget>();
-
-    buttons.add(new CupertinoDialogAction(
-        child: new Text(
-          "EXCLUIR",
-          style: const TextStyle(color: Colors.blue),
-        ),
-        onPressed: () {
-          Navigator.of(state.context).pop(true);
-        }));
-
-    buttons.add(new CupertinoDialogAction(
-        child: new Text("CANCELAR"),
-        onPressed: () {
-          Navigator.of(state.context).pop();
-        }));
-
-    return showDialog(
-        context: state.context,
-        builder: (BuildContext context) => new CupertinoAlertDialog(
-            title: new Text("Atenção!"),
-            content: new Container(
-              margin: const EdgeInsets.only(top: 20.0),
-              child: new Text("Você deseja excluir esta imagem?"),
-            ),
-            actions: buttons));
-  }
-
   void selecionarItem(List<Uint8List> item) {
     Navigator.of(state.context).pop(item);
   }
 
-  Future<void> verificarSeDesejaExcluir() async {
-    var res = await showAlertDialog();
-    if (res != null) {
+  Future<void> verificarSeDesejaExcluir(bool desejaExcluirImagem) async {
+    if (desejaExcluirImagem) {
       state.widget.fotos[state.widget.hero] = Uint8List(0);
       selecionarItem(state.widget.fotos);
     } else {
