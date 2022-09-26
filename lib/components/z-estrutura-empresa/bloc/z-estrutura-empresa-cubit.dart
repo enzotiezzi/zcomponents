@@ -150,9 +150,6 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
     _treeViewController = new TreeViewController(children: nodes);
 
-    searchTextController.text =
-        searchTextController.text.substring(0, searchTextController.text.length - 1);
-
     emit(state.patchState(
         selectedNode: state.selectedNode,
         niveis: state.niveis,
