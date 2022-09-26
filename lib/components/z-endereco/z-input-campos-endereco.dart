@@ -219,9 +219,9 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           cepFocus: cepFocusNode,
           controllerCep: widget.cepController,
           campoObrigatorio: true,
-          validacao: (cepValidado){
+          validacao: (cepValidado) async {
             if(cepValidado){
-              _consultaCep(widget.cepController.text, context);
+              await _consultaCep(widget.cepController.text, context);
               cepValido = true;
               _validarCamposObrigatorios();
               numeroFocusNode.requestFocus();
@@ -333,12 +333,13 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
   }
 
   void _validarCamposObrigatorios(){
-    if(widget.cepController.text.isNotEmpty && widget.cepController.text != null
-    && widget.logradouroController.text.isNotEmpty && widget.logradouroController.text != null
-    && widget.numeroController.text.isNotEmpty && widget.numeroController.text != null
-    && widget.bairroController.text.isNotEmpty && widget.bairroController.text != null
-    && widget.cidadeController.text.isNotEmpty && widget.cidadeController.text != null
-    && cepValido){
+    if(widget.cepController.text != null && widget.cepController.text.isNotEmpty
+        && widget.logradouroController.text != null && widget.logradouroController.text.isNotEmpty
+        && widget.numeroController.text != null && widget.numeroController.text.isNotEmpty
+        && widget.bairroController.text != null && widget.bairroController.text.isNotEmpty
+        && widget.cidadeController.text != null && widget.cidadeController.text.isNotEmpty
+        && cepValido){
+
       setState(() {
         camposValidados = true;
       });
