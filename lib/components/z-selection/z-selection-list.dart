@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
@@ -12,6 +13,7 @@ import '../../styles/main-style.dart';
 import '../z-alert-dialog.dart';
 
 class ZSelectionList extends StatefulWidget {
+  GlobalKey keyListaItens = new GlobalKey();
   GlobalKey key;
   List<ZSelectionItem> lista;
   final ThemeData theme;
@@ -85,6 +87,14 @@ class ZSelectionListState extends State<ZSelectionList> {
             style: new TextStyle(color: Colors.white),
           ),
         ),
+        actions: [
+          new Container(
+              padding: EdgeInsets.only(right: 16),
+              child: new GestureDetector(
+                child: new Icon(Icons.info, size: 28),
+                onTap: () => retornarDialogAjuda(context),
+              ))
+        ],
       ),
       body: new Column(
         children: <Widget>[
@@ -92,6 +102,7 @@ class ZSelectionListState extends State<ZSelectionList> {
           _montarExibicaoContadorSelecionados(),
           new Expanded(
               child: new Container(
+            key: widget.keyListaItens,
             margin: EdgeInsets.only(top: 16.0),
             child: _buildLista(),
           )),
@@ -128,12 +139,7 @@ class ZSelectionListState extends State<ZSelectionList> {
               widget.onAdd();
             },
             leading: new Text(widget.textoOnAdd),
-            trailing: new IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: widget.theme.primaryColor,
-                ),
-                onPressed: () {}),
+            trailing: new Icon(Icons.add, color: widget.theme.primaryColor)
           ),
           new Divider(
             height: 1,
@@ -197,6 +203,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                                   _listaFiltro = widget.lista;
                               });
                             }
+                            widget.keyListaItens = new GlobalKey();
                           }
                         },
                       )),
@@ -218,63 +225,73 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   Widget _buildLista() {
-    return ListView.builder(
-      key: keyLista,
-      itemCount: _listaFiltro.length,
-      controller: scrollController,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        var item = _listaFiltro[index];
-        return new Column(
-          children: [
-            new Container(
-              alignment: Alignment.topCenter,
+    if (_listaFiltro.isEmpty) {
+      return new Column(
+        children: [
+          new Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: new BoxDecoration(
               color: Colors.white,
-              child: new ZTile(
-                onTap: () {
-                  if (!item.obrigatorio) {
-                    setState(() {
-                      item.selecionado = !item.selecionado;
-
-                      if (item.selecionado) {
-                        widget.listaSelecao.add(item);
-                      } else {
-                        for (int i = 0; i < widget.listaSelecao.length; i++) {
-                          if (widget.listaSelecao[i].chave == item.chave) {
-                            widget.listaSelecao.removeAt(i);
-                            break;
-                          }
-                        }
-                      }
-                    });
-                  }
-                },
-                leading: new Row(
-                  children: [
-                    new Container(
-                      width: MediaQuery.of(context).size.width / 1.4,
-                      child: new Text(
-                        "${item.titulo ?? item.valor}",
-                        style: widget.theme.textTheme.bodyText1,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )
-                  ],
-                ),
-                trailing: new Checkbox(
-                    activeColor: Theme.of(context).primaryColor,
-                    value: item.selecionado,
-                    onChanged: (bool) {
+            ),
+            margin: const EdgeInsets.only(top: 8),
+            child: new Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(2.0),
+              decoration: new BoxDecoration(
+                  border: new Border.all(
+                    color: Colors.white,
+                  ),
+                  borderRadius: new BorderRadius.all(Radius.circular(16.0))),
+              child: new Text(
+                '${'Para encontrar os ' + '${widget.titulo.toLowerCase()}' + ' desejados, utilize o campo de busca acima.'}',
+                maxLines: 4,
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+          ),
+          Flexible(
+            child: new Container(
+              height: MediaQuery.of(context).size.height * 0.35,
+              padding: const EdgeInsets.only(top: 16),
+              child: new SvgPicture.asset('assets/img_background.svg'),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return ListView.builder(
+        key: keyLista,
+        itemCount: _listaFiltro.length,
+        controller: scrollController,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          var item = _listaFiltro[index];
+          if(widget.listaSelecao.length > 0){
+            for(int i=0;i<widget.listaSelecao.length;i++){
+              if(widget.listaSelecao[i].selecionado){
+                if(widget.listaSelecao[i].titulo.toLowerCase() == item.titulo.toLowerCase()){
+                  item.selecionado =true;
+                }
+              }
+            }
+          }
+          return new Column(
+            children: [
+              new Tooltip(
+                message: item.titulo,
+                child: new Container(
+                  alignment: Alignment.topCenter,
+                  color: Colors.white,
+                  child: new ZTile(
+                    onTap: () {
                       if (!item.obrigatorio) {
                         setState(() {
-                          item.selecionado = bool;
+                          item.selecionado = !item.selecionado;
+
                           if (item.selecionado) {
                             widget.listaSelecao.add(item);
                           } else {
-                            for (int i = 0;
-                                i < widget.listaSelecao.length;
-                                i++) {
+                            for (int i = 0; i < widget.listaSelecao.length; i++) {
                               if (widget.listaSelecao[i].chave == item.chave) {
                                 widget.listaSelecao.removeAt(i);
                                 break;
@@ -283,17 +300,55 @@ class ZSelectionListState extends State<ZSelectionList> {
                           }
                         });
                       }
-                    }),
+                    },
+                    leading: new Row(
+                      children: [
+                        new Container(
+                          width: MediaQuery.of(context).size.width / 1.4,
+                          child: new Text(
+                            "${item.titulo ?? item.valor}",
+                            style: widget.theme.textTheme.bodyText1,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      ],
+                    ),
+                    trailing: new Checkbox(
+                        activeColor: Theme.of(context).primaryColor,
+                        value: item.selecionado,
+                        onChanged: (bool) {
+                          if (!item.obrigatorio) {
+                            setState(() {
+                              item.selecionado = bool;
+                              if (item.selecionado) {
+                                widget.listaSelecao.add(item);
+                              } else {
+                                for (int i = 0;
+                                    i < widget.listaSelecao.length;
+                                    i++) {
+                                  if (widget.listaSelecao[i].chave ==
+                                      item.chave) {
+                                    widget.listaSelecao.removeAt(i);
+                                    break;
+                                  }
+                                }
+                              }
+                            });
+                          }
+                        }),
+                  ),
+                ),
               ),
-            ),
-            new Divider(
-              height: 2,
-              color: widget.theme.backgroundColor,
-            ),
-          ],
-        );
-      },
-    );
+              new Divider(
+                height: 2,
+                color: widget.theme.backgroundColor,
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   Widget _montarExibicaoContadorSelecionados() {
@@ -458,5 +513,71 @@ class ZSelectionListState extends State<ZSelectionList> {
         }
       }
     }
+  }
+
+  Future retornarDialogAjuda(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => new ZAlertDialog(
+          zDialog: ZDialog.normal,
+          colorLine: const Color(0xFF1e26f7),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              new Container(
+                margin: const EdgeInsets.only(top: 16, bottom: 4),
+                child: new Icon(
+                  Icons.info,
+                  color: const Color(0xFF1e26f7),
+                ),
+              ),
+              new Container(
+                child: new Text(
+                  widget.titulo.toUpperCase(),
+                  style: new TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              new Container(
+                margin: const EdgeInsets.only(top: 8, bottom: 4),
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: new Text(
+                  "Para visualizar o nome completo do campo, "
+                      "basta pressionar e segurar o campo.",
+                  style: new TextStyle(
+                      leadingDistribution: TextLeadingDistribution.even,
+                      color: Colors.grey[700],
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              new OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: new Container(
+                  margin: const EdgeInsets.only(bottom: 8, top: 8),
+                  child: new Container(
+                    width: 270,
+                    height: 22,
+                    margin: const EdgeInsets.only(top: 8),
+                    child: new Text(
+                      "OK",
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:
+                          MainStyle.get(context).fontSizeLeadinCancelar,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

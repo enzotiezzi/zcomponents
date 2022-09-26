@@ -45,6 +45,7 @@ flutter:
     - assets/scan-doc.svg
     - assets/camera.png
     - assets/location.png
+    - assets/img_background.svg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

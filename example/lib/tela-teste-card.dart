@@ -6,19 +6,17 @@ import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection.dart';
 import 'package:z_components/components/z-inputs/z-input-data-padrao.dart';
-import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
 import 'package:z_components/components/z-inputs/z-input-data-expiracao.dart';
-import 'package:z_components/components/z-form/presenter/z-form.dart';
 import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 import 'package:z_components/components/z-documentos/presenter/lista-documentos.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
+import 'package:z_components/view-model/item-tile-convite-viewmodel.dart';
 import 'package:z_components/view-model/documento-campo.dart';
 import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/permissao-negada.dart';
-import 'package:z_components/view-model/documento-campo.dart';
-import 'package:z_components/components/z-collection/z-collection-item.dart';
-import 'package:z_components/components/z-collection/z-collection.dart';
+import 'package:z_components/components/z-selection/z-selection.dart';
+import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -55,6 +53,13 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
     ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
   ];
+  List<String> listaPortesString = [
+    "aberto",
+    "fechado",
+    "em abertura",
+  ];
+
+  List<ZSelectionItem> _listaSelecaoCargo = [];
 
   List<ZFormViewModel> listaForm = [
     ZFormViewModel(
@@ -92,14 +97,15 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
 
   List<ColaboradorDocumentoViewModel> _listaDocumentosTemporario = [
     new ColaboradorDocumentoViewModel(
-        nomeDocumento: "RG",
-        campos: [],
-        status: "",
-        horizontalOuVertical: "",
-        idColaborador: "",
-        idDocumento: "",
-        idImagemDocumento: "",
-        qtdePaginaUpload: "0"),
+      nomeDocumento: "RG",
+      campos: [],
+      status: "",
+      horizontalOuVertical: "",
+      idColaborador: "",
+      idDocumento: "",
+      idImagemDocumento: "",
+      qtdePaginaUpload: "0",
+    ),
     new ColaboradorDocumentoViewModel(
         nomeDocumento: "Teste",
         campos: [],
@@ -177,6 +183,52 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       body: new Container(
         child: new ListView(
           children: [
+            new Container(
+              height: 20,
+            ),
+            new ZCollection(
+              themeData: Theme.of(context),
+              titulo: "Titulo",
+              lista: listaPorte,
+              bloquearCampo: false,
+              campoObrigatorio: true,
+              onChange: (opcEscolhida) {
+                if (opcEscolhida != null) {
+                  listaPortesString[0] = opcEscolhida.chave;
+                }
+              },
+            ),
+            new ZItemTileConvite(
+              itemTileViewModel: new ItemTileViewModel(
+                  nome: "Matheus Loureiro de Albuquerque",
+                  status: "FINALIZADO",
+                  cargo: "Deselvolvedor Flutter",
+                  dataAdmissao: "01/05/2021",
+                  porcentagemPreenchimento: "89%",
+                  prazo: " 7 dias",
+                  icone: selectIcon(SelectStatus.APROVADO),
+                  stateCard:
+                      changeTextStateCard(SelecionarEstadoCard.CORRIGIDO),
+                  onTileIsSelected: () {
+                    print("oi");
+                  }),
+            ),
+            new Container(
+              height: 20,
+            ),
+            new ZItemTileConvite(
+              itemTileViewModel: new ItemTileViewModel(
+                nome: "Luiz Zellar",
+                status: "EM ANDAMENTO",
+                cargo: "Deselvolvedor Flutter",
+                dataAdmissao: "01/07/2020",
+                porcentagemPreenchimento: "100%",
+                prazo: " 1 dias",
+                icone: selectIcon(SelectStatus.EM_ANDAMENTO),
+                stateCard: changeTextStateCard(
+                    SelecionarEstadoCard.CORRECAO_SOLICITADA),
+              ),
+            ),
             new ZTile(
               leading: Text("oi"),
               trailing: Text("123456"),
@@ -268,6 +320,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               ),
             ),
             new ZTile(
+              disable: true,
               onTap: () {
                 Navigator.push(
                     context,
@@ -341,10 +394,23 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                               colaboradorDocumentoViewModel: [
                                 ColaboradorDocumentoViewModel(
                                     campos: [
-                                      DocumentoCampo(
-                                        label: "teste",
-                                        obrigatorio: false,
-                                        tipo: "text",
+                                      new ContratacaoDocumentoCampoViewModel(
+                                        resposta: '',
+                                        tipo: 'image',
+                                        descricao: "foto",
+                                        idAtributo: '',
+                                        idDocumento: '',
+                                        dataResposta: '15/06/2022',
+                                        tamanhoMaximo: 30
+                                      ),
+                                      new ContratacaoDocumentoCampoViewModel(
+                                          resposta: '',
+                                          tipo: 'text',
+                                        descricao: "aaaaaa",
+                                        idAtributo: '',
+                                          dataResposta: '15/06/2022',
+                                          idDocumento: '',
+                                        tamanhoMaximo: 30
                                       )
                                     ],
                                     nomeDocumento: "Documento teste",
@@ -386,11 +452,33 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               themeData: Theme.of(context),
               titulo: "teste",
               onChange: (value) {},
-            )
+            ),
+            new ZSelection(
+              key: Key(''),
+              titulo: "Cargos",
+              lista: [],
+              listaRespostas: [],
+              themeData: Theme.of(context),
+              textoOnAdd: "",
+              onChange: (listaSelecaoAtualizada) {
+                if (listaSelecaoAtualizada != null) {}
+              },
+              onFilter: (filter) async {},
+              onScroll: (filter, listaAnterior) async {},
+            ),
           ],
         ),
       ),
     );
+  }
+
+  String changeTextStateCard(SelecionarEstadoCard selecionarEstado) {
+    switch (selecionarEstado) {
+      case SelecionarEstadoCard.CORRIGIDO:
+        return "CORRIGIDO";
+      case SelecionarEstadoCard.CORRECAO_SOLICITADA:
+        return "CORRECAO SOLICITADA";
+    }
   }
 
   Widget selectIcon(SelectStatus selectStatus) {

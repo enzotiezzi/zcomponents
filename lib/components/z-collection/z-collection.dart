@@ -56,7 +56,6 @@ class ZCollectionState extends State<ZCollection> {
   @override
   void initState() {
     buscarValorPadrao(widget.lista);
-    //setarvalor();
     super.initState();
   }
 
@@ -114,7 +113,9 @@ class ZCollectionState extends State<ZCollection> {
   }
 
   Color _retornaCorIcon() {
-    if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
+    if (widget.bloquearCampo) {
+      return Colors.grey;
+    } else if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
       return widget.themeData.primaryColor;
     } else {
       return Colors.black;
@@ -125,23 +126,18 @@ class ZCollectionState extends State<ZCollection> {
     if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
       return new Icon(Icons.keyboard_arrow_right, color: _retornaCorIcon());
     } else {
-      return IconButton(
+      return new IconButton(
           onPressed: () {
-            setState(() {
-              _itemSelecionado = null;
-              if (widget.onClear != null) widget.onClear();
-            });
+            if (widget.bloquearCampo) {
+              return null;
+            } else {
+              setState(() {
+                _itemSelecionado = null;
+                if (widget.onClear != null) widget.onClear();
+              });
+            }
           },
           icon: new Icon(Icons.clear, color: _retornaCorIcon()));
-    }
-  }
-
-  TextStyle _retornaCorTexto() {
-    if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
-      return widget.themeData.textTheme.bodyText1
-          .copyWith(color: widget.themeData.primaryColor);
-    } else {
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     }
   }
 
@@ -171,13 +167,6 @@ class ZCollectionState extends State<ZCollection> {
     }
   }
 
-/*
-  return ZCollectionList(
-  lista: widget.lista,
-  titulo: widget.titulo,
-  );
-*/
-
   void _irParaSelecaoDeItemHorizontal() async {
     if (!widget.bloquearCampo) {
       _itemSelecionado = await Navigator.push<ZCollectionItem>(
@@ -185,7 +174,7 @@ class ZCollectionState extends State<ZCollection> {
           new PageRouteBuilder(
             pageBuilder: (BuildContext context, Animation animation,
                 Animation secondaryAnimation) {
-              return ZCollectionList(
+              return new ZCollectionList(
                 key: keyLista,
                 lista: widget.lista,
                 titulo: widget.titulo,
@@ -203,7 +192,7 @@ class ZCollectionState extends State<ZCollection> {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,
                 Widget child) {
-              return SlideTransition(
+              return new SlideTransition(
                 position: new Tween<Offset>(
                   begin: const Offset(1.0, 0.0),
                   end: Offset.zero,
@@ -226,7 +215,25 @@ class ZCollectionState extends State<ZCollection> {
 
   Widget _returnRequiredField() {
     if (widget.campoObrigatorio) {
-      return Flexible(
+      return new Flexible(
+        flex: 45,
+        fit: FlexFit.tight,
+        child: new RichText(
+          maxLines: 2,
+          text: new TextSpan(
+            children: <TextSpan>[
+              new TextSpan(
+                text: "${widget.titulo}",
+                style: widget.themeData.textTheme.bodyText1
+                    .copyWith(color: Color(0xff999999)),
+              ),
+              new TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
+            ],
+          ),
+        ),
+      );
+    } else {
+      return new Flexible(
         flex: 45,
         fit: FlexFit.tight,
         child: new RichText(
@@ -236,30 +243,26 @@ class ZCollectionState extends State<ZCollection> {
               new TextSpan(
                 text: "${widget.titulo}",
                 style: widget.themeData.textTheme.bodyText1
-                    .copyWith(color: Color(0xff999999)),
+                    .copyWith(color: const Color(0xff999999)),
               ),
-              TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
             ],
           ),
         ),
       );
+    }
+  }
+
+  TextStyle _retornaCorTexto() {
+    if (widget.bloquearCampo &&
+        _itemSelecionado?.valor == null &&
+        _anterior == "Selecione") {
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.grey);
+    } else if (widget.bloquearCampo) {
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.grey);
+    } else if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     } else {
-      return Flexible(
-        flex: 45,
-        fit: FlexFit.tight,
-        child: RichText(
-          maxLines: 2,
-          text: TextSpan(
-            children: <TextSpan>[
-              new TextSpan(
-                text: "${widget.titulo}",
-                style: widget.themeData.textTheme.bodyText1
-                    .copyWith(color: Color(0xff999999)),
-              ),
-            ],
-          ),
-        ),
-      );
+      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
     }
   }
 }

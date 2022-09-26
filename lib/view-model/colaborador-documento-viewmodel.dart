@@ -1,4 +1,6 @@
 import 'dart:typed_data';
+import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.dart';
+
 import 'documento-campo.dart';
 
 class ColaboradorDocumentoViewModel {
@@ -13,7 +15,7 @@ class ColaboradorDocumentoViewModel {
   bool imagemObrigatoria;
   bool documentoAtualizado;
   double porcentagemStatusPreenchimento;
-  List<DocumentoCampo> campos;
+  List<ContratacaoDocumentoCampoViewModel> campos;
 
   ColaboradorDocumentoViewModel({
     this.idColaborador: "",

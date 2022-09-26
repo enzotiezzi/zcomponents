@@ -8,6 +8,7 @@ class ItemTileViewModel {
   String porcentagemPreenchimento;
   String status;
   String prazo;
+  String stateCard;
   Function onTileIsSelected;
   Widget icone;
 
@@ -20,5 +21,6 @@ class ItemTileViewModel {
     this.onTileIsSelected,
     this.status,
     this.icone,
+    this.stateCard
   });
 }

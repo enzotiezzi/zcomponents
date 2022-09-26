@@ -17,7 +17,7 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   mask_shifter: ^0.1.0
   cached_network_image: ^3.2.0
-  mask_text_input_formatter: ^2.0.0
+  mask_text_input_formatter: ^2.3.0
   pin_code_text_field: ^1.5.0
   cpf_cnpj_validator: ^1.0.5
   flutter_circular_chart: ^0.1.0
@@ -60,9 +60,9 @@ dependencies:
   flutter_bloc: ^7.0.1
   flutter_treeview: ^1.0.4+1
   google_maps_flutter: ^0.5.11+1
+  google_maps_flutter_web: ^0.3.3
   geocoder: ^0.2.1
   app_settings: ^4.0.4
-  document_scanner: ^0.1.2
   permission_handler: ^8.3.0
 
 dev_dependencies:
@@ -88,6 +88,7 @@ flutter:
     - assets/Z_Documentos.svg
     - assets/arvore.svg
     - assets/more.svg
+    - assets/img_background.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
