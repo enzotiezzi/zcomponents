@@ -248,13 +248,17 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                        new Container(
-                          width: MediaQuery.of(context).size.width / 1.6,
-                          margin: new EdgeInsets.only(
-                            left: 4,
-                            bottom: 4,
-                          ),
-                          child: _retornarCargo(),
+                        Stack(
+                          children: [
+                            new Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              margin: new EdgeInsets.only(
+                                left: 4,
+                                bottom: 4,
+                              ),
+                              child:  _retornarCargo(),
+                            ),
+                          ],
                         ),
                       ],
                     ),

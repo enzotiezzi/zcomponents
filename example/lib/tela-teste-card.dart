@@ -220,10 +220,12 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               itemTileViewModel: new ItemTileViewModel(
                 nome: "Luiz Zellar",
                 status: "EM ANDAMENTO",
-                cargo: "Deselvolvedor Flutter",
+                cargo:
+                    "Deselvolvedor Flutter com um cargo muito grande para quebrar o tamanho maximo",
                 dataAdmissao: "01/07/2020",
                 porcentagemPreenchimento: "100%",
                 prazo: " 1 dias",
+                onTileIsSelected: () {},
                 icone: selectIcon(SelectStatus.EM_ANDAMENTO),
                 stateCard: changeTextStateCard(
                     SelecionarEstadoCard.CORRECAO_SOLICITADA),
@@ -395,23 +397,21 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                                 ColaboradorDocumentoViewModel(
                                     campos: [
                                       new ContratacaoDocumentoCampoViewModel(
-                                        resposta: '',
-                                        tipo: 'image',
-                                        descricao: "foto",
-                                        idAtributo: '',
-                                        idDocumento: '',
-                                        dataResposta: '15/06/2022',
-                                        tamanhoMaximo: 30
-                                      ),
+                                          resposta: '',
+                                          tipo: 'image',
+                                          descricao: "foto",
+                                          idAtributo: '',
+                                          idDocumento: '',
+                                          dataResposta: '15/06/2022',
+                                          tamanhoMaximo: 30),
                                       new ContratacaoDocumentoCampoViewModel(
                                           resposta: '',
                                           tipo: 'text',
-                                        descricao: "aaaaaa",
-                                        idAtributo: '',
+                                          descricao: "aaaaaa",
+                                          idAtributo: '',
                                           dataResposta: '15/06/2022',
                                           idDocumento: '',
-                                        tamanhoMaximo: 30
-                                      )
+                                          tamanhoMaximo: 30)
                                     ],
                                     nomeDocumento: "Documento teste",
                                     qtdePaginaUpload: "2/1")
