@@ -94,7 +94,7 @@ class ZCollectionListState extends State<ZCollectionList> {
           new Expanded(
               child: new Container(
             margin: EdgeInsets.only(top: 16.0),
-            child: _buildLista(),
+            child: Container(child: _buildLista()),
           ))
         ],
       ),
