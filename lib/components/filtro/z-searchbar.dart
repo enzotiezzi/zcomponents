@@ -85,7 +85,7 @@ class ZSearchBarState extends State<ZSearchBar> {
                       color: Theme.of(context).primaryColor,
                     ),
                     onPressed: () async {
-                      filter();
+
                     }))
           ],
         ));
