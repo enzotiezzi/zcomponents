@@ -134,6 +134,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
     } else {
       return new Text(
         widget.itemTileViewModel.cargo,
+        overflow: TextOverflow.ellipsis,
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
     }
@@ -247,12 +248,17 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                        new Container(
-                          margin: new EdgeInsets.only(
-                            left: 4,
-                            bottom: 4,
-                          ),
-                          child: _retornarCargo(),
+                        Stack(
+                          children: [
+                            new Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              margin: new EdgeInsets.only(
+                                left: 4,
+                                bottom: 4,
+                              ),
+                              child:  _retornarCargo(),
+                            ),
+                          ],
                         ),
                       ],
                     ),
