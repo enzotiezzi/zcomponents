@@ -39,9 +39,9 @@ class ZSearchBarState extends State<ZSearchBar> {
               child: new Container(
                 margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
                 child: new Container(
-                  margin: EdgeInsets.only(left: 16, right: 2),
-                  decoration: BoxDecoration(
-                      color: Color(0xfff0f0f0),
+                  margin: const EdgeInsets.only(left: 16, right: 16),
+                  decoration: const BoxDecoration(
+                      color: const Color(0xfff0f0f0),
                       borderRadius: BorderRadius.all(Radius.circular(9.0))),
                   child: new Row(
                     children: <Widget>[
