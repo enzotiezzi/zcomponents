@@ -77,16 +77,6 @@ class ZSearchBarState extends State<ZSearchBar> {
                 ),
               ),
             ),
-            new Expanded(
-                flex: 15,
-                child: new IconButton(
-                    icon: new Icon(
-                      Icons.filter_list_outlined,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    onPressed: () async {
-
-                    }))
           ],
         ));
   }
