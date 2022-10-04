@@ -152,7 +152,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                         child: new Container(
                           margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
                           child: new Container(
-                            margin: EdgeInsets.only(left: 16, right: 2),
+                            margin: EdgeInsets.only(left: 16, right: 16),
                             decoration: BoxDecoration(
                                 color: Color(0xfff0f0f0),
                                 borderRadius:
@@ -183,14 +183,6 @@ class ZEstruturaEmpresa extends StatelessWidget {
                           ),
                         ),
                       ),
-                      new Expanded(
-                          flex: 15,
-                          child: new IconButton(
-                            icon: new Icon(
-                              Icons.filter_list_outlined,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          )),
                     ],
                   ),
                 ),
