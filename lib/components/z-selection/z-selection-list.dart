@@ -160,7 +160,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                 margin: const EdgeInsets.only(bottom: 6, top: 6.0),
                 child: new Container(
                   height: 36,
-                  margin: EdgeInsets.only(left: 16, right: 2),
+                  margin: const EdgeInsets.only(left: 16, right: 16),
                   decoration: BoxDecoration(
                       color: Color(0xfff0f0f0),
                       borderRadius: BorderRadius.all(Radius.circular(9.0))),
@@ -212,14 +212,6 @@ class ZSelectionListState extends State<ZSelectionList> {
                 ),
               ),
             ),
-            new Expanded(
-                flex: 15,
-                child: new IconButton(
-                    icon: new Icon(
-                      Icons.filter_list,
-                      color: widget.color,
-                    ),
-                    onPressed: () {}))
           ],
         ));
   }

@@ -574,8 +574,7 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-                padding: EdgeInsets.all(7.0),
-                //margin: EdgeInsets.only(left: 10.0),
+                padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8, right: 16),
                 decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.2),
                     borderRadius: BorderRadius.all(Radius.circular(9.0))),
@@ -609,13 +608,6 @@ class _ZTreeViewState extends State<ZTreeView> with TickerProviderStateMixin {
                     )
                   ],
                 )),
-            new Container(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: new Icon(
-                Icons.filter_list,
-                color: Color(0xff801F92),
-              ),
-            )
           ],
         ),
       ),
