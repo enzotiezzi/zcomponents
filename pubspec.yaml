@@ -53,7 +53,7 @@ dependencies:
   open_file: ^3.2.1
   shared_preferences: ^2.0.12
   flutter_svg: ^1.0.0
-  flutter_image_compress: ^0.7.0
+  flutter_image_compress: ^1.0.0
   brasil_fields: ^1.0.0
   crypto: ^3.0.0
   flutter_colorpicker: ^0.3.4
