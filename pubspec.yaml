@@ -50,7 +50,6 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   table_calendar: ^2.2.3
   flutter_genius_scan: ^4.3.0
-  open_file: ^3.2.1
   shared_preferences: ^2.0.12
   flutter_svg: ^1.0.0
   flutter_image_compress: ^1.0.0
