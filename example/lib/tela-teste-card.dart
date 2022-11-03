@@ -17,6 +17,8 @@ import 'package:z_components/components/z-tile.dart';
 import 'package:z_components/components/permissao-negada.dart';
 import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.dart';
+import 'package:z_components/components/z-news.dart';
+import 'package:z_components/view-model/noticia-viewmodel.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -183,7 +185,23 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       body: new Container(
         child: new ListView(
           children: [
-            new Container(
+            ZNews(
+              noticiaViewMode: [
+                NoticiaViewModel(
+                  autor: "Teste",
+                  descricao: "Teste",
+                  idCategoria: "",
+                  idNoticia: "",
+                  publicadaEm: "",
+                  titulo: "Teste",
+                  url: "https://pt.wikipedia.org/wiki/God_of_War_Ragnar%C3%B6k",
+                  urlImagem:
+                      "https://upload.wikimedia.org/wikipedia/pt/a/a5/God_of_War_Ragnar%C3%B6k_capa.jpg",
+                )
+              ],
+              onTap: (value) {},
+            )
+            /*        new Container(
               height: 20,
             ),
             new ZCollection(
@@ -465,7 +483,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
               },
               onFilter: (filter) async {},
               onScroll: (filter, listaAnterior) async {},
-            ),
+            ),*/
           ],
         ),
       ),

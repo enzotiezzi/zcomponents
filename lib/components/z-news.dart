@@ -3,28 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:z_components/components/z-news-webview.dart';
 import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/view-model/noticia-viewmodel.dart';
 
 class ZNews extends StatefulWidget {
-
-
   final List<NoticiaViewModel> noticiaViewMode;
   final ScrollController scrollC;
   void Function(String idNoticia) onTap;
 
-  ZNews({
-    this.noticiaViewMode,
-    this.scrollC,
-    this.onTap
-  });
+  ZNews({this.noticiaViewMode, this.scrollC, this.onTap});
 
   @override
   State<StatefulWidget> createState() => _ZNews();
 }
 
 class _ZNews extends State<ZNews> with TickerProviderStateMixin {
-
   @override
   void initState() {
     super.initState();
@@ -44,12 +38,15 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
           return new Card(
               elevation: 3,
               margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
-              child:
-              new InkWell(
-                onTap: (){
-                  onClickCardNoticia(widget.noticiaViewMode[index].url,widget.noticiaViewMode[index].idNoticia);
+              child: new InkWell(
+                onTap: () {
+                  onClickCardNoticia(
+                      widget.noticiaViewMode[index].url,
+                      widget.noticiaViewMode[index].idNoticia,
+                      widget.noticiaViewMode[index].titulo);
                 },
-                child: new Padding(padding: const EdgeInsets.all(6),
+                child: new Padding(
+                  padding: const EdgeInsets.all(6),
                   child: new Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +59,8 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                               height: 60,
                               width: 100,
                               child: CachedNetworkImage(
-                                imageUrl: widget.noticiaViewMode[index].urlImagem,
+                                imageUrl:
+                                    widget.noticiaViewMode[index].urlImagem,
                                 placeholder: (context, url) => SizedBox(
                                   child: Shimmer.fromColors(
                                     baseColor: Color(0xffe6e6e6),
@@ -74,62 +72,85 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                                     ),
                                   ),
                                 ),
-                                errorWidget: (context, url, error) => const Icon(Icons.error),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                                 fadeOutDuration: const Duration(seconds: 1),
-                                fadeInDuration: const Duration(milliseconds: 1300),
+                                fadeInDuration:
+                                    const Duration(milliseconds: 1300),
                               ),
                             )
                           ],
-                        ), ),
+                        ),
+                      ),
                       new Expanded(
                         flex: 7,
-                        child:
-                        new Container(
+                        child: new Container(
                           margin: const EdgeInsets.only(left: 10),
                           child: new Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               new Container(
-                                child: new Text(widget.noticiaViewMode[index].titulo,style: new TextStyle(fontWeight: FontWeight.bold),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
+                                child: new Text(
+                                  widget.noticiaViewMode[index].titulo,
+                                  style: new TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                               new Container(
-                                child: new Text(widget.noticiaViewMode[index].descricao,style: new TextStyle(fontWeight: FontWeight.w500),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
+                                child: new Text(
+                                  widget.noticiaViewMode[index].descricao,
+                                  style: new TextStyle(
+                                      fontWeight: FontWeight.w500),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                               new Row(
                                 children: <Widget>[
                                   new Container(
                                     padding: const EdgeInsets.only(top: 6),
-                                    child: new Icon(Icons.import_contacts,size: 16,),
+                                    child: new Icon(
+                                      Icons.import_contacts,
+                                      size: 16,
+                                    ),
                                   ),
                                   new Container(
-                                    width: MediaQuery.of(context).size.width*0.5,
-                                    margin: const EdgeInsets.only(top: 6,left: 6),
-                                    child: new Text("${widget.noticiaViewMode[index].autor} - ${widget.noticiaViewMode[index].publicadaEm}",overflow: TextOverflow.ellipsis,maxLines: 1,) ,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    margin:
+                                        const EdgeInsets.only(top: 6, left: 6),
+                                    child: new Text(
+                                      "${widget.noticiaViewMode[index].autor} - ${widget.noticiaViewMode[index].publicadaEm}",
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
                                   ),
                                 ],
                               )
                             ],
                           ),
-                        ),)
-
+                        ),
+                      )
                     ],
-                  ),)
-                ,
-              )
-
-          );
+                  ),
+                ),
+              ));
         });
   }
 
-  void onClickCardNoticia(String noticiaUrl,String idNoticia)async{
+  void onClickCardNoticia(
+      String noticiaUrl, String idNoticia, String titulo) async {
     widget.onTap(idNoticia);
     var url = '$noticiaUrl';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ZNewsWebView(
+                  url: url,
+                  titulo: titulo,
+                )));
   }
-
 }
