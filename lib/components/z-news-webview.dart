@@ -21,6 +21,8 @@ class ZNewsWebViewState extends State<ZNewsWebView> {
   @override
   Widget build(BuildContext context) {
     return new WebviewScaffold(
+      displayZoomControls: true,
+      withZoom: true,
       url: widget.url,
       appBar: new AppBar(
         centerTitle: true,
