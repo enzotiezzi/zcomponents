@@ -194,9 +194,9 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                   idNoticia: "",
                   publicadaEm: "",
                   titulo: "Teste",
-                  url: "https://pt.wikipedia.org/wiki/God_of_War_Ragnar%C3%B6k",
+                  url: "https://i.ibb.co/8Y1NtFC/Newsletter-Outubro-Rosa-Novembro-Azul-1.jpg",
                   urlImagem:
-                      "https://upload.wikimedia.org/wikipedia/pt/a/a5/God_of_War_Ragnar%C3%B6k_capa.jpg",
+                      "https://i.ibb.co/8Y1NtFC/Newsletter-Outubro-Rosa-Novembro-Azul-1.jpg",
                 )
               ],
               onTap: (value) {},
