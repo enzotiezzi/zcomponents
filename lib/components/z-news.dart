@@ -40,8 +40,10 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
               margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
               child: new InkWell(
                 onTap: () {
-                  onClickCardNoticia(widget.noticiaViewMode[index].url,
-                      widget.noticiaViewMode[index].idNoticia);
+                  onClickCardNoticia(
+                      widget.noticiaViewMode[index].url,
+                      widget.noticiaViewMode[index].idNoticia,
+                      widget.noticiaViewMode[index].titulo);
                 },
                 child: new Padding(
                   padding: const EdgeInsets.all(6),
@@ -139,7 +141,8 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
         });
   }
 
-  void onClickCardNoticia(String noticiaUrl, String idNoticia) async {
+  void onClickCardNoticia(
+      String noticiaUrl, String idNoticia, String titulo) async {
     widget.onTap(idNoticia);
     var url = '$noticiaUrl';
     Navigator.push(
@@ -147,6 +150,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
         MaterialPageRoute(
             builder: (context) => ZNewsWebView(
                   url: url,
+                  titulo: titulo,
                 )));
   }
 }
