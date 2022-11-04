@@ -19,7 +19,7 @@ dependencies:
   cached_network_image: ^3.2.0
   mask_text_input_formatter: ^2.3.0
   pin_code_text_field: ^1.5.0
-  cpf_cnpj_validator: ^1.0.5
+  cpf_cnpj_validator: ^2.0.0
   flutter_circular_chart: ^0.1.0
   email_validator: ^2.0.1
   configurable_expansion_tile: ^1.0.0
@@ -37,7 +37,7 @@ dependencies:
   percent_indicator: ^2.1.1+1
   after_init: ^0.1.2
   flutter_webview_plugin: ^0.4.0
-  uuid: ^3.0.0
+  uuid: ^3.0.5
   randombytes: ^0.1.1
   after_layout: ^1.0.7+2
   image_picker: ^0.6.3+4
@@ -50,7 +50,7 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   table_calendar: ^2.2.3
   flutter_genius_scan: ^4.3.0
-  shared_preferences: ^2.0.12
+  shared_preferences: ^2.0.11
   flutter_svg: ^1.0.0
   flutter_image_compress: ^0.7.0
   brasil_fields: ^1.0.0
