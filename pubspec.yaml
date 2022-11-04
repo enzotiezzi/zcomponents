@@ -21,7 +21,7 @@ dependencies:
   pin_code_text_field: ^1.5.0
   cpf_cnpj_validator: ^1.0.5
   flutter_circular_chart: ^0.1.0
-  email_validator: '^1.0.0'
+  email_validator: ^2.0.1
   configurable_expansion_tile: ^1.0.0
   http: ^0.13.4
   sqflite: ^2.0.0+3
