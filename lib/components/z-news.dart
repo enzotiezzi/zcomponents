@@ -59,7 +59,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                               height: 60,
                               width: 100,
                               color: Colors.grey,
-                              /*      child: CachedNetworkImage(
+                              child: CachedNetworkImage(
                                 imageUrl:
                                     widget.noticiaViewMode[index].urlImagem,
                                 placeholder: (context, url) => SizedBox(
@@ -78,7 +78,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                                 fadeOutDuration: const Duration(seconds: 1),
                                 fadeInDuration:
                                     const Duration(milliseconds: 1300),
-                              ),*/
+                              ),
                             )
                           ],
                         ),
