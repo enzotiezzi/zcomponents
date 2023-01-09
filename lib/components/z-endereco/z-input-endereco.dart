@@ -12,6 +12,7 @@ class ZInputEndereco extends StatefulWidget {
   final TextEditingController cidadeController;
   final TextEditingController estadoController;
   void Function(bool) validacao;
+  String enderecoCompleto;
 
   ZInputEndereco(
       {this.campoObrigatorio = false,
@@ -23,7 +24,8 @@ class ZInputEndereco extends StatefulWidget {
       @required this.bairroController,
       @required this.cidadeController,
       @required this.estadoController,
-      this.validacao});
+      this.validacao,
+      this.enderecoCompleto});
 
   @override
   _ZInputEnderecoState createState() => _ZInputEnderecoState();
@@ -32,6 +34,13 @@ class ZInputEndereco extends StatefulWidget {
 class _ZInputEnderecoState extends State<ZInputEndereco> {
   String endereco;
   String _anterior = "Preencha seu endereço";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _validarEnderecoInicial();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +114,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
   }
 
   TextStyle _retornaCorTexto() {
-    if (endereco == null ||
-        endereco.isEmpty && _anterior.contains("Preencha")) {
-      return widget.themeData.textTheme.bodyText1
-          .copyWith(color: widget.themeData.primaryColor);
-    } else {
       return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
-    }
   }
 
   Widget _returnRequiredField() {
@@ -168,6 +171,12 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
       if (widget.validacao != null) widget.validacao(false);
     } else {
       if (widget.validacao != null) widget.validacao(true);
+    }
+  }
+
+  void _validarEnderecoInicial(){
+    if(widget.enderecoCompleto != null && widget.enderecoCompleto.isNotEmpty){
+      endereco = widget.enderecoCompleto;
     }
   }
 }
