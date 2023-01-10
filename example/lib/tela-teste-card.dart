@@ -1,6 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:z_components/components/z-endereco/z-input-endereco.dart';
 import 'package:z_components/components/z-item-tile-convite.dart';
 import 'package:z_components/components/z-selection/z-selection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
@@ -200,6 +201,20 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 )
               ],
               onTap: (value) {},
+            ),
+            ZInputEndereco(
+              bairroController: TextEditingController(),
+              cepController: TextEditingController(),
+              cidadeController: TextEditingController(),
+              complementoController: TextEditingController(),
+              estadoController: TextEditingController(),
+              logradouroController: TextEditingController(),
+              numeroController: TextEditingController(),
+              campoObrigatorio: true,
+              themeData: Theme.of(context),
+              //enderecoCompleto: "Rua Andre dias, 27, Jardim Boa Vista, Sao Paulo, SP, casa, 05584030",
+              validacao: (a){},
+
             )
             /*        new Container(
               height: 20,
