@@ -12,7 +12,8 @@ class ZInputEndereco extends StatefulWidget {
   final TextEditingController cidadeController;
   final TextEditingController estadoController;
   void Function(bool) validacao;
-  String enderecoCompleto;
+  final String enderecoCompleto;
+  final bool bloquearCampo;
 
   ZInputEndereco(
       {this.campoObrigatorio = false,
@@ -25,7 +26,8 @@ class ZInputEndereco extends StatefulWidget {
       @required this.cidadeController,
       @required this.estadoController,
       this.validacao,
-      this.enderecoCompleto});
+      this.enderecoCompleto,
+      this.bloquearCampo = false});
 
   @override
   _ZInputEnderecoState createState() => _ZInputEnderecoState();
@@ -82,30 +84,41 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
           )
         ],
       ),
-      onTap: () async {
-        final resultado = await Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => new ZInputCamposEndereco(
-                      themeData: widget.themeData,
-                      cepController: widget.cepController,
-                      numeroController: widget.numeroController,
-                      logradouroController: widget.logradouroController,
-                      estadoController: widget.estadoController,
-                      complementoController: widget.complementoController,
-                      cidadeController: widget.cidadeController,
-                      bairroController: widget.bairroController,
-                    )));
-        setState(() {
-          endereco = resultado;
-          _validarEndereco();
-        });
-      },
+      onTap: _irParaSelecaoEndereco()
     );
   }
 
+  Function _irParaSelecaoEndereco(){
+    if(!widget.bloquearCampo){
+     return ()async{
+       final resultado = await Navigator.push(
+           context,
+           MaterialPageRoute(
+               builder: (context) => new ZInputCamposEndereco(
+                 themeData: widget.themeData,
+                 cepController: widget.cepController,
+                 numeroController: widget.numeroController,
+                 logradouroController: widget.logradouroController,
+                 estadoController: widget.estadoController,
+                 complementoController: widget.complementoController,
+                 cidadeController: widget.cidadeController,
+                 bairroController: widget.bairroController,
+               )));
+       setState(() {
+         if(resultado !=null && resultado.toString().isNotEmpty){
+           endereco = resultado;
+         }
+
+         _validarEndereco();
+       });
+     };
+    }
+  }
+
   Color _retornaCorIcon() {
-    if (endereco == null ||
+    if(widget.bloquearCampo){
+      return Colors.grey;
+    } else if (endereco == null ||
         endereco.isEmpty && _anterior.contains("Preencha")) {
       return widget.themeData.primaryColor;
     } else {
@@ -114,7 +127,12 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
   }
 
   TextStyle _retornaCorTexto() {
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
+      if(widget.bloquearCampo){
+        return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.grey);
+      }else {
+        return widget.themeData.textTheme.bodyText1.copyWith(
+            color: Colors.black);
+      }
   }
 
   Widget _returnRequiredField() {
