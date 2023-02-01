@@ -1,3 +1,15 @@
+import 'package:z_components/components/permissao-negada.dart';
+import 'package:z_components/components/z-item-tile.dart';
+import 'package:z_components/components/z-item-tile-candidato.dart';
+import 'package:z_components/components/z-item-tile-card-basico.dart';
+import 'package:z_components/components/z-item-tile-lista-candidato.dart';
+import 'package:z_components/components/z-item-tile-modulo-adm.dart';
+import 'package:z_components/components/z-item-tile-modulo-gestao.dart';
+import 'package:z_components/components/z-item-tile-os.dart';
+import 'package:z_components/components/z-item-tile-pergunta-adicional.dart';
+import 'package:z_components/components/z-item-tile-usuario.dart';
+import 'package:z_components/components/z-item-tile-usuario-adm.dart';
+import 'package:z_components/components/z-inputs/z-input-cpf.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +32,16 @@ import 'package:z_components/components/z-selection/z-selection.dart';
 import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.dart';
 import 'package:z_components/components/z-news.dart';
 import 'package:z_components/view-model/noticia-viewmodel.dart';
+import 'package:z_components/components/z-collection/z-collection-bottomsheet.dart';
+import 'package:z_components/components/z-inputs/z-input-data-de-nascimento.dart';
+import 'package:z_components/components/z-inputs/z-input-cep.dart';
+import 'package:z_components/components/z-inputs/z-input-celular.dart';
+import 'package:z_components/components/z-inputs/z-input-cnpj.dart';
+import 'package:z_components/components/z-inputs/z-input-email.dart';
+import 'package:z_components/components/z-inputs/z-input-generic.dart';
+import 'package:z_components/components/z-inputs/z-input-name.dart';
+import 'package:z_components/components/z-inputs/z-input-telefone-fixo.dart';
+import 'package:z_components/components/z-nome-reduzido.dart';
 
 class TelaTesteCard extends StatefulWidget {
   @override
@@ -39,6 +61,12 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   TextEditingController bairro = new TextEditingController();
   TextEditingController complemento = new TextEditingController();
   TextEditingController estado = new TextEditingController();
+  TextEditingController celular = new TextEditingController();
+  TextEditingController telefone = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+  TextEditingController generic = new TextEditingController();
+  TextEditingController cnpj = new TextEditingController();
+  TextEditingController cpf = new TextEditingController();
   List<ZCollectionItem> lista = [];
 
   GlobalKey<ZCollectionState> keyPorte = new GlobalKey<ZCollectionState>();
@@ -56,6 +84,8 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
     ZCollectionItem(valor: "Teste4", chave: "Teste4", titulo: "Teste4"),
     ZCollectionItem(valor: "Teste5", chave: "Teste5", titulo: "Teste5"),
   ];
+  TextEditingController dataController = new TextEditingController();
+  FocusNode focusData = new FocusNode();
   List<String> listaPortesString = [
     "aberto",
     "fechado",
@@ -169,6 +199,13 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
   }
 
   bool editado = false;
+  FocusNode focusEmail = new FocusNode();
+  FocusNode focusTelefone = new FocusNode();
+  FocusNode focusNome = new FocusNode();
+  FocusNode focusCNPJ = new FocusNode();
+  FocusNode focusCPF = new FocusNode();
+  FocusNode focusCelular = new FocusNode();
+  FocusNode focusGeneric = new FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +214,11 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         onPressed: () {
           setState(() {
             editado = !editado;
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PermissaoNegada(
+              onPressed: (){},
+              caminhoImagem: "assets/arvore.svg",
+              textoPermissao: "ERRO",
+            )));
           });
         },
       ),
@@ -185,6 +227,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ),
       body: new Container(
         child: new ListView(
+          shrinkWrap: true,
           children: [
             ZNews(
               noticiaViewMode: [
@@ -201,21 +244,63 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
                 )
               ],
               onTap: (value) {},
+
             ),
-            ZInputEndereco(
-              bairroController: TextEditingController(),
-              cepController: TextEditingController(),
-              cidadeController: TextEditingController(),
-              complementoController: TextEditingController(),
-              estadoController: TextEditingController(),
-              logradouroController: TextEditingController(),
-              numeroController: TextEditingController(),
-              campoObrigatorio: true,
-              themeData: Theme.of(context),
-
-              validacao: (a){},
-
+            ZTile(
+              leading: Text("a"),
+              trailing: Text("b"),
+              onTap: (){
+                print("ha");
+              },
+            ),
+            ZNomeReduzido(
+              text: "AAA BBB CCC",
             )
+            /*
+            new ZCollection(
+              themeData: Theme.of(context),
+              titulo: "Titulo",
+              valorPadrao: "Teste2",
+              lista: listaPorte,
+              bloquearCampo: true,
+              campoObrigatorio: true,
+              onChange: (opcEscolhida) {
+                if (opcEscolhida != null) {
+                  listaPortesString[0] = opcEscolhida.chave!;
+                }
+              },
+            ),*/
+            /*
+            ZCollectionBottomSheet(
+              title: 'ZBottom',
+              themeData: Theme.of(context),
+              campoObrigatorio: true,
+              valorPadrao: "1",
+              onChange:(item) async {
+                print(item.titulo);
+              },
+              lista: [
+                ZCollectionItem(chave: '2', titulo: '2', valor: '2'),
+                ZCollectionItem(chave: '1', titulo: '1', valor: '1'),
+              ],
+            ),*/
+            /*new ZItemTileConvite(
+              onTileIsSelected: (){
+                print("ha");
+              },
+              itemTileViewModel: new ItemTileViewModel(
+                  nome: "Matheus Loureiro de Albuquerque",
+                  status: "FINALIZADO",
+                  cargo: "Deselvolvedor Fluttekkkkkkkkkk",
+                  dataAdmissao: "01/05/2021",
+                  porcentagemPreenchimento: "89%",
+                  prazo: " 7 dias",
+                  icone: selectIcon(SelectStatus.APROVADO),
+                  stateCard: changeTextStateCard(SelecionarEstadoCard.CORRIGIDO),
+                  onTileIsSelected: () {
+                    print("oi");
+                  }),
+            ),*/
             /*        new Container(
               height: 20,
             ),

@@ -5,10 +5,10 @@ import 'package:z_components/i-view.dart';
 
 class ZFormView extends IView<ZForm> {
 
-  Map<String, String> camposMapeados = {};
-  ScrollController scrollControllerTudo = new ScrollController();
+  Map<String, String>? camposMapeados = {};
+  ScrollController? scrollControllerTudo = new ScrollController();
 
-  ZFormView(State state) : super(state);
+  ZFormView(State<ZForm> state) : super(state);
 
   @override
   Future<void> afterBuild() {
@@ -23,7 +23,7 @@ class ZFormView extends IView<ZForm> {
 
   void _inicializarListaRespostas() {
 
-    for (int i = 0; i < state.widget.viewmodel.length; i++) {
+    for (int i = 0; i < state.widget.viewmodel!.length; i++) {
 
     }
 

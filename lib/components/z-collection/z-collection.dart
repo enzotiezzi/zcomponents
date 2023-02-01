@@ -6,24 +6,24 @@ import 'package:z_components/components/z-collection/z-collection-item.dart';
 import 'package:z_components/components/z-collection/z-collection-list.dart';
 
 class ZCollection extends StatefulWidget {
-  final String titulo;
-  final List<ZCollectionItem> lista;
-  final ThemeData themeData;
-  final ValueChanged<ZCollectionItem> onChange;
-  final String valorPadrao;
-  final Color colorStyle;
-  final int skip;
-  final int take;
-  final bool campoObrigatorio;
-  bool editado;
-  final bool bloquearCampo;
-  final FiltroCampo filtroPrincipal;
-  final Function(List<FilterExpression>) onFilter;
-  Function(List<FilterExpression>, List<ZCollectionItem>) onScroll;
-  Function onClear;
+  final String? titulo;
+  final List<ZCollectionItem>? lista;
+  final ThemeData? themeData;
+  final ValueChanged<ZCollectionItem>? onChange;
+  final String? valorPadrao;
+  final Color? colorStyle;
+  final int? skip;
+  final int? take;
+  final bool? campoObrigatorio;
+  bool? editado;
+  final bool? bloquearCampo;
+  final FiltroCampo? filtroPrincipal;
+  final Function(List<FilterExpression>)? onFilter;
+  Function(List<FilterExpression>, List<ZCollectionItem>)? onScroll;
+  Function? onClear;
 
   ZCollection(
-      {Key key,
+      {Key? key,
       @required this.titulo,
       @required this.lista,
       @required this.themeData,
@@ -46,12 +46,12 @@ class ZCollection extends StatefulWidget {
 }
 
 class ZCollectionState extends State<ZCollection> {
-  ZCollectionItem _itemSelecionado = new ZCollectionItem();
+  ZCollectionItem? _itemSelecionado; //= new ZCollectionItem(chave: "", titulo: "", valor: "");
   String _anterior = "Selecione";
   GlobalKey<ZCollectionListState> keyLista =
       new GlobalKey<ZCollectionListState>();
 
-  ZCollectionItem get itemSelecionado => _itemSelecionado;
+  ZCollectionItem? get itemSelecionado => _itemSelecionado;
 
   @override
   void initState() {
@@ -97,26 +97,26 @@ class ZCollectionState extends State<ZCollection> {
   }
 
   String retornarTexto() {
-    if (widget.editado) {
-      if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
+    if (widget.editado !=null && widget.editado!) {
+      if (_itemSelecionado == null || _itemSelecionado!.valor == null && _anterior == "Selecione") {
         return _anterior;
       } else {
-        return _itemSelecionado?.valor + " (Editado)";
+        return _itemSelecionado!.valor! + " (Editado)";
       }
     } else {
-      if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
+      if (_itemSelecionado ==null || _itemSelecionado!.valor == null && _anterior == "Selecione") {
         return _anterior;
       } else {
-        return _itemSelecionado?.valor;
+        return _itemSelecionado!.valor!;
       }
     }
   }
 
   Color _retornaCorIcon() {
-    if (widget.bloquearCampo) {
+    if (widget.bloquearCampo != null && widget.bloquearCampo!) {
       return Colors.grey;
     } else if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
-      return widget.themeData.primaryColor;
+      return widget.themeData!.primaryColor;
     } else {
       return Colors.black;
     }
@@ -128,12 +128,12 @@ class ZCollectionState extends State<ZCollection> {
     } else {
       return new IconButton(
           onPressed: () {
-            if (widget.bloquearCampo) {
+            if (widget.bloquearCampo != null && widget.bloquearCampo!) {
               return null;
             } else {
               setState(() {
                 _itemSelecionado = null;
-                if (widget.onClear != null) widget.onClear();
+                if (widget.onClear != null) widget.onClear!();
               });
             }
           },
@@ -142,10 +142,10 @@ class ZCollectionState extends State<ZCollection> {
   }
 
   void atualizarLista(List<ZCollectionItem> lista) {
-    keyLista.currentState.atualizarLista(lista);
+    keyLista.currentState?.atualizarLista(lista);
   }
 
-  void buscarValorPadrao(List<ZCollectionItem> lista) {
+  void buscarValorPadrao(List<ZCollectionItem>? lista) {
     if (lista != null && lista.length > 0) {
       if (widget.valorPadrao != null) {
         var vP =
@@ -162,13 +162,13 @@ class ZCollectionState extends State<ZCollection> {
   void setarvalor() {
     if (_itemSelecionado?.valor != null) {
       setState(() {
-        _anterior = _itemSelecionado?.valor;
+        _anterior = _itemSelecionado!.valor!;
       });
     }
   }
 
   void _irParaSelecaoDeItemHorizontal() async {
-    if (!widget.bloquearCampo) {
+    if (widget.bloquearCampo != null && !widget.bloquearCampo!) {
       _itemSelecionado = await Navigator.push<ZCollectionItem>(
           context,
           new PageRouteBuilder(
@@ -207,14 +207,14 @@ class ZCollectionState extends State<ZCollection> {
               );
             },
           ));
-      if (widget.onChange != null) widget.onChange(_itemSelecionado);
+      if (widget.onChange != null) widget.onChange!(_itemSelecionado!);
 
       setState(() {});
     }
   }
 
   Widget _returnRequiredField() {
-    if (widget.campoObrigatorio) {
+    if (widget.campoObrigatorio != null && widget.campoObrigatorio!) {
       return new Flexible(
         flex: 45,
         fit: FlexFit.tight,
@@ -224,7 +224,7 @@ class ZCollectionState extends State<ZCollection> {
             children: <TextSpan>[
               new TextSpan(
                 text: "${widget.titulo}",
-                style: widget.themeData.textTheme.bodyText1
+                style: widget.themeData!.textTheme.bodyText1!
                     .copyWith(color: Color(0xff999999)),
               ),
               new TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
@@ -242,7 +242,7 @@ class ZCollectionState extends State<ZCollection> {
             children: <TextSpan>[
               new TextSpan(
                 text: "${widget.titulo}",
-                style: widget.themeData.textTheme.bodyText1
+                style: widget.themeData!.textTheme.bodyText1!
                     .copyWith(color: const Color(0xff999999)),
               ),
             ],
@@ -253,16 +253,16 @@ class ZCollectionState extends State<ZCollection> {
   }
 
   TextStyle _retornaCorTexto() {
-    if (widget.bloquearCampo &&
+    if (widget.bloquearCampo != null && widget.bloquearCampo! &&
         _itemSelecionado?.valor == null &&
         _anterior == "Selecione") {
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.grey);
-    } else if (widget.bloquearCampo) {
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.grey);
+      return widget.themeData!.textTheme.bodyText1!.copyWith(color: Colors.grey);
+    } else if (widget.bloquearCampo != null && widget.bloquearCampo!) {
+      return widget.themeData!.textTheme.bodyText1!.copyWith(color: Colors.grey);
     } else if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
+      return widget.themeData!.textTheme.bodyText1!.copyWith(color: Colors.black);
     } else {
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
+      return widget.themeData!.textTheme.bodyText1!.copyWith(color: Colors.black);
     }
   }
 }

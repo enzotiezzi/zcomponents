@@ -1,4 +1,5 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/styles/media-query.dart';
@@ -6,8 +7,8 @@ import 'package:z_components/view-model/item-busca-viewmodel.dart';
 import 'package:z_components/view-model/z-tree-view-viewmodel.dart';
 
 class ZNewTreeView extends StatefulWidget {
-  List<ZTreeViewViewModel> lisTree;
-  void Function(ZTreeViewViewModel) onTap;
+  List<ZTreeViewViewModel>? lisTree;
+  void Function(ZTreeViewViewModel)? onTap;
 
   ZNewTreeView({this.lisTree, this.onTap});
 
@@ -17,22 +18,22 @@ class ZNewTreeView extends StatefulWidget {
 
 class _ZNewTreeViewState extends State<ZNewTreeView>
     with TickerProviderStateMixin {
-  List<ZTreeViewViewModel> treeViewList = new List();
-  List<List<GlobalKey>> listaKey = new List<List<GlobalKey>>();
-  bool testeAki = false;
-  int testeRecursao = 0;
-  List<String> listaId = new List();
-  List<ItemBuscaViewModel> listaBusca = new List();
-  List<ItemBuscaViewModel> listaBuscaFiltrada = new List();
-  List<String> listaPossiveisId = new List();
-  double size = 0.0;
-  bool select = false;
-  double sizeEdit = 22.0;
+  List<ZTreeViewViewModel>? treeViewList = [];
+  List<List<GlobalKey>>? listaKey = [];
+  bool? testeAki = false;
+  int? testeRecursao = 0;
+  List<String>? listaId = [];
+  List<ItemBuscaViewModel>? listaBusca = [];
+  List<ItemBuscaViewModel>? listaBuscaFiltrada = [];
+  List<String>? listaPossiveisId = [];
+  double? size = 0.0;
+  bool? select = false;
+  double? sizeEdit = 22.0;
   GlobalKey containerKey = new GlobalKey<_ZNewTreeViewState>();
-  int profArvore = 0;
-  int auxProfArvore = 0;
-  int contadorBuscas = 0;
-  bool comecouBusca = false;
+  int? profArvore = 0;
+  int? auxProfArvore = 0;
+  int? contadorBuscas = 0;
+  bool? comecouBusca = false;
 
   @override
   void initState() {
@@ -51,27 +52,27 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
   }
 
   List<Widget> listaNovo() {
-    if (widget.lisTree.length == 0 || widget.lisTree == null) {
-      return new List<Widget>();
+    if (widget.lisTree!.length == 0 || widget.lisTree == null) {
+      return [];
     }
 
     int j = 0;
     if (testeAki == false) {
-      List<GlobalKey> lista = new List<GlobalKey>();
+      List<GlobalKey> lista = [];
 
-      for (int i = 0; i < widget.lisTree.length; i++) {
-        widget.lisTree[i].index = 0;
+      for (int i = 0; i < widget.lisTree!.length; i++) {
+        widget.lisTree![i].index = 0;
         GlobalKey key = new GlobalKey<_ZNewTreeViewState>();
         lista.add(key);
       }
-      listaKey.add(lista);
+      listaKey?.add(lista);
     }
 
-    List<Widget> list = new List();
-    widget.lisTree.forEach((item) {
+    List<Widget> list = [];
+    widget.lisTree?.forEach((item) {
       item.indexAuxiliar = j;
-      List<String> caminhoAkis = new List();
-      montarCaminho(item.caminho, caminhoAkis);
+      List<String> caminhoAkis = [];
+      montarCaminho(item.caminho!, caminhoAkis);
       list.add(new Container(
           margin: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0),
           child: new ConfigurableExpansionTile(
@@ -141,18 +142,18 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
                 ),
               ),
             ),
-            children: <Widget>[
-              (widget.lisTree.length != 0)
+            childrenBody:
+              (widget.lisTree!.length != 0)
                   ? new Container(
                       child: new Column(
                       children: lista2Novo(
                           nivel: item,
                           margin: 1.0,
                           posicaoAnterior: 0,
-                          filhos: item.filhos.length),
+                          filhos: item.filhos!.length),
                     ))
                   : new Container(),
-            ],
+
           )));
       j++;
     });
@@ -161,43 +162,46 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
   }
 
   List<Widget> lista2Novo(
-      {ZTreeViewViewModel nivel,
-      double margin,
-      int posicaoAnterior,
-      int filhos}) {
+      {ZTreeViewViewModel? nivel,
+      double? margin,
+      int? posicaoAnterior,
+      int? filhos}) {
     int p = 0;
-    List<GlobalKey> lista = new List<GlobalKey>();
-    int posAnterior = posicaoAnterior;
-    int total;
+    List<GlobalKey> lista = [];
+    int? posAnterior = posicaoAnterior;
+    int? total;
     if (testeAki == false) {
-      total = testeRecursao + 1;
+      total = testeRecursao! + 1;
 
-      testeRecursao++;
+      testeRecursao! +1;
     }
     if (testeAki == false) {
-      if (nivel.filhos.length == 0) {
+      if (nivel!.filhos!.length == 0) {
         GlobalKey key = new GlobalKey<_ZNewTreeViewState>();
         lista.add(key);
       }
-      for (int i = 0; i < nivel.filhos.length; i++) {
+      for (int i = 0; i < nivel!.filhos!.length; i++) {
         GlobalKey key = new GlobalKey<_ZNewTreeViewState>();
         lista.add(key);
       }
-      listaKey.add(lista);
+      listaKey?.add(lista);
     }
     var j = margin;
-    j++;
-    List<Widget> list = new List();
-    nivel.filhos.forEach((item) {
-      List<String> caminhoAkis = new List();
-      montarCaminho(item.caminho, caminhoAkis);
+    j! +1;
+    List<Widget> list = [];
+    nivel!.filhos!.forEach((item) {
+      List<String> caminhoAkis = [];
+      montarCaminho(item.caminho!, caminhoAkis);
       item.indexAuxiliar = p;
       if (testeAki == false) {
         item.index = total;
       }
       list.add(new GestureDetector(
         onTap: () {
-          widget.onTap(item);
+          if(widget.onTap!=null){
+            widget.onTap!(item);
+          }
+
         },
         child: new Container(
             decoration: BoxDecoration(
@@ -260,24 +264,24 @@ class _ZNewTreeViewState extends State<ZNewTreeView>
   }
 
   void limparBoolsFilhosTree(
-      {ZTreeViewViewModel ambienteHierarquicoViewModel}) {
+      {ZTreeViewViewModel? ambienteHierarquicoViewModel}) {
     var item = ambienteHierarquicoViewModel;
-    for (int i = 0; i < item.filhos.length; i++) {
-      if (item.filhos[i].aberto == true) {
-        item.filhos[i].aberto = false;
+    for (int i = 0; i < item!.filhos!.length; i++) {
+      if (item.filhos![i].aberto == true) {
+        item.filhos![i].aberto = false;
       }
-      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos[i]);
+      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos![i]);
     }
     setState(() {});
   }
 
-  void limparBoolsFilhos({ZTreeViewViewModel ambienteHierarquicoViewModel}) {
+  void limparBoolsFilhos({ZTreeViewViewModel? ambienteHierarquicoViewModel}) {
     var item = ambienteHierarquicoViewModel;
-    for (int i = 0; i < item.filhos.length; i++) {
-      if (item.filhos[i].select == true) {
-        item.filhos[i].select = false;
+    for (int i = 0; i < item!.filhos!.length; i++) {
+      if (item.filhos![i].select == true) {
+        item.filhos![i].select = false;
       }
-      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos[i]);
+      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos![i]);
     }
     setState(() {});
   }

@@ -7,7 +7,7 @@ import 'dialog-ocorrencia.dart';
 import 'espelho-de-ponto-view.dart';
 
 class ZEspelhoDePonto extends StatefulWidget {
-  List<ZEspelhoDePontoViewModel> espelhos;
+  List<ZEspelhoDePontoViewModel>? espelhos;
   var onTapDialogBatida;
   var refresh;
 
@@ -18,7 +18,7 @@ class ZEspelhoDePonto extends StatefulWidget {
 }
 
 class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
-  ZEspelhoDePontoView _view;
+  late ZEspelhoDePontoView _view;
   GlobalKey _espelhoDePontoKey = new GlobalKey<_ZEspelhoDePontoState>();
 
   @override
@@ -37,7 +37,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
   }
 
   Widget _body() {
-    if (widget.espelhos.length == 0)
+    if (widget.espelhos?.length == 0)
       return new Center();
     else {
       if (_view.indexDiaAtual != -1)
@@ -202,7 +202,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                     child: new ListView.builder(
                         key: _espelhoDePontoKey,
                         controller: _view.scrollController,
-                        itemCount: widget.espelhos.length,
+                        itemCount: widget.espelhos!.length,
                         itemBuilder: (context, index) => _listPonto(index))))
           ],
         ),
@@ -211,9 +211,9 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
   }
 
   Widget _listPonto(index) {
-    var item = widget.espelhos[index];
+    var item = widget.espelhos![index];
 
-    if (_view.diaAtual(item.data)) _view.indexDiaAtual = index;
+    if (_view.diaAtual(item.data!)) _view.indexDiaAtual = index;
 
     var corTouf = const Color(0xff707070);
 
@@ -238,7 +238,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
             child: new Column(
               children: <Widget>[
                 new Container(
-                  decoration: (_view.diaAtual(item.data) == true)
+                  decoration: (_view.diaAtual(item.data!) == true)
                       ? BoxDecoration(
                           border: Border.all(
                               width: 2.0, color: const Color(0xff2BBAB4)))
@@ -248,7 +248,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                       (item.tOuF == "F")
                           ? new Container(
                               color: const Color(0xffF7F7F7),
-                              width: (_view.diaAtual(item.data) == true)
+                              width: (_view.diaAtual(item.data!) == true)
                                   ? ((MediaQuery.of(context).size.width / 6.5) -
                                       3)
                                   : ((MediaQuery.of(context).size.width / 6.5) -
@@ -256,7 +256,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                               child: new Row(
                                 children: <Widget>[
                                   new Container(
-                                    width: (_view.diaAtual(item.data) == true)
+                                    width: (_view.diaAtual(item.data!) == true)
                                         ? (MediaQuery.of(context).size.width /
                                                 30) -
                                             2
@@ -269,7 +269,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                         MediaQuery.of(context).size.height / 16,
                                     color: corTouf,
                                     child: (item.tOuF != null)
-                                        ? new Text(item.tOuF)
+                                        ? new Text(item.tOuF!)
                                         : new Text(""),
                                   ),
                                   new Expanded(
@@ -285,7 +285,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                       children: <Widget>[
                                         new Container(
                                           child: new Text(
-                                            "${_view.formatarData(item.data) ?? ""}",
+                                            "${_view.formatarData(item.data!) ?? ""}",
                                             style: TextStyle(
                                                 color: const Color(0xff707070)),
                                           ),
@@ -311,7 +311,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                             )
                           : new Container(
                               color: const Color(0xffE6E6E6),
-                              width: (_view.diaAtual(item.data) == true)
+                              width: (_view.diaAtual(item.data!) == true)
                                   ? ((MediaQuery.of(context).size.width / 6.5) -
                                       3)
                                   : ((MediaQuery.of(context).size.width / 6.5) -
@@ -319,7 +319,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                               child: new Row(
                                 children: <Widget>[
                                   new Container(
-                                    width: (_view.diaAtual(item.data) == true)
+                                    width: (_view.diaAtual(item.data!) == true)
                                         ? (MediaQuery.of(context).size.width /
                                                 30) -
                                             2
@@ -333,7 +333,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                     color: corTouf,
                                     child: (item.tOuF != null)
                                         ? new Text(
-                                            item.tOuF,
+                                            item.tOuF!,
                                             style:
                                                 TextStyle(color: Colors.white),
                                           )
@@ -350,7 +350,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                       children: <Widget>[
                                         new Container(
                                           child: new Text(
-                                            "${_view.formatarData(item.data) ?? ""}",
+                                            "${_view.formatarData(item.data!) ?? ""}",
                                             style: TextStyle(
                                                 color: const Color(0xff707070)),
                                           ),
@@ -474,7 +474,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                         child: new Row(
                           children: <Widget>[
                             new GestureDetector(
-                              onTap: (item.listaOcorrencias.length == 0)
+                              onTap: (item.listaOcorrencias!.length == 0)
                                   ? () {}
                                   : () {
                                       showDialog(
@@ -487,7 +487,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                     },
                               child: new Container(
                                 padding: EdgeInsets.only(left: 2.0, right: 2.0),
-                                child: (item.listaOcorrencias.length == 0)
+                                child: (item.listaOcorrencias!.length == 0)
                                     ? new Icon(
                                         Icons.brightness_1,
                                         color: Colors.transparent,
@@ -507,10 +507,10 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: (item.listaBatidas == null)
                                       ? 0
-                                      : item.listaBatidas.length,
+                                      : item.listaBatidas!.length,
                                   itemBuilder: (context, index) => new Row(
                                         children: <Widget>[
-                                          (item.listaBatidas[index].valida ==
+                                          (item.listaBatidas![index].valida ==
                                                   false)
                                               ? (_view.showInvalida == false)
                                                   ? new Container()
@@ -518,7 +518,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                                       children: <Widget>[
                                                         _textInvalida(
                                                             index,
-                                                            item.listaBatidas[
+                                                            item.listaBatidas![
                                                                 index]),
                                                         new Container(
                                                           margin:
@@ -534,7 +534,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                                   children: <Widget>[
                                                     _text(
                                                         index,
-                                                        item.listaBatidas[
+                                                        item.listaBatidas![
                                                             index]),
                                                     new Container(
                                                       margin: EdgeInsets.only(
@@ -559,7 +559,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
         : new Container(
             child: new Column(children: <Widget>[
             new Container(
-              decoration: (_view.diaAtual(item.data) == true)
+              decoration: (_view.diaAtual(item.data!) == true)
                   ? BoxDecoration(
                       border: Border.all(
                           width: 2.0, color: const Color(0xff2BBAB4)))
@@ -569,13 +569,13 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                   (item.tOuF == "F")
                       ? new Container(
                           color: const Color(0xffF7F7F7),
-                          width: (_view.diaAtual(item.data) == true)
+                          width: (_view.diaAtual(item.data!) == true)
                               ? ((MediaQuery.of(context).size.width / 6.5) - 3)
                               : ((MediaQuery.of(context).size.width / 6.5) - 1),
                           child: new Row(
                             children: <Widget>[
                               new Container(
-                                width: (_view.diaAtual(item.data) == true)
+                                width: (_view.diaAtual(item.data!) == true)
                                     ? (MediaQuery.of(context).size.width / 30) -
                                         2
                                     : MediaQuery.of(context).size.width / 30,
@@ -584,7 +584,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                 height: MediaQuery.of(context).size.height / 16,
                                 color: corTouf,
                                 child: (item.tOuF != null)
-                                    ? new Text(item.tOuF)
+                                    ? new Text(item.tOuF!)
                                     : new Text(""),
                               ),
                               new Expanded(
@@ -597,7 +597,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                   children: <Widget>[
                                     new Container(
                                       child: new Text(
-                                        "${_view.formatarData(item.data) ?? ""}",
+                                        "${_view.formatarData(item.data!) ?? ""}",
                                         style: TextStyle(
                                             color: const Color(0xff707070)),
                                       ),
@@ -621,13 +621,13 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                         )
                       : new Container(
                           color: const Color(0xffE6E6E6),
-                          width: (_view.diaAtual(item.data) == true)
+                          width: (_view.diaAtual(item.data!) == true)
                               ? ((MediaQuery.of(context).size.width / 6.5) - 3)
                               : ((MediaQuery.of(context).size.width / 6.5) - 1),
                           child: new Row(
                             children: <Widget>[
                               new Container(
-                                width: (_view.diaAtual(item.data) == true)
+                                width: (_view.diaAtual(item.data!) == true)
                                     ? (MediaQuery.of(context).size.width / 30) -
                                         2
                                     : MediaQuery.of(context).size.width / 30,
@@ -637,7 +637,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                 color: corTouf,
                                 child: (item.tOuF != null)
                                     ? new Text(
-                                        item.tOuF,
+                                        item.tOuF!,
                                         style: TextStyle(color: Colors.white),
                                       )
                                     : new Text(""),
@@ -651,7 +651,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                   children: <Widget>[
                                     new Container(
                                       child: new Text(
-                                        "${_view.formatarData(item.data) ?? ""}",
+                                        "${_view.formatarData(item.data!) ?? ""}",
                                         style: TextStyle(
                                             color: const Color(0xff707070)),
                                       ),
@@ -761,7 +761,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                     child: new Row(
                       children: <Widget>[
                         new GestureDetector(
-                          onTap: (item.listaOcorrencias.length == 0)
+                          onTap: (item.listaOcorrencias!.length == 0)
                               ? () {}
                               : () {
                                   showDialog(
@@ -773,7 +773,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                 },
                           child: new Container(
                             padding: EdgeInsets.only(left: 2.0, right: 2.0),
-                            child: (item.listaOcorrencias.length == 0)
+                            child: (item.listaOcorrencias!.length == 0)
                                 ? new Icon(
                                     Icons.brightness_1,
                                     color: Colors.transparent,
@@ -793,10 +793,10 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: (item.listaBatidas == null)
                                     ? 0
-                                    : item.listaBatidas.length,
+                                    : item.listaBatidas!.length,
                                 itemBuilder: (context, index) => new Row(
                                       children: <Widget>[
-                                        (item.listaBatidas[index].valida ==
+                                        (item.listaBatidas![index].valida ==
                                                 false)
                                             ? (_view.showInvalida == false)
                                                 ? new Container()
@@ -804,7 +804,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                                     children: <Widget>[
                                                       _textInvalida(
                                                           index,
-                                                          item.listaBatidas[
+                                                          item.listaBatidas![
                                                               index]),
                                                       new Container(
                                                         margin: EdgeInsets.only(
@@ -818,7 +818,7 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
                                             : new Row(
                                                 children: <Widget>[
                                                   _text(index,
-                                                      item.listaBatidas[index]),
+                                                      item.listaBatidas![index]),
                                                   new Container(
                                                     margin: EdgeInsets.only(
                                                         left: 3.0),
@@ -840,10 +840,14 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
   }
 
   Widget _text(int index, ZBatidaViewModel batida) {
-    var hora = _view.converterParaHoraMinutoString(batida?.dataEnvio);
+    var hora = _view.converterParaHoraMinutoString(batida.dataEnvio);
 
     return new GestureDetector(
-      onTap: widget.onTapDialogBatida,
+      onTap: (){
+        if(widget.onTapDialogBatida!=null){
+          widget.onTapDialogBatida!();
+        }
+      },
       child: new Container(
         margin: EdgeInsets.only(left: 3.0),
         child: new Row(
@@ -866,7 +870,11 @@ class _ZEspelhoDePontoState extends State<ZEspelhoDePonto> {
     var hora = _view.converterParaHoraMinutoString(batida?.dataEnvio);
 
     return new GestureDetector(
-      onTap: widget.onTapDialogBatida,
+      onTap: (){
+        if(widget.onTapDialogBatida!=null){
+          widget.onTapDialogBatida!();
+        }
+      },
       child: new Container(
         margin: EdgeInsets.only(left: 3.0),
         child: new Row(

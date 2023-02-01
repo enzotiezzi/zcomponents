@@ -1,15 +1,15 @@
 class ZTreeViewViewModel {
-  String idNivel;
-  String idNivelPai;
-  String nome;
-  bool aberto;
-  int index;
-  int indexAuxiliar;
-  bool jaPassou;
-  bool select;
-  int possiveisBuscas;
-  String caminho;
-  List<ZTreeViewViewModel> filhos = new List();
+  String? idNivel;
+  String? idNivelPai;
+  String? nome;
+  bool? aberto;
+  int? index;
+  int? indexAuxiliar;
+  bool? jaPassou;
+  bool? select;
+  int? possiveisBuscas;
+  String? caminho;
+  List<ZTreeViewViewModel>? filhos = [];
 
   ZTreeViewViewModel({
     this.nome,
@@ -30,7 +30,7 @@ class ZTreeViewViewModel {
         this.nome = source.nome,
         this.idNivelPai = source.idNivelPai,
         this.filhos = source.filhos
-            .map((item) => new ZTreeViewViewModel.clone(item))
+            ?.map((item) => new ZTreeViewViewModel.clone(item))
             .toList(),
         this.aberto = source.aberto,
         this.jaPassou = source.jaPassou,

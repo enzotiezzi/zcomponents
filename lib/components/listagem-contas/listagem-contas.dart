@@ -6,18 +6,19 @@ import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/filtro/z-searchbar.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
+import 'package:z_components/view-model/app-usuario-conta-viewmodel.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
 import 'package:z_components/z-item-tile-conta.dart';
 import 'detalhe-conta.dart';
 import 'listagem-contas-view.dart';
 
 class ListagemContas extends StatefulWidget {
-  ThemeData themeData;
-  String token;
-  Function(ContaV2ViewModel) onAccountChange;
+  ThemeData? themeData;
+  String? token;
+  Function(ContaV2ViewModel)? onAccountChange;
 
   ListagemContas(
-      {this.themeData, this.token, this.onAccountChange, GlobalKey key})
+      {this.themeData, this.token, this.onAccountChange, GlobalKey? key})
       : super(key: key);
 
   @override
@@ -25,7 +26,7 @@ class ListagemContas extends StatefulWidget {
 }
 
 class ListagemContasState extends State<ListagemContas> {
-  ListagemContasView _view;
+  late ListagemContasView _view;
 
   @override
   void initState() {
@@ -38,7 +39,7 @@ class ListagemContasState extends State<ListagemContas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: widget.themeData.primaryColor,
+        backgroundColor: widget.themeData!.primaryColor,
         leading: IconeVoltar(
           context: context,
         ),
@@ -99,15 +100,15 @@ class ListagemContasState extends State<ListagemContas> {
                     )));
       },
       child: new ZItemTileConta(
-        imagemPerfil: _montarImagem(item.conta.logo),
+        imagemPerfil: _montarImagem(item.conta!.logo!),
         visibilidade: false,
         dataVinculo: (item.dataVinculo != null)
-            ? UtilData.obterDataDDMMAAAA(DateTime.parse(item.dataVinculo))
+            ? UtilData.obterDataDDMMAAAA(DateTime.parse(item.dataVinculo!))
             : "Nunca",
         appsVinculados: _view.listarAppsVinculados(item.appLista),
         ativo: item.contaLogada,
-        nomeConta: item.conta.nome ?? "",
-        tamanhoLista: item.appLista.length,
+        nomeConta: item.conta?.nome ?? "",
+        tamanhoLista: item.appLista!.length,
       ),
     );
   }

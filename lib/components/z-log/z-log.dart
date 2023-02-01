@@ -8,13 +8,13 @@ import 'package:z_components/infra/db/database.dart';
 import 'package:z_components/view-model/z-log-viewmodel.dart';
 
 class ZLog {
-  String token;
+  String? token;
 
-  ZLogService _logService;
+  ZLogService? _logService;
 
-  IZLogRepository _logRepository;
+  IZLogRepository? _logRepository;
 
-  Timer _logSync;
+  Timer? _logSync;
 
   ZLog({this.token});
 
@@ -24,7 +24,7 @@ class ZLog {
 
     await db.init();
 
-    _logService = new ZLogService(token);
+    _logService = new ZLogService(token!);
     _logRepository = new ZLogRepository();
 
     _startLogWorker();
@@ -33,7 +33,7 @@ class ZLog {
   Future<bool> log(ZLogViewModel zLogViewModel) async {
     var res = false; // await _logService.log(zLogViewModel);
 
-    await _logRepository.insert(new ZLogEntity(
+    await _logRepository?.insert(new ZLogEntity(
         user: zLogViewModel.user,
         errorMessage: zLogViewModel.errorMessage,
         when: zLogViewModel.when,
@@ -48,24 +48,24 @@ class ZLog {
   void _startLogWorker() {
     if (_logSync == null) {
       _logSync = new Timer(new Duration(minutes: 10), () async {
-        var logs = await _logRepository.listarLogsNaoSincronizados();
+        var logs = await _logRepository!.listarLogsNaoSincronizados();
 
         if (logs != null) {
           for (var i = 0; i < logs.length; i++) {
             var log = logs[i];
 
-            var res = await _logService.log(new ZLogViewModel(
-                user: log.user,
-                errorMessage: log.errorMessage,
-                when: log.when,
-                payload: log.payload,
-                method: log.method,
-                app: log.app));
+            var res = await _logService?.log(new ZLogViewModel(
+                user: log?.user,
+                errorMessage: log?.errorMessage,
+                when: log?.when,
+                payload: log?.payload,
+                method: log?.method,
+                app: log?.app));
 
-            if (res) {
-              log.sync = true;
+            if (res!=null && res!) {
+              log!.sync = true;
 
-              await _logRepository.update(log);
+              await _logRepository?.update(log);
             }
           }
         }

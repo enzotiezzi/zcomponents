@@ -9,12 +9,12 @@ class ZEmpresaService extends Service implements IZEmpresaService {
   static final String _URL_API = "${ApiSettings.ENDPOINT}/empresas";
 
   final String token;
-  final String idUser;
+  final String? idUser;
 
   ZEmpresaService(this.token, this.idUser) : super(token);
 
   @override
-  Future<List<CompanyViewModel>> list() async {
+  Future<List<CompanyViewModel>?> list() async {
     try {
       var url = "$_URL_API/buscar-empresa-por-usuario-app/$idUser/ZPonto";
       var response = await http.get(Uri.parse(url), headers: headers);

@@ -1,4 +1,5 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
@@ -16,10 +17,10 @@ import '../z-header.dart';
 import '../z-item-tile-usuario-adm.dart';
 
 class DetalheUsuario extends StatefulWidget {
-    final bool editarDados;
-    AppUsuarioContaViewModel appUsuarioContaViewModel;
-    bool cliqueEditar;
-    String idModulo;
+    final bool? editarDados;
+    AppUsuarioContaViewModel? appUsuarioContaViewModel;
+    bool? cliqueEditar;
+    String? idModulo;
 
     DetalheUsuario(
         {this.editarDados,
@@ -32,7 +33,7 @@ class DetalheUsuario extends StatefulWidget {
 }
 
 class _DetalheUsuarioState extends State<DetalheUsuario> {
-    DetalheUsuarioView _view;
+    late DetalheUsuarioView _view;
 
     @override
     void initState() {
@@ -55,7 +56,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                         ),
                         onSelected: _escolhaMenuItem,
                         itemBuilder: (context) {
-                            return _view.itensMenu.map((String item) {
+                            return _view.itensMenu!.map((String item) {
                                 return PopupMenuItem<String>(
                                     value: item,
                                     child: Row(
@@ -97,7 +98,8 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                                             margin: const EdgeInsets.only(left: 16),
                                             padding: const EdgeInsets.only(top: 8, bottom: 8),
                                             child: new Text(
-                                                widget.appUsuarioContaViewModel.usuario.nome,
+                                                widget.appUsuarioContaViewModel?.usuario?.nome != null ?
+                                                widget.appUsuarioContaViewModel!.usuario!.nome : "",
                                                 style: new TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w500,
@@ -113,7 +115,9 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                             child:
                             new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
                         ),
-                        children: [
+                        childrenBody: ListView(
+                            shrinkWrap: true,
+                            children :[
                             new Divider(
                                 height: 1.0,
                             ),
@@ -121,15 +125,15 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                                 margin: EdgeInsets.only(top: 10.0),
                                 child: new ZItemTileUsuarioAdm(
                                     visibilidade: true,
-                                    nomeUsuario: widget.appUsuarioContaViewModel.usuario.nome,
-                                    email: widget.appUsuarioContaViewModel.usuario.email,
+                                    nomeUsuario: widget.appUsuarioContaViewModel?.usuario?.nome,
+                                    email: widget.appUsuarioContaViewModel?.usuario?.email,
                                     quantidadeApps: "",
-                                    status: widget.appUsuarioContaViewModel.status,
-                                    telefone: widget.appUsuarioContaViewModel.usuario.telefone,
+                                    status: widget.appUsuarioContaViewModel?.status,
+                                    telefone: widget.appUsuarioContaViewModel?.usuario?.telefone,
                                     appsVinculados: "",
                                 ),
-                            )
-                        ],
+                            )]
+                        )
                     )),
                 new Expanded(child: _buildCampos()),
                 exibirBotaoConfirmar()
@@ -138,21 +142,21 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
     }
 
     Widget _montarCampoPerfil() {
-        if (widget.editarDados) {
+        if (widget.editarDados != null && widget.editarDados!) {
             return ZCollection(
                 key: _view.keyPerfil,
                 filtroPrincipal: new FiltroCampo(key: "Nome", value: "Nome"),
                 titulo: "Perfil",
-                lista: _view.listaPerfis,
+                lista: _view.listaPerfis!,
                 themeData: Theme.of(context),
                 valorPadrao: _view.perfilController.text,
                 onChange: (value) {
                     if (value != null) {
-                        widget.appUsuarioContaViewModel.perfil.nome = value.titulo;
-                        widget.appUsuarioContaViewModel.perfil.idApp =
+                        widget.appUsuarioContaViewModel?.perfil?.nome = value.titulo;
+                        widget.appUsuarioContaViewModel?.perfil?.idApp =
                             value.chaveSecundaria;
-                        widget.appUsuarioContaViewModel.perfil.idPerfil = value.chave;
-                        widget.appUsuarioContaViewModel.idPerfil = value.chave;
+                        widget.appUsuarioContaViewModel?.perfil?.idPerfil = value.chave;
+                        widget.appUsuarioContaViewModel?.idPerfil = value.chave;
                         setState(() {
                             _view.alterouPerfil = true;
                         });
@@ -169,11 +173,11 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                     }
                     var lista = await _view.buscarPerfis(searchOptions);
                     setState(() {
-                        _view.keyPerfil.currentState.atualizarLista(lista);
+                        _view.keyPerfil.currentState?.atualizarLista(lista);
                     });
                 },
                 onScroll: (filter, listaAnterior) async {
-                    if (_view.paginationMetaData.hasNext) {
+                    if (_view.paginationMetaData.hasNext!) {
                         SearchOptions searchOptions = new SearchOptions();
                         OrderByExpression order = new OrderByExpression();
                         order.propertyName = "Nome";
@@ -182,12 +186,12 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                         if (filter[0].value.isNotEmpty) {
                             searchOptions.filters = filter;
                         }
-                        searchOptions.pagination.pageNumber =
-                        _view.paginationMetaData.currentPage++;
+                        searchOptions.pagination?.pageNumber =
+                        _view.paginationMetaData.currentPage! +1;
                         var lista = await _view.buscarPerfis(searchOptions);
                         lista = listaAnterior + lista;
                         setState(() {
-                            _view.keyPerfil.currentState.atualizarLista(lista);
+                            _view.keyPerfil.currentState?.atualizarLista(lista);
                         });
                     }
                 },
@@ -255,9 +259,8 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                     child: new Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                            new RaisedButton(
-                                onPressed: _view.editarOnPressed(),
-                                disabledColor: Colors.grey,
+                            new ElevatedButton(
+                                onPressed: _view.editarOnPressed,
                                 child: new Container(
                                     child: new Row(
                                         mainAxisSize: MainAxisSize.min,
@@ -268,18 +271,25 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                                                     "CONFIRMAR",
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .button
+                                                        .button!
                                                         .copyWith(color: Colors.white),
                                                 ),
                                             )
                                         ],
                                     ),
                                 ),
-                                color: Theme.of(context).accentColor,
-                                shape: new RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(30),
+                                style: new ButtonStyle(
+                                    backgroundColor:
+                                    MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
+                                    shadowColor:
+                                    MaterialStateProperty.all<Color>(Colors.transparent),
+                                    padding: MaterialStateProperty.all(EdgeInsets.only(
+                                        top: 12, bottom: 12, left: 26, right: 26)),
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                        new RoundedRectangleBorder(
+                                            borderRadius: new BorderRadius.circular(30.0),
+                                        )),
                                 ),
-                                padding: const EdgeInsets.only(left: 10, right: 10),
                             )
                         ],
                     ),
@@ -319,7 +329,8 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                 color: Theme.of(context).primaryColor,
             );
         } else {
-            if (widget.appUsuarioContaViewModel.status == "Ativo") {
+            if (widget.appUsuarioContaViewModel!.status != null &&
+                widget.appUsuarioContaViewModel!.status == "Ativo") {
                 return Icon(
                     Icons.block_flipped,
                     color: Colors.red,

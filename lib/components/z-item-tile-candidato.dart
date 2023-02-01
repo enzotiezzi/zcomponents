@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
 
 class ZItemTileCandidato extends StatefulWidget {
-  final String nome;
-  final String funcao;
-  final String email;
-  final String telefone;
+  final String? nome;
+  final String? funcao;
+  final String? email;
+  final String? telefone;
 
   ZItemTileCandidato({this.nome, this.telefone, this.funcao, this.email});
 
@@ -20,7 +20,7 @@ class _ZItemTileCandidatoState extends State<ZItemTileCandidato> {
       return new Text('');
     }else{
       return new Text(
-        widget.nome,
+        widget.nome!,
         style: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
@@ -35,7 +35,7 @@ class _ZItemTileCandidatoState extends State<ZItemTileCandidato> {
       return Text('');
     }else{
       return Text(
-        widget.funcao,
+        widget.funcao!,
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,
@@ -50,7 +50,7 @@ class _ZItemTileCandidatoState extends State<ZItemTileCandidato> {
       return Text('');
     }else{
       return Text(
-        widget.telefone,
+        widget.telefone!,
         overflow: TextOverflow.ellipsis,
         style: new TextStyle(
         fontSize: 12,
@@ -65,7 +65,7 @@ class _ZItemTileCandidatoState extends State<ZItemTileCandidato> {
       return Text('');
     }else{
       return Text(
-        widget.email,
+        widget.email!,
         style: TextStyle(
           color: Color(0xFF808080),
           fontSize: 12

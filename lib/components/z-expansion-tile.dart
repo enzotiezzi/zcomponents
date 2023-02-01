@@ -1,13 +1,14 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/material.dart';
 
 class ZExpansion extends StatefulWidget {
-  final String titulo;
-  final Widget childExpand;
-  final Widget childTitle;
+  final String? titulo;
+  final Widget? childExpand;
+  final Widget? childTitle;
 
   ZExpansion({
-    Key key,
+    Key? key,
     this.childTitle,
     this.childExpand,
     this.titulo = "",
@@ -49,14 +50,14 @@ class _ZExpansionState extends State<ZExpansion> with TickerProviderStateMixin {
                 children: <Widget>[
                   (widget.childTitle == null)
                       ? new Container()
-                      : widget.childTitle,
+                      : widget.childTitle!,
                 ],
               ),
             ),
           ),
-          children: <Widget>[
-            (widget.childExpand == null) ? new Container() : widget.childExpand
-          ],
+          childrenBody:
+            (widget.childExpand == null) ? new Container() : widget.childExpand!
+
         ));
   }
 }

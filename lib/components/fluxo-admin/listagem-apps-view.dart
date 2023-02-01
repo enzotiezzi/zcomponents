@@ -14,22 +14,26 @@ class ListagemAppsView extends IView<ListagemApps> {
     throw UnimplementedError();
   }
 
-  @override
-  Future<void> initView() {}
 
   String listarAppsVinculados(List<AppUsuarioContaViewModel> lista) {
     String appsFormatados = "";
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nomeExibicao}";
+          appsFormatados = "$appsFormatados- ${lista[i].app?.nomeExibicao}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nomeExibicao}";
+          appsFormatados = "$appsFormatados, ${lista[i].app?.nomeExibicao}";
         }
       }
     } else {
       appsFormatados = "Sem apps vinculados";
     }
     return appsFormatados;
+  }
+
+  @override
+  Future<void> initView() {
+    // TODO: implement initView
+    throw UnimplementedError();
   }
 }

@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:z_components/config/z-button-type.dart';
 
 class ZButton extends StatelessWidget {
-  Widget _zButton;
-  final Key key;
-  final VoidCallback onPressed;
-  final String text;
-  final Icon iconLeft;
-  final Icon iconRight;
-  final ZButtonType zButtonType;
-  final Color color;
-  final Color textColor;
+  Widget? _zButton;
+  final Key? key;
+  final VoidCallback? onPressed;
+  final String? text;
+  final Icon? iconLeft;
+  final Icon? iconRight;
+  final ZButtonType? zButtonType;
+  final Color? color;
+  final Color? textColor;
 
   ZButton({
     this.key,
@@ -25,8 +25,12 @@ class ZButton extends StatelessWidget {
   }) : super(key: key) {
     switch (zButtonType) {
       case ZButtonType.isContained:
-        _zButton = new RaisedButton(
-          onPressed: this.onPressed,
+        _zButton = new ElevatedButton(
+          onPressed: (){
+            if(this.onPressed != null){
+              this.onPressed!();
+            }
+          },
           child: new Container(
             child: new Row(
               mainAxisSize: MainAxisSize.min,
@@ -37,7 +41,7 @@ class ZButton extends StatelessWidget {
                 new Container(
                   padding: const EdgeInsets.only(right: 6, left: 6),
                   child: new Text(
-                    this.text,
+                    this.text != null ? this.text! : "",
                     style: TextStyle(color: textColor, fontSize: 20.0),
                   ),
                 ),
@@ -48,19 +52,29 @@ class ZButton extends StatelessWidget {
               ],
             ),
           ),
-          color: color,
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0)),
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          splashColor: Colors.grey.withOpacity(0.5),
+          style: new ButtonStyle(
+            backgroundColor:
+            MaterialStateProperty.all<Color>(color!),
+            shadowColor:
+            MaterialStateProperty.all<Color>(Colors.transparent),
+            padding: MaterialStateProperty.all(EdgeInsets.only(
+              left: 10, right: 10)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                )),
+          ),
           key: this.key,
         );
 
         break;
       case ZButtonType.isOutlined:
-        _zButton = new RaisedButton(
-          highlightColor: Colors.transparent,
-          onPressed: this.onPressed,
+        _zButton = new ElevatedButton(
+          onPressed: (){
+            if(this.onPressed != null){
+              this.onPressed!();
+            }
+          },
           child: new Container(
             padding: EdgeInsets.only(left: 8, right: 8, top: 6, bottom: 6),
             child: new Row(
@@ -72,7 +86,7 @@ class ZButton extends StatelessWidget {
                 new Container(
                   padding: const EdgeInsets.only(right: 6, left: 6),
                   child: new Text(
-                    this.text,
+                    this.text != null ? this.text! : "",
                     style: TextStyle(color: textColor, fontSize: 20.0),
                   ),
                 ),
@@ -83,15 +97,20 @@ class ZButton extends StatelessWidget {
             ),
             decoration: BoxDecoration(
                 borderRadius: new BorderRadius.circular(30.0),
-                border: Border.all(color: textColor)),
+                border: Border.all(color: textColor!)),
           ),
-          color: Colors.transparent,
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0)),
-          elevation: 0,
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          highlightElevation: 0,
-          splashColor: Colors.transparent,
+          style: new ButtonStyle(
+            backgroundColor:
+            MaterialStateProperty.all<Color>(Colors.transparent),
+            shadowColor:
+            MaterialStateProperty.all<Color>(Colors.transparent),
+            padding: MaterialStateProperty.all(EdgeInsets.only(
+              left: 10, right: 10)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                )),
+          ),
           key: this.key,
         );
         break;
@@ -100,7 +119,11 @@ class ZButton extends StatelessWidget {
           child: new InkWell(
             borderRadius: new BorderRadius.all(const Radius.circular(25.0)),
             splashColor: const Color(0xffe6e6e6),
-            onTap: this.onPressed,
+            onTap: (){
+              if(this.onPressed !=null){
+                this.onPressed!();
+              }
+            },
             child: new Container(
               padding: const EdgeInsets.all(12),
               child: new Row(
@@ -112,7 +135,7 @@ class ZButton extends StatelessWidget {
                   new Container(
                     padding: const EdgeInsets.only(right: 6, left: 6),
                     child: new Text(
-                      this.text,
+                      this.text != null ? this.text!: "",
                       style: TextStyle(
                           color: textColor,
                           fontSize: 20.0,
@@ -134,6 +157,6 @@ class ZButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _zButton;
+    return _zButton!;
   }
 }

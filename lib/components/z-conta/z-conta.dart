@@ -8,15 +8,15 @@ import 'package:z_components/view-model/conta-view-model.dart';
 class ZConta extends StatefulWidget {
   String token;
   List<ContaViewModel> contas;
-  Function(ContaViewModel) onBindAccount;
-  Function(ContaViewModel) onAccountChange;
+  Function(ContaViewModel)? onBindAccount;
+  Function(ContaViewModel)? onAccountChange;
 
   ZConta(
-      {@required this.token,
-      @required this.contas,
+      {required this.token,
+      required this.contas,
       this.onBindAccount,
       this.onAccountChange,
-      GlobalKey key})
+      GlobalKey? key})
       : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class ZConta extends StatefulWidget {
 }
 
 class ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
-  ZContaView _view;
+  late ZContaView _view;
 
   @override
   void initState() {
@@ -73,12 +73,12 @@ class ZContaState extends State<ZConta> with AfterLayoutMixin<ZConta> {
                     leading: new CircleAvatar(
                       backgroundColor: item.corPrimaria,
                       child: new Text(
-                        "${item.nomeFantasia[0]}",
+                        "${item.nomeFantasia![0]}",
                         style: new TextStyle(color: item.corSecundaria),
                       ),
                     ),
                     title: new Text("${item.nomeFantasia}"),
-                    subtitle: new Text(_view.verificarContaAtiva(item.idConta)
+                    subtitle: new Text(_view.verificarContaAtiva(item.idConta!)
                         ? "Conta ativa"
                         : ""),
                     trailing: new Icon(Icons.arrow_forward_ios),

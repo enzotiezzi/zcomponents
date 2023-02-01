@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Paramenters {
-  double width;
-  double height;
+  double? width;
+  double? height;
 
   Paramenters({this.width, this.height});
 
@@ -13,9 +13,9 @@ class Paramenters {
   double get mainFontSize {
     double fontSize = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       fontSize = 12;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       fontSize = 14;
     }
     return fontSize;
@@ -24,9 +24,9 @@ class Paramenters {
   double get fontSizeButton {
     double fontSize = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       fontSize = 16;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       fontSize = 20;
     }
     return fontSize;
@@ -35,11 +35,11 @@ class Paramenters {
   double get iconSizePadrao{
     double size = 0;
 
-    if(width <= xs)
+    if(width! <= xs)
     {
       size = 20;
     }
-    else if (width > xs && width <= x )
+    else if (width! > xs && width! <= x )
     {
       size = 24;
     }
@@ -49,9 +49,9 @@ class Paramenters {
   double get subTitleFontSize {
     double fontSize = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       fontSize = 11;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       fontSize = 12;
     }
     return fontSize;
@@ -60,9 +60,9 @@ class Paramenters {
   double get titleFontSize {
     double fontSize = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       fontSize = 15;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       fontSize = 16;
     }
     return fontSize;
@@ -71,9 +71,9 @@ class Paramenters {
   double get sizePin {
     double size = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       size = 36;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       size = 40;
     }
     return size;
@@ -82,9 +82,9 @@ class Paramenters {
   double get fontSizeTermos {
     double size = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       size = 13;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       size = 14;
     }
     return size;
@@ -93,9 +93,9 @@ class Paramenters {
   double get fontSizeLeadinCancelar {
     double size = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       size = 12;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       size = 15;
     }
     return size;
@@ -116,9 +116,9 @@ class Paramenters {
   double get tittleFontSizeDialog {
     double fontSize = 0;
 
-    if (width <= xs) {
+    if (width! <= xs) {
       fontSize = 13;
-    } else if (width > xs && width <= x) {
+    } else if (width! > xs && width! <= x) {
       fontSize = 16;
     }
     return fontSize;

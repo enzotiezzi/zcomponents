@@ -13,7 +13,7 @@ class ZEscalaService extends Service implements IZEscalaService {
   ZEscalaService(this.token) : super(token);
 
   @override
-  Future<List<EscalaViewModel>> listarEscalas() async {
+  Future<List<EscalaViewModel>?> listarEscalas() async {
     try {
       var url = "$_uRL/listar-escalas";
 

@@ -19,14 +19,14 @@ class ContasService extends Service implements IContasService {
   ContasService(String token) : super(token);
 
   @override
-  Future<ZResponse<UsuarioContaViewModel>> listarUsuariosConta(
+  Future<ZResponse<UsuarioContaViewModel>?> listarUsuariosConta(
       SearchOptions searchOptions) async {
     var params = searchOptions.toHttpParams();
     try {
       var res = await request("$_URL/usuarios$params", Service.HTTP_GET);
 
       return PaginatedList<UsuarioContaViewModel>(
-              response: res, deserializer: UsuarioContaViewModel.fromJson)
+              response: res!, deserializer: UsuarioContaViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
@@ -34,34 +34,34 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<InfoOrganizacaoViewModel> buscarDadosOrganizacao(
+  Future<InfoOrganizacaoViewModel?> buscarDadosOrganizacao(
       String idConta) async {
     try {
       var url = "$_URL/contas/$idConta";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return InfoOrganizacaoViewModel.fromJson(json.decode(response.body));
+      return InfoOrganizacaoViewModel.fromJson(json.decode(response!.body));
     } catch (e) {
       return null;
     }
   }
 
   @override
-  Future<AppUsuarioContaViewModel> buscarDadosUsuarioConta(
+  Future<AppUsuarioContaViewModel?> buscarDadosUsuarioConta(
       String idUsuario) async {
     try {
       var url = "$_URL/usuarios/$idUsuario";
       var response = await request(url, Service.HTTP_GET);
 
-      return AppUsuarioContaViewModel.fromJson(json.decode(response.body));
+      return AppUsuarioContaViewModel.fromJson(json.decode(response!.body));
     } catch (e) {
       return null;
     }
   }
 
   @override
-  Future<bool> editarDadosOrganizacao(
+  Future<bool?> editarDadosOrganizacao(
       InfoOrganizacaoViewModel infoOrganizacaoViewModel) async {
     try {
       var url = "$_URL/contas/${infoOrganizacaoViewModel.idConta}";
@@ -69,7 +69,7 @@ class ContasService extends Service implements IContasService {
       var response = await request(url, Service.HTTP_PUT,
           body: infoOrganizacaoViewModel.toMap());
 
-      if (response.statusCode == 200 || response.statusCode == 204) {
+      if (response?.statusCode == 200 || response?.statusCode == 204) {
         return true;
       } else
         return null;
@@ -84,7 +84,7 @@ class ContasService extends Service implements IContasService {
         body: appUsuarioContaViewModel.toMap());
 
     print(appUsuarioContaViewModel.status);
-    print(res.statusCode.toString());
+
   }
 
   @override
@@ -115,16 +115,15 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<ZResponse<ModuloContaViewModel>> listarModulosConta(
+  Future<ZResponse<ModuloContaViewModel>?> listarModulosConta(
       SearchOptions searchOptions) async {
     print("chamou");
     var params = searchOptions.toHttpParams();
     try {
       var res = await request("$_URL/modulos$params", Service.HTTP_GET);
-      print(res.body);
-      print(res.statusCode);
+
       return PaginatedList<ModuloContaViewModel>(
-              response: res, deserializer: ModuloContaViewModel.fromJson)
+              response: res!, deserializer: ModuloContaViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
@@ -132,16 +131,14 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<ZResponse<AppViewModel>> listarAplicativos(
+  Future<ZResponse<AppViewModel>?> listarAplicativos(
       SearchOptions searchOptions, String idModulo) async {
     var params = searchOptions.toHttpParams();
     try {
       var url = "$_URL/modulos/${idModulo}/apps$params";
       var response = await request(url, Service.HTTP_GET);
-      print(response.body);
-      print(response.statusCode);
       return PaginatedList<AppViewModel>(
-              response: response, deserializer: AppViewModel.fromJson)
+              response: response!, deserializer: AppViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
@@ -149,17 +146,15 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<ZResponse<AppUsuarioContaViewModel>> listarUsuariosPorModuloEApp(
+  Future<ZResponse<AppUsuarioContaViewModel>?> listarUsuariosPorModuloEApp(
       String idModulo, String idApp, SearchOptions searchOptions) async {
     var params = searchOptions.toHttpParams();
     try {
       var res = await request(
           "$_URL/modulos/${idModulo}/apps/$idApp/usuarios$params",
           Service.HTTP_GET);
-      print(res.body);
-      print(res.statusCode);
       return PaginatedList<AppUsuarioContaViewModel>(
-              response: res, deserializer: AppUsuarioContaViewModel.fromJson)
+              response: res!, deserializer: AppUsuarioContaViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
@@ -167,14 +162,14 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<ZResponse<ContaV2ViewModel>> listarContas(
+  Future<ZResponse<ContaV2ViewModel>?> listarContas(
       SearchOptions searchOptions) async {
     var params = searchOptions.toHttpParams();
     try {
       var res = await request("$_URL/usuarios/contas$params", Service.HTTP_GET);
-      print(res.body);
+
       return PaginatedList<ContaV2ViewModel>(
-              response: res, deserializer: ContaV2ViewModel.fromJson)
+              response: res!, deserializer: ContaV2ViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
@@ -182,7 +177,7 @@ class ContasService extends Service implements IContasService {
   }
 
   @override
-  Future<bool> editarDadosUsuario(
+  Future<bool?> editarDadosUsuario(
       String idModulo,
       String idApp,
       String idUsuario,
@@ -194,9 +189,7 @@ class ContasService extends Service implements IContasService {
           "$_URL/modulos/$idModulo/apps/$idApp/usuarios/$idUsuario/$tipo",
           Service.HTTP_PUT,
           body: appUsuarioContaViewModel.toMap());
-      print(res.body);
-      print(res.statusCode);
-      if (res.statusCode == 200 || res.statusCode == 204) {
+      if (res?.statusCode == 200 || res?.statusCode == 204) {
         return true;
       } else
         return false;
@@ -205,7 +198,7 @@ class ContasService extends Service implements IContasService {
     }
   }
 
-  Future<bool> editarDadosFluxoUsuario(
+  Future<bool?> editarDadosFluxoUsuario(
       String idModulo,
       String idApp,
       String idUsuario,
@@ -217,9 +210,7 @@ class ContasService extends Service implements IContasService {
           "$_URL/usuarios/$idUsuario/modulos/$idModulo/apps/$idApp/$tipo",
           Service.HTTP_PUT,
           body: appUsuarioContaViewModel.toMap());
-      print(res.body);
-      print(res.statusCode);
-      if (res.statusCode == 200 || res.statusCode == 204) {
+      if (res?.statusCode == 200 || res?.statusCode == 204) {
         return true;
       } else
         return false;
@@ -228,29 +219,28 @@ class ContasService extends Service implements IContasService {
     }
   }
 
-  Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
+  Future<ZResponse<PerfilViewModel>?> buscarListaPerfis(
       SearchOptions searchOptions, String idApp) async {
     var params = searchOptions.toHttpParams();
     try {
       var res =
           await request("$_URL/app/$idApp/perfil$params", Service.HTTP_GET);
-      print(res.body);
+
       return PaginatedList<PerfilViewModel>(
-              response: res, deserializer: PerfilViewModel.fromJson)
+              response: res!, deserializer: PerfilViewModel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;
     }
   }
 
-  Future<bool> alterarConta(String idConta) async {
+  Future<bool?> alterarConta(String idConta) async {
     try {
       var res = await request(
           "$_URL/usuarios/contas/$idConta/selecionar",
           Service.HTTP_PUT,
         );
-      print(res.statusCode);
-      if (res.statusCode == 200 || res.statusCode == 204) {
+      if (res?.statusCode == 200 || res?.statusCode == 204) {
         return true;
       } else
         return false;

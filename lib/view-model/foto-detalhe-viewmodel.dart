@@ -1,16 +1,16 @@
 import 'dart:typed_data';
 
 class FotoDetalheViewModel {
-  String id;
-  String idConta;
-  String nome;
-  int tamanho;
-  String descricao;
-  String contentType;
-  String idUsuario;
-  String container;
-  String conteudo;
-  bool fotoSincronizada;
+  String? id;
+  String? idConta;
+  String? nome;
+  int? tamanho;
+  String? descricao;
+  String? contentType;
+  String? idUsuario;
+  String? container;
+  String? conteudo;
+  bool? fotoSincronizada;
 
   FotoDetalheViewModel({
     this.id,

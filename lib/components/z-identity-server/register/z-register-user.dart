@@ -6,7 +6,7 @@ class ZRegisterUser {
   FlutterWebviewPlugin _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   Future<void> signUp(Function onSignUpComplete,
-      {Map<String, String> additionalParameters}) async {
+      {Map<String, String>? additionalParameters}) async {
     _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
     if (additionalParameters == null) additionalParameters = {};

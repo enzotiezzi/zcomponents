@@ -7,11 +7,11 @@ import 'package:z_components/view-model/centrocusto-viewmodel.dart';
 import 'package:z_components/view-model/filtro-viewmodel.dart';
 
 class ZLocal extends StatefulWidget {
-  final String token;
-  final ValueChanged<ZCollectionItem> onChange;
-  final FiltroViewModel filtro;
-  final Key key;
-  final String valorPadrao;
+  final String? token;
+  final ValueChanged<ZCollectionItem>? onChange;
+  final FiltroViewModel? filtro;
+  final Key? key;
+  final String? valorPadrao;
 
   ZLocal(
       {this.key,
@@ -25,20 +25,20 @@ class ZLocal extends StatefulWidget {
 }
 
 class ZLocalState extends State<ZLocal> {
-  ZCollectionItem _itemSelecionado;
+  ZCollectionItem? _itemSelecionado;
 
-  ZCollectionItem get itemSelecionado => _itemSelecionado;
+  ZCollectionItem? get itemSelecionado => _itemSelecionado;
 
-  IZLocalService _service;
+  late IZLocalService _service;
 
   var _keyZCollection = new GlobalKey<ZCollectionState>();
 
-  var _centroCustos = new List<CentroCustoViewModel>();
+  List<CentroCustoViewModel>? _centroCustos = [];
 
   @override
   void initState() {
     super.initState();
-    _service = new ZLocalService(widget.token);
+    _service = new ZLocalService(widget.token!);
     _listarLocais();
   }
 
@@ -46,13 +46,13 @@ class ZLocalState extends State<ZLocal> {
   Widget build(BuildContext context) {
     return new ZCollection(
       titulo: "Locais",
-      lista: _centroCustos
+      lista: _centroCustos!
           .map((x) => new ZCollectionItem(
               chave: x.idCentroCusto, titulo: x.nome, valor: x.nome))
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
-        if (widget.onChange != null) widget.onChange(item);
+        if (widget.onChange != null) widget.onChange!(item);
       },
       valorPadrao: widget.valorPadrao,
       key: _keyZCollection,
@@ -67,8 +67,8 @@ class ZLocalState extends State<ZLocal> {
         _centroCustos = centroCustos;
       });
 
-      _keyZCollection.currentState.buscarValorPadrao(_centroCustos
-          .map((x) => new ZCollectionItem(
+      _keyZCollection.currentState!.buscarValorPadrao(_centroCustos
+          ?.map((x) => new ZCollectionItem(
               chave: x.idCentroCusto, titulo: x.nome, valor: x.nome))
           .toList());
     }

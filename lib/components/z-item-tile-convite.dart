@@ -14,8 +14,8 @@ enum SelectStatus {
 enum SelecionarEstadoCard { CORRIGIDO, CORRECAO_SOLICITADA }
 
 class ZItemTileConvite extends StatefulWidget {
-  final Function onTileIsSelected;
-  final ItemTileViewModel itemTileViewModel;
+  final Function? onTileIsSelected;
+  final ItemTileViewModel? itemTileViewModel;
 
   ZItemTileConvite({
     this.itemTileViewModel,
@@ -28,9 +28,10 @@ class ZItemTileConvite extends StatefulWidget {
 
 class _ZItemTileConviteState extends State<ZItemTileConvite> {
   Widget _retornarStatus() {
-    if (widget.itemTileViewModel.status == null) {
+    if (widget.itemTileViewModel?.status == null) {
       return new Text(
         "INDICAR STATUS",
+        overflow: TextOverflow.ellipsis,
         style: new TextStyle(
             fontSize: 12,
             color: new Color(0xFF000000),
@@ -41,10 +42,11 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
         children: [
           new Container(
             margin: const EdgeInsets.only(right: 2),
-            child: widget.itemTileViewModel.icone,
+            child: widget.itemTileViewModel?.icone,
           ),
           new Text(
-            widget.itemTileViewModel.status,
+            widget.itemTileViewModel!.status!,
+            overflow: TextOverflow.ellipsis,
             style: new TextStyle(
                 fontSize: 14,
                 color: new Color(0xFF000000),
@@ -56,7 +58,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
   }
 
   Widget _retornarNome() {
-    if (widget.itemTileViewModel.nome == null) {
+    if (widget.itemTileViewModel?.nome == null) {
       return new Text(
         'INDICAR NOME',
         style: new TextStyle(
@@ -66,7 +68,8 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
       );
     } else {
       return new Text(
-        widget.itemTileViewModel.nome,
+        widget.itemTileViewModel!.nome!,
+        overflow: TextOverflow.ellipsis,
         style: new TextStyle(
             fontSize: 14,
             color: new Color(0xFF000000),
@@ -76,7 +79,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
   }
 
   Widget _retornarStateCard() {
-    if (widget.itemTileViewModel.stateCard == null) {
+    if (widget.itemTileViewModel?.stateCard == null) {
       return new Container();
     } else {
       return new Container(
@@ -86,7 +89,8 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
           borderRadius: new BorderRadius.circular(12),
         ),
         child: new Text(
-          "${widget.itemTileViewModel.stateCard}",
+          "${widget.itemTileViewModel!.stateCard}",
+          overflow: TextOverflow.ellipsis,
           style: new TextStyle(
               fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -95,7 +99,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
   }
 
   Widget _retornarDataAdmissao() {
-    if (widget.itemTileViewModel.dataAdmissao == null) {
+    if (widget.itemTileViewModel?.dataAdmissao == null) {
       return new Text(
         'INDICAR DATA',
         style: new TextStyle(
@@ -105,35 +109,37 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
       );
     } else {
       return new Text(
-        widget.itemTileViewModel.dataAdmissao,
+        widget.itemTileViewModel!.dataAdmissao!,
+        overflow: TextOverflow.ellipsis,
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
     }
   }
 
   Widget _retornarPrazo() {
-    if (widget.itemTileViewModel.prazo == null) {
+    if (widget.itemTileViewModel?.prazo == null) {
       return new Text(
         'INDICAR PRAZO',
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
     } else {
       return new Text(
-        widget.itemTileViewModel.prazo,
+        widget.itemTileViewModel!.prazo!,
+        overflow: TextOverflow.ellipsis,
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
     }
   }
 
   Widget _retornarCargo() {
-    if (widget.itemTileViewModel.cargo == null) {
+    if (widget.itemTileViewModel?.cargo == null) {
       return new Text(
         'INDICAR CARGO',
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
     } else {
       return new Text(
-        widget.itemTileViewModel.cargo,
+        widget.itemTileViewModel!.cargo!,
         overflow: TextOverflow.ellipsis,
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
@@ -141,7 +147,7 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
   }
 
   Widget _retornarPorcentagem() {
-    if (widget.itemTileViewModel.porcentagemPreenchimento == null) {
+    if (widget.itemTileViewModel?.porcentagemPreenchimento == null) {
       return new Text(
         'INDICAR PORCENTAGEM',
         style: new TextStyle(
@@ -151,14 +157,15 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
       );
     } else {
       return new Text(
-        widget.itemTileViewModel.porcentagemPreenchimento,
+        widget.itemTileViewModel!.porcentagemPreenchimento!,
+        overflow: TextOverflow.ellipsis,
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
     }
   }
 
   Widget _montarSetaDireita() {
-    if (widget.itemTileViewModel.onTileIsSelected == null) {
+    if (widget.itemTileViewModel?.onTileIsSelected == null) {
       return new Container();
     } else {
       return new Container(
@@ -174,7 +181,12 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      onTap: widget.itemTileViewModel.onTileIsSelected,
+      onTap: (){
+        if(widget.itemTileViewModel != null && widget.itemTileViewModel!.onTileIsSelected != null){
+          widget.itemTileViewModel!.onTileIsSelected!();
+        }
+
+      },
       child: new IntrinsicHeight(
         child: new Container(
           margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
@@ -194,7 +206,9 @@ class _ZItemTileConviteState extends State<ZItemTileConvite> {
                         new Container(
                             margin: const EdgeInsets.only(
                                 left: 8, bottom: 8, top: 8),
-                            child: _retornarNome()),
+                            child: _retornarNome(),
+                          width: MediaQuery.of(context).size.width * 0.6,
+                        ),
                       ],
                     ),
                     new Row(

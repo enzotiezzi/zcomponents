@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/utils/svg.dart';
 
 class IconeVoltar extends StatefulWidget {
-  final BuildContext context;
-  final Function onTap;
+  final BuildContext? context;
+  final Function? onTap;
 
   IconeVoltar({this.context, this.onTap});
 
@@ -19,7 +19,7 @@ class _IconeVoltarState extends State<IconeVoltar> {
         Navigator.of(context).pop();
       };
     } else {
-      return widget.onTap;
+      return widget.onTap!();
     }
   }
 
@@ -31,6 +31,6 @@ class _IconeVoltarState extends State<IconeVoltar> {
           semanticsLabel: "leftIcon.svg",
           placeholderBuilder: (context) => Icon(Icons.error),
         ),
-        onPressed: onTapVoltar());
+        onPressed: onTapVoltar);
   }
 }

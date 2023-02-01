@@ -8,7 +8,7 @@ class EnderecoService extends Service implements IEnderecoService {
   EnderecoService() : super("");
 
   @override
-  Future<EnderecoViewModel> buscarEnderecoPorCEP(String cep) async {
+  Future<EnderecoViewModel?> buscarEnderecoPorCEP(String cep) async {
     try {
       cep = cep.replaceAll("-", "");
 
@@ -16,7 +16,7 @@ class EnderecoService extends Service implements IEnderecoService {
 
       var response = await request(url, Service.HTTP_GET, defaultAuthorizationHeader: false, timeout: 20);
 
-      return EnderecoViewModel.fromJson(json.decode(response.body));
+      return EnderecoViewModel.fromJson(json.decode(response!.body));
     } catch (e) {
       return null;
     }

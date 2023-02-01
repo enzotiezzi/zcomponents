@@ -3,30 +3,30 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputDataPadrao extends StatefulWidget {
-  final Key key;
-  FocusNode dataFocus;
-  var controllerData = new TextEditingController();
-  FocusNode proximoFocus;
-  ValueChanged<String> onChange;
-  void Function(bool) validacao;
-  bool enabled;
-  final ThemeData themeData;
-  final bool campoObrigatorio;
-  final String legenda;
+  final Key? key;
+  FocusNode? dataFocus;
+  TextEditingController? controllerData;
+  FocusNode? proximoFocus;
+  ValueChanged<String>? onChange;
+  void Function(bool)? validacao;
+  bool? enabled;
+  final ThemeData? themeData;
+  final bool? campoObrigatorio;
+  final String? legenda;
 
 
-  String dia;
-  String ano;
-  String mes;
-  String nome;
-  String text;
-  String hintText;
-  String total;
-  int intDias;
-  int intMes;
-  int intAno;
-  bool bisexto;
-  bool valideMes;
+  late String? dia;
+  late String? ano;
+  late String? mes;
+  late String? nome;
+  late String? text;
+  late String? hintText;
+  late String? total;
+  late int? intDias;
+  late int? intMes;
+  late int? intAno;
+  late bool? bisexto;
+  late bool? valideMes;
 
 
   ZInputDataPadrao({
@@ -47,10 +47,10 @@ class ZInputDataPadrao extends StatefulWidget {
 
 class _ZInputDataPadraoState extends State<ZInputDataPadrao> {
   int countcpf = 1;
-  DialogUtils _dialogUtils;
-  String data;
+  late DialogUtils _dialogUtils;
+  late String? data;
   DateTime now = DateTime.now();
-  int ano;
+  late int? ano;
 
   @override
   void initState() {
@@ -67,17 +67,17 @@ class _ZInputDataPadraoState extends State<ZInputDataPadrao> {
         widget.legenda,
         TextInputType.number,
             () {
-          FocusScope.of(context).requestFocus(widget.dataFocus);
+          //FocusScope.of(context).requestFocus(widget.dataFocus);
         },
         widget.dataFocus,
         widget.controllerData,
         widget.proximoFocus,
             (text) {
-          if (widget.onChange != null) widget.onChange(text);
+          if (widget.onChange != null) widget.onChange!(text);
 
           data = text;
           countcpf = 0;
-          if (data.length == 10) {
+          if (data!.length == 10) {
             _fieldFocusChange(context, widget.dataFocus, widget.proximoFocus);
           }
         },
@@ -89,16 +89,16 @@ class _ZInputDataPadraoState extends State<ZInputDataPadrao> {
   }
 
   void initData() {
-    widget.dataFocus.addListener(() {
-      if (!widget.dataFocus.hasFocus && countcpf == 0 && data != "") {
-        validaMes(data);
+    widget.dataFocus?.addListener(() {
+      if (!widget.dataFocus!.hasFocus && countcpf == 0 && data != "") {
+        validaMes(data!);
       }
     });
   }
 
   void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
+      BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
+    currentFocus?.unfocus();
     if (nextFocus != null) {
       FocusScope.of(context).requestFocus(nextFocus);
     }
@@ -107,16 +107,16 @@ class _ZInputDataPadraoState extends State<ZInputDataPadrao> {
   void validaMes(String data) {
     if (data.length == 10) {
       widget.dia = data.substring(0, 2);
-      widget.intDias = int.parse(widget.dia);
+      widget.intDias = int.parse(widget.dia!);
 
       widget.mes = data.substring(3, 5);
-      widget.intMes = int.parse(widget.mes);
+      widget.intMes = int.parse(widget.mes!);
 
       widget.ano = data.substring(6, 10);
-      widget.intAno = int.parse(widget.ano);
+      widget.intAno = int.parse(widget.ano!);
 
-      if ((widget.intAno % 4 == 0 && widget.intAno % 100 != 0) ||
-          widget.intAno % 400 == 0) {
+      if ((widget.intAno! % 4 == 0 && widget.intAno! % 100 != 0) ||
+          widget.intAno! % 400 == 0) {
         widget.bisexto = true;
       } else {
         widget.bisexto = false;
@@ -126,19 +126,19 @@ class _ZInputDataPadraoState extends State<ZInputDataPadrao> {
       print(widget.mes);
       print(widget.ano);
 
-      var dataDigitada = DateTime(widget.intAno, widget.intMes, widget.intDias);
+      var dataDigitada = DateTime(widget.intAno!, widget.intMes!, widget.intDias!);
       var dataAtual = DateTime.now();
 
-      if (widget.intMes < 13 &&
-          widget.intDias < 32 &&
-          widget.intAno <= ano &&
-          widget.intAno > 1890) {
-        if (widget.intDias == 00 ||
-            widget.intMes == 00 ||
-            widget.intAno == 00) {
+      if (widget.intMes! < 13 &&
+          widget.intDias! < 32 &&
+          widget.intAno! <= ano! &&
+          widget.intAno! > 1890) {
+        if (widget.intDias! == 00 ||
+            widget.intMes! == 00 ||
+            widget.intAno! == 00) {
           _dialogUtils.showAlertDialogNewAviso("Data Inválida!",
               "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31, e um ano válido.");
-          widget.validacao(false);
+          widget.validacao!(false);
         } else if (widget.intMes == 01 ||
             widget.intMes == 03 ||
             widget.intMes == 05 ||
@@ -146,114 +146,114 @@ class _ZInputDataPadraoState extends State<ZInputDataPadrao> {
             widget.intMes == 08 ||
             widget.intMes == 10 ||
             widget.intMes == 12) {
-          if (widget.intDias > 31) {
+          if (widget.intDias! > 31) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-            widget.validacao(false);
+            widget.validacao!(false);
           } else if (dataDigitada.isAfter(dataAtual) == true) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Data Futura!", "Insira uma data válida.");
-            widget.validacao(false);
+            widget.validacao!(false);
           } else {
             widget.valideMes = true;
-            widget.validacao(true);
+            widget.validacao!(true);
           }
         } else if (widget.intMes == 04 ||
             widget.intMes == 06 ||
             widget.intMes == 09 ||
             widget.intMes == 11) {
-          if (widget.intDias > 30) {
+          if (widget.intDias! > 30) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 30.");
-            widget.validacao(false);
+            widget.validacao!(false);
           } else if (dataDigitada.isAfter(dataAtual) == true) {
             _dialogUtils.showAlertDialogNewAviso(
                 "Data Futura!", "Insira uma data válida.");
-            widget.validacao(false);
+            widget.validacao!(false);
           } else {
             widget.valideMes = true;
-            widget.validacao(true);
+            widget.validacao!(true);
           }
         } else {
           if (widget.bisexto == true) {
-            if (widget.intDias > 29) {
+            if (widget.intDias! > 29) {
               _dialogUtils.showAlertDialogNewAviso(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 29.");
-              widget.validacao(false);
+              widget.validacao!(false);
             } else if (dataDigitada.isAfter(dataAtual) == true) {
               _dialogUtils.showAlertDialogNewAviso(
                   "Data Futura!", "Insira uma data válida.");
-              widget.validacao(false);
+              widget.validacao!(false);
             } else {
               widget.valideMes = true;
-              widget.validacao(true);
+              widget.validacao!(true);
             }
           } else {
-            if (widget.intDias > 28) {
+            if (widget.intDias! > 28) {
               _dialogUtils.showAlertDialogNewAviso(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
-              widget.validacao(false);
+              widget.validacao!(false);
             } else if (dataDigitada.isAfter(dataAtual) == true) {
               _dialogUtils.showAlertDialogNewAviso(
                   "Data Futura!", "Insira uma data válida.");
-              widget.validacao(false);
+              widget.validacao!(false);
             } else {
               widget.valideMes = true;
-              widget.validacao(true);
+              widget.validacao!(true);
             }
           }
         }
-      } else if (widget.intMes > 12 &&
-          widget.intDias < 32 &&
-          widget.intAno < ano) {
+      } else if (widget.intMes! > 12 &&
+          widget.intDias! < 32 &&
+          widget.intAno! < ano!) {
         _dialogUtils.showAlertDialogNewAviso(
             "Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
-        widget.validacao(false);
-      } else if (widget.intMes < 13 &&
-          widget.intDias > 31 &&
-          widget.intAno < ano) {
+        widget.validacao!(false);
+      } else if (widget.intMes! < 13 &&
+          widget.intDias! > 31 &&
+          widget.intAno! < ano!) {
         _dialogUtils.showAlertDialogNewAviso(
             "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-        widget.validacao(false);
-      } else if (widget.intMes < 13 &&
-          widget.intDias < 32 &&
-          widget.intAno > ano) {
+        widget.validacao!(false);
+      } else if (widget.intMes! < 13 &&
+          widget.intDias! < 32 &&
+          widget.intAno! > ano!) {
         _dialogUtils.showAlertDialogNewAviso(
             "Ano Inválido!", "Insira um valor de ano entre 1890 e $ano.");
-        widget.validacao(false);
-      } else if (widget.intAno < 1890) {
+        widget.validacao!(false);
+      } else if (widget.intAno! < 1890) {
         _dialogUtils.showAlertDialogNewAviso(
             "Ano Inválido!", "Insira um valor de ano entre 1890 e $ano.");
-        widget.validacao(false);
-      } else if (widget.intMes > 12 &&
-          widget.intDias < 32 &&
-          widget.intAno > ano) {
+        widget.validacao!(false);
+      } else if (widget.intMes! > 12 &&
+          widget.intDias! < 32 &&
+          widget.intAno! > ano!) {
         _dialogUtils.showAlertDialogNewAviso("Mês e Ano Inválido!",
             "Insira um valor de mês entre 01 e 12 e um ano entre 1890 e $ano.");
-        widget.validacao(false);
-      } else if (widget.intMes > 12 &&
-          widget.intDias > 32 &&
-          widget.intAno < ano) {
+        widget.validacao!(false);
+      } else if (widget.intMes! > 12 &&
+          widget.intDias! > 32 &&
+          widget.intAno! < ano!) {
         _dialogUtils.showAlertDialogNewAviso("Mês e Dia Inválido!",
             "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
-        widget.validacao(false);
-      } else if (widget.intMes < 13 &&
-          widget.intDias >= 32 &&
-          widget.intAno > ano) {
+        widget.validacao!(false);
+      } else if (widget.intMes! < 13 &&
+          widget.intDias! >= 32 &&
+          widget.intAno! > ano!) {
         _dialogUtils.showAlertDialogNewAviso("Dia e Ano Inválido!",
             "Insira um valor de dia entre 01 e 31 e um ano entre 1950 e $ano.");
-        widget.validacao(false);
+        widget.validacao!(false);
       } else if (dataDigitada.isAfter(dataAtual) == true) {
         _dialogUtils.showAlertDialogNewAviso(
             "Data Futura!", "Insira uma data válida.");
-        widget.validacao(false);
+        widget.validacao!(false);
       } else {
-        widget.validacao(true);
+        widget.validacao!(true);
       }
     } else {
       _dialogUtils.showAlertDialogNewAviso("Data Incompleta!",
           "Por favor, termine de digitar sua data de nascimento.");
-      widget.validacao(false);
+      widget.validacao!(false);
     }
   }
 }

@@ -5,9 +5,9 @@ import 'package:z_components/components/z-checkbox/z-checkbox-view.dart';
 import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 
 class ZCheckBox extends StatefulWidget {
-  List<ZCheckBoxViewModel> listaDescricao;
-  String title;
-  Function(List<String>) onChange;
+  List<ZCheckBoxViewModel>? listaDescricao;
+  String? title;
+  Function(List<String>)? onChange;
 
   ZCheckBox(
       {@required this.listaDescricao,
@@ -20,7 +20,7 @@ class ZCheckBox extends StatefulWidget {
 
 class _ZCheckBoxState extends State<ZCheckBox>
     with AfterLayoutMixin<ZCheckBox> {
-  ZCheckBoxView _view;
+  late ZCheckBoxView _view;
 
   @override
   void initState() {
@@ -66,7 +66,7 @@ class _ZCheckBoxState extends State<ZCheckBox>
               width: 130,
               padding: EdgeInsets.only(left: 14.0, top: 14.0),
               child: new Text(
-                "${widget.title}",
+                _retornarTitulo(),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
             ),
@@ -74,18 +74,18 @@ class _ZCheckBoxState extends State<ZCheckBox>
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: _crossAxisCount,
                     childAspectRatio: _aspectRatio),
-                itemCount: widget.listaDescricao.length,
+                itemCount: widget.listaDescricao!.length,
                 physics: const NeverScrollableScrollPhysics(),
 
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  var item = widget.listaDescricao[index];
+                  var item = widget.listaDescricao![index];
 
                   return new Row(
                     children: <Widget>[
                       new Checkbox(
                           value: item.foiMarcado,
-                          onChanged: (value) => _view.onChange(value, item)),
+                          onChanged: (value) => _view.onChange(value!, item)),
                       new Text("${item.descricao}")
                     ],
                   );
@@ -97,5 +97,13 @@ class _ZCheckBoxState extends State<ZCheckBox>
   @override
   void afterFirstLayout(BuildContext context) {
     _view.afterBuild();
+  }
+
+  String _retornarTitulo(){
+    if(widget.title != null){
+      return widget.title!;
+    }else{
+      return "";
+    }
   }
 }

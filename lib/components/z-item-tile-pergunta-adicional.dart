@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ZItemTilePerguntaAdicional extends StatefulWidget {
-  final Function onPressed;
-  String textoPergunta;
-  String tipoPergunta;
-  List<String> opcoes;
+  final Function? onPressed;
+  String? textoPergunta;
+  String? tipoPergunta;
+  List<String>? opcoes;
 
   ZItemTilePerguntaAdicional(
       {this.onPressed, this.tipoPergunta, this.opcoes, this.textoPergunta});
@@ -19,7 +19,11 @@ class _ZItemTilePerguntaAdicionalState
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      onTap: widget.onPressed,
+      onTap: (){
+        if(widget.onPressed != null){
+          widget.onPressed!();
+        }
+      },
       child: new IntrinsicHeight(
         child: new Container(
           margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
@@ -88,7 +92,7 @@ class _ZItemTilePerguntaAdicionalState
       );
     } else {
       return new Text(
-        widget.textoPergunta,
+        widget.textoPergunta!,
         overflow: TextOverflow.ellipsis,
         style: new TextStyle(
             fontSize: 14,
@@ -109,7 +113,7 @@ class _ZItemTilePerguntaAdicionalState
       );
     } else {
       return new Text(
-        widget.tipoPergunta,
+        widget.tipoPergunta!,
         style: new TextStyle(color: new Color(0xFF808080), fontSize: 12),
       );
     }
@@ -120,11 +124,11 @@ class _ZItemTilePerguntaAdicionalState
       return new Container();
     } else {
       String textoOpcoes = "";
-      for (int i = 0; i < widget.opcoes.length; i++) {
-        if (i != widget.opcoes.length - 1)
-          textoOpcoes = "$textoOpcoes ${widget.opcoes[i]} -";
+      for (int i = 0; i < widget.opcoes!.length; i++) {
+        if (i != widget.opcoes!.length - 1)
+          textoOpcoes = "$textoOpcoes ${widget.opcoes![i]} -";
         else
-          textoOpcoes = "$textoOpcoes ${widget.opcoes[i]}";
+          textoOpcoes = "$textoOpcoes ${widget.opcoes![i]}";
       }
 
       return new Row(

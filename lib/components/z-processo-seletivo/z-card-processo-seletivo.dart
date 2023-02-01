@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'models/processo-seletivo.dart';
 
 class ZCardProcessoSeletivo extends StatefulWidget {
-  final ThemeData themeData;
-  final ProcessoSeletivoViewModel processoSeletivo;
+  final ThemeData? themeData;
+  final ProcessoSeletivoViewModel? processoSeletivo;
 
   ZCardProcessoSeletivo(
       {@required this.themeData, @required this.processoSeletivo});
@@ -34,8 +34,8 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                   new Column(
                     children: [
                       new Text(
-                        widget.processoSeletivo.descricao,
-                        style: widget.themeData.textTheme.bodyText2.copyWith(
+                        _retornarDescricao(),
+                        style: widget.themeData!.textTheme.bodyText2!.copyWith(
                             fontWeight: FontWeight.bold, fontSize: 16.0),
                       ),
                     ],
@@ -45,11 +45,11 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                       new Row(
                         children: [
                           new Text(
-                            widget.processoSeletivo.codigo,
+                            _retornarCodigo(),
                             style: new TextStyle(fontSize: size, color: color),
                           ),
                           new Text(
-                              widget.processoSeletivo.diasEmAberto.toString(),
+                              _retornarDiasEmAberto(),
                               style:
                               new TextStyle(fontSize: size, color: color))
                         ],
@@ -60,7 +60,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
               ),
             ),
             new Container(
-              color: widget.themeData.backgroundColor,
+              color: widget.themeData!.backgroundColor,
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.all(1.0),
               child: new Row(
@@ -83,7 +83,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                               ),
                             ),
                             new Text(
-                              widget.processoSeletivo.nomeCargo,
+                             _retornarCargo(),
                               style:
                               new TextStyle(fontSize: size, color: color),
                             )
@@ -101,7 +101,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                           new Container(
                             width: MediaQuery.of(context).size.width / 2.3,
                             child: new Text(
-                              "${tipoSalario()}/${widget.processoSeletivo.periodicidadePagamento},${widget.processoSeletivo.tipoContrato}",
+                              "${tipoSalario()}/${_retornarPeriodicidadePagamento()},${_retornarTipoContrato()!}",
                               style:
                               new TextStyle(fontSize: size, color: color),
                             ),
@@ -129,7 +129,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                             new Container(
                               width: MediaQuery.of(context).size.width / 3.2,
                               child:
-                              new Text(widget.processoSeletivo.localidade,
+                              new Text(_retornarLocalidade(),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                   style: new TextStyle(
@@ -154,7 +154,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                               new Container(
                                 width: MediaQuery.of(context).size.width / 3.2,
                                 child: new Text(
-                                    widget.processoSeletivo.beneficios,
+                                   _retornarBeneficios(),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                     style: new TextStyle(
@@ -185,7 +185,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                             size: size,
                           ),
                           new Text(
-                              "ETAPA ${widget.processoSeletivo.progressoEtapa}",
+                              "ETAPA ${_retornarProgressoEtapa()}",
                               style: new TextStyle(
                                   fontSize: size,
                                   color: color,
@@ -205,7 +205,7 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
                             size: size,
                           ),
                           new Text(
-                              "${widget.processoSeletivo.qtdeParticipantesAtual}",
+                              _retornarQtdeParticipantesAnual(),
                               style: new TextStyle(
                                   fontSize: size,
                                   fontWeight: FontWeight.bold,
@@ -230,10 +230,92 @@ class _ZCardProcessoSeletivoState extends State<ZCardProcessoSeletivo> {
   }
 
   String tipoSalario() {
-    if (widget.processoSeletivo.salarioFixoOuFaixa.toUpperCase() == "FIXO") {
-      return widget.processoSeletivo.salarioValorFixo.toStringAsFixed(2);
+    if (widget.processoSeletivo!.salarioFixoOuFaixa!.toUpperCase() == "FIXO") {
+      return widget.processoSeletivo!.salarioValorFixo!.toStringAsFixed(2);
     } else {
-      return "${widget.processoSeletivo.salarioValorFaixaInicial.toStringAsFixed(2)} até ${widget.processoSeletivo.salarioValorFaixaFinal.toStringAsFixed(2)}";
+      return "${widget.processoSeletivo!.salarioValorFaixaInicial!.toStringAsFixed(2)} até ${widget.processoSeletivo!.salarioValorFaixaFinal!.toStringAsFixed(2)}";
     }
   }
+
+  String _retornarDiasEmAberto(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.diasEmAberto != null){
+      return widget.processoSeletivo!.diasEmAberto!.toString();
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarCargo(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.nomeCargo != null){
+      return widget.processoSeletivo!.nomeCargo!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarLocalidade(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.localidade != null){
+      return widget.processoSeletivo!.localidade!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarBeneficios(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.beneficios != null){
+      return widget.processoSeletivo!.beneficios!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarProgressoEtapa(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.progressoEtapa != null){
+      return widget.processoSeletivo!.progressoEtapa!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarQtdeParticipantesAnual(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.qtdeParticipantesAtual != null){
+      return widget.processoSeletivo!.qtdeParticipantesAtual!.toString();
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarTipoContrato(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.tipoContrato != null){
+      return widget.processoSeletivo!.tipoContrato!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarPeriodicidadePagamento(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.periodicidadePagamento != null){
+      return widget.processoSeletivo!.periodicidadePagamento!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarDescricao(){
+    if(widget.processoSeletivo !=null && widget.processoSeletivo!.descricao != null){
+      return widget.processoSeletivo!.descricao!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarCodigo(){
+    if(widget.processoSeletivo != null && widget.processoSeletivo!.codigo !=null){
+      return widget.processoSeletivo!.codigo! ;
+    }else{
+      return "";
+    }
+
+  }
+
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ZItemTileConta extends StatefulWidget {
-  final Widget imagemPerfil;
-  String nomeConta;
-  String appsVinculados;
-  String dataVinculo;
-  bool ativo;
-  bool visibilidade;
-  int tamanhoLista;
+  final Widget? imagemPerfil;
+  String? nomeConta;
+  String? appsVinculados;
+  String? dataVinculo;
+  bool? ativo;
+  bool? visibilidade;
+  int? tamanhoLista;
 
   ZItemTileConta(
       {this.imagemPerfil,
@@ -67,7 +67,7 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
                               flex:25,
                               child: new Container(
                                   margin: const EdgeInsets.only(left: 4.0, top: 8.0),
-                                  child: new Text(widget.nomeConta,
+                                  child: new Text(_retornarNomeConta(),
                                     overflow: TextOverflow.ellipsis,
                                   )
                               ),
@@ -114,7 +114,7 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
                             new Container(
                               margin: const EdgeInsets.only(left: 4.0, bottom: 8.0),
                               child: new Text(
-                                widget.dataVinculo,
+                                _retornarDataVinculo(),
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
@@ -132,7 +132,7 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
   }
 
   Widget _retornarArrow() {
-    if (widget.visibilidade) {
+    if (widget.visibilidade!) {
       return new Container();
     } else {
       return new Expanded(
@@ -166,7 +166,7 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
       return new Text('');
     } else {
       return new Text(
-        widget.appsVinculados,
+        widget.appsVinculados!,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(
           color: const Color(0xFF000000),
@@ -195,7 +195,7 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
   }
 
   Widget _montarAtivo() {
-    if (!widget.ativo) {
+    if (!widget.ativo!) {
       return new Container();
     } else {
       return new Container(
@@ -209,6 +209,22 @@ class _ZItemTileContaState extends State<ZItemTileConta> {
           style: const TextStyle(color: Colors.white, fontSize: 12.0),
         ),
       );
+    }
+  }
+
+  String _retornarNomeConta(){
+    if(widget.nomeConta != null){
+      return widget.nomeConta!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarDataVinculo(){
+    if(widget.dataVinculo!=null){
+      return widget.dataVinculo!;
+    }else{
+      return "";
     }
   }
 }

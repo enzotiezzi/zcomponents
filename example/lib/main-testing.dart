@@ -37,7 +37,7 @@ class _MainTestingState extends State<MainTesting> {
   TextEditingController cpfController = new TextEditingController();
   FocusNode emailFocusNode = new FocusNode();
   TextEditingController emailController = new TextEditingController();
-  IIdentityServer identityServer;
+  late IIdentityServer identityServer;
 
   List<ZCollectionItem> lista = [
     ZCollectionItem(
@@ -57,6 +57,7 @@ class _MainTestingState extends State<MainTesting> {
   @override
   Future<void> initState() {
     super.initState();
+    throw UnimplementedError();
   }
 
   @override
@@ -83,7 +84,7 @@ class _MainTestingState extends State<MainTesting> {
     if (validar()) {
       return () {};
     } else {
-      return null;
+      return (){};
     }
   }
 
@@ -117,7 +118,7 @@ class _MainTestingState extends State<MainTesting> {
               }
             },
           ),
-          new RaisedButton(
+          new ElevatedButton(
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ZUserInfo()));
@@ -182,7 +183,7 @@ class _MainTestingState extends State<MainTesting> {
           ),
           Container(
             margin: EdgeInsets.only(top: 32),
-            child: RaisedButton(
+            child: ElevatedButton(
               onPressed: () async {
                 Navigator.push(
                     context,
@@ -191,7 +192,7 @@ class _MainTestingState extends State<MainTesting> {
                               userInfo: BuscarInfo(),
                             )));
               },
-              color: Theme.of(context).accentColor,
+
               child: Text("SALVAR"),
             ),
           ),
@@ -222,11 +223,11 @@ class _MainTestingState extends State<MainTesting> {
   }
 
   Future<void> onScroll() async {
-    if (this.paginationMetaData.hasNext) {
+    if (this.paginationMetaData.hasNext!) {
       var response = await teste(this.searchOptions);
 
-      this.searchOptions.pagination.pageNumber++;
-      this.paginationMetaData = response.paginationMetaData;
+      this.searchOptions.pagination!.pageNumber! +1;
+      this.paginationMetaData = response.paginationMetaData!;
     }
   }
 
@@ -243,11 +244,11 @@ class _MainTestingState extends State<MainTesting> {
 }
 
 class GrupoResumo {
-  String idUsuario;
-  String idNivel;
-  String nomeNivel;
-  int qtdGrupoAcesso;
-  int qtdUsuario;
+  String? idUsuario;
+  String? idNivel;
+  String? nomeNivel;
+  int? qtdGrupoAcesso;
+  int? qtdUsuario;
 
   GrupoResumo(
       {this.idUsuario,

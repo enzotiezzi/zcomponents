@@ -6,35 +6,35 @@ import 'package:z_components/interface/i-zcolaborador-service.dart';
 import 'package:z_components/view-model/colaborador-viewmodel.dart';
 
 class ZItemTile extends StatefulWidget {
-  final String idConta;
-  final String token;
-  final String inicioIntervalo;
-  final String voltaIntervalo;
-  final String cpf;
-  final String codEmpresa;
-  final Function onPressedIconBatida;
-  final String tempoPausa;
-  final String jornada;
-  final String telefone;
-  final String email;
-  final String endereco;
-  final String escala;
-  final String horaEntrada;
-  final String horaSaida;
-  final String cargo;
-  final String nomeCentroCusto;
-  final String nome;
-  final String isExpand;
-  final String re;
-  final Function funcao;
-  final Function tabCard;
-  final Widget imagemPerfil;
-  final String horario;
-  final Function onTapImage;
-  final Color colorBatida;
-  final ZTypeTile zTypeTile;
-  final Color colorStatus;
-  final String status;
+  final String? idConta;
+  final String? token;
+  final String? inicioIntervalo;
+  final String? voltaIntervalo;
+  final String? cpf;
+  final String? codEmpresa;
+  final Function? onPressedIconBatida;
+  final String? tempoPausa;
+  final String? jornada;
+  final String? telefone;
+  final String? email;
+  final String? endereco;
+  final String? escala;
+  final String? horaEntrada;
+  final String? horaSaida;
+  final String? cargo;
+  final String? nomeCentroCusto;
+  final String? nome;
+  final String? isExpand;
+  final String? re;
+  final Function? funcao;
+  final Function? tabCard;
+  final Widget? imagemPerfil;
+  final String? horario;
+  final Function? onTapImage;
+  final Color? colorBatida;
+  final ZTypeTile? zTypeTile;
+  final Color? colorStatus;
+  final String? status;
 
   ZItemTile(
       {this.idConta,
@@ -72,7 +72,7 @@ class ZItemTile extends StatefulWidget {
 }
 
 class _ZItemTileState extends State<ZItemTile> {
-  double _largura;
+  late double? _largura;
 
   @override
   void initState() {
@@ -82,10 +82,14 @@ class _ZItemTileState extends State<ZItemTile> {
   @override
   Widget build(BuildContext context) {
     _largura = MediaQuery.of(context).size.width;
-    switch (widget.zTypeTile) {
+    switch (widget.zTypeTile!) {
       case ZTypeTile.isColab:
         return new GestureDetector(
-          onTap: widget.tabCard,
+          onTap: (){
+           if(widget.tabCard!=null){
+             widget.tabCard!();
+           }
+          },
           child: IntrinsicHeight(
               child: new Container(
                   margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
@@ -146,7 +150,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                   child: (widget.nome == null)
                                                       ? new Text('')
                                                       : new ZNomeReduzido(
-                                                          text: widget.nome,
+                                                          text: widget.nome !=null ? widget.nome!: "",
                                                           textStyle: TextStyle(
                                                               fontSize: 14.0,
                                                               color: Color(
@@ -157,7 +161,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                         ),
                                                 )
                                               : new Container(
-                                                  width: (_largura / 2.0),
+                                                  width: (_largura! / 2.0),
                                                   margin: EdgeInsets.only(
                                                       left: 6.0,
                                                       bottom: 6.0,
@@ -165,7 +169,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                   child: (widget.nome == null)
                                                       ? new Text('')
                                                       : new ZNomeReduzido(
-                                                          text: widget.nome,
+                                                          text: widget.nome != null ? widget.nome! : "",
                                                           textStyle: TextStyle(
                                                               fontSize: 14.0,
                                                               color: Color(
@@ -218,7 +222,8 @@ class _ZItemTileState extends State<ZItemTile> {
                                                         null)
                                                     ? new Text('')
                                                     : new Text(
-                                                        widget.nomeCentroCusto,
+                                                        widget.nomeCentroCusto != null ?
+                                                        widget.nomeCentroCusto! : "",
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         style: TextStyle(
@@ -240,11 +245,11 @@ class _ZItemTileState extends State<ZItemTile> {
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: (widget.status
-                                                                .toLowerCase() ==
+                                                                ?.toLowerCase() ==
                                                             "ativo")
                                                         ? Colors.green
                                                         : (widget.status
-                                                                    .toLowerCase() ==
+                                                                    ?.toLowerCase() ==
                                                                 "inativo")
                                                             ? Colors.red
                                                             : widget
@@ -254,7 +259,8 @@ class _ZItemTileState extends State<ZItemTile> {
                                                 margin: EdgeInsets.only(
                                                     right: 8.0, left: 2.0),
                                                 child: new Text(
-                                                  widget.status,
+                                                  widget.status != null ?
+                                                  widget.status!: "",
                                                   style: TextStyle(
                                                       fontSize: 12.0,
                                                       color: const Color(
@@ -327,7 +333,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                   ),
                                                 ),
                                                 new Container(
-                                                  width: _largura / 5,
+                                                  width: _largura! / 5,
                                                   margin: EdgeInsets.only(
                                                       left: 6.0,
                                                       right: 0.0,
@@ -358,7 +364,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                           new Expanded(
                                             flex: 5,
                                             child: new Container(
-                                              width: _largura / 2.3,
+                                              width: _largura! / 2.3,
                                               child: new Row(
                                                 children: <Widget>[
                                                   new Container(
@@ -391,7 +397,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                                 color: Color(
                                                                     0xFF808080),
                                                                 fontSize:
-                                                                    (_largura <
+                                                                    (_largura! <
                                                                             360)
                                                                         ? 8.0
                                                                         : 10,
@@ -418,7 +424,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                                 color: Color(
                                                                     0xFF808080),
                                                                 fontSize:
-                                                                    (_largura <
+                                                                    (_largura! <
                                                                             360)
                                                                         ? 8.0
                                                                         : 10,
@@ -444,7 +450,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                                 color: Color(
                                                                     0xFF808080),
                                                                 fontSize:
-                                                                    (_largura <
+                                                                    (_largura! <
                                                                             360)
                                                                         ? 8.0
                                                                         : 10,
@@ -500,7 +506,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                                 style: TextStyle(
                                                                     color: Color(
                                                                         0xFF808080),
-                                                                    fontSize: (_largura <
+                                                                    fontSize: (_largura! <
                                                                             360)
                                                                         ? 8.0
                                                                         : 10,
@@ -527,7 +533,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                                 style: TextStyle(
                                                                     color: Color(
                                                                         0xFF808080),
-                                                                    fontSize: (_largura <
+                                                                    fontSize: (_largura! <
                                                                             360)
                                                                         ? 8.0
                                                                         : 10,
@@ -554,7 +560,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                                 style: TextStyle(
                                                                     color: Color(
                                                                         0xFF808080),
-                                                                    fontSize: (_largura <
+                                                                    fontSize: (_largura! <
                                                                             360)
                                                                         ? 8.0
                                                                         : 10,
@@ -572,8 +578,12 @@ class _ZItemTileState extends State<ZItemTile> {
                                                         Alignment.topCenter,
                                                     //margin:  EdgeInsets.only(left: _largura/40,bottom: 6),
                                                     child: new InkWell(
-                                                      onTap: widget
-                                                          .onPressedIconBatida,
+                                                      onTap: (){
+                                                        if(widget.onPressedIconBatida!=null){
+                                                          widget
+                                                              .onPressedIconBatida!();
+                                                        }
+                                                      },
                                                       child: new Icon(
                                                         Icons.alarm_on,
                                                         color:
@@ -590,7 +600,11 @@ class _ZItemTileState extends State<ZItemTile> {
                                       )
                                     ],
                                   ),
-                                  onTap: widget.funcao,
+                                  onTap: (){
+                                    if(widget.funcao!=null){
+                                      widget.funcao!();
+                                    }
+                                  },
                                 )),
                             new Container(
                               color: Colors.grey,
@@ -604,7 +618,11 @@ class _ZItemTileState extends State<ZItemTile> {
         break;
       case ZTypeTile.isUser:
         return new GestureDetector(
-          onTap: widget.tabCard,
+          onTap: (){
+            if(widget.tabCard !=null){
+              widget.tabCard!();
+            }
+          },
           child: IntrinsicHeight(
               child: new Container(
                   margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
@@ -668,7 +686,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                   child: (widget.nome == null)
                                                       ? new Text('')
                                                       : new ZNomeReduzido(
-                                                          text: widget.nome,
+                                                          text: widget.nome != null ? widget.nome! : "",
                                                           textStyle: TextStyle(
                                                               fontSize: 14.0,
                                                               color: Color(
@@ -679,7 +697,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                         ),
                                                 )
                                               : new Container(
-                                                  width: (_largura / 2.4),
+                                                  width: (_largura! / 2.4),
                                                   margin: EdgeInsets.only(
                                                       left: 6.0,
                                                       bottom: 6.0,
@@ -687,7 +705,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                   child: (widget.nome == null)
                                                       ? new Text('')
                                                       : new ZNomeReduzido(
-                                                          text: widget.nome,
+                                                          text: widget.nome != null ? widget.nome! : "",
                                                           textStyle: TextStyle(
                                                               fontSize: 14.0,
                                                               color: Color(
@@ -727,9 +745,9 @@ class _ZItemTileState extends State<ZItemTile> {
                                                 ),
                                               ),
                                               new Container(
-                                                  width: (_largura < 360)
-                                                      ? _largura / 3.4
-                                                      : _largura / 3.8,
+                                                  width: (_largura! < 360)
+                                                      ? _largura! / 3.4
+                                                      : _largura! / 3.8,
                                                   margin: EdgeInsets.only(
                                                       left: 6.0, bottom: 4.0),
                                                   child: new Text(
@@ -758,9 +776,9 @@ class _ZItemTileState extends State<ZItemTile> {
                                                 ),
                                               ),
                                               new Container(
-                                                  width: (_largura <= 450)
-                                                      ? _largura * 0.28
-                                                      : _largura * 0.38,
+                                                  width: (_largura! <= 450)
+                                                      ? _largura! * 0.28
+                                                      : _largura! * 0.38,
                                                   height: 15,
                                                   margin: EdgeInsets.only(
                                                       left: 4.0, bottom: 8.0),
@@ -794,9 +812,9 @@ class _ZItemTileState extends State<ZItemTile> {
                                             ),
                                           ),
                                           new Container(
-                                              width: (_largura <= 450)
-                                                  ? _largura / 1.55
-                                                  : _largura / 1.4,
+                                              width: (_largura! <= 450)
+                                                  ? _largura! / 1.55
+                                                  : _largura! / 1.4,
                                               margin: EdgeInsets.only(
                                                   left: 6.0,
                                                   right: 0.0,
@@ -813,7 +831,11 @@ class _ZItemTileState extends State<ZItemTile> {
                                       ),
                                     ],
                                   ),
-                                  onTap: widget.funcao,
+                                  onTap: (){
+                                    if(widget.funcao!=null){
+                                      widget.funcao!();
+                                    }
+                                  },
                                 )),
                             new Container(
                               color: Colors.grey,
@@ -827,7 +849,11 @@ class _ZItemTileState extends State<ZItemTile> {
         break;
       case ZTypeTile.isEmpresa:
         return new GestureDetector(
-          onTap: widget.tabCard,
+          onTap: (){
+            if(widget.tabCard != null){
+              widget.tabCard!();
+            }
+          },
           child: IntrinsicHeight(
               child: new Container(
                   margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
@@ -860,7 +886,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                               child: (widget.nome == null)
                                                   ? new Text('')
                                                   : new ZNomeReduzido(
-                                                      text: widget.nome,
+                                                      text: widget.nome != null ? widget.nome! : "",
                                                       textStyle: TextStyle(
                                                           fontSize: 14.0,
                                                           color:
@@ -870,7 +896,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                     ),
                                             )
                                           : new Container(
-                                              width: (_largura / 2.0),
+                                              width: (_largura! / 2.0),
                                               margin: EdgeInsets.only(
                                                   left: 8.0,
                                                   bottom: 4.0,
@@ -878,7 +904,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                               child: (widget.nome == null)
                                                   ? new Text('')
                                                   : new ZNomeReduzido(
-                                                      text: widget.nome,
+                                                      text: widget.nome !=null ? widget.nome! : "",
                                                       textStyle: TextStyle(
                                                           fontSize: 14.0,
                                                           color:
@@ -888,7 +914,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                                     ),
                                             ),
                                       new Container(
-                                          width: (_largura / 4.5),
+                                          width: (_largura! / 4.5),
                                           margin: EdgeInsets.only(right: 4),
                                           child: new Text(
                                             widget.codEmpresa ?? "",
@@ -918,7 +944,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                             ),
                                           ),
                                           new Container(
-                                            width: (_largura / 1.55),
+                                            width: (_largura! / 1.55),
                                             margin: EdgeInsets.only(
                                                 left: 6.0,
                                                 right: 0.0,
@@ -943,11 +969,11 @@ class _ZItemTileState extends State<ZItemTile> {
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: (widget.status
-                                                            .toLowerCase() ==
+                                                            ?.toLowerCase() ==
                                                         "ativo")
                                                     ? Colors.green
                                                     : (widget.status
-                                                                .toLowerCase() ==
+                                                                ?.toLowerCase() ==
                                                             "inativo")
                                                         ? Colors.red
                                                         : widget.colorStatus),
@@ -956,7 +982,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                             margin: EdgeInsets.only(
                                                 right: 8.0, left: 2.0),
                                             child: new Text(
-                                              widget.status,
+                                              widget.status != null ? widget.status! : "",
                                               style: TextStyle(
                                                   fontSize: 12.0,
                                                   color:
@@ -982,9 +1008,9 @@ class _ZItemTileState extends State<ZItemTile> {
                                         ),
                                       ),
                                       new Container(
-                                        width: (_largura < 450)
-                                            ? _largura / 1.4
-                                            : _largura / 1.2,
+                                        width: (_largura! < 450)
+                                            ? _largura! / 1.4
+                                            : _largura! / 1.2,
                                         margin: EdgeInsets.only(
                                             left: 6.0,
                                             right: 0.0,
@@ -1020,7 +1046,7 @@ class _ZItemTileState extends State<ZItemTile> {
                                             ),
                                           ),
                                           new Container(
-                                            width: (_largura / 1.4),
+                                            width: (_largura! / 1.4),
                                             margin: EdgeInsets.only(
                                                 left: 6.0,
                                                 right: 0.0,
@@ -1039,14 +1065,18 @@ class _ZItemTileState extends State<ZItemTile> {
                                       ),
                                       new Container(
                                         margin: EdgeInsets.only(
-                                            right: (_largura < 450) ? 6 : 6,
+                                            right: (_largura! < 450) ? 6 : 6,
                                             bottom: 6),
                                         child: new InkWell(
-                                          onTap: widget.onPressedIconBatida,
+                                          onTap: (){
+                                            if(widget.onPressedIconBatida!=null){
+                                              widget.onPressedIconBatida!();
+                                            }
+                                          },
                                           child: new Icon(
                                             Icons.alarm_on,
                                             color: widget.colorBatida,
-                                            size: (_largura < 450) ? 14 : 18,
+                                            size: (_largura! < 450) ? 14 : 18,
                                           ),
                                         ),
                                       )
@@ -1054,7 +1084,11 @@ class _ZItemTileState extends State<ZItemTile> {
                                   )
                                 ],
                               ),
-                              onTap: widget.funcao,
+                              onTap: (){
+                                if(widget.funcao!=null){
+                                  widget.funcao!();
+                                }
+                              },
                             )),
                             new Container(
                               color: Colors.grey,

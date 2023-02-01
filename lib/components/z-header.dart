@@ -1,26 +1,27 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZHeader extends StatefulWidget {
-  final Key key;
-  final Widget child;
-  final MaterialType type;
-  final double elevation;
-  final Color color;
-  final Color shadowColor;
-  final TextStyle textStyle;
-  final ShapeBorder shape;
-  final bool borderOnForeground;
-  final Clip clipBehavior;
-  final Duration animationDuration;
-  final BorderRadiusGeometry borderRadius;
-  final String titulo;
-  final ZTipoHeader zTipos;
+  final Key? key;
+  final Widget? child;
+  final MaterialType? type;
+  final double? elevation;
+  final Color? color;
+  final Color? shadowColor;
+  final TextStyle? textStyle;
+  final ShapeBorder? shape;
+  final bool? borderOnForeground;
+  final Clip? clipBehavior;
+  final Duration? animationDuration;
+  final BorderRadiusGeometry? borderRadius;
+  final String? titulo;
+  final ZTipoHeader? zTipos;
   final List<Widget> children;
-  final bool titulosAppBar;
-  final bool initiallyExpanded;
+  final bool? titulosAppBar;
+  final bool? initiallyExpanded;
 
   ZHeader(
       {this.key,
@@ -61,7 +62,7 @@ class ZHeaderState extends State<ZHeader> {
             padding: const EdgeInsets.only(
                 bottom: 16.0, top: 16.0, right: 16, left: 16),
             child: new Text(
-              widget.titulo,
+              widget.titulo!,
               style: MainStyle.get(context).titleStyleText,
             ),
           ),
@@ -72,7 +73,7 @@ class ZHeaderState extends State<ZHeader> {
           elevation: 4.0,
           color: Colors.white,
           child: new ConfigurableExpansionTile(
-            initiallyExpanded: widget.initiallyExpanded,
+            initiallyExpanded: widget.initiallyExpanded!,
             bottomBorderOn: true,
             animatedWidgetFollowingHeader:
                 new Icon(Icons.arrow_drop_down, color: Colors.black),
@@ -87,7 +88,7 @@ class ZHeaderState extends State<ZHeader> {
                             alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.only(
                                 bottom: 16.0, top: 16.0, right: 16, left: 16),
-                            child: new Text(widget.titulo,
+                            child: new Text(widget.titulo!,
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     fontStyle: FontStyle.normal,
@@ -101,7 +102,10 @@ class ZHeaderState extends State<ZHeader> {
                 ],
               ),
             ),
-            children: widget.children,
+            childrenBody: ListView(
+              shrinkWrap: true,
+              children: widget.children,
+            ),
           ),
         );
     }

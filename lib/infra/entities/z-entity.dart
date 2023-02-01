@@ -3,12 +3,12 @@ import 'package:z_components/infra/schema/z-column.dart';
 import 'package:z_components/infra/schema/z-table.dart';
 
 abstract class ZEntity {
-  int id;
-  String idConta;
+  int? id;
+  String? idConta;
 
-  String tableName;
+  String? tableName;
 
-  ZTable table;
+  ZTable? table;
 
   ZEntity({this.id, this.idConta});
 
@@ -22,7 +22,7 @@ abstract class ZEntity {
     buildTable();
 
     try {
-      await db.execute(_toSQL(table));
+      await db.execute(_toSQL(table!));
     } catch (e) {}
   }
 
@@ -32,11 +32,11 @@ abstract class ZEntity {
     var command =
         "ALTER TABLE $tableName ADD COLUMN ${column.name} ${column.type}";
 
-    if (column.primaryKey != null && column.primaryKey)
+    if (column.primaryKey != null && column.primaryKey!)
       command += " PRIMARY KEY";
-    if (column.autoIncrement != null && column.autoIncrement)
+    if (column.autoIncrement != null && column.autoIncrement!)
       command += " AUTOINCREMENT";
-    if (column.notNull != null && column.notNull) command += " NOT NULL";
+    if (column.notNull != null && column.notNull!) command += " NOT NULL";
 
     try {
       await db.execute(command);
@@ -44,7 +44,7 @@ abstract class ZEntity {
   }
 
   String _toSQL(ZTable table) {
-    List<ZColumn> columns = table.columns;
+    List<ZColumn> columns = table.columns!;
 
     String command =
         "CREATE TABLE IF NOT EXISTS $tableName (${_extractColumns(columns)})";
@@ -56,11 +56,11 @@ abstract class ZEntity {
     var command = [];
 
     columns.forEach((c) {
-      String columnName = c.name;
-      String type = c.type;
-      bool primaryKey = c.primaryKey;
-      bool autoIncrement = c.autoIncrement;
-      bool notNull = c.notNull;
+      String? columnName = c.name;
+      String? type = c.type;
+      bool? primaryKey = c.primaryKey;
+      bool? autoIncrement = c.autoIncrement;
+      bool? notNull = c.notNull;
 
       var cmd = "$columnName $type";
 

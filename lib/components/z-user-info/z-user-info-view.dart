@@ -58,9 +58,9 @@ class ZUserInfoView extends IView<ZUserInfo> {
   var focusTelefoneSec = new FocusNode();
   var focusEmailSec = new FocusNode();
 
-  IArquivoService _arquivoService;
-  IUserInfoService _userInfoService;
-  ITesteConexaoService _testeConexaoService;
+  late IArquivoService _arquivoService;
+  late IUserInfoService _userInfoService;
+  late ITesteConexaoService _testeConexaoService;
 
   String textoFoto = "";
 
@@ -91,14 +91,14 @@ class ZUserInfoView extends IView<ZUserInfo> {
   bool preencheuEmail = false;
   bool preencheuTelefone = false;
 
-  BuscarInfo _userInfo;
+  late BuscarInfo _userInfo;
 
   GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
 
-  DialogUtils _dialogUtils;
+  late DialogUtils? _dialogUtils;
 
-  Uint8List imagemPerfil;
+  late Uint8List? imagemPerfil;
 
   ZUserInfoView(State<ZUserInfo> state) : super(state);
 
@@ -109,7 +109,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
     _arquivoService = new ArquivoService(NovoToken.newToken);
     _userInfoService = new UserInfoService(NovoToken.newToken);
     _testeConexaoService = new TesteConexaoService();
-    if (state.widget.editarAtivo) {
+    if (state.widget.editarAtivo !=null && state.widget.editarAtivo!) {
       Future.delayed(Duration(milliseconds: 400), () {
         FocusScope.of(state.context).requestFocus(focusNodeNome);
       });
@@ -140,15 +140,15 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   void _preencherControllers() {
-    textEditingControllerNome.text = _userInfo?.nome;
-    textEditingControllerTelefone.text = _userInfo?.telefone;
-    textEditingControllerEmail.text = _userInfo?.email;
-    textEditingControllerCPF.text = _userInfo?.username;
-    textEditingControllerNomeReduzido.text = _userInfo?.nomeReduzido;
+    textEditingControllerNome.text = _userInfo.nome!;
+    textEditingControllerTelefone.text = _userInfo.telefone!;
+    textEditingControllerEmail.text = _userInfo.email!;
+    textEditingControllerCPF.text = _userInfo.username!;
+    textEditingControllerNomeReduzido.text = _userInfo.nomeReduzido!;
   }
 
-  Future escolherMetodoSelecionarFoto() {
-    if (state.widget.editarAtivo) {
+  Future escolherMetodoSelecionarFoto() async{
+    if (state.widget.editarAtivo !=null && state.widget.editarAtivo!) {
       return showModalBottomSheet<String>(
           context: state.context,
           shape: RoundedRectangleBorder(
@@ -184,7 +184,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                             flex: 5,
                             child: new GestureDetector(
                               onTap: () => escolherImagem(ImageSource.camera)
-                                  .then((_) => _dialogUtils.dismiss()),
+                                  .then((_) => _dialogUtils?.dismiss()),
                               child: new Container(
                                 color: Colors.transparent,
                                 child: new Column(
@@ -214,7 +214,7 @@ class ZUserInfoView extends IView<ZUserInfo> {
                             flex: 5,
                             child: new GestureDetector(
                                 onTap: () => escolherImagem(ImageSource.gallery)
-                                    .then((_) => _dialogUtils.dismiss()),
+                                    .then((_) => _dialogUtils?.dismiss()),
                                 child: new Container(
                                   color: Colors.transparent,
                                   child: new Column(
@@ -248,16 +248,16 @@ class ZUserInfoView extends IView<ZUserInfo> {
   }
 
   Future<void> escolherImagem(ImageSource source) async {
-    var imagem = await ImagePicker.pickImage(source: source, imageQuality: 70);
+    var imagem = await ImagePicker().getImage(source: source,imageQuality: 70);
 
     if (imagem != null) {
-      var bytes = imagem.readAsBytesSync();
+      Uint8List bytes = await imagem.readAsBytes();
 
       var base64 = base64Encode(bytes);
 
       if (state.mounted) {
         state.setState(() {
-          imagemPerfil = bytes;
+          imagemPerfil = bytes ;
         });
 
         var idAnexo = await _arquivoService.enviarImagem(new ArquivoViewModel(
@@ -269,10 +269,10 @@ class ZUserInfoView extends IView<ZUserInfo> {
           container: "teste",
         ));
 
-        state.widget.userInfo.idFoto = idAnexo;
+        state.widget.userInfo?.idFoto = idAnexo;
 
         if (state.widget.onChangeProfileImage != null)
-          state.widget.onChangeProfileImage(base64);
+          state.widget.onChangeProfileImage!(base64);
       }
     }
   }
@@ -292,45 +292,45 @@ class ZUserInfoView extends IView<ZUserInfo> {
       telefone: textEditingControllerTelefone.text,
       email: textEditingControllerEmail.text,
       nomeReduzido: textEditingControllerNomeReduzido.text,
-      fotoBase64: (state.widget.userInfo.fotoBase64 == null)
+      fotoBase64: (state.widget.userInfo?.fotoBase64 == null)
           ? null
-          : state.widget.userInfo.fotoBase64,
-      idFoto: (state.widget.userInfo.idFoto == "")
+          : state.widget.userInfo!.fotoBase64!,
+      idFoto: (state.widget.userInfo?.idFoto == "")
           ? null
-          : state.widget.userInfo.idFoto,
+          : state.widget.userInfo!.idFoto!,
     );
 
-    _dialogUtils.showZProgressDialog(
+    _dialogUtils?.showZProgressDialog(
         "Salvando informações...", 0.7, _globalKey);
 
-    var res = false;
+    bool? res = false;
 
     var conexao = await _testeConexaoService.testarConexao();
 
-    if (conexao) {
+    if (conexao != null && conexao!) {
       res = await _userInfoService.editarInformacoes(userInfo);
     }
 
-    if (res) {
+    if (res != null && res) {
       Future.delayed(Duration(milliseconds: 1000), () {
-        _globalKey.currentState.refresh(1.0, "Pronto", success: true);
+        _globalKey.currentState?.refresh(1.0, "Pronto", success: true);
       });
       Future.delayed(new Duration(milliseconds: 2000), () {
-        _dialogUtils.dismiss();
+        _dialogUtils?.dismiss();
         Navigator.of(state.context).pop();
 
         if (state.widget.onEditFinish != null)
-          state.widget.onEditFinish(userInfo);
+          state.widget.onEditFinish!(userInfo);
       });
     } else {
       Future.delayed(Duration(milliseconds: 1000), () {
-        _globalKey.currentState.refresh(1.0, "Erro ao criar o usuário", success: false);
+        _globalKey.currentState?.refresh(1.0, "Erro ao criar o usuário", success: false);
       });
       Future.delayed(new Duration(milliseconds: 2000), () {
-        _dialogUtils.dismiss();
+        _dialogUtils?.dismiss();
 
         if (state.widget.onEditFinish != null)
-          state.widget.onEditFinish(userInfo);
+          state.widget.onEditFinish!(userInfo);
       });
     }
 

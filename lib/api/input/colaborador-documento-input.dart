@@ -1,7 +1,7 @@
 class ColaboradorDocumentoInput {
-  String idColaborador;
-  Map<String, int> imagens;
-  Map<String, String> campos;
+  String? idColaborador;
+  Map<String, int>? imagens;
+  Map<String, String>? campos;
 
   ColaboradorDocumentoInput({
     this.idColaborador: "",

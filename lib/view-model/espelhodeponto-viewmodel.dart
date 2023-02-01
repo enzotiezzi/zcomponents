@@ -3,14 +3,14 @@ import 'batida-viewmodel.dart';
 import 'lancamento-ocorrencia-viewmodel.dart';
 
 class ZEspelhoDePontoViewModel {
-  List<ZBatidaViewModel> listaBatidas;
-  List<ZLancamentoOcorrenciaViewModel> listaOcorrencias;
-  String data;
-  String tOuF;
-  String horaEntradaPrevisto;
-  String horaSaidaPrevisto;
-  String horaIntervaloPrevisto;
-  APOBatidaDetalheViewModel batidaDetalhe;
+  List<ZBatidaViewModel>? listaBatidas;
+  List<ZLancamentoOcorrenciaViewModel>? listaOcorrencias;
+  String? data;
+  String? tOuF;
+  String? horaEntradaPrevisto;
+  String? horaSaidaPrevisto;
+  String? horaIntervaloPrevisto;
+  APOBatidaDetalheViewModel? batidaDetalhe;
 
   ZEspelhoDePontoViewModel(
       {this.data,

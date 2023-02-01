@@ -2,18 +2,18 @@ import 'app-usuario-conta-viewmodel.dart';
 import 'conta.dart';
 
 class ContaV2ViewModel {
-  String idConta;
-  String idUsuario;
-  String nomeConta;
-  String nomeUsuario;
-  String email;
-  String telefone;
-  List<dynamic> appLista;
-  String status;
-  bool ativo;
-  bool contaLogada;
-  String dataVinculo;
-  Conta conta;
+  String? idConta;
+  String? idUsuario;
+  String? nomeConta;
+  String? nomeUsuario;
+  String? email;
+  String? telefone;
+  List<dynamic>? appLista;
+  String? status;
+  bool? ativo;
+  bool? contaLogada;
+  String? dataVinculo;
+  Conta? conta;
 
   ContaV2ViewModel(
       {this.idConta,

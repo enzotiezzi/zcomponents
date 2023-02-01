@@ -7,10 +7,10 @@ import 'package:z_components/components/z-sequencia/sequencia.dart';
 import 'package:z_components/components/z_loading.dart';
 
 class ZSequencia extends StatefulWidget {
-  final String primeiroDiaEscala;
-  final String escala;
-  final ThemeData themeData;
-  final DateTime data;
+  final String? primeiroDiaEscala;
+  final String? escala;
+  final ThemeData? themeData;
+  final DateTime? data;
 
   ZSequencia(
       {@required this.primeiroDiaEscala,
@@ -36,7 +36,7 @@ class ZSequenciaState extends State<ZSequencia> {
     "Sunday": "DOM"
   };
 
-  var _sequencia = new List<String>();
+  List<String> _sequencia = [];
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class ZSequenciaState extends State<ZSequencia> {
   }
 
   Widget _buildSequencia() {
-    var seqs = new List<Widget>();
+    List<Widget> seqs = [];
 
     for (int i = 0; i < _sequencia.length; i++)
       seqs.add(_buildItemSequencia(i));
@@ -84,15 +84,15 @@ class ZSequenciaState extends State<ZSequencia> {
   }
 
   Widget _buildItemSequencia(index) {
-    var date = new DateTime.now();
+    DateTime? date = new DateTime.now();
 
     if (widget.data != null) date = widget.data;
 
     var backGroundColor = const Color(0xFFFFFFFF);
-    var fontColor = widget.themeData.primaryColor;
-    var borderColor = widget.themeData.primaryColor;
+    var fontColor = widget.themeData!.primaryColor;
+    var borderColor = widget.themeData!.primaryColor;
 
-    var data = date.add(new Duration(days: indexDia));
+    var data = date!.add(new Duration(days: indexDia));
     var diaSemana = new DateFormat.EEEE().format(data);
 
     var dia = _diasSemana[diaSemana];
@@ -104,7 +104,7 @@ class ZSequenciaState extends State<ZSequencia> {
 
     if (dataFormatada == hojeFormatado) {
       dia = "HOJE";
-      backGroundColor = widget.themeData.primaryColor;
+      backGroundColor = widget.themeData!.primaryColor;
       fontColor = const Color(0xFFFFFFFF);
     }
 
@@ -141,15 +141,15 @@ class ZSequenciaState extends State<ZSequencia> {
     );
   }
 
-  List<String> _montarSequencia() {
+   _montarSequencia() {
     var sequencia = new Sequencia(
         escala: widget.escala, primeiroDiaEscala: widget.primeiroDiaEscala);
 
     var date = new DateTime.now();
 
-    if (widget.data != null) date = widget.data;
+    if (widget.data != null) date = widget.data!;
 
-    var sequencias = new List<String>();
+    List<String> sequencias = [];
 
     var indexDias = -3;
 

@@ -5,10 +5,10 @@ import 'z-tav-bar-view.dart';
 
 
 class ZTabBar extends StatefulWidget {
-  List<ZTabBarViewModel> listaZTabBarViewModel;
-  void Function(int) onChanged;
+  List<ZTabBarViewModel>? listaZTabBarViewModel;
+  void Function(int)? onChanged;
 
-  Color color;
+  Color? color;
 
   ZTabBar({@required this.listaZTabBarViewModel, this.color, this.onChanged});
 
@@ -17,7 +17,7 @@ class ZTabBar extends StatefulWidget {
 }
 
 class _ZTabBarState extends State<ZTabBar> {
-  ZTabBarView _view;
+  late ZTabBarView _view;
 
   @override
   void initState() {
@@ -43,10 +43,10 @@ class _ZTabBarState extends State<ZTabBar> {
   }
 
   List<Widget> _itemLista() {
-    List<Widget> lista = new List<Widget>();
-    for (int i = 0; i < widget.listaZTabBarViewModel.length; i++) {
-      var item = widget.listaZTabBarViewModel[i];
-      if (item.enable) {
+    List<Widget> lista = [];
+    for (int i = 0; i < widget.listaZTabBarViewModel!.length; i++) {
+      var item = widget.listaZTabBarViewModel![i];
+      if (item.enable != null && item.enable!) {
         lista.add(new InkWell(
           onTap: () {
             _view.selecionarItem(i);
@@ -55,7 +55,7 @@ class _ZTabBarState extends State<ZTabBar> {
               decoration: BoxDecoration(
                   border: Border(right: BorderSide(color: Color(0xffEFEFF4)))),
               width: MediaQuery.of(context).size.width /
-                  widget.listaZTabBarViewModel.length,
+                  widget.listaZTabBarViewModel!.length,
               child: new Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -71,7 +71,7 @@ class _ZTabBarState extends State<ZTabBar> {
                         ),
                         new Container(
                           child: new Text(
-                            item.titulo,
+                            item.titulo ?? "",
                             style: TextStyle(
                                 color: _view.corTexto(
                                     item.selecionado, item.enable),
@@ -87,7 +87,7 @@ class _ZTabBarState extends State<ZTabBar> {
                               borderRadius: BorderRadius.circular(6.0)),
                           margin: EdgeInsets.only(right: 16.0),
                           child: new Text(
-                            item.contador,
+                            item.contador??"",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16.0,
@@ -97,7 +97,7 @@ class _ZTabBarState extends State<ZTabBar> {
                       ],
                     ),
                   ),
-                  _focusTextField(item.selecionado),
+                  _focusTextField(item.selecionado!),
                 ],
               )),
         ));
@@ -105,7 +105,7 @@ class _ZTabBarState extends State<ZTabBar> {
             decoration: BoxDecoration(
                 border: Border(right: BorderSide(color: Color(0xffEFEFF4)))),
             width: MediaQuery.of(context).size.width /
-                widget.listaZTabBarViewModel.length,
+                widget.listaZTabBarViewModel!.length,
             child: new Container(
                   padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
                   child: new Row(
@@ -113,7 +113,7 @@ class _ZTabBarState extends State<ZTabBar> {
                     children: <Widget>[
                       new Container(
                         child: new Text(
-                          item.titulo,
+                          item.titulo ?? "",
                           style: TextStyle(
                               color: _view.corTexto(item.selecionado, item.enable),
                               fontSize: 16.0,

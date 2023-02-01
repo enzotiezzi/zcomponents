@@ -19,8 +19,8 @@ class PessoaRepository extends AbstractRepository<Pessoa> implements IPessoaRepo
   }
 
   @override
-  Future<Pessoa> findLast() {
+  Future<Pessoa> findLast() async{
     // TODO: implement findLast
-    return null;
+    return Pessoa();
   }
 }

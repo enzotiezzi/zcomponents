@@ -1,3 +1,3 @@
 abstract class ITesteConexaoService {
-  Future<bool> testarConexao();
+  Future<bool?> testarConexao();
 }

@@ -16,14 +16,14 @@ class ColaboradorDocumentoService extends Service
   ColaboradorDocumentoService(String token) : super(token);
 
   @override
-  Future<List<ColaboradorDocumentoViewModel>> listarDocumentosColaborador(
+  Future<List<ColaboradorDocumentoViewModel>?> listarDocumentosColaborador(
       String idColaborador) async {
     try {
       var url = "$_URL/colaborador/documento/$idColaborador";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return (json.decode(response.body) as List)
+      return (json.decode(response!.body) as List)
           .map((x) => ColaboradorDocumentoViewModel.fromJson(x))
           .toList();
     } catch (e) {
@@ -32,7 +32,7 @@ class ColaboradorDocumentoService extends Service
   }
 
   @override
-  Future<bool> enviarDocumento(
+  Future<bool?> enviarDocumento(
       ColaboradorDocumentoInput colaboradorDocumentoInput,
       String idColaborador,
       String idDocumento) async {
@@ -43,21 +43,21 @@ class ColaboradorDocumentoService extends Service
 
       var response = await request(url, Service.HTTP_POST,
           body: map);
-      return response.statusCode == 200;
+      return response?.statusCode == 200;
     } catch (e) {
       return false;
     }
   }
 
   @override
-  Future<List<ColaboradorDocumentoImagemViewModel>> listarDocumentoImagem(
+  Future<List<ColaboradorDocumentoImagemViewModel>?> listarDocumentoImagem(
       String idColaborador, String idDocumento) async {
     try {
       var url = "$_URL/colaborador/documento/imagem/$idColaborador/$idDocumento";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return (json.decode(response.body) as List)
+      return (json.decode(response!.body) as List)
           .map((x) => ColaboradorDocumentoImagemViewModel.fromJson(x))
           .toList();
     } catch (e) {
@@ -66,14 +66,14 @@ class ColaboradorDocumentoService extends Service
   }
 
   @override
-  Future<List<ColaboradorDocumentoCampoViewModel>> listarDocumentoCampo(
+  Future<List<ColaboradorDocumentoCampoViewModel>?> listarDocumentoCampo(
       String idColaborador, String idDocumento) async {
     try {
       var url = "$_URL/colaborador/documento/campo/$idColaborador/$idDocumento";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return (json.decode(response.body) as List)
+      return (json.decode(response!.body) as List)
           .map((x) => ColaboradorDocumentoCampoViewModel.fromJson(x))
           .toList();
     } catch (e) {

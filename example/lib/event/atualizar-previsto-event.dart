@@ -4,7 +4,7 @@ class AtualizarPrevistoEvent extends Event {
   AtualizarPrevistoEvent(String name) : super(name);
 
   @override
-  Future<void> run({Map<String, dynamic> payload}) {
+  Future<void> run({Map<String, dynamic>? payload}) {
     // TODO: implement run
     throw UnimplementedError();
   }

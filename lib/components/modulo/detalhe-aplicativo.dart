@@ -1,4 +1,4 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:z_components/components/fluxo-admin/listagem-usuario.dart';
 import 'package:z_components/components/modulo/detalhe-aplicativo-view.dart';
@@ -11,8 +11,8 @@ import 'package:z_components/view-model/app-view-model.dart';
 import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 
 class DetalheAplicativo extends StatefulWidget {
-  AppViewModel appViewModel;
-  ModuloContaViewModel contaViewModel;
+  AppViewModel? appViewModel;
+  ModuloContaViewModel? contaViewModel;
 
   DetalheAplicativo({this.appViewModel, this.contaViewModel});
 
@@ -21,7 +21,7 @@ class DetalheAplicativo extends StatefulWidget {
 }
 
 class _DetalheAplicativoState extends State<DetalheAplicativo> {
-  DetalheAplicativoView _view;
+  late DetalheAplicativoView _view;
 
   @override
   void initState() {
@@ -57,7 +57,7 @@ class _DetalheAplicativoState extends State<DetalheAplicativo> {
                   margin: const EdgeInsets.only(left: 16),
                   padding: const EdgeInsets.only(top: 16, bottom: 16),
                   child: new Text(
-                    widget.appViewModel.nomeExibicao,
+                    widget.appViewModel?.nomeExibicao != null ? widget.appViewModel!.nomeExibicao! : "",
                     style: new TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w500,

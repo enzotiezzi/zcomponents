@@ -9,8 +9,8 @@ import 'package:z_components/config/z-tipos-baseline.dart';
 import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 
 class AtualizarDadosPrevisto extends StatefulWidget {
-  AtualizarDadosViewModel dadosViewModel;
-  Function(AtualizarDadosViewModel) finalizarAtualizacao;
+  AtualizarDadosViewModel? dadosViewModel;
+  Function(AtualizarDadosViewModel)? finalizarAtualizacao;
 
   AtualizarDadosPrevisto({this.dadosViewModel, this.finalizarAtualizacao});
 
@@ -27,27 +27,27 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
     "Está é sua escala de trabalho?",
     "Este é o seu horário de trabalho?",
   ];
-  TextEditingController _controller2;
-  TextEditingController _controller4;
-  TextEditingController _controller5;
-  TextEditingController _controller6;
-  TextEditingController _controller7;
+  TextEditingController _controller2 = TextEditingController();
+  TextEditingController _controller4 = TextEditingController();
+  TextEditingController _controller5 = TextEditingController();
+  TextEditingController _controller6 = TextEditingController();
+  TextEditingController _controller7 = TextEditingController();
 
   FocusNode _focusNode = new FocusNode();
-  List<TextEditingController> _listController;
+  List<TextEditingController>? _listController;
 
   @override
   void initState() {
     _controller2 =
-        new TextEditingController(text: widget.dadosViewModel.centroCusto);
+        new TextEditingController(text: widget.dadosViewModel?.centroCusto);
     _controller4 =
-        new TextEditingController(text: widget.dadosViewModel.escala);
+        new TextEditingController(text: widget.dadosViewModel?.escala);
     _controller5 =
-        new TextEditingController(text: "${widget.dadosViewModel.horaInicio}");
+        new TextEditingController(text: "${widget.dadosViewModel?.horaInicio}");
     _controller6 =
-        new TextEditingController(text: "${widget.dadosViewModel.horaTermino}");
+        new TextEditingController(text: "${widget.dadosViewModel?.horaTermino}");
     _controller7 = new TextEditingController(
-        text: "${widget.dadosViewModel.tempoIntervalo}");
+        text: "${widget.dadosViewModel?.tempoIntervalo}");
 
     _listController = [_controller2, _controller4, _controller5];
 
@@ -62,10 +62,19 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            new RaisedButton(
-                color: Colors.white,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
+            new ElevatedButton(
+                style: new ButtonStyle(
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.white),
+                  shadowColor:
+                  MaterialStateProperty.all<Color>(Colors.transparent),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(
+                      top: 12, bottom: 12, left: 26, right: 26)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
+                      )),
+                ),
                 onPressed: () {
                   if (_page == 0) {
                     Navigator.of(context).pop();
@@ -87,10 +96,19 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
                           style: TextStyle(color: const Color(0xff707070)),
                         ),
                 )),
-            new RaisedButton(
-              color: const Color(0xff2BBAB4),
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
+            new ElevatedButton(
+              style: new ButtonStyle(
+                backgroundColor:
+                MaterialStateProperty.all<Color>(Color(0xff2BBAB4)),
+                shadowColor:
+                MaterialStateProperty.all<Color>(Colors.transparent),
+                padding: MaterialStateProperty.all(EdgeInsets.only(
+                    top: 12, bottom: 12, left: 26, right: 26)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    )),
+              ),
               onPressed: () {
                 _focusNode.unfocus();
                 setState(() {
@@ -103,16 +121,16 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
                     AtualizarDadosViewModel dadosAtualizados =
                         new AtualizarDadosViewModel(
                             statusColaborador:
-                                widget.dadosViewModel.statusColaborador,
+                                widget.dadosViewModel?.statusColaborador,
                             nomeColaborador:
-                                widget.dadosViewModel.nomeColaborador,
-                            cargo: widget.dadosViewModel.cargo,
+                                widget.dadosViewModel?.nomeColaborador,
+                            cargo: widget.dadosViewModel?.cargo,
                             centroCusto: _controller2.text,
                             escala: _controller4.text,
                             horaInicio: _controller5.text,
                             horaTermino: _controller6.text,
                             tempoIntervalo: _controller7.text);
-                    widget.finalizarAtualizacao(dadosAtualizados);
+                    widget.finalizarAtualizacao!(dadosAtualizados);
                   }
                   if (_page < 2) {
                     _page++;
@@ -215,7 +233,7 @@ class _AtualizarDadosPrevistoState extends State<AtualizarDadosPrevisto> {
         zTipos: ZTipoBaseline.semTituloText,
         text: _titulos[_page],
         hintText: "",
-        controllerPadrao: _listController[_page],
+        controllerPadrao: _listController![_page],
       );
     }
   }

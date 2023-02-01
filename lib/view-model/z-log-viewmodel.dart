@@ -1,12 +1,12 @@
 import 'package:z_components/i-serializable.dart';
 
 class ZLogViewModel implements ISerializable {
-  String user;
-  String errorMessage;
-  String when;
-  String app;
-  String payload;
-  String method;
+  String? user;
+  String? errorMessage;
+  String? when;
+  String? app;
+  String? payload;
+  String? method;
 
   ZLogViewModel(
       {this.user,

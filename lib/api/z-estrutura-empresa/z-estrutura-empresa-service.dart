@@ -13,7 +13,7 @@ class EstruturaEmpresaService extends Service
   final String _baseURL = "${ApiSettings.ENDPOINT_API_V1}/estrutura-empresa";
 
   @override
-  Future<ZResponse<Nivel>> listarNiveis(SearchOptions searchOptions) async {
+  Future<ZResponse<Nivel>?> listarNiveis(SearchOptions searchOptions) async {
     var params = searchOptions.toHttpParams();
 
     var url = "$_baseURL/niveis$params";
@@ -21,7 +21,7 @@ class EstruturaEmpresaService extends Service
     try {
       var res = await request(url, Service.HTTP_GET);
 
-      return PaginatedList<Nivel>(response: res, deserializer: Nivel.fromJson)
+      return PaginatedList<Nivel>(response: res!, deserializer: Nivel.fromJson)
           .mapToPaginatedList();
     } catch (e) {
       return null;

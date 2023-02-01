@@ -5,7 +5,7 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/view-model/lancamento-ocorrencia-viewmodel.dart';
 
 class DialogOcorrencia extends StatefulWidget {
-  List<ZLancamentoOcorrenciaViewModel> listaOcorrenciaViewModel;
+  List<ZLancamentoOcorrenciaViewModel>? listaOcorrenciaViewModel;
 
   DialogOcorrencia({this.listaOcorrenciaViewModel});
 
@@ -29,7 +29,7 @@ class _DialogOcorrenciaState extends State<DialogOcorrencia> {
       children: <Widget>[
         new Expanded(
           child: new ListView.builder(
-              itemCount: widget.listaOcorrenciaViewModel.length,
+              itemCount: widget.listaOcorrenciaViewModel!.length,
               itemBuilder: (context, index) =>
                   _itemOcorrencia(_largura, index, _altura)),
         ),
@@ -61,7 +61,7 @@ class _DialogOcorrenciaState extends State<DialogOcorrencia> {
   }
 
   Widget _itemOcorrencia(_largura, index, _altura) {
-    var item = widget.listaOcorrenciaViewModel[index];
+    var item = widget.listaOcorrenciaViewModel![index];
     return new Column(
       children: <Widget>[
         (index == 0)

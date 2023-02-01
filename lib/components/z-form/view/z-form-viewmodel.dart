@@ -1,26 +1,26 @@
 import 'package:flutter/cupertino.dart';
 
 class ZFormViewModel {
-  String idCampo;
-  String idModelo;
+  String? idCampo;
+  String? idModelo;
 
-  String nomeCampo;
+  String? nomeCampo;
 
-  String tipoValorCampo;
+  String? tipoValorCampo;
 
-  String tamanhoValorCampo;
+  String? tamanhoValorCampo;
 
-  String tamanhoPrecisaoValorCampo;
+  String? tamanhoPrecisaoValorCampo;
 
-  bool obrigatorio;
+  bool? obrigatorio;
 
-  String resposta;
+  String? resposta;
 
-  int maxLength;
+  int? maxLength;
 
-  bool enabled;
+  bool? enabled;
 
-  TextEditingController controller;
+  TextEditingController? controller;
 
   ZFormViewModel(
       {this.idModelo,

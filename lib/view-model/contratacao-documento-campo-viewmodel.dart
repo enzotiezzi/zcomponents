@@ -1,30 +1,30 @@
 import 'contratacao-documento-viewmodel.dart';
 
 class ContratacaoDocumentoCampoViewModel {
-  ContratacaoDocumentoViewModel contratacaoDocumento;
-  String idContratacao;
-  String idAtributo;
-  String idDocumento;
-  String resposta;
-  String dataResposta;
-  bool revisado;
-  bool aprovado;
-  String justificativaReprovacao;
-  String idModelo;
-  String idTipo;
-  String modelo;
-  String label;
-  String descricao;
-  String tipo;
-  int ordem;
-  int tamanhoMaximo;
-  int versao;
-  bool obrigatorio;
-  bool multiplaEscolha;
-  String opcoes;
-  String mascara;
-  String nomeCampo;
-  String idConta;
+  ContratacaoDocumentoViewModel? contratacaoDocumento;
+  String? idContratacao;
+  String? idAtributo;
+  String? idDocumento;
+  String? resposta;
+  String? dataResposta;
+  bool? revisado;
+  bool? aprovado;
+  String? justificativaReprovacao;
+  String? idModelo;
+  String? idTipo;
+  String? modelo;
+  String? label;
+  String? descricao;
+  String? tipo;
+  int? ordem;
+  int? tamanhoMaximo;
+  int? versao;
+  bool? obrigatorio;
+  bool? multiplaEscolha;
+  String? opcoes;
+  String? mascara;
+  String? nomeCampo;
+  String? idConta;
 
   ContratacaoDocumentoCampoViewModel(
       {this.idContratacao,
@@ -90,7 +90,7 @@ class ContratacaoDocumentoCampoViewModel {
       "idContratacao": this.idContratacao,
       "idAtributo": this.idAtributo,
       "idDocumento": this.idDocumento,
-      "contratacaoDocumento": this.contratacaoDocumento.toMap(),
+      "contratacaoDocumento": this.contratacaoDocumento?.toMap(),
       'resposta': this.resposta,
       'dataResposta': this.dataResposta,
       'revisado': this.revisado,

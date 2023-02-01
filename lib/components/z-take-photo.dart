@@ -9,15 +9,15 @@ import 'package:z_components/components/z-hero-transition-class.dart';
 import 'package:z_components/components/z-photo-view-animation.dart';
 
 class ZTakePhoto extends StatefulWidget {
-  List<String> fotos;
-  final bool permissaoGaleria;
-  final String title;
-  final bool fotoObrigatoria;
-  final bool finalizacaoChamado;
-  final Color primaryColorApp;
-  final Uint8List image;
+  List<String>? fotos;
+  final bool? permissaoGaleria;
+  final String? title;
+  final bool? fotoObrigatoria;
+  final bool? finalizacaoChamado;
+  final Color? primaryColorApp;
+  final Uint8List? image;
 
-  ScrollController scrollControllerTela;
+  ScrollController? scrollControllerTela;
 
 
   ZTakePhoto({
@@ -36,8 +36,8 @@ class ZTakePhoto extends StatefulWidget {
 }
 
 class _ZTakePhotoState extends State<ZTakePhoto> {
-  String foto;
-  List<String> fotosAmplia = new List();
+  String? foto="";
+  List<String>? fotosAmplia = [];
 
   final Uint8List kTransparentImage = new Uint8List.fromList(<int>[
     0x89,
@@ -112,7 +112,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
       children: <Widget>[
         new Container(
           margin:
-          EdgeInsets.only(top: 20, bottom: (widget.fotos.length > 0) ? 0 : 80),
+          EdgeInsets.only(top: 20, bottom: (widget.fotos!.length > 0) ? 0 : 80),
           child: new InkWell(
             onTap: () {
               if (widget.permissaoGaleria == true) {
@@ -133,7 +133,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
                             padding: const EdgeInsets.only(
                                 left: 16, right: 16, top: 10, bottom: 10),
                             child: new Text(
-                              widget.title,
+                              widget.title ?? "",
                               style: new TextStyle(
                                   color: widget.primaryColorApp,
                                   fontWeight: FontWeight.w500,
@@ -141,7 +141,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
                             )),
                         new Container(
                           margin: EdgeInsets.only(right: (widget
-                              .fotoObrigatoria == true && widget.fotos.length ==
+                              .fotoObrigatoria == true && widget.fotos!.length ==
                               0) ? 0 : 16),
                           child: new Icon(
                             Icons.camera_enhance,
@@ -161,7 +161,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
   }
 
   Widget _buildListaFotos() {
-    if (widget.fotos != null && widget.fotos.length > 0) {
+    if (widget.fotos != null && widget.fotos!.length > 0) {
       return new Container(
         padding: const EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 0),
         color: new Color(0xFFFFFFFF),
@@ -171,14 +171,14 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
                 child: new SizedBox(
                   child: new ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: widget.fotos.length,
+                    itemCount: widget.fotos!.length,
                     itemBuilder: (BuildContext ctxt, int index) {
                       return new GestureDetector(
                           onTap: (){
                             imageClick2(
                                 index,
                                 index,
-                                widget.fotos[index]);
+                                widget.fotos![index]);
                           },
                           child:
                           new Hero(
@@ -191,7 +191,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(6.0),
                                 child: FadeInImage(
-                                  image: FileImage(File(widget.fotos[index])),
+                                  image: FileImage(File(widget.fotos![index])),
                                   placeholder: MemoryImage(kTransparentImage),
                                   fit: BoxFit.cover,
                                   height: 58,
@@ -214,7 +214,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
   Future imageClick2(int hero, int hero2,String caminho) async {
     if(widget.finalizacaoChamado == true)
       {
-        fotosAmplia.length = widget.fotos.length;
+        fotosAmplia!.length = widget.fotos!.length;
         fotosAmplia = await Navigator.push<List<String>>(
           context,
           new HeroDialogRoute(
@@ -238,7 +238,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
       }
     else if (widget.finalizacaoChamado == false && widget.image != null)
     {
-      fotosAmplia.length = widget.fotos.length;
+      fotosAmplia!.length = widget.fotos!.length;
       fotosAmplia = await Navigator.push<List<String>>(
         context,
         new HeroDialogRoute(
@@ -368,15 +368,14 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
         });
   }
 
-  Future<String> openCamera() async {
-    var buscarfoto = await ImagePicker.pickImage(
-      source: ImageSource.camera,
-    );
+  Future openCamera() async {
+    ImagePicker imagePicker = new ImagePicker();
+    var buscarfoto = await ImagePicker().getImage(source: ImageSource.camera,);
 
     if (buscarfoto != null) {
-      foto = buscarfoto.absolute.path;
+      foto = buscarfoto.path;
       setState(() {
-        widget.fotos.add(foto);
+        widget.fotos?.add(foto!);
         if(widget.scrollControllerTela != null)
           {
             Future.delayed(new Duration(milliseconds: 500), () {
@@ -384,23 +383,21 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
                   Duration(milliseconds: 200),
                       () =>
                       widget.scrollControllerTela
-                          .jumpTo(
-                          widget.scrollControllerTela.position.maxScrollExtent));
+                          ?.jumpTo(
+                          widget.scrollControllerTela!.position.maxScrollExtent));
             });
           }
       });
     }
   }
 
-  Future<String> openGallery() async {
-    var buscarfoto = await ImagePicker.pickImage(
-      source: ImageSource.gallery,
-    );
+  Future openGallery() async {
+    var buscarfoto = await ImagePicker().getImage(source: ImageSource.gallery,);
 
     if (buscarfoto != null) {
-      foto = buscarfoto.absolute.path;
+      foto = buscarfoto.path;
       setState(() {
-        widget.fotos.add(foto);
+        widget.fotos?.add(foto!);
         if(widget.scrollControllerTela != null)
         {
           Future.delayed(new Duration(milliseconds: 500), () {
@@ -408,8 +405,8 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
                 Duration(milliseconds: 200),
                     () =>
                     widget.scrollControllerTela
-                        .jumpTo(
-                        widget.scrollControllerTela.position.maxScrollExtent));
+                        ?.jumpTo(
+                        widget.scrollControllerTela!.position.maxScrollExtent));
           });
         }
       });
@@ -417,7 +414,7 @@ class _ZTakePhotoState extends State<ZTakePhoto> {
   }
 
   Widget _buildObrigatoriedadeFoto() {
-    if (widget.fotoObrigatoria == true && widget.fotos.length == 0) {
+    if (widget.fotoObrigatoria == true && widget.fotos!.length == 0) {
       return new Container(
           padding: const EdgeInsets.only(right: 16, top: 10, bottom: 10),
           child: new Text(

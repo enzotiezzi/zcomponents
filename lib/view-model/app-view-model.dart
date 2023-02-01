@@ -2,14 +2,14 @@
 import 'package:z_components/view-model/modulo-viewmodel.dart';
 
 class AppViewModel {
-  String idApp;
-  String nome;
-  String versao;
-  String dataVersao;
-  String projectKeyFirebase;
-  String idModulo;
-  ModuloViewModel modulo;
-  String nomeExibicao;
+  String? idApp;
+  String? nome;
+  String? versao;
+  String? dataVersao;
+  String? projectKeyFirebase;
+  String? idModulo;
+  ModuloViewModel? modulo;
+  String? nomeExibicao;
 
   AppViewModel(
       {
@@ -44,7 +44,7 @@ class AppViewModel {
     "dataVersao":this.dataVersao,
     "projectKeyFirebase":this.projectKeyFirebase,
     "idModulo":this.idModulo,
-    "modulo":this.modulo.toMap(),
+    "modulo":this.modulo?.toMap(),
     "nomeExibicao":this.nomeExibicao
    };
   }

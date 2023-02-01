@@ -12,14 +12,13 @@ import 'package:z_components/i-view.dart';
 import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 
 class ListaDocumentosView extends IView<ListaDocumentos> {
-  IColaboradorDocumentoService _colaboradorDocumentoService;
+  late IColaboradorDocumentoService _colaboradorDocumentoService;
 
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
 
-  IArquivoService _arquivoService;
+  late IArquivoService _arquivoService;
 
-  List<ColaboradorDocumentoViewModel> listaDocumentos =
-      new List<ColaboradorDocumentoViewModel>();
+  List<ColaboradorDocumentoViewModel> listaDocumentos = [];
 
   ListaDocumentosView(State<ListaDocumentos> state) : super(state);
 
@@ -32,8 +31,8 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
   Future<void> initView() async {
     _dialogUtils = new DialogUtils(state.context);
     _colaboradorDocumentoService =
-        new ColaboradorDocumentoService(state.widget.token);
-    _arquivoService = new ArquivoService(state.widget.token);
+        new ColaboradorDocumentoService(state.widget.token!);
+    _arquivoService = new ArquivoService(state.widget.token!);
     await _buscarListaDocumentos();
   }
 
@@ -41,14 +40,14 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
     if (state.widget.colaboradorDocumentoViewModel == null) {
       _dialogUtils.showProgressDialog();
       var lista = await _colaboradorDocumentoService
-          .listarDocumentosColaborador(state.widget.idColaborador);
+          .listarDocumentosColaborador(state.widget.idColaborador!);
       if (lista != null) {
         for (int i = 0; i < lista.length; i++) {
           var doc =
-              await _arquivoService.buscarAnexo(lista[i].idImagemDocumento);
+              await _arquivoService.buscarAnexo(lista[i].idImagemDocumento!);
 
           if (doc != null) {
-            lista[i].imagemDocumento = base64Decode(doc.conteudo);
+            lista[i].imagemDocumento = base64Decode(doc.conteudo!);
           }
         }
 
@@ -62,14 +61,14 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
     } else {
       _dialogUtils.showProgressDialog();
 
-      listaDocumentos = state.widget.colaboradorDocumentoViewModel;
+      listaDocumentos = state.widget.colaboradorDocumentoViewModel!;
 
       for (int i = 0; i < listaDocumentos.length; i++) {
         var doc = await _arquivoService
-            .buscarAnexo(listaDocumentos[i].idImagemDocumento);
+            .buscarAnexo(listaDocumentos[i].idImagemDocumento!);
 
         if (doc != null) {
-          listaDocumentos[i].imagemDocumento = base64Decode(doc.conteudo);
+          listaDocumentos[i].imagemDocumento = base64Decode(doc.conteudo!);
         }
       }
       state.setState(() {});

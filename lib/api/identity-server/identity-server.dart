@@ -14,17 +14,17 @@ import 'i-identity-server.dart';
 class IdentityServer implements IIdentityServer {
   static final String address = "identity-server-dev.zellar.com.br";
 
-  String clientId;
-  String redirectUrl;
-  List<String> scopes;
+  late String? clientId;
+  late String? redirectUrl;
+  late List<String>? scopes;
 
-  SharedPreferences _sharedPreferences;
+  late SharedPreferences _sharedPreferences;
 
   ITesteConexaoService _testeConexaoService = new TesteConexaoService();
 
-  UserInfo _user;
+  late UserInfo? _user;
 
-  ZIdentityServer _zIdentityServer;
+  late ZIdentityServer? _zIdentityServer;
 
   IdentityServer(
       {@required this.clientId,
@@ -33,24 +33,24 @@ class IdentityServer implements IIdentityServer {
     SharedPreferences.getInstance()
         .then((preferences) => _sharedPreferences = preferences);
     _zIdentityServer = new ZIdentityServer(
-        clientId: clientId, redirectURI: redirectUrl, scopes: scopes);
+        clientId: clientId!, redirectURI: redirectUrl!, scopes: scopes!);
   }
 
   @override
   Future login() async {
-    var authorizeAndExchangeCode = await _zIdentityServer.authorize();
+    var authorizeAndExchangeCode = await _zIdentityServer?.authorize();
 
     if (authorizeAndExchangeCode != null) {
       _sharedPreferences = await SharedPreferences.getInstance();
 
       await _sharedPreferences.setString(
-          ApiSettings.API_TOKEN, authorizeAndExchangeCode.accessToken);
+          ApiSettings.API_TOKEN, authorizeAndExchangeCode.accessToken!);
       await _sharedPreferences.setString(
-          ApiSettings.REFRESH_TOKEN, authorizeAndExchangeCode.refreshToken);
+          ApiSettings.REFRESH_TOKEN, authorizeAndExchangeCode.refreshToken!);
       await _sharedPreferences.setString(
         ApiSettings.TOKEN_EXPIRATION_DATE,
         DateTime.now()
-            .add(Duration(seconds: authorizeAndExchangeCode.expiresIn))
+            .add(Duration(seconds: authorizeAndExchangeCode.expiresIn!))
             .toIso8601String(),
       );
 
@@ -65,7 +65,7 @@ class IdentityServer implements IIdentityServer {
 
       var online = await _testeConexaoService.testarConexao();
 
-      if (online) {
+      if (online!=null && online) {
         var token = _sharedPreferences.getString(ApiSettings.API_TOKEN);
 
         if (token == null)
@@ -104,14 +104,14 @@ class IdentityServer implements IIdentityServer {
           _sharedPreferences.getString(ApiSettings.REFRESH_TOKEN);
 
       // requisitando um novo refresh token
-      var result = await _zIdentityServer.refreshToken(refreshToken);
+      var result = await _zIdentityServer?.refreshToken(refreshToken!);
 
       if (result != null) {
-        String newAcesstoken = result.accessToken;
-        String newIdtoken = result.idToken;
-        String newRefreshToken = result.refreshToken;
+        String newAcesstoken = result.accessToken!;
+        String newIdtoken = result.idToken!;
+        String newRefreshToken = result.refreshToken!;
         String expirationToken = DateTime.now()
-            .add(Duration(seconds: result.expiresIn))
+            .add(Duration(seconds: result.expiresIn!))
             .toIso8601String();
 
         // salvando dados obtidos pela requisição de um novo acess token
@@ -129,7 +129,7 @@ class IdentityServer implements IIdentityServer {
     }
   }
 
-  Future<UserInfo> _findUserInfo(String token) async {
+  Future<UserInfo?> _findUserInfo(String token) async {
     try {
       Dio dio = new Dio();
 
@@ -152,25 +152,25 @@ class IdentityServer implements IIdentityServer {
 
   @override
   UserInfo getUserInfo() {
-    return _user;
+    return _user!;
   }
 
   @override
   Future setIdColaborador() async {}
 
   @override
-  Future setUserInfo({String token}) async {
-    _user = await _findUserInfo(token);
+  Future setUserInfo({String? token}) async {
+    _user = await _findUserInfo(token!);
 
     if (_user != null) {
-      await _sharedPreferences.setString(ApiSettings.API_ID_USER, _user.idUser);
-      await _sharedPreferences.setString(ApiSettings.API_USERNAME, _user.cpf);
+      await _sharedPreferences.setString(ApiSettings.API_ID_USER, _user!.idUser!);
+      await _sharedPreferences.setString(ApiSettings.API_USERNAME, _user!.cpf!);
     }
   }
 
   @override
-  Future logout(Function function, {String token}) async {
-    await _zIdentityServer.logOut(function, token: token);
+  Future logout(Function function, {String? token}) async {
+    await _zIdentityServer?.logOut(function, token: token!);
   }
 
   @override
@@ -181,7 +181,7 @@ class IdentityServer implements IIdentityServer {
 
     var tokenInfo = UserInfo.fromJson(TokenParser.parseJwt(accessToken));
 
-    return tokenInfo.idConta;
+    return tokenInfo.idConta!;
   }
 
   @override

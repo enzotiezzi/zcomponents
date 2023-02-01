@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZTile extends StatefulWidget {
-  final Widget leading;
-  final Widget trailing;
-  final GestureTapCallback onTap;
-  double margem;
-  bool disable;
+  final Widget? leading;
+  final Widget? trailing;
+  final GestureTapCallback? onTap;
+  double? margem;
+  bool? disable;
 
-  ZTile({this.leading, this.trailing, this.onTap, this.margem, this.disable});
+  ZTile({this.leading, this.trailing, this.onTap, this.margem =0, this.disable});
 
   @override
   _ZTileState createState() => _ZTileState();
@@ -31,7 +31,7 @@ class _ZTileState extends State<ZTile> {
       widget.disable = false;
     }
 
-    if (widget.disable){
+    if (widget.disable!){
       return new Opacity(
           opacity: 0.4,
           child: _zTile(),
@@ -43,23 +43,51 @@ class _ZTileState extends State<ZTile> {
 
   Widget _zTile(){
     return new GestureDetector(
-      onTap: widget.disable ? null : widget.onTap,
+      onTap:(){
+        if(widget.disable !=null && !widget.disable! && widget.onTap !=null){
+          widget.onTap!();
+        }
+      },
       child: new Container(
-        color: widget.disable ? Colors.grey.withOpacity(0.1) : Colors.white,
+        color: _retornarCor(),
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             new Container(
-              child: widget.leading,
+              child: _retornarLeading(),
               margin: new EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
             ),
             new Container(
-              child: widget.trailing,
-              margin: EdgeInsets.only(right: widget.margem),
+              child: _retornarTrailing(),
+              margin: EdgeInsets.only(right: widget.margem!),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Color _retornarCor(){
+    if(widget.disable != null && widget.disable!){
+      return Colors.grey.withOpacity(0.1);
+    }else{
+      return Colors.white;
+    }
+  }
+
+  Widget _retornarLeading(){
+    if(widget.leading != null){
+      return widget.leading!;
+    }else{
+      return Container();
+    }
+  }
+
+  Widget _retornarTrailing(){
+    if(widget.trailing != null){
+      return widget.trailing!;
+    }else{
+      return Container();
+    }
   }
 }

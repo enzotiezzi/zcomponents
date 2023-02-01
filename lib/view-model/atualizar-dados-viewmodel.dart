@@ -1,12 +1,12 @@
 class AtualizarDadosViewModel {
-  String nomeColaborador;
-  String centroCusto;
-  String cargo;
-  String escala;
-  String horaInicio;
-  String horaTermino;
-  String tempoIntervalo;
-  String statusColaborador;
+  String? nomeColaborador;
+  String? centroCusto;
+  String? cargo;
+  String? escala;
+  String? horaInicio;
+  String? horaTermino;
+  String? tempoIntervalo;
+  String? statusColaborador;
 
   AtualizarDadosViewModel(
       {this.nomeColaborador,

@@ -1,9 +1,9 @@
 class ZTokenViewModel{
-  String idToken;
-  String accessToken;
-  int expiresIn;
-  String tokenType;
-  String refreshToken;
+  String? idToken;
+  String? accessToken;
+  int? expiresIn;
+  String? tokenType;
+  String? refreshToken;
 
   ZTokenViewModel({this.idToken, this.accessToken, this.expiresIn, this.tokenType, this.refreshToken});
 

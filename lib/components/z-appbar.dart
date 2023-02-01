@@ -1,4 +1,5 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -7,16 +8,16 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   //tamanho da app bar
   Size get preferredSize => Size(double.infinity, tamanho());
-  Widget card;
+  Widget? card;
   bool expandable;
   String texto = "texto de teste";
   String title = "Dashboard";
-  String assets;
+  String? assets;
 
 
-  Color cor = Color(0xff2BBAB4);
+  Color? cor = Color(0xff2BBAB4);
 
-  ZAppBar({this.card, @required this.texto, @required this.expandable,@required this.title, this.cor,@required this.assets });
+  ZAppBar({this.card, required this.texto, required this.expandable,required this.title, this.cor,required this.assets });
 
   @override
   Widget build(BuildContext context) {
@@ -147,44 +148,47 @@ class ZAppBar extends StatelessWidget with PreferredSizeWidget {
                         ]),
                   ),
                 ),
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 20, left: 16, right: 16),
-                        height: 0.5,
-                        width: MediaQuery.of(context).size.width - 80,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      (texto!=null)?
-                      Container(
-                          child: Text(
-                        "$texto",
-                        style: TextStyle(color: Colors.white),
-                      )):new Container(
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: card,
-                      )
-                    ],
-                  ),
-                ],
+                childrenBody: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        new Container(
+                          margin: const EdgeInsets.only(
+                              bottom: 20, left: 16, right: 16),
+                          height: 0.5,
+                          width: MediaQuery.of(context).size.width - 80,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        (texto!=null)?
+                        Container(
+                            child: Text(
+                              "$texto",
+                              style: TextStyle(color: Colors.white),
+                            )):new Container(
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: card,
+                        )
+                      ],
+                    ),
+                  ],
+                )
               ),
             ),
     );

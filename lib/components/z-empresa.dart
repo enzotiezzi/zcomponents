@@ -6,11 +6,11 @@ import 'package:z_components/interface/i-zempresa-service.dart';
 import 'package:z_components/view-model/company-components-viewmodel.dart';
 
 class ZEmpresa extends StatefulWidget {
-  final String token;
-  final ValueChanged<ZCollectionItem> onChange;
-  final String idUser;
-  final Key key;
-  final String valorPadrao;
+  final String? token;
+  final ValueChanged<ZCollectionItem>? onChange;
+  final String? idUser;
+  final Key? key;
+  final String? valorPadrao;
 
   ZEmpresa(
       {this.key,
@@ -24,20 +24,20 @@ class ZEmpresa extends StatefulWidget {
 }
 
 class ZEmpresaState extends State<ZEmpresa> {
-  ZCollectionItem _itemSelecionado;
+  ZCollectionItem? _itemSelecionado;
 
-  ZCollectionItem get itemSelecionado => _itemSelecionado;
+  ZCollectionItem? get itemSelecionado => _itemSelecionado;
 
-  IZEmpresaService _service;
+  late IZEmpresaService _service;
 
   var _keyZCollection = new GlobalKey<ZCollectionState>();
 
-  var _empresas = new List<CompanyViewModel>();
+  List<CompanyViewModel> _empresas = [];
 
   @override
   void initState() {
     super.initState();
-    _service = new ZEmpresaService(widget.token, widget.idUser);
+    _service = new ZEmpresaService(widget.token!, widget.idUser);
     _listarLocais();
   }
 
@@ -51,7 +51,7 @@ class ZEmpresaState extends State<ZEmpresa> {
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
-        if (widget.onChange != null) widget.onChange(item);
+        if (widget.onChange != null) widget.onChange!(item);
       },
       valorPadrao: widget.valorPadrao,
       key: _keyZCollection,
@@ -66,7 +66,7 @@ class ZEmpresaState extends State<ZEmpresa> {
         _empresas = listaEmpresa;
       });
 
-      _keyZCollection.currentState.buscarValorPadrao(listaEmpresa
+      _keyZCollection.currentState?.buscarValorPadrao(listaEmpresa
           .map((x) => new ZCollectionItem(
               chave: x.idEmpresa, titulo: x.nome, valor: x.nome))
           .toList());

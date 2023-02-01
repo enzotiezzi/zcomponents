@@ -2,25 +2,25 @@ import 'contratacao-documento-campo-viewmodel.dart';
 import 'contratacao-viewmodel.dart';
 
 class ContratacaoDocumentoViewModel {
-  ContratacaoViewModel contratacao;
-  String idContratacao;
-  String idDocumento;
-  String nomeDocumento;
-  int qtdePagina;
-  List<ContratacaoDocumentoCampoViewModel> campos;
-  bool obrigatorio;
-  String idConta;
-  String idImagemDocumento;
-  int qtdePaginaObrigatoria;
-  String horizontalOuVertical;
-  String nomeCompleto;
-  int qtdeCampoTotal;
-  int qtdeCampoRespondido;
-  double percentualRespondido;
-  int qtdeCampoRevisado;
-  double percentualRevisado;
-  bool possuiReprovacao;
-  int qtdeCampoReprovado;
+  ContratacaoViewModel? contratacao;
+  String? idContratacao;
+  String? idDocumento;
+  String? nomeDocumento;
+  int? qtdePagina;
+  List<ContratacaoDocumentoCampoViewModel>? campos;
+  bool? obrigatorio;
+  String? idConta;
+  String? idImagemDocumento;
+  int? qtdePaginaObrigatoria;
+  String? horizontalOuVertical;
+  String? nomeCompleto;
+  int? qtdeCampoTotal;
+  int? qtdeCampoRespondido;
+  double? percentualRespondido;
+  int? qtdeCampoRevisado;
+  double? percentualRevisado;
+  bool? possuiReprovacao;
+  int? qtdeCampoReprovado;
 
   ContratacaoDocumentoViewModel(
       {this.contratacao,
@@ -51,7 +51,7 @@ class ContratacaoDocumentoViewModel {
         qtdePagina: json["qtdePagina"],
         obrigatorio: json["obrigatorio"],
         campos: (json["campos"] == null)
-            ? new List()
+            ? []
             : (json["campos"] as List)
             .map((x) => ContratacaoDocumentoCampoViewModel.fromJson(x))
             .toList(),
@@ -81,7 +81,7 @@ class ContratacaoDocumentoViewModel {
       "qtdePagina": this.qtdePagina,
       "obrigatorio": this.obrigatorio,
       "idImagemDocumento": this.idImagemDocumento,
-      "campos": this.campos.map((x) => x.toMap()).toList(),
+      "campos": this.campos?.map((x) => x.toMap()).toList(),
       "qtdeCampoTotal": this.qtdeCampoTotal,
       "qtdeCampoRespondido": this.qtdeCampoRespondido,
       "percentualRespondido": this.percentualRespondido,

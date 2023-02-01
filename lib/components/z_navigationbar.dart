@@ -2,36 +2,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
-  Widget _zNavigationBar;
-  final bool voltar;
-  final Key key;
-  final BuildContext context;
-  final Widget leading;
-  final bool automaticallyImplyLeading;
-  final bool automaticallyImplyMiddle;
-  final String previousPageTitle;
-  final Widget middle;
-  final Widget trailing;
-  final Color backgroundColor;
-  final EdgeInsetsDirectional padding;
-  final Border border;
-  final Color actionsForegroundColor;
-  final bool transitionBetweenRoutes;
-  final Widget title;
-  final ShapeBorder shape;
-  final List<Widget> actions;
-  final Widget flexibleSpace;
-  final PreferredSizeWidget bottom;
-  final double elevation;
-  final Brightness brightness;
-  final IconThemeData iconTheme;
-  final IconThemeData actionsIconTheme;
-  final TextTheme textTheme;
-  final bool primary;
-  final bool centerTitle;
-  final double titleSpacing;
-  final double toolbarOpacity;
-  final double bottomOpacity;
+  Widget? _zNavigationBar;
+  final bool? voltar;
+  final Key? key;
+  final BuildContext? context;
+  final Widget? leading;
+  final bool? automaticallyImplyLeading;
+  final bool? automaticallyImplyMiddle;
+  final String? previousPageTitle;
+  final Widget? middle;
+  final Widget? trailing;
+  final Color? backgroundColor;
+  final EdgeInsetsDirectional? padding;
+  final Border? border;
+  final Color? actionsForegroundColor;
+  final bool? transitionBetweenRoutes;
+  final Widget? title;
+  final ShapeBorder? shape;
+  final List<Widget>? actions;
+  final Widget? flexibleSpace;
+  final PreferredSizeWidget? bottom;
+  final double? elevation;
+  final Brightness? brightness;
+  final IconThemeData? iconTheme;
+  final IconThemeData? actionsIconTheme;
+  final TextTheme ?textTheme;
+  final bool? primary;
+  final bool? centerTitle;
+  final double? titleSpacing;
+  final double? toolbarOpacity;
+  final double? bottomOpacity;
   var onTap;
 
   ZNavigationBar({
@@ -67,15 +67,19 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
     this.textTheme,
   }) : super(key: key) {
     _zNavigationBar = new CupertinoNavigationBar(
-      automaticallyImplyLeading: this.automaticallyImplyLeading,
-      automaticallyImplyMiddle: this.automaticallyImplyMiddle,
+      automaticallyImplyLeading: this.automaticallyImplyLeading!,
+      automaticallyImplyMiddle: this.automaticallyImplyMiddle!,
       previousPageTitle: this.previousPageTitle,
-      transitionBetweenRoutes: this.transitionBetweenRoutes,
+      transitionBetweenRoutes: this.transitionBetweenRoutes!,
       key: this.key,
       backgroundColor: new Color(0xFFF7F7F7),
       leading: (voltar == true)
           ? new GestureDetector(
-              onTap: this.onTap,
+              onTap: (){
+                if(this.onTap != null){
+                  this.onTap!();
+                }
+              },
               child: new Container(
                 padding: EdgeInsets.only(right: 20.0),
                 color: Colors.transparent,
@@ -99,7 +103,7 @@ class ZNavigationBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _zNavigationBar;
+    return _zNavigationBar!;
   }
 
   @override

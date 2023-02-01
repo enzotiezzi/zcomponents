@@ -12,14 +12,14 @@ import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZEstruturaEmpresa extends StatelessWidget {
-  final String token;
-  final GlobalKey key;
-  final bool headerAtivo;
-  final void Function(Nivel) onNodeSelected;
-  final void Function() onInfoSelected;
-  final String header;
-  final ZEstruturaEmpresaCubit bloc;
-  final bool exibeIconeVoltar;
+  final String? token;
+  final GlobalKey? key;
+  final bool? headerAtivo;
+  final void Function(Nivel)? onNodeSelected;
+  final void Function()? onInfoSelected;
+  final String? header;
+  final ZEstruturaEmpresaCubit? bloc;
+  final bool? exibeIconeVoltar;
 
   ZEstruturaEmpresa({
     @required this.token,
@@ -58,12 +58,12 @@ class ZEstruturaEmpresa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!bloc.carregou) {
-      bloc.buscarEstruturaEmpresa(token);
+    if (!bloc!.carregou) {
+      bloc?.buscarEstruturaEmpresa(token!);
     }
 
     return new BlocProvider.value(
-        value: bloc,
+        value: bloc!,
         child: new Scaffold(
           appBar: new AppBar(
             actions: [
@@ -73,7 +73,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
                     size: 28,
                   ),
                   onPressed: () {
-                    if (onInfoSelected != null) onInfoSelected();
+                    if (onInfoSelected != null) onInfoSelected!();
                   }),
             ],
             leading: montarWidgetIconeVoltar(context),
@@ -83,9 +83,9 @@ class ZEstruturaEmpresa extends StatelessWidget {
           body: new BlocBuilder<ZEstruturaEmpresaCubit,
               ZEstruturaEmpresaCubitModel>(builder: (context, state) {
             Widget widget = new SmartRefresher(
-              controller: bloc.refreshController,
+              controller: bloc!.refreshController,
               onRefresh: () {
-                bloc.refresh(token);
+                bloc?.refresh(token!);
               },
               enablePullDown: true,
               header: new ClassicHeader(
@@ -98,13 +98,13 @@ class ZEstruturaEmpresa extends StatelessWidget {
               child: new Container(
                 padding: const EdgeInsets.all(8.0),
                 child: new TreeView(
-                    controller: bloc.treeViewController,
+                    controller: bloc!.treeViewController,
                     allowParentSelect: true,
                     theme: _treeViewTheme,
                     onNodeTap: (String key) {
-                      var node = bloc.treeViewController.getNode(key);
+                      var node = bloc!.treeViewController.getNode(key);
 
-                      bloc.selecionarNo(node);
+                      bloc!.selecionarNo(node!);
                     },
                     nodeBuilder: (context, node) => new Container(
                           padding: const EdgeInsets.all(4.0),
@@ -122,10 +122,10 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                       color: MainStyle.APP_THEME,
                                     ),
                                     onPressed: () {
-                                      bloc.selecionarNo(node);
+                                      bloc!.selecionarNo(node);
 
                                       if (onNodeSelected != null)
-                                        onNodeSelected(node.data as Nivel);
+                                        onNodeSelected!(node.data as Nivel);
                                     }),
                                 flex: 10,
                               )
@@ -135,7 +135,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
               ),
             );
 
-            if (state.isLoading)
+            if (state.isLoading!)
               widget = new Center(
                 child: new ZLoading(),
               );
@@ -170,9 +170,9 @@ class ZEstruturaEmpresa extends StatelessWidget {
                                   placeholderStyle: new TextStyle(
                                       color: Color(0xff999999), fontSize: 17),
                                   keyboardType: TextInputType.text,
-                                  controller: bloc.searchTextController,
+                                  controller: bloc!.searchTextController,
                                   onChanged: (value) {
-                                    bloc.filtrarEstruturaEmpresa(value);
+                                    bloc?.filtrarEstruturaEmpresa(value);
                                   },
                                   placeholder: "Buscar",
                                   decoration: new BoxDecoration(
@@ -198,7 +198,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
       return new Container();
     } else {
       return new ZHeader(
-        child: new Text(header),
+        child: new Text(header!),
         titulo: header,
         elevation: 4,
       );
@@ -206,7 +206,7 @@ class ZEstruturaEmpresa extends StatelessWidget {
   }
 
   Widget montarWidgetIconeVoltar(BuildContext context) {
-    if (exibeIconeVoltar) {
+    if (exibeIconeVoltar!) {
       return new IconeVoltar(
         context: context,
       );

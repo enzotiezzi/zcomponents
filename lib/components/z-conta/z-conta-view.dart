@@ -15,9 +15,9 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/conta-view-model.dart';
 
 class ZContaView extends IView<ZConta> {
-  IContaServce _contaService;
+  late IContaServce _contaService;
 
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
 
   GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
@@ -31,7 +31,7 @@ class ZContaView extends IView<ZConta> {
   }
 
   Future<void> selecionarConta(ContaViewModel conta) async {
-    if (!verificarContaAtiva(conta.idConta))
+    if (!verificarContaAtiva(conta.idConta!))
       _showDialogContaSelecionada(conta);
     else
       _showDialogContaJaAtiva(conta);
@@ -282,7 +282,7 @@ class ZContaView extends IView<ZConta> {
 
       if (tokenInfo != null) {
         if (tokenInfo.idConta != null)
-          return idConta.toUpperCase() == tokenInfo.idConta.toUpperCase();
+          return idConta.toUpperCase() == tokenInfo.idConta!.toUpperCase();
       }
 
       return false;
@@ -290,13 +290,13 @@ class ZContaView extends IView<ZConta> {
       return false;
   }
 
-  Future<bool> _pesquisarConta(String codigoAtivacao) async {
+  Future<bool?> _pesquisarConta(String codigoAtivacao) async {
     _dialogUtils.showZProgressDialog("Buscando conta", 0.3, _globalKey);
 
     var conta = await _contaService.localizarConta(codigoAtivacao);
 
     if (conta != null) {
-      _globalKey.currentState.refresh(1.0, "Conta encontrada", success: true);
+      _globalKey.currentState?.refresh(1.0, "Conta encontrada", success: true);
 
       await Future.delayed(new Duration(seconds: 1), () async {
         _dialogUtils.dismiss();
@@ -313,7 +313,7 @@ class ZContaView extends IView<ZConta> {
       });
     } else {
       _globalKey.currentState
-          .refresh(1.0, "Não foi possível encontrar a conta", success: false);
+          ?.refresh(1.0, "Não foi possível encontrar a conta", success: false);
 
       await Future.delayed(new Duration(seconds: 1), () {
         _dialogUtils.dismiss();
@@ -323,7 +323,7 @@ class ZContaView extends IView<ZConta> {
     }
   }
 
-  Future<bool> _showDialogConfirmarVinculo(ContaViewModel conta) async {
+  Future _showDialogConfirmarVinculo(ContaViewModel conta)  {
     return showDialog(
         context: state.context,
         builder: (context) => new ZAlertDialog(
@@ -398,19 +398,19 @@ class ZContaView extends IView<ZConta> {
   }
 
   Future<bool> _vincularConta(ContaViewModel conta) async {
-    if (!_verificarSeContaJaVinculada(conta.idConta)) {
+    if (!_verificarSeContaJaVinculada(conta.idConta!)) {
       _dialogUtils.showZProgressDialog("Vinculando conta", 0.5, _globalKey);
 
-      var res = await _contaService.associarConta(conta.idConta);
+      var res = await _contaService.associarConta(conta.idConta!);
 
-      if (res) {
+      if (res != null && res!) {
         _globalKey.currentState
-            .refresh(1.0, "Vínculo feito com sucesso.", success: true);
+            ?.refresh(1.0, "Vínculo feito com sucesso.", success: true);
 
         if (state.widget.onBindAccount != null)
-          await state.widget.onBindAccount(conta);
+          await state.widget.onBindAccount!(conta);
       } else {
-        _globalKey.currentState.refresh(
+        _globalKey.currentState?.refresh(
             1.0, "Não foi possível fazer o vínculo com essa conta.",
             success: false);
       }
@@ -418,7 +418,7 @@ class ZContaView extends IView<ZConta> {
       await Future.delayed(
           new Duration(seconds: 1), () => _dialogUtils.dismiss());
 
-      return res;
+      return res!;
     } else {
       await _dialogUtils.showAlertDialog(
           "Atenção", "Você já está vinculado à esta conta.", "OK");
@@ -430,7 +430,7 @@ class ZContaView extends IView<ZConta> {
   bool _verificarSeContaJaVinculada(String idConta) {
     if (idConta != null)
       return state.widget.contas
-              .where((x) => x.idConta.toLowerCase() == idConta.toLowerCase())
+              .where((x) => x.idConta!.toLowerCase() == idConta.toLowerCase())
               .toList()
               .length >
           0;
@@ -441,19 +441,19 @@ class ZContaView extends IView<ZConta> {
   Future _trocarConta(ContaViewModel conta) async {
     _dialogUtils.showZProgressDialog("Trocando de conta", 0.5, _globalKey);
 
-    var res = await _contaService.trocarContaAtiva(conta.idConta);
+    var res = await _contaService.trocarContaAtiva(conta.idConta!);
 
-    if (res) {
+    if (res!=null && res!) {
       _globalKey.currentState
-          .refresh(1.0, "Conta trocada com sucesso.", success: true);
+          ?.refresh(1.0, "Conta trocada com sucesso.", success: true);
 
       state.setState(() {});
 
       if (state.widget.onAccountChange != null)
-        await state.widget.onAccountChange(conta);
+        await state.widget.onAccountChange!(conta);
     } else {
       _globalKey.currentState
-          .refresh(1.0, "Não foi possível trocar de conta.", success: false);
+          ?.refresh(1.0, "Não foi possível trocar de conta.", success: false);
     }
 
     await Future.delayed(
@@ -463,6 +463,8 @@ class ZContaView extends IView<ZConta> {
   @override
   Future<void> afterBuild() {
     // TODO: implement afterBuild
-    return null;
+    throw UnimplementedError();
   }
+
+
 }

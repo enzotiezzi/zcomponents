@@ -22,18 +22,18 @@ import 'package:z_components/i-view.dart';
 import 'package:z_components/view-model/arquivo-viewmodel.dart';
 
 class ZScanDocumentoView extends IView<ScanDocumentos> {
-  IArquivoService _arquivoService;
-  IColaboradorDocumentoService _colaboradorDocumentoService;
+  late IArquivoService _arquivoService;
+  late IColaboradorDocumentoService _colaboradorDocumentoService;
 
-  String foto;
-  List<Uint8List> fotos = new List();
-  List<Uint8List> fotosAmpliada = new List();
-  List<String> listaRespostasUsuario = new List();
-  List<String> listaIdArquivo = new List();
-  int posicaoLista = 0;
+  String? foto;
+  List<Uint8List>? fotos = [];
+  List<Uint8List>? fotosAmpliada =[];
+  List<String>? listaRespostasUsuario = [];
+  List<String>? listaIdArquivo =  [];
+  int? posicaoLista = 0;
   Map<String, String> camposMapeados = {};
-  Map<String, int> imagensMapeados = {};
-  DialogUtils dialogUtils;
+  Map<String, int>? imagensMapeados = {};
+  late DialogUtils dialogUtils;
   bool camposValidos = false;
 
   ScrollController scrollControllerTudo = new ScrollController();
@@ -108,7 +108,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   ]);
   String tipoImage = "IMAGE";
 
-  ZScanDocumentoView(State state) : super(state);
+  ZScanDocumentoView(State<ScanDocumentos> state) : super(state);
 
   @override
   Future<void> afterBuild() {
@@ -119,19 +119,19 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   @override
   Future<void> initView() async {
     dialogUtils = DialogUtils(state.context);
-    _arquivoService = new ArquivoService(state.widget.token);
+    _arquivoService = new ArquivoService(state.widget.token!);
     _colaboradorDocumentoService =
-        new ColaboradorDocumentoService(state.widget.token);
+        new ColaboradorDocumentoService(state.widget.token!);
     await _inicializarListaRespostas();
     if (state.widget.keyGeniusScan != null)
-      await FlutterGeniusScan.setLicenceKey(state.widget.keyGeniusScan);
+      await FlutterGeniusScan.setLicenceKey(state.widget.keyGeniusScan!);
     await _buscarIdFotos();
     dialogUtils.dismiss();
   }
 
   void displayError(BuildContext context, PlatformException error) {
     try {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(error.message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.message!)));
     } catch (e) {}
   }
 
@@ -235,14 +235,12 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
         });
   }
 
-  Future<String> openGallery(int i) async {
-    var buscarfoto = await ImagePicker.pickImage(
-      source: ImageSource.gallery,
-    );
+  openGallery(int i) async {
+    var buscarfoto = await ImagePicker().getImage(source: ImageSource.gallery);
 
     if (buscarfoto != null) {
       state.setState(() {
-        fotos[i] = buscarfoto.readAsBytesSync();
+        fotos![i] = buscarfoto.readAsBytes() as Uint8List;
         Future.delayed(new Duration(milliseconds: 500), () {
         });
       });
@@ -263,7 +261,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
 
       foto = fotoCortada.replaceAll("file://", '');
 
-      var file = File(foto);
+      var file = File(foto!);
 
       var resultUint8List = await FlutterImageCompress.compressWithFile(
         file.absolute.path,
@@ -272,13 +270,13 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
       );
 
       state.setState(() {
-        fotos[i] = resultUint8List;
+        fotos![i] = resultUint8List!;
       });
     }, onError: (error) => displayError(state.context, error));
   }
 
   Future expandirImagem(int hero, int hero2, Uint8List caminho) async {
-    fotosAmpliada.length = fotos.length;
+    fotosAmpliada!.length = fotos!.length;
     fotosAmpliada = await showDialog(
         context: state.context,
         builder: (context) {
@@ -287,7 +285,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
             hero2: hero2,
             finalizacaoChamado: true,
             imagem: caminho,
-            fotos: fotos,
+            fotos: fotos!,
           );
         });
     if (fotos != fotosAmpliada) {
@@ -298,33 +296,33 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
 
   Future<void> _inicializarListaRespostas() async {
     var lista = await _colaboradorDocumentoService.listarDocumentoCampo(
-        state.widget.colaboradorDocumentoViewModel.idColaborador,
-        state.widget.colaboradorDocumentoViewModel.idDocumento);
+        state.widget.colaboradorDocumentoViewModel!.idColaborador!,
+        state.widget.colaboradorDocumentoViewModel!.idDocumento!);
     for (int i = 0;
-        i < state.widget.colaboradorDocumentoViewModel.campos.length;
+        i < state.widget.colaboradorDocumentoViewModel!.campos!.length;
         i++) {
-      listaRespostasUsuario.add("");
+      listaRespostasUsuario?.add("");
     }
 
     if (lista != null && lista.length > 0) {
       for (int i = 0;
-          i < state.widget.colaboradorDocumentoViewModel.campos.length;
+          i < state.widget.colaboradorDocumentoViewModel!.campos!.length;
           i++) {
         for (int j = 0;
-            j < state.widget.colaboradorDocumentoViewModel.campos.length;
+            j < state.widget.colaboradorDocumentoViewModel!.campos!.length;
             j++) {
-          if (state.widget.colaboradorDocumentoViewModel.campos[i].idAtributo ==
+          if (state.widget.colaboradorDocumentoViewModel!.campos![i].idAtributo ==
               lista[j].idDocumentoCampo) {
-            if (state.widget.colaboradorDocumentoViewModel.campos[i]
+            if (state.widget.colaboradorDocumentoViewModel!.campos![i]
                     .tipo !=
                 "date") {
-              listaRespostasUsuario[i] = lista[j].valor;
+              listaRespostasUsuario![i] = lista[j].valor!;
             } else {
               try {
-                listaRespostasUsuario[i] =
-                    UtilData.obterDataDDMMAAAA(DateTime.parse(lista[j].valor));
+                listaRespostasUsuario![i] =
+                    UtilData.obterDataDDMMAAAA(DateTime.parse(lista[j].valor!));
               } catch (e) {
-                listaRespostasUsuario[i] = lista[j].valor;
+                listaRespostasUsuario![i] = lista[j].valor!;
               }
             }
           }
@@ -339,29 +337,27 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   bool mapearCamposComRespostas() {
     try {
       for (int i = 0;
-          i < state.widget.colaboradorDocumentoViewModel.campos.length;
+          i < state.widget.colaboradorDocumentoViewModel!.campos!.length;
           i++) {
-        state.widget.colaboradorDocumentoViewModel.campos[i].resposta =
-            listaRespostasUsuario[i];
-        if (state.widget.colaboradorDocumentoViewModel.campos[i].obrigatorio ==
+        state.widget.colaboradorDocumentoViewModel!.campos![i].resposta =
+            listaRespostasUsuario![i];
+        if (state.widget.colaboradorDocumentoViewModel!.campos![i].obrigatorio ==
                 true &&
-            listaRespostasUsuario[i] == "") {
+            listaRespostasUsuario![i] == "") {
           return false;
         }
-        if (state.widget.colaboradorDocumentoViewModel.campos[i]
+        if (state.widget.colaboradorDocumentoViewModel!.campos![i]
                 .tipo ==
             "date") {
           try {
-            var textoSeparado = listaRespostasUsuario[i].split("/");
-            listaRespostasUsuario[i] =
+            var textoSeparado = listaRespostasUsuario![i].split("/");
+            listaRespostasUsuario![i] =
                 "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
-            var validarData = isValidDate(listaRespostasUsuario[i]);
+            var validarData = isValidDate(listaRespostasUsuario![i]);
 
             if (validarData) {
-              camposMapeados.addAll({
-                state.widget.colaboradorDocumentoViewModel.campos[i]
-                    .resposta: listaRespostasUsuario[i]
-              });
+              camposMapeados.addAll({state.widget.colaboradorDocumentoViewModel!.campos![i].resposta! : listaRespostasUsuario![i]});
+              return true;
             } else {
               return false;
             }
@@ -370,33 +366,33 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
           }
         } else {
           camposMapeados.addAll({
-            state.widget.colaboradorDocumentoViewModel.campos[i]
-                .resposta: listaRespostasUsuario[i]
+            state.widget.colaboradorDocumentoViewModel!.campos![i]
+                .resposta!: listaRespostasUsuario![i]
           });
         }
       }
       return true;
     } catch (e) {
-      print(e);
+      return false;
     }
   }
 
   void mapearimagens() {
-    for (int i = 0; i < listaIdArquivo.length; i++) {
-      imagensMapeados.addAll({listaIdArquivo[i]: (i + 1)});
+    for (int i = 0; i < listaIdArquivo!.length; i++) {
+      imagensMapeados?.addAll({listaIdArquivo![i]: (i + 1)});
     }
   }
 
   Future<void> enviarFotos() async {
-    if (fotos != null && fotos.length > 0) {
-      for (var i = 0; i <= fotos.length - 1; i++) {
-        var arqModel = await montarViewModelDeArquivo(fotos[i]);
+    if (fotos != null && fotos!.length > 0) {
+      for (var i = 0; i <= fotos!.length - 1; i++) {
+        var arqModel = await montarViewModelDeArquivo(fotos![i]);
 
         var idFotoArquivo = await _arquivoService.enviarImagem(arqModel);
 
         if (idFotoArquivo != null) {
-          state.widget.colaboradorDocumentoViewModel.campos[i].resposta = idFotoArquivo;
-          listaIdArquivo.add(idFotoArquivo);
+          state.widget.colaboradorDocumentoViewModel!.campos![i].resposta = idFotoArquivo;
+          listaIdArquivo?.add(idFotoArquivo);
         }
       }
     }
@@ -404,13 +400,13 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
 
   Future<void> _buscarIdFotos() async {
 
-    for (int i = 0; i < state.widget.colaboradorDocumentoViewModel.campos.length; i++) {
-      var itemIndex = state.widget.colaboradorDocumentoViewModel.campos[i];
+    for (int i = 0; i < state.widget.colaboradorDocumentoViewModel!.campos!.length; i++) {
+      var itemIndex = state.widget.colaboradorDocumentoViewModel!.campos![i];
 
-      if (itemIndex.tipo.toUpperCase() == tipoImage && itemIndex.resposta.isNotEmpty) {
-          await buscarFotos(itemIndex.resposta);
+      if (itemIndex.tipo!.toUpperCase() == tipoImage && itemIndex.resposta!.isNotEmpty) {
+          await buscarFotos(itemIndex.resposta!);
       } else {
-        fotos.add(new Uint8List(0));
+        fotos?.add(new Uint8List(0));
       }
     }
     if (state.mounted) {
@@ -422,11 +418,11 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
     var idFotoArquivo = await _arquivoService.buscarAnexo(idArquivo);
 
     if (idFotoArquivo != null && idFotoArquivo.conteudo != null) {
-      Uint8List image = base64Decode(idFotoArquivo.conteudo);
+      Uint8List image = base64Decode(idFotoArquivo.conteudo!);
 
-      fotos.add(image);
+      fotos?.add(image);
     } else {
-      fotos.add(new Uint8List(0));
+      fotos?.add(new Uint8List(0));
     }
   }
 
@@ -469,14 +465,14 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   Future<void> salvarDocumentos() async {
     mapearimagens();
     ColaboradorDocumentoInput input = new ColaboradorDocumentoInput(
-        idColaborador: state.widget.colaboradorDocumentoViewModel.idColaborador,
+        idColaborador: state.widget.colaboradorDocumentoViewModel!.idColaborador,
         campos: camposMapeados,
         imagens: imagensMapeados);
 
     var res = await _colaboradorDocumentoService.enviarDocumento(
         input,
-        state.widget.colaboradorDocumentoViewModel.idColaborador,
-        state.widget.colaboradorDocumentoViewModel.idDocumento);
+        state.widget.colaboradorDocumentoViewModel!.idColaborador!,
+        state.widget.colaboradorDocumentoViewModel!.idDocumento!);
     dialogUtils.dismiss();
 
     if (res != null) {

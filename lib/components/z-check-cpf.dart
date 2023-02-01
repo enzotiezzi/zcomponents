@@ -5,7 +5,7 @@ import 'package:z_components/styles/main-style.dart';
 
 class ZCheckCPF extends StatefulWidget {
   ZCheckCPF({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

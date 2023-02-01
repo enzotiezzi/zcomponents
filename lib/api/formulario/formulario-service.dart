@@ -11,13 +11,13 @@ class FormularioService extends Service implements IFormularioService {
   FormularioService(String token) : super(token);
 
   @override
-  Future<List<ZDynamicModelViewModel>> buscarFormularios() async {
+  Future<List<ZDynamicModelViewModel>?> buscarFormularios() async {
     try {
       var url = "$_URL/formulario/modelo";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return (json.decode(response.body) as List)
+      return (json.decode(response!.body) as List)
           .map((x) => ZDynamicModelViewModel.fromJson(x))
           .toList();
     } catch (e) {
@@ -26,13 +26,13 @@ class FormularioService extends Service implements IFormularioService {
   }
 
   @override
-  Future<List<ZDynamicFormViewModel>> montarFormulario(String idModelo) async {
+  Future<List<ZDynamicFormViewModel>?> montarFormulario(String idModelo) async {
     try {
       var url = "$_URL/formulario/modelo/$idModelo/atributos";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return (json.decode(response.body) as List)
+      return (json.decode(response!.body) as List)
           .map((x) => ZDynamicFormViewModel.fromJson(x))
           .toList();
     } catch (e) {
@@ -41,7 +41,7 @@ class FormularioService extends Service implements IFormularioService {
   }
 
   @override
-  Future<ZDynamicFormViewModel> enviarFormulario(
+  Future<ZDynamicFormViewModel?> enviarFormulario(
       ZDynamicFormViewModel solicitacao) async {
     try {
       var url = "$_URL/formulario/valores";
@@ -49,7 +49,7 @@ class FormularioService extends Service implements IFormularioService {
       var response =
       await request(url, Service.HTTP_POST, body: solicitacao.toMap());
 
-      return ZDynamicFormViewModel.fromJson(json.decode(response.body));
+      return ZDynamicFormViewModel.fromJson(json.decode(response!.body));
     } catch (e) {
       return null;
     }

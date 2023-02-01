@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-collection/z-collection-item.dart';
 
 class ZCollectionBottomSheet extends StatefulWidget {
-  final String title;
-  final ThemeData themeData;
-  final List<ZCollectionItem> lista;
-  final ValueChanged<ZCollectionItem> onChange;
-  final bool campoObrigatorio;
-  String valorPadrao;
+  final String? title;
+  final ThemeData? themeData;
+  final List<ZCollectionItem>? lista;
+  final ValueChanged<ZCollectionItem>? onChange;
+  final bool? campoObrigatorio;
+  String? valorPadrao;
 
   ZCollectionBottomSheet(
       {@required this.title,
@@ -23,14 +23,14 @@ class ZCollectionBottomSheet extends StatefulWidget {
 }
 
 class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
-  ZCollectionItem _itemSelecionado = new ZCollectionItem();
+  ZCollectionItem? _itemSelecionado;
   String _anterior = "Selecione";
 
-  ZCollectionItem get itemSelecionado => _itemSelecionado;
+  ZCollectionItem? get itemSelecionado => _itemSelecionado;
 
   @override
   void initState() {
-    if (widget.valorPadrao != null && widget.valorPadrao.isNotEmpty) {
+    if (widget.valorPadrao != null && widget.valorPadrao!.isNotEmpty) {
       _itemSelecionado = new ZCollectionItem(
           chave: widget.valorPadrao,
           titulo: widget.valorPadrao,
@@ -56,10 +56,10 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                     flex: 65,
                     fit: FlexFit.tight,
                     child: new Text(
-                      (_itemSelecionado?.valor == null &&
+                      (_itemSelecionado == null || _itemSelecionado!.valor == null &&
                           _anterior == "Selecione")
                           ? _anterior
-                          : _itemSelecionado?.valor,
+                          : _itemSelecionado!.valor!,
                       style: _retornaCorTexto(),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.clip,
@@ -86,7 +86,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
 
   Color _retornaCorIcon() {
     if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
-      return widget.themeData.accentColor;
+      return widget.themeData!.accentColor;
     } else {
       return Colors.black;
     }
@@ -94,10 +94,10 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
 
   TextStyle _retornaCorTexto() {
     if (_itemSelecionado?.valor == null && _anterior == "Selecione") {
-      return widget.themeData.textTheme.bodyText1
-          .copyWith(color: widget.themeData.accentColor);
+      return widget.themeData!.textTheme.bodyText1!
+          .copyWith(color: widget.themeData!.accentColor);
     } else {
-      return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.black);
+      return widget.themeData!.textTheme.bodyText1!.copyWith(color: Colors.black);
     }
   }
 
@@ -117,7 +117,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                     padding: const EdgeInsets.only(top: 18, bottom: 8),
                     child: new Text(
                       "${widget.title}",
-                      style: widget.themeData.textTheme.subtitle1
+                      style: widget.themeData!.textTheme.subtitle1!
                           .copyWith(color: Color(0xff999999)),
                     ),
                   ),
@@ -125,17 +125,17 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
               ),
               new Divider(color: Color(0xffCECECE)),
               new ListView.builder(
-                itemCount: widget.lista.length,
+                itemCount: widget.lista!.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  var item = widget.lista[index];
+                  var item = widget.lista![index];
                   return new GestureDetector(
                     child: new Container(
                       padding: const EdgeInsets.only(
                           left: 16.0, top: 8.0, bottom: 8.0),
                       child: Text(
                         "${item.titulo}",
-                        style: widget.themeData.textTheme.bodyText2
+                        style: widget.themeData!.textTheme.bodyText2!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -145,7 +145,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
                           _itemSelecionado = item;
                           widget.valorPadrao = item.titulo;
                           if (widget.onChange != null)
-                            widget.onChange(_itemSelecionado);
+                            widget.onChange!(_itemSelecionado!);
                           Navigator.pop(context);
                         });
                     },
@@ -158,7 +158,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
   }
 
   Widget _returnRequiredField() {
-    if (widget.campoObrigatorio) {
+    if (widget.campoObrigatorio != null && widget.campoObrigatorio!) {
       return Flexible(
         flex: 45,
         fit: FlexFit.tight,
@@ -168,7 +168,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
             children: <TextSpan>[
               new TextSpan(
                 text: "${widget.title}",
-                style: widget.themeData.textTheme.bodyText1
+                style: widget.themeData!.textTheme.bodyText1!
                     .copyWith(color: Color(0xff999999)),
               ),
               TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
@@ -186,7 +186,7 @@ class _ZCollectionBottomSheetState extends State<ZCollectionBottomSheet> {
             children: <TextSpan>[
               new TextSpan(
                 text: "${widget.title}",
-                style: widget.themeData.textTheme.bodyText1
+                style: widget.themeData!.textTheme.bodyText1!
                     .copyWith(color: Color(0xff999999)),
               ),
             ],

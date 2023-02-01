@@ -1,12 +1,12 @@
 class ColaboradorDocumentoCampoViewModel {
-  String idColaboradorDocumentoCampo;
+  String? idColaboradorDocumentoCampo;
 
-  String idColaboradorDocumento;
+  String? idColaboradorDocumento;
 
-  String idDocumentoCampo;
+  String? idDocumentoCampo;
 
-  String valor;
-  int ordem;
+  String? valor;
+  int? ordem;
 
   ColaboradorDocumentoCampoViewModel({
     this.idColaboradorDocumentoCampo,

@@ -1,7 +1,7 @@
 
 class ModuloViewModel {
-  String idModulo;
-  String nome;
+  String? idModulo;
+  String? nome;
 
   ModuloViewModel({this.idModulo,this.nome});
 

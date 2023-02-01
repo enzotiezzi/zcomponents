@@ -9,8 +9,8 @@ import 'package:z_components/view-model/atualizar-dados-viewmodel.dart';
 import 'atualizar-dados-previsto.dart';
 
 class ConfirmarPrevisto extends StatefulWidget {
-  AtualizarDadosViewModel dadosViewModel;
-  Function(AtualizarDadosViewModel) finalizarAtualizacao;
+  AtualizarDadosViewModel? dadosViewModel;
+  Function(AtualizarDadosViewModel)? finalizarAtualizacao;
 
   ConfirmarPrevisto(
       {@required this.dadosViewModel, @required this.finalizarAtualizacao});
@@ -34,10 +34,19 @@ class _ConfirmarPrevistoState extends State<ConfirmarPrevisto> {
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            new RaisedButton(
-                color: Colors.white,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
+            new ElevatedButton(
+                style: new ButtonStyle(
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.white),
+                  shadowColor:
+                  MaterialStateProperty.all<Color>(Colors.transparent),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(
+                      top: 12, bottom: 12, left: 26, right: 26)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
+                      )),
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -57,12 +66,21 @@ class _ConfirmarPrevistoState extends State<ConfirmarPrevisto> {
                     style: TextStyle(color: const Color(0xff707070)),
                   ),
                 )),
-            new RaisedButton(
-              color: const Color(0xff2BBAB4),
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
+            new ElevatedButton(
+              style: new ButtonStyle(
+                backgroundColor:
+                MaterialStateProperty.all<Color>(Color(0xff2BBAB4)),
+                shadowColor:
+                MaterialStateProperty.all<Color>(Colors.transparent),
+                padding: MaterialStateProperty.all(EdgeInsets.only(
+                    top: 12, bottom: 12, left: 26, right: 26)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    )),
+              ),
               onPressed: () {
-                widget.finalizarAtualizacao(widget.dadosViewModel);
+                widget.finalizarAtualizacao!(widget.dadosViewModel!);
               },
               child: new Container(
                 alignment: Alignment.center,
@@ -103,14 +121,14 @@ class _ConfirmarPrevistoState extends State<ConfirmarPrevisto> {
                 color: const Color(0xffF0F0F0),
                 padding: EdgeInsets.fromLTRB(16.0, 8.0, 16, 8.0),
                 child: new ZItemTile(
-                    cargo: widget.dadosViewModel.cargo,
-                    tempoPausa: widget.dadosViewModel.tempoIntervalo,
-                    horaSaida: widget.dadosViewModel.horaTermino,
-                    horaEntrada: widget.dadosViewModel.horaInicio,
-                    nomeCentroCusto: widget.dadosViewModel.centroCusto,
-                    nome: widget.dadosViewModel.nomeColaborador,
-                    escala: widget.dadosViewModel.escala,
-                    status: widget.dadosViewModel.statusColaborador),
+                    cargo: widget.dadosViewModel?.cargo,
+                    tempoPausa: widget.dadosViewModel?.tempoIntervalo,
+                    horaSaida: widget.dadosViewModel?.horaTermino,
+                    horaEntrada: widget.dadosViewModel?.horaInicio,
+                    nomeCentroCusto: widget.dadosViewModel?.centroCusto,
+                    nome: widget.dadosViewModel?.nomeColaborador,
+                    escala: widget.dadosViewModel?.escala,
+                    status: widget.dadosViewModel?.statusColaborador),
               ),
             )
           ],

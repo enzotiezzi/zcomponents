@@ -11,17 +11,17 @@ import 'package:z_components/styles/main-style.dart';
 import '../z-alert-dialog.dart';
 
 class ZCollectionList extends StatefulWidget {
-  GlobalKey key;
-  List<ZCollectionItem> lista;
-  final ThemeData theme;
-  final String titulo;
-  final ZCollectionItem ultimoValor;
+  GlobalKey? key;
+  List<ZCollectionItem>? lista;
+  final ThemeData? theme;
+  final String? titulo;
+  final ZCollectionItem? ultimoValor;
   final color;
-  final FiltroCampo filtroPrincipal;
-  int skip;
-  int take;
-  Function(List<FilterExpression>) onChange;
-  Function(List<FilterExpression>, List<ZCollectionItem>) onScroll;
+  final FiltroCampo? filtroPrincipal;
+  int? skip;
+  int? take;
+  Function(List<FilterExpression>)? onChange;
+  Function(List<FilterExpression>, List<ZCollectionItem>)? onScroll;
 
   ZCollectionList(
       {this.lista,
@@ -42,10 +42,10 @@ class ZCollectionList extends StatefulWidget {
 }
 
 class ZCollectionListState extends State<ZCollectionList> {
-  List<ZCollectionItem> _listaFiltro;
-  ScrollController scrollController;
+  late List<ZCollectionItem>? _listaFiltro;
+  late ScrollController scrollController;
   GlobalKey keyLista = new GlobalKey();
-  String textoBusca = "";
+  String? textoBusca = "";
 
   @override
   void initState() {
@@ -66,7 +66,7 @@ class ZCollectionListState extends State<ZCollectionList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: widget.theme.backgroundColor,
+      backgroundColor: widget.theme!.backgroundColor,
       appBar: new AppBar(
           backgroundColor: widget.color,
           leading: IconeVoltar(
@@ -75,7 +75,7 @@ class ZCollectionListState extends State<ZCollectionList> {
           centerTitle: true,
           title: new Container(
             child: new Text(
-              widget.titulo.toUpperCase(),
+              widget.titulo!.toUpperCase(),
               style: new TextStyle(color: Colors.white),
             ),
           ),
@@ -135,9 +135,9 @@ class ZCollectionListState extends State<ZCollectionList> {
                           if (text.length >= 3 || text.length == 0) {
                             if (widget.onChange != null) {
                               textoBusca = text;
-                              widget.onChange([
+                              widget.onChange!([
                                 new FilterExpression(
-                                    propertyName: widget.filtroPrincipal.key,
+                                    propertyName: widget.filtroPrincipal!.key,
                                     operatorBetween: "AndAlso",
                                     operator: "Contains",
                                     value: text)
@@ -147,9 +147,9 @@ class ZCollectionListState extends State<ZCollectionList> {
                               keyLista = new GlobalKey();
                               setState(() {
                                 if (text.length > 0)
-                                  _listaFiltro = widget.lista
+                                  _listaFiltro = widget.lista!
                                       .where((x) =>
-                                          x.valor.toLowerCase().contains(text))
+                                          x.valor!.toLowerCase().contains(text))
                                       .toList();
                                 else
                                   _listaFiltro = widget.lista;
@@ -170,11 +170,11 @@ class ZCollectionListState extends State<ZCollectionList> {
   Widget _buildLista() {
     return ListView.builder(
       key: keyLista,
-      itemCount: _listaFiltro.length,
+      itemCount: _listaFiltro!.length,
       controller: scrollController,
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        var item = _listaFiltro[index];
+        var item = _listaFiltro![index];
         return new Column(
           children: [
             new Tooltip(
@@ -189,8 +189,8 @@ class ZCollectionListState extends State<ZCollectionList> {
                     leading: new Container(
                       width: MediaQuery.of(context).size.width / 1.3,
                       child: new Text(
-                        _retornaTextoDoItem(_listaFiltro[index].ordem, _listaFiltro, index),
-                        style: widget.theme.textTheme.bodyText1,
+                        _retornaTextoDoItem(_listaFiltro![index].ordem!, _listaFiltro!, index),
+                        style: widget.theme!.textTheme.bodyText1,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -199,7 +199,7 @@ class ZCollectionListState extends State<ZCollectionList> {
             ),
             new Divider(
               height: 2,
-              color: widget.theme.backgroundColor,
+              color: widget.theme!.backgroundColor,
             ),
           ],
         );
@@ -220,34 +220,34 @@ class ZCollectionListState extends State<ZCollectionList> {
     Navigator.of(context).pop(item);
   }
 
-  Future<void> _initList() {
+   _initList() {
     if (widget.take == 0) {
       setState(() {
         _listaFiltro = widget.lista;
       });
     } else {
       var listaSkipTake =
-          widget.lista.skip(widget.skip).take(widget.take).toList();
+          widget.lista?.skip(widget.skip!).take(widget.take!).toList();
 
       if (listaSkipTake != null && listaSkipTake.length > 0) {
         setState(() {
-          _listaFiltro.addAll(listaSkipTake);
-          widget.skip += widget.take;
+          _listaFiltro?.addAll(listaSkipTake);
+          widget.skip = widget.skip! + widget.take!;
         });
       }
     }
   }
 
   Future<void> _scrollListener() async {
-    if (widget.take > 0) {
+    if (widget.take! > 0) {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         var listaSkipTake =
-            widget.lista.skip(widget.skip).take(widget.take).toList();
+            widget.lista?.skip(widget.skip!).take(widget.take!).toList();
         if (listaSkipTake != null && listaSkipTake.length > 0) {
           setState(() {
-            _listaFiltro.addAll(listaSkipTake);
-            widget.skip += widget.take;
+            _listaFiltro?.addAll(listaSkipTake);
+            widget.skip = widget.skip! + widget.take!;
           });
         }
       }
@@ -255,14 +255,14 @@ class ZCollectionListState extends State<ZCollectionList> {
     if (widget.onScroll != null) {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        widget.onScroll([
+        widget.onScroll!([
           new FilterExpression(
-              propertyName: widget.filtroPrincipal.key,
+              propertyName: widget.filtroPrincipal!.key,
               operatorBetween: "AndAlso"
                   "",
               operator: "Contains",
               value: textoBusca)
-        ], _listaFiltro);
+        ], _listaFiltro!);
       }
     }
   }
@@ -293,7 +293,7 @@ class ZCollectionListState extends State<ZCollectionList> {
               ),
               new Container(
                 child: new Text(
-                    widget.titulo.toUpperCase(),
+                    widget.titulo!.toUpperCase(),
                   style: new TextStyle(
                       color: Colors.black,
                       fontSize: 16,

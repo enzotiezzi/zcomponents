@@ -7,40 +7,40 @@ import 'package:z_components/config/z-tipo-header.dart';
 import 'package:z_components/config/z-type-tile.dart';
 
 class ZPerfilColaborador extends StatefulWidget {
-  final String idConta;
-  final String token;
-  final String cpf;
-  final String tituloAppBar;
-  final String inicioIntervalo;
-  final String voltaIntervalo;
-  final String textoTituloInfo;
-  final String textoLocalInfo;
-  final String jornada;
-  final String textoCargoInfo;
-  final String textoEscalaInfo;
-  final String textoHoraEntradaInfo;
-  final String textoHoraSaidaInfo;
-  final String textoHoraIntervaloInfo;
-  final String textoCodigoInfo;
-  final String tituloHeader;
-  final String re;
-  final Color colorBatida;
-  final int numeroQuadrados;
-  final List<String> listaTextos;
-  final List<IconData> listaIcones;
-  final List<dynamic> listaOnTap;
-  final bool statusInfo;
-  final Widget imagemPerfil;
-  final Function onTapVoltar;
-  final Function onTapImage;
-  final String isExpand;
-  final Function funcaoIconBatida;
-  final String status;
-  final Function funcao;
-  final Color color;
-  final String endereco;
-  final String telefone;
-  final String email;
+  final String? idConta;
+  final String? token;
+  final String? cpf;
+  final String? tituloAppBar;
+  final String? inicioIntervalo;
+  final String? voltaIntervalo;
+  final String? textoTituloInfo;
+  final String? textoLocalInfo;
+  final String? jornada;
+  final String? textoCargoInfo;
+  final String? textoEscalaInfo;
+  final String? textoHoraEntradaInfo;
+  final String? textoHoraSaidaInfo;
+  final String? textoHoraIntervaloInfo;
+  final String? textoCodigoInfo;
+  final String? tituloHeader;
+  final String? re;
+  final Color? colorBatida;
+  final int? numeroQuadrados;
+  final List<String>? listaTextos;
+  final List<IconData>? listaIcones;
+  final List<dynamic>? listaOnTap;
+  final bool? statusInfo;
+  final Widget? imagemPerfil;
+  final Function? onTapVoltar;
+  final Function? onTapImage;
+  final String? isExpand;
+  final Function? funcaoIconBatida;
+  final String? status;
+  final Function? funcao;
+  final Color? color;
+  final String? endereco;
+  final String? telefone;
+  final String? email;
 
   ZPerfilColaborador(
       {this.re: "",
@@ -110,8 +110,7 @@ class _ZPerfilColaboradorState extends State<ZPerfilColaborador> {
               height: 79,
               width: double.infinity,
               child: Center(
-                child: Text(
-                  widget.tituloAppBar,
+                child: Text(_retornaTituloAppBar(),
                   style: TextStyle(color: Colors.white),
                 ),
               ))),
@@ -128,7 +127,7 @@ class _ZPerfilColaboradorState extends State<ZPerfilColaborador> {
           child: new Container(
             margin: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
             child: new Text(
-              "${widget.tituloHeader}",
+              _retornaTituloHeader(),
               style: new TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
             ),
           ),
@@ -190,5 +189,21 @@ class _ZPerfilColaboradorState extends State<ZPerfilColaborador> {
         ),
       ],
     );
+  }
+
+  String _retornaTituloAppBar(){
+    if(widget.tituloAppBar != null){
+      return widget.tituloAppBar!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornaTituloHeader(){
+    if(widget.tituloHeader != null){
+      return widget.tituloHeader!;
+    }else{
+      return "";
+    }
   }
 }

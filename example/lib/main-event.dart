@@ -9,7 +9,7 @@ class MainEvent extends StatefulWidget {
 }
 
 class _MainEventState extends State<MainEvent> {
-  EventManager _eventManager;
+  late EventManager _eventManager;
 
 
   @override

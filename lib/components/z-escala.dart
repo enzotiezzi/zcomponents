@@ -6,10 +6,10 @@ import 'package:z_components/interface/i-zescala-service.dart';
 import 'package:z_components/view-model/escala-viewmodel.dart';
 
 class ZEscala extends StatefulWidget {
-  final String token;
-  final Key key;
-  final ValueChanged<ZCollectionItem> onChange;
-  final String valorPadrao;
+  final String? token;
+  final Key? key;
+  final ValueChanged<ZCollectionItem>? onChange;
+  final String? valorPadrao;
 
   ZEscala({this.key, @required this.token, this.onChange, this.valorPadrao});
 
@@ -18,20 +18,20 @@ class ZEscala extends StatefulWidget {
 }
 
 class ZEscalaState extends State<ZEscala> {
-  ZCollectionItem _itemSelecionado;
+  ZCollectionItem? _itemSelecionado;
 
-  ZCollectionItem get itemSelecionado => _itemSelecionado;
+  ZCollectionItem? get itemSelecionado => _itemSelecionado;
 
-  IZEscalaService _service;
+  late IZEscalaService _service;
 
   var _keyZCollection = new GlobalKey<ZCollectionState>();
 
-  var _escalas = new List<EscalaViewModel>();
+  List<EscalaViewModel> _escalas = [];
 
   @override
   void initState() {
     super.initState();
-    _service = new ZEscalaService(widget.token);
+    _service = new ZEscalaService(widget.token!);
     _listarEscalas();
   }
 
@@ -45,7 +45,7 @@ class ZEscalaState extends State<ZEscala> {
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
-        if (widget.onChange != null) widget.onChange(item);
+        if (widget.onChange != null) widget.onChange!(item);
       },
       valorPadrao: widget.valorPadrao,
       key: _keyZCollection,
@@ -59,7 +59,7 @@ class ZEscalaState extends State<ZEscala> {
       setState(() {
         _escalas = escalas;
       });
-      _keyZCollection.currentState.buscarValorPadrao(_escalas
+      _keyZCollection.currentState?.buscarValorPadrao(_escalas
           .map((x) => new ZCollectionItem(
               chave: x.escala, titulo: x.nome, valor: x.escala))
           .toList());

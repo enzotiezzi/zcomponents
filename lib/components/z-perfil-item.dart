@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZPerfilItem extends StatefulWidget {
-  final int numeroQuadrados;
-  final List<String> listaTextos;
-  final List<IconData> listaIcones;
-  final List<dynamic> listaOnTap;
-  final Color color;
+  final int? numeroQuadrados;
+  final List<String>? listaTextos;
+  final List<IconData>? listaIcones;
+  final List<dynamic>? listaOnTap;
+  final Color? color;
 
   ZPerfilItem(
       {this.numeroQuadrados = 0,
@@ -29,11 +29,15 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisSpacing: 10.0, mainAxisSpacing: 10.0, crossAxisCount: 3),
       itemBuilder: (context, index) {
-        return (index == widget.numeroQuadrados - 1 ||
-                index == widget.numeroQuadrados - 2 ||
-                index == widget.numeroQuadrados - 3)
+        return (index == widget.numeroQuadrados! - 1 ||
+                index == widget.numeroQuadrados! - 2 ||
+                index == widget.numeroQuadrados! - 3)
             ? new GestureDetector(
-                onTap: widget.listaOnTap[index],
+                onTap: (){
+                  if(widget.listaOnTap !=null){
+                    widget.listaOnTap![index];
+                  }
+                },
                 child: new Container(
                   margin: EdgeInsets.only(bottom: 2.0),
                   child: new Material(
@@ -50,14 +54,14 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                             margin: EdgeInsets.only(
                                 bottom: 6.0, top: 8.0, left: 8.0, right: 8.0),
                             child: new Icon(
-                              widget.listaIcones[index],
+                              widget.listaIcones![index],
                               color: widget.color,
                             ),
                           ),
                           new Container(
                               margin: EdgeInsets.only(left: 10.0, right: 10.0),
                               child: new Text(
-                                widget.listaTextos[index],
+                                widget.listaTextos![index],
                                 style: TextStyle(
                                     color: const Color(0xff707070),
                                     ),
@@ -69,7 +73,11 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                 ),
               )
             : new GestureDetector(
-                onTap: widget.listaOnTap[index],
+                onTap: (){
+                  if(widget.listaOnTap != null){
+                    widget.listaOnTap![index];
+                  }
+                },
                 child: new Material(
                   borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   color: Colors.white,
@@ -84,14 +92,14 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                           margin: EdgeInsets.only(
                               bottom: 6.0, top: 8.0, left: 8.0, right: 8.0),
                           child: new Icon(
-                            widget.listaIcones[index],
+                            widget.listaIcones![index],
                             color: widget.color,
                           ),
                         ),
                         new Container(
                           margin: EdgeInsets.only(left: 10.0, right: 10.0),
                           child: new Text(
-                                  widget.listaTextos[index],
+                                  widget.listaTextos![index],
                                   style:
                                       TextStyle(color: const Color(0xff707070)),
                                 )

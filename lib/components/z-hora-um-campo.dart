@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_shifter_v2/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 
 class ZHoraUmCampo extends StatefulWidget {
-  String titulo;
+  String? titulo;
 
-  ZHoraUmCampo({Key key, @required this.titulo}) : super(key: key);
+  ZHoraUmCampo({Key? key, @required this.titulo}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ZHoraUmCampoState();
@@ -18,12 +18,12 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
 
   //bool _visibles = false;
 
-  FocusNode _focusEntrada;
+  FocusNode _focusEntrada = new FocusNode();
 
-  String _horaEntrada;
-  String _minutoEntrada;
-  int _intHoraEntrada = 0;
-  int _intMinutoEntrada;
+  String? _horaEntrada = "";
+  String? _minutoEntrada= "";
+  int? _intHoraEntrada = 0;
+  int? _intMinutoEntrada = 0;
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Container(
-                child: new Text(widget.titulo),
+                child: new Text(widget.titulo ??""),
               ),
             ],
           ),
@@ -76,16 +76,16 @@ class _ZHoraUmCampoState extends State<ZHoraUmCampo> {
                 onChanged: (text) {
                   _horaEntrada = text.substring(0, 2);
                   _minutoEntrada = text.substring(3, 5);
-                  _intHoraEntrada = int.parse(_horaEntrada);
-                  _intMinutoEntrada = int.parse(_minutoEntrada);
+                  _intHoraEntrada = int.parse(_horaEntrada!);
+                  _intMinutoEntrada = int.parse(_minutoEntrada!);
                   if (text.length == 5) {
-                    if (_intHoraEntrada > 23 && _intMinutoEntrada > 59) {
+                    if (_intHoraEntrada! > 23 && _intMinutoEntrada! > 59) {
                       showAlertDialogNew("Horario Inválido!",
                           "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
-                    } else if (_intHoraEntrada > 23 && _intMinutoEntrada < 59) {
+                    } else if (_intHoraEntrada! > 23 && _intMinutoEntrada! < 59) {
                       showAlertDialogNew("Hora Inválida!",
                           "Por favor insira um valor de hora entre 00 e 23.");
-                    } else if (_intHoraEntrada < 24 && _intMinutoEntrada > 59) {
+                    } else if (_intHoraEntrada! < 24 && _intMinutoEntrada! > 59) {
                       showAlertDialogNew("Minuto Inválido!",
                           "Por favor insira um valor de minuto entre 00 e 59.");
                     } else {

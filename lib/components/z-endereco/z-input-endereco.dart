@@ -3,7 +3,7 @@ import 'package:z_components/components/z-endereco/z-input-campos-endereco.dart'
 
 class ZInputEndereco extends StatefulWidget {
   final bool campoObrigatorio;
-  final ThemeData themeData;
+  final ThemeData? themeData;
   final TextEditingController cepController;
   final TextEditingController logradouroController;
   final TextEditingController numeroController;
@@ -11,22 +11,22 @@ class ZInputEndereco extends StatefulWidget {
   final TextEditingController bairroController;
   final TextEditingController cidadeController;
   final TextEditingController estadoController;
-  void Function(bool) validacao;
-  final String enderecoCompleto;
+  void Function(bool)? validacao;
+  final String? enderecoCompleto;
   final bool bloquearCampo;
 
   ZInputEndereco(
       {this.campoObrigatorio = false,
-      @required this.themeData,
-      @required this.cepController,
-      @required this.logradouroController,
-      @required this.numeroController,
-      @required this.complementoController,
-      @required this.bairroController,
-      @required this.cidadeController,
-      @required this.estadoController,
+      required this.themeData,
+      required this.cepController,
+      required this.logradouroController,
+      required this.numeroController,
+      required this.complementoController,
+      required this.bairroController,
+      required this.cidadeController,
+      required this.estadoController,
       this.validacao,
-      this.enderecoCompleto,
+      this.enderecoCompleto ="",
       this.bloquearCampo = false});
 
   @override
@@ -34,7 +34,7 @@ class ZInputEndereco extends StatefulWidget {
 }
 
 class _ZInputEnderecoState extends State<ZInputEndereco> {
-  String endereco;
+  String endereco = "";
   String _anterior = "Preencha seu endereço";
 
   @override
@@ -88,14 +88,14 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
     );
   }
 
-  Function _irParaSelecaoEndereco(){
+  Function() _irParaSelecaoEndereco(){
     if(!widget.bloquearCampo){
      return ()async{
        final resultado = await Navigator.push(
            context,
            MaterialPageRoute(
                builder: (context) => new ZInputCamposEndereco(
-                 themeData: widget.themeData,
+                 themeData: widget.themeData!,
                  cepController: widget.cepController,
                  numeroController: widget.numeroController,
                  logradouroController: widget.logradouroController,
@@ -112,6 +112,10 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
          _validarEndereco();
        });
      };
+    }else{
+      return (){
+
+      };
     }
   }
 
@@ -120,7 +124,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
       return Colors.grey;
     } else if (endereco == null ||
         endereco.isEmpty && _anterior.contains("Preencha")) {
-      return widget.themeData.primaryColor;
+      return widget.themeData!.primaryColor;
     } else {
       return Colors.black;
     }
@@ -128,9 +132,9 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
 
   TextStyle _retornaCorTexto() {
       if(widget.bloquearCampo){
-        return widget.themeData.textTheme.bodyText1.copyWith(color: Colors.grey);
+        return widget.themeData!.textTheme.bodyText1!.copyWith(color: Colors.grey);
       }else {
-        return widget.themeData.textTheme.bodyText1.copyWith(
+        return widget.themeData!.textTheme.bodyText1!.copyWith(
             color: Colors.black);
       }
   }
@@ -146,7 +150,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
             children: <TextSpan>[
               new TextSpan(
                 text: "Endereço",
-                style: widget.themeData.textTheme.bodyText1
+                style: widget.themeData!.textTheme.bodyText1!
                     .copyWith(color: Color(0xff999999)),
               ),
               new TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
@@ -164,7 +168,7 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
             children: <TextSpan>[
               new TextSpan(
                 text: "Endereço",
-                style: widget.themeData.textTheme.bodyText1
+                style: widget.themeData!.textTheme.bodyText1!
                     .copyWith(color: Color(0xff999999)),
               ),
             ],
@@ -186,15 +190,15 @@ class _ZInputEnderecoState extends State<ZInputEndereco> {
         widget.bairroController == null ||
         widget.numeroController.text.isEmpty ||
         widget.numeroController == null) {
-      if (widget.validacao != null) widget.validacao(false);
+      if (widget.validacao != null) widget.validacao!(false);
     } else {
-      if (widget.validacao != null) widget.validacao(true);
+      if (widget.validacao != null) widget.validacao!(true);
     }
   }
 
   void _validarEnderecoInicial(){
-    if(widget.enderecoCompleto != null && widget.enderecoCompleto.isNotEmpty){
-      endereco = widget.enderecoCompleto;
+    if(widget.enderecoCompleto != null && widget.enderecoCompleto!.isNotEmpty){
+      endereco = widget.enderecoCompleto!;
     }
   }
 }

@@ -1,7 +1,7 @@
 class ZDynamicModelViewModel {
-  String idModelo;
-  String nome;
-  bool isAtivo;
+  String? idModelo;
+  String? nome;
+  bool? isAtivo;
 
   ZDynamicModelViewModel({
     this.idModelo,

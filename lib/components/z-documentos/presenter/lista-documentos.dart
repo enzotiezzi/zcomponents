@@ -13,14 +13,14 @@ import 'package:z_components/view-model/colaborador-documento-viewmodel.dart';
 import '../../z-alert-dialog.dart';
 
 class ListaDocumentos extends StatefulWidget {
-  String idColaborador;
-  String token;
-  String keyGeniusScan;
-  List<ColaboradorDocumentoViewModel> colaboradorDocumentoViewModel;
-  Function(ColaboradorDocumentoViewModel) retornarListaDocumentos;
-  bool iconeInformativo;
-  String textoInformativo;
-  String tituloTextoInformativo;
+  String? idColaborador;
+  String? token;
+  String? keyGeniusScan;
+  List<ColaboradorDocumentoViewModel>? colaboradorDocumentoViewModel;
+  Function(ColaboradorDocumentoViewModel)? retornarListaDocumentos;
+  bool? iconeInformativo;
+  String? textoInformativo;
+  String? tituloTextoInformativo;
 
   ListaDocumentos(
       {this.idColaborador,
@@ -37,8 +37,8 @@ class ListaDocumentos extends StatefulWidget {
 }
 
 class _ListaDocumentosState extends State<ListaDocumentos> {
-  DialogUtils _dialogUtils;
-  ListaDocumentosView _view;
+  late DialogUtils _dialogUtils;
+  late ListaDocumentosView _view;
   bool _documentoAtualizado = true;
 
   @override
@@ -62,7 +62,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
   }
 
   Widget _retornarDialogInformativo() {
-    if (widget.iconeInformativo) {
+    if (widget.iconeInformativo != null && widget.iconeInformativo!) {
       return new IconButton(
         onPressed: () {
           showDialog(
@@ -87,7 +87,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                           right: 16,
                         ),
                         child: new Text(
-                          widget.tituloTextoInformativo,
+                          widget.tituloTextoInformativo ??"",
                           textAlign: TextAlign.center,
                           style: new TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -102,7 +102,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                       new Divider(
                         height: 1.0,
                       ),
-                      new FlatButton(
+                      new TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -169,13 +169,13 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
                             : BoxDecoration(
                                 image: new DecorationImage(
                                     image:
-                                        new Image.memory(item.imagemDocumento)
+                                        new Image.memory(item.imagemDocumento!)
                                             .image)),
                       ),
                       new Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: new Text(
-                          item.nomeDocumento,
+                          item.nomeDocumento!,
                           style: new TextStyle(
                             color: const Color(0xff000000),
                             fontSize: 14,
@@ -217,7 +217,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
   }
 
   Widget _retornarStatus(int index) {
-    if (_view.listaDocumentos[index].porcentagemStatusPreenchimento < 1) {
+    if (_view.listaDocumentos[index].porcentagemStatusPreenchimento! < 1) {
       return new Container(
         decoration: new ShapeDecoration(
             shape: new CircleBorder(), color: Colors.transparent),
@@ -227,9 +227,9 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
           size: 8,
         ),
       );
-    } else if (_view.listaDocumentos[index].porcentagemStatusPreenchimento >
+    } else if (_view.listaDocumentos[index].porcentagemStatusPreenchimento! >
             0 &&
-        _view.listaDocumentos[index].porcentagemStatusPreenchimento < 100) {
+        _view.listaDocumentos[index].porcentagemStatusPreenchimento! < 100) {
       return new Container(
         decoration:
             new ShapeDecoration(shape: new CircleBorder(), color: Colors.amber),
@@ -252,7 +252,7 @@ class _ListaDocumentosState extends State<ListaDocumentos> {
     }
   }
 
-  Widget _buildIconeStatus(String status) {
+  Widget? _buildIconeStatus(String status) {
     switch (status.toUpperCase()) {
       case DocumentoStatusUtils.APROVADO:
         return new SvgPicture.asset(

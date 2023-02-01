@@ -20,7 +20,7 @@ abstract class IView<T extends StatefulWidget> {
     });
   }
 
-  Future<T> navigate<T>(Widget presenter) {
+  Future navigate<T>(Widget presenter) {
     return Navigator.push(
         state.context, PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
@@ -44,7 +44,7 @@ abstract class IView<T extends StatefulWidget> {
     ));
   }
 
-  Future<T> navigateSale<T>(Widget presenter) {
+  Future navigateSale<T>(Widget presenter) {
     return Navigator.push(
         state.context, PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
@@ -67,7 +67,7 @@ abstract class IView<T extends StatefulWidget> {
     ));
   }
 
-  Future<T> navigateSize<T>(Widget presenter) {
+  Future navigateSize<T>(Widget presenter) {
     return Navigator.push(
         state.context, PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
@@ -84,7 +84,7 @@ abstract class IView<T extends StatefulWidget> {
     ));
   }
 
-  Future<T> navigateFade<T>(Widget presenter) {
+  Future navigateFade<T>(Widget presenter) {
     return Navigator.push(
         state.context, PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
@@ -99,7 +99,7 @@ abstract class IView<T extends StatefulWidget> {
     ));
   }
 
-  Future<T> navigateReplacement<T>(Widget presenter) {
+  Future navigateReplacement<T>(Widget presenter) {
     return Navigator.pushReplacement(
         state.context, PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
@@ -123,15 +123,15 @@ abstract class IView<T extends StatefulWidget> {
     ));
   }
 
-  Future<T> navigateNamed<T>(String route) {
+  Future navigateNamed<T>(String route) {
     return Navigator.pushNamed(state.context, route);
   }
 
-  Future<T> navigateNamedReplacement<T>(String route) {
+  Future navigateNamedReplacement<T>(String route) {
     return Navigator.pushReplacementNamed(state.context, route);
   }
 
-  Future<T> navigatorPushNamedAndRemoveUntil<T>(String route)  {
+  Future navigatorPushNamedAndRemoveUntil<T>(String route)  {
     return Navigator.pushNamedAndRemoveUntil(state.context,route,
             (Route<dynamic> route) => false);
   }

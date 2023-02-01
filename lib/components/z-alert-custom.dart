@@ -6,22 +6,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-platform.dart';
 
 class ZAlertDialogCustom extends StatelessWidget {
-  final Key key;
-  final Widget title;
-  final EdgeInsetsGeometry titlePadding;
-  final TextStyle titleTextStyle;
-  final Widget content;
-  final EdgeInsetsGeometry contentPadding;
-  final TextStyle contentTextStyle;
-  final List<Widget> actions;
-  final Color backgroundColor;
-  final double elevation;
-  final String semanticLabel;
-  final ShapeBorder shape;
-  final List<Widget> actionsCupertino;
-  final ScrollController scrollController;
-  final ScrollController actionScrollController;
-  final ZPlatform zPlatform;
+  final Key? key;
+  final Widget? title;
+  final EdgeInsetsGeometry? titlePadding;
+  final TextStyle? titleTextStyle;
+  final Widget? content;
+  final EdgeInsetsGeometry? contentPadding;
+  final TextStyle? contentTextStyle;
+  final List<Widget>? actions;
+  final Color? backgroundColor;
+  final double? elevation;
+  final String? semanticLabel;
+  final ShapeBorder? shape;
+  final List<Widget>? actionsCupertino;
+  final ScrollController? scrollController;
+  final ScrollController? actionScrollController;
+  final ZPlatform? zPlatform;
 
   ZAlertDialogCustom({
     this.key,
@@ -61,7 +61,7 @@ class ZAlertDialogCustom extends StatelessWidget {
           );
         } else {
           CupertinoAlertDialog(
-            actions: this.actions,
+            actions: this.actions!,
             title: this.title,
             content: this.content,
             key: this.key,
@@ -88,7 +88,7 @@ class ZAlertDialogCustom extends StatelessWidget {
         break;
       case ZPlatform.isIOS:
         CupertinoAlertDialog(
-          actions: this.actions,
+          actions: this.actions!,
           title: this.title,
           content: this.content,
           key: this.key,
@@ -101,6 +101,6 @@ class ZAlertDialogCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return null;
+    return Container();
   }
 }

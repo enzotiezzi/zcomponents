@@ -1,24 +1,24 @@
 class FilterExpression {
-  String propertyName;
+  String? propertyName;
   dynamic value;
-  String operator;
-  String operatorBetween;
+  String? operator;
+  String? operatorBetween;
 
   FilterExpression(
       {this.value, this.propertyName, this.operator, this.operatorBetween});
 }
 
 class OrderByExpression {
-  String propertyName;
-  String orientation;
+  String? propertyName;
+  String? orientation;
 
   OrderByExpression({this.propertyName, this.orientation});
 }
 
 class SearchOptions {
-  Pagination pagination;
-  List<FilterExpression> filters;
-  List<OrderByExpression> orders;
+  late Pagination? pagination;
+  late List<FilterExpression>? filters;
+  late List<OrderByExpression>? orders;
 
   SearchOptions() {
     filters = [];
@@ -29,32 +29,32 @@ class SearchOptions {
   String toHttpParams() {
     Map<String, String> params = {};
 
-    for(var i = 0; i < filters.length; i++) {
-      var filter = filters[i];
+    for(var i = 0; i < filters!.length; i++) {
+      var filter = filters![i];
 
-      params["Filters[$i].propertyName"] = filter.propertyName;
+      params["Filters[$i].propertyName"] = filter.propertyName!;
       params["Filters[$i].value"] = filter.value;
-      params["Filters[$i].operator"] = filter.operator;
-      params["Filters[$i].operatorBetween"] = filter.operatorBetween;
+      params["Filters[$i].operator"] = filter.operator!;
+      params["Filters[$i].operatorBetween"] = filter.operatorBetween!;
     }
 
-    for(var i = 0; i < orders.length; i++) {
-      var order = orders[i];
+    for(var i = 0; i < orders!.length; i++) {
+      var order = orders![i];
 
-      params["Orders[$i].propertyName"] = order.propertyName;
-      params["Orders[$i].orientation"] = order.orientation;
+      params["Orders[$i].propertyName"] = order.propertyName!;
+      params["Orders[$i].orientation"] = order.orientation!;
     }
 
-    params["Pagination.PageNumber"] = pagination.pageNumber.toString();
-    params["Pagination.PageSize"] = pagination.pageSize.toString();
+    params["Pagination.PageNumber"] = pagination!.pageNumber.toString();
+    params["Pagination.PageSize"] = pagination!.pageSize.toString();
 
     return Uri.https("","", params).toString().replaceAll("https:", "");
   }
 }
 
 class Pagination {
-  int pageNumber;
-  int pageSize;
+  late int? pageNumber;
+  late int? pageSize;
 
   Pagination() {
     pageNumber = 1;
@@ -63,12 +63,12 @@ class Pagination {
 }
 
 class PaginationMetaData {
-  int currentPage;
-  int totalPages;
-  int pageSize;
-  int totalCount;
-  bool hasPrevious;
-  bool hasNext;
+  late int? currentPage;
+  late int? totalPages;
+  late int? pageSize;
+  late int? totalCount;
+  late bool? hasPrevious;
+  late bool? hasNext;
 
   PaginationMetaData(
       {this.currentPage,

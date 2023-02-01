@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ZItemTileModuloGestao extends StatefulWidget {
-  final Function onTap;
-  final String nomeModulo;
-  final String status;
-  final bool visibilidade;
+  final Function? onTap;
+  final String? nomeModulo;
+  final String? status;
+  final bool? visibilidade;
 
   ZItemTileModuloGestao(
       {this.onTap, this.nomeModulo, this.status, this.visibilidade = false});
@@ -19,7 +19,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
       return new Text("");
     } else {
       return new Text(
-        widget.nomeModulo,
+        widget.nomeModulo!,
         style: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
@@ -33,7 +33,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
       return Text('');
     } else {
       return Text(
-        widget.status,
+        widget.status!,
         style: TextStyle(
           color: Color(0xFF000000),
           fontSize: 12,
@@ -43,7 +43,7 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
   }
 
   Widget _retornarArrow() {
-    if (widget.visibilidade) {
+    if (widget.visibilidade != null && widget.visibilidade!) {
       return Container();
     } else {
       return Expanded(
@@ -61,7 +61,11 @@ class _ZItemTileModuloGestaoState extends State<ZItemTileModuloGestao> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: (){
+        if(widget.onTap != null){
+          widget.onTap!();
+        }
+      },
       child: IntrinsicHeight(
         child: Container(
           margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),

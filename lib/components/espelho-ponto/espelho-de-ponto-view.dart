@@ -9,31 +9,31 @@ import 'package:z_components/i-view.dart';
 
 class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
 
-  String tituloNotificacao;
-  String mensagemNotificacao;
+  String? tituloNotificacao;
+  String? mensagemNotificacao;
 
   bool showInvalida = false;
 
-  DialogUtils dialog;
+  late DialogUtils dialog;
 
   final keyProgress = GlobalKey<ZProgressDialogState>();
   final keyProgressInicial = GlobalKey<ZProgressDialogState>();
 
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
 
-  ScrollController scrollController;
+  late ScrollController scrollController;
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
   int indexDiaAtual = -1;
 
-  DateTime dataInicioFolha;
-  DateTime dataFimFolha;
-  DateTime dataEspelhoDePonto = DateTime.now();
+  DateTime? dataInicioFolha;
+  DateTime? dataFimFolha;
+  DateTime? dataEspelhoDePonto = DateTime.now();
 
-  String dataInicioPeriodo = "";
-  String dataFimPeriodo = "";
+  String? dataInicioPeriodo = "";
+  String? dataFimPeriodo = "";
 
   ZEspelhoDePontoView(State<ZEspelhoDePonto> state) : super(state);
 
@@ -61,8 +61,8 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
         text;
   }
 
-  String montarDiasSemana(String data) {
-    var date = DateTime.parse(data);
+  String montarDiasSemana(String? data) {
+    var date = DateTime.parse(data!);
 
     var diasSemana = {
       DateTime.sunday: "DOM",
@@ -74,11 +74,11 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
       DateTime.saturday: "SAB",
     };
 
-    return diasSemana[date.weekday];
+    return diasSemana[date.weekday]!;
   }
 
-  String converterParaHoraMinutoString(String data) {
-    var date = DateTime.parse(data);
+  String converterParaHoraMinutoString(String? data) {
+    var date = DateTime.parse(data!);
 
     return "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}";
   }
@@ -86,6 +86,7 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
   @override
   Future<void> afterBuild() {
     // TODO: implement afterBuild
-    return null;
+    throw UnimplementedError();
   }
+
 }

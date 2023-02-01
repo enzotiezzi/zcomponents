@@ -1,5 +1,5 @@
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
@@ -20,10 +20,10 @@ import '../z-item-tile-modulo-adm.dart';
 import '../z-item-tile-usuario-adm.dart';
 
 class DetalheModulo extends StatefulWidget {
-    final bool editarDados;
-    AppUsuarioContaViewModel appUsuarioContaViewModel;
-    bool cliqueEditar;
-    UsuarioContaViewModel usuario;
+    final bool? editarDados;
+    AppUsuarioContaViewModel? appUsuarioContaViewModel;
+    bool? cliqueEditar;
+    UsuarioContaViewModel? usuario;
 
     DetalheModulo(
         {this.editarDados,
@@ -36,7 +36,7 @@ class DetalheModulo extends StatefulWidget {
 }
 
 class _DetalheModuloState extends State<DetalheModulo> {
-    DetalheModuloView _view;
+    late DetalheModuloView _view;
     String textoModificar = '';
 
 
@@ -46,7 +46,6 @@ class _DetalheModuloState extends State<DetalheModulo> {
         _view = DetalheModuloView(this);
         _view.initView();
         super.initState();
-        print(widget.appUsuarioContaViewModel.toMap());
     }
 
     @override
@@ -63,7 +62,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
                         ),
                         onSelected: _escolhaMenuItem,
                         itemBuilder: (context) {
-                            return _view.itensMenu.map((String item) {
+                            return _view.itensMenu!.map((String item) {
                                 return PopupMenuItem<String>(
                                     value: item,
                                     child: Row(
@@ -105,7 +104,8 @@ class _DetalheModuloState extends State<DetalheModulo> {
                                             margin: const EdgeInsets.only(left: 16),
                                             padding: const EdgeInsets.only(top: 8, bottom: 8),
                                             child: new Text(
-                                                widget.appUsuarioContaViewModel.app.nomeExibicao,
+                                                widget.appUsuarioContaViewModel?.app?.nomeExibicao != null ?
+                                                widget.appUsuarioContaViewModel!.app!.nomeExibicao!: "",
                                                 style: new TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w500,
@@ -123,18 +123,18 @@ class _DetalheModuloState extends State<DetalheModulo> {
                                 color: Color(0xffcccccc),
                             ),
                         ),
-                        children: [
+                        childrenBody:
                             new ZItemTileUsuarioAdm(
                                 visibilidade: true,
-                                nomeUsuario: widget.usuario.usuario.nome,
-                                email: widget.usuario.usuario.email,
-                                quantidadeApps: widget.usuario.appLista.length.toString(),
-                                status: widget.usuario.status,
-                                telefone: widget.usuario.usuario.telefone,
+                                nomeUsuario: widget.usuario?.usuario?.nome,
+                                email: widget.usuario?.usuario?.email,
+                                quantidadeApps: widget.usuario?.appLista!.length.toString(),
+                                status: widget.usuario?.status,
+                                telefone: widget.usuario?.usuario?.telefone,
                                 appsVinculados:
-                                _view.listarAppsVinculados(widget.usuario.appLista),
+                                _view.listarAppsVinculados(widget.usuario!.appLista!),
                             ),
-                        ],
+
                     ),
                 ),
                 new Expanded(child: _buildCampos()),
@@ -144,21 +144,21 @@ class _DetalheModuloState extends State<DetalheModulo> {
     }
 
     Widget _montarCampoPerfil() {
-        if (widget.editarDados) {
+        if (widget.editarDados != null && widget.editarDados!) {
             return ZCollection(
                 key: _view.keyPerfil,
                 filtroPrincipal: new FiltroCampo(key: "Nome", value: "Nome"),
                 titulo: "Perfil",
-                lista: _view.listaPerfis,
+                lista: _view.listaPerfis!,
                 themeData: Theme.of(context),
                 valorPadrao: _view.perfilController.text,
                 onChange: (value) {
                     if (value != null) {
-                        widget.appUsuarioContaViewModel.perfil.nome = value.titulo;
-                        widget.appUsuarioContaViewModel.perfil.idApp =
+                        widget.appUsuarioContaViewModel?.perfil?.nome = value.titulo;
+                        widget.appUsuarioContaViewModel?.perfil?.idApp =
                             value.chaveSecundaria;
-                        widget.appUsuarioContaViewModel.perfil.idPerfil = value.chave;
-                        widget.appUsuarioContaViewModel.idPerfil = value.chave;
+                        widget.appUsuarioContaViewModel?.perfil?.idPerfil = value.chave;
+                        widget.appUsuarioContaViewModel?.idPerfil = value.chave;
                         setState(() {
                             _view.alterouPerfil = true;
                         });
@@ -175,11 +175,11 @@ class _DetalheModuloState extends State<DetalheModulo> {
                     searchOptions.orders = [order];
                     var lista = await _view.buscarPerfis(searchOptions);
                     setState(() {
-                        _view.keyPerfil.currentState.atualizarLista(lista);
+                        _view.keyPerfil.currentState?.atualizarLista(lista);
                     });
                 },
                 onScroll: (filter, listaAnterior) async {
-                    if (_view.paginationMetaData.hasNext) {
+                    if (_view.paginationMetaData.hasNext!) {
                         SearchOptions searchOptions = new SearchOptions();
                         if (filter[0].value.isNotEmpty) {
                             searchOptions.filters = filter;
@@ -188,12 +188,12 @@ class _DetalheModuloState extends State<DetalheModulo> {
                         order.propertyName = "Nome";
                         order.orientation = "ASC";
                         searchOptions.orders = [order];
-                        searchOptions.pagination.pageNumber =
-                        _view.paginationMetaData.currentPage++;
+                        searchOptions.pagination?.pageNumber =
+                        _view.paginationMetaData.currentPage! +1;
                         var lista = await _view.buscarPerfis(searchOptions);
                         lista = listaAnterior + lista;
                         setState(() {
-                            _view.keyPerfil.currentState.atualizarLista(lista);
+                            _view.keyPerfil.currentState?.atualizarLista(lista);
                         });
                     }
                 },
@@ -229,9 +229,8 @@ class _DetalheModuloState extends State<DetalheModulo> {
                     child: new Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                            new RaisedButton(
-                                onPressed: _view.editarOnPressed(),
-                                disabledColor: Colors.grey,
+                            new ElevatedButton(
+                                onPressed: _view.editarOnPressed,
                                 child: new Container(
                                     child: new Row(
                                         mainAxisSize: MainAxisSize.min,
@@ -243,17 +242,24 @@ class _DetalheModuloState extends State<DetalheModulo> {
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .button
-                                                        .copyWith(color: Colors.white),
+                                                        ?.copyWith(color: Colors.white),
                                                 ),
                                             )
                                         ],
                                     ),
                                 ),
-                                color: Theme.of(context).accentColor,
-                                shape: new RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(30),
+                                style: new ButtonStyle(
+                                    backgroundColor:
+                                    MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
+                                    shadowColor:
+                                    MaterialStateProperty.all<Color>(Colors.transparent),
+                                    padding: MaterialStateProperty.all(EdgeInsets.only(
+                                      left: 10,right: 10)),
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                        new RoundedRectangleBorder(
+                                            borderRadius: new BorderRadius.circular(30.0),
+                                        )),
                                 ),
-                                padding: const EdgeInsets.only(left: 10, right: 10),
                             )
                         ],
                     ),
@@ -304,7 +310,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
         );
     }
     String _definirTexto() {
-        if (widget.appUsuarioContaViewModel.status == "Ativo") {
+        if (widget.appUsuarioContaViewModel?.status == "Ativo") {
             return "Revogar";
         } else {
             return "Ativar";
@@ -340,7 +346,7 @@ class _DetalheModuloState extends State<DetalheModulo> {
                 color: Theme.of(context).primaryColor,
             );
         } else {
-            if (widget.appUsuarioContaViewModel.status == "Ativo") {
+            if (widget.appUsuarioContaViewModel?.status == "Ativo") {
                 return Icon(
                     Icons.block_flipped,
                     color: Colors.red,

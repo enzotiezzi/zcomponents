@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 
 class Conta {
-  String idConta;
-  String nome;
-  String nomeFantasia;
-  Uint8List logo;
-  String corPrimaria;
-  String corSecundaria;
+  String? idConta;
+  String? nome;
+  String? nomeFantasia;
+  Uint8List? logo;
+  String? corPrimaria;
+  String? corSecundaria;
 
   Conta(
       {this.nome,

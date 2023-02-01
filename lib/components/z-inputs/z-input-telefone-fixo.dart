@@ -5,15 +5,15 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputTelefoneFixo extends StatefulWidget {
-  final Key key;
-  FocusNode telefoneFixoFocus;
-  var controllerTelefoneFixo = new TextEditingController();
-  FocusNode proximoFocus;
-  ValueChanged<String> onChange;
-  void Function(bool) validacao;
-  bool enabled;
-  final bool campoObrigatorio;
-  final ThemeData themeData;
+  final Key? key;
+  FocusNode? telefoneFixoFocus;
+  TextEditingController? controllerTelefoneFixo;
+  FocusNode? proximoFocus;
+  ValueChanged<String>? onChange;
+  void Function(bool)? validacao;
+  bool? enabled;
+  final bool? campoObrigatorio;
+  final ThemeData? themeData;
 
   ZInputTelefoneFixo(
       {this.key,
@@ -33,7 +33,7 @@ class ZInputTelefoneFixo extends StatefulWidget {
 
 class _ZInputTelefoneFixoState extends State<ZInputTelefoneFixo> {
   int countTelefoneFixo = 0;
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
   String telefoneFixo = "";
 
   @override
@@ -50,13 +50,13 @@ class _ZInputTelefoneFixoState extends State<ZInputTelefoneFixo> {
         "Telefone",
         TextInputType.number,
             () {
-          FocusScope.of(context).requestFocus(widget.telefoneFixoFocus);
+
         },
         widget.telefoneFixoFocus,
         widget.controllerTelefoneFixo,
         widget.proximoFocus,
             (text) {
-          if (widget.onChange != null) widget.onChange(text);
+          if (widget.onChange != null) widget.onChange!(text);
 
           telefoneFixo = text;
           countTelefoneFixo = 0;
@@ -74,16 +74,16 @@ class _ZInputTelefoneFixoState extends State<ZInputTelefoneFixo> {
   }
 
   void initTelefone() {
-    widget.telefoneFixoFocus.addListener(() {
-      if (!widget.telefoneFixoFocus.hasFocus && countTelefoneFixo == 0 && telefoneFixo != "") {
+    widget.telefoneFixoFocus?.addListener(() {
+      if (!widget.telefoneFixoFocus!.hasFocus && countTelefoneFixo == 0 && telefoneFixo != "") {
         _validarTelefone();
       }
     });
   }
 
   void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
+      BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
+    currentFocus?.unfocus();
     if (nextFocus != null) {
       FocusScope.of(context).requestFocus(nextFocus);
     }
@@ -158,9 +158,9 @@ class _ZInputTelefoneFixoState extends State<ZInputTelefoneFixo> {
     if (telefoneFixo.length < 14 && telefoneFixo != "") {
       _dialogUtils.showAlertDialogNewAviso(
           "Telefone Inválido!", "Por Favor, Termine de digitar o seu Telefone.");
-      if (widget.validacao != null) widget.validacao(false);
+      if (widget.validacao != null) widget.validacao!(false);
     } else {
-      if (widget.validacao != null) widget.validacao(true);
+      if (widget.validacao != null) widget.validacao!(true);
     }
   }
 }

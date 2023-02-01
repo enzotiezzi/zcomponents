@@ -5,15 +5,15 @@ import 'package:z_components/styles/main-style.dart';
 
 class ZInputCNPJ extends StatefulWidget {
 
-  final Key key;
-  FocusNode cnpjFocus;
-  var controllerCNPJ = new TextEditingController();
-  FocusNode proximoFocus;
-  ValueChanged<String> onChange;
-  void Function(bool) validacao;
-  bool enabled;
-  final bool campoObrigatorio;
-  final ThemeData themeData;
+  final Key? key;
+  FocusNode? cnpjFocus;
+  TextEditingController? controllerCNPJ ;
+  FocusNode? proximoFocus;
+  ValueChanged<String>? onChange;
+  void Function(bool)? validacao;
+  bool? enabled;
+  final bool? campoObrigatorio;
+  final ThemeData? themeData;
 
   ZInputCNPJ(
       {this.key,
@@ -34,9 +34,9 @@ class ZInputCNPJ extends StatefulWidget {
 class _ZInputCNPJState extends State<ZInputCNPJ> {
 
   int countcnpj = 1;
-  DialogUtils _dialogUtils;
-  String cnpj;
-  bool valideCnpj;
+  late DialogUtils _dialogUtils;
+  late String? cnpj;
+  bool? valideCnpj;
 
   @override
   void initState() {
@@ -52,17 +52,17 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
         "CNPJ",
         TextInputType.number,
             () {
-          FocusScope.of(context).requestFocus(widget.cnpjFocus);
+
         },
         widget.cnpjFocus,
         widget.controllerCNPJ,
         widget.proximoFocus,
             (text) {
-              if (widget.onChange != null) widget.onChange(text);
+              if (widget.onChange != null) widget.onChange!(text);
 
               cnpj = text;
               countcnpj = 0;
-          if (cnpj.length == 18) {
+          if (cnpj!.length == 18) {
             _fieldFocusChange(context, widget.cnpjFocus,
                 widget.proximoFocus);
           }
@@ -74,8 +74,8 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
   }
 
   void initNome() {
-    widget.cnpjFocus.addListener(() {
-      if (!widget.cnpjFocus.hasFocus &&
+    widget.cnpjFocus?.addListener(() {
+      if (!widget.cnpjFocus!.hasFocus &&
           countcnpj == 0 &&
           cnpj != "") {
         _validarCNPJ();
@@ -83,8 +83,8 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
     });
   }
   void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
+      BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
+    currentFocus?.unfocus();
     if (nextFocus != null) {
       FocusScope.of(context).requestFocus(nextFocus);
     }
@@ -95,10 +95,10 @@ class _ZInputCNPJState extends State<ZInputCNPJ> {
       valideCnpj = false;
       _dialogUtils.showAlertDialogNewAviso(
           "CNPJ Inválido!", "Por Favor insira um CNPJ válido.");
-      widget.validacao(false);
+      widget.validacao!(false);
     } else {
       valideCnpj = true;
-      widget.validacao(true);
+      widget.validacao!(true);
     }
   }
 

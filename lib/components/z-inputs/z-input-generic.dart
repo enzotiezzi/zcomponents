@@ -3,23 +3,23 @@ import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class ZInputGeneric extends StatefulWidget {
-  final Key key;
-  final ThemeData themeData;
-  String hintText;
-  String textMask;
-  String titulo;
-  bool comMascara;
-  bool barrarEntradaDeNumeros;
-  TextInputType tipoTeclado;
-  FocusNode inputPadraoFocus;
-  ValueChanged<String> onChange;
-  bool obscureText;
-  bool enabled;
-  final bool campoObrigatorio;
-  int maxLength;
+  final Key? key;
+  final ThemeData? themeData;
+  String? hintText;
+  String? textMask;
+  String? titulo;
+  bool? comMascara;
+  bool? barrarEntradaDeNumeros;
+  TextInputType? tipoTeclado;
+  FocusNode? inputPadraoFocus;
+  ValueChanged<String>? onChange;
+  bool? obscureText;
+  bool? enabled;
+  final bool? campoObrigatorio;
+  int? maxLength;
 
-  var controllerInputPadrao = new TextEditingController();
-  FocusNode proximoFocus;
+  TextEditingController? controllerInputPadrao;
+  FocusNode? proximoFocus;
 
   ZInputGeneric(
       {this.key,
@@ -56,7 +56,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
       color: Colors.white,
       child: GestureDetector(
         onTap: () {
-          FocusScope.of(context).requestFocus(widget.inputPadraoFocus);
+
         },
         child: new Column(
           children: <Widget>[
@@ -81,17 +81,17 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             keyboardType: widget.tipoTeclado,
                             textCapitalization: TextCapitalization.words,
                             focusNode: widget.inputPadraoFocus,
-                            obscureText: widget.obscureText,
+                            obscureText: widget.obscureText!,
                             controller: widget.controllerInputPadrao,
-                            cursorColor: widget.themeData.primaryColor,
-                            style: widget.themeData.textTheme.bodyText1
-                                .copyWith(
+                            cursorColor: widget.themeData!.primaryColor,
+                            style: widget.themeData!.textTheme.bodyText1
+                                !.copyWith(
                                     color: corTexto(
-                                        widget.themeData, widget.enabled)),
+                                        widget.themeData!, widget.enabled!)),
                             inputFormatters: _retornaListaDeFormatacoes(),
                             onSubmitted: (text) {
                               if (widget.inputPadraoFocus != null)
-                                widget.inputPadraoFocus.unfocus();
+                                widget.inputPadraoFocus!.unfocus();
                               if (widget.proximoFocus != null) {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
@@ -99,7 +99,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             },
                             decoration: InputDecoration(
                               hintText: widget.hintText,
-                              hintStyle: widget.themeData.textTheme.bodyText1
+                              hintStyle: widget.themeData!.textTheme.bodyText1!
                                   .copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
@@ -107,12 +107,12 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: widget.themeData.primaryColor),
+                                    color: widget.themeData!.primaryColor),
                               ),
                             ),
                             onChanged: (text) {
                               if (widget.onChange != null)
-                                widget.onChange(text);
+                                widget.onChange!(text);
                             },
                           )
                         : new TextField(
@@ -121,17 +121,17 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             keyboardType: widget.tipoTeclado,
                             textCapitalization: TextCapitalization.words,
                             focusNode: widget.inputPadraoFocus,
-                            obscureText: widget.obscureText,
+                            obscureText: widget.obscureText!,
                             controller: widget.controllerInputPadrao,
-                            cursorColor: widget.themeData.primaryColor,
-                            style: widget.themeData.textTheme.bodyText1
-                                .copyWith(
+                            cursorColor: widget.themeData!.primaryColor,
+                            style: widget.themeData!.textTheme.bodyText1
+                                !.copyWith(
                                     color: corTexto(
-                                        widget.themeData, widget.enabled)),
+                                        widget.themeData!, widget.enabled!)),
                             maxLengthEnforcement: MaxLengthEnforcement.none,
                             onSubmitted: (text) {
                               if (widget.inputPadraoFocus != null)
-                                widget.inputPadraoFocus.unfocus();
+                                widget.inputPadraoFocus?.unfocus();
                               if (widget.proximoFocus != null) {
                                 FocusScope.of(context)
                                     .requestFocus(widget.proximoFocus);
@@ -143,20 +143,20 @@ class _ZInputGenericState extends State<ZInputGeneric> {
                             ],
                             decoration: InputDecoration(
                               hintText: widget.hintText,
-                              hintStyle: widget.themeData.textTheme.bodyText1
-                                  .copyWith(color: Color(0xFFC7C7C7)),
+                              hintStyle: widget.themeData!.textTheme.bodyText1
+                                  !.copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: widget.themeData.primaryColor),
+                                    color: widget.themeData!.primaryColor),
                               ),
                             ),
                             onChanged: (text) {
                               if (widget.onChange != null)
-                                widget.onChange(text);
+                                widget.onChange!(text);
                             },
                           ),
                   ),
@@ -170,7 +170,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
   }
 
   List<TextInputFormatter> _retornaListaDeFormatacoes() {
-    if(widget.barrarEntradaDeNumeros){
+    if(widget.barrarEntradaDeNumeros!){
       return [
         new FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),
         new MaskTextInputFormatter(
@@ -192,21 +192,21 @@ class _ZInputGenericState extends State<ZInputGeneric> {
 
   Color corTexto(ThemeData themeData, bool enabled) {
     if (enabled) {
-      return themeData.textTheme.bodyText1.color;
+      return themeData.textTheme.bodyText1!.color!;
     } else
       return Colors.grey;
   }
 
   Widget _returnRequiredField() {
-    if (widget.campoObrigatorio) {
+    if (widget.campoObrigatorio!) {
       return new RichText(
         maxLines: 2,
         text: TextSpan(
           children: <TextSpan>[
             new TextSpan(
               text: "${widget.titulo}",
-              style: widget.themeData.textTheme.bodyText1
-                  .copyWith(color: Color(0xff999999)),
+              style: widget.themeData!.textTheme.bodyText1
+                  !.copyWith(color: Color(0xff999999)),
             ),
             TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
           ],
@@ -218,7 +218,7 @@ class _ZInputGenericState extends State<ZInputGeneric> {
           text: TextSpan(children: <TextSpan>[
             new TextSpan(
               text: "${widget.titulo}",
-              style: widget.themeData.textTheme.bodyText1
+              style: widget.themeData!.textTheme.bodyText1!
                   .copyWith(color: Color(0xff999999)),
             )
           ]));

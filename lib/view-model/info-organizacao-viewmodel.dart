@@ -1,24 +1,24 @@
 class InfoOrganizacaoViewModel {
-  String idConta;
-  String nome;
-  String nomeFantasia;
-  String cpfOuCNPJ;
-  String tipoPessoa;
-  String dataCriacao;
-  String logradouro;
-  String cep;
-  String numero;
-  String bairro;
-  String complemento;
-  String cidade;
-  String estado;
-  String telefone;
-  String email;
-  bool ativo;
-  String codigoAtivacao;
-  String corPrimaria;
-  String corSecundaria;
-  String context;
+  String? idConta;
+  String? nome;
+  String? nomeFantasia;
+  String? cpfOuCNPJ;
+  String? tipoPessoa;
+  String? dataCriacao;
+  String? logradouro;
+  String? cep;
+  String? numero;
+  String? bairro;
+  String? complemento;
+  String? cidade;
+  String? estado;
+  String? telefone;
+  String? email;
+  bool? ativo;
+  String? codigoAtivacao;
+  String? corPrimaria;
+  String? corSecundaria;
+  String? context;
 
   InfoOrganizacaoViewModel(
       {this.idConta,

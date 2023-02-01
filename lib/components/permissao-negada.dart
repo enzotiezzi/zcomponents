@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 
 class PermissaoNegada extends StatefulWidget {
-  String textoPermissao;
-  String caminhoImagem;
-  Function onPressed;
+  String? textoPermissao;
+  String? caminhoImagem;
+  Function? onPressed;
 
   PermissaoNegada(
-      {Key key, this.caminhoImagem, this.textoPermissao, this.onPressed})
+      {Key? key, this.caminhoImagem, this.textoPermissao, this.onPressed})
       : super(key: key);
 
   @override
@@ -37,12 +37,12 @@ class _PermissaoNegadaState extends State<PermissaoNegada> {
         children: [
           new Container(
             margin: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
-            child: Image.asset(widget.caminhoImagem),
+            child: Image.asset(widget.caminhoImagem!),
           ),
           new Container(
             margin: EdgeInsets.only(right: 16.0, left: 16.0),
             child: new Text(
-              widget.textoPermissao,
+              widget.textoPermissao!,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
@@ -75,7 +75,7 @@ class _PermissaoNegadaState extends State<PermissaoNegada> {
                   borderRadius: new BorderRadius.circular(30.0),
                 )),
               ),
-              onPressed: widget.onPressed,
+              onPressed: (){widget.onPressed!();},
               child: new Text(
                 "Ir para configurações",
                 style: new TextStyle(fontSize: 14),

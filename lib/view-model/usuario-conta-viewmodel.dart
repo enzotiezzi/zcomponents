@@ -3,16 +3,16 @@ import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
 import 'app-usuario-conta-viewmodel.dart';
 
 class UsuarioContaViewModel {
-  String idConta;
-  String idUsuario;
-  List<AppUsuarioContaViewModel> appLista;
-  String status;
-  bool ativo;
-  bool contaLogada;
-  String dataVinculo;
-  String perfil;
-  UsuarioAdmViewModel usuario;
-  int appQtde;
+  String? idConta;
+  String? idUsuario;
+  List<AppUsuarioContaViewModel>? appLista;
+  String? status;
+  bool? ativo;
+  bool? contaLogada;
+  String? dataVinculo;
+  String? perfil;
+  UsuarioAdmViewModel? usuario;
+  int? appQtde;
 
   UsuarioContaViewModel(
       {this.idConta,
@@ -34,7 +34,7 @@ class UsuarioContaViewModel {
             ? (json['appLista'] as List)
                 .map((x) => AppUsuarioContaViewModel.fromJson(x))
                 .toList()
-            : List(),
+            : [],
         status: json["status"],
         ativo: json["ativo"],
         contaLogada: json["contaLogada"],
@@ -56,7 +56,7 @@ class UsuarioContaViewModel {
       "contaLogada":this.contaLogada,
       "dataVinculo":this.dataVinculo,
       "perfil":this.perfil,
-      "usuario":this.usuario.toMap(),
+      "usuario":this.usuario?.toMap(),
       "appQtde":this.appQtde
 
     };

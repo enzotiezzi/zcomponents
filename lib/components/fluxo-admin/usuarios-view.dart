@@ -14,13 +14,13 @@ import '../../i-view.dart';
 class UsuariosView extends IView<Usuarios> {
   UsuariosView(State<Usuarios> state) : super(state);
 
-  IContasService contasService;
-  List<UsuarioContaViewModel> listaUsuarios = [];
+  late IContasService contasService;
+  List<UsuarioContaViewModel>? listaUsuarios = [];
   GlobalKey<ZSearchBarState> keySearchBar = new GlobalKey();
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
-  ScrollController scrollController;
-  DialogUtils _dialogUtils;
+  late ScrollController scrollController;
+  late DialogUtils _dialogUtils;
 
   @override
   Future<void> afterBuild() {
@@ -44,18 +44,18 @@ class UsuariosView extends IView<Usuarios> {
   }
 
   Future<void> buscarListaUsuarios(SearchOptions searchOptions,
-      {bool scrollPage}) async {
+      {bool? scrollPage}) async {
     var res = await contasService.listarUsuariosConta(searchOptions);
 
     if (res != null) {
       if (scrollPage != null) {
-        listaUsuarios = listaUsuarios + res.body;
+        listaUsuarios = listaUsuarios! + res.body!;
       } else {
         listaUsuarios = res.body;
       }
       if (state.mounted) {
         state.setState(() {
-          paginationMetaData = res.paginationMetaData;
+          paginationMetaData = res.paginationMetaData!;
           this.searchOptions = searchOptions;
         });
       }
@@ -64,12 +64,12 @@ class UsuariosView extends IView<Usuarios> {
 
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
-      if (this.paginationMetaData.hasNext) {
+      if (this.paginationMetaData.hasNext!) {
         OrderByExpression order = new OrderByExpression();
         order.propertyName = "Usuario.Nome";
         order.orientation = "ASC";
         searchOptions.orders = [order];
-        this.searchOptions.pagination.pageNumber++;
+        this.searchOptions.pagination!.pageNumber! +1;
         await buscarListaUsuarios(this.searchOptions, scrollPage: true);
       }
     }

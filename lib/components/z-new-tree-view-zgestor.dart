@@ -1,14 +1,15 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/view-model/item-busca-viewmodel.dart';
 import 'package:z_components/view-model/z-tree-view-viewmodel.dart';
 
 class ZNewTreeViewGestor extends StatefulWidget {
-  List<ZTreeViewViewModel> lisTree;
-  void Function(ZTreeViewViewModel) onTap;
-  Color colorArrow;
-  bool todosInicialmenteAbertos;
+  List<ZTreeViewViewModel>? lisTree;
+  void Function(ZTreeViewViewModel)? onTap;
+  Color? colorArrow;
+  bool? todosInicialmenteAbertos;
 
   ZNewTreeViewGestor({this.lisTree, this.onTap,this.colorArrow: const Color(0xff801F92),this.todosInicialmenteAbertos: false});
 
@@ -17,22 +18,22 @@ class ZNewTreeViewGestor extends StatefulWidget {
 }
 
 class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProviderStateMixin {
-  List<ZTreeViewViewModel> treeViewList = new List();
-  List<List<GlobalKey>> listaKey = new List<List<GlobalKey>>();
-  bool testeAki = false;
-  int testeRecursao = 0;
-  List<String> listaId = new List();
-  List<ItemBuscaViewModel> listaBusca = new List();
-  List<ItemBuscaViewModel> listaBuscaFiltrada = new List();
-  List<String> listaPossiveisId = new List();
-  double size = 0.0;
-  bool select = false;
-  double sizeEdit = 22.0;
+  List<ZTreeViewViewModel>? treeViewList = [];
+  List<List<GlobalKey>>? listaKey = [];
+  bool? testeAki = false;
+  int? testeRecursao = 0;
+  List<String>? listaId = [];
+  List<ItemBuscaViewModel>? listaBusca = [];
+  List<ItemBuscaViewModel>? listaBuscaFiltrada = [];
+  List<String>? listaPossiveisId = [];
+  double? size = 0.0;
+  bool? select = false;
+  double? sizeEdit = 22.0;
   GlobalKey containerKey = new GlobalKey<_ZNewTreeViewGestorState>();
-  int profArvore = 0;
-  int auxProfArvore = 0;
-  int contadorBuscas = 0;
-  bool comecouBusca = false;
+  int? profArvore = 0;
+  int? auxProfArvore = 0;
+  int? contadorBuscas = 0;
+  bool? comecouBusca = false;
 
   @override
   void initState() {
@@ -55,23 +56,23 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
   }
 
   List<Widget> listaNovo() {
-    if (widget.lisTree.length == 0 || widget.lisTree == null) {
-      return new List<Widget>();
+    if (widget.lisTree!.length == 0 || widget.lisTree == null) {
+      return [];
     }
 
     int j = 0;
 
-    List<GlobalKey> lista = new List<GlobalKey>();
+    List<GlobalKey> lista = [];
 
-    for (int i = 0; i < treeViewList.length; i++) {
-      treeViewList[i].index = 0;
+    for (int i = 0; i < treeViewList!.length; i++) {
+      treeViewList![i].index = 0;
       GlobalKey key = new GlobalKey<_ZNewTreeViewGestorState>();
       lista.add(key);
     }
-    listaKey.add(lista);
+    listaKey?.add(lista);
 
-    List<Widget> list = new List();
-    treeViewList.forEach((item) {
+    List<Widget> list = [];
+    treeViewList?.forEach((item) {
       item.indexAuxiliar = j;
 
       list.add(_itemListaNovo(item, j));
@@ -82,13 +83,13 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
   }
 
   Widget _itemListaNovo(item, j) {
-    if (!listaId.contains(item.idNivel) && listaId.length != 0) {
+    if (!listaId!.contains(item.idNivel) && listaId!.length != 0) {
       return new Container();
     } else if (item.filhos.length == 0) {
       return new GestureDetector(
         onTap: () {
           if (widget.onTap != null) {
-            var res = widget.onTap(item);
+            var res = widget.onTap!(item);
           }
         },
         child: new Container(
@@ -97,14 +98,14 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
               animatedWidgetFollowingHeader: (item.filhos.length != 0)
                   ? new Icon(Icons.arrow_drop_down)
                   : new Container(),
-              initiallyExpanded: widget.todosInicialmenteAbertos,
+              initiallyExpanded: widget.todosInicialmenteAbertos!,
               borderColorStart: Colors.grey.withOpacity(0.3),
               borderColorEnd: Colors.grey.withOpacity(0.3),
               bottomBorderOn: true,
               onExpansionChanged: (bool value) {
-                for (int i = 0; i < listaKey[0].length; i++) {
+                for (int i = 0; i < listaKey![0].length; i++) {
                   if (i != item.indexAuxiliar) {
-                    listaKey[0][i] = new GlobalKey<_ZNewTreeViewGestorState>();
+                    listaKey![0][i] = new GlobalKey<_ZNewTreeViewGestorState>();
                   } else {}
                 }
                 setState(() {
@@ -121,7 +122,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                 child: new InkWell(
                   onTap: () {
                     if (widget.onTap != null) {
-                      var res = widget.onTap(item);
+                      var res = widget.onTap!(item);
                     }
                   },
                   child:
@@ -179,17 +180,17 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                   ),
                 )
               ),
-              children: <Widget>[
+              childrenBody:
                 _definirFilho(item, 1.0, 0),
-              ],
+
             )),
       );
     } else {
       return new Container(
           color: Colors.white,
           child: new ConfigurableExpansionTile(
-            key: listaKey[0][j],
-            initiallyExpanded: widget.todosInicialmenteAbertos,
+            key: listaKey![0][j],
+            initiallyExpanded: widget.todosInicialmenteAbertos!,
             animatedWidgetFollowingHeader: (item.filhos.length != 0)
                 ? new Container(
               margin: const EdgeInsets.symmetric(horizontal: 14),
@@ -200,9 +201,9 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
             borderColorEnd: Colors.grey.withOpacity(0.3),
             bottomBorderOn: true,
             onExpansionChanged: (bool value) {
-              for (int i = 0; i < listaKey[0].length; i++) {
+              for (int i = 0; i < listaKey![0].length; i++) {
                 if (i != item.indexAuxiliar) {
-                  listaKey[0][i] = new GlobalKey<_ZNewTreeViewGestorState>();
+                  listaKey![0][i] = new GlobalKey<_ZNewTreeViewGestorState>();
                 } else {}
               }
               setState(() {
@@ -217,7 +218,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
 
               if (item.filhos.length == 0) {
                 if (widget.onTap != null) {
-                  var res = widget.onTap(item);
+                  var res = widget.onTap!(item);
                 }
               }
             },
@@ -260,9 +261,8 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                 ),
               ),
             ),
-            children: <Widget>[
+            childrenBody:
               _definirFilho(item, 1.0, 0),
-            ],
           ));
     }
   }
@@ -275,7 +275,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
     }
   }
 
-  IconData definirIconeExpansionTile(item) {
+  IconData? definirIconeExpansionTile(item) {
     if (item.filhos.length != 0) {
       if (item.aberto == null || item.aberto == true) {
         return Icons.arrow_drop_down;
@@ -301,29 +301,29 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
   }
 
   List<Widget> lista2Novo(
-      {ZTreeViewViewModel nivel, double margin, int posicaoAnterior}) {
+      {ZTreeViewViewModel? nivel, double? margin, int? posicaoAnterior}) {
     int p = 0;
-    List<GlobalKey> lista = new List<GlobalKey>();
+    List<GlobalKey> lista = [];
     int total;
 
-    total = testeRecursao + 1;
+    total = testeRecursao! + 1;
 
-    testeRecursao++;
+    testeRecursao! +1;
 
-    if (nivel.filhos.length == 0) {
+    if (nivel!.filhos!.length == 0) {
       GlobalKey key = new GlobalKey<_ZNewTreeViewGestorState>();
       lista.add(key);
     }
-    for (int i = 0; i < nivel.filhos.length; i++) {
+    for (int i = 0; i < nivel!.filhos!.length; i++) {
       GlobalKey key = new GlobalKey<_ZNewTreeViewGestorState>();
       lista.add(key);
     }
-    listaKey.add(lista);
+    listaKey?.add(lista);
 
     var j = margin;
-    j++;
-    List<Widget> list = new List();
-    nivel.filhos.forEach((item) {
+    j! +1;
+    List<Widget> list = [];
+    nivel.filhos?.forEach((item) {
       item.indexAuxiliar = p;
       if (testeAki == false) {
         item.index = total;
@@ -335,13 +335,13 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
   }
 
   Widget _itemLista(item, margin, p, j) {
-    if (!listaId.contains(item.idNivel) && listaId.length != 0) {
+    if (!listaId!.contains(item.idNivel) && listaId!.length != 0) {
       return new Container();
     } else if (item.filhos.length == 0) {
       return new GestureDetector(
         onTap: () {
           if (widget.onTap != null) {
-            var res = widget.onTap(item);
+            var res = widget.onTap!(item);
           }
         },
         child: new Container(
@@ -349,7 +349,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
             child: new ConfigurableExpansionTile(
               borderColorStart: Colors.grey.withOpacity(0.3),
               borderColorEnd: definirCorExpansionTile(item),
-              initiallyExpanded: widget.todosInicialmenteAbertos,
+              initiallyExpanded: widget.todosInicialmenteAbertos!,
               animatedWidgetFollowingHeader: (item.filhos.length != 0)
                   ? new Container(
                 margin: const EdgeInsets.symmetric(horizontal: 14),
@@ -361,7 +361,7 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                 child: new InkWell(
                   onTap: () {
                     if (widget.onTap != null) {
-                      var res = widget.onTap(item);
+                      var res = widget.onTap!(item);
                     }
                   },
                   child: new Container(
@@ -412,17 +412,16 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                   ),
                 )
               ),
-              children: <Widget>[
+              childrenBody:
                 _definirFilho(item, j, item.index),
-              ],
             )),
       );
     } else
       return new Container(
           color: Colors.white,
           child: new ConfigurableExpansionTile(
-            key: listaKey[item.index][p],
-            initiallyExpanded: widget.todosInicialmenteAbertos,
+            key: listaKey![item.index][p],
+            initiallyExpanded: widget.todosInicialmenteAbertos!,
             animatedWidgetFollowingHeader: (item.filhos.length != 0)
                 ? new Container(
               margin: const EdgeInsets.symmetric(horizontal: 14),
@@ -433,9 +432,9 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
             borderColorEnd: definirCorExpansionTile(item),
             bottomBorderOn: true,
             onExpansionChanged: (bool value) {
-              for (int i = 0; i < listaKey[item.index].length; i++) {
+              for (int i = 0; i < listaKey![item.index].length; i++) {
                 if (i != item.indexAuxiliar) {
-                  listaKey[item.index][i] = new GlobalKey<_ZNewTreeViewGestorState>();
+                  listaKey![item.index][i] = new GlobalKey<_ZNewTreeViewGestorState>();
                 } else {}
               }
               setState(() {
@@ -485,21 +484,20 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
                 ),
               ),
             ),
-            children: <Widget>[
+            childrenBody:
               _definirFilho(item, j, item.index),
-            ],
           ));
   }
 
   void montarListaPossiveisItens(String text) {
-    listaPossiveisId.clear();
-    listaId.clear();
+    listaPossiveisId?.clear();
+    listaId?.clear();
     if (text.length == 0) {
       return;
     }
-    for (int i = 0; i < listaBusca.length; i++) {
-      if (listaBusca[i].nome.toLowerCase().contains(text.toLowerCase())) {
-        listaPossiveisId.add(listaBusca[i].idAmbiente);
+    for (int i = 0; i < listaBusca!.length; i++) {
+      if (listaBusca![i].nome!.toLowerCase().contains(text.toLowerCase())) {
+        listaPossiveisId?.add(listaBusca![i].idAmbiente!);
       }
     }
     containerKey = new GlobalKey<_ZNewTreeViewGestorState>();
@@ -507,24 +505,24 @@ class _ZNewTreeViewGestorState extends State<ZNewTreeViewGestor> with TickerProv
   }
 
   void limparBoolsFilhosTree(
-      {ZTreeViewViewModel ambienteHierarquicoViewModel}) {
+      {ZTreeViewViewModel? ambienteHierarquicoViewModel}) {
     var item = ambienteHierarquicoViewModel;
-    for (int i = 0; i < item.filhos.length; i++) {
-      if (item.filhos[i].aberto == true) {
-        item.filhos[i].aberto = false;
+    for (int i = 0; i < item!.filhos!.length; i++) {
+      if (item.filhos![i].aberto == true) {
+        item.filhos![i].aberto = false;
       }
-      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos[i]);
+      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos![i]);
     }
     setState(() {});
   }
 
-  void limparBoolsFilhos({ZTreeViewViewModel ambienteHierarquicoViewModel}) {
+  void limparBoolsFilhos({ZTreeViewViewModel? ambienteHierarquicoViewModel}) {
     var item = ambienteHierarquicoViewModel;
-    for (int i = 0; i < item.filhos.length; i++) {
-      if (item.filhos[i].select == true) {
-        item.filhos[i].select = false;
+    for (int i = 0; i < item!.filhos!.length; i++) {
+      if (item.filhos![i].select == true) {
+        item.filhos![i].select = false;
       }
-      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos[i]);
+      limparBoolsFilhos(ambienteHierarquicoViewModel: item.filhos![i]);
     }
     setState(() {});
   }

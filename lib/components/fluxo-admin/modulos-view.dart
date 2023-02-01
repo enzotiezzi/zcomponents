@@ -13,13 +13,13 @@ import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 class ModulosView extends IView<Modulos> {
   ModulosView(State<Modulos> state) : super(state);
 
-  List<ModuloContaViewModel> listaModulos = [];
+  List<ModuloContaViewModel>? listaModulos = [];
   GlobalKey<ZSearchBarState> keySearchBar = new GlobalKey();
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
-  ScrollController scrollController;
-  IContasService contasService;
-  DialogUtils _dialogUtils;
+  late ScrollController scrollController;
+  late IContasService contasService;
+  late DialogUtils _dialogUtils;
 
   @override
   Future<void> initView() async {
@@ -38,23 +38,21 @@ class ModulosView extends IView<Modulos> {
     _dialogUtils.dismiss();
   }
 
-  @override
-  Future<void> afterBuild() {}
 
   Future<void> buscarListaModulos(SearchOptions searchOptions,
-      {bool scrollPage}) async {
+      {bool? scrollPage}) async {
     var res = await contasService.listarModulosConta(searchOptions);
 
     if (res != null) {
       if (scrollPage != null) {
-        listaModulos = listaModulos + res.body;
+        listaModulos = listaModulos! + res.body!;
         print(listaModulos);
       } else {
         listaModulos = res.body;
       }
       if (state.mounted) {
         state.setState(() {
-          paginationMetaData = res.paginationMetaData;
+          paginationMetaData = res.paginationMetaData!;
           this.searchOptions = searchOptions;
         });
       }
@@ -63,15 +61,21 @@ class ModulosView extends IView<Modulos> {
 
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
-      if (this.paginationMetaData.hasNext) {
+      if (this.paginationMetaData.hasNext!) {
         OrderByExpression order = new OrderByExpression();
         order.propertyName = "Modulo.Nome";
         order.orientation = "ASC";
         searchOptions.orders = [order];
-        this.searchOptions.pagination.pageNumber++;
+        this.searchOptions.pagination!.pageNumber! +1;
 
         await buscarListaModulos(this.searchOptions, scrollPage: true);
       }
     }
+  }
+
+  @override
+  Future<void> afterBuild() {
+    // TODO: implement afterBuild
+    throw UnimplementedError();
   }
 }

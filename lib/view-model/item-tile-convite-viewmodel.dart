@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 
 
 class ItemTileViewModel {
-  String nome;
-  String dataAdmissao;
-  String cargo;
-  String porcentagemPreenchimento;
-  String status;
-  String prazo;
-  String stateCard;
-  Function onTileIsSelected;
-  Widget icone;
+  String? nome;
+  String? dataAdmissao;
+  String? cargo;
+  String? porcentagemPreenchimento;
+  String? status;
+  String? prazo;
+  String? stateCard;
+  Function? onTileIsSelected;
+  Widget? icone;
 
   ItemTileViewModel({
     this.nome,

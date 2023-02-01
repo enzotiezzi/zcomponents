@@ -21,11 +21,11 @@ class ListagemContasView extends IView<ListagemContas> {
   GlobalKey<ZSearchBarState> keySearchBar = new GlobalKey();
   List<ContaV2ViewModel> listaContas = [];
   SearchOptions searchOptions = new SearchOptions();
-  PaginationMetaData paginationMetaData = new PaginationMetaData();
-  ScrollController scrollController;
-  IContasService contasService;
-  IArquivoService _arquivoService;
-  DialogUtils _dialogUtils;
+  late PaginationMetaData paginationMetaData = new PaginationMetaData();
+  late ScrollController scrollController;
+  late IContasService contasService;
+  late IArquivoService _arquivoService;
+  late DialogUtils _dialogUtils;
 
   @override
   Future<void> afterBuild() {
@@ -37,8 +37,9 @@ class ListagemContasView extends IView<ListagemContas> {
   Future<void> initView() async {
     _dialogUtils = DialogUtils(state.context);
     _dialogUtils.showProgressDialog();
-    contasService = new ContasService(state.widget.token);
-    _arquivoService = new ArquivoService(state.widget.token);
+
+    contasService = new ContasService(state.widget.token!);
+    _arquivoService = new ArquivoService(state.widget.token!);
 
     scrollController = new ScrollController();
     scrollController.addListener(onScroll);
@@ -51,25 +52,25 @@ class ListagemContasView extends IView<ListagemContas> {
   }
 
   Future<void> buscarListaContas(SearchOptions searchOptions,
-      {bool scrollPage}) async {
+      {bool? scrollPage}) async {
     var res = await contasService.listarContas(searchOptions);
 
     if (res != null) {
       if (scrollPage != null) {
-        listaContas = listaContas + res.body;
+        listaContas = listaContas + res.body!;
       } else {
-        listaContas = res.body;
+        listaContas = res.body!;
       }
       for (int i = 0; i < listaContas.length; i++) {
-        var doc = await _arquivoService.buscarAnexo(listaContas[i].idConta);
+        var doc = await _arquivoService.buscarAnexo(listaContas[i].idConta!);
 
         if (doc != null) {
-          listaContas[i].conta.logo = base64Decode(doc.conteudo);
+          listaContas[i].conta!.logo = base64Decode(doc.conteudo!);
         }
       }
       if (state.mounted) {
         state.setState(() {
-          paginationMetaData = res.paginationMetaData;
+          paginationMetaData = res.paginationMetaData!;
           this.searchOptions = searchOptions;
         });
       }
@@ -78,27 +79,27 @@ class ListagemContasView extends IView<ListagemContas> {
 
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
-      if (this.paginationMetaData.hasNext) {
+      if (this.paginationMetaData.hasNext!) {
         OrderByExpression order = new OrderByExpression();
         order.propertyName = "Conta.Nome";
         order.orientation = "ASC";
         searchOptions.orders = [order];
-        this.searchOptions.pagination.pageNumber++;
+        this.searchOptions.pagination!.pageNumber! +1;
         await buscarListaContas(this.searchOptions, scrollPage: true);
       }
     }
   }
 
-  String listarAppsVinculados(List<AppUsuarioContaViewModel> lista) {
+  String listarAppsVinculados(List<dynamic>? lista) {
     String appsFormatados = "";
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
           appsFormatados =
-              "$appsFormatados- ${lista[i].app.nomeExibicao ?? ""}";
+              "$appsFormatados- ${lista[i].app?.nomeExibicao ?? ""}";
         } else {
           appsFormatados =
-              "$appsFormatados, ${lista[i].app.nomeExibicao ?? ""}";
+              "$appsFormatados, ${lista[i].app?.nomeExibicao ?? ""}";
         }
       }
     } else {

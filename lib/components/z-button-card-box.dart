@@ -2,19 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZButtonCardBox extends StatefulWidget {
-  final Icon icon;
-  final Text text;
-  final Color colorText;
-  final bool isCenter;
-  final double radius;
-  final double elevation;
-  final Function onClick;
+  final Icon? icon;
+  final Text? text;
+  final Color? colorText;
+  final bool? isCenter;
+  final double? radius;
+  final double? elevation;
+  final Function? onClick;
 
   ZButtonCardBox(
       {@required this.icon,
       @required this.text,
       this.colorText = Colors.black,
-      Key key,
+      Key? key,
       this.onClick,
       this.isCenter = false,
       this.elevation = 1.0,
@@ -35,11 +35,15 @@ class _ZButtonCardBoxState extends State<ZButtonCardBox> {
             child: new Card(
                 elevation: widget.elevation,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(widget.radius),
+                  borderRadius: BorderRadius.circular(widget.radius!),
                 ),
                 child: new InkWell(
-                    borderRadius: BorderRadius.circular(widget.radius),
-                    onTap: widget.onClick,
+                    borderRadius: BorderRadius.circular(widget.radius!),
+                    onTap: (){
+                      if(widget.onClick != null){
+                        widget.onClick!();
+                      }
+                    },
                     child: new Container(
                       margin: const EdgeInsets.only(left: 8, right: 8, top: 8),
                       child: new Column(

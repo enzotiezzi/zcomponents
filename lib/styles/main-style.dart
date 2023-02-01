@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_shifter/mask_shifter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/styles/media-query.dart';
 
@@ -15,27 +14,27 @@ class MainStyle {
   }
 
   static Widget styleTextInput(
-      BuildContext context,
-      String title,
-      TextInputType typeKeyboard,
-      Function onTap,
-      FocusNode currentFocus,
-      TextEditingController controller,
-      FocusNode nextFocus,
-      Function(String) onChange,
-      bool mask,
-      {String textMask,
-      String hintText,
-      bool enabled,
-      ThemeData themeData,
-      bool campoObrigatorio}) {
+      BuildContext? context,
+      String? title,
+      TextInputType? typeKeyboard,
+      Function? onTap,
+      FocusNode? currentFocus,
+      TextEditingController? controller,
+      FocusNode? nextFocus,
+      Function(String)? onChange,
+      bool? mask,
+      {String? textMask,
+      String? hintText,
+      bool? enabled,
+      ThemeData? themeData,
+      bool? campoObrigatorio}) {
     if (enabled == null) {
       enabled = true;
     }
     return new Container(
       color: Colors.white,
       child: GestureDetector(
-        onTap: onTap,
+        onTap: onTap != null ? onTap() : (){},
         child: new Column(
           children: <Widget>[
             new Row(
@@ -61,22 +60,22 @@ class MainStyle {
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: themeData.primaryColor,
+                            cursorColor: themeData!.primaryColor,
                             style: themeData.textTheme.bodyText1
-                                .copyWith(color: corTexto(themeData, enabled)),
+                                ?.copyWith(color: corTexto(themeData, enabled)),
                             inputFormatters: [
                               new MaskTextInputFormatter(mask: textMask)
                             ],
                             onSubmitted: (text) {
-                              currentFocus.unfocus();
+                              currentFocus?.unfocus();
                               if (nextFocus != null) {
-                                FocusScope.of(context).requestFocus(nextFocus);
+                                FocusScope.of(context!).requestFocus(nextFocus);
                               }
                             },
                             decoration: InputDecoration(
                               hintText: hintText,
                               hintStyle: themeData.textTheme.bodyText1
-                                  .copyWith(color: Color(0xFFC7C7C7)),
+                                  ?.copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),
@@ -95,19 +94,19 @@ class MainStyle {
                             textCapitalization: TextCapitalization.words,
                             focusNode: currentFocus,
                             controller: controller,
-                            cursorColor: themeData.primaryColor,
+                            cursorColor: themeData!.primaryColor,
                             style: themeData.textTheme.bodyText1
-                                .copyWith(color: corTexto(themeData, enabled)),
+                                ?.copyWith(color: corTexto(themeData, enabled)),
                             onSubmitted: (text) {
-                              currentFocus.unfocus();
+                              currentFocus?.unfocus();
                               if (nextFocus != null) {
-                                FocusScope.of(context).requestFocus(nextFocus);
+                                FocusScope.of(context!).requestFocus(nextFocus);
                               }
                             },
                             decoration: InputDecoration(
                               hintText: hintText,
                               hintStyle: themeData.textTheme.bodyText1
-                                  .copyWith(color: Color(0xFFC7C7C7)),
+                                  ?.copyWith(color: Color(0xFFC7C7C7)),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFf0f0f0)),
@@ -130,33 +129,33 @@ class MainStyle {
   }
 }
 
-Color corTexto(ThemeData themeData, bool enabled) {
+Color? corTexto(ThemeData themeData, bool enabled) {
   if (enabled) {
-    return themeData.textTheme.bodyText1.color;
+    return themeData.textTheme.bodyText1!.color;
   } else
     return Colors.grey;
 }
 
 Widget returnRequiredField(
-    String title, ThemeData themeData, bool campoObrigatorio) {
-  if (campoObrigatorio) {
+    String? title, ThemeData? themeData, bool? campoObrigatorio) {
+  if (campoObrigatorio != null && campoObrigatorio) {
     return new RichText(
       maxLines: 2,
       text: TextSpan(
         children: <TextSpan>[
           new TextSpan(
             text: title,
-            style: themeData.textTheme.bodyText1
-                .copyWith(color: Color(0xff999999)),
+            style: themeData?.textTheme.bodyText1
+                ?.copyWith(color: Color(0xff999999)),
           ),
           TextSpan(text: "*", style: TextStyle(color: Colors.redAccent))
         ],
       ),
     );
   } else {
-    return new Text(title,
+    return new Text(title!,
         style:
-            themeData.textTheme.bodyText1.copyWith(color: Color(0XFF999999)));
+            themeData?.textTheme.bodyText1?.copyWith(color: Color(0XFF999999)));
   }
 }
 
@@ -166,7 +165,7 @@ class _MainStyle {
   Color _primaryColor = new Color(0xff2bbab4);
   Color _secondaryColor = new Color(0xff801f92);
 
-  _MainStyle({this.context});
+  _MainStyle({required this.context});
 
   Color get primaryColor => _primaryColor;
 

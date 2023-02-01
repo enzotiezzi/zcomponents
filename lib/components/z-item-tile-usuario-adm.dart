@@ -3,14 +3,14 @@ import 'package:z_components/components/z-nome-reduzido.dart';
 import 'package:z_components/view-model/conta.dart';
 
 class ZItemTileUsuarioAdm extends StatefulWidget {
-  final String nomeUsuario;
-  final String appsVinculados;
-  final String email;
-  final String status;
-  final String quantidadeApps;
-  final Function onTap;
-  final String telefone;
-  final bool visibilidade;
+  final String? nomeUsuario;
+  final String? appsVinculados;
+  final String? email;
+  final String? status;
+  final String? quantidadeApps;
+  final Function? onTap;
+  final String? telefone;
+  final bool? visibilidade;
 
   ZItemTileUsuarioAdm(
       {this.nomeUsuario,
@@ -29,10 +29,10 @@ class ZItemTileUsuarioAdm extends StatefulWidget {
 class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
   Widget retornarNome() {
     if (widget.nomeUsuario == null) {
-      return new Text(widget.nomeUsuario);
+      return new Text(widget.nomeUsuario != null ? widget.nomeUsuario!: "");
     } else {
       return new Text(
-        widget.nomeUsuario,
+        widget.nomeUsuario != null ? widget.nomeUsuario!: "",
         style: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
@@ -42,7 +42,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
   }
 
   Widget _buildPossuiApps() {
-    if (widget.quantidadeApps.isNotEmpty || widget.appsVinculados.isNotEmpty) {
+    if (widget.quantidadeApps != null && widget.quantidadeApps!.isNotEmpty) {
       return new Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Expanded(
           flex: 20,
@@ -70,9 +70,9 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
     if (widget.appsVinculados == null) {
       return new Text('');
     } else {
-      if (widget.quantidadeApps == null || widget.quantidadeApps.isEmpty) {
+      if (widget.quantidadeApps == null || widget.quantidadeApps!.isEmpty) {
         return new Text(
-          widget.appsVinculados,
+          widget.appsVinculados!,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: Color(0xFF000000),
@@ -81,7 +81,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
         );
       } else {
         return new Text(
-          "[${widget.quantidadeApps}] " + widget.appsVinculados,
+          "[${widget.quantidadeApps}] " + widget.appsVinculados!,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: Color(0xFF000000),
@@ -97,7 +97,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
       return Text('');
     } else {
       return Text(
-        widget.email,
+        widget.email!,
         style: TextStyle(
           color: Color(0xFF000000),
           fontSize: 12,
@@ -107,7 +107,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
   }
 
   Widget retornarTelefone() {
-    if (widget.telefone == null || widget.telefone.isEmpty) {
+    if (widget.telefone == null || widget.telefone!.isEmpty) {
       return Text('Não possui telefone',
           style: TextStyle(
             color: Color(0xFF000000),
@@ -115,7 +115,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
           ));
     } else {
       return Text(
-        widget.telefone,
+        widget.telefone!,
         style: TextStyle(
           color: Color(0xFF000000),
           fontSize: 12,
@@ -129,7 +129,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
       return Text('');
     } else {
       return Text(
-        widget.status,
+        widget.status!,
         style: TextStyle(
           color: Color(0xFF000000),
           fontSize: 12,
@@ -139,7 +139,7 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
   }
 
   Widget _retornarArrow() {
-    if (widget.visibilidade) {
+    if (widget.visibilidade != null && widget.visibilidade!) {
       return Container();
     } else {
       return Expanded(
@@ -157,7 +157,11 @@ class _ZItemTileUsuarioAdmState extends State<ZItemTileUsuarioAdm> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: (){
+        if(widget.onTap!=null){
+          widget.onTap!();
+        }
+      },
       child: new IntrinsicHeight(
         child: new Container(
           margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7, top: 7),

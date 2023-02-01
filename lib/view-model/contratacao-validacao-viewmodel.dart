@@ -1,6 +1,6 @@
 class ContratacaoValidacaoStatusViewModel {
-  String idContratacaoValidacaoStatus;
-  String nome;
+  String? idContratacaoValidacaoStatus;
+  String? nome;
 
   ContratacaoValidacaoStatusViewModel(
       {this.idContratacaoValidacaoStatus, this.nome});

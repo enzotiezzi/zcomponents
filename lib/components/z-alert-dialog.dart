@@ -4,15 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:z_components/config/z-dialog.dart';
 
 class ZAlertDialog extends StatelessWidget {
-  Widget _zAlertDialog;
+  Widget? _zAlertDialog;
 
-  final Key key;
-  final EdgeInsetsGeometry contentPadding;
-  final ZDialog zDialog;
-  final Widget child;
-  final Color colorLine;
-  final Color colorBackgroundLinear;
-  final Color colorLoadLinear;
+  final Key? key;
+  final EdgeInsetsGeometry? contentPadding;
+  final ZDialog? zDialog;
+  final Widget? child;
+  final Color? colorLine;
+  final Color? colorBackgroundLinear;
+  final Color? colorLoadLinear;
 
   ZAlertDialog({
     this.child,
@@ -45,7 +45,7 @@ class ZAlertDialog extends StatelessWidget {
           contentPadding: this.contentPadding,
           content: new Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[(child == null) ? new Container() : child],
+            children: <Widget>[(child == null) ? new Container() : child!],
           ),
         );
         break;
@@ -81,7 +81,7 @@ class ZAlertDialog extends StatelessWidget {
                     )
                   ],
                 ),
-                (child == null) ? new Container() : child
+                (child == null) ? new Container() : child!
               ],
             ),
           ),
@@ -119,7 +119,7 @@ class ZAlertDialog extends StatelessWidget {
                     )
                   ],
                 ),
-                (child == null) ? new Container() : child
+                (child == null) ? new Container() : child!
               ],
             ),
           ),
@@ -157,7 +157,7 @@ class ZAlertDialog extends StatelessWidget {
                     )
                   ],
                 ),
-                (child == null) ? new Container() : child
+                (child == null) ? new Container() : child!
               ],
             ),
           ),
@@ -172,7 +172,7 @@ class ZAlertDialog extends StatelessWidget {
           key: this.key,
           title: new LinearProgressIndicator(
             backgroundColor: colorBackgroundLinear,
-            valueColor: new AlwaysStoppedAnimation<Color>(colorLoadLinear),
+            valueColor: new AlwaysStoppedAnimation<Color>(colorLoadLinear!),
           ),
           titlePadding: EdgeInsets.all(0.0),
           contentPadding: this.contentPadding,
@@ -180,7 +180,7 @@ class ZAlertDialog extends StatelessWidget {
             margin: const EdgeInsets.only(top: 12),
             child: new Column(
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[(child == null) ? new Container() : child],
+              children: <Widget>[(child == null) ? new Container() : child!],
             ),
           ),
         );
@@ -193,6 +193,6 @@ class ZAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _zAlertDialog;
+    return _zAlertDialog!;
   }
 }

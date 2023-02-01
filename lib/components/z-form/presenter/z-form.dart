@@ -4,8 +4,8 @@ import 'package:z_components/components/z-form/view/z-form-viewmodel.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 
 class ZForm extends StatefulWidget {
-  List<ZFormViewModel> viewmodel;
-  final Function(List<ZFormViewModel>) onChange;
+  List<ZFormViewModel>? viewmodel;
+  final Function(List<ZFormViewModel>)? onChange;
 
   ZForm({this.viewmodel, this.onChange});
 
@@ -14,7 +14,7 @@ class ZForm extends StatefulWidget {
 }
 
 class _ZFormState extends State<ZForm> {
-  ZFormView _view;
+  late ZFormView _view;
 
   @override
   void initState() {
@@ -35,9 +35,9 @@ class _ZFormState extends State<ZForm> {
   }
 
   List<Widget> _montarListaDinamicaDocumentos() {
-    List<Widget> lista = new List();
-    for (int i = 0; i < widget.viewmodel.length; i++) {
-      var item = widget.viewmodel[i];
+    List<Widget> lista = [];
+    for (int i = 0; i < widget.viewmodel!.length; i++) {
+      var item = widget.viewmodel![i];
       if (item.tipoValorCampo == "date") {
         lista.add(new Column(
           children: [
@@ -58,9 +58,9 @@ class _ZFormState extends State<ZForm> {
                     var textoSeparado = text.split("/");
                     item.resposta =
                         "${textoSeparado[2]}-${textoSeparado[1]}-${textoSeparado[0]}";
-                    widget.onChange(widget.viewmodel);
+                    widget.onChange!(widget.viewmodel!);
                   }
-                },
+                }, inputPadraoFocus: new FocusNode(),
               ),
             ),
             new Divider(
@@ -82,8 +82,8 @@ class _ZFormState extends State<ZForm> {
                 controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
-                  widget.onChange(widget.viewmodel);
-                },
+                  widget.onChange!(widget.viewmodel!);
+                }, inputPadraoFocus: new FocusNode(),
               ),
             ),
             new Divider(
@@ -109,10 +109,10 @@ class _ZFormState extends State<ZForm> {
                 onChange: (text) {
                   if (text.length == 15) {
                     item.resposta = text.trim();
-                    widget.onChange(widget.viewmodel);
-                    item.controller.text = item.resposta;
+                    widget.onChange!(widget.viewmodel!);
+                    item.controller!.text = item.resposta!;
                   }
-                },
+                }, inputPadraoFocus: new FocusNode(),
               ),
             ),
             new Divider(
@@ -137,8 +137,8 @@ class _ZFormState extends State<ZForm> {
                 controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
-                  widget.onChange(widget.viewmodel);
-                },
+                  widget.onChange!(widget.viewmodel!);
+                }, inputPadraoFocus: new FocusNode(),
               ),
             ),
             new Divider(
@@ -159,8 +159,8 @@ class _ZFormState extends State<ZForm> {
                 controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
-                  widget.onChange(widget.viewmodel);
-                },
+                  widget.onChange!(widget.viewmodel!);
+                }, inputPadraoFocus: new FocusNode(),
               ),
             ),
             new Divider(
@@ -182,8 +182,8 @@ class _ZFormState extends State<ZForm> {
                 controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
-                  widget.onChange(widget.viewmodel);
-                },
+                  widget.onChange!(widget.viewmodel!);
+                }, inputPadraoFocus: new FocusNode(),
               ),
             ),
             new Divider(
@@ -204,8 +204,9 @@ class _ZFormState extends State<ZForm> {
                 controllerInputPadrao: item.controller,
                 onChange: (text) {
                   item.resposta = text.trim();
-                  widget.onChange(widget.viewmodel);
+                  widget.onChange!(widget.viewmodel!);
                 },
+                inputPadraoFocus: new FocusNode(),
               ),
             ),
             new Divider(

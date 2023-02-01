@@ -3,8 +3,8 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 
 class ZNewsWebView extends StatefulWidget {
-  String url;
-  String titulo;
+  String? url;
+  String? titulo;
 
   ZNewsWebView({this.url, this.titulo});
 
@@ -23,7 +23,7 @@ class ZNewsWebViewState extends State<ZNewsWebView> {
     return new WebviewScaffold(
       displayZoomControls: true,
       withZoom: true,
-      url: widget.url,
+      url: _retornarURL(),
       appBar: new AppBar(
         centerTitle: true,
         leading: IconeVoltar(
@@ -32,5 +32,13 @@ class ZNewsWebViewState extends State<ZNewsWebView> {
         title: new Text(widget.titulo ?? ""),
       ),
     );
+  }
+
+  String _retornarURL(){
+    if(widget.url != null){
+      return widget.url!;
+    }else{
+      return "";
+    }
   }
 }

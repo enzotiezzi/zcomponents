@@ -10,13 +10,13 @@ class ColaboradorService extends Service implements IColaboradorService {
   ColaboradorService(String token) : super(token);
 
   @override
-  Future<List<ColaboradorViewModel>> buscarColaboradores(String re) async {
+  Future<List<ColaboradorViewModel>?> buscarColaboradores(String re) async {
     try {
       var url = "$_URL/colaboradores/listar-colaboradores-por-re/$re";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return (json.decode(response.body) as List)
+      return (json.decode(response!.body) as List)
           .map((x) => ColaboradorViewModel.fromJson(x))
           .toList();
     } catch (e) {

@@ -17,12 +17,12 @@ import 'package:z_components/view-model/info-organizacao-viewmodel.dart';
 import '../z-text.dart';
 
 class InformacoesOrganizacao extends StatefulWidget {
-  ThemeData themeData;
-  bool editarDados;
-  String textoFoto;
-  InfoOrganizacaoViewModel infoOrganizacaoViewModel;
-  String idConta;
-  Uint8List imagemPerfil;
+  ThemeData? themeData;
+  bool? editarDados;
+  String? textoFoto;
+  InfoOrganizacaoViewModel? infoOrganizacaoViewModel;
+  String? idConta;
+  Uint8List? imagemPerfil;
 
   InformacoesOrganizacao(
       {this.themeData,
@@ -37,7 +37,7 @@ class InformacoesOrganizacao extends StatefulWidget {
 }
 
 class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
-  InformacoesOrganizacaoView _view;
+  late InformacoesOrganizacaoView _view;
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
   }
 
   Widget _montarBotaoEditar() {
-    if (widget.editarDados) {
+    if (widget.editarDados !=null && widget.editarDados!) {
       return new Container();
     } else {
       return new GestureDetector(
@@ -283,7 +283,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
                     children: [
                       _buildImagemPerfil(),
                       new Text(
-                        widget.textoFoto,
+                        widget.textoFoto ?? "",
                         style: TextStyle(color: _corTextoFoto()),
                       ),
                     ],
@@ -292,7 +292,11 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               ),
             ],
           )),
-      onTap: _view.escolherMetodoSelecionarFoto,
+      onTap: (){
+        if(_view.escolherMetodoSelecionarFoto != null){
+          _view.escolherMetodoSelecionarFoto!();
+        }
+      },
     );
   }
 
@@ -366,7 +370,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             "Esta cor é aplicada nos cabeçalhos e elementos base \ndas telas.",
             style: Theme.of(context)
                 .textTheme
-                .caption
+                .caption!
                 .copyWith(color: Color(0xFF707070)),
           ),
         ],
@@ -405,7 +409,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
   }
 
   Widget _exibirBotao() {
-    if (widget.editarDados) {
+    if (widget.editarDados != null && widget.editarDados!) {
       return new Material(
         elevation: 4.0,
         child: new Container(
@@ -414,7 +418,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              new RaisedButton(
+              new ElevatedButton(
                 onPressed: () {
                   _view.editarDadosOrganizacao();
                 },
@@ -428,18 +432,25 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
                           "PRÓXIMO",
                           style: Theme.of(context)
                               .textTheme
-                              .button
+                              .button!
                               .copyWith(color: Color(0xFFFFFFFF)),
                         ),
                       )
                     ],
                   ),
                 ),
-                color: Theme.of(context).accentColor,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30),
+                style: new ButtonStyle(
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
+                  shadowColor:
+                  MaterialStateProperty.all<Color>(Colors.transparent),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(
+                      left: 10, right: 10)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
+                      )),
                 ),
-                padding: const EdgeInsets.only(left: 10, right: 10),
               )
             ],
           ),
@@ -462,7 +473,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
             "Esta cor é aplicada em botões e elementos clicáveis de \ndestaque.",
             style: Theme.of(context)
                 .textTheme
-                .caption
+                .caption!
                 .copyWith(color: Color(0xFF707070)),
           ),
         ],
@@ -482,7 +493,7 @@ class _InformacoesOrganizacaoState extends State<InformacoesOrganizacao> {
               width: 1.0,
             ),
             image: new DecorationImage(
-              image: MemoryImage(_view.imagemPerfil),
+              image: MemoryImage(_view.imagemPerfil!),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(6.0)),

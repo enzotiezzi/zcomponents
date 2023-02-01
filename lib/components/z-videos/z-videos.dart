@@ -11,8 +11,8 @@ import 'genthumbnail.dart';
 class ZVideos extends StatefulWidget {
 
 
-  final List<NoticiaViewModel> noticiaViewMode;
-  final ScrollController scrollC;
+  final List<NoticiaViewModel>? noticiaViewMode;
+  final ScrollController? scrollC;
 
   ZVideos({
         this.noticiaViewMode,
@@ -25,8 +25,8 @@ class ZVideos extends StatefulWidget {
 
 class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
 
-  String _tempDir;
-  GenThumbnailImage _futreImage;
+  String? _tempDir;
+  GenThumbnailImage? _futreImage;
 
   @override
   void initState() {
@@ -44,19 +44,19 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
         height: MediaQuery.of(context).size.height*0.6,
         child:
         new ListView.builder(
-            itemCount: widget.noticiaViewMode.length,
+            itemCount: widget.noticiaViewMode!.length,
             shrinkWrap: true,
             padding: const EdgeInsets.all(0),
             controller: widget.scrollC,
             itemBuilder: (context, index) {
-              carregarThumb(widget.noticiaViewMode[index].urlImagem);
+              carregarThumb(widget.noticiaViewMode![index].urlImagem!);
               return new Card(
                   elevation: 3,
                   margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
                   child:
                   new GestureDetector(
                     onTap: (){
-                      _onClickCardVideo(widget.noticiaViewMode[index].url,widget.noticiaViewMode[index].titulo,widget.noticiaViewMode[index].descricao,index);
+                      _onClickCardVideo(widget.noticiaViewMode![index].url!,widget.noticiaViewMode![index].titulo!,widget.noticiaViewMode![index].descricao!,index);
                     },
                     child: new Padding(padding: const EdgeInsets.all(6),
                       child: new Row(
@@ -67,7 +67,7 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
                             flex: 3,
                             child: new Column(
                               children: <Widget>[
-                                new Hero(tag: 'video$index', child: _futreImage)
+                                new Hero(tag: 'video$index', child: _futreImage!)
                               ],
                             ), ),
                           new Expanded(
@@ -80,10 +80,10 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   new Container(
-                                    child: new Text(widget.noticiaViewMode[index].titulo,style: new TextStyle(fontWeight: FontWeight.bold),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
+                                    child: new Text(widget.noticiaViewMode![index].titulo!,style: new TextStyle(fontWeight: FontWeight.bold),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
                                   ),
                                   new Container(
-                                    child: new Text(widget.noticiaViewMode[index].descricao,style: new TextStyle(fontWeight: FontWeight.w500),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
+                                    child: new Text(widget.noticiaViewMode![index].descricao!,style: new TextStyle(fontWeight: FontWeight.w500),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
                                   ),
                                   new Row(
                                     children: <Widget>[
@@ -94,7 +94,7 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
                                       new Container(
                                         width: MediaQuery.of(context).size.width*0.5,
                                         margin: const EdgeInsets.only(top: 6,left: 6),
-                                        child: new Text("${widget.noticiaViewMode[index].autor} - ${widget.noticiaViewMode[index].publicadaEm}",overflow: TextOverflow.ellipsis,maxLines: 1,) ,
+                                        child: new Text("${widget.noticiaViewMode![index].autor} - ${widget.noticiaViewMode![index].publicadaEm}",overflow: TextOverflow.ellipsis,maxLines: 1,) ,
                                       ),
                                     ],
                                   )
@@ -113,19 +113,19 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
     }
     else{
      return new ListView.builder(
-          itemCount: widget.noticiaViewMode.length,
+          itemCount: widget.noticiaViewMode!.length,
           shrinkWrap: true,
           padding: const EdgeInsets.all(0),
           controller: widget.scrollC,
           itemBuilder: (context, index) {
-            carregarThumb(widget.noticiaViewMode[index].urlImagem);
+            carregarThumb(widget.noticiaViewMode![index].urlImagem!);
             return new Card(
                 elevation: 3,
                 margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
                 child:
                 new GestureDetector(
                   onTap: (){
-                    _onClickCardVideo(widget.noticiaViewMode[index].url,widget.noticiaViewMode[index].titulo,widget.noticiaViewMode[index].descricao,index);
+                    _onClickCardVideo(widget.noticiaViewMode![index].url!,widget.noticiaViewMode![index].titulo!,widget.noticiaViewMode![index].descricao!,index);
                   },
                   child: new Padding(padding: const EdgeInsets.all(6),
                     child: new Row(
@@ -136,7 +136,7 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
                           flex: 3,
                           child: new Column(
                             children: <Widget>[
-                              new Hero(tag: 'video$index', child: _futreImage)
+                              new Hero(tag: 'video$index', child: _futreImage!)
                             ],
                           ), ),
                         new Expanded(
@@ -149,10 +149,10 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 new Container(
-                                  child: new Text(widget.noticiaViewMode[index].titulo,style: new TextStyle(fontWeight: FontWeight.bold),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
+                                  child: new Text(widget.noticiaViewMode![index].titulo!,style: new TextStyle(fontWeight: FontWeight.bold),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
                                 ),
                                 new Container(
-                                  child: new Text(widget.noticiaViewMode[index].descricao,style: new TextStyle(fontWeight: FontWeight.w500),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
+                                  child: new Text(widget.noticiaViewMode![index].descricao!,style: new TextStyle(fontWeight: FontWeight.w500),maxLines: 1,overflow: TextOverflow.ellipsis,) ,
                                 ),
                                 new Row(
                                   children: <Widget>[
@@ -163,7 +163,7 @@ class _ZNews extends State<ZVideos> with TickerProviderStateMixin {
                                     new Container(
                                       width: MediaQuery.of(context).size.width*0.5,
                                       margin: const EdgeInsets.only(top: 6,left: 6),
-                                      child: new Text("${widget.noticiaViewMode[index].autor} - ${widget.noticiaViewMode[index].publicadaEm}",overflow: TextOverflow.ellipsis,maxLines: 1,) ,
+                                      child: new Text("${widget.noticiaViewMode![index].autor} - ${widget.noticiaViewMode![index].publicadaEm}",overflow: TextOverflow.ellipsis,maxLines: 1,) ,
                                     ),
                                   ],
                                 )

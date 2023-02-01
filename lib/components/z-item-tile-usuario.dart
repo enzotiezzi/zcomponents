@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:z_components/api/zcolaborador-service.dart';
+import 'package:z_components/components/z-injector/z-injector.dart';
 import 'package:z_components/interface/i-zcolaborador-service.dart';
 import 'package:z_components/view-model/colaborador-viewmodel.dart';
 import 'package:z_components/view-model/usuario-viewmodel.dart';
 
 class ZItemTileUsuario extends StatefulWidget {
-  final String idConta;
-  final String token;
-  final Color colorStatus;
-  final String cpf;
-  final String status;
-  final String isExpand;
-  final Function funcao;
-  final Widget imagemPerfil;
-  final Function onTapImage;
+  final String? idConta;
+  final String? token;
+  final Color? colorStatus;
+  final String? cpf;
+  final String? status;
+  final String? isExpand;
+  final Function? funcao;
+  final Widget? imagemPerfil;
+  final Function? onTapImage;
 
   ZItemTileUsuario(
       {this.idConta,
@@ -31,15 +32,15 @@ class ZItemTileUsuario extends StatefulWidget {
 }
 
 class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
-  ColaboradorViewModel colaboradorViewModel;
-  UsuarioViewModel usuarioViewModel;
-  IZColaboradorService _colaboradorService;
+  ColaboradorViewModel? colaboradorViewModel = ColaboradorViewModel();
+  UsuarioViewModel? usuarioViewModel = UsuarioViewModel();
+  IZColaboradorService? _colaboradorService = ZInjector.getDependency<IZColaboradorService>();
 
   @override
   void initState() {
     super.initState();
     _colaboradorService =
-        ZColaboradorService(widget.token, widget.idConta, widget.cpf);
+        ZColaboradorService(widget.token!, widget.idConta!, widget.cpf!);
 
     _buscarInformacaoUsuario();
   }
@@ -58,7 +59,11 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
           new Expanded(
               flex: 2,
               child: new GestureDetector(
-                onTap: widget.onTapImage,
+                onTap: (){
+                  if(widget.onTapImage != null){
+                    widget.onTapImage!();
+                  }
+                },
                 child: new Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -101,7 +106,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                                 child: (colaboradorViewModel == null)
                                     ? new Text('')
                                     : new Text(
-                                        colaboradorViewModel.nome,
+                                        colaboradorViewModel!.nome!,
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             color: Color(0xFF000000),
@@ -117,7 +122,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                                 child: (colaboradorViewModel == null)
                                     ? new Text('')
                                     : new Text(
-                                        colaboradorViewModel.nome,
+                                        colaboradorViewModel!.nome!,
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             color: Color(0xFF000000),
@@ -147,7 +152,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                               child: (colaboradorViewModel == null)
                                   ? new Text('')
                                   : new Text(
-                                      colaboradorViewModel.nomeCentroCusto,
+                                      colaboradorViewModel!.nomeCentroCusto!,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           color: Color(0xFFA3A3A3),
@@ -165,9 +170,9 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color:
-                                      (widget.status.toLowerCase() == "ativo")
+                                      (widget.status!.toLowerCase() == "ativo")
                                           ? Colors.green
-                                          : (widget.status.toLowerCase() ==
+                                          : (widget.status!.toLowerCase() ==
                                                   "inativo")
                                               ? Colors.red
                                               : widget.colorStatus),
@@ -175,7 +180,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                             new Container(
                               margin: EdgeInsets.only(right: 8.0, left: 2.0),
                               child: new Text(
-                                widget.status,
+                                widget.status ?? "",
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     color: const Color(0xff999999)),
@@ -201,7 +206,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                           child: (colaboradorViewModel == null)
                               ? new Text('')
                               : new Text(
-                                  colaboradorViewModel.cargo,
+                                  colaboradorViewModel!.cargo!,
                                   style: TextStyle(
                                       color: Color(0xFFA3A3A3),
                                       fontSize: 12.0,
@@ -225,7 +230,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                           child: (colaboradorViewModel == null)
                               ? new Text('')
                               : new Text(
-                                  "${colaboradorViewModel.escala} ${colaboradorViewModel.horaEntrada} - ${colaboradorViewModel.horaSaida}",
+                                  "${colaboradorViewModel!.escala} ${colaboradorViewModel!.horaEntrada} - ${colaboradorViewModel!.horaSaida}",
                                   style: TextStyle(
                                       color: Color(0xFFA3A3A3),
                                       fontSize: 12.0,
@@ -261,7 +266,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                                       fontWeight: FontWeight.w500),
                                 )
                               : new Text(
-                                  "${colaboradorViewModel.tempoPausa})",
+                                  "${colaboradorViewModel!.tempoPausa})",
                                   style: TextStyle(
                                       color: Color(0xFFA3A3A3),
                                       fontSize: 10.0,
@@ -272,7 +277,11 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
                     )
                   ],
                 ),
-                onTap: widget.funcao,
+                onTap: (){
+                  if(widget.funcao != null){
+                    widget.funcao!();
+                  }
+                },
               )),
         ],
       ),
@@ -280,7 +289,7 @@ class _ZItemTileUsuarioState extends State<ZItemTileUsuario> {
   }
 
   Future _buscarInformacaoUsuario() async {
-    var colaborador = await _colaboradorService.buscarPerfilColaborador();
+    var colaborador = await _colaboradorService?.buscarPerfilColaborador();
 
     setState(() {
       colaboradorViewModel = colaborador;

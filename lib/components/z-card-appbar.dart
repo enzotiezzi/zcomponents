@@ -1,41 +1,41 @@
 import 'package:flutter/material.dart';
 
 class ZCardAppBar extends StatefulWidget {
-  final Key key;
-  final ZCardAppBarType zCardAppBarType;
+  final Key? key;
+  final ZCardAppBarType? zCardAppBarType;
 
-  Color backgroundColorTotalCham = const Color(0xff2bbab4);
-  Color primaryColor = const Color(0xff2bbab4);
-  Color backgroundColorChPen = Colors.white;
-  Color backgroundColorChAnda = Colors.white;
-  Color textNumbTotal = Colors.white;
-  Color textNumbPend = Colors.black;
-  Color textNumbAnd = Colors.black;
-  Color textWordTotal = Colors.white;
-  Color textWordPend = Color(0xff999999);
-  Color textWordAnda = Color(0xff999999);
-  Color corTextNumbTotal = Colors.white;
-  Color corTextNumbPend = Colors.black;
-  Color corTextNumbAnd = Colors.black;
-  Color corTextWordTotal = Colors.white;
+  Color? backgroundColorTotalCham = const Color(0xff2bbab4);
+  Color? primaryColor = const Color(0xff2bbab4);
+  Color? backgroundColorChPen = Colors.white;
+  Color? backgroundColorChAnda = Colors.white;
+  Color? textNumbTotal = Colors.white;
+  Color? textNumbPend = Colors.black;
+  Color? textNumbAnd = Colors.black;
+  Color? textWordTotal = Colors.white;
+  Color? textWordPend = Color(0xff999999);
+  Color? textWordAnda = Color(0xff999999);
+  Color? corTextNumbTotal = Colors.white;
+  Color? corTextNumbPend = Colors.black;
+  Color? corTextNumbAnd = Colors.black;
+  Color? corTextWordTotal = Colors.white;
 
-  AnimationController animationControllerTotal;
-  AnimationController animationControllerPendentes;
-  AnimationController animationControllerAndamento;
+  late AnimationController? animationControllerTotal;
+  late AnimationController? animationControllerPendentes;
+  late AnimationController? animationControllerAndamento;
 
-  Animation animationTotal;
-  Animation animationAndamento;
-  Animation animationPendentes;
+  late Animation? animationTotal;
+  late Animation? animationAndamento;
+  late Animation? animationPendentes;
 
-  int durationAnimation = 5;
+  int? durationAnimation = 5;
 
-  var carregouList = true;
-  var carregouListPend = true;
-  var carregouListAnd = true;
+  bool? carregouList = true;
+  bool? carregouListPend = true;
+  bool? carregouListAnd = true;
 
-  var pendentes = true;
-  var totalCh = true;
-  var andamento = false;
+  bool? pendentes = true;
+  bool? totalCh = true;
+  bool? andamento = false;
 
 
   ZCardAppBar(
@@ -87,16 +87,16 @@ class _ZCardAppBarState extends State<ZCardAppBar>
         vsync: this, duration: Duration(seconds: 5));
 
     widget.animationTotal = IntTween(begin: 0, end: 10).animate(CurvedAnimation(
-        parent: widget.animationControllerAndamento, curve: Curves.easeOut));
+        parent: widget.animationControllerAndamento!, curve: Curves.easeOut));
 
     widget.animationAndamento = IntTween(begin: 0, end: 10).animate(
         CurvedAnimation(
-            parent: widget.animationControllerAndamento,
+            parent: widget.animationControllerAndamento!,
             curve: Curves.easeOut));
 
     widget.animationPendentes = IntTween(begin: 0, end: 10).animate(
         CurvedAnimation(
-            parent: widget.animationControllerAndamento,
+            parent: widget.animationControllerAndamento!,
             curve: Curves.easeOut));
   }
 
@@ -107,7 +107,7 @@ class _ZCardAppBarState extends State<ZCardAppBar>
     );
   }
 
-  Widget Zcard() {
+  Widget? Zcard() {
     switch (widget.zCardAppBarType) {
       case ZCardAppBarType.isZchamados:
         return _cardTest();
@@ -166,13 +166,13 @@ class _ZCardAppBarState extends State<ZCardAppBar>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AnimatedBuilder(
-                        animation: widget.animationControllerTotal,
-                        builder: (BuildContext context, Widget child) {
+                        animation: widget.animationControllerTotal!,
+                        builder: (BuildContext? context, Widget? child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
                               child: (widget.carregouList != false)
                                   ? new Text(
-                                      widget.animationTotal.value.toString(),
+                                      widget.animationTotal!.value.toString(),
                                       style: new TextStyle(
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
@@ -249,13 +249,13 @@ class _ZCardAppBarState extends State<ZCardAppBar>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AnimatedBuilder(
-                        animation: widget.animationControllerPendentes,
-                        builder: (BuildContext context, Widget child) {
+                        animation: widget.animationControllerPendentes!,
+                        builder: (BuildContext? context, Widget? child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
                               child: (widget.carregouListPend != false)
                                   ? new Text(
-                                      widget.animationPendentes.value
+                                      widget.animationPendentes!.value
                                           .toString(),
                                       style: new TextStyle(
                                           fontSize: 32,
@@ -331,13 +331,13 @@ class _ZCardAppBarState extends State<ZCardAppBar>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AnimatedBuilder(
-                        animation: widget.animationControllerAndamento,
-                        builder: (BuildContext context, Widget child) {
+                        animation: widget.animationControllerAndamento!,
+                        builder: (BuildContext context, Widget? child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
                               child: (widget.carregouListAnd != false)
                                   ? new Text(
-                                      widget.animationAndamento.value
+                                      widget.animationAndamento!.value
                                           .toString(),
                                       style: new TextStyle(
                                           fontSize: 32,

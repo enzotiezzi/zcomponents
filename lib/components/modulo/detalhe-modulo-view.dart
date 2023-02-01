@@ -20,11 +20,11 @@ class DetalheModuloView extends IView<DetalheModulo> {
 
     SearchOptions searchOptions = new SearchOptions();
     PaginationMetaData paginationMetaData = new PaginationMetaData();
-    ScrollController scrollController;
+    late ScrollController scrollController;
     GlobalKey<ZCollectionState> keyPerfil = new GlobalKey<ZCollectionState>();
 
-    IContasService contasService;
-    DialogUtils _dialogUtils;
+    late IContasService contasService;
+    late DialogUtils _dialogUtils;
     TextEditingController dataExpiracaoController = new TextEditingController();
     FocusNode dataExpiracaoFocus = new FocusNode();
     TextEditingController dataController = new TextEditingController();
@@ -50,18 +50,17 @@ class DetalheModuloView extends IView<DetalheModulo> {
     String textModificar = '';
     String textModificarAcesso = '';
     String tipoDialog = "";
-    List<String> itensMenu = [];
-    List<ZCollectionItem> listaPerfis = [];
+    List<String>? itensMenu = [];
+    List<ZCollectionItem>? listaPerfis = [];
 
-    @override
-    Future<void> afterBuild() {}
+
 
     @override
     Future<void> initView() async {
         _dialogUtils = DialogUtils(state.context);
         _definirTextoDialog();
         contasService = new ContasService(NovoToken.newToken);
-        if (state.widget.editarDados) {
+        if (state.widget.editarDados != null && state.widget.editarDados!) {
             itensMenu = [_definirTexto()];
             OrderByExpression order = new OrderByExpression();
             order.propertyName = "Nome";
@@ -78,23 +77,23 @@ class DetalheModuloView extends IView<DetalheModulo> {
     Future<List<ZCollectionItem>> buscarPerfis(
         SearchOptions searchOptions) async {
         var res = await contasService.buscarListaPerfis(
-            searchOptions, state.widget.appUsuarioContaViewModel.app.idApp);
+            searchOptions, state.widget.appUsuarioContaViewModel!.app!.idApp!);
         List<ZCollectionItem> listaAux = [];
         if (res != null) {
-            paginationMetaData = res.paginationMetaData;
-            for (int i = 0; i < res.body.length; i++) {
+            paginationMetaData = res.paginationMetaData!;
+            for (int i = 0; i < res.body!.length; i++) {
                 listaAux.add(new ZCollectionItem(
-                    chave: res.body[i].idPerfil,
-                    titulo: res.body[i].nome,
-                    chaveSecundaria: res.body[i].idApp,
-                    valor: res.body[i].nome));
+                    chave: res.body?[i].idPerfil,
+                    titulo: res.body?[i].nome,
+                    chaveSecundaria: res.body?[i].idApp,
+                    valor: res.body?[i].nome));
             }
         }
         return listaAux;
     }
 
     String _definirTexto() {
-        if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
+        if (state.widget.appUsuarioContaViewModel?.status! == "Ativo") {
             textModificarAcesso = "Inativar";
             return "Revogar";
         } else {
@@ -103,8 +102,8 @@ class DetalheModuloView extends IView<DetalheModulo> {
         }
     }
 
-    String _definirTextoDialog() {
-        if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
+    _definirTextoDialog() {
+        if (state.widget.appUsuarioContaViewModel?.status! == "Ativo") {
             tipoDialog = "removido";
         } else {
             tipoDialog = "habilitado";
@@ -121,14 +120,14 @@ class DetalheModuloView extends IView<DetalheModulo> {
         }
     }
 
-    Widget preencherDados() {
-        titulo = state.widget.appUsuarioContaViewModel.app.nome;
-        perfilController.text = state.widget.appUsuarioContaViewModel.perfil.nome ??
+     preencherDados() {
+        titulo = state.widget.appUsuarioContaViewModel?.app?.nome ?? "";
+        perfilController.text = state.widget.appUsuarioContaViewModel?.perfil?.nome ??
             "Não contém perfil";
         dataVinculoController.text = _validarDataVinculo();
         dataExpiracaoController.text = _validarDataExpiracao();
-        statusController.text = state.widget.appUsuarioContaViewModel.status;
-        if (state.widget.appUsuarioContaViewModel.status == "Ativo") {
+        statusController.text = state.widget.appUsuarioContaViewModel?.status ?? "";
+        if (state.widget.appUsuarioContaViewModel?.status == "Ativo") {
             textModificar = "REVOGAR ACESSO";
         } else {
             textModificar = "ATIVAR ACESSO";
@@ -136,18 +135,18 @@ class DetalheModuloView extends IView<DetalheModulo> {
     }
 
     String _validarDataVinculo() {
-        if (state.widget.appUsuarioContaViewModel.dataVinculo != null) {
+        if (state.widget.appUsuarioContaViewModel!.dataVinculo != null) {
             return UtilData.obterDataDDMMAAAA(
-                DateTime.parse(state.widget.appUsuarioContaViewModel.dataVinculo));
+                DateTime.parse(state.widget.appUsuarioContaViewModel!.dataVinculo!));
         } else {
             return "Nunca";
         }
     }
 
     String _validarDataExpiracao() {
-        if (state.widget.appUsuarioContaViewModel.dataInativacao != null) {
+        if (state.widget.appUsuarioContaViewModel?.dataInativacao != null) {
             return UtilData.obterDataDDMMAAAA(
-                DateTime.parse(state.widget.appUsuarioContaViewModel.dataInativacao));
+                DateTime.parse(state.widget.appUsuarioContaViewModel!.dataInativacao!));
         } else {
             return "Nunca";
         }
@@ -161,7 +160,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
         }
     }
 
-    Function editarOnPressed() {
+    Function? editarOnPressed() {
         if (alterouPerfil) {
             return () async {
                 await _alterarAcesso("perfil");
@@ -198,9 +197,9 @@ class DetalheModuloView extends IView<DetalheModulo> {
         if (lista != null && lista.length != 0) {
             for (int i = 0; i < lista.length; i++) {
                 if (i == 0) {
-                    appsFormatados = "$appsFormatados- ${lista[i].app.nomeExibicao}";
+                    appsFormatados = "$appsFormatados- ${lista[i].app!.nomeExibicao}";
                 } else {
-                    appsFormatados = "$appsFormatados, ${lista[i].app.nomeExibicao}";
+                    appsFormatados = "$appsFormatados, ${lista[i].app!.nomeExibicao}";
                 }
             }
         } else {
@@ -227,7 +226,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
                             ),
                             new Container(
                                 child: new Text(
-                                    "O acesso do aplicativo: ${state.widget.appUsuarioContaViewModel.app.nomeExibicao.toUpperCase()} será $tipoDialog HOJE para ${state.widget.appUsuarioContaViewModel.usuario.nome.toUpperCase()}",
+                                    "O acesso do aplicativo: ${state.widget.appUsuarioContaViewModel?.app!.nomeExibicao!.toUpperCase()} será $tipoDialog HOJE para ${state.widget.appUsuarioContaViewModel!.usuario!.nome.toUpperCase()}",
                                     style: TextStyle(fontSize: 14),
                                     textAlign: TextAlign.center,
                                 ),
@@ -271,12 +270,12 @@ class DetalheModuloView extends IView<DetalheModulo> {
                                             splashColor: const Color(0xffe6e6e6),
                                             onTap: () async {
                                                 if (state
-                                                    .widget.appUsuarioContaViewModel.status ==
+                                                    .widget.appUsuarioContaViewModel?.status ==
                                                     "Ativo") {
-                                                    state.widget.appUsuarioContaViewModel.status =
+                                                    state.widget.appUsuarioContaViewModel?.status =
                                                     "Inativo";
                                                 } else {
-                                                    state.widget.appUsuarioContaViewModel.status =
+                                                    state.widget.appUsuarioContaViewModel?.status =
                                                     "Ativo";
                                                 }
                                                 Navigator.pop(context);
@@ -308,20 +307,20 @@ class DetalheModuloView extends IView<DetalheModulo> {
         }
 
         var res = await contasService.editarDadosFluxoUsuario(
-            state.widget.appUsuarioContaViewModel.app.idModulo,
-            state.widget.appUsuarioContaViewModel.idApp,
-            state.widget.appUsuarioContaViewModel.idUsuario,
-            state.widget.appUsuarioContaViewModel,
+            state.widget.appUsuarioContaViewModel!.app!.idModulo!,
+            state.widget.appUsuarioContaViewModel!.idApp!,
+            state.widget.appUsuarioContaViewModel!.idUsuario!,
+            state.widget.appUsuarioContaViewModel!,
             textModificarAcesso);
 
         if (res != null && res) {
             _dialogUtils.dismiss();
             Navigator.of(state.context).pop(state.widget.appUsuarioContaViewModel);
         } else {
-            if (state.widget.appUsuarioContaViewModel.status == "Inativo") {
-                state.widget.appUsuarioContaViewModel.status = "Ativo";
+            if (state.widget.appUsuarioContaViewModel?.status == "Inativo") {
+                state.widget.appUsuarioContaViewModel?.status = "Ativo";
             } else {
-                state.widget.appUsuarioContaViewModel.status = "Inativo";
+                state.widget.appUsuarioContaViewModel?.status = "Inativo";
             }
             _dialogUtils.dismiss();
             _dialogUtils.showAlertDialogErro(
@@ -329,4 +328,10 @@ class DetalheModuloView extends IView<DetalheModulo> {
             print("Erro");
         }
     }
+
+  @override
+  Future<void> afterBuild() {
+    // TODO: implement afterBuild
+    throw UnimplementedError();
+  }
 }

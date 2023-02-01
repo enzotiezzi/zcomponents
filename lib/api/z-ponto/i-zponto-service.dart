@@ -1,3 +1,3 @@
 abstract class IZPontoService {
-  Future<bool> testarConexaoServidor();
+  Future<bool?> testarConexaoServidor();
 }

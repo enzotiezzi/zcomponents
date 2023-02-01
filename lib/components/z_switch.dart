@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:z_components/config/z-platform.dart';
 
 class ZSwitch extends StatelessWidget {
-  Widget _zSwitch;
+  Widget? _zSwitch;
 
-  final bool value;
-  final ValueChanged<bool> onChanged;
-  final Color activeColor;
-  final DragStartBehavior dragStartBehavior;
-  final Color activeTrackColor;
-  final Color inactiveThumbColor;
-  final Color inactiveTrackColor;
-  final ImageProvider activeThumbImage;
-  final ImageProvider inactiveThumbImage;
-  final MaterialTapTargetSize materialTapTargetSize;
-  final ZPlatform zPlatform;
+  final bool? value;
+  final ValueChanged<bool>? onChanged;
+  final Color? activeColor;
+  final DragStartBehavior? dragStartBehavior;
+  final Color? activeTrackColor;
+  final Color? inactiveThumbColor;
+  final Color? inactiveTrackColor;
+  final ImageProvider? activeThumbImage;
+  final ImageProvider? inactiveThumbImage;
+  final MaterialTapTargetSize? materialTapTargetSize;
+  final ZPlatform? zPlatform;
 
   ZSwitch(
-      {Key key,
+      {Key? key,
       @required this.value,
       @required this.onChanged,
       this.activeColor,
@@ -39,9 +39,9 @@ class ZSwitch extends StatelessWidget {
         if (Platform.isAndroid) {
           _zSwitch = new Switch(
             onChanged: this.onChanged,
-            value: this.value,
+            value: this.value!,
             activeColor: this.activeColor,
-            dragStartBehavior: this.dragStartBehavior,
+            dragStartBehavior: this.dragStartBehavior!,
             key: key,
             activeThumbImage: this.activeThumbImage,
             activeTrackColor: this.activeTrackColor,
@@ -53,9 +53,9 @@ class ZSwitch extends StatelessWidget {
         } else {
           _zSwitch = new CupertinoSwitch(
             onChanged: this.onChanged,
-            value: this.value,
+            value: this.value!,
             activeColor: this.activeColor,
-            dragStartBehavior: this.dragStartBehavior,
+            dragStartBehavior: this.dragStartBehavior!,
             key: key,
           );
         }
@@ -63,9 +63,9 @@ class ZSwitch extends StatelessWidget {
       case ZPlatform.isAndroid:
         _zSwitch = new Switch(
           onChanged: this.onChanged,
-          value: this.value,
+          value: this.value!,
           activeColor: this.activeColor,
-          dragStartBehavior: this.dragStartBehavior,
+          dragStartBehavior: this.dragStartBehavior!,
           key: key,
           activeThumbImage: this.activeThumbImage,
           activeTrackColor: this.activeTrackColor,
@@ -78,9 +78,9 @@ class ZSwitch extends StatelessWidget {
       case ZPlatform.isIOS:
         _zSwitch = new CupertinoSwitch(
           onChanged: this.onChanged,
-          value: this.value,
+          value: this.value!,
           activeColor: this.activeColor,
-          dragStartBehavior: this.dragStartBehavior,
+          dragStartBehavior: this.dragStartBehavior!,
           key: key,
         );
         break;
@@ -89,6 +89,6 @@ class ZSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _zSwitch;
+    return _zSwitch!;
   }
 }

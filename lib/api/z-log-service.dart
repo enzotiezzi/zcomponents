@@ -13,7 +13,7 @@ class ZLogService extends Service{
 
       var res = await request(url, Service.HTTP_POST, body: zLogViewModel.toMap());
 
-      return res.statusCode == 200;
+      return res?.statusCode == 200;
     }catch(e){
       return false;
     }

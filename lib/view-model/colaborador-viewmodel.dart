@@ -1,29 +1,29 @@
 import 'package:z_components/view-model/posicao-alocacao-sequencia-viewmodel.dart';
 
 class ColaboradorViewModel {
-  String idColaborador;
-  String rE;
-  String nomeColaborador;
-  String idCentroCusto;
-  String idPosicaoAlocacao;
-  String centroCusto;
-  String cargo;
-  String idCargo;
-  String nome;
-  String cpf;
-  String escala;
-  String idEmpresa;
-  String celular;
-  String nomeCentroCusto;
-  String primeiraFolga;
-  String idConta;
-  String horaEntrada;
-  String horaSaida;
-  String tempoPausa;
+  String? idColaborador;
+  String? rE;
+  String? nomeColaborador;
+  String? idCentroCusto;
+  String? idPosicaoAlocacao;
+  String? centroCusto;
+  String? cargo;
+  String? idCargo;
+  String? nome;
+  String? cpf;
+  String? escala;
+  String? idEmpresa;
+  String? celular;
+  String? nomeCentroCusto;
+  String? primeiraFolga;
+  String? idConta;
+  String? horaEntrada;
+  String? horaSaida;
+  String? tempoPausa;
 
-  bool pendente;
+  bool? pendente;
 
-  List<PosicaoAlocacaoSequenciaViewModel> sequencias;
+  List<PosicaoAlocacaoSequenciaViewModel>? sequencias;
 
   ColaboradorViewModel({
     this.idColaborador: "",
@@ -68,7 +68,7 @@ class ColaboradorViewModel {
       "tempoPausa": this.tempoPausa,
       "idPosicaoAlocacao": this.idPosicaoAlocacao,
       "pendente": this.pendente,
-      "sequenciaEscala": this.sequencias.map((x) => x.toMap()).toList(),
+      "sequenciaEscala": this.sequencias?.map((x) => x.toMap()).toList(),
       "idCargo": this.idCargo,
       "primeiraFolga": this.primeiraFolga,
       "idConta": this.idConta,

@@ -50,17 +50,17 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   var textEditingControllerRua = new TextEditingController();
   var textEditingControllerNumero = new TextEditingController();
   TextEditingController complementoController = new TextEditingController();
-  IArquivoService _arquivoService;
+  late IArquivoService _arquivoService;
   GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
-  ITesteConexaoService _testeConexaoService;
-  IEnderecoService _enderecoService;
-  IContasService _contasService;
+  late ITesteConexaoService _testeConexaoService;
+  late IEnderecoService _enderecoService;
+  late IContasService _contasService;
 
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
   final keyProgress = GlobalKey<ZProgressDialogState>();
 
-  Uint8List imagemPerfil;
+  Uint8List? imagemPerfil;
   InfoOrganizacaoViewModel infoOrganizacaoViewModel =
       new InfoOrganizacaoViewModel();
 
@@ -84,18 +84,18 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     _arquivoService = new ArquivoService(NovoToken.newToken);
 
     if (state.widget.infoOrganizacaoViewModel == null &&
-        !state.widget.editarDados) {
+        state.widget.editarDados !=null && !state.widget.editarDados!) {
       _dialogUtils.showProgressDialog();
       await _buscarDadosOrganizacao();
       await _buscarImagem();
       _dialogUtils.dismiss();
     } else {
-      _popularControllers(state.widget.infoOrganizacaoViewModel);
+      _popularControllers(state.widget.infoOrganizacaoViewModel!);
     }
 
     state.setState(() {});
 
-    if (state.widget.editarDados) {
+    if (state.widget.editarDados != null && state.widget.editarDados!) {
       Future.delayed(Duration(milliseconds: 1000), () {
         FocusScope.of(state.context).requestFocus(telefoneFocusNode);
       });
@@ -106,15 +106,15 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     var doc = await _arquivoService.buscarAnexo(idConta);
 
     if (doc != null) {
-      imagemPerfil = base64Decode(doc.conteudo);
+      imagemPerfil = base64Decode(doc.conteudo!);
       if (state.mounted) {
         state.setState(() {});
       }
     }
   }
 
-  Future<void> showDialogCorPrimaria() {
-    if (state.widget.editarDados) {
+  Future showDialogCorPrimaria()async {
+    if (state.widget.editarDados != null && state.widget.editarDados!) {
       return showDialog(
         context: state.context,
         builder: (_) => AlertDialog(
@@ -129,7 +129,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: const Text('Ok'),
               onPressed: () {
                 if (corPrimaria != pickerPrimaria) {}
@@ -143,8 +143,8 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     }
   }
 
-  Future<void> showDialogCorSecundaria() {
-    if (state.widget.editarDados) {
+  Future showDialogCorSecundaria() async{
+    if (state.widget.editarDados != null && state.widget.editarDados!) {
       return showDialog(
         context: state.context,
         builder: (_) => AlertDialog(
@@ -159,7 +159,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: const Text('Ok'),
               onPressed: () {
                 if (corSecundaria != pickerSecundaria) {}
@@ -182,8 +182,8 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
     state.setState(() => pickerSecundaria = color);
   }
 
-  Future escolherMetodoSelecionarFoto() {
-    if (state.widget.editarDados) {
+  Future escolherMetodoSelecionarFoto() async{
+    if (state.widget.editarDados !=null && state.widget.editarDados!) {
       return showModalBottomSheet<String>(
           context: state.context,
           shape: RoundedRectangleBorder(
@@ -283,10 +283,10 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   }
 
   Future<void> escolherImagem(ImageSource source) async {
-    var imagem = await ImagePicker.pickImage(source: source, imageQuality: 70);
+    var imagem = await ImagePicker().getImage(source: source,imageQuality: 70);
 
     if (imagem != null) {
-      var bytes = imagem.readAsBytesSync();
+      Uint8List bytes =await imagem.readAsBytes();
 
       var base64 = base64Encode(bytes);
 
@@ -310,7 +310,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
         endereco = await _enderecoService.buscarEnderecoPorCEP(cep);
         if (endereco != null) {
           _globalKey.currentState
-              .refresh(1.0, "Endereço encontrado", success: true);
+              ?.refresh(1.0, "Endereço encontrado", success: true);
 
           if (state.mounted) {
             state.setState(() {
@@ -324,14 +324,14 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
           }
         } else {
           Future.delayed(Duration(milliseconds: 1000), () {
-            _globalKey.currentState.refresh(
+            _globalKey.currentState?.refresh(
                 1.0, "Não foi possível encontrar o endereço.",
                 success: false);
           });
         }
       } else {
         Future.delayed(Duration(milliseconds: 1000), () {
-          _globalKey.currentState.refresh(1.0,
+          _globalKey.currentState?.refresh(1.0,
               "Você está sem conexão, Não foi possível encontrar o endereço.",
               success: false);
         });
@@ -344,7 +344,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   }
 
   Future<void> _buscarDadosOrganizacao() async {
-    var res = await _contasService.buscarDadosOrganizacao(state.widget.idConta);
+    var res = await _contasService.buscarDadosOrganizacao(state.widget.idConta!);
     if (res != null) {
       infoOrganizacaoViewModel = res;
       _popularControllers(res);
@@ -370,11 +370,11 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
       cpfController.text = infoOrganizacaoViewModel.cpfOuCNPJ ?? "";
     }
     if (infoOrganizacaoViewModel.corPrimaria != null) {
-      corPrimaria = fromHex(infoOrganizacaoViewModel.corPrimaria);
-      corSecundaria = fromHex(infoOrganizacaoViewModel.corSecundaria);
+      corPrimaria = fromHex(infoOrganizacaoViewModel!.corPrimaria!);
+      corSecundaria = fromHex(infoOrganizacaoViewModel!.corSecundaria!);
     }
-    idConta = infoOrganizacaoViewModel.idConta;
-    imagemPerfil = state.widget.imagemPerfil;
+    idConta = infoOrganizacaoViewModel.idConta!;
+    imagemPerfil = state.widget.imagemPerfil!;
   }
 
   void _atualizarViewModel(InfoOrganizacaoViewModel infoOrganizacaoViewModel) {
@@ -401,16 +401,16 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
 
   Future<void> editarDadosOrganizacao() async {
     _dialogUtils.showZProgressDialog("Atualizando dados", 0.4, keyProgress);
-    _atualizarViewModel(state.widget.infoOrganizacaoViewModel);
-    state.widget.infoOrganizacaoViewModel.idConta = state.widget.idConta;
+    _atualizarViewModel(state.widget.infoOrganizacaoViewModel!);
+    state.widget.infoOrganizacaoViewModel!.idConta = state.widget.idConta;
     print(state.widget.infoOrganizacaoViewModel);
     var res = await _contasService
-        .editarDadosOrganizacao(state.widget.infoOrganizacaoViewModel);
+        .editarDadosOrganizacao(state.widget.infoOrganizacaoViewModel!);
     var resImagem = await _atualizarImagem();
 
     if (res != null && resImagem) {
       Future.delayed(Duration(milliseconds: 500), () {
-        keyProgress.currentState.refresh(1.0, "Dados atualizados com sucesso!");
+        keyProgress.currentState?.refresh(1.0, "Dados atualizados com sucesso!");
         Future.delayed(Duration(milliseconds: 1500), () {
           _dialogUtils.dismiss();
           Navigator.of(state.context).pop(true);
@@ -418,7 +418,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
       });
     } else {
       Future.delayed(Duration(milliseconds: 500), () {
-        keyProgress.currentState.refresh(
+        keyProgress.currentState?.refresh(
             1.0, "Ocorreu um erro ao atualizar os dados.",
             success: false);
         Future.delayed(Duration(milliseconds: 1500), () {
@@ -429,7 +429,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
   }
 
   Future<bool> _atualizarImagem() async {
-    var base64 = base64Encode(imagemPerfil);
+    var base64 = base64Encode(imagemPerfil!);
     var res = await _arquivoService.atualizarImagem(new ArquivoViewModel(
       id: idConta,
       nome: "cover.jpg",

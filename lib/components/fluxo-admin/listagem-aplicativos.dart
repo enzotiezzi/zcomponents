@@ -1,5 +1,5 @@
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
@@ -18,7 +18,7 @@ import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 import '../z-item-tile-card-basico.dart';
 
 class ListagemAplicativos extends StatefulWidget {
-  ModuloContaViewModel moduloContaViewModel;
+  ModuloContaViewModel? moduloContaViewModel;
 
   ListagemAplicativos({this.moduloContaViewModel});
 
@@ -27,7 +27,7 @@ class ListagemAplicativos extends StatefulWidget {
 }
 
 class _ListagemAplicativosState extends State<ListagemAplicativos> {
-  ListagemAplicativosView _view;
+  late ListagemAplicativosView _view;
 
   @override
   void initState() {
@@ -65,7 +65,8 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
                       margin: const EdgeInsets.only(left: 16),
                       padding: const EdgeInsets.only(top: 8, bottom: 8),
                       child: new Text(
-                        widget.moduloContaViewModel.modulo.nome,
+                        widget.moduloContaViewModel?.modulo?.nome != null
+                            ? widget.moduloContaViewModel!.modulo!.nome! : "",
                         style: new TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
@@ -80,12 +81,12 @@ class _ListagemAplicativosState extends State<ListagemAplicativos> {
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: new Icon(Icons.arrow_drop_down, color: Color(0xffE6E6E6)),
             ),
-            children: [
+            childrenBody:
               new ZItemTileModuloGestao(
                 visibilidade: true,
-                nomeModulo: widget.moduloContaViewModel.modulo.nome,status:  widget.moduloContaViewModel.status,
+                nomeModulo: widget.moduloContaViewModel?.modulo?.nome,status:  widget.moduloContaViewModel?.status,
               )
-            ],
+
           ),
         ),
         new ZSearchBar(

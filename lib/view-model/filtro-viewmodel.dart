@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 class FiltroViewModel {
-  List<String> idsEmpresa;
-  List<String> idsResponsavel;
-  List<String> idsCentroCusto;
-  List<String> ordem;
-  String nome;
-  String data;
+  List<String>? idsEmpresa;
+  List<String>? idsResponsavel;
+  List<String>? idsCentroCusto;
+  List<String>? ordem;
+  String? nome;
+  String? data;
 
   FiltroViewModel(
       {this.idsEmpresa,

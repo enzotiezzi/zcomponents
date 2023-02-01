@@ -4,18 +4,18 @@ import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.da
 import 'documento-campo.dart';
 
 class ColaboradorDocumentoViewModel {
-  String idColaborador;
-  String idDocumento;
-  String nomeDocumento;
-  String status;
-  String idImagemDocumento;
-  Uint8List imagemDocumento;
-  String horizontalOuVertical;
-  String qtdePaginaUpload;
-  bool imagemObrigatoria;
-  bool documentoAtualizado;
-  double porcentagemStatusPreenchimento;
-  List<ContratacaoDocumentoCampoViewModel> campos;
+  String? idColaborador;
+  String? idDocumento;
+  String? nomeDocumento;
+  String? status;
+  String? idImagemDocumento;
+  Uint8List? imagemDocumento;
+  String? horizontalOuVertical;
+  String? qtdePaginaUpload;
+  bool? imagemObrigatoria;
+  bool? documentoAtualizado;
+  double? porcentagemStatusPreenchimento;
+  List<ContratacaoDocumentoCampoViewModel>? campos;
 
   ColaboradorDocumentoViewModel({
     this.idColaborador: "",
@@ -46,7 +46,7 @@ class ColaboradorDocumentoViewModel {
         documentoAtualizado: json["documentoAtualizado"],
         campos: (json['campos'] != null)
             ? (json['campos']).map((x) => DocumentoCampo.fromJson(x)).toList()
-            : new List(),
+            : [],
         porcentagemStatusPreenchimento: json["porcentagemStatusPreenchimento"]);
   }
 
@@ -61,7 +61,7 @@ class ColaboradorDocumentoViewModel {
       "imagemDocumento": this.imagemDocumento,
       "imagemObrigatoria": this.imagemObrigatoria,
       "documentoAtualizado": this.documentoAtualizado,
-      "campos": this.campos.map((x) => x.toMap()).toList(),
+      "campos": this.campos?.map((x) => x.toMap()).toList(),
     };
   }
 }

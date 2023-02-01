@@ -32,10 +32,10 @@ class FotoView extends IView<Foto> {
 
   Future<void> verificarSeDesejaExcluir(bool desejaExcluirImagem) async {
     if (desejaExcluirImagem) {
-      state.widget.fotos[state.widget.hero] = Uint8List(0);
-      selecionarItem(state.widget.fotos);
+      state.widget.fotos![state.widget.hero!] = Uint8List(0);
+      selecionarItem(state.widget.fotos!);
     } else {
-      selecionarItem(state.widget.fotos);
+      selecionarItem(state.widget.fotos!);
     }
   }
 }

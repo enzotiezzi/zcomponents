@@ -7,10 +7,10 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/historico-view-model.dart';
 
 class Dashboard extends StatefulWidget {
-  List<HistoricoViewModel> listaHistoricoPendentes;
-  List<HistoricoViewModel> listaHistoricoAndamento;
-  void Function(String) onTap;
-  List<HistoricoViewModel> listaHistoricoAbertosEPendendes;
+  List<HistoricoViewModel>? listaHistoricoPendentes = [];
+  List<HistoricoViewModel>? listaHistoricoAndamento = [];
+  void Function(String)? onTap;
+   List<HistoricoViewModel>? listaHistoricoAbertosEPendendes = [];
   var refresh;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -20,14 +20,14 @@ class Dashboard extends StatefulWidget {
 }
 
 class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
-  Animation animation;
-  AnimationController animationController;
+  late Animation animation;
+  late AnimationController animationController;
 
-  Animation animationPendentes;
-  AnimationController animationControllerPendentes;
+  late Animation animationPendentes;
+  late AnimationController animationControllerPendentes;
 
-  Animation animationAndamento;
-  AnimationController animationControllerAndamento;
+  late Animation animationAndamento;
+  late AnimationController animationControllerAndamento;
 
   final pageController = PageController();
   final pageControllerChamados = PageController();
@@ -152,7 +152,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
 
   Widget _buildListaChamados() {
     if (teste == true) {
-      if (widget.listaHistoricoAbertosEPendendes.length != 0) {
+      if (widget.listaHistoricoAbertosEPendendes!.length != 0) {
         return new Expanded(
             child: SmartRefresher(
           enablePullDown: true,
@@ -168,19 +168,19 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
             iconPos: IconPosition.right,
           ),
           child: new ListView.builder(
-              itemCount: widget.listaHistoricoAbertosEPendendes.length,
+              itemCount: widget.listaHistoricoAbertosEPendendes!.length,
               shrinkWrap: true,
               padding: const EdgeInsets.only(bottom: 60),
               itemBuilder: (context, index) {
-                List<String> onde = new List();
-                List<String> oque = new List();
-                List<String> porque = new List();
+                List<String> onde = [];
+                List<String> oque = [];
+                List<String> porque = [];
                 montarCaminho(
                     widget
-                        .listaHistoricoAbertosEPendendes[index].caminhoAmbiente,
-                    widget.listaHistoricoAbertosEPendendes[index]
+                        .listaHistoricoAbertosEPendendes![index].caminhoAmbiente,
+                    widget.listaHistoricoAbertosEPendendes![index]
                         .caminhoTipoEquipamento,
-                    widget.listaHistoricoAbertosEPendendes[index]
+                    widget.listaHistoricoAbertosEPendendes![index]
                         .caminhoTipoProblema,
                     onde,
                     oque,
@@ -228,7 +228,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                         alignment: Alignment.center,
                                         padding: const EdgeInsets.only(left: 8),
                                         child: new Text(
-                                          "${widget.listaHistoricoAbertosEPendendes[index].dataAbertura.split("-")[2].substring(0, 2)}/${widget.listaHistoricoAbertosEPendendes[index].dataAbertura.split("-")[1]}/${widget.listaHistoricoAbertosEPendendes[index].dataAbertura.split("-")[0]}",
+                                          "${widget.listaHistoricoAbertosEPendendes![index].dataAbertura!.split("-")[2].substring(0, 2)}/${widget.listaHistoricoAbertosEPendendes![index].dataAbertura!.split("-")[1]}/${widget.listaHistoricoAbertosEPendendes![index].dataAbertura!.split("-")[0]}",
                                           style: new TextStyle(
                                               color: Color(0xff707070),
                                               //fontWeight: FontWeight.w500,fontSize: 10
@@ -254,7 +254,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                         alignment: Alignment.center,
                                         padding: const EdgeInsets.only(left: 8),
                                         child: new Text(
-                                          "${widget.listaHistoricoAbertosEPendendes[index].dataAbertura.split("T")[1].substring(0, 5)}",
+                                          "${widget.listaHistoricoAbertosEPendendes![index].dataAbertura!.split("T")[1].substring(0, 5)}",
                                           style: new TextStyle(
                                               color: Color(0xff707070),
                                               //fontWeight: FontWeight.w500,fontSize: 10
@@ -275,7 +275,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                         child: new Icon(
                                           Icons.brightness_1,
                                           color: (widget
-                                                      .listaHistoricoAbertosEPendendes[
+                                                      .listaHistoricoAbertosEPendendes![
                                                           index]
                                                       .status ==
                                                   "Em Andamento")
@@ -426,9 +426,9 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                             onTap: () {
                               Future.delayed(new Duration(milliseconds: 200),
                                   () {
-                                widget.onTap(widget
-                                    .listaHistoricoAbertosEPendendes[index]
-                                    .idSolicitacao);
+                                widget.onTap!(widget
+                                    .listaHistoricoAbertosEPendendes![index]
+                                    .idSolicitacao!);
                               });
                             },
                           )),
@@ -679,7 +679,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                   children: <Widget>[
                     AnimatedBuilder(
                         animation: animationController,
-                        builder: (BuildContext context, Widget child) {
+                        builder: (BuildContext context,  child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
                               child: (carregouList != false)
@@ -761,7 +761,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                   children: <Widget>[
                     AnimatedBuilder(
                         animation: animationControllerPendentes,
-                        builder: (BuildContext context, Widget child) {
+                        builder: (BuildContext context,  child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
                               child: (carregouListPend != false)
@@ -842,7 +842,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                   children: <Widget>[
                     AnimatedBuilder(
                         animation: animationControllerAndamento,
-                        builder: (BuildContext context, Widget child) {
+                        builder: (BuildContext context,  child) {
                           return new Container(
                               margin: const EdgeInsets.only(top: 8),
                               child: (carregouListAnd != false)
@@ -902,7 +902,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
 
   Widget _buildListaChamadosPendentes() {
     if (teste == true) {
-      if (widget.listaHistoricoPendentes.length > 0) {
+      if (widget.listaHistoricoPendentes!.length > 0) {
         return new Expanded(
           child: SmartRefresher(
               enablePullDown: true,
@@ -918,19 +918,19 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                 iconPos: IconPosition.right,
               ),
               child: new ListView.builder(
-                  itemCount: widget.listaHistoricoPendentes.length,
+                  itemCount: widget.listaHistoricoPendentes!.length,
                   shrinkWrap: true,
                   padding: const EdgeInsets.only(bottom: 60),
                   itemBuilder: (context, index) {
-                    List<String> onde = new List();
-                    List<String> oque = new List();
-                    List<String> porque = new List();
+                    List<String> onde = [];
+                    List<String> oque = [];
+                    List<String> porque = [];
                     montarCaminho(
-                        widget.listaHistoricoPendentes[index].caminhoAmbiente,
-                        widget.listaHistoricoPendentes[index]
+                        widget.listaHistoricoPendentes![index].caminhoAmbiente,
+                        widget.listaHistoricoPendentes![index]
                             .caminhoTipoEquipamento,
                         widget
-                            .listaHistoricoPendentes[index].caminhoTipoProblema,
+                            .listaHistoricoPendentes![index].caminhoTipoProblema,
                         onde,
                         oque,
                         porque);
@@ -979,7 +979,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                             padding:
                                                 const EdgeInsets.only(left: 8),
                                             child: new Text(
-                                              "${widget.listaHistoricoPendentes[index].dataAbertura.split("-")[2].substring(0, 2)}/${widget.listaHistoricoPendentes[index].dataAbertura.split("-")[1]}/${widget.listaHistoricoPendentes[index].dataAbertura.split("-")[0]}",
+                                              "${widget.listaHistoricoPendentes![index].dataAbertura!.split("-")[2].substring(0, 2)}/${widget.listaHistoricoPendentes![index].dataAbertura!.split("-")[1]}/${widget.listaHistoricoPendentes![index].dataAbertura!.split("-")[0]}",
                                               style: new TextStyle(
                                                   color: Color(0xff707070),
                                                   //fontWeight: FontWeight.w500,fontSize: 10
@@ -1009,7 +1009,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                             padding:
                                                 const EdgeInsets.only(left: 8),
                                             child: new Text(
-                                              "${widget.listaHistoricoPendentes[index].dataAbertura.split("T")[1].substring(0, 5)}",
+                                              "${widget.listaHistoricoPendentes![index].dataAbertura!.split("T")[1].substring(0, 5)}",
                                               style: new TextStyle(
                                                   color: Color(0xff707070),
                                                   //fontWeight: FontWeight.w500,fontSize: 10
@@ -1032,7 +1032,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                             child: new Icon(
                                               Icons.brightness_1,
                                               color: (widget
-                                                          .listaHistoricoPendentes[
+                                                          .listaHistoricoPendentes![
                                                               index]
                                                           .status ==
                                                       "Em Andamento")
@@ -1186,9 +1186,9 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                 onTap: () {
                                   Future.delayed(
                                       new Duration(milliseconds: 200), () {
-                                    widget.onTap(widget
-                                        .listaHistoricoAbertosEPendendes[index]
-                                        .idSolicitacao);
+                                    widget.onTap!(widget
+                                        .listaHistoricoAbertosEPendendes![index]
+                                        .idSolicitacao!);
                                   });
                                 },
                               )),
@@ -1381,7 +1381,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
 
   Widget _buildListaChamadosAndamento() {
     if (teste == true) {
-      if (widget.listaHistoricoAndamento.length > 0) {
+      if (widget.listaHistoricoAndamento!.length > 0) {
         return new Expanded(
             child: SmartRefresher(
                 enablePullDown: true,
@@ -1397,19 +1397,19 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                   iconPos: IconPosition.right,
                 ),
                 child: new ListView.builder(
-                  itemCount: widget.listaHistoricoAndamento.length,
+                  itemCount: widget.listaHistoricoAndamento!.length,
                   shrinkWrap: true,
                   padding: const EdgeInsets.only(bottom: 60),
                   itemBuilder: (context, index) {
-                    List<String> onde = new List();
-                    List<String> oque = new List();
-                    List<String> porque = new List();
+                    List<String> onde = [];
+                    List<String> oque = [];
+                    List<String> porque = [];
                     montarCaminho(
-                        widget.listaHistoricoAndamento[index].caminhoAmbiente,
-                        widget.listaHistoricoAndamento[index]
+                        widget.listaHistoricoAndamento![index].caminhoAmbiente,
+                        widget.listaHistoricoAndamento![index]
                             .caminhoTipoEquipamento,
                         widget
-                            .listaHistoricoAndamento[index].caminhoTipoProblema,
+                            .listaHistoricoAndamento![index].caminhoTipoProblema,
                         onde,
                         oque,
                         porque);
@@ -1458,7 +1458,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                             padding:
                                                 const EdgeInsets.only(left: 8),
                                             child: new Text(
-                                              "${widget.listaHistoricoAndamento[index].dataAbertura.split("-")[2].substring(0, 2)}/${widget.listaHistoricoAndamento[index].dataAbertura.split("-")[1]}/${widget.listaHistoricoAndamento[index].dataAbertura.split("-")[0]}",
+                                              "${widget.listaHistoricoAndamento![index].dataAbertura!.split("-")[2].substring(0, 2)}/${widget.listaHistoricoAndamento![index].dataAbertura!.split("-")[1]}/${widget.listaHistoricoAndamento![index].dataAbertura!.split("-")[0]}",
                                               style: new TextStyle(
                                                   color: Color(0xff707070),
                                                   //fontWeight: FontWeight.w500,fontSize: 10
@@ -1488,7 +1488,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                             padding:
                                                 const EdgeInsets.only(left: 8),
                                             child: new Text(
-                                              "${widget.listaHistoricoAndamento[index].dataAbertura.split("T")[1].substring(0, 5)}",
+                                              "${widget.listaHistoricoAndamento![index].dataAbertura!.split("T")[1].substring(0, 5)}",
                                               style: new TextStyle(
                                                   color: Color(0xff707070),
                                                   //fontWeight: FontWeight.w500,fontSize: 10
@@ -1511,7 +1511,7 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                             child: new Icon(
                                               Icons.brightness_1,
                                               color: (widget
-                                                          .listaHistoricoAndamento[
+                                                          .listaHistoricoAndamento![
                                                               index]
                                                           .status ==
                                                       "Em Andamento")
@@ -1665,9 +1665,9 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
                                 onTap: () {
                                   Future.delayed(
                                       new Duration(milliseconds: 200), () {
-                                    widget.onTap(widget
-                                        .listaHistoricoAbertosEPendendes[index]
-                                        .idSolicitacao);
+                                    widget.onTap!(widget
+                                        .listaHistoricoAbertosEPendendes![index]
+                                        .idSolicitacao!);
                                   });
                                 },
                               )),
@@ -1858,41 +1858,41 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
   }
 
   void montarCaminho(
-      String onde,
-      String oque,
-      String porque,
-      List<String> listaOnde,
-      List<String> listaOque,
-      List<String> listaPorque) {
+      String? onde,
+      String? oque,
+      String? porque,
+      List<String>? listaOnde,
+      List<String>? listaOque,
+      List<String>? listaPorque) {
     int tamanhoOnde = 0;
     int tamanhoOque = 0;
     int tamanhoPorque = 0;
     if (onde != null && onde.contains("|")) {
       tamanhoOnde = onde.split("|").length;
       for (int i = 0; i < tamanhoOnde; i++) {
-        listaOnde.add(onde.split("|")[i]);
+        listaOnde!.add(onde.split("|")[i]);
       }
-      caminhoOnde = listaOnde.first;
+      caminhoOnde = listaOnde!.first;
     } else {
-      caminhoOnde = onde;
+      caminhoOnde = onde!;
     }
     if (oque != null && oque.contains("|")) {
       tamanhoOque = oque.split("|").length;
       for (int i = 0; i < tamanhoOque; i++) {
-        listaOque.add(oque.split("|")[i]);
+        listaOque!.add(oque.split("|")[i]);
       }
-      caminhoOque = listaOque.first;
+      caminhoOque = listaOque!.first;
     } else {
-      caminhoOque = oque;
+      caminhoOque = oque!;
     }
     if (porque != null && porque.contains("|")) {
       tamanhoPorque = porque.split("|").length;
       for (int i = 0; i < tamanhoPorque; i++) {
-        listaPorque.add(porque.split("|")[i]);
+        listaPorque!.add(porque.split("|")[i]);
       }
-      caminhoPorque = listaPorque.first;
+      caminhoPorque = listaPorque!.first;
     } else {
-      caminhoPorque = porque;
+      caminhoPorque = porque!;
     }
   }
 
@@ -1956,8 +1956,8 @@ class _Dashboard extends State<Dashboard> with TickerProviderStateMixin {
     animationController.reset();
     animationControllerPendentes.reset();
     animationControllerAndamento.reset();
-    widget.listaHistoricoAbertosEPendendes.clear();
-    widget.listaHistoricoPendentes.clear();
-    widget.listaHistoricoAndamento.clear();
+    widget.listaHistoricoAbertosEPendendes!.clear();
+    widget.listaHistoricoPendentes?.clear();
+    widget.listaHistoricoAndamento?.clear();
   }
 }

@@ -3,16 +3,16 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputName extends StatefulWidget {
-  final Key key;
-  final ThemeData themeData;
-  FocusNode nomeFocus;
-  var controllerNome = new TextEditingController();
-  FocusNode proximoFocus;
-  ValueChanged<String> onChange;
-  String nomeDoHintText;
-  bool enabled;
-  final bool campoObrigatorio;
-  void Function(bool) validacao;
+  final Key? key;
+  final ThemeData? themeData;
+  FocusNode? nomeFocus;
+  TextEditingController? controllerNome;
+  FocusNode? proximoFocus;
+  ValueChanged<String>? onChange;
+  String? nomeDoHintText;
+  bool? enabled;
+  final bool? campoObrigatorio;
+  void Function(bool)? validacao;
 
 
   ZInputName({
@@ -32,10 +32,10 @@ class ZInputName extends StatefulWidget {
 }
 
 class _ZInputNameState extends State<ZInputName> {
-  DialogUtils _dialogUtils;
-  String nome;
+  late DialogUtils _dialogUtils;
+  late String? nome;
   int countNome = 1;
-  bool valideNome;
+  late bool? valideNome;
 
   @override
   void initState() {
@@ -52,13 +52,13 @@ class _ZInputNameState extends State<ZInputName> {
         "Nome",
         TextInputType.text,
         () {
-          FocusScope.of(context).requestFocus(widget.nomeFocus);
+
         },
         widget.nomeFocus,
         widget.controllerNome,
         widget.proximoFocus,
         (text) {
-          if (widget.onChange != null) widget.onChange(text);
+          if (widget.onChange != null) widget.onChange!(text);
 
           nome = text;
           countNome = 0;
@@ -71,8 +71,8 @@ class _ZInputNameState extends State<ZInputName> {
   }
 
   void initNome() {
-    widget.nomeFocus.addListener(() {
-      if (!widget.nomeFocus.hasFocus && countNome == 0 && nome != "") {
+    widget.nomeFocus?.addListener(() {
+      if (!widget.nomeFocus!.hasFocus && countNome == 0 && nome != "") {
         _valideNome();
       }
     });
@@ -83,21 +83,21 @@ class _ZInputNameState extends State<ZInputName> {
       valideNome = false;
       _dialogUtils.showAlertDialogNewAviso(
           "Nome Inválido!", "Por Favor insira o nome completo.");
-      widget.validacao(false);
-    } else if (nome.split(' ').length < 2) {
+      widget.validacao!(false);
+    } else if (nome!.split(' ').length < 2) {
       valideNome = false;
       _dialogUtils.showAlertDialogNewAviso(
           "Nome Inválido!", "Por Favor insira o nome completo.");
-      widget.validacao(false);
+      widget.validacao!(false);
     } else {
-      if (nome.split(' ')[1].length < 2) {
+      if (nome!.split(' ')[1].length < 2) {
         valideNome = false;
         _dialogUtils.showAlertDialogNewAviso(
             "Nome Inválido!", "Por Favor insira o nome completo.");
-        widget.validacao(false);
+        widget.validacao!(false);
       }else{
         valideNome = true;
-        widget.validacao(true);
+        widget.validacao!(true);
       }
     }
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:z_components/components/z-aba/z-aba-viewmodel.dart';
 
 class ZAba extends StatefulWidget {
-  List<ZAbaViewModel> zAbaViewModel;
+  List<ZAbaViewModel>? zAbaViewModel;
 
   ZAba({this.zAbaViewModel});
 
@@ -17,9 +17,9 @@ class _ZAbaState extends State<ZAba> {
       height: 150,
       child: new ListView.builder(    padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 10.0),
         scrollDirection: Axis.horizontal,
-        itemCount: widget.zAbaViewModel.length,
+        itemCount: widget.zAbaViewModel!.length,
         itemBuilder: (context, index) =>
-            _montarCardAba(widget.zAbaViewModel[index]),
+            _montarCardAba(widget.zAbaViewModel![index]),
       ),
     );
   }
@@ -29,7 +29,7 @@ class _ZAbaState extends State<ZAba> {
       width: 160,
       child: new GestureDetector(
         onTap: () {
-          item.onTap();
+          item.onTap!();
         },
         child: new Container(
           margin: EdgeInsets.only(left: 10.0),
@@ -52,7 +52,7 @@ class _ZAbaState extends State<ZAba> {
                   new Container(
                     margin: EdgeInsets.all(6.0),
                     child: new Text(
-                      item.titulo,
+                      item.titulo ?? "",
                       style: TextStyle(
                           color: Color(0xff000000), fontWeight: FontWeight.w600),
                     ),

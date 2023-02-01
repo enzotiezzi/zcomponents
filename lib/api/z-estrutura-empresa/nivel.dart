@@ -1,30 +1,30 @@
 class Nivel {
-  String idNivel;
-  String nome;
-  String idNivelPai;
-  String caminho;
+  String? idNivel;
+  String? nome;
+  String? idNivelPai;
+  String? caminho;
 
   // NivelTipo NivelTipo;
-  String idNivelTipo;
-  String tipo;
+  String? idNivelTipo;
+  String? tipo;
 
   // Endereco Endereco;
-  List<Nivel> niveis;
+  List<Nivel>? niveis;
 
-  String rua;
-  String numero;
-  String complemento;
-  String CEP;
-  String bairro;
+  String? rua;
+  String? numero;
+  String? complemento;
+  String? CEP;
+  String? bairro;
 
   // MunicipioZellar Municipio;
-  String idMunicipio;
+  String? idMunicipio;
 
   // EstadoZellar Estado;
-  String idEstado;
-  String idUsuarioCriacao;
+  String? idEstado;
+  String? idUsuarioCriacao;
 
-  int index;
+  int? index;
 
   Nivel(
       {this.nome,

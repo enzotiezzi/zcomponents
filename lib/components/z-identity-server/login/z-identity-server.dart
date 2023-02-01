@@ -1,29 +1,30 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:crypto/crypto.dart' as x;
 import 'package:http/http.dart' as http;
-import 'package:randombytes/randombytes.dart';
+import 'dart:math';
 import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/components/z-identity-server/js-channels.dart';
 import 'package:z_components/components/z-identity-server/token-info.dart';
 import 'package:z_components/components/z-identity-server/z-token-viewmodel.dart';
 
 class ZIdentityServer {
-  String clientId;
-  String redirectURI;
-  List<String> scopes;
-  String authorizeURL;
-  String tokenURL;
+  String? clientId;
+  String? redirectURI;
+  List<String>? scopes;
+  String? authorizeURL;
+  String? tokenURL;
 
   FlutterWebviewPlugin _flutterWebviewPlugin = new FlutterWebviewPlugin();
-  SharedPreferences _sharedPreferences;
+  late SharedPreferences _sharedPreferences;
 
-  String _codeVerifier;
+  late String _codeVerifier;
 
   ZIdentityServer(
       {@required this.clientId,
@@ -32,12 +33,12 @@ class ZIdentityServer {
       @required this.authorizeURL,
       @required this.tokenURL});
 
-  Future<ZTokenViewModel> authorize() async {
+  Future<ZTokenViewModel?> authorize() async {
     try {
       _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
       _flutterWebviewPlugin.onUrlChanged.listen((url) {
-        if (url.contains("code=") && url.contains(redirectURI))
+        if (url.contains("code=") && url.contains(redirectURI!))
           _flutterWebviewPlugin.reload();
       });
 
@@ -51,14 +52,14 @@ class ZIdentityServer {
           ].toSet());
 
       var url = await _flutterWebviewPlugin.onUrlChanged.firstWhere(
-          (url) => url.contains("code=") && url.contains(redirectURI));
+          (url) => url.contains("code=") && url.contains(redirectURI!));
 
       await _flutterWebviewPlugin.close();
       _flutterWebviewPlugin.dispose();
 
       var code = Uri.parse(url).queryParameters['code'];
 
-      var tokenViewModel = await _getToken(code);
+      var tokenViewModel = await _getToken(code!);
 
       return tokenViewModel;
     } catch (e) {
@@ -66,7 +67,7 @@ class ZIdentityServer {
     }
   }
 
-  Future<ZTokenViewModel> refreshToken(String refreshToken) async {
+  Future<ZTokenViewModel?> refreshToken(String refreshToken) async {
     try {
       final response = await http.post(
          Uri.parse( 'https://${IdentityServer.address}/connect/token'),
@@ -78,7 +79,7 @@ class ZIdentityServer {
             'redirect_uri': redirectURI,
             'grant_type': 'refresh_token',
             'refresh_token': refreshToken,
-            'scope': scopes.join(" ")
+            'scope': scopes?.join(" ")
           });
 
       var tokenViewModel = ZTokenViewModel.fromJson(json.decode(response.body));
@@ -89,7 +90,7 @@ class ZIdentityServer {
     }
   }
 
-  Future<void> logOut(Function onLogOut, {String token}) async {
+  Future<void> logOut(Function onLogOut, {String? token}) async {
     _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
     if (Platform.isIOS) {
@@ -130,7 +131,7 @@ class ZIdentityServer {
       'response_type': 'code',
       'client_id': clientId,
       'redirect_uri': redirectURI,
-      'scope': scopes.join(" "),
+      'scope': scopes?.join(" "),
       'state': state,
       'code_challenge': codeChallengeBase64,
       'code_challenge_method': 'S256'
@@ -140,9 +141,14 @@ class ZIdentityServer {
   }
 
   String _generateCodeVerifier() {
-    var random = randomBytes(32, secure: true);
+    var random = Random.secure();
+    final ret = Uint8List(32);
 
-    return _toBase64URLEncode(random);
+    for (var i = 0; i < 32; i++) {
+      ret[i] = random.nextInt(256);
+    }
+
+    return _toBase64URLEncode(ret);
   }
 
   String _generateCodeChallenge(String codeVerifier) {
@@ -162,7 +168,7 @@ class ZIdentityServer {
         .replaceAll("=", "");
   }
 
-  Future<ZTokenViewModel> _getToken(String code) async {
+  Future<ZTokenViewModel?> _getToken(String code) async {
     try {
       final response = await http.post(
           Uri.parse('https://${IdentityServer.address}/connect/token'),

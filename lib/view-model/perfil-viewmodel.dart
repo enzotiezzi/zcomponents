@@ -1,7 +1,7 @@
 class PerfilViewModel {
-  String idPerfil;
-  String nome;
-  String idApp;
+  String? idPerfil;
+  String? nome;
+  String? idApp;
 
   PerfilViewModel({
     this.idPerfil,

@@ -4,15 +4,15 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputCEP extends StatefulWidget {
-  final Key key;
-  FocusNode cepFocus;
-  var controllerCep = new TextEditingController();
-  FocusNode proximoFocus;
-  ValueChanged<String> onChange;
-  void Function(bool) validacao;
-  bool enabled;
-  final bool campoObrigatorio;
-  final ThemeData themeData;
+  final Key? key;
+  FocusNode? cepFocus;
+  TextEditingController? controllerCep;
+  FocusNode? proximoFocus;
+  ValueChanged<String>? onChange;
+  void Function(bool)? validacao;
+  bool? enabled;
+  final bool? campoObrigatorio;
+  final ThemeData? themeData;
 
   ZInputCEP(
       {this.key,
@@ -31,7 +31,7 @@ class ZInputCEP extends StatefulWidget {
 }
 
 class _ZInputCEPState extends State<ZInputCEP> {
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
   String cep = "";
 
   @override
@@ -48,13 +48,13 @@ class _ZInputCEPState extends State<ZInputCEP> {
         "CEP",
         TextInputType.number,
         () {
-          FocusScope.of(context).requestFocus(widget.cepFocus);
+          //FocusScope.of(context).requestFocus(widget.cepFocus);
         },
         widget.cepFocus,
         widget.controllerCep,
         widget.proximoFocus,
         (text) {
-          if (widget.onChange != null) widget.onChange(text);
+          if (widget.onChange != null) widget.onChange!(text);
 
           cep = text;
           if (cep.length == 9) {
@@ -70,16 +70,16 @@ class _ZInputCEPState extends State<ZInputCEP> {
   }
 
   void initCep() {
-    widget.cepFocus.addListener(() {
-      if (!widget.cepFocus.hasFocus && cep != "") {
+    widget.cepFocus?.addListener(() {
+      if (!widget.cepFocus!.hasFocus && cep != "") {
         _validarCEP();
       }
     });
   }
 
   void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
+      BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
+    currentFocus?.unfocus();
     if (nextFocus != null) {
       FocusScope.of(context).requestFocus(nextFocus);
     }
@@ -101,13 +101,13 @@ class _ZInputCEPState extends State<ZInputCEP> {
     if (cep.length < 9 && cep != "") {
       _dialogUtils.showAlertDialogNewAviso(
           "CEP Inválido!", "Por Favor, Termine de digitar o seu cep.");
-      widget.validacao(false);
+      widget.validacao!(false);
     } else if(sequenciaIlegal.indexOf(cep)  != -1){
       _dialogUtils.showAlertDialogNewAviso(
           "CEP Inválido!", "Por Favor, Digite um cep válido.");
-      widget.validacao(false);
+      widget.validacao!(false);
     } else {
-      widget.validacao(true);
+      widget.validacao!(true);
     }
   }
 }

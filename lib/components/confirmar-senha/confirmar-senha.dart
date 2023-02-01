@@ -7,15 +7,15 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ConfirmarSenha {
-  String token;
-  BuildContext context;
+  String? token;
+  BuildContext? context;
 
   ConfirmarSenha({@required this.token, @required this.context});
 
-  Future<bool> dialogConfirmarSenha() {
+  Future dialogConfirmarSenha() {
     TextEditingController senha = new TextEditingController();
     return showDialog(
-      context: context,
+      context: context!,
       barrierDismissible: false,
       builder: (BuildContext context) => ZAlertDialog(
         zDialog: ZDialog.normal,
@@ -75,14 +75,14 @@ class ConfirmarSenha {
 
   Future<void> _verificarPin(String text) async {
     IConfirmarSenhaService iConfirmarSenhaService =
-        new ConfirmarSenhaService(token);
+        new ConfirmarSenhaService(token!);
 
     var service = await iConfirmarSenhaService.validarSenha(text);
 
     if (service != null && service == true) {
-      Navigator.of(context).pop(true);
+      Navigator.of(context!).pop(true);
     } else {
-      Navigator.of(context).pop(false);
+      Navigator.of(context!).pop(false);
     }
   }
 }

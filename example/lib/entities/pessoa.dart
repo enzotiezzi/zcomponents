@@ -4,10 +4,10 @@ import 'package:z_components/infra/schema/z-column.dart';
 import 'package:z_components/infra/schema/z-table.dart';
 
 class Pessoa extends ZEntity {
-  String nome;
-  int idade;
+  String? nome;
+  int? idade;
 
-  Pessoa({this.nome, this.idade, int id, String idConta})
+  Pessoa({this.nome, this.idade, int? id, String? idConta})
       : super(id: id, idConta: idConta);
 
   @override

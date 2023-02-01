@@ -3,12 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:z_components/components/z-nome-reduzido.dart';
 
 class ZItemTileListaCandidato extends StatefulWidget {
-  final String idConta;
-  final Widget imagemPerfil;
-  final String nomeDependente;
-  final String idade;
-  final String grauParentesco;
-  final String documentos;
+  final String? idConta;
+  final Widget? imagemPerfil;
+  final String? nomeDependente;
+  final String? idade;
+  final String? grauParentesco;
+  final String? documentos;
 
   ZItemTileListaCandidato(
       {this.idConta,
@@ -47,7 +47,7 @@ class _ZItemTileListaCandidatoState extends State<ZItemTileListaCandidato> {
       return new Text('');
     } else {
       return new ZNomeReduzido(
-        text: widget.nomeDependente,
+        text: widget.nomeDependente!,
         textStyle: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
@@ -75,7 +75,7 @@ class _ZItemTileListaCandidatoState extends State<ZItemTileListaCandidato> {
       return new Text('');
     } else {
       return new Text(
-        widget.grauParentesco,
+        widget.grauParentesco!,
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,
@@ -89,7 +89,7 @@ class _ZItemTileListaCandidatoState extends State<ZItemTileListaCandidato> {
       return new Text('');
     } else {
       return new Text(
-        widget.documentos,
+        widget.documentos!,
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MaterialFormsSample extends StatefulWidget {
-  const MaterialFormsSample({Key key}) : super(key: key);
+  const MaterialFormsSample({Key? key}) : super(key: key);
 
   @override
   _MaterialFormsSampleState createState() => _MaterialFormsSampleState();
@@ -62,16 +62,16 @@ class _MaterialFormsSampleState extends State<MaterialFormsSample> {
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1950),
                     lastDate: DateTime(2030),
-                    builder: (BuildContext context, Widget child) {
+                    builder: (BuildContext context,  child) {
                       return Theme(
                         data: ThemeData.dark(),
-                        child: child,
+                        child: child!,
                       );
                     },
                   );
 
                   setState(() {
-                    _dataNascimentoTextController.text = new DateFormat("dd/MM/yyyy").format(selectedDate);
+                    _dataNascimentoTextController.text = new DateFormat("dd/MM/yyyy").format(selectedDate!);
                   });
                 },
                 decoration: new InputDecoration(
@@ -108,9 +108,9 @@ class _MaterialFormsSampleState extends State<MaterialFormsSample> {
                       secondary: new Icon(Icons.emoji_transportation),
                       title: new Text("Vale transporte"),
                       activeColor: Theme.of(context).primaryColor,
-                      onChanged: (bool newValue) {
+                      onChanged: (newValue) {
                         setState(() {
-                          _vtSelecionado = newValue;
+                          _vtSelecionado = newValue!;
                         });
                       }),
                   new CheckboxListTile(
@@ -118,9 +118,9 @@ class _MaterialFormsSampleState extends State<MaterialFormsSample> {
                       secondary: new Icon(Icons.fastfood_sharp),
                       title: new Text("Vale alimentação"),
                       activeColor: Theme.of(context).primaryColor,
-                      onChanged: (bool newValue) {
+                      onChanged: ( newValue) {
                         setState(() {
-                          _vaSelecionado = newValue;
+                          _vaSelecionado = newValue!;
                         });
                       }),
                 ],

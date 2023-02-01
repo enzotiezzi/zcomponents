@@ -2,32 +2,32 @@ import 'contratacao-status-viewmodel.dart';
 import 'contratacao-validacao-viewmodel.dart';
 
 class ContratacaoViewModel {
-  String idContratacao;
-  String idEmpresa;
-  String idCargo;
-  String idKitAdmissao;
-  String dataAdmissao;
-  String dataVencimento;
-  ContratacaoStatus contratacaoStatus;
-  String idContratacaoStatus;
-  bool preenchimentoRH;
-  bool preenchimentoCandidato;
-  String nomeCargo;
-  String nome;
-  String cpf;
-  String email;
-  String telefone;
-  String textoConvite;
-  String dataVisualizacaoCandidato;
-  String dataAprovacaoRH;
-  String dataCriacao;
-  String idUsuarioCriacao;
-  double contratacaoPercentualRespondido;
-  bool correcaoSolicitada;
-  String idContratacaoValidacaoStatus;
-  ContratacaoValidacaoStatusViewModel contratacaoValidacaoStatusViewModel;
-  String idConta;
-  bool correcaoRealizada;
+  String? idContratacao;
+  String? idEmpresa;
+  String? idCargo;
+  String? idKitAdmissao;
+  String? dataAdmissao;
+  String? dataVencimento;
+  ContratacaoStatus? contratacaoStatus;
+  String? idContratacaoStatus;
+  bool? preenchimentoRH;
+  bool? preenchimentoCandidato;
+  String? nomeCargo;
+  String? nome;
+  String? cpf;
+  String? email;
+  String? telefone;
+  String? textoConvite;
+  String? dataVisualizacaoCandidato;
+  String? dataAprovacaoRH;
+  String? dataCriacao;
+  String? idUsuarioCriacao;
+  double? contratacaoPercentualRespondido;
+  bool? correcaoSolicitada;
+  String? idContratacaoValidacaoStatus;
+  ContratacaoValidacaoStatusViewModel? contratacaoValidacaoStatusViewModel;
+  String? idConta;
+  bool? correcaoRealizada;
 
   ContratacaoViewModel(
       {this.idContratacao,
@@ -103,7 +103,7 @@ class ContratacaoViewModel {
       "idKitAdmissao": this.idKitAdmissao,
       "dataAdmissao": this.dataAdmissao,
       "dataVencimento": this.dataVencimento,
-      "contratacaoStatus": this.contratacaoStatus.toMap(),
+      "contratacaoStatus": this.contratacaoStatus?.toMap(),
       "idContratacaoStatus": this.idContratacaoStatus,
       "preenchimentoRH": this.preenchimentoRH,
       "preenchimentoCandidato": this.preenchimentoCandidato,
@@ -118,7 +118,7 @@ class ContratacaoViewModel {
       "idUsuarioCriacao": this.idUsuarioCriacao,
       "nomeCargo": this.nomeCargo,
       "contratacaoPercentualRespondido": this.contratacaoPercentualRespondido,
-      "contratacaoValidacaoStatusViewModel": this.contratacaoValidacaoStatusViewModel.toMap(),
+      "contratacaoValidacaoStatusViewModel": this.contratacaoValidacaoStatusViewModel?.toMap(),
       "correcaoSolicitada": this.correcaoSolicitada,
       "idContratacaoValidacaoStatus": this.idContratacaoValidacaoStatus
     };

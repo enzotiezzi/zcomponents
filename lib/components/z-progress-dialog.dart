@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 class ZProgressDialog extends StatefulWidget {
-  String message;
-  bool barrierDismissible;
-  double progressBarValue;
-  bool complete;
-  bool sucess;
-  int animationDuration;
-  Color colorBar;
-  Key key;
+  String? message;
+  bool? barrierDismissible;
+  double? progressBarValue;
+  bool? complete;
+  bool? sucess;
+  int? animationDuration;
+  Color? colorBar;
+  Key? key;
 
   ZProgressDialog(
       {this.message: "",
@@ -42,7 +42,7 @@ class ZProgressDialogState extends State<ZProgressDialog>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (widget.barrierDismissible == true) {
+        if (widget.barrierDismissible != null && widget.barrierDismissible==true) {
           Navigator.pop(context);
         }
       },
@@ -79,17 +79,17 @@ class ZProgressDialogState extends State<ZProgressDialog>
                                             left: 6, right: 6),
                                         animateFromLastPercent: true,
                                         animationDuration:
-                                            widget.animationDuration,
+                                            widget.animationDuration!,
                                         backgroundColor: Colors.white,
                                         percent:
-                                            (widget.progressBarValue > 1.0 ||
-                                                    widget.progressBarValue < 0)
+                                            (widget.progressBarValue! > 1.0 ||
+                                                    widget.progressBarValue! < 0)
                                                 ? 1.0
-                                                : widget.progressBarValue,
+                                                : widget.progressBarValue!,
                                         linearStrokeCap:
                                             LinearStrokeCap.roundAll,
                                         progressColor: (widget.sucess == true &&
-                                                widget.progressBarValue < 1.0)
+                                                widget.progressBarValue! < 1.0)
                                             ? widget.colorBar
                                             : (widget.sucess == true)
                                                 ? Color(0xff1AC15D)
@@ -106,7 +106,7 @@ class ZProgressDialogState extends State<ZProgressDialog>
                                         margin: const EdgeInsets.only(
                                             top: 16, bottom: 16),
                                         child: new Text(
-                                          widget.message,
+                                          _rtornarMensagem(),
                                           textAlign: TextAlign.center,
                                           style: new TextStyle(
                                               fontWeight: FontWeight.bold),
@@ -117,7 +117,7 @@ class ZProgressDialogState extends State<ZProgressDialog>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    (widget.progressBarValue == 1.0)
+                                    (widget.progressBarValue != null && widget.progressBarValue == 1.0)
                                         ? new Container()
                                         : new SpinKitThreeBounce(
                                             color: Colors.black,
@@ -127,7 +127,7 @@ class ZProgressDialogState extends State<ZProgressDialog>
                                 ),
                                 new Container(
                                   margin: const EdgeInsets.only(bottom: 16),
-                                  child: (widget.sucess == true)
+                                  child: (widget.sucess != null && widget.sucess == true)
                                       ? new AnimatedSize(
                                           vsync: this,
                                           duration:
@@ -151,7 +151,7 @@ class ZProgressDialogState extends State<ZProgressDialog>
                                             Icons.clear,
                                             color: Colors.red,
                                             size:
-                                                (widget.progressBarValue == 1.0)
+                                                (widget.progressBarValue != null && widget.progressBarValue == 1.0)
                                                     ? 24
                                                     : 0,
                                           ),
@@ -167,7 +167,7 @@ class ZProgressDialogState extends State<ZProgressDialog>
     );
   }
 
-  void refresh(double newValueProgress, String newValueMessage, {bool success}) {
+  void refresh(double newValueProgress, String newValueMessage, {bool? success}) {
     if (success == null) {
       success = true;
     }
@@ -176,5 +176,13 @@ class ZProgressDialogState extends State<ZProgressDialog>
       widget.message = newValueMessage;
       widget.sucess = success;
     });
+  }
+
+  String _rtornarMensagem(){
+    if(widget.message!=null){
+      return widget.message!;
+    }else{
+      return "";
+    }
   }
 }

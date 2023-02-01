@@ -1,29 +1,30 @@
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ZPGrafico extends StatefulWidget {
-  final bool initiallyExpanded;
+  final bool? initiallyExpanded;
 
-  final String titulo;
+  final String? titulo;
 
-  final GestureTapCallback onTapItem1;
-  final GestureTapCallback onTapItem2;
-  final GestureTapCallback onTapItem3;
+  final GestureTapCallback? onTapItem1;
+  final GestureTapCallback? onTapItem2;
+  final GestureTapCallback? onTapItem3;
 
-  final String tituloCenterCircle;
+  final String? tituloCenterCircle;
 
-  final double valueItem1;
-  final double valueItem2;
-  final double valueItem3;
+  final double? valueItem1;
+  final double? valueItem2;
+  final double? valueItem3;
 
-  final String tituloItem1;
-  final String tituloItem2;
-  final String tituloItem3;
+  final String? tituloItem1;
+  final String? tituloItem2;
+  final String? tituloItem3;
 
   ZPGrafico({
-    Key key,
+    Key? key,
     this.initiallyExpanded = false,
     this.onTapItem1,
     this.onTapItem2,
@@ -112,7 +113,7 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
         margin: EdgeInsets.only(left: 7.0, right: 7.0),
         child: new ConfigurableExpansionTile(
           key: widget.key,
-          initiallyExpanded: widget.initiallyExpanded,
+          initiallyExpanded: widget.initiallyExpanded!,
           onExpansionChanged: (bool) {
             setState(() {
               //_secondExpansionVisible = !bool;
@@ -129,7 +130,7 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
                   new Row(
                     children: <Widget>[
                       new Container(
-                        child: new Text(widget.titulo),
+                        child: new Text(widget.titulo!),
                       ),
                       new Container(
                         margin: EdgeInsets.only(left: 5.0),
@@ -189,7 +190,7 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
               ),
             ),
           ),
-          children: <Widget>[_secondExpansion()],
+          childrenBody: _secondExpansion(),
         ));
   }
 
@@ -205,12 +206,14 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           new Container(
-            child: AnimatedCircularChart(
-                holeLabel: widget.tituloCenterCircle,
-                labelStyle: TextStyle(fontSize: 10.0, color: Colors.black),
-                duration: Duration(milliseconds: 500),
-                size: Size.fromRadius(60.0),
-                initialChartData: <CircularStackEntry>[
+            child: SfCircularChart(
+              title: ChartTitle(text: widget.tituloCenterCircle!),
+
+                //holeLabel: widget.tituloCenterCircle,
+                //labelStyle: TextStyle(fontSize: 10.0, color: Colors.black),
+                //duration: Duration(milliseconds: 500),
+                //size: Size.fromRadius(60.0),
+                /*initialChartData: <CircularStackEntry>[
                   new CircularStackEntry(
                     <CircularSegmentEntry>[
                       new CircularSegmentEntry(
@@ -231,14 +234,19 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
                     ],
                     rankKey: 'progress',
                   ),
-                ]),
+                ]*/
+            ),
           ),
           new Container(
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 new GestureDetector(
-                  onTap: widget.onTapItem1,
+                  onTap: (){
+                    if(widget.onTapItem1 != null){
+                      widget.onTapItem1!();
+                    }
+                  },
                   child: new Container(
                       width: (MediaQuery.of(context).size.width / 2.1),
                       color: const Color(0xffF7F7F7),
@@ -266,7 +274,7 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
                                         fontWeight: FontWeight.bold)),
                               ),
                               new Text(
-                                widget.tituloItem1,
+                                widget.tituloItem1!,
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w500),
@@ -281,7 +289,11 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
                       )),
                 ),
                 new GestureDetector(
-                  onTap: widget.onTapItem2,
+                  onTap: (){
+                    if(widget.onTapItem2 !=null){
+                      widget.onTapItem2!();
+                    }
+                  },
                   child: new Container(
                       width: (MediaQuery.of(context).size.width / 2.1),
                       color: const Color(0xffF7F7F7),
@@ -309,7 +321,7 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
                                         fontWeight: FontWeight.bold)),
                               ),
                               new Text(
-                                widget.tituloItem2,
+                                widget.tituloItem2!,
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w500),
@@ -324,7 +336,11 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
                       )),
                 ),
                 new GestureDetector(
-                  onTap: widget.onTapItem3,
+                  onTap: (){
+                    if(widget.onTapItem3 != null){
+                      widget.onTapItem3!();
+                    }
+                  },
                   child: new Container(
                       width: (MediaQuery.of(context).size.width / 2.1),
                       color: const Color(0xffF7F7F7),
@@ -352,7 +368,7 @@ class _ZPGraficoState extends State<ZPGrafico> with TickerProviderStateMixin {
                                         fontWeight: FontWeight.bold)),
                               ),
                               new Text(
-                                widget.tituloItem3,
+                                widget.tituloItem3!,
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w500),

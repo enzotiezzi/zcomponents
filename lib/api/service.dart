@@ -15,7 +15,7 @@ abstract class Service {
   final String token;
 
   String serverErrorMessage = "";
-  String exceptionMessage = "";
+  String? exceptionMessage = "";
   Map<String, String> headers = new HashMap<String, String>();
 
   Service(this.token);
@@ -26,11 +26,11 @@ abstract class Service {
     headers[HttpHeaders.authorizationHeader] = "Bearer $token";
   }
 
-  Future<http.Response> request(String url, String method,
+  Future<http.Response?> request(String url, String method,
       {dynamic body,
       int timeout = 15,
       bool defaultAuthorizationHeader = true}) async {
-    http.Response response;
+    http.Response? response;
 
     try {
       if (defaultAuthorizationHeader) await buildAuthorizationHeaders();
@@ -73,8 +73,8 @@ abstract class Service {
 
       return response;
     } catch (e) {
-      serverErrorMessage = response.body;
-      exceptionMessage = e;
+      serverErrorMessage = response!.body;
+      exceptionMessage = e.toString();
       return null;
     }
   }

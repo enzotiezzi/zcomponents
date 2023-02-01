@@ -37,16 +37,17 @@ class DetalheUsuarioView extends IView<DetalheUsuario>{
   @override
   Future<void> initView() {
     _preencherDados();
+    throw UnimplementedError();
 
   }
 
-  Widget _preencherDados(){
-    titulo = state.widget.appUsuarioContaViewModel.app.nome;
+   _preencherDados(){
+    titulo = state.widget.appUsuarioContaViewModel?.app?.nome ?? "";
     perfilController.text = "Não contém perfil";
     dataVinculoController.text = _validarDataVinculo();
     dataExpiracaoController.text = _validarDataExpiracao();
-    statusController.text = state.widget.appUsuarioContaViewModel.status;
-    if(state.widget.appUsuarioContaViewModel.status == "Ativo"){
+    statusController.text = state.widget.appUsuarioContaViewModel?.status ?? "";
+    if(state.widget.appUsuarioContaViewModel?.status == "Ativo"){
       textModificar = "REVOGAR ACESSO";
     }else{
       textModificar="ATIVAR ACESSO";
@@ -62,24 +63,24 @@ class DetalheUsuarioView extends IView<DetalheUsuario>{
   }
 
   String _validarDataVinculo(){
-    if(state.widget.appUsuarioContaViewModel.dataVinculo != null){
-      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel.dataVinculo));
+    if(state.widget.appUsuarioContaViewModel?.dataVinculo != null){
+      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel!.dataVinculo!));
     }else{
       return "Nunca";
     }
   }
 
   String _validarDataExpiracao(){
-    if(state.widget.appUsuarioContaViewModel.dataInativacao != null){
-      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel.dataInativacao));
+    if(state.widget.appUsuarioContaViewModel?.dataInativacao != null){
+      return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appUsuarioContaViewModel!.dataInativacao!));
     }else{
       return "Nunca";
     }
   }
 
-  Function cliqueModificarAcesso(){}
+  Function? cliqueModificarAcesso(){}
 
-  Function editarOnPressed(){
+  Function? editarOnPressed(){
 
   }
 

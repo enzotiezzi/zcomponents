@@ -1,12 +1,12 @@
 import 'package:meta/meta.dart';
 
 class ZSelectionItem {
-  final String chave;
-  final String chaveSecundaria;
-  String valor;
-  final String titulo;
-  bool selecionado;
-  bool obrigatorio;
+  final String? chave;
+  final String? chaveSecundaria;
+  String? valor;
+  final String? titulo;
+  bool? selecionado;
+  bool? obrigatorio;
 
   ZSelectionItem(
       {@required this.chave,

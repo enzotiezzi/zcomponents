@@ -4,17 +4,17 @@ import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputEmail extends StatefulWidget {
-  final Key key;
-  FocusNode emailFocus;
-  var controllerEmail = new TextEditingController();
-  FocusNode proximoFocus;
-  String email;
-  bool valideEmail;
-  ValueChanged<String> onChange;
-  void Function(bool) validacao;
-  bool enabled;
-  final bool campoObrigatorio;
-  final ThemeData themeData;
+  final Key? key;
+  FocusNode? emailFocus;
+  TextEditingController? controllerEmail ;
+  FocusNode? proximoFocus;
+  String? email;
+  bool? valideEmail;
+  ValueChanged<String>? onChange;
+  void Function(bool)? validacao;
+  bool? enabled;
+  final bool? campoObrigatorio;
+  final ThemeData? themeData;
 
   ZInputEmail(
       {this.key,
@@ -34,8 +34,8 @@ class ZInputEmail extends StatefulWidget {
 
 class _ZInputDataNascimentoState extends State<ZInputEmail> {
   int emailCount = 1;
-  DialogUtils _dialogUtils;
-  String data;
+  late DialogUtils _dialogUtils;
+  late String? data;
 
   @override
   void initState() {
@@ -51,13 +51,13 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
         "E-mail",
         TextInputType.emailAddress,
         () {
-          FocusScope.of(context).requestFocus(widget.emailFocus);
+
         },
         widget.emailFocus,
         widget.controllerEmail,
         widget.proximoFocus,
         (text) {
-          if (widget.onChange != null) widget.onChange(text);
+          if (widget.onChange != null) widget.onChange!(text);
 
           data = text;
           emailCount = 0;
@@ -70,22 +70,22 @@ class _ZInputDataNascimentoState extends State<ZInputEmail> {
   }
 
   void initNome() {
-    widget.emailFocus.addListener(() {
-      if (!widget.emailFocus.hasFocus && emailCount == 0 && data != "") {
+    widget.emailFocus?.addListener(() {
+      if (!widget.emailFocus!.hasFocus && emailCount == 0 && data != "") {
         _validarEmail();
       }
     });
   }
 
   void _validarEmail() {
-   if (!EmailValidator.validate(widget.controllerEmail.text)) {
+   if (!EmailValidator.validate(widget.controllerEmail!.text)) {
       widget.valideEmail = false;
       _dialogUtils.showAlertDialogNewAviso(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");
-      widget.validacao(false);
+      widget.validacao!(false);
     } else {
       widget.valideEmail = true;
-      widget.validacao(true);
+      widget.validacao!(true);
     }
   }
 }

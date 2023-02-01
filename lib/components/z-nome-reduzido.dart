@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZNomeReduzido extends StatefulWidget {
-  final String text;
-  final TextStyle textStyle;
+  final String? text;
+  final TextStyle? textStyle;
 
   ZNomeReduzido({this.text, this.textStyle});
 
@@ -12,9 +12,9 @@ class ZNomeReduzido extends StatefulWidget {
 }
 
 class _ZNomeReduzidoState extends State<ZNomeReduzido> {
-  String ultimoReduzido;
-  String primeiroReduzido;
-  String texto;
+  String? ultimoReduzido = "";
+  String? primeiroReduzido= "";
+  String? texto= "";
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _ZNomeReduzidoState extends State<ZNomeReduzido> {
   @override
   Widget build(BuildContext context) {
     if (texto != null) {
-      return (texto.length > 25)
+      return (texto!.length > 25)
           ? new Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -45,7 +45,7 @@ class _ZNomeReduzidoState extends State<ZNomeReduzido> {
               ],
             )
           : new Container(
-              child: new Text(texto, style: widget.textStyle),
+              child: new Text(texto!, style: widget.textStyle),
             );
     } else {
       return new Container(
@@ -54,14 +54,14 @@ class _ZNomeReduzidoState extends State<ZNomeReduzido> {
     }
   }
 
-  void nomeReduzido(String text) {
+  void nomeReduzido(String? text) {
     if (text != null) {
       text = text.trim();
       if (text.contains(" ")) {
         primeiroReduzido = text.substring(0, text.indexOf(" ")).trim();
         ultimoReduzido =
             text.substring(text.lastIndexOf(" "), text.length).trim();
-        String nomeTotal = primeiroReduzido + " " + ultimoReduzido;
+        String nomeTotal = primeiroReduzido! + " " + ultimoReduzido!;
 
         if (mounted)
           setState(() {

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class TokenParser {
-  static Map<String, dynamic> parseJwt(String token) {
-    final parts = token.split('.');
-    if (parts.length != 3) {
+  static Map<String, dynamic> parseJwt(String? token) {
+    final parts = token?.split('.');
+    if (parts!.length != 3) {
       throw Exception('invalid token');
     }
     final payload = _decodeBase64(parts[1]);

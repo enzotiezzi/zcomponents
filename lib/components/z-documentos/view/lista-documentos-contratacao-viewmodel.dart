@@ -7,8 +7,8 @@ import 'package:z_components/i-view.dart';
 class ListaDocumentosContratacaoView extends IView<ListaDocumentosContratacao> {
   ListaDocumentosContratacaoView(State<ListaDocumentosContratacao> state) : super(state);
 
-  IColaboradorDocumentoService _colaboradorDocumentoService;
-  IArquivoService _arquivoService;
+  late IColaboradorDocumentoService _colaboradorDocumentoService;
+  late IArquivoService _arquivoService;
 
 
 

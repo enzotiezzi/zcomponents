@@ -8,9 +8,9 @@ import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/view-model/noticia-viewmodel.dart';
 
 class ZNews extends StatefulWidget {
-  final List<NoticiaViewModel> noticiaViewMode;
-  final ScrollController scrollC;
-  void Function(String idNoticia) onTap;
+  final List<NoticiaViewModel>? noticiaViewMode;
+  final ScrollController? scrollC;
+  void Function(String idNoticia)? onTap;
 
   ZNews({this.noticiaViewMode, this.scrollC, this.onTap});
 
@@ -31,7 +31,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
 
   Widget listView() {
     return new ListView.builder(
-        itemCount: widget.noticiaViewMode.length,
+        itemCount: widget.noticiaViewMode!.length,
         shrinkWrap: true,
         controller: widget.scrollC,
         itemBuilder: (context, index) {
@@ -41,9 +41,9 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
               child: new InkWell(
                 onTap: () {
                   onClickCardNoticia(
-                      widget.noticiaViewMode[index].url,
-                      widget.noticiaViewMode[index].idNoticia,
-                      widget.noticiaViewMode[index].titulo);
+                      widget.noticiaViewMode![index].url,
+                      widget.noticiaViewMode![index].idNoticia,
+                      widget.noticiaViewMode![index].titulo);
                 },
                 child: new Padding(
                   padding: const EdgeInsets.all(6),
@@ -61,7 +61,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                               color: Colors.grey,
                               child: CachedNetworkImage(
                                 imageUrl:
-                                    widget.noticiaViewMode[index].urlImagem,
+                                    _retornarURLNoticia(index),
                                 placeholder: (context, url) => SizedBox(
                                   child: Shimmer.fromColors(
                                     baseColor: Color(0xffe6e6e6),
@@ -93,7 +93,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                             children: <Widget>[
                               new Container(
                                 child: new Text(
-                                  widget.noticiaViewMode[index].titulo,
+                                  _retornarTituloNoticia(index),
                                   style: new TextStyle(
                                       fontWeight: FontWeight.bold),
                                   maxLines: 1,
@@ -102,7 +102,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                               ),
                               new Container(
                                 child: new Text(
-                                  widget.noticiaViewMode[index].descricao,
+                                  _retornarDescricaoNoticia(index),
                                   style: new TextStyle(
                                       fontWeight: FontWeight.w500),
                                   maxLines: 1,
@@ -124,7 +124,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                                     margin:
                                         const EdgeInsets.only(top: 6, left: 6),
                                     child: new Text(
-                                      "${widget.noticiaViewMode[index].autor} - ${widget.noticiaViewMode[index].publicadaEm}",
+                                      _retornarAutorEDataPublicacao(index),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                     ),
@@ -143,8 +143,8 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
   }
 
   void onClickCardNoticia(
-      String noticiaUrl, String idNoticia, String titulo) async {
-    widget.onTap(idNoticia);
+      String? noticiaUrl, String? idNoticia, String? titulo) async {
+    widget.onTap!(idNoticia!);
     var url = '$noticiaUrl';
     Navigator.push(
         context,
@@ -153,5 +153,38 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
                   url: url,
                   titulo: titulo,
                 )));
+  }
+
+  String _retornarTituloNoticia(int index){
+    if(widget.noticiaViewMode != null && widget.noticiaViewMode![index].titulo != null){
+      return widget.noticiaViewMode![index].titulo!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarDescricaoNoticia(int index){
+    if(widget.noticiaViewMode != null && widget.noticiaViewMode![index].descricao != null){
+      return widget.noticiaViewMode![index].descricao!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarURLNoticia(int index){
+    if(widget.noticiaViewMode != null && widget.noticiaViewMode![index].urlImagem != null){
+      return widget.noticiaViewMode![index].urlImagem!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarAutorEDataPublicacao(int index){
+    if(widget.noticiaViewMode != null && widget.noticiaViewMode![index].autor != null
+        && widget.noticiaViewMode![index].publicadaEm != null){
+      return "{widget.noticiaViewMode![index].autor} - ${widget.noticiaViewMode![index].publicadaEm}";
+    }else{
+      return "";
+    }
   }
 }

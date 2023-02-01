@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_shifter_v2/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/config/z-tipos-baseline.dart';
@@ -13,37 +13,37 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZBaseLine extends StatefulWidget {
-  bool enable;
-  bool valideMes;
-  bool valideCPF;
-  bool valideEmail;
-  bool valideCelular;
-  bool valideNome;
+  bool? enable;
+  bool? valideMes;
+  bool? valideCPF;
+  bool? valideEmail;
+  bool? valideCelular;
+  bool? valideNome;
 
-  FocusNode nomeFocus;
-  FocusNode emailFocus;
-  FocusNode cpfFocus;
-  FocusNode celularFocus;
-  FocusNode mesFocus;
-  FocusNode padraoFocus;
-  FocusNode cEPFocus;
-  FocusNode cNPJFocus;
-  FocusNode proximoFocus;
+  FocusNode? nomeFocus;
+  FocusNode? emailFocus;
+  FocusNode? cpfFocus;
+  FocusNode? celularFocus;
+  FocusNode? mesFocus;
+  FocusNode? padraoFocus;
+  FocusNode? cEPFocus;
+  FocusNode? cNPJFocus;
+  FocusNode? proximoFocus;
 
-  final Key key;
-  final BuildContext context;
-  final ZTipoBaseline zTipos;
+  final Key? key;
+  final BuildContext? context;
+  final ZTipoBaseline? zTipos;
 
-  String dia;
-  String ano;
-  String mes;
-  String nome;
-  String text;
-  String hintText;
+  String? dia;
+  String? ano;
+  String? mes;
+  String? nome;
+  String? text;
+  String? hintText;
 
-  int intDias;
-  int intMes;
-  int intAno;
+  int? intDias;
+  int? intMes;
+  int? intAno;
   int countNome = 1;
   int countCPF = 1;
   int countCelular = 1;
@@ -52,23 +52,23 @@ class ZBaseLine extends StatefulWidget {
   int countCNPJ = 1;
   int countCEP = 1;
 
-  String total;
+  String? total;
 
-  bool bisexto;
+  bool? bisexto;
 
-  String email;
-  String cPF;
-  String cNPJ;
-  String celular;
-  String value;
-  var controllerEmail = new TextEditingController();
-  var controllerNome = new TextEditingController();
-  var controllerCPF = new TextEditingController();
-  var controllerCelular = new TextEditingController();
-  var controllerData = new TextEditingController();
-  var controllerPadrao = new TextEditingController();
-  var controllerCEP = new TextEditingController();
-  var controllerCNPJ = new TextEditingController();
+  String? email;
+  String? cPF;
+  String? cNPJ;
+  String? celular;
+  String? value;
+  TextEditingController? controllerEmail = new TextEditingController();
+  TextEditingController? controllerNome = new TextEditingController();
+  TextEditingController? controllerCPF = new TextEditingController();
+  TextEditingController? controllerCelular = new TextEditingController();
+  TextEditingController? controllerData = new TextEditingController();
+  TextEditingController? controllerPadrao = new TextEditingController();
+  TextEditingController? controllerCEP = new TextEditingController();
+  TextEditingController? controllerCNPJ = new TextEditingController();
   var onChangedTextPadrao;
   var onChangedCEP;
 
@@ -221,7 +221,7 @@ class ZBaseLineState extends State<ZBaseLine> {
                           onChanged: (text) {
                             widget.cPF = text;
                             widget.countCPF = 0;
-                            if (widget.cPF.length == 14) {
+                            if (widget.cPF!.length == 14) {
                               _fieldFocusChange(context, widget.cpfFocus,
                                   widget.proximoFocus);
                             }
@@ -305,7 +305,7 @@ class ZBaseLineState extends State<ZBaseLine> {
                           onChanged: (text) {
                             widget.celular = text;
                             widget.countCelular = 0;
-                            if (widget.celular.length == 16) {
+                            if (widget.celular!.length == 16) {
                               _fieldFocusChange(context, widget.celularFocus,
                                   widget.proximoFocus);
                             }
@@ -454,7 +454,7 @@ class ZBaseLineState extends State<ZBaseLine> {
                           padding: const EdgeInsets.only(
                               top: 12.0, bottom: 12.0, left: 16.0),
                           child: new Text(
-                            widget.text,
+                            widget.text ?? "",
                             style: MainStyle.get(context).mainStyleTextBaseLine,
                           ),
                         )),
@@ -506,7 +506,7 @@ class ZBaseLineState extends State<ZBaseLine> {
                       child: new Container(
                         padding: const EdgeInsets.only(
                             top: 12.0, bottom: 12.0, left: 16.0),
-                        child: new Text(widget.text,
+                        child: new Text(widget.text?? "",
                             style:
                                 MainStyle.get(context).mainStyleTextBaseLine),
                       ),
@@ -671,8 +671,8 @@ class ZBaseLineState extends State<ZBaseLine> {
 
   void initNome() {
     widget.nomeFocus = FocusNode();
-    widget.nomeFocus.addListener(() {
-      if (!widget.nomeFocus.hasFocus &&
+    widget.nomeFocus?.addListener(() {
+      if (!widget.nomeFocus!.hasFocus &&
           widget.countNome == 0 &&
           widget.nome != "") {
         _valideNome();
@@ -681,8 +681,8 @@ class ZBaseLineState extends State<ZBaseLine> {
   }
 
   void init() {
-    widget.emailFocus.addListener(() {
-      if (!widget.emailFocus.hasFocus &&
+    widget.emailFocus?.addListener(() {
+      if (!widget.emailFocus!.hasFocus &&
           widget.countEmail == 0 &&
           widget.email != "") {
         _validarEmail();
@@ -691,8 +691,8 @@ class ZBaseLineState extends State<ZBaseLine> {
   }
 
   void initCpf() {
-    widget.cpfFocus.addListener(() {
-      if (!widget.cpfFocus.hasFocus &&
+    widget.cpfFocus?.addListener(() {
+      if (!widget.cpfFocus!.hasFocus &&
           widget.countCPF == 0 &&
           widget.cPF != "") {
         _validarCPF();
@@ -701,8 +701,8 @@ class ZBaseLineState extends State<ZBaseLine> {
   }
 
   void initCelular() {
-    widget.celularFocus.addListener(() {
-      if (!widget.celularFocus.hasFocus &&
+    widget.celularFocus?.addListener(() {
+      if (!widget.celularFocus!.hasFocus &&
           widget.countCelular == 0 &&
           widget.celular != "") {
         _validarCelular();
@@ -711,8 +711,8 @@ class ZBaseLineState extends State<ZBaseLine> {
   }
 
   void initMes() {
-    widget.mesFocus.addListener(() {
-      if (!widget.mesFocus.hasFocus &&
+    widget.mesFocus?.addListener(() {
+      if (!widget.mesFocus!.hasFocus &&
           widget.countData == 0 &&
           widget.total != "") {
         mesHasFocus();
@@ -721,8 +721,8 @@ class ZBaseLineState extends State<ZBaseLine> {
   }
 
   void initCNPJ() {
-    widget.cNPJFocus.addListener(() {
-      if (!widget.cNPJFocus.hasFocus &&
+    widget.cNPJFocus?.addListener(() {
+      if (!widget.cNPJFocus!.hasFocus &&
           widget.countCNPJ == 0 &&
           widget.cNPJ != "") {
         if (!CNPJValidator.isValid(widget.cNPJ)) {
@@ -733,17 +733,17 @@ class ZBaseLineState extends State<ZBaseLine> {
   }
 
   void validaMes() {
-    widget.dia = widget.total.substring(0, 2);
-    widget.intDias = int.parse(widget.dia);
+    widget.dia = widget.total!.substring(0, 2);
+    widget.intDias = int.parse(widget.dia!);
 
-    widget.mes = widget.total.substring(3, 5);
-    widget.intMes = int.parse(widget.mes);
+    widget.mes = widget.total!.substring(3, 5);
+    widget.intMes = int.parse(widget.mes!);
 
-    widget.ano = widget.total.substring(6, 10);
-    widget.intAno = int.parse(widget.ano);
+    widget.ano = widget.total!.substring(6, 10);
+    widget.intAno = int.parse(widget.ano!);
 
-    if ((widget.intAno % 4 == 0 && widget.intAno % 100 != 0) ||
-        widget.intAno % 400 == 0) {
+    if ((widget.intAno! % 4 == 0 && widget.intAno! % 100 != 0) ||
+        widget.intAno! % 400 == 0) {
       widget.bisexto = true;
     } else {
       widget.bisexto = false;
@@ -753,11 +753,11 @@ class ZBaseLineState extends State<ZBaseLine> {
     print(widget.mes);
     print(widget.ano);
 
-    if (widget.total.length == 10) {
-      if (widget.intMes < 13 &&
-          widget.intDias < 32 &&
-          widget.intAno < 2004 &&
-          widget.intAno > 1901) {
+    if (widget.total!.length == 10) {
+      if (widget.intMes! < 13 &&
+          widget.intDias! < 32 &&
+          widget.intAno! < 2004 &&
+          widget.intAno! > 1901) {
         if (widget.intDias == 00 ||
             widget.intMes == 00 ||
             widget.intAno == 00) {
@@ -770,7 +770,7 @@ class ZBaseLineState extends State<ZBaseLine> {
             widget.intMes == 08 ||
             widget.intMes == 10 ||
             widget.intMes == 12) {
-          if (widget.intDias > 31) {
+          if (widget.intDias! > 31) {
             showAlertDialogNew(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
           } else {
@@ -780,7 +780,7 @@ class ZBaseLineState extends State<ZBaseLine> {
             widget.intMes == 06 ||
             widget.intMes == 09 ||
             widget.intMes == 11) {
-          if (widget.intDias > 30) {
+          if (widget.intDias! > 30) {
             showAlertDialogNew(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
           } else {
@@ -788,14 +788,14 @@ class ZBaseLineState extends State<ZBaseLine> {
           }
         } else {
           if (widget.bisexto == true) {
-            if (widget.intDias > 29) {
+            if (widget.intDias! > 29) {
               showAlertDialogNew(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 29.");
             } else {
               widget.valideMes = true;
             }
           } else {
-            if (widget.intDias > 28) {
+            if (widget.intDias! > 28) {
               showAlertDialogNew(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
             } else {
@@ -803,37 +803,37 @@ class ZBaseLineState extends State<ZBaseLine> {
             }
           }
         }
-      } else if (widget.intMes > 12 &&
-          widget.intDias < 32 &&
-          widget.intAno < 2004) {
+      } else if (widget.intMes! > 12 &&
+          widget.intDias! < 32 &&
+          widget.intAno! < 2004) {
         showAlertDialogNew(
             "Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
-      } else if (widget.intMes < 13 &&
-          widget.intDias > 32 &&
-          widget.intAno < 2004) {
+      } else if (widget.intMes! < 13 &&
+          widget.intDias! > 32 &&
+          widget.intAno! < 2004) {
         showAlertDialogNew(
             "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-      } else if (widget.intMes < 13 &&
-          widget.intDias < 32 &&
-          widget.intAno > 2004) {
+      } else if (widget.intMes! < 13 &&
+          widget.intDias! < 32 &&
+          widget.intAno! > 2004) {
         showAlertDialogNew(
             "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
-      } else if (widget.intAno < 1901) {
+      } else if (widget.intAno! < 1901) {
         showAlertDialogNew(
             "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
-      } else if (widget.intMes > 12 &&
-          widget.intDias < 32 &&
-          widget.intAno > 2004) {
+      } else if (widget.intMes! > 12 &&
+          widget.intDias! < 32 &&
+          widget.intAno! > 2004) {
         showAlertDialogNew("Mês e Ano Inválido!",
             "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
-      } else if (widget.intMes > 12 &&
-          widget.intDias > 32 &&
-          widget.intAno < 2004) {
+      } else if (widget.intMes! > 12 &&
+          widget.intDias! > 32 &&
+          widget.intAno! < 2004) {
         showAlertDialogNew("Mês e Dia Inválido!",
             "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
-      } else if (widget.intMes < 13 &&
-          widget.intDias > 32 &&
-          widget.intAno > 2004) {
+      } else if (widget.intMes! < 13 &&
+          widget.intDias! > 32 &&
+          widget.intAno! > 2004) {
         showAlertDialogNew("Dia e Ano Inválido!",
             "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
       } else {
@@ -847,7 +847,7 @@ class ZBaseLineState extends State<ZBaseLine> {
     if (widget.total == null) {
       showAlertDialogNew(
           "Data Inválida!", "Por Favor, digite sua data de nascimento.");
-    } else if (widget.total.length < 10) {
+    } else if (widget.total!.length < 10) {
       showAlertDialogNew("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
     }
@@ -857,7 +857,7 @@ class ZBaseLineState extends State<ZBaseLine> {
     if (widget.nome == null) {
       widget.valideNome = false;
       showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
-    } else if (widget.nome.split(' ').length < 2) {
+    } else if (widget.nome!.split(' ').length < 2) {
       widget.valideNome = false;
       showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
     } else {
@@ -879,12 +879,12 @@ class ZBaseLineState extends State<ZBaseLine> {
       widget.valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, digitar o seu celular.");
-    } else if (widget.celular.length < 16) {
+    } else if (widget.celular!.length < 16) {
       widget.valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
-    } else if (widget.celular.length == 16) {
-      var splitCelular = widget.celular.split(" ");
+    } else if (widget.celular!.length == 16) {
+      var splitCelular = widget.celular!.split(" ");
 
       if (splitCelular[1] == "9") {
         widget.valideCelular = true;
@@ -900,7 +900,7 @@ class ZBaseLineState extends State<ZBaseLine> {
     if (widget.email == null) {
       widget.valideEmail = false;
       showAlertDialogNew("E-mail Inválido!", "Por Favor insira um E-mail.");
-    } else if (!EmailValidator.validate(widget.email)) {
+    } else if (!EmailValidator.validate(widget.email!)) {
       widget.valideEmail = false;
       showAlertDialogNew(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");
@@ -975,8 +975,8 @@ class ZBaseLineState extends State<ZBaseLine> {
   }
 
   void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
+      BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
+    currentFocus?.unfocus();
     if (nextFocus != null) {
       FocusScope.of(context).requestFocus(nextFocus);
     }

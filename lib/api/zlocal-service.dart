@@ -11,18 +11,18 @@ class ZLocalService extends Service implements IZLocalService {
   String _uRL = "${ApiSettings.ENDPOINT}/zponto";
 
   final String token;
-  final FiltroViewModel filtro;
+  final FiltroViewModel? filtro;
 
   ZLocalService(this.token, {this.filtro}) : super(token);
 
   @override
-  Future<List<CentroCustoViewModel>> listarCentrosCusto(
-      {FiltroViewModel filtro}) async {
+  Future<List<CentroCustoViewModel>?> listarCentrosCusto(
+      {FiltroViewModel? filtro}) async {
     try {
       var url = "$_uRL/buscar-centros-custo-empresa";
 
       var response = await http.post(Uri.parse(url),
-          body: json.encode(filtro.toMap()), headers: headers);
+          body: json.encode(filtro?.toMap()), headers: headers);
 
       var l = ((json.decode(response.body) as List)
           .map((i) => new CentroCustoViewModel.fromJson(i))).toList();

@@ -1,5 +1,4 @@
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/filtro/filter-expression.dart';
 import 'package:z_components/components/filtro/filtro-campo.dart';
@@ -17,8 +16,8 @@ import 'package:z_components/view-model/modulo-conta-viewmodel.dart';
 import '../z-item-tile-card-basico.dart';
 
 class ListagemUsuarios extends StatefulWidget {
-  AppViewModel appViewModel;
-  ModuloContaViewModel moduloContaViewModel;
+  AppViewModel? appViewModel;
+  ModuloContaViewModel? moduloContaViewModel;
 
   ListagemUsuarios({this.appViewModel, this.moduloContaViewModel});
 
@@ -27,7 +26,7 @@ class ListagemUsuarios extends StatefulWidget {
 }
 
 class _ListagemUsuariosState extends State<ListagemUsuarios> {
-  ListagemUsuariosView _view;
+  late ListagemUsuariosView _view;
 
   @override
   void initState() {
@@ -60,7 +59,7 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
                   margin: const EdgeInsets.only(left: 16),
                   padding: const EdgeInsets.only(top: 16, bottom: 16),
                   child: new Text(
-                    widget.appViewModel.nomeExibicao,
+                    widget.appViewModel?.nomeExibicao !=null ? widget.appViewModel!.nomeExibicao! :"",
                     style: new TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
@@ -101,9 +100,9 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
           padding: EdgeInsets.only(top: 20.0),
           shrinkWrap: true,
           controller: _view.scrollController,
-          itemCount: _view.listaUsuarioPorApp.length,
+          itemCount: _view.listaUsuarioPorApp!.length,
           itemBuilder: (builder, index) =>
-              _montarCardUsuario(_view.listaUsuarioPorApp[index]));
+              _montarCardUsuario(_view.listaUsuarioPorApp![index]));
     } else {
       return new Container();
     }
@@ -112,10 +111,10 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
   Widget _montarCardUsuario(AppUsuarioContaViewModel app) {
     return new Container(
       child: new ZItemTileUsuarioAdm(
-        nomeUsuario: app.usuario.nome,
+        nomeUsuario: app.usuario?.nome,
         status: app.status,
-        telefone: app.usuario.telefone,
-        email: app.usuario.email,
+        telefone: app.usuario?.telefone,
+        email: app.usuario?.email,
         appsVinculados: "",
         quantidadeApps: "",
         onTap: () async {
@@ -123,13 +122,13 @@ class _ListagemUsuariosState extends State<ListagemUsuarios> {
               context,
               MaterialPageRoute(
                 builder: (context) => DetalheUsuario(
-                    idModulo: widget.moduloContaViewModel.idModulo,
+                    idModulo: widget.moduloContaViewModel?.idModulo,
                     editarDados: false,
                     cliqueEditar: false,
                     appUsuarioContaViewModel: app),
               ));
           if (res != null) {
-            _view.listaUsuarioPorApp.clear();
+            _view.listaUsuarioPorApp?.clear();
             _view.searchOptions = new SearchOptions();
             OrderByExpression order = new OrderByExpression();
             order.propertyName = "Usuario.Nome";

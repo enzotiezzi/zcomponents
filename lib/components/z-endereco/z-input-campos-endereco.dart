@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:geocoder/geocoder.dart';
+import 'package:flutter_geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:z_components/components/utils/dialog-utils.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
@@ -10,14 +10,14 @@ import 'package:http/http.dart' as http;
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 
 class ZInputCamposEndereco extends StatefulWidget {
-  final ThemeData themeData;
-  final TextEditingController cepController;
-  final TextEditingController logradouroController;
-  final TextEditingController numeroController;
-  final TextEditingController complementoController;
-  final TextEditingController bairroController;
-  final TextEditingController cidadeController;
-  final TextEditingController estadoController;
+  final ThemeData? themeData;
+  final TextEditingController? cepController;
+  final TextEditingController? logradouroController;
+  final TextEditingController? numeroController;
+  final TextEditingController? complementoController;
+  final TextEditingController? bairroController;
+  final TextEditingController? cidadeController;
+  final TextEditingController? estadoController;
 
   ZInputCamposEndereco({
     @required this.themeData,
@@ -34,8 +34,9 @@ class ZInputCamposEndereco extends StatefulWidget {
 }
 
 class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
-  FocusNode cepFocusNode = new FocusNode();
+
   FocusNode logradouroFocusNode = new FocusNode();
+  FocusNode cepFocusNode = new FocusNode();
   FocusNode estadoFocusNode = new FocusNode();
   FocusNode cidadeFocusNode = new FocusNode();
   FocusNode bairroFocusNode = new FocusNode();
@@ -56,20 +57,21 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
 
   @override
   void initState() {
-    super.initState();
-    if(widget.cepController.text.isNotEmpty && widget.cepController.text.length == 9 && widget.cepController.text != null){
+    if(widget.cepController?.text != null &&widget.cepController!.text.isNotEmpty && widget.cepController!.text.length == 9){
       cepValido = true;
       cepPreenchido = true;
     }
-    if(widget.cepController.text.isNotEmpty && widget.cepController.text != null
-        && widget.logradouroController.text.isNotEmpty && widget.logradouroController.text != null
-        && widget.numeroController.text.isNotEmpty && widget.numeroController.text != null
-        && widget.bairroController.text.isNotEmpty && widget.bairroController.text != null
-        && widget.cidadeController.text.isNotEmpty && widget.cidadeController.text != null){
+    if(widget.cepController?.text != null &&  widget.cepController!.text.isNotEmpty
+        && widget.logradouroController?.text != null && widget.logradouroController!.text.isNotEmpty
+        && widget.numeroController?.text != null && widget.numeroController!.text.isNotEmpty
+        && widget.bairroController?.text != null && widget.bairroController!.text.isNotEmpty
+        &&  widget.cidadeController?.text != null && widget.cidadeController!.text.isNotEmpty){
       _preencherCampos();
       _atualizarMapa(endereco);
       _validarCamposObrigatorios();
     }
+
+    super.initState();
   }
 
   @override
@@ -114,7 +116,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                new RaisedButton(
+                new ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(endereco);
                   },
@@ -129,17 +131,24 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
                             style: Theme.of(context)
                                 .textTheme
                                 .button
-                                .copyWith(color: Color(0xFFFFFFFF)),
+                                ?.copyWith(color: Color(0xFFFFFFFF)),
                           ),
                         )
                       ],
                     ),
                   ),
-                  color: Theme.of(context).primaryColor,
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30),
+                  style: new ButtonStyle(
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                    shadowColor:
+                    MaterialStateProperty.all<Color>(Colors.transparent),
+                    padding: MaterialStateProperty.all(EdgeInsets.only(
+                        left: 10, right: 10)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        )),
                   ),
-                  padding: const EdgeInsets.only(left: 10, right: 10),
                 )
               ],
             ),
@@ -157,7 +166,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                new RaisedButton(
+                new ElevatedButton(
                   onPressed: null,
                   child: new Container(
                     child: new Row(
@@ -170,17 +179,24 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
                             style: Theme.of(context)
                                 .textTheme
                                 .button
-                                .copyWith(color: Color(0xFFFFFFFF)),
+                                ?.copyWith(color: Color(0xFFFFFFFF)),
                           ),
                         )
                       ],
                     ),
                   ),
-                  color: Theme.of(context).primaryColor,
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30),
+                  style: new ButtonStyle(
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.grey),
+                    shadowColor:
+                    MaterialStateProperty.all<Color>(Colors.transparent),
+                    padding: MaterialStateProperty.all(EdgeInsets.only(
+                        left: 10, right: 10)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        )),
                   ),
-                  padding: const EdgeInsets.only(left: 10, right: 10),
                 )
               ],
             ),
@@ -221,7 +237,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           campoObrigatorio: true,
           validacao: (cepValidado) async {
             if(cepValidado){
-              await _consultaCep(widget.cepController.text, context);
+              await _consultaCep(widget.cepController!.text, context);
               cepValido = true;
               _validarCamposObrigatorios();
               numeroFocusNode.requestFocus();
@@ -251,7 +267,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
             onChange: (rua){
               _validarCamposObrigatorios();
               _preencherCampos();
-              String montarEndereco = widget.numeroController.text + " " + widget.logradouroController.text + " " + widget.bairroController.text;
+              String montarEndereco = widget.numeroController!.text + " " + widget.logradouroController!.text + " " + widget.bairroController!.text;
               _atualizarMapa(montarEndereco);
             },
           ),
@@ -268,7 +284,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           onChange: (numero){
             _validarCamposObrigatorios();
             _preencherCampos();
-            String montarEndereco = widget.numeroController.text + " " + widget.logradouroController.text + " " + widget.bairroController.text;
+            String montarEndereco = widget.numeroController!.text + " " + widget.logradouroController!.text + " " + widget.bairroController!.text;
             _atualizarMapa(montarEndereco);
           },
         ),
@@ -333,11 +349,11 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
   }
 
   void _validarCamposObrigatorios(){
-    if(widget.cepController.text != null && widget.cepController.text.isNotEmpty
-        && widget.logradouroController.text != null && widget.logradouroController.text.isNotEmpty
-        && widget.numeroController.text != null && widget.numeroController.text.isNotEmpty
-        && widget.bairroController.text != null && widget.bairroController.text.isNotEmpty
-        && widget.cidadeController.text != null && widget.cidadeController.text.isNotEmpty
+    if(widget.cepController?.text != null && widget.cepController!.text.isNotEmpty
+        && widget.logradouroController?.text != null && widget.logradouroController!.text.isNotEmpty
+        && widget.numeroController?.text != null && widget.numeroController!.text.isNotEmpty
+        && widget.bairroController?.text != null && widget.bairroController!.text.isNotEmpty
+        && widget.cidadeController?.text != null && widget.cidadeController!.text.isNotEmpty
         && cepValido){
 
       setState(() {
@@ -360,10 +376,10 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
     Map<String, dynamic> retorno = json.decode(response.body);
 
     if(response.statusCode == 200){
-      widget.logradouroController.text = retorno["logradouro"];
-      widget.bairroController.text = retorno["bairro"];
-      widget.cidadeController.text = retorno["localidade"];
-      widget.estadoController.text = retorno["uf"];
+      widget.logradouroController!.text = retorno["logradouro"];
+      widget.bairroController!.text = retorno["bairro"];
+      widget.cidadeController!.text = retorno["localidade"];
+      widget.estadoController!.text = retorno["uf"];
 
       _preencherCampos();
 
@@ -374,7 +390,7 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
           retorno["localidade"] != null &&
           retorno["uf"] != null){
 
-        String montarLocalizacao = widget.logradouroController.text + " " + widget.bairroController.text;
+        String montarLocalizacao = widget.logradouroController!.text + " " + widget.bairroController!.text;
         setState(() {
            _atualizarMapa(montarLocalizacao);
           cepPreenchido = true;
@@ -393,10 +409,10 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
 
   void _preencherCampos(){
     setState(() {
-      endereco = widget.logradouroController.text + ", "
-          + widget.numeroController.text + ", "
-          + widget.complementoController.text + ", "
-          + widget.bairroController.text;
+      endereco = widget.logradouroController!.text + ", "
+          + widget.numeroController!.text + ", "
+          + widget.complementoController!.text + ", "
+          + widget.bairroController!.text;
     });
   }
 
@@ -409,11 +425,11 @@ class _ZInputCamposEnderecoState extends State<ZInputCamposEndereco> {
     var coordenadas = endereco.first;
 
     setState(() {
-      _posicaoCamera = CameraPosition(zoom:19,target: LatLng(coordenadas.coordinates.latitude, coordenadas.coordinates.longitude));
+      _posicaoCamera = CameraPosition(zoom:19,target: LatLng(coordenadas.coordinates.latitude!, coordenadas.coordinates.longitude!));
       _marcadores = {};
       Marker marcador = Marker(
           markerId: MarkerId(DateTime.now().toString()),
-          position: LatLng(coordenadas.coordinates.latitude, coordenadas.coordinates.longitude),
+          position: LatLng(coordenadas.coordinates.latitude!, coordenadas.coordinates.longitude!),
           infoWindow: InfoWindow(title: "Meu Local"),
           icon: BitmapDescriptor.defaultMarker);
         _marcadores.add(marcador);

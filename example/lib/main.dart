@@ -71,25 +71,25 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   var textEditingControllerNomeB = new TextEditingController();
 
   final key = GlobalKey<ZProgressDialogState>();
-  FocusNode inputPadraoFocus;
-  FocusNode nomeFocus;
-  FocusNode emailFocus;
-  FocusNode cpfFocus;
-  FocusNode celularFocus;
-  FocusNode dataFocus;
-  FocusNode ruaFocus;
-  FocusNode numeroFocus;
-  FocusNode cepFocus;
-  FocusNode cnpjFocus;
-  FocusNode focusNodeNome;
+  late FocusNode inputPadraoFocus;
+  late FocusNode nomeFocus;
+  late FocusNode emailFocus;
+  late FocusNode cpfFocus;
+  late FocusNode celularFocus;
+  late FocusNode dataFocus;
+  late FocusNode ruaFocus;
+  late FocusNode numeroFocus;
+  late FocusNode cepFocus;
+  late FocusNode cnpjFocus;
+  late FocusNode focusNodeNome;
   var focusNodeNomeB = new FocusNode();
 
   bool value = false;
-  ZBaseLine valideNome;
-  ZBaseLine valideCPF;
-  ZBaseLine valideData;
-  ZBaseLine valideEmail;
-  ZBaseLine valideCelular;
+  late ZBaseLine valideNome;
+  late ZBaseLine valideCPF;
+  late ZBaseLine valideData;
+  late ZBaseLine valideEmail;
+  late ZBaseLine valideCelular;
   bool isSwitched = true;
 
   var _controllerFim = new TextEditingController();
@@ -100,9 +100,9 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   var _keyCargo = new GlobalKey<ZCargoState>();
 
-  String vp;
-  String nomeeee;
-  String cpf;
+  late String vp;
+  late String nomeeee;
+  late String cpf;
 
   var _keyStatus = new GlobalKey<ZCollectionState>();
 
@@ -161,24 +161,24 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
     },
   ];
 
-  List<ZTreeViewViewModel> zTreeViewViewModel;
+  late List<ZTreeViewViewModel> zTreeViewViewModel;
 
-  List<ZTreeViewViewModel> zTreeViewViewModel2;
+  late List<ZTreeViewViewModel> zTreeViewViewModel2;
 
-  List<ZTreeViewViewModel> zTreeViewViewModel2Filho;
-  List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilho;
-  List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilhoFilho;
+  late List<ZTreeViewViewModel> zTreeViewViewModel2Filho;
+  late List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilho;
+  late List<ZTreeViewViewModel> zTreeViewViewModel2FilhoFilhoFilho;
 
-  List<ZTreeViewViewModel> zTreeViewViewModel3;
+  late List<ZTreeViewViewModel> zTreeViewViewModel3;
 
-  List<ZCollectionItem> listaTesteSkipTake;
+  late List<ZCollectionItem> listaTesteSkipTake;
 
-  List<ZBatidaViewModel> listBatidas = new List();
-  List<ZDynamicFormViewModel> lista = new List();
-  List<ZDynamicFormViewModel> listaEnvio = new List();
+  List<ZBatidaViewModel> listBatidas = [];
+  List<ZDynamicFormViewModel> lista = [];
+  List<ZDynamicFormViewModel> listaEnvio = [];
   IFormularioService iFormularioService = new FormularioService(
       "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0YWQ5OTFiMzk0NDIzNzEzZDlkZGI3ZWQzYzRlN2Q3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2MjIyMTExMDYsImV4cCI6MTYyMjIxNDcwNiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIiLCJhdWQiOlsiaHR0cHM6Ly9pZGVudGl0eS1zZXJ2ZXItZGV2LnplbGxhci5jb20uYnIvcmVzb3VyY2VzIiwibW9sdHJlcy5hY2Vzc28uYXBpIl0sImNsaWVudF9pZCI6IlpHZXN0b3IiLCJzdWIiOiJiYmMwN2RkYS1hMzQ0LTQ3ZWQtOTRkNC1mZDg0NTI2Y2E3ODgiLCJhdXRoX3RpbWUiOjE2MjIxMjcyMjYsImlkcCI6ImxvY2FsIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiJPWjRZREFURVFYRUM3RlNHTjRHNFhDTkIyN0c1UFhBUiIsImFjY291bnQiOiJaZWxsYXIyIiwiaWRBY2NvdW50IjoiNDg2YTQ5YjMtNDdkMS00ZDc2LTgwZGYtMDc5ZWI4MmQ2ZDhmIiwiaWRDb2xhYm9yYWRvciI6IjE2QTgwNDE1LUQyODItNEFDQS04NDMxLThDN0YwNjkzQjE3QiIsInByZWZlcnJlZF91c2VybmFtZSI6IjQzOC4xOTcuNzE4LTE2IiwiZW1haWwiOiJibGFibGFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiRW56byBUaWV6emkiLCJwaG9uZV9udW1iZXIiOiIoMTEpOSA5NzE3LTI1NDQiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJtb2x0cmVzLmFjZXNzby5hcGkuZnVsbCIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.hr8JAZBnpOsDvzXgujbajDIAUFp_yZZHXhTHivB-4titwj3_zClaLQyZL1NlW525vknWlD8hY6S1c3mlq6g9Ws2P_sxjhRqE4eUoEJQ6-6UgUdHZDTJSdIZu7B6bp1SY3Al5QPkyLfffAmG0fAFQLTXu746ISVR_dSjOuxidnpT6KsKHG48VLUgpJd9tS3X5hUanNF3oU-rnbiLtt_5TSYTKqrIDdBCW5LxG52MMoWFXYfQtCBZUb_Bd6q68_DAdsyVCxhvmnGFSzJSLyxdQhjkHPa-MWJK4hCRecvZXQNWx-QlrzjuU0F0UcIqSMtUsIq99gkh3XPoDJi31mgKxZg");
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
   List<String> orem = [
     "ENTRADA",
     "SAÍDA",
@@ -190,13 +190,13 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   @override
   void initState() {
-    zTreeViewViewModel2FilhoFilho = new List();
-    zTreeViewViewModel2 = new List();
-    zTreeViewViewModel = new List();
-    zTreeViewViewModel3 = new List();
-    zTreeViewViewModel2Filho = new List();
-    zTreeViewViewModel2FilhoFilhoFilho = new List();
-    listaTesteSkipTake = new List();
+    zTreeViewViewModel2FilhoFilho = [];
+    zTreeViewViewModel2 = [];
+    zTreeViewViewModel = [];
+    zTreeViewViewModel3 = [];
+    zTreeViewViewModel2Filho = [];
+    zTreeViewViewModel2FilhoFilhoFilho = [];
+    listaTesteSkipTake = [];
 
     listaTesteSkipTake = [
       ZCollectionItem(
@@ -727,17 +727,17 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
 
   void refrehs() {
     Future.delayed(Duration(seconds: 3), () {
-      key.currentState.refresh(0.35, "Carregando Fotos");
+      key.currentState?.refresh(0.35, "Carregando Fotos");
     });
     Future.delayed(Duration(seconds: 6), () {
-      key.currentState.refresh(0.6, "So mais um momento");
+      key.currentState?.refresh(0.6, "So mais um momento");
     });
     Future.delayed(Duration(seconds: 9), () {
-      key.currentState.refresh(0.85,
+      key.currentState?.refresh(0.85,
           "Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn");
     });
     Future.delayed(Duration(seconds: 12), () {
-      key.currentState.refresh(1.0,
+      key.currentState?.refresh(1.0,
           "Ewerweerwerwer wer wer wer weljr nweljnr wojern weojnrowjen roejwn",
           success: true);
     });
@@ -763,10 +763,10 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
   void montarFormulario() async {
     var formulario = await iFormularioService.buscarFormularios();
 
-    var formularioSellecionado = formulario.first;
+    var formularioSellecionado = formulario!.first;
 
-    lista = await iFormularioService
-        .montarFormulario(formularioSellecionado.idModelo);
+    lista = (await iFormularioService
+        .montarFormulario(formularioSellecionado.idModelo!))!;
 
     setState(() {
       print(lista);
@@ -792,7 +792,7 @@ class _ComponentExemploClasseState extends State<ComponentExemploClasse> {
         tipo: item.tipo,
         versao: item.versao,
       );
-      await listaEnvio.add(zDynamicFormViewModel);
+       listaEnvio.add(zDynamicFormViewModel);
     });
 
     print(listaEnvio);

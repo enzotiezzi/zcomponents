@@ -5,13 +5,13 @@ import 'package:z_components/components/z-documentos/view/foto-view.dart';
 import 'package:z_components/config/z-dialog.dart';
 
 class Foto extends StatefulWidget {
-  final Uint8List image;
-  final String imageOriginal;
-  final int hero;
-  final int hero2;
-  final bool finalizacaoChamado;
-  final Uint8List imagem;
-  final List<Uint8List> fotos;
+  final Uint8List? image;
+  final String? imageOriginal;
+  final int? hero;
+  final int? hero2;
+  final bool? finalizacaoChamado;
+  final Uint8List? imagem;
+  final List<Uint8List>? fotos;
 
   Foto(
       {this.image,
@@ -29,7 +29,7 @@ class Foto extends StatefulWidget {
 }
 
 class _Foto extends State<Foto> {
-  FotoView _view;
+  late FotoView _view;
 
   @override
   void initState() {
@@ -74,8 +74,8 @@ class _Foto extends State<Foto> {
                                       image: DecorationImage(
                                           image: (widget.finalizacaoChamado ==
                                                   false)
-                                              ? MemoryImage(widget.image)
-                                              : MemoryImage(widget.imagem),
+                                              ? MemoryImage(widget.image!)
+                                              : MemoryImage(widget.imagem!),
                                           fit: BoxFit.cover)),
                                   margin: EdgeInsets.only(bottom: 16),
                                   height: 300,
@@ -99,9 +99,9 @@ class _Foto extends State<Foto> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  new RaisedButton(
+                                  new ElevatedButton(
                                     onPressed: () {
-                                      _view.selecionarItem(widget.fotos);
+                                      _view.selecionarItem(widget.fotos!);
                                     },
                                     child: new Container(
                                       child: new Row(
@@ -120,15 +120,20 @@ class _Foto extends State<Foto> {
                                         ],
                                       ),
                                     ),
-                                    color: Colors.white,
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0)),
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 10),
-                                    splashColor: Colors.grey.withOpacity(0.5),
+                                    style: new ButtonStyle(
+                                      backgroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.white),
+                                      shadowColor:
+                                      MaterialStateProperty.all<Color>(Colors.transparent),
+                                      padding: MaterialStateProperty.all(EdgeInsets.only(
+                                          left: 10, right: 10)),
+                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                          new RoundedRectangleBorder(
+                                            borderRadius: new BorderRadius.circular(30.0),
+                                          )),
+                                    ),
                                   ),
-                                  new RaisedButton(
+                                  new ElevatedButton(
                                     onPressed: () async {
                                       _buildDialogDeletarimagem(context);
                                     },
@@ -149,13 +154,18 @@ class _Foto extends State<Foto> {
                                         ],
                                       ),
                                     ),
-                                    color: Colors.red,
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0)),
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 10),
-                                    splashColor: Colors.grey.withOpacity(0.5),
+                                    style: new ButtonStyle(
+                                      backgroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.red),
+                                      shadowColor:
+                                      MaterialStateProperty.all<Color>(Colors.transparent),
+                                      padding: MaterialStateProperty.all(EdgeInsets.only(
+                                          left: 10, right: 10)),
+                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                          new RoundedRectangleBorder(
+                                            borderRadius: new BorderRadius.circular(30.0),
+                                          )),
+                                    ),
                                   )
                                 ],
                               )
@@ -173,8 +183,9 @@ class _Foto extends State<Foto> {
     if (widget.finalizacaoChamado == false) {
       Navigator.pop(context);
     } else {
-      _view.selecionarItem(widget.fotos);
+      _view.selecionarItem(widget.fotos!);
     }
+    return false;
   }
 
   @override

@@ -21,24 +21,20 @@ import 'package:z_components/view-model/z-checkbox-viewmodel.dart';
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 
 class ZDynamicFormView extends IView<ZDyanmicForm> {
-  Map json;
+  Map? json;
   int groupvalue = 0;
 
   ZDynamicFormView(State<ZDyanmicForm> state) : super(state);
 
-  @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    return null;
-  }
 
   @override
   Future<void> initView() {
     json = new Map();
+    throw UnimplementedError();
   }
 
   Widget buildDynamicForm() {
-    var widgets = state.widget.fields.map<Widget>((x) {
+    var widgets = state.widget.fields?.map<Widget>((x) {
       switch (x.tipo) {
         case ZDynamicFormType.SELECT:
           return _buildSelect(x);
@@ -90,19 +86,19 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
       height: MediaQuery.of(state.context).size.height*0.76,
       child: new ListView(
       shrinkWrap: true,
-      children: widgets,
+      children: widgets!,
     ),);
   }
 
   Widget _buildSelect(ZDynamicFormViewModel item) {
     return new ZCollection(
       titulo: item.label,
-      lista: item.opcoes
+      lista: item.opcoes!
           .split('|')
           .map((x) =>
               new ZCollectionItem(chave: item.nomeCampo, titulo: x, valor: x))
           .toList(),
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value, themeData: Theme.of(state.context),
     );
   }
 
@@ -112,7 +108,7 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     return new ZInputCPF(
       controllerCpf: textEditingController,
       cpfFocus: focusNode,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value, themeData: Theme.of(state.context),
     );
   }
 
@@ -122,7 +118,7 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     return new ZInputEmail(
       emailFocus: focusNode,
       controllerEmail: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value, themeData: Theme.of(state.context),
     );
   }
 
@@ -132,7 +128,7 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     return new ZInputDataNascimento(
       dataFocus: focusNode,
       controllerData: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value, themeData: Theme.of(state.context),
     );
   }
 
@@ -143,7 +139,8 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
       titulo: item.label,
       inputPadraoFocus: focusNode,
       controllerInputPadrao: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
+      themeData: Theme.of(state.context),
       tipoTeclado: TextInputType.number,
     );
   }
@@ -155,8 +152,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
       titulo: item.label,
       inputPadraoFocus: focusNode,
       controllerInputPadrao: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
       tipoTeclado: TextInputType.visiblePassword,
+      themeData: Theme.of(state.context),
       obscureText: true,
     );
   }
@@ -164,7 +162,7 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
   Widget _buildRadio(ZDynamicFormViewModel item) {
     return new ZRadioGroup(
       title: item.label,
-      itens: item.opcoes
+      itens: item.opcoes!
           .split('|')
           .map((x) => new ZRadioItem(
                 description: x,
@@ -172,21 +170,21 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
               ))
           .toList(),
       groupValue: groupvalue++,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
     );
   }
 
   Widget _buildCheckbox(ZDynamicFormViewModel item) {
     return new ZCheckBox(
-      listaDescricao: item.opcoes
+      listaDescricao: item.opcoes!
           .split('|')
           .map((x) => new ZCheckBoxViewModel(
                 descricao: x,
                 value: x,
               ))
           .toList(),
-      title: item.label,
-      onChange: (value) => json[item.nomeCampo] = value,
+      title: item.label!,
+      onChange: (value) => json![item.nomeCampo] = value,
     );
   }
 
@@ -195,8 +193,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     FocusNode focusNode = new FocusNode();
     return new ZInputCEP(
       cepFocus: focusNode,
+      themeData: Theme.of(state.context),
       controllerCep: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
     );
   }
 
@@ -205,8 +204,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     FocusNode focusNode = new FocusNode();
     return new ZInputCelular(
       celularFocus: focusNode,
+      themeData: Theme.of(state.context),
       controllerCelular: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
     );
   }
 
@@ -215,8 +215,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     FocusNode focusNode = new FocusNode();
     return new ZInputCNPJ(
       cnpjFocus: focusNode,
+      themeData: Theme.of(state.context),
       controllerCNPJ: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
     );
   }
 
@@ -225,8 +226,9 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     FocusNode focusNode = new FocusNode();
     return new ZInputName(
       nomeFocus: focusNode,
+      themeData: Theme.of(state.context),
       controllerNome: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
     );
   }
 
@@ -235,11 +237,18 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
     FocusNode focusNode = new FocusNode();
     return new ZInputGeneric(
       titulo: item.label,
+      themeData: Theme.of(state.context),
       inputPadraoFocus: focusNode,
       controllerInputPadrao: textEditingController,
-      onChange: (value) => json[item.nomeCampo] = value,
+      onChange: (value) => json![item.nomeCampo] = value,
       tipoTeclado: TextInputType.visiblePassword,
       obscureText: false,
     );
+  }
+
+  @override
+  Future<void> afterBuild() {
+    // TODO: implement afterBuild
+    throw UnimplementedError();
   }
 }

@@ -14,15 +14,15 @@ import 'package:z_components/view-model/app-view-model.dart';
 class ListagemAplicativosView extends IView<ListagemAplicativos> {
   ListagemAplicativosView(State<ListagemAplicativos> state) : super(state);
 
-  IContasService contasService;
+  late IContasService contasService;
   GlobalKey<ZSearchBarState> keySearchBar = new GlobalKey();
   List<AppViewModel> listaModulos = [];
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
-  ScrollController scrollController;
+  late ScrollController scrollController;
 
   bool icons2 = true;
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
 
   @override
   Future<void> afterBuild() {
@@ -46,24 +46,24 @@ class ListagemAplicativosView extends IView<ListagemAplicativos> {
   }
 
   Future<void> buscarAplicativos(SearchOptions searchOptions,
-      {bool scrollPage}) async {
+      {bool? scrollPage}) async {
     var res = await contasService.listarAplicativos(
-        searchOptions, state.widget.moduloContaViewModel.idModulo);
+        searchOptions, state.widget.moduloContaViewModel!.idModulo!);
     if (res != null) {
       state.setState(() {
-        listaModulos = res.body;
+        listaModulos = res.body!;
       });
     }
   }
 
   Future<void> onScroll() async {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
-      if (this.paginationMetaData.hasNext) {
+      if (this.paginationMetaData.hasNext!) {
         OrderByExpression order = new OrderByExpression();
         order.propertyName = "NomeExibicao";
         order.orientation = "ASC";
         searchOptions.orders = [order];
-        this.searchOptions.pagination.pageNumber++;
+        this.searchOptions.pagination!.pageNumber! +1;
         await buscarAplicativos(this.searchOptions, scrollPage: true);
       }
     }

@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:z_components/config/z-platform.dart';
 
 class ZLoading extends StatelessWidget {
-  Widget _zLoading;
+  Widget? _zLoading;
 
-  final BuildContext context;
-  final Key key;
-  final double value;
-  final Color backgroundColor;
-  final Animation<Color> valueColor;
-  final double strokeWidth;
-  final String semanticsLabel;
-  final String semanticsValue;
-  final bool animating;
-  final double radius;
-  final ZPlatform zPlatform;
-  final Color color;
+  final BuildContext? context;
+  final Key? key;
+  final double? value;
+  final Color? backgroundColor;
+  final Animation<Color>? valueColor;
+  final double? strokeWidth;
+  final String? semanticsLabel;
+  final String? semanticsValue;
+  final bool? animating;
+  final double? radius;
+  final ZPlatform? zPlatform;
+  final Color? color;
 
   ZLoading({
     this.context,
@@ -59,7 +59,7 @@ class ZLoading extends StatelessWidget {
                         backgroundColor: this.backgroundColor,
                         valueColor:
                             new AlwaysStoppedAnimation<Color>(Colors.white),
-                        strokeWidth: this.strokeWidth,
+                        strokeWidth: this.strokeWidth ?? 0,
                         semanticsLabel: this.semanticsLabel,
                         semanticsValue: this.semanticsValue,
                       ),
@@ -84,6 +84,6 @@ class ZLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _zLoading;
+    return _zLoading!;
   }
 }

@@ -13,20 +13,20 @@ import '../../styles/main-style.dart';
 import '../z-alert-dialog.dart';
 
 class ZSelectionList extends StatefulWidget {
-  GlobalKey keyListaItens = new GlobalKey();
-  GlobalKey key;
-  List<ZSelectionItem> lista;
-  final ThemeData theme;
-  final String titulo;
+  GlobalKey? keyListaItens = new GlobalKey();
+  GlobalKey<ZSelectionListState>? key;
+  List<ZSelectionItem>? lista;
+  final ThemeData? theme;
+  final String? titulo;
   final color;
-  final FiltroCampo filtroPrincipal;
-  int skip;
-  int take;
-  Function(List<FilterExpression>) onChange;
-  Function(List<FilterExpression>, List<ZSelectionItem>) onScroll;
-  Function() onAdd;
-  String textoOnAdd;
-  List<ZSelectionItem> listaSelecao;
+  final FiltroCampo? filtroPrincipal;
+  int? skip;
+  int? take;
+  Function(List<FilterExpression>)? onChange;
+  Function(List<FilterExpression>?, List<ZSelectionItem>)? onScroll;
+  Function()? onAdd;
+  String? textoOnAdd;
+  List<ZSelectionItem?>? listaSelecao;
 
   ZSelectionList(
       {this.lista,
@@ -49,9 +49,9 @@ class ZSelectionList extends StatefulWidget {
 }
 
 class ZSelectionListState extends State<ZSelectionList> {
-  List<ZSelectionItem> _listaFiltro;
-  ScrollController scrollController;
-  GlobalKey keyLista = new GlobalKey();
+  late List<ZSelectionItem>? _listaFiltro;
+  late ScrollController scrollController;
+  GlobalKey? keyLista = new GlobalKey();
   String textoBusca = "";
 
   @override
@@ -74,7 +74,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: widget.theme.backgroundColor,
+      backgroundColor: widget.theme!.backgroundColor,
       appBar: new AppBar(
         backgroundColor: widget.color,
         leading: IconeVoltar(
@@ -83,7 +83,7 @@ class ZSelectionListState extends State<ZSelectionList> {
         centerTitle: true,
         title: new Container(
           child: new Text(
-            widget.titulo.toUpperCase(),
+            widget.titulo!.toUpperCase(),
             style: new TextStyle(color: Colors.white),
           ),
         ),
@@ -114,19 +114,19 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   void montarRespostas() {
-    for (int i = 0; i < widget.lista.length; i++) {
-      widget.lista[i].selecionado = false;
-      for (int j = 0; j < widget.listaSelecao.length; j++) {
-        if (widget.listaSelecao[j].chave == widget.lista[i].chave) {
-          widget.lista[i].selecionado = true;
-          widget.lista[i].obrigatorio = widget.listaSelecao[j].obrigatorio;
+    for (int i = 0; i < widget.lista!.length; i++) {
+      widget.lista![i].selecionado = false;
+      for (int j = 0; j < widget.listaSelecao!.length; j++) {
+        if (widget.listaSelecao![j]!.chave == widget.lista![i].chave) {
+          widget.lista![i].selecionado = true;
+          widget.lista![i].obrigatorio = widget.listaSelecao![j]!.obrigatorio;
         }
       }
     }
   }
 
   Widget montarAddMais() {
-    if (widget.textoOnAdd == null || widget.textoOnAdd.isEmpty) {
+    if (widget.textoOnAdd == null || widget.textoOnAdd!.isEmpty) {
       return new Container();
     } else {
       return new Column(
@@ -136,10 +136,10 @@ class ZSelectionListState extends State<ZSelectionList> {
           ),
           new ZTile(
             onTap: () {
-              widget.onAdd();
+              widget.onAdd!();
             },
-            leading: new Text(widget.textoOnAdd),
-            trailing: new Icon(Icons.add, color: widget.theme.primaryColor)
+            leading: new Text(widget.textoOnAdd!),
+            trailing: new Icon(Icons.add, color: widget.theme!.primaryColor)
           ),
           new Divider(
             height: 1,
@@ -183,9 +183,9 @@ class ZSelectionListState extends State<ZSelectionList> {
                           if (text.length >= 3 || text.length == 0) {
                             if (widget.onChange != null) {
                               textoBusca = text;
-                              widget.onChange([
+                              widget.onChange!([
                                 new FilterExpression(
-                                    propertyName: widget.filtroPrincipal.key,
+                                    propertyName: widget.filtroPrincipal?.key,
                                     operatorBetween: "AndAlso",
                                     operator: "Contains",
                                     value: text)
@@ -195,9 +195,9 @@ class ZSelectionListState extends State<ZSelectionList> {
                               keyLista = new GlobalKey();
                               setState(() {
                                 if (text.length > 0)
-                                  _listaFiltro = widget.lista
+                                  _listaFiltro = widget.lista!
                                       .where((x) =>
-                                          x.valor.toLowerCase().contains(text))
+                                          x.valor!.toLowerCase().contains(text))
                                       .toList();
                                 else
                                   _listaFiltro = widget.lista;
@@ -217,7 +217,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   Widget _buildLista() {
-    if (_listaFiltro.isEmpty) {
+    if (_listaFiltro !=null && _listaFiltro!.isEmpty) {
       return new Column(
         children: [
           new Container(
@@ -235,7 +235,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                   ),
                   borderRadius: new BorderRadius.all(Radius.circular(16.0))),
               child: new Text(
-                '${'Para encontrar os ' + '${widget.titulo.toLowerCase()}' + ' desejados, utilize o campo de busca acima.'}',
+                '${'Para encontrar os ' + '${widget.titulo!.toLowerCase()}' + ' desejados, utilize o campo de busca acima.'}',
                 maxLines: 4,
                 style: TextStyle(fontSize: 15),
               ),
@@ -253,15 +253,15 @@ class ZSelectionListState extends State<ZSelectionList> {
     } else {
       return ListView.builder(
         key: keyLista,
-        itemCount: _listaFiltro.length,
+        itemCount: _listaFiltro!.length,
         controller: scrollController,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          var item = _listaFiltro[index];
-          if(widget.listaSelecao.length > 0){
-            for(int i=0;i<widget.listaSelecao.length;i++){
-              if(widget.listaSelecao[i].selecionado){
-                if(widget.listaSelecao[i].titulo.toLowerCase() == item.titulo.toLowerCase()){
+          var item = _listaFiltro![index];
+          if(widget.listaSelecao!.length > 0){
+            for(int i=0;i<widget.listaSelecao!.length;i++){
+              if(widget.listaSelecao![i]!.selecionado!){
+                if(widget.listaSelecao![i]!.titulo!.toLowerCase() == item.titulo!.toLowerCase()){
                   item.selecionado =true;
                 }
               }
@@ -276,16 +276,16 @@ class ZSelectionListState extends State<ZSelectionList> {
                   color: Colors.white,
                   child: new ZTile(
                     onTap: () {
-                      if (!item.obrigatorio) {
+                      if (item.obrigatorio !=null && !item.obrigatorio!) {
                         setState(() {
-                          item.selecionado = !item.selecionado;
+                          item.selecionado = !item.selecionado!;
 
-                          if (item.selecionado) {
-                            widget.listaSelecao.add(item);
+                          if (item.selecionado!) {
+                            widget.listaSelecao!.add(item);
                           } else {
-                            for (int i = 0; i < widget.listaSelecao.length; i++) {
-                              if (widget.listaSelecao[i].chave == item.chave) {
-                                widget.listaSelecao.removeAt(i);
+                            for (int i = 0; i < widget.listaSelecao!.length; i++) {
+                              if (widget.listaSelecao![i]!.chave == item.chave) {
+                                widget.listaSelecao?.removeAt(i);
                                 break;
                               }
                             }
@@ -299,7 +299,7 @@ class ZSelectionListState extends State<ZSelectionList> {
                           width: MediaQuery.of(context).size.width / 1.4,
                           child: new Text(
                             "${item.titulo ?? item.valor}",
-                            style: widget.theme.textTheme.bodyText1,
+                            style: widget.theme?.textTheme.bodyText1,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -310,18 +310,18 @@ class ZSelectionListState extends State<ZSelectionList> {
                         activeColor: Theme.of(context).primaryColor,
                         value: item.selecionado,
                         onChanged: (bool) {
-                          if (!item.obrigatorio) {
+                          if (item.obrigatorio != null && !item.obrigatorio!) {
                             setState(() {
                               item.selecionado = bool;
-                              if (item.selecionado) {
-                                widget.listaSelecao.add(item);
+                              if (item.selecionado!) {
+                                widget.listaSelecao?.add(item);
                               } else {
                                 for (int i = 0;
-                                    i < widget.listaSelecao.length;
+                                    i < widget.listaSelecao!.length;
                                     i++) {
-                                  if (widget.listaSelecao[i].chave ==
+                                  if (widget.listaSelecao![i]!.chave ==
                                       item.chave) {
-                                    widget.listaSelecao.removeAt(i);
+                                    widget.listaSelecao?.removeAt(i);
                                     break;
                                   }
                                 }
@@ -334,7 +334,7 @@ class ZSelectionListState extends State<ZSelectionList> {
               ),
               new Divider(
                 height: 2,
-                color: widget.theme.backgroundColor,
+                color: widget.theme?.backgroundColor,
               ),
             ],
           );
@@ -344,7 +344,7 @@ class ZSelectionListState extends State<ZSelectionList> {
   }
 
   Widget _montarExibicaoContadorSelecionados() {
-    String contador = widget.listaSelecao.length.toString();
+    String contador = widget.listaSelecao!.length.toString();
     if (contador == "0") {
       return new Container();
     } else {
@@ -390,9 +390,9 @@ class ZSelectionListState extends State<ZSelectionList> {
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            new RaisedButton(
+            new ElevatedButton(
               onPressed: () {
-                _selecionarItem(_listaFiltro);
+                _selecionarItem(_listaFiltro!);
               },
               child: new Container(
                 child: new Row(
@@ -405,17 +405,24 @@ class ZSelectionListState extends State<ZSelectionList> {
                         style: Theme.of(context)
                             .textTheme
                             .button
-                            .copyWith(color: Color(0xFFFFFFFF)),
+                            ?.copyWith(color: Color(0xFFFFFFFF)),
                       ),
                     )
                   ],
                 ),
               ),
-              color: Theme.of(context).primaryColor,
-              shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30),
+              style: new ButtonStyle(
+                backgroundColor:
+                MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                shadowColor:
+                MaterialStateProperty.all<Color>(Colors.transparent),
+                padding: MaterialStateProperty.all(EdgeInsets.only(
+                    left: 10, right: 10)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    )),
               ),
-              padding: const EdgeInsets.only(left: 10, right: 10),
             )
           ],
         ),
@@ -423,38 +430,38 @@ class ZSelectionListState extends State<ZSelectionList> {
     );
   }
 
-  void _selecionarItem(List<ZSelectionItem> item) {
+  void _selecionarItem(List<ZSelectionItem?>? item) {
     Navigator.of(context).pop([item, widget.listaSelecao]);
   }
 
-  Future<void> _initList() {
+  Future<void> _initList() async{
     if (widget.take == 0) {
       setState(() {
         _listaFiltro = widget.lista;
       });
     } else {
       var listaSkipTake =
-          widget.lista.skip(widget.skip).take(widget.take).toList();
+          widget.lista!.skip(widget.skip!).take(widget.take!).toList();
 
       if (listaSkipTake != null && listaSkipTake.length > 0) {
         setState(() {
-          _listaFiltro.addAll(listaSkipTake);
-          widget.skip += widget.take;
+          _listaFiltro?.addAll(listaSkipTake);
+          widget.skip = widget.skip! + widget.take!;
         });
       }
     }
   }
 
   Future<void> _scrollListener() async {
-    if (widget.take > 0) {
+    if (widget.take! > 0) {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         var listaSkipTake =
-            widget.lista.skip(widget.skip).take(widget.take).toList();
+            widget.lista!.skip(widget.skip!).take(widget.take!).toList();
         if (listaSkipTake != null && listaSkipTake.length > 0) {
           setState(() {
-            _listaFiltro.addAll(listaSkipTake);
-            widget.skip += widget.take;
+            _listaFiltro?.addAll(listaSkipTake);
+            widget.skip = widget.skip! + widget.take!;
           });
         }
       }
@@ -462,14 +469,14 @@ class ZSelectionListState extends State<ZSelectionList> {
     if (widget.onScroll != null) {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        widget.onScroll([
+        widget.onScroll!([
           new FilterExpression(
-              propertyName: widget.filtroPrincipal.key,
+              propertyName: widget.filtroPrincipal?.key,
               operatorBetween: "AndAlso"
                   "",
               operator: "Contains",
               value: textoBusca)
-        ], _listaFiltro);
+        ], _listaFiltro!);
       }
     }
   }
@@ -494,14 +501,14 @@ class ZSelectionListState extends State<ZSelectionList> {
                 )));
   }
 
-  void atualizarListas(List<ZSelectionItem> listaAtualizado) {
+  void atualizarListas(List<ZSelectionItem?> listaAtualizado) {
     widget.listaSelecao = listaAtualizado;
 
-    for (int i = 0; i < _listaFiltro.length; i++) {
-      _listaFiltro[i].selecionado = false;
-      for (int j = 0; j < widget.listaSelecao.length; j++) {
-        if (_listaFiltro[i].chave == widget.listaSelecao[j].chave) {
-          _listaFiltro[i].selecionado = true;
+    for (int i = 0; i < _listaFiltro!.length; i++) {
+      _listaFiltro![i].selecionado = false;
+      for (int j = 0; j < widget.listaSelecao!.length; j++) {
+        if (_listaFiltro![i].chave == widget.listaSelecao![j]!.chave) {
+          _listaFiltro![i].selecionado = true;
         }
       }
     }
@@ -525,7 +532,7 @@ class ZSelectionListState extends State<ZSelectionList> {
               ),
               new Container(
                 child: new Text(
-                  widget.titulo.toUpperCase(),
+                  widget.titulo!.toUpperCase(),
                   style: new TextStyle(
                       color: Colors.black,
                       fontSize: 16,

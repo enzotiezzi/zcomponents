@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class ZItemTileOS extends StatefulWidget {
 
-  final String oque;
-  final String onde;
-  final String porque;
-  final String dataSla;
-  final String codigo;
-  final String prioridade;
-  final bool visibilidade;
-  final bool emAndamento;
-  final Function onPressedFinalizar;
-  final Function onTap;
+  final String? oque;
+  final String? onde;
+  final String? porque;
+  final String? dataSla;
+  final String? codigo;
+  final String? prioridade;
+  final bool? visibilidade;
+  final bool? emAndamento;
+  final Function? onPressedFinalizar;
+  final Function? onTap;
 
   ZItemTileOS({
     this.oque,
@@ -36,7 +36,11 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      onTap: widget.onTap,
+      onTap: (){
+        if(widget.onTap != null){
+          widget.onTap!();
+        }
+      },
       child: new IntrinsicHeight(
         child: new Container(
           margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8,top: 8),
@@ -186,13 +190,13 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
 
-  Widget retornaOque (String oque){
+  Widget retornaOque (String? oque){
 
     if(oque == null || oque.isEmpty){
       return Text("Motivo não encontrado");
     }else{
       return Text(
-        widget.oque,overflow: TextOverflow.ellipsis,
+        widget.oque!,overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600
@@ -201,12 +205,12 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
 
   }
-  Widget retornaOnde (String onde){
+  Widget retornaOnde (String? onde){
     if(onde == null || onde.isEmpty){
       return Text("Local não encontrado",overflow: TextOverflow.ellipsis,);
     }else{
       return Text(
-        widget.onde,
+        widget.onde!,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12,
@@ -215,12 +219,12 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       );
     }
   }
-  Widget retornaPorque (String porque){
+  Widget retornaPorque (String? porque){
     if(porque == null || porque.isEmpty){
       return Text("Local não encontrado");
     }else{
       return Text(
-        widget.porque,
+        widget.porque!,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12,
@@ -229,7 +233,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       );
     }
   }
-  Widget retornaDataSla (String dataSla){
+  Widget retornaDataSla (String? dataSla){
     if(dataSla ==null || dataSla.isEmpty){
       return new  Container(
         margin: _definirMarginSla(),
@@ -249,7 +253,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
             top: 8
         ),
         child: new Text(
-          widget.dataSla,
+          widget.dataSla!,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
               fontSize: 12,
@@ -259,12 +263,12 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       );
     }
   }
-  Widget retornaCodigo (String codigo){
+  Widget retornaCodigo (String? codigo){
     if (codigo == null || codigo.isEmpty){
       return new Text("Código não identificado");
     }else{
       return Text(
-        widget.codigo, overflow: TextOverflow.ellipsis,
+        widget.codigo!, overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12,
             color: Color(0xFF000000),
@@ -273,12 +277,12 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
       );
     }
   }
-  Widget retornaPrioridade (String prioridade){
+  Widget retornaPrioridade (String? prioridade){
     if (prioridade == null || prioridade.isEmpty){
       return new Text("Não têm");
     }else{
       return Text(
-        widget.prioridade,overflow: TextOverflow.ellipsis,
+        widget.prioridade!,overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontSize: 12,
             color: Color(0xFF000000),
@@ -289,11 +293,15 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
   Widget retornaBotao(){
 
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return  Stack(
         children: [
           GestureDetector(
-            onTap: widget.onPressedFinalizar,
+            onTap: (){
+              if(widget.onPressedFinalizar != null){
+                widget.onPressedFinalizar!();
+              }
+            },
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),),
@@ -315,7 +323,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
 
 
   int flexEmAndamento(){
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return 36;
     }else{
       return  25;
@@ -323,7 +331,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
   int flexCampoDescAndamento(){
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return 15;
     }else{
       return  20;
@@ -331,7 +339,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
   int flexCampoConteudoAndamento(){
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return 42;
     }else{
       return  25;
@@ -339,7 +347,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
   Widget espacoAdicional(){
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return Expanded(
         flex: 30,
         child: Container(),
@@ -349,7 +357,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
   Widget retornaArrow(){
-    if(widget.visibilidade){
+    if(widget.visibilidade!){
       return Expanded(flex:5,child: Container());
     }else{
       return Expanded(
@@ -367,7 +375,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
   EdgeInsetsGeometry _alinharMarginOnde(){
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
       );
@@ -379,7 +387,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
   EdgeInsetsGeometry _alinharMarginOque() {
-    if (widget.emAndamento) {
+    if (widget.emAndamento!) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 8, top: 8
       );
@@ -392,7 +400,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
   EdgeInsetsGeometry _alinharMarginPorque() {
-    if (widget.emAndamento) {
+    if (widget.emAndamento!) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 0, top: 0
       );
@@ -404,7 +412,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
     }
   }
   EdgeInsetsGeometry _alinharMarginData() {
-    if (widget.emAndamento) {
+    if (widget.emAndamento!) {
       return EdgeInsets.only(
           left: 8, right: 0, bottom: 2, top:8
       );
@@ -417,7 +425,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
   EdgeInsetsGeometry _definirMarginSla(){
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return EdgeInsets.only(
           top: 8
       );
@@ -430,7 +438,7 @@ class _ZItemTileOSState extends State<ZItemTileOS> {
   }
 
   EdgeInsetsGeometry _definirMarginWidgetPorque(){
-    if(widget.emAndamento){
+    if(widget.emAndamento!){
       return EdgeInsets.only(
         top: 0
       );

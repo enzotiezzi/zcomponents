@@ -11,8 +11,8 @@ class MonstroRepository extends AbstractRepository<Monstro> implements IMonstroR
   }
 
   @override
-  Future<Monstro> findLast() {
+  Future<Monstro> findLast() async{
     // TODO: implement findLast
-    return null;
+    return Monstro();
   }
 }

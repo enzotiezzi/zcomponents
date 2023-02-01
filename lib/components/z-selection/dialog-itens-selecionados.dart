@@ -6,9 +6,9 @@ import '../z-tile.dart';
 import 'z-selection-item.dart';
 
 class DialogItensSelecionados extends StatefulWidget {
-  List<ZSelectionItem> listaSelecao;
-  GlobalKey<ZSelectionListState> keyListagemSelecao;
-  ThemeData theme;
+  List<ZSelectionItem?>? listaSelecao;
+  GlobalKey<ZSelectionListState>? keyListagemSelecao;
+  ThemeData? theme;
 
   DialogItensSelecionados(
       {this.listaSelecao, this.theme, this.keyListagemSelecao});
@@ -23,7 +23,7 @@ class _DialogItensSelecionadosState extends State<DialogItensSelecionados> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(
-          backgroundColor: widget.theme.primaryColor,
+          backgroundColor: widget.theme!.primaryColor,
           leading: IconeVoltar(
             context: context,
           ),
@@ -47,7 +47,7 @@ class _DialogItensSelecionadosState extends State<DialogItensSelecionados> {
             new Expanded(
               child: new ListView.builder(
                 shrinkWrap: true,
-                itemCount: widget.listaSelecao.length,
+                itemCount: widget.listaSelecao!.length,
                 itemBuilder: (context, index) {
                   return new Column(
                     children: [
@@ -55,25 +55,25 @@ class _DialogItensSelecionadosState extends State<DialogItensSelecionados> {
                         leading: new Container(
                           width: MediaQuery.of(context).size.width / 1.8,
                           child: new Text(
-                            widget.listaSelecao[index].titulo,
-                            style: widget.theme.textTheme.bodyText1,
+                            widget.listaSelecao![index]!.titulo!,
+                            style: widget.theme!.textTheme.bodyText1,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         trailing: new IconButton(
                           onPressed: () {
-                            if (!widget.listaSelecao[index].obrigatorio) {
-                              widget.listaSelecao.removeAt(index);
-                              widget.keyListagemSelecao.currentState
-                                  .atualizarListas(widget.listaSelecao);
+                            if (!widget.listaSelecao![index]!.obrigatorio!) {
+                              widget.listaSelecao?.removeAt(index);
+                              widget.keyListagemSelecao!.currentState
+                                  !.atualizarListas(widget.listaSelecao!);
                               setState(() {});
                             }
                           },
                           icon: Icon(
                             Icons.remove_circle_outline,
                             color: _escolherCorIconeRemover(
-                                widget.listaSelecao[index].obrigatorio),
+                                widget.listaSelecao![index]!.obrigatorio!),
                           ),
                         ),
                       ),

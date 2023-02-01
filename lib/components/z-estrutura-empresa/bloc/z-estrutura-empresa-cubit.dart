@@ -14,19 +14,19 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     implements ZEstruturaEmpresaActions {
   bool carregou = false;
 
-  TreeViewController _treeViewController;
+  late TreeViewController _treeViewController;
   TextEditingController _searchTextController = new TextEditingController();
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  IEstruturaEmpresaService _estruturaEmpresaService;
+  late IEstruturaEmpresaService _estruturaEmpresaService;
 
   TreeViewController get treeViewController => _treeViewController;
 
   TextEditingController get searchTextController => _searchTextController;
 
-  Node get selectedNode => state.selectedNode;
+  Node? get selectedNode => state.selectedNode;
 
   ZEstruturaEmpresaCubit()
       : super(new ZEstruturaEmpresaCubitModel(
@@ -40,7 +40,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
     var searchOptions = new SearchOptions();
 
     searchOptions.orders
-        .add(new OrderByExpression(propertyName: "Nome", orientation: "ASC"));
+        ?.add(new OrderByExpression(propertyName: "Nome", orientation: "ASC"));
 
     emit(state.patchState(isLoading: true));
     _estruturaEmpresaService = new EstruturaEmpresaService(token);
@@ -54,7 +54,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
       List<Node<Nivel>> nodes = [];
 
-      _depthConvertion(null, niveis, nodes);
+      _depthConvertion(null, niveis!, nodes);
 
       _treeViewController = new TreeViewController(children: nodes);
 
@@ -67,47 +67,47 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   }
 
   void _depthConvertion(
-      Node parent, List<Nivel> niveis, List<Node<Nivel>> nodes) {
+      Node? parent, List<Nivel> niveis, List<Node<Nivel>> nodes) {
     for (var i = 0; i < niveis.length; i++) {
       var nivel = niveis[i];
 
       var node = new Node<Nivel>(
-          key: nivel.idNivel, label: nivel.nome, data: nivel, children: []);
+          key: nivel.idNivel!, label: nivel.nome!, data: nivel, children: []);
 
       if (parent != null)
         parent.children.add(node);
       else
         nodes.add(node);
 
-      _depthConvertion(node, nivel.niveis, nodes);
+      _depthConvertion(node, nivel.niveis!, nodes);
     }
   }
 
   void _depthSearch(
-      Node parent, List<Nivel> niveis, List<Node<Nivel>> nodes, String filter) {
+      Node? parent, List<Nivel> niveis, List<Node<Nivel>> nodes, String filter) {
     for (var i = 0; i < niveis.length; i++) {
       var nivel = niveis[i];
 
       foundNodeInDepth = false;
-      _depthFilterSearch(filter, nivel.niveis);
+      _depthFilterSearch(filter, nivel.niveis!);
 
       var node = new Node<Nivel>(
-          key: nivel.idNivel,
-          label: nivel.nome,
+          key: nivel.idNivel!,
+          label: nivel.nome!,
           data: nivel,
           children: [],
           expanded: true);
 
-      if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) &&
+      if (nivel.nome!.toLowerCase().contains(filter.toLowerCase()) &&
           !foundNodeInDepth) {
-        _adicionarNiveisAoNo(node, nivel.niveis);
+        _adicionarNiveisAoNo(node, nivel.niveis!);
 
         if (parent != null)
           parent.children.add(node);
         else
           nodes.add(node);
       } else {
-        if (nivel.nome.toLowerCase().contains(filter.toLowerCase()) ||
+        if (nivel.nome!.toLowerCase().contains(filter.toLowerCase()) ||
             foundNodeInDepth) {
           if (parent != null)
             parent.children.add(node);
@@ -116,7 +116,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
         }
       }
 
-      _depthSearch(node, nivel.niveis, nodes, filter);
+      _depthSearch(node, nivel.niveis!, nodes, filter);
     }
   }
 
@@ -127,10 +127,10 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
       for (var i = 0; i < niveis.length; i++) {
         var nivelAtual = niveis[i];
 
-        if (nivelAtual.nome.toLowerCase().contains(filter.toLowerCase()))
+        if (nivelAtual.nome!.toLowerCase().contains(filter.toLowerCase()))
           foundNodeInDepth = true;
 
-        _depthFilterSearch(filter, nivelAtual.niveis);
+        _depthFilterSearch(filter, nivelAtual.niveis!);
       }
     }
   }
@@ -146,7 +146,7 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
   void filtrarEstruturaEmpresa(String nome) {
     List<Node<Nivel>> nodes = [];
 
-    _depthSearch(null, state.niveis, nodes, nome);
+    _depthSearch(null, state.niveis!, nodes, nome);
 
     _treeViewController = new TreeViewController(children: nodes);
 
@@ -168,10 +168,10 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
 
   @override
   void adicionarNivel(Nivel nivel) {
-    _adicionarNivelFilho(nivel, state.selectedNode.data as Nivel, state.niveis);
+    _adicionarNivelFilho(nivel, state.selectedNode!.data as Nivel, state.niveis!);
 
     emit(state.patchState(niveis: state.niveis));
-    filtrarEstruturaEmpresa(state.selectedNode.label);
+    filtrarEstruturaEmpresa(state.selectedNode!.label);
   }
 
   void _adicionarNivelFilho(
@@ -180,10 +180,10 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
       var nivel = niveis[i];
 
       if (nivel.idNivel == nivelPai.idNivel) {
-        nivelPai.niveis.add(nivelFilho);
-        searchTextController.text = nivelFilho.nome;
+        nivelPai.niveis?.add(nivelFilho);
+        searchTextController.text = nivelFilho.nome!;
       } else {
-        _adicionarNivelFilho(nivelFilho, nivelPai, nivel.niveis);
+        _adicionarNivelFilho(nivelFilho, nivelPai, nivel.niveis!);
       }
     }
   }
@@ -193,15 +193,15 @@ class ZEstruturaEmpresaCubit extends Cubit<ZEstruturaEmpresaCubitModel>
       var nivel = niveis[i];
 
       var node = new Node<Nivel>(
-          key: nivel.idNivel,
-          label: nivel.nome,
+          key: nivel.idNivel!,
+          label: nivel.nome!,
           data: nivel,
           children: [],
           expanded: true);
 
       parentNode.children.add(node);
 
-      _adicionarNiveisAoNo(node, nivel.niveis);
+      _adicionarNiveisAoNo(node, nivel.niveis!);
     }
   }
 }

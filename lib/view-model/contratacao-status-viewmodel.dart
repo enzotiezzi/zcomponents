@@ -1,6 +1,6 @@
 class ContratacaoStatus {
-  String idContratacaoStatus;
-  String nome;
+  String? idContratacaoStatus;
+  String? nome;
 
   ContratacaoStatus({this.idContratacaoStatus, this.nome: ""});
 

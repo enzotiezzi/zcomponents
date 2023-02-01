@@ -16,16 +16,16 @@ class DetalheAplicativoView extends IView<DetalheAplicativo>{
     FocusNode moduloFocus = new FocusNode();
 
     void _preencherDados(){
-        nomeController.text = state.widget.appViewModel.nomeExibicao;
-        versaoController.text = state.widget.appViewModel.versao;
+        nomeController.text = state.widget.appViewModel!.nomeExibicao!;
+        versaoController.text = state.widget.appViewModel!.versao!;
         dataVersaoController.text = _validarDataVersao();
-        moduloController.text = state.widget.contaViewModel.modulo.nome;
+        moduloController.text = state.widget.contaViewModel!.modulo!.nome!;
 
     }
 
     String _validarDataVersao(){
-        if(state.widget.appViewModel.dataVersao != null){
-            return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appViewModel.dataVersao));
+        if(state.widget.appViewModel!.dataVersao != null){
+            return UtilData.obterDataDDMMAAAA(DateTime.parse(state.widget.appViewModel!.dataVersao!));
         }else{
             return "Nunca";
         }
@@ -41,5 +41,6 @@ class DetalheAplicativoView extends IView<DetalheAplicativo>{
     @override
     Future<void> initView() {
         _preencherDados();
+        throw UnimplementedError();
     }
 }

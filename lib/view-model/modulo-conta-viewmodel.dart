@@ -2,13 +2,13 @@
 import 'package:z_components/view-model/modulo-viewmodel.dart';
 
 class ModuloContaViewModel {
-  String idModulo;
-  String dataVinculo;
-  String dataInativacao;
-  bool ativo;
-  String status;
-  ModuloViewModel modulo;
-  String idConta;
+  String? idModulo;
+  String? dataVinculo;
+  String? dataInativacao;
+  bool? ativo;
+  String? status;
+  ModuloViewModel? modulo;
+  String? idConta;
 
 
   ModuloContaViewModel({

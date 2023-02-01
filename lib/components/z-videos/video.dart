@@ -5,10 +5,10 @@ import 'package:video_player/video_player.dart';
 
 
 class Video extends StatefulWidget {
-  static final String ROUTER = "/video";
-  final String videoPlayerController1;
-  final String titulo;
-  final String descricao;
+  static final String? ROUTER = "/video";
+  final String? videoPlayerController1;
+  final String? titulo;
+  final String? descricao;
   final index;
   Video(
       {
@@ -22,16 +22,16 @@ class Video extends StatefulWidget {
 }
 
 class _Video extends State<Video> with TickerProviderStateMixin {
-  VideoPlayerController _videoPlayerController1;
-  ChewieController _chewieController;
+  VideoPlayerController? _videoPlayerController1;
+  ChewieController? _chewieController;
 
   @override
   void initState() {
     super.initState();
-    _videoPlayerController1 = VideoPlayerController.network(widget.videoPlayerController1);
+    _videoPlayerController1 = VideoPlayerController.network(widget.videoPlayerController1!);
 
     _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController1,
+      videoPlayerController: _videoPlayerController1!,
       aspectRatio: 3 / 2,
       autoPlay: true,
       looping: true,
@@ -40,8 +40,8 @@ class _Video extends State<Video> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _videoPlayerController1.dispose();
-    _chewieController.dispose();
+    _videoPlayerController1?.dispose();
+    _chewieController?.dispose();
     super.dispose();
   }
 
@@ -61,7 +61,7 @@ class _Video extends State<Video> with TickerProviderStateMixin {
               child: Align(
                   alignment: Alignment.topCenter,
                   child: new Hero(tag: 'video${widget.index}', child: Chewie(
-                    controller: _chewieController,
+                    controller: _chewieController!,
                   ),)
               ),
             ),
@@ -71,7 +71,7 @@ class _Video extends State<Video> with TickerProviderStateMixin {
                 new Container(
                   margin: const EdgeInsets.only(top: 6,bottom: 6),
                   width: MediaQuery.of(context).size.width*0.9,
-                  child: new Text(widget.descricao,style: new TextStyle(fontSize: 16,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
+                  child: new Text(widget.descricao!,style: new TextStyle(fontSize: 16,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
                 )
               ],
             )
@@ -82,7 +82,7 @@ class _Video extends State<Video> with TickerProviderStateMixin {
     else{
      return Scaffold(
         appBar: AppBar(
-          title: Text(widget.titulo),
+          title: Text(widget.titulo!),
           centerTitle: true,
         ),
         body: ListView(
@@ -91,7 +91,7 @@ class _Video extends State<Video> with TickerProviderStateMixin {
               child: Align(
                   alignment: Alignment.topCenter,
                   child: new Hero(tag: 'video${widget.index}', child: Chewie(
-                    controller: _chewieController,
+                    controller: _chewieController!,
                   ),)
               ),
             ),
@@ -101,7 +101,7 @@ class _Video extends State<Video> with TickerProviderStateMixin {
                 new Container(
                   margin: const EdgeInsets.only(top: 6),
                   width: MediaQuery.of(context).size.width*0.9,
-                  child: new Text(widget.descricao,style: new TextStyle(fontSize: 16,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
+                  child: new Text(widget.descricao!,style: new TextStyle(fontSize: 16,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
                 )
               ],
             )

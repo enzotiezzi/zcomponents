@@ -1,20 +1,20 @@
 class DocumentoCampo {
-  String idDocumentoCampo;
-  String idDocumento;
-  String nomeCampo;
-  String tipoValorCampo;
-  String tamanhoValorCampo;
-  String tamanhoPrecisaoValorCampo;
-  bool obrigatorio;
-  String resposta;
-  String idAtributo;
-  String idModelo;
-  String dataResposta;
-  String modelo;
-  String idTipo;
-  String label;
-  String tipo;
-  String mascara;
+  String? idDocumentoCampo;
+  String? idDocumento;
+  String? nomeCampo;
+  String? tipoValorCampo;
+  String? tamanhoValorCampo;
+  String? tamanhoPrecisaoValorCampo;
+  bool? obrigatorio;
+  String? resposta;
+  String? idAtributo;
+  String? idModelo;
+  String? dataResposta;
+  String? modelo;
+  String? idTipo;
+  String? label;
+  String? tipo;
+  String? mascara;
 
   DocumentoCampo(
       {this.idDocumento,

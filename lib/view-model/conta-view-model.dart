@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ContaViewModel {
-  String idConta;
-  String nome;
-  String nomeFantasia;
-  Color corPrimaria;
-  Color corSecundaria;
-  String logo;
-  bool ativo;
+  String? idConta;
+  String? nome;
+  String? nomeFantasia;
+  Color? corPrimaria;
+  Color? corSecundaria;
+  String? logo;
+  bool? ativo;
 
   ContaViewModel(
       {this.idConta,

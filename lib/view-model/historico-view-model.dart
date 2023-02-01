@@ -1,10 +1,10 @@
 class HistoricoViewModel {
-  String caminhoAmbiente;
-  String caminhoTipoEquipamento;
-  String caminhoTipoProblema;
-  String dataAbertura;
-  String idSolicitacao;
-  String status;
+  String? caminhoAmbiente;
+  String? caminhoTipoEquipamento;
+  String? caminhoTipoProblema;
+  String? dataAbertura;
+  String? idSolicitacao;
+  String? status;
 
   HistoricoViewModel(
       {this.idSolicitacao,

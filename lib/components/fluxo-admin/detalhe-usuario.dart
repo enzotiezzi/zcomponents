@@ -8,9 +8,9 @@ import '../z-header.dart';
 
 class DetalheUsuario extends StatefulWidget {
 
-  final bool editarDados;
-  AppUsuarioContaViewModel appUsuarioContaViewModel;
-  bool cliqueEditar;
+  final bool? editarDados;
+  AppUsuarioContaViewModel? appUsuarioContaViewModel;
+  bool? cliqueEditar;
 
   DetalheUsuario({this.editarDados,this.appUsuarioContaViewModel,this.cliqueEditar});
 
@@ -20,7 +20,7 @@ class DetalheUsuario extends StatefulWidget {
 
 class _DetalheUsuarioState extends State<DetalheUsuario> {
 
-  DetalheUsuarioView _view;
+  late DetalheUsuarioView _view;
 
   @override
   void initState() {
@@ -112,7 +112,7 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
     );
   }
 
-  bool retornarEnabled(bool editar){
+  bool retornarEnabled(bool? editar){
     print(editar);
     if(editar==true){
       return true;
@@ -163,8 +163,8 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              new RaisedButton(
-                onPressed: _view.cliqueModificarAcesso(),
+              new ElevatedButton(
+                onPressed: _view.cliqueModificarAcesso,
                 child: new Container(
                   child: new Row(
                     mainAxisSize: MainAxisSize.min,
@@ -175,18 +175,25 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                           _view.textModificar,
                           style: Theme.of(context)
                               .textTheme
-                              .button
+                              .button!
                               .copyWith(color: Colors.white),
                         ),
                       )
                     ],
                   ),
                 ),
-                color: Theme.of(context).accentColor,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30),
+                style: new ButtonStyle(
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
+                  shadowColor:
+                  MaterialStateProperty.all<Color>(Colors.transparent),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(
+                      top: 12, bottom: 12, left: 26, right: 26)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
+                      )),
                 ),
-                padding: const EdgeInsets.only(left: 10, right: 10),
               )
             ],
           ),
@@ -207,9 +214,8 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              new RaisedButton(
-                onPressed: _view.editarOnPressed(),
-                disabledColor: Colors.grey,
+              new ElevatedButton(
+                onPressed: _view.editarOnPressed,
                 child: new Container(
                   child: new Row(
                     mainAxisSize: MainAxisSize.min,
@@ -220,18 +226,25 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                           "CONFIRMAR",
                           style: Theme.of(context)
                               .textTheme
-                              .button
+                              .button!
                               .copyWith(color: Colors.white),
                         ),
                       )
                     ],
                   ),
                 ),
-                color: Theme.of(context).accentColor,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30),
+                style: new ButtonStyle(
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
+                  shadowColor:
+                  MaterialStateProperty.all<Color>(Colors.transparent),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(
+                      top: 12, bottom: 12, left: 26, right: 26)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
+                      )),
                 ),
-                padding: const EdgeInsets.only(left: 10, right: 10),
               )
             ],
           ),

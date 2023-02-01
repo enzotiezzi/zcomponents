@@ -7,13 +7,13 @@ import 'package:flutter/painting.dart';
 
 class ZFotoAnimationView extends StatefulWidget {
 
-  final Uint8List image;
-  final String imageOriginal;
-  final int hero;
-  final int hero2;
-  final bool finalizacaoChamado;
-  final String caminho;
-  final List<String> fotos;
+  final Uint8List? image;
+  final String? imageOriginal;
+  final int? hero;
+  final int? hero2;
+  final bool? finalizacaoChamado;
+  final String? caminho;
+  final List<String>? fotos;
 
   ZFotoAnimationView({
     this.image,this.hero,this.imageOriginal,this.hero2,this.finalizacaoChamado: false,this.caminho,this.fotos});
@@ -34,7 +34,7 @@ class _ZFotoAnimationViewState extends State<ZFotoAnimationView> {
     return new WillPopScope(
       child: GestureDetector(
         onTap: (){
-          if(widget.finalizacaoChamado == true)
+          if(widget.finalizacaoChamado !=null && widget.finalizacaoChamado == true)
           {}
           else{
             Navigator.pop(context);
@@ -60,7 +60,7 @@ class _ZFotoAnimationViewState extends State<ZFotoAnimationView> {
                                 border: new Border.all(color: Colors.white,width: 2),
                                 borderRadius: BorderRadius.circular(6.0),
                                 image: DecorationImage(
-                                    image:(widget.finalizacaoChamado == false)? MemoryImage(widget.image):FileImage(File(widget.caminho)),
+                                    image:_retornarImagem(),
                                     fit: BoxFit.cover)),
                             margin: EdgeInsets.only(bottom: 16),
                             height:300,
@@ -83,7 +83,7 @@ class _ZFotoAnimationViewState extends State<ZFotoAnimationView> {
                       new Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          new RaisedButton(
+                          new ElevatedButton(
                             onPressed: () {
                               _selecionarItem(widget.fotos);
                             },
@@ -101,15 +101,22 @@ class _ZFotoAnimationViewState extends State<ZFotoAnimationView> {
                                 ],
                               ),
                             ),
-                            color: Colors.white,
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(30.0)),
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            splashColor: Colors.grey.withOpacity(0.5),
+                            style: new ButtonStyle(
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                              shadowColor:
+                              MaterialStateProperty.all<Color>(Colors.transparent),
+                              padding: MaterialStateProperty.all(EdgeInsets.only(
+                                  left: 10, right: 10)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  new RoundedRectangleBorder(
+                                    borderRadius: new BorderRadius.circular(30.0),
+                                  )),
+                            ),
                           ),
-                          new RaisedButton(
+                          new ElevatedButton(
                             onPressed: () {
-                              widget.fotos.removeAt(widget.hero);
+                              widget.fotos?.removeAt(widget.hero!);
                               _selecionarItem(widget.fotos);
                             },
                             child: new Container(
@@ -126,11 +133,18 @@ class _ZFotoAnimationViewState extends State<ZFotoAnimationView> {
                                 ],
                               ),
                             ),
-                            color: Colors.red,
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(30.0)),
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            splashColor: Colors.grey.withOpacity(0.5),
+                            style: new ButtonStyle(
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.red),
+                              shadowColor:
+                              MaterialStateProperty.all<Color>(Colors.transparent),
+                              padding: MaterialStateProperty.all(EdgeInsets.only(
+                                  left: 10, right: 10)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  new RoundedRectangleBorder(
+                                    borderRadius: new BorderRadius.circular(30.0),
+                                  )),
+                            ),
                           )
 
                         ],
@@ -144,21 +158,30 @@ class _ZFotoAnimationViewState extends State<ZFotoAnimationView> {
       onWillPop: willPopCallback,);
   }
 
-  void _selecionarItem(List<String> item) {
+  void _selecionarItem(List<String>? item) {
     Navigator.of(context).pop(item);
   }
   Future<bool> willPopCallback() async {
-    if (widget.finalizacaoChamado == false) {
+    if (widget.finalizacaoChamado != null && widget.finalizacaoChamado == false) {
       Navigator.pop(context);
     } else {
       _selecionarItem(widget.fotos);
     }
+    return false;
   }
 
   @override
   void setState(fn) {
     if (mounted) {
       super.setState(fn);
+    }
+  }
+
+  ImageProvider _retornarImagem(){
+    if(widget.finalizacaoChamado != null && widget.finalizacaoChamado == false){
+      return MemoryImage(widget.image!);
+    }else{
+      return FileImage(File(widget.caminho!));
     }
   }
 }

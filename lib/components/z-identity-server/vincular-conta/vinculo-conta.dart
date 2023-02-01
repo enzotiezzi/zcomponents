@@ -7,9 +7,9 @@ import 'package:z_components/api/identity-server/identity-server.dart';
 import 'package:z_components/components/z-identity-server/js-channels.dart';
 
 class VinculoConta {
-  String token;
+  String? token;
 
-  FlutterWebviewPlugin _flutterWebviewPlugin;
+  FlutterWebviewPlugin? _flutterWebviewPlugin;
 
   final String _vinculo_url =
       "https://${IdentityServer.address}/account/contas/localizar";
@@ -19,11 +19,11 @@ class VinculoConta {
   Future<Null> vincularConta(Function onBindAccount) async {
     _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
-    _flutterWebviewPlugin.launch(_vinculo_url,
+    _flutterWebviewPlugin?.launch(_vinculo_url,
         javascriptChannels: <JavascriptChannel>[
           JsChannels.getChannelFecharWebView((javaScriptMessage) async {
-            await _flutterWebviewPlugin.close();
-            _flutterWebviewPlugin.dispose();
+            await _flutterWebviewPlugin?.close();
+            _flutterWebviewPlugin?.dispose();
 
             if (onBindAccount != null) onBindAccount();
           }),

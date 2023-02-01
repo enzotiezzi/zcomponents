@@ -8,13 +8,13 @@ class ConfirmarSenhaService extends Service implements IConfirmarSenhaService {
   ConfirmarSenhaService(String token) : super(token);
 
   @override
-  Future<bool> validarSenha(String pin) async {
+  Future<bool?> validarSenha(String pin) async {
     try {
       var url = "$_URL/apis/seguranca/pin";
 
       var response = await request(url, Service.HTTP_POST, body: pin);
 
-      return response.statusCode == 200;
+      return response?.statusCode == 200;
     } catch (e) {
       return null;
     }

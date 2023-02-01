@@ -9,12 +9,12 @@ import 'package:z_components/view-model/perfil-viewmodel.dart';
 import 'package:z_components/view-model/usuario-conta-viewmodel.dart';
 
 abstract class IContasService {
-  Future<ZResponse<UsuarioContaViewModel>> listarUsuariosConta(
+  Future<ZResponse<UsuarioContaViewModel>?> listarUsuariosConta(
       SearchOptions searchOptions);
 
-  Future<InfoOrganizacaoViewModel> buscarDadosOrganizacao(String idConta);
+  Future<InfoOrganizacaoViewModel?> buscarDadosOrganizacao(String idConta);
 
-  Future<bool> editarDadosOrganizacao(
+  Future<bool?> editarDadosOrganizacao(
       InfoOrganizacaoViewModel infoOrganizacaoViewModel);
 
   Future modificarAcesso(AppUsuarioContaViewModel appUsuarioContaViewModel);
@@ -25,35 +25,35 @@ abstract class IContasService {
 
   Future modificarAcessoBloquear(UsuarioContaViewModel usuarioContaViewModel);
 
-  Future<ZResponse<ModuloContaViewModel>> listarModulosConta(
+  Future<ZResponse<ModuloContaViewModel>?> listarModulosConta(
       SearchOptions searchOptions);
 
-  Future<ZResponse<AppViewModel>> listarAplicativos(
+  Future<ZResponse<AppViewModel>?> listarAplicativos(
       SearchOptions searchOptions, String idModulo);
 
-  Future<ZResponse<AppUsuarioContaViewModel>> listarUsuariosPorModuloEApp(
+  Future<ZResponse<AppUsuarioContaViewModel>?> listarUsuariosPorModuloEApp(
       String idModulo, String idApp, SearchOptions searchOptions);
 
-  Future<ZResponse<ContaV2ViewModel>> listarContas(SearchOptions searchOptions);
+  Future<ZResponse<ContaV2ViewModel>?> listarContas(SearchOptions searchOptions);
 
-  Future<bool> editarDadosUsuario(
+  Future<bool?> editarDadosUsuario(
       String idModulo,
       String idApp,
       String idUsuario,
       AppUsuarioContaViewModel appUsuarioContaViewModel,
       String tipo);
 
-  Future<bool> editarDadosFluxoUsuario(
+  Future<bool?> editarDadosFluxoUsuario(
       String idModulo,
       String idApp,
       String idUsuario,
       AppUsuarioContaViewModel appUsuarioContaViewModel,
       String tipo);
 
-  Future<ZResponse<PerfilViewModel>> buscarListaPerfis(
+  Future<ZResponse<PerfilViewModel>?> buscarListaPerfis(
       SearchOptions searchOptions, String idApp);
 
-  Future<AppUsuarioContaViewModel> buscarDadosUsuarioConta(String idUsuario);
+  Future<AppUsuarioContaViewModel?> buscarDadosUsuarioConta(String idUsuario);
 
-  Future<bool> alterarConta(String idConta);
+  Future<bool?> alterarConta(String idConta);
 }

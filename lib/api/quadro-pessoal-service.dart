@@ -13,8 +13,8 @@ class QuadroPessoalService extends Service {
 
   QuadroPessoalService(this.token, this.idConta) : super(token);
 
-  Future<List<PosicaoAlocacaoSequenciaViewModel>> buscarSequencia(
-      String idColaborador) async {
+  Future<List<PosicaoAlocacaoSequenciaViewModel?>?> buscarSequencia(
+      String? idColaborador) async {
     try {
       var url = "$_URL/buscar-sequencia/$idColaborador/$idConta}";
 
@@ -23,19 +23,19 @@ class QuadroPessoalService extends Service {
       var lista = (json.decode(response.body) as List)
           .map((x) => PosicaoAlocacaoSequenciaViewModel.fromJson(x));
 
-      return lista;
+      return lista.toList();
     } catch (e) {
       return null;
     }
   }
 
-  Future<List<String>> listarTouFColaborador(String idColaborador) async {
+  Future<List<String>?> listarTouFColaborador(String? idColaborador) async {
     try {
       var url = "$_URL/listar-touf-colaborador/$idColaborador/$idConta";
 
       var response = await http.get(Uri.parse(url), headers: headers);
 
-      var lista = new List<String>();
+      List<String> lista =[];
 
       (json.decode(response.body) as List).forEach((x) {
         lista.add(x);

@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZCuppertinoTabBar<T> extends StatefulWidget {
-  int tabInicial;
-  final Color corTabSelecionada;
-  final Color corFundoTab;
-  final String primeiraTabNome;
-  final String segundaTabNome;
-  final bool lockPrimeiraTab;
-  final bool lockSegundaTab;
-  final int porcentagemLarguraTabLocks;
-  final ValueChanged<T> trocaDeTabs;
+  int? tabInicial;
+  final Color? corTabSelecionada;
+  final Color? corFundoTab;
+  final String? primeiraTabNome;
+  final String? segundaTabNome;
+  final bool? lockPrimeiraTab;
+  final bool? lockSegundaTab;
+  final int? porcentagemLarguraTabLocks;
+  final ValueChanged<T>? trocaDeTabs;
 
   ZCuppertinoTabBar(
       {this.tabInicial: 0,
@@ -42,13 +42,13 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
               padding: const EdgeInsets.all(0),
               borderColor: widget.corTabSelecionada,
               unselectedColor: widget.corFundoTab,
-              onValueChanged: widget.trocaDeTabs,
+              onValueChanged: widget.trocaDeTabs!,
               children: <int, Widget>{
                 0: new Container(
                   margin: const EdgeInsets.only(
                       left: 40, right: 40, top: 2, bottom: 2),
                   child: Text(
-                    widget.primeiraTabNome,
+                    widget.primeiraTabNome!,
                     style: new TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 14),
                   ),
@@ -57,7 +57,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                   margin: const EdgeInsets.only(
                       left: 40, right: 40, top: 2, bottom: 2),
                   child: Text(
-                    widget.segundaTabNome,
+                    widget.segundaTabNome!,
                     style: new TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 14),
                   ),
@@ -77,7 +77,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Container(
-                width: (MediaQuery.of(context).size.width*widget.porcentagemLarguraTabLocks)/100,
+                width: (MediaQuery.of(context).size.width *widget.porcentagemLarguraTabLocks!)/100,
                 height: 30,
                 decoration: new BoxDecoration(
                     color: widget.corTabSelecionada,
@@ -95,7 +95,8 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                             bottomLeft: Radius.circular(6.0),
                           ),
                           color: widget.corTabSelecionada,),
-                        child: new Center(child: new Text(widget.primeiraTabNome,style: new TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),),
+                        child: new Center(child: new Text(widget.primeiraTabNome!,
+                          style: new TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),),
                       ),
                     ),
                     new Expanded(
@@ -108,7 +109,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                               bottomRight: Radius.circular(6.0),
                             ),
                             color: Colors.white),
-                        child: new Center(child: new Text(widget.segundaTabNome,style: new TextStyle(color: Color(0xffE8E6E6),fontWeight: FontWeight.bold),),),
+                        child: new Center(child: new Text(widget.segundaTabNome!,style: new TextStyle(color: Color(0xffE8E6E6),fontWeight: FontWeight.bold),),),
 
 
                       ),),
@@ -125,7 +126,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Container(
-                width: (MediaQuery.of(context).size.width*widget.porcentagemLarguraTabLocks)/100,
+                width: (MediaQuery.of(context).size.width*widget.porcentagemLarguraTabLocks!)/100,
                 height: 30,
                 decoration: new BoxDecoration(
                     color:widget.corTabSelecionada,
@@ -143,7 +144,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                               bottomLeft: Radius.circular(6.0),
                             ),
                             color: Colors.white),
-                        child: new Center(child: new Text(widget.primeiraTabNome,style: new TextStyle(color: Color(0xffE8E6E6),fontWeight: FontWeight.bold),),),
+                        child: new Center(child: new Text(widget.primeiraTabNome!,style: new TextStyle(color: Color(0xffE8E6E6),fontWeight: FontWeight.bold),),),
                       ),
                     ),
                     new Expanded(
@@ -156,7 +157,7 @@ class _ZCuppertinoTabBarState extends State<ZCuppertinoTabBar> {
                             bottomRight: Radius.circular(6.0),
                           ),
                           color: widget.corTabSelecionada,),
-                        child: new Center(child: new Text(widget.segundaTabNome,style: new TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),),
+                        child: new Center(child: new Text(widget.segundaTabNome!,style: new TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),),
                       ),),
                   ],
                 ),

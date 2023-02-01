@@ -8,8 +8,8 @@ import 'package:z_components/components/z_loading.dart';
 import 'package:z_components/settings/api-settings.dart';
 
 class ZFotoColaborador extends StatefulWidget {
-  final String token;
-  final String idColaborador;
+  final String? token;
+  final String? idColaborador;
 
   ZFotoColaborador({@required this.idColaborador, @required this.token});
 
@@ -28,7 +28,7 @@ class _ZFotoColaboradorState extends State<ZFotoColaborador> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.token == null || widget.token.length == 0)
+    if (widget.token == null || widget.token!.length == 0)
       return new ZLoading(
         color: Color(0XFF801F92),
       );

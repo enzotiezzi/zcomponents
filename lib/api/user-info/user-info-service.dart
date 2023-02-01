@@ -11,53 +11,52 @@ class UserInfoService extends Service implements IUserInfoService {
   UserInfoService(String token) : super(token);
 
   @override
-  Future<bool> editarInformacoes(BuscarInfo input) async {
+  Future<bool?> editarInformacoes(BuscarInfo input) async {
     try {
       var url = "$_URL2/usuario-pessoa";
 
       var response = await request(url, Service.HTTP_PUT, body: input.toMap());
 
-      return response.statusCode == 200;
+      return response?.statusCode == 200;
     } catch (e) {
       return false;
     }
   }
 
   @override
-  Future<BuscarInfo> buscarInformacoesUsuarioPessoa() async{
+  Future<BuscarInfo?> buscarInformacoesUsuarioPessoa() async{
     try {
       var url = "$_URL2/usuario-pessoa";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return BuscarInfo.fromJson(json.decode(response.body));
+      return BuscarInfo.fromJson(json.decode(response!.body));
     } catch(e){
       return null;
     }
   }
 
   @override
-  Future<bool> editarInformacoesNovo(BuscarInfo input) async {
+  Future<bool?> editarInformacoesNovo(BuscarInfo input) async {
     try {
       var url = "$_URL/Users";
 
       var response = await request(url, Service.HTTP_PUT, body: input.toMap());
 
-      return response.statusCode == 200;
+      return response?.statusCode == 200;
     } catch (e) {
       return false;
     }
   }
 
   @override
-  Future<BuscarInfo> buscarInformacoesUsuarioPessoaNovo() async {
+  Future<BuscarInfo?> buscarInformacoesUsuarioPessoaNovo() async {
     try {
       var url = "$_URL/Users";
 
       var response = await request(url, Service.HTTP_GET);
-      print(response.statusCode);
 
-      return BuscarInfo.fromJson(json.decode(response.body));
+      return BuscarInfo.fromJson(json.decode(response!.body));
     } catch (e) {
       return null;
     }

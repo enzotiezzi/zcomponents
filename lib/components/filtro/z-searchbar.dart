@@ -5,10 +5,10 @@ import 'package:z_components/components/filtro/filtro-campo.dart';
 import 'package:z_components/components/z-inputs/z-input-generic.dart';
 
 class ZSearchBar extends StatefulWidget {
-  final GlobalKey key;
-  final FiltroCampo filtroPrincipal;
-  final List<FiltroCampo> camposFiltro;
-  final Function(List<FilterExpression>) onFilter;
+  final GlobalKey? key;
+  final FiltroCampo? filtroPrincipal;
+  final List<FiltroCampo>? camposFiltro;
+  final Function(List<FilterExpression>)? onFilter;
 
   ZSearchBar(
       {@required this.key,
@@ -59,9 +59,9 @@ class ZSearchBarState extends State<ZSearchBar> {
                         controller: searchTextController,
                         onChanged: (value) {
                           if (value.length >= 3 || value.length == 0)
-                            widget.onFilter([
+                            widget.onFilter!([
                               new FilterExpression(
-                                  propertyName: widget.filtroPrincipal.key,
+                                  propertyName: widget.filtroPrincipal!.key,
                                   operatorBetween: "AndAlso",
                                   operator: "Contains",
                                   value: value)
@@ -86,15 +86,15 @@ class ZSearchBarState extends State<ZSearchBar> {
         context,
         new MaterialPageRoute(
             builder: (context) => new _ZFilter(
-                  camposFiltro: widget.camposFiltro,
+                  camposFiltro: widget.camposFiltro!,
                 )));
 
-    if (filters != null && widget.onFilter != null) widget.onFilter(filters);
+    if (filters != null && widget.onFilter != null) widget.onFilter!(filters);
   }
 }
 
 class _ZFilter extends StatefulWidget {
-  final List<FiltroCampo> camposFiltro;
+  final List<FiltroCampo>? camposFiltro;
 
   _ZFilter({@required this.camposFiltro});
 
@@ -103,7 +103,7 @@ class _ZFilter extends StatefulWidget {
 }
 
 class _ZFilterState extends State<_ZFilter> {
-  List<FilterExpression> filters = new List();
+  List<FilterExpression> filters = [];
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +123,7 @@ class _ZFilterState extends State<_ZFilter> {
 
   Widget _buildBody() {
     return new ListView.builder(
-      itemCount: widget.camposFiltro.length,
+      itemCount: widget.camposFiltro!.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         var focusNode = new FocusNode();
@@ -131,16 +131,16 @@ class _ZFilterState extends State<_ZFilter> {
 
         return new ZInputGeneric(
             themeData: Theme.of(context),
-            titulo: widget.camposFiltro[index].value,
+            titulo: widget.camposFiltro![index].value,
             inputPadraoFocus: focusNode,
             controllerInputPadrao: textController,
-            hintText: widget.camposFiltro[index].value,
+            hintText: widget.camposFiltro![index].value,
             onChange: (value) {
-              var key = widget.camposFiltro[index].key;
+              var key = widget.camposFiltro![index].key;
 
               var campo = filters.firstWhere(
                   (element) => element.propertyName == key,
-                  orElse: () => null);
+                  orElse: () => FilterExpression());
 
               if (campo != null)
                 campo.value = value;

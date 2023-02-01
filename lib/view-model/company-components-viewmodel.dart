@@ -1,22 +1,22 @@
 class CompanyViewModel {
-  String idEmpresa;
-  String nome;
-  String codigo;
-  String endereco;
-  String bairro;
-  String cidade;
-  String estado;
-  String cep;
-  String complemento;
-  String numero;
-  String cnpj;
-  String cPFOuCNPJ;
-  String razaoSocial;
-  String telefone;
-  String userId;
-  String contexto;
-  String latitude;
-  String longitude;
+  String? idEmpresa;
+  String? nome;
+  String? codigo;
+  String? endereco;
+  String? bairro;
+  String? cidade;
+  String? estado;
+  String? cep;
+  String? complemento;
+  String? numero;
+  String? cnpj;
+  String? cPFOuCNPJ;
+  String? razaoSocial;
+  String? telefone;
+  String? userId;
+  String? contexto;
+  String? latitude;
+  String? longitude;
 
   CompanyViewModel(
       {this.idEmpresa: "",

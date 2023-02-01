@@ -5,9 +5,9 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/z-dynamic-form-viewmodel.dart';
 
 class ZDyanmicForm extends StatefulWidget{
-  final String title;
-  final List<ZDynamicFormViewModel> fields;
-  final Function clickButtonEnviar;
+  final String? title;
+  final List<ZDynamicFormViewModel>? fields;
+  final Function? clickButtonEnviar;
 
   ZDyanmicForm({@required this.title, @required this.fields,this.clickButtonEnviar});
 
@@ -16,7 +16,7 @@ class ZDyanmicForm extends StatefulWidget{
 }
 
 class _ZDynamicFormState extends State<ZDyanmicForm> with AfterLayoutMixin<ZDyanmicForm>{
-  ZDynamicFormView _view;
+  late ZDynamicFormView _view;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _ZDynamicFormState extends State<ZDyanmicForm> with AfterLayoutMixin<ZDyan
 
   @override
   Widget build(BuildContext context) {
-    return MainStyle.get(context).getDefaultScaffold(widget.title, _buildBody());
+    return MainStyle.get(context).getDefaultScaffold(widget.title!, _buildBody());
   }
 
   Widget _buildBody() {
@@ -41,8 +41,8 @@ class _ZDynamicFormState extends State<ZDyanmicForm> with AfterLayoutMixin<ZDyan
 }
 
   Widget _buildBotaoEnviar(){
-    return new RaisedButton(
-      onPressed: widget.clickButtonEnviar,
+    return new ElevatedButton(
+      onPressed: widget.clickButtonEnviar!(),
       child: new Container(
         child: new Row(
           mainAxisSize: MainAxisSize.min,
@@ -57,11 +57,18 @@ class _ZDynamicFormState extends State<ZDyanmicForm> with AfterLayoutMixin<ZDyan
           ],
         ),
       ),
-      color: Color(0xff2bbab4),
-      shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(30.0)),
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      splashColor: Colors.grey.withOpacity(0.5),
+      style: new ButtonStyle(
+        backgroundColor:
+        MaterialStateProperty.all<Color>(Color(0xff2bbab4)),
+        shadowColor:
+        MaterialStateProperty.all<Color>(Colors.transparent),
+        padding: MaterialStateProperty.all(EdgeInsets.only(
+            left: 10, right: 10)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
+            )),
+      ),
     );
   }
 

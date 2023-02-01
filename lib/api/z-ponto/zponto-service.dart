@@ -8,13 +8,13 @@ class ZPontoService extends Service implements IZPontoService {
   ZPontoService(String token) : super(token);
 
   @override
-  Future<bool> testarConexaoServidor() async {
+  Future<bool?> testarConexaoServidor() async {
     try {
       var url = "${_URL}/isAlive";
 
       var response = await request(url, Service.HTTP_GET);
 
-      return response.statusCode == 200;
+      return response?.statusCode == 200;
     } catch (e) {
       return false;
     }

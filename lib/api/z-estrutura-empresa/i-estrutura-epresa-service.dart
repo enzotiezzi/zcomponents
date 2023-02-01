@@ -4,5 +4,5 @@ import 'package:z_components/components/filtro/z-response.dart';
 import 'nivel.dart';
 
 abstract class IEstruturaEmpresaService {
-  Future<ZResponse<Nivel>> listarNiveis(SearchOptions searchOptions);
+  Future<ZResponse<Nivel>?> listarNiveis(SearchOptions searchOptions);
 }

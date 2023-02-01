@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class ZFloatButton extends StatelessWidget {
-  Widget _zFloatButton;
+  Widget? _zFloatButton;
 
-  final Widget child;
-  final Key key;
-  final String tooltip;
-  final Color foregroundColor;
-  final Color backgroundColor;
-  final VoidCallback onPressed;
-  final double elevation;
-  final double highlightElevation;
-  final double disabledElevation;
-  final bool mini;
-  final ShapeBorder shape;
-  final Clip clipBehavior;
-  final bool isExtended;
-  final MaterialTapTargetSize materialTapTargetSize;
+  final Widget? child;
+  final Key? key;
+  final String? tooltip;
+  final Color? foregroundColor;
+  final Color? backgroundColor;
+  final VoidCallback? onPressed;
+  final double? elevation;
+  final double? highlightElevation;
+  final double? disabledElevation;
+  final bool? mini;
+  final ShapeBorder? shape;
+  final Clip? clipBehavior;
+  final bool? isExtended;
+  final MaterialTapTargetSize? materialTapTargetSize;
 
   ZFloatButton({
     this.key,
@@ -44,19 +44,19 @@ class ZFloatButton extends StatelessWidget {
         child: this.child,
         backgroundColor: this.backgroundColor,
         shape: this.shape,
-        clipBehavior: this.clipBehavior,
+        clipBehavior: this.clipBehavior!,
         disabledElevation: this.disabledElevation,
         foregroundColor: this.foregroundColor,
         highlightElevation: this.highlightElevation,
-        isExtended: this.isExtended,
+        isExtended: this.isExtended!,
         materialTapTargetSize: this.materialTapTargetSize,
-        mini: this.mini,
+        mini: this.mini!,
         tooltip: this.tooltip,
         key: this.key);
   }
 
   @override
   Widget build(BuildContext context) {
-    return _zFloatButton;
+    return _zFloatButton!;
   }
 }

@@ -1,4 +1,4 @@
 
 abstract class IConfirmarSenhaService{
-  Future<bool> validarSenha(String pin);
+  Future<bool?> validarSenha(String pin);
 }

@@ -3,20 +3,20 @@ import 'package:z_components/view-model/perfil-viewmodel.dart';
 import 'package:z_components/view-model/usuario-adm-viewmodel.dart';
 
 class AppUsuarioContaViewModel {
-  String idApp;
-  String idUsuario;
-  String idConta;
-  String status;
-  String dataVinculo;
-  String dataInativacao;
-  String idPerfil;
-  String tipoConta;
-  bool alteraTotem;
-  bool ativo;
-  String token;
-  UsuarioAdmViewModel usuario;
-  PerfilViewModel perfil;
-  AppViewModel app;
+  String? idApp;
+  String? idUsuario;
+  String? idConta;
+  String? status;
+  String? dataVinculo;
+  String? dataInativacao;
+  String? idPerfil;
+  String? tipoConta;
+  bool? alteraTotem;
+  bool? ativo;
+  String? token;
+  UsuarioAdmViewModel? usuario;
+  PerfilViewModel? perfil;
+  AppViewModel? app;
 
   AppUsuarioContaViewModel(
       {this.idApp,
@@ -67,9 +67,9 @@ class AppUsuarioContaViewModel {
       "tipoConta": this.tipoConta,
       "ativo": this.ativo,
       "token": this.token,
-      "usuario": this.usuario.toMap(),
-      "app": this.app.toMap(),
-      "perfil": (this.perfil.idPerfil != null) ? this.perfil.toMap() : null
+      "usuario": this.usuario?.toMap(),
+      "app": this.app?.toMap(),
+      "perfil": (this.perfil?.idPerfil != null) ? this.perfil?.toMap() : null
     };
   }
 }

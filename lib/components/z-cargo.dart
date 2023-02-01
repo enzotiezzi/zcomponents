@@ -6,10 +6,10 @@ import 'package:z_components/view-model/cargo-viewmodel.dart';
 import 'package:z_components/api/zcargo-service.dart';
 
 class ZCargo extends StatefulWidget {
-  final String token;
-  final Key key;
-  final ValueChanged<ZCollectionItem> onChange;
-  final String valorPadrao;
+  final String? token;
+  final Key? key;
+  final ValueChanged<ZCollectionItem>? onChange;
+  final String? valorPadrao;
 
   ZCargo({this.key, @required this.token, this.onChange, this.valorPadrao});
 
@@ -18,19 +18,19 @@ class ZCargo extends StatefulWidget {
 }
 
 class ZCargoState extends State<ZCargo> {
-  ZCollectionItem _itemSelecionado;
+  ZCollectionItem? _itemSelecionado;
 
-  ZCollectionItem get itemSelecionado => _itemSelecionado;
+  ZCollectionItem? get itemSelecionado => _itemSelecionado;
 
-  IZCargoService _service;
+  late IZCargoService _service;
 
   var _keyZCollection = new GlobalKey<ZCollectionState>();
 
-  var _cargos = new List<CargoViewModel>();
+  List<CargoViewModel> _cargos = [];
 
   @override
   void initState() {
-    _service = new ZCargoService(widget.token);
+    _service = new ZCargoService(widget.token!);
     _listarCargos();
     super.initState();
   }
@@ -45,7 +45,7 @@ class ZCargoState extends State<ZCargo> {
           .toList(),
       onChange: (item) {
         _itemSelecionado = item;
-        if (widget.onChange != null) widget.onChange(item);
+        if (widget.onChange != null) widget.onChange!(item);
       },
       valorPadrao: widget.valorPadrao,
       key: _keyZCollection,
@@ -59,7 +59,7 @@ class ZCargoState extends State<ZCargo> {
       setState(() {
         _cargos = cargos;
       });
-      _keyZCollection.currentState.buscarValorPadrao(_cargos
+      _keyZCollection.currentState?.buscarValorPadrao(_cargos
           .map((x) => new ZCollectionItem(
               chave: x.idCargo, titulo: x.nome, valor: x.nome))
           .toList());

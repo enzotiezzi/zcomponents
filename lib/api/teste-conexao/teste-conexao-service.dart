@@ -13,13 +13,13 @@ class TesteConexaoService extends Service implements ITesteConexaoService {
   TesteConexaoService() : super("");
 
 
-  Future<bool> testarConexao() async {
+  Future<bool?> testarConexao() async {
     try {
       var url = "${ApiSettings.ENDPOINT_API}/zponto/isAlive";
 
       var response = await request(url, Service.HTTP_GET, timeout: 4);
 
-      return response.statusCode == 200;
+      return response?.statusCode == 200;
     } catch (e) {
       return false;
     }

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class ZItemTileModuloAdm extends StatefulWidget {
 
-  final String nomeModulo;
-  final String perfilAcesso;
-  final String statusVinculo;
-  final String dataVinculo;
-  final String dataExpiracao;
-  final Function onTap;
-  final bool visibilidade;
+  final String? nomeModulo;
+  final String? perfilAcesso;
+  final String? statusVinculo;
+  final String? dataVinculo;
+  final String? dataExpiracao;
+  final Function? onTap;
+  final bool? visibilidade;
 
   ZItemTileModuloAdm(
       {this.nomeModulo,
@@ -28,10 +28,10 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
 
   Widget retornarNomeModulo(){
     if(widget.nomeModulo==null){
-      return new Text(widget.nomeModulo);
+      return new Text("");
     }else{
       return new Text(
-        widget.nomeModulo,
+        widget.nomeModulo!,
         style: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
@@ -46,7 +46,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
       return new Text('');
     }else{
       return new Text(
-        widget.perfilAcesso,
+        widget.perfilAcesso!,
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,
@@ -60,7 +60,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
       return Text('');
     }else{
       return Text(
-        widget.dataExpiracao,
+        widget.dataExpiracao!,
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,
@@ -74,7 +74,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
       return Text('');
     }else{
       return Text(
-        widget.dataVinculo,
+        widget.dataVinculo!,
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,
@@ -88,7 +88,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
       return Text('');
     }else{
       return Text(
-        widget.statusVinculo,
+        widget.statusVinculo!,
         style: TextStyle(
             color: Color(0xFF000000),
             fontSize: 12,
@@ -98,7 +98,7 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
   }
 
   Widget _retornarArrow(){
-    if(widget.visibilidade){
+    if(widget.visibilidade!){
       return Container();
     }else{
       return Expanded(
@@ -116,7 +116,11 @@ class _ZItemTileModuloAdmState extends State<ZItemTileModuloAdm> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: (){
+        if(widget.onTap!=null){
+          widget.onTap!();
+        }
+      },
       child: new IntrinsicHeight(
         child: new Container(
           margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),

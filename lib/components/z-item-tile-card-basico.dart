@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ZItemTileCardBasico extends StatefulWidget {
-  final Function onTap;
-  final String nome;
+  final Function? onTap;
+  final String? nome;
 
   final bool visibilidade;
 
@@ -19,7 +19,7 @@ class _ZItemTileCardBasicoState extends State<ZItemTileCardBasico> {
       return new Text("");
     } else {
       return new Text(
-        widget.nome,
+        widget.nome!,
         style: TextStyle(
             fontSize: 14.0,
             color: Color(0xFF000000),
@@ -47,7 +47,11 @@ class _ZItemTileCardBasicoState extends State<ZItemTileCardBasico> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: (){
+        if(widget.onTap!=null){
+          widget.onTap!();
+        }
+      },
       child: IntrinsicHeight(
         child: Container(
           margin: const EdgeInsets.only(left: 8, right: 8, bottom: 7,top: 7),

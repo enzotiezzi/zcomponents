@@ -13,14 +13,14 @@ import 'listagem-apps.dart';
 class Usuarios extends StatefulWidget {
   ThemeData themeData;
 
-  Usuarios({this.themeData});
+  Usuarios({required this.themeData});
 
   @override
   _UsuariosState createState() => _UsuariosState();
 }
 
 class _UsuariosState extends State<Usuarios> {
-  UsuariosView _view;
+  late UsuariosView _view;
 
   @override
   void initState() {
@@ -74,26 +74,26 @@ class _UsuariosState extends State<Usuarios> {
             padding: EdgeInsets.only(top: 20.0),
             controller: _view.scrollController,
             shrinkWrap: true,
-            itemCount: _view.listaUsuarios.length,
+            itemCount: _view.listaUsuarios!.length,
             itemBuilder: (builder, index) =>
-                _montarCardUsuario(_view.listaUsuarios[index])));
+                _montarCardUsuario(_view.listaUsuarios![index])));
   }
 
   Widget _montarCardUsuario(UsuarioContaViewModel usuario) {
     return new Container(
       child: new ZItemTileUsuarioAdm(
-        nomeUsuario: usuario.usuario.nome,
-        email: usuario.usuario.email,
-        quantidadeApps: usuario.appLista.length.toString(),
+        nomeUsuario: usuario.usuario?.nome,
+        email: usuario.usuario?.email,
+        quantidadeApps: usuario.appLista!.length.toString(),
         status: usuario.status,
-        appsVinculados: _listarAppsVinculados(usuario.appLista),
-        telefone: usuario.usuario.telefone,
+        appsVinculados: _listarAppsVinculados(usuario.appLista!),
+        telefone: usuario.usuario?.telefone,
         onTap: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ListagemApps(
-                        listaApps: usuario.appLista,
+                        listaApps: usuario.appLista!,
                         usuario: usuario,
                       )));
         },
@@ -106,9 +106,9 @@ class _UsuariosState extends State<Usuarios> {
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
-          appsFormatados = "$appsFormatados- ${lista[i].app.nomeExibicao}";
+          appsFormatados = "$appsFormatados- ${lista[i].app?.nomeExibicao}";
         } else {
-          appsFormatados = "$appsFormatados, ${lista[i].app.nomeExibicao}";
+          appsFormatados = "$appsFormatados, ${lista[i].app?.nomeExibicao}";
         }
       }
     } else {

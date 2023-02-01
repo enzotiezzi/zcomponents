@@ -1,32 +1,32 @@
 class ZBatidaViewModel {
-  String idColaborador;
-  String cpf;
-  String idCentroCusto;
-  int horarioBatida;
-  double latitude;
-  double longitude;
-  bool offline;
-  String dataEnvio;
-  String foto;
-  String idDispositivo;
-  bool valida;
-  String observacao;
-  String ordem;
-  String idBatida;
-  String ticketBatida;
-  int utc;
-  bool origemConectividade;
-  String tipoBatida;
-  String ordemInicial;
+  String? idColaborador;
+  String? cpf;
+  String? idCentroCusto;
+  int? horarioBatida;
+  double? latitude;
+  double? longitude;
+  bool? offline;
+  String? dataEnvio;
+  String? foto;
+  String? idDispositivo;
+  bool? valida;
+  String? observacao;
+  String? ordem;
+  String? idBatida;
+  String? ticketBatida;
+  int? utc;
+  bool? origemConectividade;
+  String? tipoBatida;
+  String? ordemInicial;
 
-  String ordemSugerido;
-  String ordemTroca;
-  String horarioBatidaCelular;
-  String dataJornada;
-  String horarioBatidaRealizada;
+  String? ordemSugerido;
+  String? ordemTroca;
+  String? horarioBatidaCelular;
+  String? dataJornada;
+  String? horarioBatidaRealizada;
 
-  String horarioBatidaServidor;
-  bool atualizada;
+  String? horarioBatidaServidor;
+  bool? atualizada;
 
   ZBatidaViewModel(
       {this.idColaborador,
@@ -55,8 +55,8 @@ class ZBatidaViewModel {
       this.ordemTroca,
       this.atualizada,
       this.dataJornada,
-      int id,
-      String idConta});
+      int? id,
+      String? idConta});
 
 
 }

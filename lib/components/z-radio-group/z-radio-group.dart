@@ -6,11 +6,11 @@ import 'package:z_components/components/z-radio-group/z-radio-item.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZRadioGroup extends StatefulWidget {
-  String title;
-  List<ZRadioItem> itens;
-  Function(String) onChange;
-  Color selectColor;
-  int groupValue;
+  String? title;
+  List<ZRadioItem>? itens;
+  Function(String)? onChange;
+  Color? selectColor;
+  int? groupValue;
 
   ZRadioGroup(
       {@required this.title,
@@ -25,7 +25,7 @@ class ZRadioGroup extends StatefulWidget {
 
 class _ZRadioGroupState extends State<ZRadioGroup>
     with AfterLayoutMixin<ZRadioGroup> {
-  ZRadioGroupView _view;
+  late ZRadioGroupView _view;
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _ZRadioGroupState extends State<ZRadioGroup>
                 width: MediaQuery.of(context).size.width*0.82,
                 margin: const EdgeInsets.only(left: 16,top: 16,bottom: 6),
                 child: new Text(
-                  widget.title,
+                  widget.title!,
                   style: MainStyle.get(context).mainStyleTextTitle,
                 ),
               )
@@ -73,16 +73,16 @@ class _ZRadioGroupState extends State<ZRadioGroup>
             padding: const EdgeInsets.all(0),
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            children: List.generate(widget.itens.length, (index) {
-              var item = widget.itens[index];
+            children: List.generate(widget.itens!.length, (index) {
+              var item = widget.itens![index];
 
               return new Row(
                 children: <Widget>[
                   new Radio(
-                      value: item.checked ? 1 : 0,
+                      value: item.checked! ? 1 : 0,
                       groupValue: widget.groupValue,
                       activeColor: widget.selectColor,
-                      onChanged: (value) => _view.onChange(value, item)),
+                      onChanged: (value) => _view.onChange(value!, item)),
                   new Text(
                     "${item.description}",
                     style: new TextStyle(

@@ -4,13 +4,13 @@ import 'package:z_components/infra/schema/z-column.dart';
 import 'package:z_components/infra/schema/z-table.dart';
 
 class ZLogEntity extends ZEntity {
-  String user;
-  String errorMessage;
-  String when;
-  String app;
-  String payload;
-  String method;
-  bool sync;
+  String? user;
+  String? errorMessage;
+  String? when;
+  String? app;
+  String? payload;
+  String? method;
+  bool? sync;
 
   ZLogEntity(
       {this.user,

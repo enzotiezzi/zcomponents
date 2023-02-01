@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/view-model/conta-v2-viewmodel.dart';
@@ -9,10 +9,10 @@ import '../../z-item-tile-conta.dart';
 import 'detalhe-conta-view.dart';
 
 class DetalheConta extends StatefulWidget {
-  ContaV2ViewModel contaV2ViewModel;
-  ThemeData themeData;
-  String token;
-  Function(ContaV2ViewModel) onAccountChange;
+  ContaV2ViewModel? contaV2ViewModel;
+  ThemeData? themeData;
+  String? token;
+  Function(ContaV2ViewModel)? onAccountChange;
 
   DetalheConta(
       {this.contaV2ViewModel,
@@ -25,7 +25,7 @@ class DetalheConta extends StatefulWidget {
 }
 
 class _DetalheContaState extends State<DetalheConta> {
-  DetalheContaViewModel _view;
+  late DetalheContaViewModel _view;
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _DetalheContaState extends State<DetalheConta> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor:  widget.themeData.primaryColor,
+      appBar: AppBar(backgroundColor:  widget.themeData!.primaryColor,
         leading: IconeVoltar(
           context: context,
         ),
@@ -62,29 +62,29 @@ class _DetalheContaState extends State<DetalheConta> {
                   child: new Container(
                 padding: EdgeInsets.all(16.0),
                 child: new Text(
-                  widget.contaV2ViewModel.conta.nome,
+                  _retornarNome(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               )),
-              children: [
+              childrenBody:
                 new Container(
                   margin: EdgeInsets.only(top: 10.0),
                   child: new ZItemTileConta(
                     imagemPerfil:
-                        _montarImagem(widget.contaV2ViewModel.conta.logo),
-                    tamanhoLista: widget.contaV2ViewModel.appLista.length,
+                        _montarImagem(widget.contaV2ViewModel!.conta!.logo!),
+                    tamanhoLista: widget.contaV2ViewModel?.appLista!.length,
                     visibilidade: true,
-                    dataVinculo: (widget.contaV2ViewModel.dataVinculo != null)
+                    dataVinculo: (widget.contaV2ViewModel?.dataVinculo != null)
                         ? UtilData.obterDataDDMMAAAA(
-                            DateTime.parse(widget.contaV2ViewModel.dataVinculo))
+                            DateTime.parse(widget.contaV2ViewModel!.dataVinculo!))
                         : "Nunca",
                     appsVinculados: _view
-                        .listarAppsVinculados(widget.contaV2ViewModel.appLista),
-                    ativo: widget.contaV2ViewModel.contaLogada,
-                    nomeConta: widget.contaV2ViewModel.conta.nome ?? "",
+                        .listarAppsVinculados(widget.contaV2ViewModel!.appLista),
+                    ativo: widget.contaV2ViewModel!.contaLogada,
+                    nomeConta: widget.contaV2ViewModel!.conta!.nome ?? "",
                   ),
                 )
-              ],
+              ,
             )),
         _montarInfosConta(),
         exibirBotaoModificar()
@@ -119,11 +119,12 @@ class _DetalheContaState extends State<DetalheConta> {
                             color: Colors.grey.withOpacity(0.6),
                             borderRadius: BorderRadius.circular(6)),
                         child: new Text(
-                            widget.contaV2ViewModel.appLista.length.toString()),
+                          _retornarQuantidadeDeApps()
+                            ),
                       ),
                       new Text(
                         _view.listarAppsVinculados(
-                            widget.contaV2ViewModel.appLista),
+                            widget.contaV2ViewModel?.appLista),
                       )
                     ],
                   ),
@@ -146,7 +147,7 @@ class _DetalheContaState extends State<DetalheConta> {
                   margin: EdgeInsets.only(top: 6.0),
                   child: new Text(
                     UtilData.obterDataDDMMAAAA(
-                        DateTime.parse(widget.contaV2ViewModel.dataVinculo)),
+                        DateTime.parse(widget.contaV2ViewModel!.dataVinculo!)),
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ),
@@ -159,14 +160,14 @@ class _DetalheContaState extends State<DetalheConta> {
   }
 
   Widget exibirBotaoModificar() {
-    if (!widget.contaV2ViewModel.contaLogada) {
+    if (widget.contaV2ViewModel!.contaLogada != null && !widget.contaV2ViewModel!.contaLogada!) {
       return new Container(
         padding: EdgeInsets.only(top: 20.0),
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // ignore: deprecated_member_use
-            new RaisedButton(
+            new ElevatedButton(
               onPressed: () {
                 _view.showDialogContaSelecionada();
               },
@@ -181,17 +182,23 @@ class _DetalheContaState extends State<DetalheConta> {
                         style: Theme.of(context)
                             .textTheme
                             .button
-                            .copyWith(color: Colors.white),
+                            ?.copyWith(color: Colors.white),
                       ),
                     )
                   ],
                 ),
               ),
-              color:  widget.themeData.accentColor,
-              shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30),
+              style: new ButtonStyle(
+                backgroundColor:
+                MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
+                shadowColor:
+                MaterialStateProperty.all<Color>(Colors.transparent),
+                padding: MaterialStateProperty.all(EdgeInsets.only(left: 10, right: 10)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    )),
               ),
-              padding: const EdgeInsets.only(left: 10, right: 10),
             )
           ],
         ),
@@ -201,7 +208,7 @@ class _DetalheContaState extends State<DetalheConta> {
           padding: EdgeInsets.only(top: 20.0),
           child: new Text(
             "Você está utilizando esta conta no momento.",
-            style: TextStyle(color:  widget.themeData.primaryColor),
+            style: TextStyle(color:  widget.themeData!.primaryColor),
           ));
     }
   }
@@ -220,5 +227,21 @@ class _DetalheContaState extends State<DetalheConta> {
       );
     } else
       return new Container();
+  }
+
+  String _retornarNome(){
+    if(widget.contaV2ViewModel != null && widget.contaV2ViewModel!.conta != null && widget.contaV2ViewModel!.conta!.nome !=null){
+      return widget.contaV2ViewModel!.conta!.nome!;
+    }else{
+      return "";
+    }
+  }
+
+  String _retornarQuantidadeDeApps(){
+    if(widget.contaV2ViewModel !=null && widget.contaV2ViewModel!.appLista !=null){
+      return widget.contaV2ViewModel!.appLista!.length.toString();
+    }else{
+      return "";
+    }
   }
 }

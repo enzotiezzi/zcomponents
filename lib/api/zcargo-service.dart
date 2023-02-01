@@ -13,7 +13,7 @@ class ZCargoService extends Service implements IZCargoService {
   ZCargoService(this.token) : super(token);
 
   @override
-  Future<List<CargoViewModel>> listarCargos() async {
+  Future<List<CargoViewModel>?> listarCargos() async {
     try {
       var url = "$_URL/listar-cargos";
 

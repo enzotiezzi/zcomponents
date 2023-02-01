@@ -4,10 +4,10 @@ import 'package:z_components/infra/schema/z-column.dart';
 import 'package:z_components/infra/schema/z-table.dart';
 
 class Monstro extends ZEntity {
-  String nome;
-  String habilidade;
+  String? nome;
+  String? habilidade;
 
-  Monstro({this.nome, this.habilidade, int id, String idConta})
+  Monstro({this.nome, this.habilidade, int? id, String? idConta})
       : super(id: id, idConta: idConta);
 
   @override

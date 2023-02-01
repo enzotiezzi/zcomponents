@@ -1,12 +1,12 @@
 class NoticiaViewModel {
-  String idNoticia;
-  String idCategoria;
-  String autor;
-  String titulo;
-  String descricao;
-  String url;
-  String urlImagem;
-  String publicadaEm;
+  String? idNoticia;
+  String? idCategoria;
+  String? autor;
+  String? titulo;
+  String? descricao;
+  String? url;
+  String? urlImagem;
+  String? publicadaEm;
 
   NoticiaViewModel({
     this.idNoticia,

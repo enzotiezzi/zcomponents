@@ -1,16 +1,16 @@
 import 'package:meta/meta.dart';
 
 class Sequencia {
-  final String primeiroDiaEscala;
-  final String escala;
+  final String? primeiroDiaEscala;
+  final String? escala;
 
   Sequencia({@required this.escala, @required this.primeiroDiaEscala});
 
   String calcularSeDiaTouF(DateTime date) {
-    var escalaNormalizada = _normalizarEscala(escala);
+    var escalaNormalizada = _normalizarEscala(escala!);
 
     var quantidadeDeDiasNaEmpresa =
-        _calcularDiasNaEmpresa(primeiroDiaEscala, date);
+        _calcularDiasNaEmpresa(primeiroDiaEscala!, date);
 
     var quantidadeDeDiasNaEscala = _calcularDiasNaEscala(escalaNormalizada);
 
@@ -53,7 +53,7 @@ class Sequencia {
   }
 
   List<String> _montarVetorTouF(String escala) {
-    var vetorTouF = new List<String>();
+    List<String> vetorTouF = [];
 
     var escalaFracionada = escala.split('x');
 

@@ -16,7 +16,7 @@ class ZColaboradorService extends Service implements IZColaboradorService {
   ZColaboradorService(this.token, this.idConta, this.cpf) : super(token);
 
   @override
-  Future<ColaboradorViewModel> buscarPerfilColaborador() async {
+  Future<ColaboradorViewModel?> buscarPerfilColaborador() async {
     try {
       var url =
           "$_URL_API_COLABORADOR/totem-buscar-perfil-colaborador/$cpf/$idConta";

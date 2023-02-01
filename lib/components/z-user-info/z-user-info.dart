@@ -16,12 +16,12 @@ import 'package:z_components/styles/main-style.dart';
 import 'package:z_components/view-model/buscarinfo-viewmodel.dart';
 
 class ZUserInfo extends StatefulWidget {
-  String token;
-  BuscarInfo userInfo;
-  bool editarAtivo;
+  String? token;
+  BuscarInfo? userInfo;
+  bool? editarAtivo;
 
-  Function(BuscarInfo) onEditFinish;
-  Function(String) onChangeProfileImage;
+  Function(BuscarInfo)? onEditFinish;
+  Function(String)? onChangeProfileImage;
 
   ZUserInfo(
       {@required this.token,
@@ -35,7 +35,7 @@ class ZUserInfo extends StatefulWidget {
 }
 
 class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
-  ZUserInfoView _view;
+  late ZUserInfoView _view;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
   }
 
   Widget _montarBotaoEditar() {
-    if (!widget.editarAtivo) {
+    if (!widget.editarAtivo!) {
       return new GestureDetector(
         child: new Container(
           alignment: Alignment.center,
@@ -127,7 +127,9 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
                     )
                   ],
                 )),
-            onTap: _view.escolherMetodoSelecionarFoto,
+            onTap: (){
+              _view.escolherMetodoSelecionarFoto();
+            },
           ),
           ZText(
             tituloText: "DADOS GERAIS",
@@ -138,7 +140,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           ),
           Container(
             child: new ZInputName(
-                enabled: widget.editarAtivo,
+                enabled: widget.editarAtivo!,
                 themeData: Theme.of(context),
                 nomeFocus: _view.focusNodeNome,
                 controllerNome: _view.textEditingControllerNome,
@@ -208,7 +210,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           ),
           new Container(
             child: new ZInputCelular(
-              enabled: widget.editarAtivo,
+              enabled: widget.editarAtivo!,
               themeData: Theme.of(context),
               celularFocus: _view.focusNodeTelefone,
               controllerCelular: _view.textEditingControllerTelefone,
@@ -217,7 +219,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           ),
           new Container(
             child: new ZInputEmail(
-                enabled: widget.editarAtivo,
+                enabled: widget.editarAtivo!,
                 themeData: Theme.of(context),
                 emailFocus: _view.focusNodeEmail,
                 controllerEmail: _view.textEditingControllerEmail),
@@ -232,7 +234,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
   }
 
   Widget _montarBotaoSalvar() {
-    if (widget.editarAtivo) {
+    if (widget.editarAtivo!) {
       return new Material(
         elevation: 4.0,
         child: new Container(
@@ -241,7 +243,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              new RaisedButton(
+              new ElevatedButton(
                 onPressed: () {
                   _view.submit();
                 },
@@ -255,20 +257,26 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
                           "SALVAR",
                           style: Theme.of(context)
                               .textTheme
-                              .button
+                              .button!
                               .copyWith(color: Color(0xFFFFFFFF)),
                         ),
                       )
                     ],
                   ),
                 ),
-                color: Theme.of(context).accentColor,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30),
-                ),
-                padding: const EdgeInsets.only(left: 10, right: 10),
-              )
-            ],
+          style: new ButtonStyle(
+            backgroundColor:
+            MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
+            shadowColor:
+            MaterialStateProperty.all<Color>(Colors.transparent),
+            padding: MaterialStateProperty.all(EdgeInsets.only(
+                left: 10, right: 10)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                )),
+          ),
+              )],
           ),
         ),
       );
@@ -277,7 +285,7 @@ class ZUserInfoState extends State<ZUserInfo> with AfterLayoutMixin<ZUserInfo> {
   }
 
   ImageProvider _buildImagemPerfil() {
-    if (_view.imagemPerfil != null) return MemoryImage(_view.imagemPerfil);
+    if (_view.imagemPerfil != null) return MemoryImage(_view.imagemPerfil!);
 
     return NetworkImage(
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");

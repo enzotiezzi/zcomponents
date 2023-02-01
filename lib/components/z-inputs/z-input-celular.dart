@@ -5,15 +5,15 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZInputCelular extends StatefulWidget {
-  final Key key;
-  FocusNode celularFocus;
-  var controllerCelular = new TextEditingController();
-  FocusNode proximoFocus;
-  ValueChanged<String> onChange;
-  void Function(bool) validacao;
-  bool enabled;
-  final bool campoObrigatorio;
-  final ThemeData themeData;
+  final Key? key;
+  FocusNode? celularFocus;
+  TextEditingController? controllerCelular;
+  FocusNode? proximoFocus;
+  ValueChanged<String>? onChange;
+  void Function(bool)? validacao;
+  bool? enabled;
+  final bool? campoObrigatorio;
+  final ThemeData? themeData;
 
   ZInputCelular(
       {this.key,
@@ -33,7 +33,7 @@ class ZInputCelular extends StatefulWidget {
 
 class _ZInputCelularState extends State<ZInputCelular> {
   int countCelular = 0;
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
   String celular = "";
 
   @override
@@ -50,13 +50,12 @@ class _ZInputCelularState extends State<ZInputCelular> {
         "Celular",
         TextInputType.number,
         () {
-          FocusScope.of(context).requestFocus(widget.celularFocus);
         },
         widget.celularFocus,
         widget.controllerCelular,
         widget.proximoFocus,
         (text) {
-          if (widget.onChange != null) widget.onChange(text);
+          if (widget.onChange != null) widget.onChange!(text);
 
           celular = text;
           countCelular = 0;
@@ -74,16 +73,16 @@ class _ZInputCelularState extends State<ZInputCelular> {
   }
 
   void initCelular() {
-    widget.celularFocus.addListener(() {
-      if (!widget.celularFocus.hasFocus && countCelular == 0 && celular != "") {
+    widget.celularFocus?.addListener(() {
+      if (!widget.celularFocus!.hasFocus && countCelular == 0 && celular != "") {
         _validarCelular();
       }
     });
   }
 
   void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
+      BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
+    currentFocus?.unfocus();
     if (nextFocus != null) {
       FocusScope.of(context).requestFocus(nextFocus);
     }
@@ -159,9 +158,9 @@ class _ZInputCelularState extends State<ZInputCelular> {
       _dialogUtils.showAlertDialogNewAviso(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
 
-      if (widget.validacao != null) widget.validacao(false);
+      if (widget.validacao != null) widget.validacao!(false);
     } else {
-      if (widget.validacao != null) widget.validacao(true);
+      if (widget.validacao != null) widget.validacao!(true);
     }
   }
 }

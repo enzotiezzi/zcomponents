@@ -3,58 +3,58 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mask_shifter_v2/mask_shifter.dart';
 import 'package:z_components/config/z-mask.dart';
 import 'package:z_components/config/z-platform.dart';
-import 'package:mask_shifter/mask_shifter.dart';
 
 class ZTextField extends StatelessWidget {
-  Widget _zTextField;
+  Widget? _zTextField;
 
-  final TextStyle placeholderStyle;
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final InputDecoration decoration;
-  final TextInputType keyboardType;
-  final TextInputAction textInputAction;
-  final TextCapitalization textCapitalization;
-  final TextStyle style;
-  final StrutStyle strutStyle;
-  final TextAlign textAlign;
-  final TextDirection textDirection;
-  final bool autofocus;
-  final bool obscureText;
-  final bool autocorrect;
-  final int maxLines;
-  final int minLines;
-  final bool expands;
-  static const int noMaxLength = -1;
-  final int maxLength;
-  final bool maxLengthEnforced;
-  final ValueChanged<String> onChanged;
-  final VoidCallback onEditingComplete;
-  final ValueChanged<String> onSubmitted;
-  var inputFormatters = List<TextInputFormatter>();
-  final bool enabled;
-  final double cursorWidth;
-  final Radius cursorRadius;
-  final Color cursorColor;
-  final Brightness keyboardAppearance;
-  final EdgeInsets scrollPadding;
-  final bool enableInteractiveSelection;
-  final DragStartBehavior dragStartBehavior;
-  final GestureTapCallback onTap;
-  final InputCounterWidgetBuilder buildCounter;
-  final ScrollPhysics scrollPhysics;
-  final EdgeInsetsGeometry padding;
-  final String placeholder;
-  final Widget prefix;
-  final OverlayVisibilityMode prefixMode;
-  final Widget suffix;
-  final OverlayVisibilityMode suffixMode;
-  final OverlayVisibilityMode clearButtonMode;
-  final BoxDecoration decorationCupertino;
-  final ZPlatform zPlatform;
-  final ZMask zMask;
+  final TextStyle? placeholderStyle;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final InputDecoration? decoration;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final TextCapitalization? textCapitalization;
+  final TextStyle? style;
+  final StrutStyle? strutStyle;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final bool? autofocus;
+  final bool? obscureText;
+  final bool? autocorrect;
+  final int? maxLines;
+  final int? minLines;
+  final bool? expands;
+  static const int? noMaxLength = -1;
+  final int? maxLength;
+  final bool? maxLengthEnforced;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onEditingComplete;
+  final ValueChanged<String>? onSubmitted;
+  List<TextInputFormatter>? inputFormatters = [];
+  final bool? enabled;
+  final double? cursorWidth;
+  final Radius? cursorRadius;
+  final Color? cursorColor;
+  final Brightness? keyboardAppearance;
+  final EdgeInsets? scrollPadding;
+  final bool? enableInteractiveSelection;
+  final DragStartBehavior? dragStartBehavior;
+  final GestureTapCallback? onTap;
+  final InputCounterWidgetBuilder? buildCounter;
+  final ScrollPhysics? scrollPhysics;
+  final EdgeInsetsGeometry? padding;
+  final String? placeholder;
+  final Widget? prefix;
+  final OverlayVisibilityMode? prefixMode;
+  final Widget? suffix;
+  final OverlayVisibilityMode? suffixMode;
+  final OverlayVisibilityMode? clearButtonMode;
+  final BoxDecoration? decorationCupertino;
+  final ZPlatform? zPlatform;
+  final ZMask? zMask;
 
   ZTextField({
     this.keyboardType,
@@ -82,7 +82,7 @@ class ZTextField extends StatelessWidget {
           )),
       borderRadius: BorderRadius.all(Radius.circular(4.0)),
     ),
-    Key key,
+    Key? key,
     this.controller,
     this.focusNode,
     this.decoration,
@@ -130,34 +130,34 @@ class ZTextField extends StatelessWidget {
       case ZMask.isPadrao:
         break;
       case ZMask.isTelefone:
-        inputFormatters.add(MaskedTextInputFormatterShifter(
+        inputFormatters?.add(MaskedTextInputFormatterShifter(
             maskONE: "(XX) XXXXX-XXXX", maskTWO: "(XX) XXXXX-XXXX"));
         inputFormatters
-            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
+            ?.add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isCPF:
-        inputFormatters.add(MaskedTextInputFormatterShifter(
+        inputFormatters?.add(MaskedTextInputFormatterShifter(
             maskONE: "XXX.XXX.XXX-XX", maskTWO: "XXX.XXX.XXX-XX"));
         inputFormatters
-            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
+            ?.add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isData:
-        inputFormatters.add(MaskedTextInputFormatterShifter(
+        inputFormatters?.add(MaskedTextInputFormatterShifter(
             maskONE: "XX/XX/XXXX", maskTWO: "XX/XX/XXXX"));
         inputFormatters
-            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
+            ?.add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isCNPJ:
-        inputFormatters.add(MaskedTextInputFormatterShifter(
+        inputFormatters?.add(MaskedTextInputFormatterShifter(
             maskONE: "XX.XXX.XXX/XXXX-XX", maskTWO: "XX.XXX.XXX/XXXX-XX"));
         inputFormatters
-            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
+            ?.add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
       case ZMask.isCEP:
-        inputFormatters.add(MaskedTextInputFormatterShifter(
+        inputFormatters?.add(MaskedTextInputFormatterShifter(
             maskONE: "XXXXX-XXX", maskTWO: "XXXXX-XXX"));
         inputFormatters
-            .add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
+            ?.add(FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")));
         break;
     }
 
@@ -176,27 +176,27 @@ class ZTextField extends StatelessWidget {
             focusNode: this.focusNode,
             inputFormatters: this.inputFormatters,
             maxLength: this.maxLength,
-            obscureText: this.obscureText,
-            textAlign: this.textAlign,
-            autocorrect: this.autocorrect,
-            autofocus: this.autofocus,
+            obscureText: this.obscureText!,
+            textAlign: this.textAlign!,
+            autocorrect: this.autocorrect!,
+            autofocus: this.autofocus!,
             buildCounter: this.buildCounter,
             cursorColor: this.cursorColor,
             cursorRadius: this.cursorRadius,
-            cursorWidth: this.cursorWidth,
-            dragStartBehavior: this.dragStartBehavior,
+            cursorWidth: this.cursorWidth!,
+            dragStartBehavior: this.dragStartBehavior!,
             enableInteractiveSelection: this.enableInteractiveSelection,
-            expands: this.expands,
+            expands: this.expands!,
             key: this.key,
             keyboardAppearance: this.keyboardAppearance,
-            maxLengthEnforced: this.maxLengthEnforced,
+            //maxLengthEnforced: this.maxLengthEnforced,
             maxLines: this.maxLines,
             minLines: this.minLines,
             onEditingComplete: this.onEditingComplete,
-            scrollPadding: this.scrollPadding,
+            scrollPadding: this.scrollPadding!,
             scrollPhysics: this.scrollPhysics,
             strutStyle: this.strutStyle,
-            textCapitalization: this.textCapitalization,
+            textCapitalization: this.textCapitalization!,
             textDirection: this.textDirection,
             textInputAction: this.textInputAction,
           );
@@ -211,22 +211,22 @@ class ZTextField extends StatelessWidget {
             focusNode: this.focusNode,
             inputFormatters: this.inputFormatters,
             maxLength: this.maxLength,
-            obscureText: this.obscureText,
+            obscureText: this.obscureText!,
             textAlign: TextAlign.start,
-            autocorrect: this.autocorrect,
-            autofocus: this.autofocus,
+            autocorrect: this.autocorrect!,
+            autofocus: this.autofocus!,
             cursorColor: this.cursorColor,
-            cursorRadius: this.cursorRadius,
-            cursorWidth: this.cursorWidth,
-            dragStartBehavior: this.dragStartBehavior,
-            expands: this.expands,
+            cursorRadius: this.cursorRadius!,
+            cursorWidth: this.cursorWidth!,
+            dragStartBehavior: this.dragStartBehavior!,
+            expands: this.expands!,
             key: this.key,
             keyboardAppearance: this.keyboardAppearance,
-            maxLengthEnforced: this.maxLengthEnforced,
+            //maxLengthEnforced: this.maxLengthEnforced,
             maxLines: this.maxLines,
             minLines: this.minLines,
             onEditingComplete: this.onEditingComplete,
-            scrollPadding: this.scrollPadding,
+            scrollPadding: this.scrollPadding!,
             scrollPhysics: this.scrollPhysics,
             strutStyle: this.strutStyle,
             textCapitalization: TextCapitalization.none,
@@ -239,7 +239,7 @@ class ZTextField extends StatelessWidget {
             prefix: this.prefix,
             prefixMode: OverlayVisibilityMode.always,
             suffix: this.suffix,
-            suffixMode: this.suffixMode,
+            suffixMode: this.suffixMode!,
           );
         }
         break;
@@ -256,27 +256,27 @@ class ZTextField extends StatelessWidget {
           focusNode: this.focusNode,
           inputFormatters: this.inputFormatters,
           maxLength: this.maxLength,
-          obscureText: this.obscureText,
-          textAlign: this.textAlign,
-          autocorrect: this.autocorrect,
-          autofocus: this.autofocus,
+          obscureText: this.obscureText!,
+          textAlign: this.textAlign!,
+          autocorrect: this.autocorrect!,
+          autofocus: this.autofocus!,
           buildCounter: this.buildCounter,
           cursorColor: this.cursorColor,
           cursorRadius: this.cursorRadius,
-          cursorWidth: this.cursorWidth,
-          dragStartBehavior: this.dragStartBehavior,
+          cursorWidth: this.cursorWidth!,
+          dragStartBehavior: this.dragStartBehavior!,
           enableInteractiveSelection: this.enableInteractiveSelection,
-          expands: this.expands,
+          expands: this.expands!,
           key: this.key,
           keyboardAppearance: this.keyboardAppearance,
-          maxLengthEnforced: this.maxLengthEnforced,
+          //maxLengthEnforced: this.maxLengthEnforced,
           maxLines: this.maxLines,
           minLines: this.minLines,
           onEditingComplete: this.onEditingComplete,
-          scrollPadding: this.scrollPadding,
+          scrollPadding: this.scrollPadding!,
           scrollPhysics: this.scrollPhysics,
           strutStyle: this.strutStyle,
-          textCapitalization: this.textCapitalization,
+          textCapitalization: this.textCapitalization!,
           textDirection: this.textDirection,
           textInputAction: this.textInputAction,
         );
@@ -292,22 +292,22 @@ class ZTextField extends StatelessWidget {
           focusNode: this.focusNode,
           inputFormatters: this.inputFormatters,
           maxLength: this.maxLength,
-          obscureText: this.obscureText,
+          obscureText: this.obscureText!,
           textAlign: TextAlign.start,
-          autocorrect: this.autocorrect,
-          autofocus: this.autofocus,
+          autocorrect: this.autocorrect!,
+          autofocus: this.autofocus!,
           cursorColor: this.cursorColor,
-          cursorRadius: this.cursorRadius,
-          cursorWidth: this.cursorWidth,
-          dragStartBehavior: this.dragStartBehavior,
-          expands: this.expands,
+          cursorRadius: this.cursorRadius!,
+          cursorWidth: this.cursorWidth!,
+          dragStartBehavior: this.dragStartBehavior!,
+          expands: this.expands!,
           key: this.key,
           keyboardAppearance: this.keyboardAppearance,
-          maxLengthEnforced: this.maxLengthEnforced,
+          //maxLengthEnforced: this.maxLengthEnforced,
           maxLines: this.maxLines,
           minLines: this.minLines,
           onEditingComplete: this.onEditingComplete,
-          scrollPadding: this.scrollPadding,
+          scrollPadding: this.scrollPadding!,
           scrollPhysics: this.scrollPhysics,
           strutStyle: this.strutStyle,
           textCapitalization: TextCapitalization.none,
@@ -320,7 +320,7 @@ class ZTextField extends StatelessWidget {
           prefix: this.prefix,
           prefixMode: OverlayVisibilityMode.always,
           suffix: this.suffix,
-          suffixMode: this.suffixMode,
+          suffixMode: this.suffixMode!,
         );
         break;
     }
@@ -328,6 +328,6 @@ class ZTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _zTextField;
+    return _zTextField!;
   }
 }

@@ -1,8 +1,8 @@
 class ColaboradorDocumentoImagemViewModel {
-  String idColaboradorDocumentoImagem;
-  String idColaboradorDocumento;
-  String idImagem;
-  int numeroPagina;
+  String? idColaboradorDocumentoImagem;
+  String? idColaboradorDocumento;
+  String? idImagem;
+  int? numeroPagina;
 
 
   ColaboradorDocumentoImagemViewModel({

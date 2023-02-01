@@ -3,7 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_shifter_v2/mask_shifter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/components/z-check-cpf.dart';
@@ -13,22 +13,22 @@ import 'package:z_components/config/z-tipo-senha.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZCadastroUsuario extends StatefulWidget {
-  Widget zTelaCadastro;
+  Widget? zTelaCadastro;
   var onTapTermosUso;
-  bool termos;
-  Key key;
+  bool? termos;
+  Key? key;
 
-  final bool possuiCPF;
+  final bool? possuiCPF;
 
-  final BuildContext context;
-  var controllerEmail = new TextEditingController();
-  var controllerNome = new TextEditingController();
-  var controllerCPF = new TextEditingController();
-  var controllerCelular = new TextEditingController();
-  var onPressed;
-  var controllerData = new TextEditingController();
-  var controllerSenha = new TextEditingController();
-  var controllerRepetirSenha = new TextEditingController();
+  final BuildContext? context;
+  TextEditingController? controllerEmail = new TextEditingController();
+  TextEditingController? controllerNome = new TextEditingController();
+  TextEditingController? controllerCPF = new TextEditingController();
+  TextEditingController? controllerCelular = new TextEditingController();
+  late var onPressed;
+  TextEditingController? controllerData = new TextEditingController();
+  TextEditingController? controllerSenha = new TextEditingController();
+  TextEditingController? controllerRepetirSenha = new TextEditingController();
 
   var onTapVoltar;
 
@@ -59,26 +59,26 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   int countCelular = 1;
   int countEmail = 1;
   int countData = 1;
-  bool valideMes;
-  bool valideCPF;
-  bool valideEmail;
-  bool valideCelular;
-  bool valideNome;
-  FocusNode nomeFocus;
-  FocusNode emailFocus;
-  FocusNode cpfFocus;
-  FocusNode celularFocus;
-  FocusNode mesFocus;
-  bool bisexto;
-  int intDias;
-  int intMes;
-  int intAno;
+  bool? valideMes = false;
+  bool? valideCPF = false;
+  bool? valideEmail = false;
+  bool? valideCelular = false;
+  bool? valideNome = false;
+  FocusNode nomeFocus = new FocusNode();
+  FocusNode emailFocus = new FocusNode();
+  FocusNode cpfFocus = FocusNode();
+  FocusNode celularFocus = FocusNode();
+   FocusNode mesFocus = new FocusNode();
+   bool? bisexto = false ;
+   int? intDias = 0;
+   int? intMes = 0;
+   int? intAno = 0;
 
-  String dia;
-  String ano;
-  String mes;
+   String? dia= "";
+   String? ano= "";
+   String? mes= "";
 
-  String teste;
+  String? teste = "";
 
   bool cancelar = false;
 
@@ -143,7 +143,11 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                           fontSize:
                               MainStyle.get(context).fontSizeLeadinCancelar),
                     ),
-                    onTap: widget.onPressed,
+                    onTap: (){
+                      if(widget.onPressed != null){
+                        widget.onPressed!();
+                      }
+                    },
                   ),
           ),
         ),
@@ -490,7 +494,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
         ),
         new ZPinSenha(
           onChange: (text) {
-            widget.controllerSenha.text = text;
+            widget.controllerSenha!.text = text;
           },
           context: context,
           numeroQuadrados: 4,
@@ -498,7 +502,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
         ),
         new ZPinSenha(
           onChange: (text) {
-            widget.controllerRepetirSenha.text = text;
+            widget.controllerRepetirSenha!.text = text;
           },
           context: context,
           numeroQuadrados: 4,
@@ -521,7 +525,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                     new GestureDetector(
                       onTap: () {
                         setState(() {
-                          widget.termos = !widget.termos;
+                          widget.termos = !widget.termos!;
                         });
                       },
                       child: new Container(
@@ -547,7 +551,11 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
                       ),
                     ),
                     new GestureDetector(
-                      onTap: widget.onTapTermosUso,
+                      onTap: (){
+                        if(widget.onTapTermosUso != null){
+                          widget.onTapTermosUso!();
+                        }
+                      },
                       child: new Container(
                         margin: EdgeInsets.only(
                             top: 4.0, bottom: 4, right: 12, left: 16),
@@ -606,23 +614,23 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void validaMes() {
-    dia = widget.controllerData.text.substring(0, 2);
-    intDias = int.parse(dia);
+    dia = widget.controllerData!.text.substring(0, 2);
+    intDias = int.parse(dia!);
 
-    mes = widget.controllerData.text.substring(3, 5);
-    intMes = int.parse(mes);
+    mes = widget.controllerData!.text.substring(3, 5);
+    intMes = int.parse(mes!);
 
-    ano = widget.controllerData.text.substring(6, 10);
-    intAno = int.parse(ano);
+    ano = widget.controllerData!.text.substring(6, 10);
+    intAno = int.parse(ano!);
 
-    if ((intAno % 4 == 0 && intAno % 100 != 0) || intAno % 400 == 0) {
+    if ((intAno! % 4 == 0 && intAno! % 100 != 0) || intAno! % 400 == 0) {
       bisexto = true;
     } else {
       bisexto = false;
     }
 
-    if (widget.controllerData.text.length == 10) {
-      if (intMes < 13 && intDias < 32 && intAno < 2004 && intAno > 1901) {
+    if (widget.controllerData!.text.length == 10) {
+      if (intMes! < 13 && intDias! < 32 && intAno! < 2004 && intAno! > 1901) {
         if (intDias == 00 || intMes == 00 || intAno == 00) {
 //          showAlertDialogNew("Data Inválida!",
 //              "Insira um valor de mês entre 01 e 12, um dia entre 01 e 31 e um ano abaixo de 2004, não podem ser valores 00.");
@@ -633,7 +641,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             intMes == 08 ||
             intMes == 10 ||
             intMes == 12) {
-          if (intDias > 31) {
+          if (intDias! > 31) {
             showAlertDialogNew(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
           } else {
@@ -643,7 +651,7 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             intMes == 06 ||
             intMes == 09 ||
             intMes == 11) {
-          if (intDias > 30) {
+          if (intDias! > 30) {
             showAlertDialogNew(
                 "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
           } else {
@@ -651,14 +659,14 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
           }
         } else {
           if (bisexto == true) {
-            if (intDias > 29) {
+            if (intDias! > 29) {
               showAlertDialogNew(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
             } else {
               valideMes = true;
             }
           } else {
-            if (intDias > 28) {
+            if (intDias! > 28) {
               showAlertDialogNew(
                   "Dia Inválido!", "Insira um valor de dia entre 01 e 28.");
             } else {
@@ -666,25 +674,25 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
             }
           }
         }
-      } else if (intMes > 12 && intDias < 32 && intAno < 2004) {
+      } else if (intMes! > 12 && intDias! < 32 && intAno! < 2004) {
         showAlertDialogNew(
             "Mês Inválido!", "Insira um valor de mês entre 01 e 12.");
-      } else if (intMes < 13 && intDias > 32 && intAno < 2004) {
+      } else if (intMes! < 13 && intDias! > 32 && intAno! < 2004) {
         showAlertDialogNew(
             "Dia Inválido!", "Insira um valor de dia entre 01 e 31.");
-      } else if (intMes < 13 && intDias < 32 && intAno > 2004) {
+      } else if (intMes! < 13 && intDias! < 32 && intAno! > 2004) {
         showAlertDialogNew(
             "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
-      } else if (intAno < 1901) {
+      } else if (intAno! < 1901) {
         showAlertDialogNew(
             "Ano Inválido!", "Insira um valor de ano entre 1901 e 2004.");
-      } else if (intMes > 12 && intDias < 32 && intAno > 2004) {
+      } else if (intMes! > 12 && intDias! < 32 && intAno! > 2004) {
         showAlertDialogNew("Mês e Ano Inválido!",
             "Insira um valor de mês entre 01 e 12 e um ano entre 1901 e 2004.");
-      } else if (intMes > 12 && intDias > 32 && intAno < 2004) {
+      } else if (intMes! > 12 && intDias! > 32 && intAno! < 2004) {
         showAlertDialogNew("Mês e Dia Inválido!",
             "Insira um valor de mês entre 01 e 12 e dia entre 01 e 31.");
-      } else if (intMes < 13 && intDias > 32 && intAno > 2004) {
+      } else if (intMes! < 13 && intDias! > 32 && intAno! > 2004) {
         showAlertDialogNew("Dia e Ano Inválido!",
             "Insira um valor de dia entre 01 e 31 e um ano entre 1901 e 2004.");
       } else {
@@ -805,16 +813,16 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void mesHasFocus() {
-    if (widget.controllerData.text.length < 10 &&
-        widget.controllerData.text.length >= 1) {
+    if (widget.controllerData!.text.length < 10 &&
+        widget.controllerData!.text.length >= 1) {
       showAlertDialogNew("Data Inválida!",
           "Por Favor, termine de digitar sua data de nascimento");
     }
   }
 
   void _valideNome() {
-    if (widget.controllerNome.text.split(' ').length < 2 &&
-        widget.controllerNome.text.length >= 1) {
+    if (widget.controllerNome!.text.split(' ').length < 2 &&
+        widget.controllerNome!.text.length >= 1) {
       valideNome = false;
       showAlertDialogNew("Nome Inválido!", "Por Favor insira o nome completo.");
     } else {
@@ -823,8 +831,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarCPF() {
-    if (!CPFValidator.isValid(widget.controllerCPF.text) &&
-        widget.controllerCPF.text.length >= 1) {
+    if (!CPFValidator.isValid(widget.controllerCPF!.text) &&
+        widget.controllerCPF!.text.length >= 1) {
       valideCPF = false;
       showAlertDialogNew("CPF Inválido!", "Por Favor insira um CPF válido.");
     } else {
@@ -833,8 +841,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarCelular() {
-    if (widget.controllerCelular.text.length < 16 &&
-        widget.controllerCelular.text.length >= 1) {
+    if (widget.controllerCelular!.text.length < 16 &&
+        widget.controllerCelular!.text.length >= 1) {
       valideCelular = false;
       showAlertDialogNew(
           "Celular Inválido!", "Por Favor, Termine de digitar o seu celular.");
@@ -844,8 +852,8 @@ class _ZCadastroUsuarioState extends State<ZCadastroUsuario>
   }
 
   void _validarEmail() {
-    if (!EmailValidator.validate(widget.controllerEmail.text.trim()) &&
-        widget.controllerEmail.text.length >= 1) {
+    if (!EmailValidator.validate(widget.controllerEmail!.text.trim()) &&
+        widget.controllerEmail!.text.length >= 1) {
       valideEmail = false;
       showAlertDialogNew(
           "E-mail Inválido!", "Por Favor insira um E-mail válido.");

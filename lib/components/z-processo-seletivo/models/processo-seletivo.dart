@@ -1,73 +1,73 @@
 class ProcessoSeletivoViewModel {
-  String idProcessoSeletivo;
+  String? idProcessoSeletivo;
 
-  String codigo;
+  String? codigo;
 
-  String descricao;
+  String? descricao;
 
-  String dataInicio;
+  String? dataInicio;
 
-  String dataTermino;
+  String? dataTermino;
 
-  String idProcessoSeletivoStatus;
+  String? idProcessoSeletivoStatus;
 
-  String processoSeletivoStatus;
+  String? processoSeletivoStatus;
 
-  int diasEmAberto;
+  int? diasEmAberto;
 
-  String nomeCargo;
+  String? nomeCargo;
 
-  String tipoContrato;
+  String? tipoContrato;
 
-  String idCargo;
+  String? idCargo;
 
-  int qtdeMinimoParticipantes;
+  int? qtdeMinimoParticipantes;
 
-  int qtdeMaximoParticipantes;
+  int? qtdeMaximoParticipantes;
 
-  int qtdeMaximoParticipantesAprovados;
+  int? qtdeMaximoParticipantesAprovados;
 
-  String idTipoContrato;
+  String? idTipoContrato;
 
-  String sexo;
+  String? sexo;
 
-  String caracteristicaCandidato;
+  String? caracteristicaCandidato;
 
-  String responsavelRH;
+  String? responsavelRH;
 
-  String localidade;
+  String? localidade;
 
-  String salarioFixoOuFaixa;
+  String? salarioFixoOuFaixa;
 
-  double salarioValorFixo;
+  double? salarioValorFixo;
 
-  double salarioValorFaixaInicial;
+  double? salarioValorFaixaInicial;
 
-  double salarioValorFaixaFinal;
+  double? salarioValorFaixaFinal;
 
-  bool salarioVisivel;
+  bool? salarioVisivel;
 
-  String periodicidadePagamento;
+  String? periodicidadePagamento;
 
-  String escala;
+  String? escala;
 
-  String tipoHorarioJornada;
+  String? tipoHorarioJornada;
 
-  String horaEntradaJornada;
+  String? horaEntradaJornada;
 
-  String horaSaidaJornada;
+  String? horaSaidaJornada;
 
-  String cargaHorariaIntervalo;
+  String? cargaHorariaIntervalo;
 
-  String beneficios;
+  String? beneficios;
 
-  String outrasRemuneracoes;
+  String? outrasRemuneracoes;
 
-  String progressoEtapa;
+  String? progressoEtapa;
 
-  int qtdeParticipantesTotal;
+  int? qtdeParticipantesTotal;
 
-  int qtdeParticipantesAtual;
+  int? qtdeParticipantesAtual;
 
   ProcessoSeletivoViewModel(
       {this.idProcessoSeletivo,

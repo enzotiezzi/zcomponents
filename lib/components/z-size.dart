@@ -1,21 +1,21 @@
 import 'package:flutter/widgets.dart';
 
 class ZSize extends StatelessWidget {
-  final Key key;
-  final Widget child;
-  final BuildContext context;
-  final double percentHeight;
-  final double percentWidth;
-  final double maxHeight;
-  final double maxWidth;
+  final Key? key;
+  final Widget? child;
+  final BuildContext? context;
+  final double? percentHeight;
+  final double? percentWidth;
+  final double? maxHeight;
+  final double? maxWidth;
 
-  final bool quadrado;
-  final double height;
-  final double width;
-  final EdgeInsetsGeometry padding;
+  final bool? quadrado;
+  final double? height;
+  final double? width;
+  final EdgeInsetsGeometry? padding;
 
-  double _height;
-  double _width;
+  double? _height;
+  double? _width;
 
   ZSize({
     this.key,
@@ -34,19 +34,19 @@ class ZSize extends StatelessWidget {
   }
 
   void initSize() {
-    if (height < 1)
-      _height = (MediaQuery.of(context).size.height * percentHeight) / 100;
+    if (height! < 1)
+      _height = (MediaQuery.of(context!).size.height * percentHeight!) / 100;
     else
       _height = height;
-    if (width < 1)
-      _width = (MediaQuery.of(context).size.width * percentWidth) / 100;
+    if (width! < 1)
+      _width = (MediaQuery.of(context!).size.width * percentWidth!) / 100;
     else
       _width = width;
 
-    if (_height > maxHeight) _height = maxHeight;
-    if (_width > maxWidth) _width = maxWidth;
+    if (_height! > maxHeight!) _height = maxHeight;
+    if (_width! > maxWidth!) _width = maxWidth;
 
-    if (quadrado) if (_width > _height)
+    if (quadrado!=null && quadrado!) if (_width! > _height!)
       _height = _width;
     else
       _width = _height;
@@ -55,7 +55,7 @@ class ZSize extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        child: new Padding(padding: padding, child: child),
+        child: new Padding(padding: padding!, child: child),
         height: _height,
         width: _width);
   }

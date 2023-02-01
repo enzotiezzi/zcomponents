@@ -14,10 +14,10 @@ import 'package:z_components/view-model/contratacao-documento-campo-viewmodel.da
 import 'package:z_components/view-model/documento-campo.dart';
 
 class ScanDocumentos extends StatefulWidget {
-  ColaboradorDocumentoViewModel colaboradorDocumentoViewModel;
-  String token;
-  String keyGeniusScan;
-  Function(ColaboradorDocumentoViewModel) retornarListaDocumentos;
+  ColaboradorDocumentoViewModel? colaboradorDocumentoViewModel;
+  String? token;
+  String? keyGeniusScan;
+  Function(ColaboradorDocumentoViewModel)? retornarListaDocumentos;
 
   ScanDocumentos(
       {this.colaboradorDocumentoViewModel,
@@ -30,7 +30,7 @@ class ScanDocumentos extends StatefulWidget {
 }
 
 class _ScanDocumentosState extends State<ScanDocumentos> {
-  ZScanDocumentoView _view;
+  late ZScanDocumentoView _view;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
         ),
         centerTitle: true,
         title: new Text(
-            "${widget.colaboradorDocumentoViewModel.nomeDocumento.toUpperCase()}"),
+            _retornarNomeDocumento()),
       ),
       body: _scanDocumentos(),
       bottomNavigationBar: _exibirBotao(),
@@ -75,11 +75,11 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
   }
 
   List<Widget> _montarListaDinamicaDocumentos() {
-    List<Widget> lista = new List();
-    for (int i = 0; i < _view.listaRespostasUsuario.length; i++) {
-      var item = widget.colaboradorDocumentoViewModel.campos[i];
+    List<Widget> lista = [];
+    for (int i = 0; i < _view.listaRespostasUsuario!.length; i++) {
+      var item = widget.colaboradorDocumentoViewModel!.campos![i];
 
-      if (item.tipo.toUpperCase() == _view.tipoImage.toUpperCase()) {
+      if (item.tipo!.toUpperCase() == _view.tipoImage.toUpperCase()) {
         lista.add(new Container(
           child: new Column(
             children: [
@@ -87,7 +87,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                 leading: new Container (
                   alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(left: 4),
-                  child: new Text(item.descricao,
+                  child: new Text(item.descricao??"",
                       style: TextStyle(
                           color: Colors.grey, fontWeight: FontWeight.w600)),
                 ),
@@ -104,7 +104,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
               new Divider(height: 1)
             ]))
         );
-      } else if (item.mascara != null && item.mascara.isNotEmpty) {
+      } else if (item.mascara != null && item.mascara!.isNotEmpty) {
         lista.add(new Container(
           child: new ZInputGeneric(
             themeData: Theme.of(context),
@@ -112,10 +112,10 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
             comMascara: true,
             textMask: item.mascara,
             controllerInputPadrao:
-                TextEditingController(text: _view.listaRespostasUsuario[i]),
+                TextEditingController(text: _view.listaRespostasUsuario![i]),
             onChange: (text) {
-              _view.listaRespostasUsuario[i] = text.trim();
-            },
+              _view.listaRespostasUsuario![i] = text.trim();
+            }, inputPadraoFocus: new FocusNode(),
           ),
         ));
       } else {
@@ -125,9 +125,9 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
             titulo: item.nomeCampo,
             inputPadraoFocus: null,
             controllerInputPadrao:
-                TextEditingController(text: _view.listaRespostasUsuario[i]),
+                TextEditingController(text: _view.listaRespostasUsuario![i]),
             onChange: (text) {
-              _view.listaRespostasUsuario[i] = text.trim();
+              _view.listaRespostasUsuario![i] = text.trim();
             },
           ),
         ));
@@ -137,7 +137,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
   }
 
   Widget _montarFotoCampo(ContratacaoDocumentoCampoViewModel itemIndex, int index) {
-    if (_view.fotos[index].isNotEmpty) {
+    if (_view.fotos![index].isNotEmpty) {
     return new Column(
       children: [
         new Container(
@@ -149,7 +149,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                 new SizedBox(
                     height: 72,
                     child: new GestureDetector(
-                        onTap: () => _view.expandirImagem(index, index, _view.fotos[index]),
+                        onTap: () => _view.expandirImagem(index, index, _view.fotos![index]),
                         child: new Hero(
                           transitionOnUserGestures: true,
                           tag: "image$index",
@@ -165,7 +165,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                               borderRadius: new BorderRadius.circular(6.0),
                               child: new FadeInImage(
                                 image: new MemoryImage(
-                                  _view.fotos[index]
+                                  _view.fotos![index]
                                 ),
                                 placeholder: new MemoryImage(
                                     _view.kTransparentImage),
@@ -198,7 +198,7 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
       child: new Text(text,
           style: Theme.of(context)
               .textTheme
-              .subtitle2
+              .subtitle2!
               .copyWith(fontWeight: FontWeight.bold)),
     );
   }
@@ -227,15 +227,15 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
                   bool validado = _view.mapearCamposComRespostas();
 
                   if (validado &&
-                      (widget.colaboradorDocumentoViewModel.imagemObrigatoria &&
-                          _view.fotos.length > 0)) {
+                      (widget.colaboradorDocumentoViewModel!.imagemObrigatoria! &&
+                          _view.fotos!.length > 0)) {
                     if (widget.retornarListaDocumentos == null) {
                       _view.dialogUtils.showProgressDialog();
                       await _view.enviarFotos();
                       await _view.salvarDocumentos();
                     } else {
-                      widget.retornarListaDocumentos(
-                          widget.colaboradorDocumentoViewModel);
+                      widget.retornarListaDocumentos!(
+                          widget.colaboradorDocumentoViewModel!);
                       Navigator.of(context).pop(true);
                     }
                   } else {
@@ -248,5 +248,13 @@ class _ScanDocumentosState extends State<ScanDocumentos> {
         ),
       ),
     );
+  }
+
+  String _retornarNomeDocumento(){
+    if(widget.colaboradorDocumentoViewModel!= null && widget.colaboradorDocumentoViewModel!.nomeDocumento != null){
+      return widget.colaboradorDocumentoViewModel!.nomeDocumento!.toUpperCase();
+    }else{
+      return "";
+    }
   }
 }

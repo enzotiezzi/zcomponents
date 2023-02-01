@@ -4,14 +4,14 @@ import 'package:z_components/components/z-documentos/view/lista-documentos-contr
 import 'package:z_components/view-model/contratacao-documento-viewmodel.dart';
 
 class ListaDocumentosContratacao extends StatefulWidget {
-  String idColaborador;
-  String token;
-  String keyGeniusScan;
-  List<ContratacaoDocumentoViewModel> colaboradorDocumentoViewModel;
-  Function(ContratacaoDocumentoViewModel) retornarListaDocumentos;
-  bool iconeInformativo;
-  String textoInformativo;
-  String tituloTextoInformativo;
+  String? idColaborador;
+  String? token;
+  String? keyGeniusScan;
+  List<ContratacaoDocumentoViewModel>? colaboradorDocumentoViewModel;
+  Function(ContratacaoDocumentoViewModel)? retornarListaDocumentos;
+  bool? iconeInformativo;
+  String? textoInformativo;
+  String? tituloTextoInformativo;
 
   ListaDocumentosContratacao(
       {this.idColaborador,
@@ -28,8 +28,8 @@ class ListaDocumentosContratacao extends StatefulWidget {
 }
 
 class _ListaDocumentosContratacaoState extends State<ListaDocumentosContratacao> {
-  DialogUtils _dialogUtils;
-  ListaDocumentosContratacaoView _view;
+  late DialogUtils _dialogUtils;
+  late ListaDocumentosContratacaoView _view;
   bool _documentoAtualizado = true;
 
   @override

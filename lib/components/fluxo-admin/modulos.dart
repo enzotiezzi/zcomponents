@@ -13,7 +13,7 @@ import 'package:z_components/view-model/modulo-viewmodel.dart';
 import '../z-item-tile-modulo-gestao.dart';
 
 class Modulos extends StatefulWidget {
-  ThemeData themeData;
+  ThemeData? themeData;
 
   Modulos({this.themeData});
 
@@ -22,7 +22,7 @@ class Modulos extends StatefulWidget {
 }
 
 class _ModulosState extends State<Modulos> {
-  ModulosView _view;
+  late ModulosView _view;
 
   @override
   void initState() {
@@ -70,12 +70,12 @@ class _ModulosState extends State<Modulos> {
   Widget _listarModulos() {
     return new Expanded(
       child: ListView.builder(
-        itemCount: _view.listaModulos.length,
+        itemCount: _view.listaModulos!.length,
         padding: EdgeInsets.only(top: 20.0),
         controller: _view.scrollController,
         shrinkWrap: true,
         itemBuilder: (builder, index) =>
-            _montarCardModulo(_view.listaModulos[index]),
+            _montarCardModulo(_view.listaModulos![index]),
       ),
     );
   }
@@ -85,7 +85,7 @@ class _ModulosState extends State<Modulos> {
     print(moduloContaViewModel.toMap());
     return new Container(
       child: new ZItemTileModuloGestao(
-        nomeModulo: moduloContaViewModel.modulo.nome,
+        nomeModulo: moduloContaViewModel.modulo?.nome,
         status: moduloContaViewModel.status,
         onTap: () {
           Navigator.push(

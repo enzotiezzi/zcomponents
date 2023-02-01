@@ -1,20 +1,20 @@
 class UserInfo {
-  String idUser;
-  String idColaborador;
-  String idConta;
-  String cpf;
-  String email;
-  String nome;
-  String telefone;
-  String dataNascimento;
-  String logradouro;
-  String bairro;
-  String cidade;
-  String estado;
-  String cep;
-  String numero;
-  String idFoto;
-  String fotoBase64;
+  String? idUser;
+  String? idColaborador;
+  String? idConta;
+  String? cpf;
+  String? email;
+  String? nome;
+  String? telefone;
+  String? dataNascimento;
+  String? logradouro;
+  String? bairro;
+  String? cidade;
+  String? estado;
+  String? cep;
+  String? numero;
+  String? idFoto;
+  String? fotoBase64;
 
   UserInfo(
       {this.idUser,

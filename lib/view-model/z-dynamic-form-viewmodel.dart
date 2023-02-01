@@ -1,19 +1,19 @@
 class ZDynamicFormViewModel {
-  String idModelo;
-  String idAtributo;
-  String idTipo;
-  String modelo;
-  String label;
-  String descricao;
-  String tipo;
-  int ordem;
-  int tamanhoMaximo;
-  int versao;
-  bool obrigatorio;
-  bool multiplaEscolha;
-  String opcoes;
-  String nomeCampo;
-  String sistema;
+  String? idModelo;
+  String? idAtributo;
+  String? idTipo;
+  String? modelo;
+  String? label;
+  String? descricao;
+  String? tipo;
+  int? ordem;
+  int? tamanhoMaximo;
+  int? versao;
+  bool? obrigatorio;
+  bool? multiplaEscolha;
+  String? opcoes;
+  String? nomeCampo;
+  String? sistema;
 
   ZDynamicFormViewModel({
     this.idModelo,

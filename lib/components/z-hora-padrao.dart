@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_shifter/mask_shifter.dart';
+import 'package:mask_shifter_v2/mask_shifter.dart';
 import 'package:z_components/components/z-alert-dialog.dart';
 import 'package:z_components/config/z-dialog.dart';
 
 class ZHora extends StatefulWidget {
-  final TextEditingController controllerHoraEntrada;
-  final TextEditingController controllerHoraSaida;
-  final TextEditingController controllerIntervalo;
+  final TextEditingController? controllerHoraEntrada;
+  final TextEditingController? controllerHoraSaida;
+  final TextEditingController? controllerIntervalo;
 
   ZHora(
-      {Key key,
+      {Key? key,
       this.controllerHoraEntrada,
       this.controllerHoraSaida,
       this.controllerIntervalo})
@@ -29,43 +29,43 @@ class _HoraState extends State<ZHora> {
   bool okSaida = true;
   bool okIntervalo = true;
 
-  FocusNode _focusEntrada;
-  FocusNode _focusSaida;
-  FocusNode _focusIntervalo;
+  FocusNode _focusEntrada = new FocusNode();
+  FocusNode _focusSaida = new FocusNode();
+  FocusNode _focusIntervalo = new FocusNode();
 
-  String _horaEntrada;
-  String _minutoEntrada;
+  String? _horaEntrada = "";
+  String? _minutoEntrada= "";
   int _intHoraEntrada = 0;
-  int _intMinutoEntrada;
+  int? _intMinutoEntrada = 0;
 
-  String horarioInteiroEntrada;
-  String horarioInteiroSaida;
-  String horarioInteiroIntervalo;
+  String? horarioInteiroEntrada = "";
+  String? horarioInteiroSaida = "";
+  String? horarioInteiroIntervalo= "";
 
-  String _horaSaida;
-  String _minutoSaida;
+   String? _horaSaida = "";
+   String? _minutoSaida= "";
   int _intHoraSaida = 0;
-  int _intMinutoSaida;
+   int? _intMinutoSaida = 0;
 
   Color colorHoraEntrada = Colors.grey;
   Color colorHoraSaida = Colors.grey;
   Color colorIntervalo = Colors.grey;
 
-  String _horaIntervalo;
-  String _minutoIntervalo;
-  int _intHoraIntervalo;
-  int _intMinutoIntervalo;
+   String? _horaIntervalo = "";
+   String? _minutoIntervalo = "";
+   int? _intHoraIntervalo = 0;
+   int? _intMinutoIntervalo = 0;
   //bool _visible = true;
 
   @override
   void initState() {
     super.initState();
-    if (widget.controllerHoraEntrada.text != "" &&
-        widget.controllerIntervalo.text != "" &&
-        widget.controllerHoraSaida.text != "") {
-      ajustarHorarioInicioPadrao(widget.controllerHoraEntrada.text);
-      ajustarHoraFimPadrao(widget.controllerHoraSaida.text);
-      ajustarHoraIntervaloPadrao(widget.controllerIntervalo.text);
+    if (widget.controllerHoraEntrada?.text != "" &&
+        widget.controllerIntervalo?.text != "" &&
+        widget.controllerHoraSaida?.text != "") {
+      ajustarHorarioInicioPadrao(widget.controllerHoraEntrada!.text);
+      ajustarHoraFimPadrao(widget.controllerHoraSaida!.text);
+      ajustarHoraIntervaloPadrao(widget.controllerIntervalo!.text);
       ajustarDmaisUm();
     }
 
@@ -73,14 +73,14 @@ class _HoraState extends State<ZHora> {
     _focusSaida = FocusNode();
     _focusIntervalo = FocusNode();
     _focusEntrada.addListener(() {
-      if (!_focusEntrada.hasFocus && horarioInteiroEntrada.length < 5) {
+      if (!_focusEntrada.hasFocus && horarioInteiroEntrada!.length < 5) {
         showAlertDialogNew("Campo Incompleto!",
             "Por Favor, termine de digitar o horário de entrada.");
         _fieldFocusChange(context, _focusEntrada, _focusEntrada);
       }
     });
     _focusSaida.addListener(() {
-      if (!_focusSaida.hasFocus && horarioInteiroSaida.length < 5) {
+      if (!_focusSaida.hasFocus && horarioInteiroSaida!.length < 5) {
         showAlertDialogNew("Campo Incompleto!",
             "Por Favor, termine de digitar o horário de saída.");
         _fieldFocusChange(context, _focusSaida, _focusSaida);
@@ -93,7 +93,7 @@ class _HoraState extends State<ZHora> {
         }*/
     });
     _focusIntervalo.addListener(() {
-      if (!_focusIntervalo.hasFocus && horarioInteiroIntervalo.length < 5) {
+      if (!_focusIntervalo.hasFocus && horarioInteiroIntervalo!.length < 5) {
         showAlertDialogNew("Campo Incompleto!",
             "Por Favor, termine de digitar o horário de intervalo.");
         _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
@@ -204,7 +204,7 @@ class _HoraState extends State<ZHora> {
                             //controller: _binding.controllerHorarioInicio,
                             decoration: InputDecoration.collapsed(hintText: ""),
                             onChanged: (text) {
-                              text = widget.controllerHoraEntrada.text;
+                              text = widget.controllerHoraEntrada!.text;
                               ajustarHorarioInicio(text);
                             },
                           )),
@@ -247,7 +247,7 @@ class _HoraState extends State<ZHora> {
                                       decoration: InputDecoration.collapsed(
                                           hintText: ""),
                                       onChanged: (text) {
-                                        text = widget.controllerHoraSaida.text;
+                                        text = widget.controllerHoraSaida!.text;
                                         ajustarHoraFim(text);
                                       },
                                     )),
@@ -312,7 +312,7 @@ class _HoraState extends State<ZHora> {
                             // controller: _binding.controllerIntervalo,
                             decoration: InputDecoration.collapsed(hintText: ""),
                             onChanged: (text) {
-                              text = widget.controllerIntervalo.text;
+                              text = widget.controllerIntervalo!.text;
                               ajustarHoraIntervalo(text);
                             },
                           )),
@@ -333,10 +333,10 @@ class _HoraState extends State<ZHora> {
     horarioInteiroEntrada = text;
     _horaEntrada = text.substring(0, 2);
     _minutoEntrada = text.substring(3, 5);
-    _intHoraEntrada = int.parse(_horaEntrada);
-    _intMinutoEntrada = int.parse(_minutoEntrada);
+    _intHoraEntrada = int.parse(_horaEntrada!);
+    _intMinutoEntrada = int.parse(_minutoEntrada!);
     if (text.length == 5) {
-      if (_intHoraEntrada > 23 && _intMinutoEntrada > 59) {
+      if (_intHoraEntrada > 23 && _intMinutoEntrada! > 59) {
         showAlertDialogNew("Horario Inválido!",
             "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
         _fieldFocusChange(context, _focusEntrada, _focusEntrada);
@@ -344,7 +344,7 @@ class _HoraState extends State<ZHora> {
         setState(() {
           colorHoraEntrada = const Color(0xffE53629);
         });
-      } else if (_intHoraEntrada > 23 && _intMinutoEntrada < 59) {
+      } else if (_intHoraEntrada > 23 && _intMinutoEntrada! < 59) {
         showAlertDialogNew("Hora Inválida!",
             "Por favor insira um valor de hora entre 00 e 23.");
         _fieldFocusChange(context, _focusEntrada, _focusEntrada);
@@ -352,7 +352,7 @@ class _HoraState extends State<ZHora> {
         setState(() {
           colorHoraEntrada = const Color(0xffE53629);
         });
-      } else if (_intHoraEntrada < 24 && _intMinutoEntrada > 59) {
+      } else if (_intHoraEntrada < 24 && _intMinutoEntrada! > 59) {
         showAlertDialogNew("Minuto Inválido!",
             "Por favor insira um valor de minuto entre 00 e 59.");
         _fieldFocusChange(context, _focusEntrada, _focusEntrada);
@@ -376,20 +376,20 @@ class _HoraState extends State<ZHora> {
     horarioInteiroEntrada = text;
     _horaEntrada = text.substring(0, 2);
     _minutoEntrada = text.substring(3, 5);
-    _intHoraEntrada = int.parse(_horaEntrada);
-    _intMinutoEntrada = int.parse(_minutoEntrada);
+    _intHoraEntrada = int.parse(_horaEntrada!);
+    _intMinutoEntrada = int.parse(_minutoEntrada!);
     if (text.length == 5) {
-      if (_intHoraEntrada > 23 && _intMinutoEntrada > 59) {
+      if (_intHoraEntrada > 23 && _intMinutoEntrada! > 59) {
         okEntrada = false;
         setState(() {
           colorHoraEntrada = const Color(0xffE53629);
         });
-      } else if (_intHoraEntrada > 23 && _intMinutoEntrada < 59) {
+      } else if (_intHoraEntrada > 23 && _intMinutoEntrada! < 59) {
         okEntrada = false;
         setState(() {
           colorHoraEntrada = const Color(0xffE53629);
         });
-      } else if (_intHoraEntrada < 24 && _intMinutoEntrada > 59) {
+      } else if (_intHoraEntrada < 24 && _intMinutoEntrada! > 59) {
         okEntrada = false;
         setState(() {
           colorHoraEntrada = const Color(0xffE53629);
@@ -407,11 +407,11 @@ class _HoraState extends State<ZHora> {
     horarioInteiroSaida = text;
     _horaSaida = text.substring(0, 2);
     _minutoSaida = text.substring(3, 5);
-    _intHoraSaida = int.parse(_horaSaida);
-    _intMinutoSaida = int.parse(_minutoSaida);
+    _intHoraSaida = int.parse(_horaSaida!);
+    _intMinutoSaida = int.parse(_minutoSaida!);
 
     if (text.length == 5) {
-      if (_intHoraSaida > 23 && _intMinutoSaida > 59) {
+      if (_intHoraSaida > 23 && _intMinutoSaida! > 59) {
         showAlertDialogNew("Horario Inválido!",
             "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
         _fieldFocusChange(context, _focusSaida, _focusSaida);
@@ -419,7 +419,7 @@ class _HoraState extends State<ZHora> {
         setState(() {
           colorHoraSaida = const Color(0xffE53629);
         });
-      } else if (_intHoraSaida > 23 && _intMinutoSaida < 59) {
+      } else if (_intHoraSaida > 23 && _intMinutoSaida! < 59) {
         showAlertDialogNew("Hora Inválida!",
             "Por favor insira um valor de hora entre 00 e 23.");
         _fieldFocusChange(context, _focusSaida, _focusSaida);
@@ -428,7 +428,7 @@ class _HoraState extends State<ZHora> {
         setState(() {
           colorHoraSaida = const Color(0xffE53629);
         });
-      } else if (_intHoraSaida < 23 && _intMinutoSaida > 59) {
+      } else if (_intHoraSaida < 23 && _intMinutoSaida! > 59) {
         showAlertDialogNew("Minuto Inválido!",
             "Por favor insira um valor de minuto entre 00 e 59.");
         _fieldFocusChange(context, _focusSaida, _focusSaida);
@@ -453,22 +453,22 @@ class _HoraState extends State<ZHora> {
     horarioInteiroSaida = text;
     _horaSaida = text.substring(0, 2);
     _minutoSaida = text.substring(3, 5);
-    _intHoraSaida = int.parse(_horaSaida);
-    _intMinutoSaida = int.parse(_minutoSaida);
+    _intHoraSaida = int.parse(_horaSaida!);
+    _intMinutoSaida = int.parse(_minutoSaida!);
 
     if (text.length == 5) {
-      if (_intHoraSaida > 23 && _intMinutoSaida > 59) {
+      if (_intHoraSaida > 23 && _intMinutoSaida! > 59) {
         okSaida = false;
         setState(() {
           colorHoraSaida = const Color(0xffE53629);
         });
-      } else if (_intHoraSaida > 23 && _intMinutoSaida < 59) {
+      } else if (_intHoraSaida > 23 && _intMinutoSaida! < 59) {
         okSaida = false;
 
         setState(() {
           colorHoraSaida = const Color(0xffE53629);
         });
-      } else if (_intHoraSaida < 23 && _intMinutoSaida > 59) {
+      } else if (_intHoraSaida < 23 && _intMinutoSaida! > 59) {
         okSaida = false;
 
         setState(() {
@@ -487,11 +487,11 @@ class _HoraState extends State<ZHora> {
     horarioInteiroIntervalo = text;
     _horaIntervalo = text.substring(0, 2);
     _minutoIntervalo = text.substring(3, 5);
-    _intHoraIntervalo = int.parse(_horaIntervalo);
-    _intMinutoIntervalo = int.parse(_minutoIntervalo);
+    _intHoraIntervalo = int.parse(_horaIntervalo!);
+    _intMinutoIntervalo = int.parse(_minutoIntervalo!);
 
     if (text.length == 5) {
-      if (_intHoraIntervalo > 23 && _intMinutoIntervalo > 59) {
+      if (_intHoraIntervalo! > 23 && _intMinutoIntervalo! > 59) {
         showAlertDialogNew("Horario Inválido!",
             "Por favor insira um valor de hora entre 00 e 23 e um minuto de 00 a 59.");
         _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
@@ -499,7 +499,7 @@ class _HoraState extends State<ZHora> {
         setState(() {
           colorIntervalo = const Color(0xffE53629);
         });
-      } else if (_intHoraIntervalo > 23 && _intMinutoIntervalo < 59) {
+      } else if (_intHoraIntervalo! > 23 && _intMinutoIntervalo! < 59) {
         showAlertDialogNew("Hora Inválida!",
             "Por favor insira um valor de hora entre 00 e 23.");
         _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
@@ -508,7 +508,7 @@ class _HoraState extends State<ZHora> {
         setState(() {
           colorIntervalo = const Color(0xffE53629);
         });
-      } else if (_intHoraIntervalo < 23 && _intMinutoIntervalo > 59) {
+      } else if (_intHoraIntervalo! < 23 && _intMinutoIntervalo! > 59) {
         showAlertDialogNew("Minuto Inválido!",
             "Por favor insira um valor de minuto entre 00 e 59.");
         _fieldFocusChange(context, _focusIntervalo, _focusIntervalo);
@@ -527,22 +527,22 @@ class _HoraState extends State<ZHora> {
     horarioInteiroIntervalo = text;
     _horaIntervalo = text.substring(0, 2);
     _minutoIntervalo = text.substring(3, 5);
-    _intHoraIntervalo = int.parse(_horaIntervalo);
-    _intMinutoIntervalo = int.parse(_minutoIntervalo);
+    _intHoraIntervalo = int.parse(_horaIntervalo!);
+    _intMinutoIntervalo = int.parse(_minutoIntervalo!);
 
     if (text.length == 5) {
-      if (_intHoraIntervalo > 23 && _intMinutoIntervalo > 59) {
+      if (_intHoraIntervalo! > 23 && _intMinutoIntervalo! > 59) {
         okIntervalo = false;
         setState(() {
           colorIntervalo = const Color(0xffE53629);
         });
-      } else if (_intHoraIntervalo > 23 && _intMinutoIntervalo < 59) {
+      } else if (_intHoraIntervalo! > 23 && _intMinutoIntervalo! < 59) {
         okIntervalo = false;
 
         setState(() {
           colorIntervalo = const Color(0xffE53629);
         });
-      } else if (_intHoraIntervalo < 23 && _intMinutoIntervalo > 59) {
+      } else if (_intHoraIntervalo! < 23 && _intMinutoIntervalo! > 59) {
         okIntervalo = false;
         setState(() {
           colorIntervalo = const Color(0xffE53629);
@@ -683,7 +683,7 @@ class _HoraState extends State<ZHora> {
       _horarioTrabalhado = 24 - _intHoraEntrada;
       _horarioTrabalhado = _horarioTrabalhado + _intHoraSaida;
       print(_horarioTrabalhado);
-      if (_intHoraIntervalo >= _horarioTrabalhado) {
+      if (_intHoraIntervalo! >= _horarioTrabalhado) {
         showAlertDialogNew("Erro de Jornada!",
             "O intervalo não pode ser maior que a jornada trabalhada.");
         okIntervalo = false;
@@ -703,7 +703,7 @@ class _HoraState extends State<ZHora> {
     } else {
       _horarioTrabalhado = _intHoraSaida - _intHoraEntrada;
       print(_horarioTrabalhado);
-      if (_intHoraIntervalo >= _horarioTrabalhado) {
+      if (_intHoraIntervalo! >= _horarioTrabalhado) {
         showAlertDialogNew("Erro de Jornada!",
             "O intervalo não pode ser maior que a jornada trabalhada.");
         okIntervalo = false;
@@ -729,7 +729,7 @@ class _HoraState extends State<ZHora> {
       _horarioTrabalhado = 24 - _intHoraEntrada;
       _horarioTrabalhado = _horarioTrabalhado + _intHoraSaida;
       print(_horarioTrabalhado);
-      if (_intHoraIntervalo >= _horarioTrabalhado) {
+      if (_intHoraIntervalo! >= _horarioTrabalhado) {
         okIntervalo = false;
         setState(() {
           colorIntervalo = const Color(0xffE53629);
@@ -744,7 +744,7 @@ class _HoraState extends State<ZHora> {
     } else {
       _horarioTrabalhado = _intHoraSaida - _intHoraEntrada;
       print(_horarioTrabalhado);
-      if (_intHoraIntervalo >= _horarioTrabalhado) {
+      if (_intHoraIntervalo! >= _horarioTrabalhado) {
         okIntervalo = false;
         setState(() {
           colorIntervalo = const Color(0xffE53629);

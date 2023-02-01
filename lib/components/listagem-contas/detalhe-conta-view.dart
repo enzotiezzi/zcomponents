@@ -13,9 +13,9 @@ import '../z-progress-dialog.dart';
 
 class DetalheContaViewModel extends IView<DetalheConta> {
   DetalheContaViewModel(State<DetalheConta> state) : super(state);
-  IContasService _contaService;
+  late IContasService _contaService;
 
-  DialogUtils _dialogUtils;
+  late DialogUtils _dialogUtils;
 
   GlobalKey<ZProgressDialogState> _globalKey =
       new GlobalKey<ZProgressDialogState>();
@@ -28,20 +28,21 @@ class DetalheContaViewModel extends IView<DetalheConta> {
 
   @override
   Future<void> initView() {
-    _contaService = new ContasService(state.widget.token);
+    _contaService = new ContasService(state.widget.token!);
     _dialogUtils = new DialogUtils(state.context);
+    throw UnimplementedError();
   }
 
-  String listarAppsVinculados(List<AppUsuarioContaViewModel> lista) {
+  String listarAppsVinculados(List<dynamic>? lista) {
     String appsFormatados = "";
     if (lista != null && lista.length != 0) {
       for (int i = 0; i < lista.length; i++) {
         if (i == 0) {
           appsFormatados =
-              "$appsFormatados- ${lista[i].app.nomeExibicao ?? ""}";
+              "$appsFormatados- ${lista[i].app?.nomeExibicao ?? ""}";
         } else {
           appsFormatados =
-              "$appsFormatados, ${lista[i].app.nomeExibicao ?? ""}";
+              "$appsFormatados, ${lista[i].app?.nomeExibicao ?? ""}";
         }
       }
     } else {
@@ -68,14 +69,14 @@ class DetalheContaViewModel extends IView<DetalheConta> {
                     ),
                     new Container(
                       child: new Text(
-                        "Deseja trocar para a conta: ${state.widget.contaV2ViewModel.conta.nomeFantasia} ?",
+                        "Deseja trocar para a conta: ${state.widget.contaV2ViewModel!.conta!.nomeFantasia} ?",
                         textAlign: TextAlign.center,
                       ),
                     ),
                     new Container(
                       padding: const EdgeInsets.all(4.0),
                       child: new Text(
-                        "Ao trocar a conta você só poderá ver informações da conta ${state.widget.contaV2ViewModel.conta.nomeFantasia}",
+                        "Ao trocar a conta você só poderá ver informações da conta ${state.widget.contaV2ViewModel!.conta!.nomeFantasia}",
                         textAlign: TextAlign.center,
                         style: new TextStyle(
                             fontSize: MainStyle.get(context).subTitleFontSize),
@@ -135,22 +136,22 @@ class DetalheContaViewModel extends IView<DetalheConta> {
     _dialogUtils.showZProgressDialog("Trocando de conta", 0.5, _globalKey);
 
     var res = await _contaService
-        .alterarConta(state.widget.contaV2ViewModel.conta.idConta);
+        .alterarConta(state.widget.contaV2ViewModel!.conta!.idConta!);
 
-    if (res) {
+    if (res != null && res) {
       _globalKey.currentState
-          .refresh(1.0, "Conta trocada com sucesso.", success: true);
+          ?.refresh(1.0, "Conta trocada com sucesso.", success: true);
 
       state.setState(() {});
     } else {
       _globalKey.currentState
-          .refresh(1.0, "Não foi possível trocar de conta.", success: false);
+          ?.refresh(1.0, "Não foi possível trocar de conta.", success: false);
     }
 
     await Future.delayed(
         new Duration(seconds: 1), () => _dialogUtils.dismiss());
     Navigator.of(state.context).pop();
-    if (state.widget.onAccountChange != null && res)
-      await state.widget.onAccountChange(state.widget.contaV2ViewModel);
+    if (state.widget.onAccountChange != null && res!)
+      await state.widget.onAccountChange!(state.widget.contaV2ViewModel!);
   }
 }

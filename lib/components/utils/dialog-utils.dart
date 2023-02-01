@@ -9,17 +9,17 @@ import 'package:z_components/config/z-dialog.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class DialogUtils {
-  BuildContext _context;
+  BuildContext? _context;
 
   DialogUtils(BuildContext context) {
     _context = context;
   }
 
   Future showAlertDialogErro(String message,
-      {String errorMessage}) async {
+      {String? errorMessage}) async {
     showDialog(
         barrierDismissible: false,
-        context: _context,
+        context: _context!,
         builder: (BuildContext context) {
           return new ZAlertDialog(
             zDialog: ZDialog.erro,
@@ -36,7 +36,7 @@ class DialogUtils {
                 new Divider(
                   height: 1.0,
                 ),
-                new FlatButton(
+                new TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -66,7 +66,7 @@ class DialogUtils {
 
   Future showAlertDialogNewAviso(String title, String message) async {
     return showDialog(
-        context: _context,
+        context: _context!,
         barrierDismissible: true,
         builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.alert,
@@ -136,10 +136,10 @@ class DialogUtils {
   }
 
   Future showAlertDialogAcao(String title, String message,
-      {Function onCameraPressed = null,
-      Function onGaleryPressed = null}) async {
+      {Function? onCameraPressed,
+      Function? onGaleryPressed}) async {
     return showDialog(
-        context: _context,
+        context: _context!,
         barrierDismissible: true,
         builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.normal,
@@ -189,7 +189,7 @@ class DialogUtils {
                               new BorderRadius.all(const Radius.circular(20.0)),
                           splashColor: const Color(0xffe6e6e6),
                           onTap: () {
-                            Navigator.pop(_context);
+                            Navigator.pop(_context!);
                             if (onGaleryPressed != null) onGaleryPressed();
                           },
                           child: new Container(
@@ -211,7 +211,7 @@ class DialogUtils {
                               new BorderRadius.all(const Radius.circular(20.0)),
                           splashColor: const Color(0xffe6e6e6),
                           onTap: () {
-                            Navigator.pop(_context);
+                            Navigator.pop(_context!);
                             if (onCameraPressed != null) onCameraPressed();
                           },
                           child: new Container(
@@ -235,9 +235,9 @@ class DialogUtils {
   }
 
   Future showAlertDialogErroAcao(String title, String message,
-      {Function onLoginPressed = null}) async {
+      {Function? onLoginPressed}) async {
     return showDialog(
-        context: _context,
+        context: _context!,
         barrierDismissible: true,
         builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.erro,
@@ -284,7 +284,7 @@ class DialogUtils {
                           new BorderRadius.all(const Radius.circular(20.0)),
                       splashColor: const Color(0xffe6e6e6),
                       onTap: () {
-                        Navigator.pop(_context);
+                        Navigator.pop(_context!);
                         if (onLoginPressed != null) onLoginPressed();
                       },
                       child: new Container(
@@ -308,7 +308,7 @@ class DialogUtils {
   void showProgressDialog() {
     Future.delayed(new Duration(milliseconds: 0)).then((_) {
       showDialog(
-          context: _context,
+          context: _context!,
           barrierDismissible: false,
           builder: (BuildContext context) => new AlertDialog(
                 elevation: 0,
@@ -329,7 +329,7 @@ class DialogUtils {
       [String buttonTextCancel = ""]) {
     Future.delayed(new Duration(milliseconds: 0)).then((_) {
       showDialog(
-          context: _context,
+          context: _context!,
           builder: (BuildContext context) => new CupertinoAlertDialog(
                   title: new Text(title),
                   content: new Text(message),
@@ -348,8 +348,8 @@ class DialogUtils {
   }
 
   Future showAlertDialog(String title, String message, String buttonTextOk,
-      {String buttonTextCancel = "", Function onOkPressed = null}) async {
-    var buttons = new List<Widget>();
+      {String buttonTextCancel = "", Function? onOkPressed}) async {
+    List<Widget> buttons = [];
 
     buttons.add(new CupertinoDialogAction(
         child: new Text(
@@ -357,7 +357,7 @@ class DialogUtils {
           style: const TextStyle(color: Colors.blue),
         ),
         onPressed: () {
-          Navigator.pop(_context);
+          Navigator.pop(_context!);
           if (onOkPressed != null) onOkPressed();
         }));
 
@@ -369,7 +369,7 @@ class DialogUtils {
           }));
 
     return showDialog(
-        context: _context,
+        context: _context!,
         builder: (BuildContext context) => new CupertinoAlertDialog(
             title: new Text(title),
             content: new Container(
@@ -381,7 +381,7 @@ class DialogUtils {
 
   Future showSuccessDialog(String message) async {
     return showDialog(
-        context: _context,
+        context: _context!,
         barrierDismissible: false,
         builder: (BuildContext context) => ZAlertDialog(
               zDialog: ZDialog.sucess,
@@ -434,7 +434,7 @@ class DialogUtils {
 
   Future showZProgressDialog(String messagem, double barValue, var key) {
     return showDialog(
-        context: _context,
+        context: _context!,
         builder: (BuildContext context) => new ZProgressDialog(
               message: messagem,
               barrierDismissible: false,
@@ -444,6 +444,6 @@ class DialogUtils {
   }
 
   void dismiss() {
-    Navigator.pop(_context);
+    Navigator.pop(_context!);
   }
 }

@@ -7,13 +7,13 @@ class MediaQuerySize {
 }
 
 class _MediaQuery {
-  BuildContext context;
+  BuildContext? context;
   var width;
   var height;
 
   _MediaQuery({this.context}) {
-    width = MediaQuery.of(context).size.width;
-    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context!).size.width;
+    height = MediaQuery.of(context!).size.height;
   }
 
   double get fontSize {

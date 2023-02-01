@@ -1,11 +1,11 @@
 class ArquivoViewModel {
-  String nome;
-  double tamanho;
-  String descricao;
-  String contentType;
-  String container;
-  String conteudo;
-  String id;
+  String? nome;
+  double? tamanho;
+  String? descricao;
+  String? contentType;
+  String? container;
+  String? conteudo;
+  String? id;
 
   ArquivoViewModel(
       {this.nome,

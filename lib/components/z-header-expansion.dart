@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:z_components/styles/main-style.dart';
 
 class ZHeaderExpansion extends StatefulWidget {
-  final String titulo;
-  final bool collapsed;
-  final GestureTapCallback onTap;
+  final String? titulo;
+  final bool? collapsed;
+  final GestureTapCallback? onTap;
 
   ZHeaderExpansion({
-    Key key,
+    Key? key,
     this.titulo = "",
     this.collapsed,
     this.onTap,
@@ -41,7 +41,7 @@ class _ZHeaderExpansionState extends State<ZHeaderExpansion>
             alignment: Alignment.center,
             padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
             child: new Text(
-              widget.titulo,
+              widget.titulo ?? "",
               style: MainStyle.get(context).titleStyleText,
             ),
           ),
@@ -49,7 +49,11 @@ class _ZHeaderExpansionState extends State<ZHeaderExpansion>
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               GestureDetector(
-                onTap: widget.onTap,
+                onTap: (){
+                  if(widget.onTap !=null){
+                    widget.onTap!();
+                  }
+                },
                 child: new Container(
                   padding: EdgeInsets.only(left: 7.0, right: 7.0),
                   color: Colors.transparent,
