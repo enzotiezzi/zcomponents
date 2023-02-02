@@ -1,3 +1,4 @@
+import 'package:z_components/components/utils/icone-voltar.dart';
 import 'package:z_components/components/permissao-negada.dart';
 import 'package:z_components/components/z-item-tile.dart';
 import 'package:z_components/components/z-item-tile-candidato.dart';
@@ -214,16 +215,20 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         onPressed: () {
           setState(() {
             editado = !editado;
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PermissaoNegada(
-              onPressed: (){},
-              caminhoImagem: "assets/arvore.svg",
-              textoPermissao: "ERRO",
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TelaTesteCard(
+
             )));
           });
         },
       ),
       appBar: AppBar(
-        leading: new Text("TESTE"),
+        leading: IconeVoltar(
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TelaTesteCard(
+
+            )));
+          },
+        ),
 
       ),
       body: new Container(

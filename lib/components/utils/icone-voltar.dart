@@ -13,14 +13,15 @@ class IconeVoltar extends StatefulWidget {
 }
 
 class _IconeVoltarState extends State<IconeVoltar> {
-  Function onTapVoltar() {
-    if (widget.onTap == null) {
-      return () {
-        Navigator.of(context).pop();
-      };
-    } else {
-      return widget.onTap!();
-    }
+
+   Function? onTapVoltar() {
+
+      if(widget.onTap != null){
+        return widget.onTap!();
+      }else{
+        return (){Navigator.of(context).pop();};
+      }
+
   }
 
   @override
@@ -31,8 +32,7 @@ class _IconeVoltarState extends State<IconeVoltar> {
           semanticsLabel: "leftIcon.svg",
           placeholderBuilder: (context) => Icon(Icons.error),
         ),
-        onPressed: (){
-          onTapVoltar();
-        });
+        onPressed: onTapVoltar
+        );
   }
 }
