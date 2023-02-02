@@ -21,7 +21,7 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
 
   late SharedPreferences sharedPreferences;
 
-  late ScrollController scrollController;
+  ScrollController scrollController = ScrollController();
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -84,9 +84,7 @@ class ZEspelhoDePontoView extends IView<ZEspelhoDePonto> {
   }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
 }

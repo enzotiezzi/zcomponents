@@ -22,15 +22,13 @@ class ListagemContasView extends IView<ListagemContas> {
   List<ContaV2ViewModel> listaContas = [];
   SearchOptions searchOptions = new SearchOptions();
   late PaginationMetaData paginationMetaData = new PaginationMetaData();
-  late ScrollController scrollController;
+  ScrollController scrollController = ScrollController();
   late IContasService contasService;
   late IArquivoService _arquivoService;
   late DialogUtils _dialogUtils;
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override

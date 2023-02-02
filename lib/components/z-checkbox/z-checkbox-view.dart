@@ -11,10 +11,9 @@ class ZCheckBoxView extends IView<ZCheckBox> {
 
 
   @override
-  Future<void> initView() {
+  Future<void> initView() async{
     listaCheck = [];
     listaSelecionados = [];
-    throw UnimplementedError();
   }
 
   void onChange(bool isChecked, ZCheckBoxViewModel item) {
@@ -36,8 +35,6 @@ class ZCheckBoxView extends IView<ZCheckBox> {
   }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 }

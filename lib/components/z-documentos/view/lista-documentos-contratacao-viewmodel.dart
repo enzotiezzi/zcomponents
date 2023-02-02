@@ -14,15 +14,11 @@ class ListaDocumentosContratacaoView extends IView<ListaDocumentosContratacao> {
 
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override
-  Future<void> initView() {
-    // TODO: implement initView
-    throw UnimplementedError();
+  Future<void> initView() async{
   }
 
 

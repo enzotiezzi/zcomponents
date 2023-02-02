@@ -41,8 +41,7 @@ class _ListaDocumentosContratacaoState extends State<ListaDocumentosContratacao>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Container();
   }
 
 

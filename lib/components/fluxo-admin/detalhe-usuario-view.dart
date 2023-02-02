@@ -29,15 +29,11 @@ class DetalheUsuarioView extends IView<DetalheUsuario>{
   bool preencheuDataExpiracao=false;
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override
-  Future<void> initView() {
-    _preencherDados();
-    throw UnimplementedError();
+  Future<void> initView() async{
 
   }
 

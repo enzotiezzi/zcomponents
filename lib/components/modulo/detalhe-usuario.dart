@@ -260,7 +260,9 @@ class _DetalheUsuarioState extends State<DetalheUsuario> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                             new ElevatedButton(
-                                onPressed: _view.editarOnPressed,
+                                onPressed: (){
+                                    _view.editarOnPressed();
+                                },
                                 child: new Container(
                                     child: new Row(
                                         mainAxisSize: MainAxisSize.min,

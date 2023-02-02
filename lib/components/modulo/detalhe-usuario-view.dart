@@ -23,7 +23,7 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
     String? tipoDialog = "";
     SearchOptions searchOptions = new SearchOptions();
     PaginationMetaData paginationMetaData = new PaginationMetaData();
-    late ScrollController scrollController;
+    ScrollController scrollController = ScrollController();
 
     TextEditingController emailController = new TextEditingController();
     FocusNode emailFocus = new FocusNode();
@@ -56,9 +56,8 @@ class DetalheUsuarioView extends IView<DetalheUsuario> {
     new GlobalKey<ZProgressDialogState>();
 
     @override
-    Future<void> afterBuild() {
-        // TODO: implement afterBuild
-        throw UnimplementedError();
+    Future<void> afterBuild() async{
+
     }
 
     @override

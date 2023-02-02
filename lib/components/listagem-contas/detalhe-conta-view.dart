@@ -21,9 +21,7 @@ class DetalheContaViewModel extends IView<DetalheConta> {
       new GlobalKey<ZProgressDialogState>();
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override

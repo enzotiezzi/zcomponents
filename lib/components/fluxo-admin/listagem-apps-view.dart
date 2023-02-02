@@ -9,9 +9,7 @@ class ListagemAppsView extends IView<ListagemApps> {
   bool icons2 = true;
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
 
@@ -32,8 +30,6 @@ class ListagemAppsView extends IView<ListagemApps> {
   }
 
   @override
-  Future<void> initView() {
-    // TODO: implement initView
-    throw UnimplementedError();
+  Future<void> initView() async{
   }
 }

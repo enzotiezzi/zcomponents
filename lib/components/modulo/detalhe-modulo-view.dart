@@ -20,7 +20,7 @@ class DetalheModuloView extends IView<DetalheModulo> {
 
     SearchOptions searchOptions = new SearchOptions();
     PaginationMetaData paginationMetaData = new PaginationMetaData();
-    late ScrollController scrollController;
+    ScrollController scrollController = ScrollController();
     GlobalKey<ZCollectionState> keyPerfil = new GlobalKey<ZCollectionState>();
 
     late IContasService contasService;
@@ -330,8 +330,6 @@ class DetalheModuloView extends IView<DetalheModulo> {
     }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 }

@@ -19,15 +19,13 @@ class ListagemAplicativosView extends IView<ListagemAplicativos> {
   List<AppViewModel> listaModulos = [];
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
-  late ScrollController scrollController;
+  ScrollController scrollController = ScrollController();
 
   bool icons2 = true;
   late DialogUtils _dialogUtils;
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override

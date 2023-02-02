@@ -17,7 +17,7 @@ class ModulosView extends IView<Modulos> {
   GlobalKey<ZSearchBarState> keySearchBar = new GlobalKey();
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
-  late ScrollController scrollController;
+  ScrollController scrollController = ScrollController();
   late IContasService contasService;
   late DialogUtils _dialogUtils;
 
@@ -74,8 +74,6 @@ class ModulosView extends IView<Modulos> {
   }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 }

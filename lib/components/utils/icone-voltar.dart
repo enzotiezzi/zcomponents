@@ -31,6 +31,8 @@ class _IconeVoltarState extends State<IconeVoltar> {
           semanticsLabel: "leftIcon.svg",
           placeholderBuilder: (context) => Icon(Icons.error),
         ),
-        onPressed: onTapVoltar);
+        onPressed: (){
+          onTapVoltar();
+        });
   }
 }

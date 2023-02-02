@@ -33,14 +33,11 @@ class DetalheAplicativoView extends IView<DetalheAplicativo>{
 
 
     @override
-    Future<void> afterBuild() {
-        // TODO: implement afterBuild
-        throw UnimplementedError();
+    Future<void> afterBuild() async{
     }
 
     @override
-    Future<void> initView() {
+    Future<void> initView() async{
         _preencherDados();
-        throw UnimplementedError();
     }
 }

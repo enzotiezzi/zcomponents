@@ -111,9 +111,7 @@ class ZScanDocumentoView extends IView<ScanDocumentos> {
   ZScanDocumentoView(State<ScanDocumentos> state) : super(state);
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override

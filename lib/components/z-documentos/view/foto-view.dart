@@ -21,9 +21,8 @@ class FotoView extends IView<Foto> {
   }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
+
   }
 
   void selecionarItem(List<Uint8List> item) {

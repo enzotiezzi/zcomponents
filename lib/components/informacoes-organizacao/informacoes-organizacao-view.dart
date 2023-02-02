@@ -70,9 +70,7 @@ class InformacoesOrganizacaoView extends IView<InformacoesOrganizacao> {
       : super(state);
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override

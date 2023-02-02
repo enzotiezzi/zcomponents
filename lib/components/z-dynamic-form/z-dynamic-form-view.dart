@@ -28,9 +28,8 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
 
 
   @override
-  Future<void> initView() {
+  Future<void> initView() async{
     json = new Map();
-    throw UnimplementedError();
   }
 
   Widget buildDynamicForm() {
@@ -247,8 +246,6 @@ class ZDynamicFormView extends IView<ZDyanmicForm> {
   }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 }

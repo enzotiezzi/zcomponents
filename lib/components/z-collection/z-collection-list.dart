@@ -42,8 +42,8 @@ class ZCollectionList extends StatefulWidget {
 }
 
 class ZCollectionListState extends State<ZCollectionList> {
-  late List<ZCollectionItem>? _listaFiltro;
-  late ScrollController scrollController;
+  List<ZCollectionItem>? _listaFiltro = [];
+  ScrollController scrollController = ScrollController();
   GlobalKey keyLista = new GlobalKey();
   String? textoBusca = "";
 

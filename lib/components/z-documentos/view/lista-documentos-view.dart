@@ -23,8 +23,7 @@ class ListaDocumentosView extends IView<ListaDocumentos> {
   ListaDocumentosView(State<ListaDocumentos> state) : super(state);
 
   @override
-  Future<void> afterBuild() {
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override

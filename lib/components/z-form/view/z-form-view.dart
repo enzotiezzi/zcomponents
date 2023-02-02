@@ -11,9 +11,7 @@ class ZFormView extends IView<ZForm> {
   ZFormView(State<ZForm> state) : super(state);
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override

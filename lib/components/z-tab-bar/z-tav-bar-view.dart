@@ -11,9 +11,8 @@ class ZTabBarView extends IView<ZTabBar> {
 
 
   @override
-  Future<void> initView() {
+  Future<void> initView() async{
     _inicializarTab();
-    throw UnimplementedError();
   }
 
   void _inicializarTab() {
@@ -53,8 +52,6 @@ class ZTabBarView extends IView<ZTabBar> {
   }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 }

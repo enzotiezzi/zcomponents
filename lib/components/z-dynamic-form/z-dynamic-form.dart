@@ -42,7 +42,11 @@ class _ZDynamicFormState extends State<ZDyanmicForm> with AfterLayoutMixin<ZDyan
 
   Widget _buildBotaoEnviar(){
     return new ElevatedButton(
-      onPressed: widget.clickButtonEnviar!(),
+      onPressed: (){
+        if(widget.clickButtonEnviar != null){
+          widget.clickButtonEnviar!();
+        }
+      },
       child: new Container(
         child: new Row(
           mainAxisSize: MainAxisSize.min,

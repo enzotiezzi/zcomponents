@@ -20,14 +20,10 @@ class ZRadioGroupView extends IView<ZRadioGroup>{
   }
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override
-  Future<void> initView() {
-    // TODO: implement initView
-    throw UnimplementedError();
+  Future<void> initView() async{
   }
 }

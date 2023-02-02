@@ -17,9 +17,9 @@ class ZLogRepository extends AbstractRepository<ZLogEntity>
   }
 
   @override
-  Future<ZLogEntity> findLast() {
+  Future<ZLogEntity> findLast() async{
     // TODO: implement findLast
-    throw UnimplementedError();
+    return ZLogEntity();
   }
 
   @override

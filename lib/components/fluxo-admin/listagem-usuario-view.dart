@@ -19,14 +19,12 @@ class ListagemUsuariosView extends IView<ListagemUsuarios> {
   GlobalKey<ZSearchBarState> keySearchBar = new GlobalKey();
   SearchOptions searchOptions = new SearchOptions();
   PaginationMetaData paginationMetaData = new PaginationMetaData();
-  late ScrollController scrollController;
+  ScrollController scrollController = ScrollController();
   bool icons2 = true;
   late DialogUtils _dialogUtils;
 
   @override
-  Future<void> afterBuild() {
-    // TODO: implement afterBuild
-    throw UnimplementedError();
+  Future<void> afterBuild() async{
   }
 
   @override
