@@ -222,13 +222,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
         },
       ),
       appBar: AppBar(
-        leading: IconeVoltar(
-          onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TelaTesteCard(
-
-            )));
-          },
-        ),
+        leading: IconeVoltar(),
 
       ),
       body: new Container(

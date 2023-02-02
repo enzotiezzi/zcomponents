@@ -14,16 +14,6 @@ class IconeVoltar extends StatefulWidget {
 
 class _IconeVoltarState extends State<IconeVoltar> {
 
-   Function? onTapVoltar() {
-
-      if(widget.onTap != null){
-        return widget.onTap!();
-      }else{
-        return (){Navigator.of(context).pop();};
-      }
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return new IconButton(
@@ -32,7 +22,14 @@ class _IconeVoltarState extends State<IconeVoltar> {
           semanticsLabel: "leftIcon.svg",
           placeholderBuilder: (context) => Icon(Icons.error),
         ),
-        onPressed: onTapVoltar
+        onPressed: (){
+          if(widget.onTap != null){
+            return widget.onTap!();
+          }else{
+            print("a");
+            Navigator.of(context).pop();
+          }
+        }
         );
   }
 }
