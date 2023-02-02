@@ -182,7 +182,7 @@ class _ZNews extends State<ZNews> with TickerProviderStateMixin {
   String _retornarAutorEDataPublicacao(int index){
     if(widget.noticiaViewMode != null && widget.noticiaViewMode![index].autor != null
         && widget.noticiaViewMode![index].publicadaEm != null){
-      return "{widget.noticiaViewMode![index].autor} - ${widget.noticiaViewMode![index].publicadaEm}";
+      return "${widget.noticiaViewMode![index].autor} - ${widget.noticiaViewMode![index].publicadaEm}";
     }else{
       return "";
     }
