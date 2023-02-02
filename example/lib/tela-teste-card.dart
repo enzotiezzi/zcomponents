@@ -224,6 +224,7 @@ class _TelaTesteCardState extends State<TelaTesteCard> {
       ),
       appBar: AppBar(
         leading: new Text("TESTE"),
+
       ),
       body: new Container(
         child: new ListView(
