@@ -152,6 +152,7 @@ class _ZPerfilState extends State<ZPerfil> {
             listaTextos: widget.listaTextos,
             listaIcones: widget.listaIcones,
             listaOnTap: widget.listaOnTap,
+
             color: widget.color,
           ),
         ),

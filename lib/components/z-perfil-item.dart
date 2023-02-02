@@ -33,11 +33,7 @@ class _ZPerfilItemState extends State<ZPerfilItem> {
                 index == widget.numeroQuadrados! - 2 ||
                 index == widget.numeroQuadrados! - 3)
             ? new GestureDetector(
-                onTap: (){
-                  if(widget.listaOnTap !=null){
-                    widget.listaOnTap![index];
-                  }
-                },
+                onTap: widget.listaOnTap![index],
                 child: new Container(
                   margin: EdgeInsets.only(bottom: 2.0),
                   child: new Material(
