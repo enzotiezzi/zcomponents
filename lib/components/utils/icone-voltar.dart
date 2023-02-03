@@ -26,7 +26,6 @@ class _IconeVoltarState extends State<IconeVoltar> {
           if(widget.onTap != null){
             return widget.onTap!();
           }else{
-            print("a");
             Navigator.of(context).pop();
           }
         }
